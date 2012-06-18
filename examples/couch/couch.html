@@ -1,16 +1,39 @@
 <html>
+  <link href="../../css/bootstrap.css" rel="stylesheet">
   <title> couch test </title>
   <body>
+    <div class="main container">
+      <div class="hero-unit">
+        <h3>looking for you ...</h3>
+      </div>
+    </div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  <script src="http://localhost:5984/_utils/script/jquery.couch.js" type="text/javascript"></script>
+  <script src="http://webbox.hip.cat:5984/_utils/script/jquery.couch.js" type="text/javascript"></script>
   <script type="text/javascript">
-    $.couch.urlPrefix = 'http://localhost:1234';
+    $.couch.urlPrefix = 'http://webbox.hip.cat:1234';
     $.couch.allDbs({
       success:function(res) {
           console.log('Successfully connected : Databases: ', res);
+          if (res.indexOf("places_ive_been") < 0) {
+             console.log("making database places_ive_been");
+             $.couch.db('places_ive_been').create();
+          }
+          var pib = $.couch.db('places_ive_been');
+          var setCurrentLocation = function(position) {
+            console.log("position", position.coords);
+            pib.saveDoc({when:new Date(), position: position.coords});
+            $('h3').html('@ ' + position.coords.latitude + 'N by ' + position.coords.longitude + 'W');
+          };
+          var geolocate = function() {
+             if (navigator.geolocation) {
+               console.log("geolocating");
+               navigator.geolocation.getCurrentPosition(function(position) { setCurrentLocation(position); },   function(error) { console.error(error); });
+             };
+          };
+          setInterval(geolocate, 1000);    
      }, error: function(err) {
          console.error('Could not connect to couch', err);
-     }});
+     }});    
 </script>  
 </html>
