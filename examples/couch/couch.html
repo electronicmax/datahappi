@@ -21,17 +21,18 @@
           }
           var pib = $.couch.db('places_ive_been');
           var setCurrentLocation = function(position) {
-            console.log("position", position.coords);
+            // console.log("position", position.coords);
             pib.saveDoc({when:new Date(), position: position.coords});
             $('h3').html('@ ' + position.coords.latitude + 'N by ' + position.coords.longitude + 'W');
           };
           var geolocate = function() {
              if (navigator.geolocation) {
-               console.log("geolocating");
+               // console.log("geolocating");
                navigator.geolocation.getCurrentPosition(function(position) { setCurrentLocation(position); },   function(error) { console.error(error); });
              };
           };
-          setInterval(geolocate, 1000);    
+          setInterval(geolocate, 1000);
+          window.pib = pib;
      }, error: function(err) {
          console.error('Could not connect to couch', err);
      }});    
