@@ -7,6 +7,7 @@ var http = require('http'),
     },
     passed_domain = false;
 
+
 // add passed extra headers
 for (var i=2; i < process.argv.length; i++) {
   switch (true) {
@@ -60,4 +61,4 @@ http.createServer(function(request, response) {
   request.addListener('end', function() {
     proxy_request.end();
   });
-}).listen(process.env.PORT || 1234);
+}).listen(process.env.PORT || 8000);
