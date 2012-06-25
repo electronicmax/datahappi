@@ -26,12 +26,12 @@ define([],
                {
                    domain:["boo"],
                    range: ["goo"],
-                   fn: function(x) { return { within: { lat: 328, lng : 2398} }; }
+                   fn: function(x) { return { goo: boo.zoo } }; }
                },
                {
                    domain:["boo"],
                    range: ["lat","lng"],
-                   fn: function(x) { return { within: { lat: 328, lng : 2398} }; }
+                   fn: function(x) { return { lat: 328, lng : 2398 }; }
                }                              
            ];
            
