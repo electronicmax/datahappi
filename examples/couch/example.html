@@ -1,16 +1,35 @@
+<!DOCTYPE html>
 <html>
 	<title>jquery.couch.js example</title>
 	<body>
 		<!-- Load jQuery -->
-		<script src="http://volant/lib/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="/lib/jquery-1.7.2.min.js" type="text/javascript"></script>
 
- 		<!-- Load jQuery.couch -->
-		<script src="http://volant:5984/_utils/script/jquery.couch.js" type="text/javascript"></script>
+		<!-- Load Underscore -->
+		<script src="/lib/underscore.js" type="text/javascript"></script>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				alert("test");
-			});
+		<!-- Load jQuery.couch -->
+		<script src="http://volant.ecs.soton.ac.uk:8000/_utils/script/jquery.couch.js" type="text/javascript">
 		</script>
+
+		<!-- Page content -->
+		<select id="existingDatabases"></select>
+		<button onclick="removeDB()">Delete</button>
+		<br>
+		<form name="newTableForm" id="newTableForm">
+			<input id="tableName" type="text" name="tableName">
+			<input type="submit">
+		</form>
+		<br>
+		<br>
+		<select id="existingDocs"></select>
+		<button onclick="removeDoc()">Delete</button>
+		<form name="newDocForm" id="newDocForm">
+			<input id="docName" type="text" name="docName">
+			<input type="submit">
+		</form>
+
+		<!-- js-ify content -->
+		<script src="example.js" type="text/javascript"></script>
 	</body>
 </html>
