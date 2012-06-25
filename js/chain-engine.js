@@ -4,7 +4,7 @@ define([],
                return l1.length == l2.length && _(l1).difference(l2).length == 0;
            };
            var flatten = function(L) {
-               return L.reduce(function(x,y) { return x.concat(y); });
+               return L.reduce(function(x,y) { return x.concat(y); }, []);
            }           
            var DEFINED = function(x) {  return x !== undefined;    }
            var TRANSFORMERS = [
@@ -47,13 +47,11 @@ define([],
                        return EQ(T.range, dest_type);
                    });
                    
-                   // if none can be found, fail.
-                   if (good_destination.length == 0) { return [undefined]; }
-
                    // try to find a path from our src to each candidate's domain
                    return flatten(good_destination.map(function(T) {
-                       var m = me(src_type, T.domain, transformers); // recurse!
-                       return m.filter(DEFINED).map(function(trail) {
+                       // find valid paths to T's domain, then add ourselves to it
+                       var m = me(src_type, T.domain, transformers); 
+                       return m.map(function(trail) {
                            return trail.concat(T); 
                        });
                    }));
