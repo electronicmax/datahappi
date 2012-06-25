@@ -5,22 +5,25 @@ var http = require('http'),
       'Access-Control-Max-Age'       : '86400', // 24 hours
       'Access-Control-Allow-Headers' : 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Authorization'
     },
-    passed_domain = false;
+    passed_domain = false,
+    SRC_PORT = process.argv.length == 4 ? Number(process.argv[2]) : 8000,
+    DEST_PORT = process.argv.length == 4 ? Number(process.argv[3]) : 5984;
 
+console.log("Listening on :", SRC_PORT, "routing to :", DEST_PORT);
 
-// add passed extra headers
-for (var i=2; i < process.argv.length; i++) {
-  switch (true) {
-    case /^\X-/.test(process.argv[i]):
-      cors_headers['Access-Control-Allow-Headers'] += ', ' + process.argv[i];
-      break;
-    case /[\w.]+(:\d+)?/.test(process.argv[i]):
-      passed_domain = process.argv[i];
-      break;
-    default:
-      console.log('Dunno what to do with param: '+process.argv[i])
-  }
-};
+// DISABLED :: (add passed extra headers )
+// for (var i=2; i < process.argv.length; i++) {
+//   switch (true) {
+//     case /^\X-/.test(process.argv[i]):
+//       cors_headers['Access-Control-Allow-Headers'] += ', ' + process.argv[i];
+//       break;
+//     case /[\w.]+(:\d+)?/.test(process.argv[i]):
+//       passed_domain = process.argv[i];
+//       break;
+//     default:
+//       console.log('Dunno what to do with param: '+process.argv[i])
+//   }
+// };
 
 http.createServer(function(request, response) {
   if (request.method == 'OPTIONS') {
@@ -38,7 +41,7 @@ http.createServer(function(request, response) {
 
   console.log(request.headers['host'], request.method, request.url);
 
-  var proxy = http.createClient(5984, request.headers['host']);
+  var proxy = http.createClient(DEST_PORT, request.headers['host']);
   var proxy_request = proxy.request(request.method, request.url, request.headers);
 
 
@@ -61,4 +64,4 @@ http.createServer(function(request, response) {
   request.addListener('end', function() {
     proxy_request.end();
   });
-}).listen(process.env.PORT || 8000);
+}).listen(SRC_PORT);
