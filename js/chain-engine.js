@@ -26,7 +26,7 @@ define([],
                {
                    domain:["boo"],
                    range: ["goo"],
-                   fn: function(x) { return { goo: boo.zoo } }; }
+                   fn: function(x) { return { goo: boo.zoo }; }
                },
                {
                    domain:["boo"],
