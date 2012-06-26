@@ -9,11 +9,19 @@ var http = require('http'),
     url  = require('url');;
 
 httpProxy.createServer(function (req, res, proxy) {
+    
     var url_parts = url.parse(req.url, true),
-        host = url_parts.query.url,
-        path = url_parts.pathname;
+        target_url = decodeURIComponent(url_parts.query.url),
+        host = url.parse(target_url,true).host,
+        path = url.parse(target_url,true).path;
+
+    if (url_parts.query.url === undefined) {
+        console.log("returning -> 404");
+        return res.writeHead(404, {});
+    }
 
     console.log("================ New request ================");
+    console.log(" target_url:     ", url_parts.query.url, " ? ", target_url);
     console.log(" HOST:     ", host);
     console.log(" PATH NAME:", path);
     console.log(" HEADERS:\n", req.headers);
