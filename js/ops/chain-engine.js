@@ -1,12 +1,12 @@
 define([],
        function() {
            var EQ = function(l1,l2) {
-               return l1.length == l2.length && _(l1).difference(l2).length == 0;
+               return l1.length == l2.length && _(l1).difference(l2).length === 0;
            };
            var flatten = function(L) {
                return L.reduce(function(x,y) { return x.concat(y); }, []);
-           }           
-           var DEFINED = function(x) {  return x !== undefined;    }
+           };           
+           var DEFINED = function(x) {  return x !== undefined;    };
            var TRANSFORMERS = [
                {
                    domain:["within"],
@@ -37,7 +37,7 @@ define([],
            
            return {
                find_chain: function(src_type, dest_type, transformers) {
-                   var transformers = transformers || TRANSFORMERS;
+                   transformers = transformers || TRANSFORMERS;
                    var me = arguments.callee;
                    
                    if (EQ(src_type, dest_type)) { return [[]]; } // goal achieved.
