@@ -4,7 +4,7 @@ var http = require('http'),
 
 httpProxy.createServer(function (req, res, proxy) {
     var url_parts = url.parse(req.url, true),
-        host = url_parts.query.host,
+        host = url_parts.query.host || "localhost",
         path = url_parts.pathname;
 
     console.log("================ New request ================");
