@@ -6,14 +6,26 @@
       <div class="hero-unit">
         <h3>rdfquery import test!</h3>
       </div>
-      <h4>Try this</h4>
+      
+      <h4>example</h4>
+
+      <pre>
+        var collection = new RDFQCollection('http://data.southampton.ac.uk/building/58.rdf');
+        collection.fetch().then(function(x) { window.databank = x; console.log(" GOT ", x); });
+        dse._registry
+      </pre>      
+        
+      <h4>old example</h4>
       <pre>
         dse.fetch_by_proxy('http://data.southampton.ac.uk/building/58.rdf').then(
                            function(xml) {
                                   window.db = $.rdf().load(xml, {});
                                   console.log("I eated ", window.db.databank.triples().length, " triples!");
                            });
+
+        
       </pre>
+      
     </div>
   </body>
   <script src="../lib/jquery-1.7.2.min.js" type="text/javascript"></script>
