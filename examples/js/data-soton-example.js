@@ -14,7 +14,7 @@ define([],
            var _convert_helper=function(v) {
                if (v.type == 'literal') { return v.value; }
                if (v.type == 'uri') { return get_model(v.value); }
-               console.error("dont know how to handle ", v);
+               throw new Error("dont know how to handle ", v);
            }           
            var convert_rdfv = function(v){
                if (v === undefined) { return; }
