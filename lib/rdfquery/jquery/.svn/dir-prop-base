@@ -1,0 +1,7 @@
+K 13
+svn:externals
+V 125
+jquery.json -r 5  http://jquery-json.googlecode.com/svn/trunk/
+jquery.qunit http://jqueryjs.googlecode.com/svn/trunk/qunit/ 
+
+END
