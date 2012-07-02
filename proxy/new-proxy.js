@@ -9,7 +9,12 @@ var http = require('http'),
     url  = require('url');;
 
 httpProxy.createServer(function (req, res, proxy) {
-    
+    if (req.method === 'OPTIONS') {
+        console.log('********** responding to OPTIONS request ***********');
+        res.writeHead(200, cors_headers);
+        res.end();
+        return;
+    }
     var url_parts = url.parse(req.url, true),
         target_url = decodeURIComponent(url_parts.query.url),
         host = url.parse(target_url,true).host,
@@ -25,12 +30,12 @@ httpProxy.createServer(function (req, res, proxy) {
     console.log(" HOST:     ", host);
     console.log(" PATH NAME:", path);
     console.log(" HEADERS:\n", req.headers);
-    
+
     var proxy = http.createClient(80, host);
 
     // we want to bring the new host over into the headers
     req.headers.host = host;
-    
+
     var proxy_request = proxy.request(req.method, path, req.headers);
     proxy_request.addListener('response', function (proxy_response) {
         proxy_response.addListener('data', function(chunk) {
@@ -42,7 +47,7 @@ httpProxy.createServer(function (req, res, proxy) {
         var headers = proxy_response.headers;
         for (name in cors_headers) {
             headers[name] = cors_headers[name];
-        }        
+        }
         res.writeHead(proxy_response.statusCode, proxy_response.headers);
     });
     req.addListener('data', function(chunk) {
@@ -51,7 +56,7 @@ httpProxy.createServer(function (req, res, proxy) {
     req.addListener('end', function() {
         proxy_request.end();
     });
-    
+
     /*
       // abbreviated way >
       req.headers['accept'] = 'application/xhtml+xml,text/html';
