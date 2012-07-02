@@ -1,0 +1,304 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns0: <http://www.w3.org/ns/org#> .
+@prefix ns1: <http://vocab.deri.ie/rooms#> .
+@prefix oo: <http://purl.org/openorg/> .
+@prefix ns2: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/> .
+@prefix ns3: <http://id.southampton.ac.uk/ns/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns4: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix ns5: <http://purl.org/goodrelations/v1#> .
+
+<http://id.southampton.ac.uk/org/GK> rdf:type ns0:Organization .
+
+<http://id.southampton.ac.uk/building/32> ns1:occupant <http://id.southampton.ac.uk/org/GK> ,
+                                                       <http://id.southampton.ac.uk/building/32#occupants> ,
+                                                       <http://id.southampton.ac.uk/org/FP> ,
+                                                       <http://id.southampton.ac.uk/org/F7FP080000> ,
+                                                       <http://id.southampton.ac.uk/org/F7FP090000> ;
+                                          oo:lacksFeature <http://id.southampton.ac.uk/building/32#residential> ;
+                                          ns2:easting "442544"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+                                          ns2:northing "115392"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+                                          ns3:disabledGoPage <http://www.disabledgo.com/en/access-guide/building-32> ;
+                                          geo:long "-1.395905"^^<http://www.w3.org/2001/XMLSchema#float> ;
+                                          dcterms:spatial "POLYGON((-1.3960952 50.9368069,-1.3958352 50.9368250,-1.3956962 50.9360329,-1.3959562 50.9360148,-1.3960952 50.9368069))" ;
+                                          rdf:type ns3:UoSBuilding ,
+                                                   ns1:Building ;
+                                          foaf:page <http://www.soton.ac.uk/estates/ourestate/buildings/highfield/32.html> ;
+                                          skos:notation "32"^^<http://id.southampton.ac.uk/ns/building-code-scheme> ;
+                                          ns3:buildingArchitect <http://id.southampton.ac.uk/building/32#architect> ;
+                                          geo:lat "50.9364157"^^<http://www.w3.org/2001/XMLSchema#float> ;
+                                          ns3:buildingDate "2006" ;
+                                          ns2:within <http://id.southampton.ac.uk/site/1> ;
+                                          rdfs:label "EEE Building" ;
+                                          ns3:electricityTimeSeries "energy/b32/ekw" ;
+                                          ns3:ombielName "Bldg 32 (EEE)" .
+
+<http://id.southampton.ac.uk/building/32#occupants> foaf:mbox <mailto:building-32@all.soton.ac.uk> ;
+                                                    rdf:type ns3:BuildingOccupantsGroup ;
+                                                    rdfs:label "Staff and Research Students in Building 32" .
+
+<http://id.southampton.ac.uk/org/FP> rdf:type ns0:Organization ,
+                                              ns0:OrganizationalUnit ;
+                                     rdfs:label "Electronics & Computer Science" .
+
+<http://id.southampton.ac.uk/org/F7FP080000> rdf:type ns0:Organization ;
+                                             rdfs:label "Agents, Interactions & Complexity" .
+
+<http://id.southampton.ac.uk/org/F7FP090000> rdf:type ns0:Organization ;
+                                             rdfs:label "Web & Internet Science" .
+
+<http://id.southampton.ac.uk/building/32#residential> rdf:type ns3:PlaceFeature-ResidentialUse ;
+                                                      rdfs:label "Building 32 is non-residential" .
+
+<http://id.southampton.ac.uk/building/32#architect> rdfs:label "John McAslan & Partners" .
+
+<http://id.southampton.ac.uk/site/1> rdf:type ns0:Site ,
+                                              geo:SpatialThing ;
+                                     rdfs:label "Highfield Campus" .
+
+<http://data.southampton.ac.uk/images/buildings/raw/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "3456" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.5000" ;
+                                                            foaf:thumbnail <http://data.southampton.ac.uk/images/buildings/100/32.jpg> ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "4535969" ;
+                                                            ns4:height "2304" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://id.ecs.soton.ac.uk/person/10955> rdf:type foaf:Person .
+
+<http://creativecommons.org/licenses/by/3.0/> rdfs:label "CC-BY" .
+
+<http://data.southampton.ac.uk/images/buildings/100/32.jpg> rdf:type foaf:Image ;
+                                                            rdfs:label "Building 32" ;
+                                                            foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "100" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.4925" ;
+                                                            ns4:fileSize "7158" ;
+                                                            ns4:height "67" ;
+                                                            dcterms:created "2010" .
+
+<http://data.southampton.ac.uk/images/buildings/600/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "600" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.5000" ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "196241" ;
+                                                            ns4:height "400" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://data.southampton.ac.uk/images/buildings/400/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "400" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.4981" ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "91168" ;
+                                                            ns4:height "267" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://data.southampton.ac.uk/images/buildings/200/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "200" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.5038" ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "24502" ;
+                                                            ns4:height "133" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://data.southampton.ac.uk/images/buildings/800/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "800" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.5009" ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "336032" ;
+                                                            ns4:height "533" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://data.southampton.ac.uk/images/buildings/300/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                            ns4:width "300" ;
+                                                            dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                            dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                            dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                            ns4:aspectRatio "1.5000" ;
+                                                            rdf:type foaf:Image ;
+                                                            ns4:fileSize "52508" ;
+                                                            ns4:height "200" ;
+                                                            dcterms:created "2010" ;
+                                                            rdfs:label "Building 32" .
+
+<http://data.southampton.ac.uk/images/buildings/1000/32.jpg> foaf:depicts <http://id.southampton.ac.uk/building/32> ;
+                                                             ns4:width "1000" ;
+                                                             dcterms:creator <http://id.ecs.soton.ac.uk/person/10955> ;
+                                                             dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;
+                                                             dcterms:format <http://purl.org/xtypes/Format-JPEG> ;
+                                                             ns4:aspectRatio "1.4993" ;
+                                                             rdf:type foaf:Image ;
+                                                             ns4:fileSize "510032" ;
+                                                             ns4:height "667" ;
+                                                             dcterms:created "2010" ;
+                                                             rdfs:label "Building 32" .
+
+<http://id.southampton.ac.uk/room/32-2097> rdf:type ns1:Room ;
+                                           rdfs:label "32 / 2097" ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2013> rdf:type ns1:Room ;
+                                           rdfs:label "32 / 2013" ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-4053> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1047> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/point-of-service/F7-deanery> rdf:type ns5:LocationOfSalesOrServiceProvisioning ;
+                                                          rdfs:label "Physical and Applied Science Faculty Deanery" ;
+                                                          ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1005> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/syllabus/location/#SPLUS4E5BB2> rdf:type ns3:SyllabusLocation ;
+                                                             rdfs:label "32 / 1039" ;
+                                                             ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1031> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/opendays/2011/07/place/22af69b1b4909185f4a243fae3a1eb18> rdf:type geo:SpatialThing ;
+                                                                                      rdfs:label "Lecture Theatre, Building 32" ;
+                                                                                      ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-3053> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1007> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2041> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/opendays/2011/07/place/141a7faac32848a347ad27514eecd495> rdf:type geo:SpatialThing ;
+                                                                                      rdfs:label "Room 2043, Building 32" ;
+                                                                                      ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-4047> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/point-of-service/F8-deanery> rdf:type ns5:LocationOfSalesOrServiceProvisioning ;
+                                                          rdfs:label "Social and Human Sciences Faculty Deanery" ;
+                                                          ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-4007> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1015> rdf:type ns3:SyllabusLocation ,
+                                                    ns1:Room ;
+                                           rdfs:label "Lecture Theatre" ,
+                                                      "32 / 1015" ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1041> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/vending-machine/20> rdf:type ns5:LocationOfSalesOrServiceProvisioning ;
+                                                 rdfs:label "Snack Vending Machine (Snakky Max)" ;
+                                                 ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1025> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1051> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2067> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/syllabus/location/#SPLUS61912A> rdf:type ns3:SyllabusLocation ;
+                                                             rdfs:label "32 / EEE Foyer" ;
+                                                             ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/syllabus/location/#SPLUS4C6A16> rdf:type ns3:SyllabusLocation ;
+                                                             rdfs:label "32 / 2097" ;
+                                                             ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/vending-machine/56> rdf:type ns5:LocationOfSalesOrServiceProvisioning ;
+                                                 rdfs:label "Bottle Vending Machine (Coke)" ;
+                                                 ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2093> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/syllabus/location/#SPLUS4E5BBD> rdf:type ns3:SyllabusLocation ;
+                                                             rdfs:label "32 / 1049" ;
+                                                             ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1027> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2063> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/opendays/2011/09/place/2d208ed73ac80f2413da10c430825d33> rdf:type geo:SpatialThing ;
+                                                                                      rdfs:label "Building 32" ;
+                                                                                      ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-4077> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/opendays/2011/09/place/22af69b1b4909185f4a243fae3a1eb18> rdf:type geo:SpatialThing ;
+                                                                                      rdfs:label "Lecture Theatre, Building 32" ;
+                                                                                      ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2135> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2027> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-1609> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/syllabus/location/#SPLUS4C6A1C> rdf:type ns3:SyllabusLocation ;
+                                                             rdfs:label "32 / 2103" ;
+                                                             ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2103> rdf:type ns1:Room ;
+                                           rdfs:label "32 / 2103" ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-2001> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-4037> rdf:type ns1:Room ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
+
+<http://id.southampton.ac.uk/room/32-3077> rdf:type ns3:SyllabusLocation ,
+                                                    ns1:Room ;
+                                           rdfs:label "32 / 3077" ,
+                                                      "Seminar Room" ;
+                                           ns2:within <http://id.southampton.ac.uk/building/32> .
