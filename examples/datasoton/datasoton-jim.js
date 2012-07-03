@@ -1,14 +1,16 @@
-define(["./rdfcollection"],
+define(["../../js/rdf/RDFCollection"],
 	function(rdfcollection) {
 		"strict mode";
-		var placesCollection = rdfcollection('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
-		var eventsCollection = rdfcollection('http://data.southampton.ac.uk/dumps/events-diary/2012-06-29/events-diary.rdf');
-
+		var placesCollection = rdfcollection.get_rdf('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
+		var eventsCollection = rdfcollection.get_rdf('http://data.southampton.ac.uk/dumps/events-diary/2012-06-29/events-diary.rdf');
 		$.when(
 			placesCollection.fetch(),
 			eventsCollection.fetch()
 		).done(function() {
-			console.log("done");
+		    console.log("done");                    
+                    window.places = placesCollection;
+                    window.events = eventsCollection;
+
 			console.log(placesCollection);
 			console.log(eventsCollection);
 		}).fail(function(e) {
