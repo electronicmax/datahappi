@@ -12,8 +12,10 @@ define([],
                return modelsbyuri[uri];
            };
            var _convert_helper=function(v) {
-               if (v.type == 'literal') { return v.value; }
-               if (v.type == 'uri') { return get_model(v.value); }
+               if (v.type === 'literal') { return v.value; }
+               if (v.type === 'uri') { return get_model(v.value); }
+			   /// ASK MAX MIGHT BE WRONG
+			   if (v.type === 'bnode') { console.log(v.value); return v.value; }
                throw new Error("dont know how to handle ", v);
            }           
            var convert_rdfv = function(v){
@@ -37,6 +39,17 @@ define([],
                        var this_ = this;
                        var d = new $.Deferred();
                        fetch_by_proxy(this.src_url).then(function(xml) {
+
+							window.r = $(xml)
+
+							/* Preprocess - Fix all buggy dates */
+							var startTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "start"));
+							var endTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "end"));
+							var allTimes = [].concat(startTimes, endTimes);
+							_(allTimes).each(function (el) {
+								el.textContent = el.textContent.replace(/ ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])/, 'T$1');
+							});
+
                            var dbload = $.rdf().load(xml, {});
                            var json = dbload.databank.dump();
                            var json_ms = _(json).keys().map(function(k) {
