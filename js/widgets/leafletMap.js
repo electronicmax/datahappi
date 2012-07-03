@@ -4,7 +4,7 @@ define([],
                initialize:function() {
                    var this_ = this;
                    // add our required leaflet stylesheet
-                   $('head').append('<link rel="stylesheet" href="../lib/leaflet/leaflet.css" type="text/css" />');
+                   $('head').append('<link rel="stylesheet" href="../../lib/leaflet/leaflet.css" type="text/css" />');
                    this_.render();
                    this.collection = this.options.data || new Backbone.Collection();
                },
