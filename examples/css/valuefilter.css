@@ -1,0 +1,32 @@
+
+body {
+    font-family:District, sans-serif;
+    font-size:80%;
+}
+li {
+    line-height:1.2em;
+}
+.codemirror {
+    border:1px solid black !important;
+    margin-top:30px; margin-bottom:30px;
+}
+#values {
+    width:100%;
+}
+table td:first-child {
+    width:10%;
+}
+table td {
+    width:50%;
+}
+.val * {
+    font-family:monospace;
+    width:100%;
+    font-size:70%;
+    overflow:hidden;
+    height:2.5em;
+}
+textarea {
+    padding:none;
+}
+
