@@ -1,6 +1,7 @@
 define(['../../js/rdf/RDFCollection'],
        function(rdfc) {
            window.dse = rdfc; // DEBUG: remove.
-           rdfc.test();
+           var c = rdfc.get_rdf('http://data.southampton.ac.uk/building/58.rdf');
+           c.fetch().then(function() {});           
            return {};
        });
