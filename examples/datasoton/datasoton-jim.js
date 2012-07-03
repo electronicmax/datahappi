@@ -3,6 +3,8 @@ define(["../../js/rdf/RDFCollection"],
 		"strict mode";
 		var placesCollection = rdfcollection.get_rdf('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
 		var eventsCollection = rdfcollection.get_rdf('http://data.southampton.ac.uk/dumps/events-diary/2012-06-29/events-diary.rdf');
+
+		var newEventCollection = new Backbone.Collection();
 		$.when(
 			placesCollection.fetch(),
 			eventsCollection.fetch().then(function() {
