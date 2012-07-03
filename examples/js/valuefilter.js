@@ -40,11 +40,11 @@ define(['../../js/rdf/RDFCollection'],
                    this.$el.html(this.template({m:this.options.model.toJSON()}));
                    return this.el;
                }
-           });           
-           rdfc.test().then(function(data) {
-               views = views.concat(data.map(function(x) {
-                   var m = new Backbone.Model(x);
-                   var v = new ThingView({model:x});
+           });
+           var c = rdfc.get_rdf('http://data.southampton.ac.uk/building/58.rdf');
+           c.fetch().then(function() {
+               views = views.concat(c.map(function(m) {
+                   var v = new ThingView({model:m});
                    var row = $('<tr></tr>').appendTo('#values');
                    var cell = row.append(v.render());
                    v.valueview = $('<td class="val"><textarea></textarea></td>').appendTo(row);
