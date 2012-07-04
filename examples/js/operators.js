@@ -46,6 +46,13 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine', 'js/utils'],
                                util.t("<%= latitude %>, <%= longitude %>",
                                       vals[0].attributes));
                            
+                       } else {
+                           var names  = ce.apply_chain(model,['place name']);
+                           if (names && names.length > 0) {
+                               iv.val_view.html(vals[0].get('place name'));
+                           } else {
+                               iv.val_view.html(' :( ');
+                           }
                        }
                    });
                },
@@ -70,6 +77,10 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine', 'js/utils'],
                v.load($('#url').val());                              
                return false;
            });
+
+           // pre-load room definitions 
+           var rooms = rdfc.get_rdf('http://hip.cat/misc/rooms-and-buildings.rdf').fetch().then(function() { console.log("ready!"); });
+           
            window.rdf = rdfc;
            window.ce = ce;
            window.view = v;           
