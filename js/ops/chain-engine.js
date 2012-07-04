@@ -7,56 +7,75 @@ define([],
                return L.reduce(function(x,y) { return x.concat(y); }, []);
            };           
            var DEFINED = function(x) {  return x !== undefined;    };
+           var to_model = function(o) { return new Backbone.Model(o); }
            var TRANSFORMERS = [
                {
                    domain:["within"],
-                   range: ["lat","lng"],
-                   fn: function(x) { return { lat: x.within.lat, lng : x.within.lng }; }
+                   range: ["http://www.w3.org/2003/01/geo/wgs84_pos#lat", "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
+                   fn: function(x) {
+                       if (x.get("within") && x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#lat") && 
+                           x.get("within").get["http://www.w3.org/2003/01/geo/wgs84_pos#long"]) {
+                           return to_model({
+                               "http://www.w3.org/2003/01/geo/wgs84_pos#lat": x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
+                               "http://www.w3.org/2003/01/geo/wgs84_pos#long": x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#long")                               
+                           });
+                       }
+                   }
                },
                {
-                   domain:["blah"],
+                   domain:["within"],
                    range: ["within"],
-                   fn: function(x) { return { within: { lat: 328, lng : 2398} }; }
+                   fn: function(x) {
+                       if (x.get("within") && x.get("within").get("within")) { return  x.within ; }
+                   }
                },
                {
-                   domain:["goo"],
-                   range: ["within"],
-                   fn: function(x) { return { within: { lat: 328, lng : 2398} }; }
-               },
-               {
-                   domain:["boo"],
-                   range: ["goo"],
-                   fn: function(x) { return { goo: boo.zoo }; }
-               },
-               {
-                   domain:["boo"],
-                   range: ["lat","lng"],
-                   fn: function(x) { return { lat: 328, lng : 2398 }; }
-               }                              
-           ];
-           
-           return {
-               find_chain: function(src_type, dest_type, transformers) {
-                   transformers = transformers || TRANSFORMERS;
-                   var me = arguments.callee;
-                   
-                   if (EQ(src_type, dest_type)) { return [[]]; } // goal achieved.
-
-                   // find transforms that will give us our current destination
-                   var good_destination = transformers.filter(function(T) {
-                       return EQ(T.range, dest_type);
-                   });
-                   
-                   // try to find a path from our src to each candidate's domain
-                   return flatten(good_destination.map(function(T) {
-                       // find valid paths to T's domain, then add ourselves to it
-                       var m = me(src_type, T.domain, transformers); 
-                       return m.map(function(trail) {
-                           return trail.concat(T); 
+                   domain:["http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+                           "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
+                   range: ["latitude","longitude"],
+                   fn: function(x) {
+                       return to_model({
+                           latitude: x.get("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
+                           longitude : x.get("http://www.w3.org/2003/01/geo/wgs84_pos#long")
                        });
-                   }));
+                   }
                }
+           ];
+
+           var satisfies = function(entity, tgt_type) {
+               // tgt_type is an array of property names
+               // entity is a Backbone.Model
+               console.log(" tgt type ", tgt_type, " KEYS : ", _(entity.attributes).keys(), _(tgt_type).without(_(entity.attributes).keys()));
+               return _(tgt_type).difference(_(entity.attributes).keys()).length == 0;
+           }
+
+           var chain = function(src_entity, target_type) {
+               // forward chains from the src_entity to the target_type
+               var me = arguments.callee;
+               if (satisfies(src_entity, target_type)) { return [[]]; } // goal achieved.
+
+               // find transforms that will give us our current destination
+               var selected_Ts = TRANSFORMERS.filter(function(T) {  return satisfies(src_entity, T.domain); });
+               var next = selected_Ts.map(function(T) {
+                   var val = T.fn(src_entity);
+                   if (DEFINED(val)) {
+                       var chain_tail = me(val,target_type);
+                       return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
+                   }
+                   return undefined;
+               }).filter(DEFINED);
+           
+               return flatten(next);
            };
 
-           
+           var apply_chain = function(src_entity,target_type) {
+               var c = chain(src_entity,target_type);
+               return c.map(function(x) { return x[x.length - 1][1]; });
+           };
+
+           return {
+               transformers:TRANSFORMERS,
+               chain:chain,
+               apply_chain:apply_chain
+           };
        });
