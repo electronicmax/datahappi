@@ -1,13 +1,21 @@
 define(['../../js/rdf/RDFCollection',
-        '../../js/widgets/leafletMap'],
-       function(rdfc, leafletMap) {
+    '../../js/widgets/leafletMap',
+    '../../js/ops/chain-engine'],
+    function(rdfc, leafletMap) {
            /// put cool shtuff here.
            window.dse = rdfc;
-           var b58 = rdfc.get_rdf('http://data.southampton.ac.uk/building/58.rdf');
-           b58.fetch().then(function(data) {
-               console.log(" omg data ", b58);
+
+           var placesCollection = rdfc.get_rdf('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
+
+           placesCollection.fetch().then(function(data) {
+             console.log(" omg data ", placesCollection);
            });
-           window.b58 = b58;
-           new leafletMap.LeafletWidget( {el: $('#map'), attributes: {css: {height: "400px"}} })
+           var map = new leafletMap.LeafletWidget( {el: $('#map'), attributes: {css: {height: "400px"}} });
+
+           map.addMarker(50.936592, -1.398697);
+
+           window.placesCollection = placesCollection;
+
+
            return {};
        });
