@@ -7,7 +7,9 @@ define([],
                return L.reduce(function(x,y) { return x.concat(y); }, []);
            };           
            var DEFINED = function(x) {  return x !== undefined;    };
-           var to_model = function(o) { return new Backbone.Model(o); }
+           var to_model = function(o) {
+               return new Backbone.Model(o);
+           };
            var TRANSFORMERS = [
                {
                    domain:["within"],
@@ -24,6 +26,7 @@ define([],
                {
                    domain:["http://purl.org/NET/c4dm/event.owl#place"],
                    fn: function(x) {
+                       "http://purl.org/NET/c4dm/event.owl#place"
                        if (x.get("http://purl.org/NET/c4dm/event.owl#place")) {
                            return  x.get("http://purl.org/NET/c4dm/event.owl#place");
                        }
@@ -52,6 +55,13 @@ define([],
                // tgt_type is an array of property names
                // entity is a Backbone.Model
                // console.log(" tgt type ", tgt_type, " KEYS : ", _(entity.attributes).keys(), _(tgt_type).without(_(entity.attributes).keys()));
+               if (! entity instanceof Backbone.Model) {
+                   console.log("Got > ", entity);
+                   return false;
+               }
+               if (!_(entity.attributes).isObject()) {
+                   console.log("Weird entity : ", entity, entity.attributes);
+               }
                return _(tgt_type).difference(_(entity.attributes).keys()).length == 0;
            }
 
@@ -64,6 +74,13 @@ define([],
                var selected_Ts = TRANSFORMERS.filter(function(T) {  return satisfies(src_entity, T.domain); });
                var next = selected_Ts.map(function(T) {
                    var val = T.fn(src_entity);
+                   if (_(val).isArray()) {
+                       var tails = _(val).filter(DEFINED).map(function(v) {
+                           var chain_tail = me(v,target_type);
+                           return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
+                       });
+                       return flatten(tails);                       
+                   }
                    if (DEFINED(val)) {
                        var chain_tail = me(val,target_type);
                        return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });

@@ -20,7 +20,7 @@ define([],
            var convert_rdfv = function(v){
                if (v === undefined) { return; }
                if (v.length === 0) { return []; }
-               if (v.length == 1) {  return _convert_helper(v[0]);       }
+               // if (v.length == 1) {  return _convert_helper(v[0]);       }
                return v.map(_convert_helper);
            };
            var convert_values = function(o) {
@@ -50,7 +50,7 @@ define([],
                            window._DEBUG_DB = dbload; // TODO eliminate
                            var json = dbload.databank.dump();
                            var json_ms = _(json).keys().map(function(k) {
-                               var m = get_model(k);
+                               var m = get_model(k);                               
                                _(m.attributes).extend(_(convert_values(json[k])).extend({_id:k}));
                                return m;
                            });                           
