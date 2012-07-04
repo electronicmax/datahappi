@@ -11,7 +11,6 @@ define([],
            var TRANSFORMERS = [
                {
                    domain:["within"],
-                   range: ["http://www.w3.org/2003/01/geo/wgs84_pos#lat", "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
                    fn: function(x) {
                        if (x.get("within") && x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#lat") && 
                            x.get("within").get["http://www.w3.org/2003/01/geo/wgs84_pos#long"]) {
@@ -23,16 +22,23 @@ define([],
                    }
                },
                {
-                   domain:["within"],
-                   range: ["within"],
+                   domain:["http://purl.org/NET/c4dm/event.owl#place"],
                    fn: function(x) {
-                       if (x.get("within") && x.get("within").get("within")) { return  x.within ; }
+                       if (x.get("http://purl.org/NET/c4dm/event.owl#place")) {
+                           return  x.get("http://purl.org/NET/c4dm/event.owl#place");
+                       }
+                   }
+               },               
+               {
+                   domain:["http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within"],
+                   fn: function(x) {
+                       if (x.get("http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within")) {
+                           return  x.get("http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within") ;
+                       }
                    }
                },
                {
-                   domain:["http://www.w3.org/2003/01/geo/wgs84_pos#lat",
-                           "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
-                   range: ["latitude","longitude"],
+                   domain:["http://www.w3.org/2003/01/geo/wgs84_pos#lat", "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
                    fn: function(x) {
                        return to_model({
                            latitude: x.get("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
@@ -45,7 +51,7 @@ define([],
            var satisfies = function(entity, tgt_type) {
                // tgt_type is an array of property names
                // entity is a Backbone.Model
-               console.log(" tgt type ", tgt_type, " KEYS : ", _(entity.attributes).keys(), _(tgt_type).without(_(entity.attributes).keys()));
+               // console.log(" tgt type ", tgt_type, " KEYS : ", _(entity.attributes).keys(), _(tgt_type).without(_(entity.attributes).keys()));
                return _(tgt_type).difference(_(entity.attributes).keys()).length == 0;
            }
 
