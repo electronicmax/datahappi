@@ -49,7 +49,8 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine', 'js/utils'],
                        } else {
                            var names  = ce.apply_chain(model,['place name']);
                            if (names && names.length > 0) {
-                               iv.val_view.html(vals[0].get('place name'));
+                               console.log('names ', names);
+                               iv.val_view.html(names[0].get('place name'));
                            } else {
                                iv.val_view.html(' :( ');
                            }
