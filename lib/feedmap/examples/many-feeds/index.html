@@ -7,9 +7,25 @@
 		.inpfeed { margin: 15px 0;}
 		small { color: #333; }
 	</style>
-	<script src="js/lib/jquery.js"></script>
-	<script src="js/lib/underscore.js"></script>
-	<script src="js/lib/backbone.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/underscore.js"></script>
+	<script type="text/javascript" src="js/lib/backbone.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.uri.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.xmlns.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.curie.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.datatype.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.rdf.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.rdfa.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.rdf.xml.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.rdf.turtle.js"></script>
+	<script type="text/javascript" src="../../../rdfquery/jquery.rdf.json.js"></script>
+	<script src="../../../require.js" data-main="/datahappi/examples/js/operators.js"></script>
+	<script type="text/javascript">
+		require.config({
+   		baseUrl: "/datahappi/",
+   		waitSeconds: 15
+	});
+	</script>
 	<script src="js/lib/leaflet.js"></script>
 	<script src="js/lib/jath.js"></script><!-- Used for XML parsing -->
 	<script src="js/lib/jscoord.js"></script><!-- Used to convert eastings/northings to lat/lng -->
