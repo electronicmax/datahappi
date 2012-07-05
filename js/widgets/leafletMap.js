@@ -1,5 +1,11 @@
 define([],
   function() {
+    // var MarkerIcon = L.Icon.extend({
+    //   iconUrl: '../lib/leaflet/images/marker-icon.png',
+    //   shadowUrl: '../lib/leaflet/images/marker-shadow.png',
+    // });
+    // var blueIcon = new MarkerIcon();
+    // var greenIcon = new MarkerIcon('../lib/leaflet/images/marker-icon-green.png');
     var LeafletWidget = Backbone.View.extend({
       initialize:function() {
         var this_ = this;
@@ -14,9 +20,18 @@ define([],
       setValueFunction:function(fn) {
         this.options.valuefn = fn;
       },
-      addMarker:function(latitude, longitude) {
-        markerLocation = new L.LatLng(latitude, longitude);
-        var marker = new L.Marker(markerLocation);
+      addMarker:function(latitude, longitude, isGreen) {
+
+var MarkerIcon = L.Icon;//.extend({
+      // iconUrl: '../lib/leaflet/images/marker-icon.png',
+      // shadowUrl: '../lib/leaflet/images/marker-shadow.png',
+    // });
+    var blueIcon = new L.Icon();
+    var greenIcon = new MarkerIcon('../lib/leaflet/images/marker-icon-green.png');
+
+
+        iconFile = (isGreen)? greenIcon : blueIcon;
+        var marker = new L.Marker(new L.LatLng(latitude, longitude), {icon: blueIcon});
         this.map.addLayer(marker);
       },
       render:function() {
@@ -30,17 +45,15 @@ define([],
         });
 
         function setLocation (latitude, longitude) {
-          this_.map.setView(new L.LatLng(latitude, longitude), 13).addLayer(cloudmade);
+          this_.map.setView(new L.LatLng(latitude, longitude), 16).addLayer(cloudmade);
         }
 
-        if (navigator.geolocation) {
+        try {
           navigator.geolocation.getCurrentPosition( function(position) {
             console.log(position);
             setLocation(position.coords.latitude, position.coords.longitude);
-          }, function(error) {
-            setLocation(50.936592, -1.398697);
-          }) 
-        } else {
+          })
+        } catch (error) {
           setLocation(50.936592, -1.398697);
         }
 

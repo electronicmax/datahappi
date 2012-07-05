@@ -1,21 +1,39 @@
 define(['../../js/rdf/RDFCollection',
     '../../js/widgets/leafletMap',
     '../../js/ops/chain-engine'],
-    function(rdfc, leafletMap) {
-           /// put cool shtuff here.
-           window.dse = rdfc;
+    function(rdfc, leafletMap, ce) {
+        /// put cool shtuff here.
+        var map = new leafletMap.LeafletWidget( {el: $('#map'), attributes: {css: {height: "400px"}} });
+        var placesCollection = rdfc.get_rdf('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
 
-           var placesCollection = rdfc.get_rdf('http://data.southampton.ac.uk/dumps/places/2012-06-06/places.rdf');
-
-           placesCollection.fetch().then(function(data) {
-             console.log(" omg data ", placesCollection);
-           });
-           var map = new leafletMap.LeafletWidget( {el: $('#map'), attributes: {css: {height: "400px"}} });
-
-           map.addMarker(50.936592, -1.398697);
-
-           window.placesCollection = placesCollection;
+        try {
+          navigator.geolocation.getCurrentPosition( function(position) {
+            console.log("geoLocation: ", position);
+            map.addMarker(position.coords.latitude, position.coords.longitude, true);
+          })
+        } catch(err) {}
 
 
-           return {};
-       });
+        placesCollection.fetch().then(function(data) {
+            console.log(" omg data ", placesCollection);
+            window.placesCollection = placesCollection;
+
+            var locations = _(placesCollection.models).map(function (m) {
+                return ce.apply_chain(m, ["latitude", "longitude"]);
+            }).filter(function (m) {
+                return m.length > 0;
+            });
+            console.log( "locations: ", locations); 
+            _(locations).each(function (m) {
+                var latitude = m[0].attributes.latitude[0];
+                var longitude = m[0].attributes.longitude[0];
+                console.log("LatLng: ", latitude, ":", longitude);
+                map.addMarker(latitude, longitude);
+            })
+        });
+
+
+
+
+        return {};
+    });
