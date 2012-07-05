@@ -62,12 +62,20 @@ define([],
                            }).map(function(y) {
                                // then get hte label
                                return y.get('http://www.w3.org/2000/01/rdf-schema#label')[0];
-                           });;
+                           });
                            console.log('labels ', labels);
                            return to_model({ 'place name' : labels[0] });
                        }
                    }
-               }               
+               },
+               {
+                   domain:["http://purl.org/dc/terms/description"],
+                   fn: function(x) {
+                       return to_model({
+                           description: x.get("http://purl.org/dc/terms/description")[0]
+                       });
+                   }
+               },
            ];
 
            var satisfies = function(entity, tgt_type) {
