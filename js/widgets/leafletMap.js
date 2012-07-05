@@ -1,11 +1,15 @@
 define([],
   function() {
-    // var MarkerIcon = L.Icon.extend({
-    //   iconUrl: '../lib/leaflet/images/marker-icon.png',
-    //   shadowUrl: '../lib/leaflet/images/marker-shadow.png',
-    // });
-    // var blueIcon = new MarkerIcon();
-    // var greenIcon = new MarkerIcon('../lib/leaflet/images/marker-icon-green.png');
+    var blueIcon = new L.Icon.Default();
+    var greenIcon = new L.Icon({
+      iconSize: new L.Point(25, 41),
+      iconAnchor: new L.Point(13, 41),
+      popupAnchor: new L.Point(0, -33),
+
+      shadowSize: new L.Point(41, 41),
+      iconUrl: '../../lib/leaflet/images/marker-icon-green.png',
+      shadowUrl: '../../lib/leaflet/images/marker-shadow.png'
+    });
     var LeafletWidget = Backbone.View.extend({
       initialize:function() {
         var this_ = this;
@@ -21,17 +25,8 @@ define([],
         this.options.valuefn = fn;
       },
       addMarker:function(latitude, longitude, isGreen) {
-
-var MarkerIcon = L.Icon;//.extend({
-      // iconUrl: '../lib/leaflet/images/marker-icon.png',
-      // shadowUrl: '../lib/leaflet/images/marker-shadow.png',
-    // });
-    var blueIcon = new L.Icon();
-    var greenIcon = new MarkerIcon('../lib/leaflet/images/marker-icon-green.png');
-
-
         iconFile = (isGreen)? greenIcon : blueIcon;
-        var marker = new L.Marker(new L.LatLng(latitude, longitude), {icon: blueIcon});
+        var marker = new L.Marker(new L.LatLng(latitude, longitude), {icon: iconFile});
         this.map.addLayer(marker);
       },
       render:function() {
