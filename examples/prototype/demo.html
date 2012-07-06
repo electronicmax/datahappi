@@ -130,7 +130,7 @@
     <script src="../../lib/underscore-min.js" type="text/javascript"></script>
     <script src="../../lib/backbone.js" type="text/javascript"></script>
     <script src="../../lib/leaflet/leaflet-src.js" type="text/javascript"></script>
-    <script src="../../lib/require.js" data-main="../js/map-test.js"></script>
+    <script src="../../lib/require.js"></script>
     <script src="../../lib/bootstrap-transition.js"></script>
     <script src="../../lib/bootstrap-alert.js"></script>
     <script src="../../lib/bootstrap-modal.js"></script>
@@ -154,13 +154,12 @@
     <script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.json.js"></script>  
     <script>
     $(document).ready(function() {
-      $("#mapWell").bind('click', _.once(function() {
         $("#mapWell").hide();
-      }));
       $("#comparison").change(function(){
         $("#public").css({ 'background-color': '#49AFCD', 'color': 'white'});
         $("#private").css({ 'background-color': '#5BB75B', 'color': 'white'});
         $("#mapWell").fadeIn();
+        require(['../js/map-test.js']);
       });
     });
     </script>
