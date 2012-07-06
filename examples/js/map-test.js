@@ -13,7 +13,6 @@ define(['../../js/rdf/RDFCollection',
           })
         } catch(err) {}
 
-
         placesCollection.fetch().then(function(data) {
             console.log(" omg data ", placesCollection);
             window.placesCollection = placesCollection;
