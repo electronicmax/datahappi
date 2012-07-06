@@ -76,6 +76,14 @@ define([],
                        });
                    }
                },
+               {
+                   domain:["http://www.w3.org/2000/01/rdf-schema#label"],
+                   fn: function(x) {
+                       return to_model({
+                           name: x.get("http://www.w3.org/2000/01/rdf-schema#label")[0]
+                       });
+                   }
+               },
            ];
 
            var satisfies = function(entity, tgt_type) {
