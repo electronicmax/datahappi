@@ -71,22 +71,21 @@ define(['js/rdf/RDFCollection',
                    return d.promise();
                },
            });
+	   
            var v = new V({el:$('.main')[0]});
-           $('.load').click(function() {
-               v.load($('#url').val());               
-           });
-           $('form').submit(function() {
-               console.log('submit!');
-               v.load($('#url').val());                              
-               return false;
-           });
-
-           // pre-load room definitions
-	   console.log('calling get rdf ');
-           var rooms = rdfc.get_rdf('http://hip.cat/misc/rooms-and-buildings.rdf').fetch().then(function() {
-		   console.log("ready!");
-	       });
-           
+	   var load = function() {
+	       var buildings_url = $("#definitions_url").val();
+	       var data_url = $('#url').val();
+	       console.log('buildings ', buildings_url);
+	       console.log('data ', data_url);	       
+	       var rooms = rdfc.get_rdf(buildings_url).fetch().then(function() {
+		       console.log('loaded buildings');
+		       v.load(data_url).then(function() { console.log(' loaded events '); });               
+		   });
+	   };
+	   
+           $('.load').click(load);
+           $('form').submit(load);
            window.rdf = rdfc;
            window.ce = ce;
            window.view = v;           

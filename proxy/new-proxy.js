@@ -18,7 +18,14 @@ httpProxy.createServer(function (req, res, proxy) {
     var url_parts = url.parse(req.url, true),
         target_url = decodeURIComponent(url_parts.query.url),
         host = url.parse(target_url,true).host,
-        path = url.parse(target_url,true).path;
+        path = url.parse(target_url,true).path,
+	port = parseInt(url.parse(target_url,true).port) || 80;
+
+    if (host) {
+	host = host.search(/:\d+/g) >= 0 ? host.slice(0,host.indexOf(':')) : host;
+    }
+
+    // var port = host.search(/:\d+/g) >= 0 ? parseInt(host.slice(host.indexOf(':')+1)) : 80;						  
 
     if (url_parts.query.url === undefined) {
         console.log("returning -> 404");
@@ -28,10 +35,11 @@ httpProxy.createServer(function (req, res, proxy) {
     console.log("================ New request ================");
     console.log(" target_url:     ", url_parts.query.url, " ? ", target_url);
     console.log(" HOST:     ", host);
+    console.log(' port: ', port);
     console.log(" PATH NAME:", path);
-    console.log(" HEADERS:\n", req.headers);
 
-    var proxy = http.createClient(80, host);
+
+    var proxy = http.createClient(port, host);
     proxy.on('error', function (e) {
         console.log("error:", e);
         console.log("returning -> 404");
@@ -39,6 +47,9 @@ httpProxy.createServer(function (req, res, proxy) {
     });
     // we want to bring the new host over into the headers
     req.headers.host = host;
+    req.headers.port = port;
+
+    console.log(" HEADERS:\n", req.headers);    
 
     //try {
         var proxy_request = proxy.request(req.method, path, req.headers);

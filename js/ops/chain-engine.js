@@ -21,7 +21,7 @@ define([],
                                "http://www.w3.org/2003/01/geo/wgs84_pos#long": x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#long")                               
                            });
                        }
-                   }
+                   } 
                },
                {
                    domain:["http://purl.org/NET/c4dm/event.owl#place"],
@@ -100,9 +100,12 @@ define([],
                return _(tgt_type).difference(_(entity.attributes).keys()).length == 0;
            }
 
+	   var caching = { };
+	   // applications of { (model_id) -> ( (T, val1) ... ) ) }
+
            var chain = function(src_entity, target_type) {
                // forward chains from the src_entity to the target_type
-               var me = arguments.callee;
+               var rechain = arguments.callee;
                if (satisfies(src_entity, target_type)) { return [[]]; } // goal achieved.
 
                // find transforms that will give us our current destination
@@ -111,16 +114,19 @@ define([],
                    var val = T.fn(src_entity);
                    if (_(val).isArray()) {
                        var tails = _(val).filter(DEFINED).map(function(v) {
-                           var chain_tail = me(v,target_type);
+                           var chain_tail = rechain(v,target_type);
                            return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
                        });
                        return flatten(tails);                       
-                   }
-                   if (DEFINED(val)) {
-                       var chain_tail = me(val,target_type);
+                   } else if (DEFINED(val)) {
+		       // we got a value directly -- let's propagate that on 
+                       var chain_tail = rechain(val,target_type);
                        return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
-                   }
-                   return undefined;
+                   } else {
+		       // not defined
+		       return undefined;
+		   }
+
                }).filter(DEFINED);
            
                return flatten(next);
