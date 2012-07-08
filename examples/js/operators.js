@@ -1,6 +1,6 @@
-define(['js/rdf/RDFCollection.js',
-	'js/ops/chain-engine.js',
-	'js/utils.js'],
+define(['js/rdf/RDFCollection',
+	'js/ops/chain-engine',
+	'js/utils'],
        function(rdfc, ce, util) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
