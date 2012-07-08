@@ -1,7 +1,10 @@
 define([],
     function() {
+	   var kill_port = function(host_string) {
+	       return host_string.search(/:\d+/g) >= 0 ?  host_string.slice(0,host_string.indexOf(':')) : host_string;
+	   };
         var fetch_by_proxy = function(url,proxy_url) {
-            proxy_url = proxy_url || "http://"+ document.location.host + ":9292";
+            proxy_url = proxy_url || "http://"+ kill_port(document.location.host) + ":9292";
             return $.get(proxy_url, { url : url });
         };
         var modelsbyuri = {};

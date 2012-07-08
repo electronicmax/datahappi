@@ -1,4 +1,6 @@
-define(['js/rdf/RDFCollection','js/ops/chain-engine', 'js/utils'],
+define(['js/rdf/RDFCollection.js',
+	'js/ops/chain-engine.js',
+	'js/utils.js'],
        function(rdfc, ce, util) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
@@ -79,8 +81,11 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine', 'js/utils'],
                return false;
            });
 
-           // pre-load room definitions 
-           var rooms = rdfc.get_rdf('http://hip.cat/misc/rooms-and-buildings.rdf').fetch().then(function() { console.log("ready!"); });
+           // pre-load room definitions
+	   console.log('calling get rdf ');
+           var rooms = rdfc.get_rdf('http://hip.cat/misc/rooms-and-buildings.rdf').fetch().then(function() {
+		   console.log("ready!");
+	       });
            
            window.rdf = rdfc;
            window.ce = ce;
