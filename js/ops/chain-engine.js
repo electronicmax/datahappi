@@ -1,89 +1,34 @@
-define([],
-       function() {
-           var EQ = function(l1,l2) {
-               return l1.length == l2.length && _(l1).difference(l2).length === 0;
-           };
-           var flatten = function(L) {
-               return L.reduce(function(x,y) { return x.concat(y); }, []);
+define(['js/rdf/RDFCollection','js/ops/ops'],
+       function(rdfc,ops) {           
+           var apply_chain = function(src_entity,target_type) {
+               var c = chain(src_entity,target_type);
+               return c.map(function(x) { return x[x.length - 1][1]; });
            };           
+           var ChainModel = rdfc.RDFModel.extend({
+               idAttribute:"_id",               
+               get_chain:function(props) {
+                   if (_(props).isArray()) {
+                       // list of properties
+                       return apply_chain(this, props);
+                   } else {
+                       return apply_chain(this, [props]);
+                   }
+               }
+           });
+           var ChainRDFCollection = rdfc.RDFCollection.extend({ model:ChainModel  });
+           var to_model =  function(o) {
+               // might be a model -> keep a model.
+               // might be an object not a model --> coerce to model
+               
+               if (o === undefined) { throw new Error("Cant to_model on undefined "); }
+               if (!o instanceof Object) { throw new Error("Got a ", o, " require an object "); }
+               if (o instanceof Backbone.Model) { return o; }
+               return new ChainModel(o);
+           };           
+           var TRANSFORMERS = ops.operators;
+           var EQ = function(l1,l2) {   return l1.length == l2.length && _(l1).difference(l2).length === 0;       };
+           var flatten = function(L) {  return L.reduce(function(x,y) { return x.concat(y); }, []);        };           
            var DEFINED = function(x) {  return x !== undefined;    };
-           var to_model = function(o) {
-               return new Backbone.Model(o);
-           };
-           var TRANSFORMERS = [
-               {
-                   domain:["within"],
-                   fn: function(x) {
-                       if (x.get("within") && x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#lat") && 
-                           x.get("within").get["http://www.w3.org/2003/01/geo/wgs84_pos#long"]) {
-                           return to_model({
-                               "http://www.w3.org/2003/01/geo/wgs84_pos#lat": x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
-                               "http://www.w3.org/2003/01/geo/wgs84_pos#long": x.get("within").get("http://www.w3.org/2003/01/geo/wgs84_pos#long")                               
-                           });
-                       }
-                   } 
-               },
-               {
-                   domain:["http://purl.org/NET/c4dm/event.owl#place"],
-                   fn: function(x) {
-                       "http://purl.org/NET/c4dm/event.owl#place"
-                       if (x.get("http://purl.org/NET/c4dm/event.owl#place")) {
-                           return  x.get("http://purl.org/NET/c4dm/event.owl#place");
-                       }
-                   }
-               },               
-               {
-                   domain:["http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within"],
-                   fn: function(x) {
-                       if (x.get("http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within")) {
-                           return  x.get("http://data.ordnancesurvey.co.uk/ontology/spatialrelations/within") ;
-                       }
-                   }
-               },
-               {
-                   domain:["http://www.w3.org/2003/01/geo/wgs84_pos#lat", "http://www.w3.org/2003/01/geo/wgs84_pos#long"],
-                   fn: function(x) {
-                       return to_model({
-                           latitude: x.get("http://www.w3.org/2003/01/geo/wgs84_pos#lat"),
-                           longitude : x.get("http://www.w3.org/2003/01/geo/wgs84_pos#long")
-                       });
-                   }
-               },
-               {
-                   domain:["http://purl.org/NET/c4dm/event.owl#place"],
-                   fn: function(x) {
-                       if (x.get("http://purl.org/NET/c4dm/event.owl#place") &&
-                           x.get("http://purl.org/NET/c4dm/event.owl#place").filter(function(y) { return y.get('http://www.w3.org/2000/01/rdf-schema#label'); })) {
-                           // 
-                           var labels = x.get("http://purl.org/NET/c4dm/event.owl#place").filter(function(y) {
-                               // gett rid of values that dont have a label first, 
-                               return y.get('http://www.w3.org/2000/01/rdf-schema#label');
-                           }).map(function(y) {
-                               // then get hte label
-                               return y.get('http://www.w3.org/2000/01/rdf-schema#label')[0];
-                           });
-                           return to_model({ 'place name' : labels[0] });
-                       }
-                   }
-               },
-               {
-                   domain:["http://purl.org/dc/terms/description"],
-                   fn: function(x) {
-                       return to_model({
-                           description: x.get("http://purl.org/dc/terms/description")[0]
-                       });
-                   }
-               },
-               {
-                   domain:["http://www.w3.org/2000/01/rdf-schema#label"],
-                   fn: function(x) {
-                       return to_model({
-                           name: x.get("http://www.w3.org/2000/01/rdf-schema#label")[0]
-                       });
-                   }
-               },
-           ];
-
            var satisfies = function(entity, tgt_type) {
                // tgt_type is an array of property names
                // entity is a Backbone.Model
@@ -101,6 +46,7 @@ define([],
            // FnCache - maintains a cache of applications of a function
            // keyed on 2 values: a model, first, and the function, second
            var FnCache = function() {
+               console.log('fncache');
                this.cache = {}; // m_id -> [ (fn, val) ... ]
                this.models = [];
            };
@@ -109,6 +55,7 @@ define([],
                    var m_id = m.id;
                    var apps = this.cache[m_id] && this.cache[m_id].filter(function(fnapp) { return fnapp[0] == fn; });
                    if (apps && apps.length) {
+                       console.log('apps ', apps);
                        return apps[0][1];
                    }
                    return undefined; // 
@@ -121,11 +68,10 @@ define([],
                    if (this.models.indexOf(m) < 0) {
                        // don't have the model yet, let's keep track of it in case it changes
                        this.models.push(m);
-                       m.bind("change", function() {  this_.flush_model(m);  });
-                   }                   
-                   var result = v;
-                   this.cache[m_id] = this.cache[m_id] ? this.cache[m_id].filter(function(fnapp) { return fnapp[0] != fn; }).concat([fn, result]) : [[fn, result]];
-                   return result;
+                       m.bind("change", function() { this_.flush_model(m); });
+                   }
+                   this.cache[m_id] = this.cache[m_id] !== undefined ? this.cache[m_id].filter(function(fnapp) { return fnapp[0] != fn; }).concat([fn, v]) : [[fn, v]];
+                   return v;
                },
                flush_model:function(m) {
                    console.log('trigger on ', m, ' cache clearing ', this.cache[m.id].length , ' cached items');
@@ -133,45 +79,48 @@ define([],
                }
            };
            // ---------------------------------
-
            var _chain_cache = new FnCache();
+           window._cache = _chain_cache;
            
            var chain = function(src_entity, target_type) {
                // forward chains from the src_entity to the target_type
+               console.log('chain ', src_entity.id, target_type);
                var rechain = arguments.callee;
-               if (satisfies(src_entity, target_type)) { return [[]]; } // goal achieved.
+               if (satisfies(src_entity, target_type)) {
+                   return [[]];
+               } // goal achieved.
                // find transforms that will give us our current destination
-               var selected_Ts = TRANSFORMERS.filter(function(T) {  return satisfies(src_entity, T.domain); });
+               var selected_Ts = TRANSFORMERS.filter(function(T) { return satisfies(src_entity, T.domain);    });
+               console.log('candidates ', selected_Ts.length);
                var next = selected_Ts.map(function(T) {
-                   var cached = _chain_cache.get_value(T,src_entity);
-                   if (cached) { return cached; }
+                   // var cached = _chain_cache.get_value(T,src_entity);
+                   // if (cached) {
+                   //     console.log("cached ! value ", cached);
+                   //     return cached;
+                   // }
+                   
                    // not cached; proceeed                   
-                   var val = T.fn(src_entity); 
-                   if (_(val).isArray()) {
-                       var tails = _(val).filter(DEFINED).map(function(v) {
-                           var chain_tail = rechain(v,target_type);
-                           return chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
+                   var vals = T.fn(src_entity);
+                   
+                   // might be undefined --> fail.
+                   if (DEFINED(vals)) {
+                       if (!_(vals).isArray()) { vals = [vals]; } // now val is an array, simpliifes processing
+                       var tails = _(vals).filter(DEFINED).map(function(v) {
+                           var model_v = to_model(v);
+                           var chain_tail = rechain(model_v,target_type);
+                           return chain_tail.map(function(tail_t) { return [[T,model_v]].concat(tail_t); });
                        });
                        var result = flatten(tails);
-                       return _chain_cache.set_value(T,src_entity,result);
-                   } else if (DEFINED(val)) {
-		       // we got a value directly -- let's propagate that on 
-                       var chain_tail = rechain(val,target_type);
-                       var result =  chain_tail.map(function(tail_t) { return [[T,val]].concat(tail_t); });
-                       return _chain_cache.set_value(T,src_entity,result);
+                       return result;
                    }                   
 		   // not defined
 		   return undefined;
                }).filter(DEFINED);           
                return flatten(next);
            };
-
-           var apply_chain = function(src_entity,target_type) {
-               var c = chain(src_entity,target_type);
-               return c.map(function(x) { return x[x.length - 1][1]; });
-           };
-
            return {
+               get_rdf_collection:function(x) { return new ChainRDFCollection(x); },
+               ChainModel:ChainModel,
                transformers:TRANSFORMERS,
                chain:chain,
                apply_chain:apply_chain

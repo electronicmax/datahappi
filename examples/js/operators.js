@@ -1,6 +1,4 @@
-define(['js/rdf/RDFCollection',
-	'js/ops/chain-engine',
-	'js/utils'],
+define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
        function(rdfc, ce, util) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
@@ -45,8 +43,7 @@ define(['js/rdf/RDFCollection',
                        var vals = ce.apply_chain(model,['latitude','longitude']);
                        if (vals && vals.length > 0) {
                            iv.val_view.html(
-                               util.t("<%= latitude %>, <%= longitude %>",
-                                      vals[0].attributes));
+                               util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes));
                            
                        } else {
                            var names  = ce.apply_chain(model,['place name']);
@@ -61,7 +58,7 @@ define(['js/rdf/RDFCollection',
                load:function(url) {
                    var this_ = this;
                    var d = util.deferred();
-                   this.collection = rdfc.get_rdf(url);
+                   this.collection = ce.get_rdf_collection(url);
                    this.collection.fetch().then(function() {
                        this_.render();
                        this_.compute();
@@ -91,7 +88,8 @@ define(['js/rdf/RDFCollection',
            $('form').submit(load);
            window.rdf = rdfc;
            window.ce = ce;
-           window.view = v;           
+           window.view = v;
+           load();
            return {};
        });
 
