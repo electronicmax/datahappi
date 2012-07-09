@@ -40,13 +40,12 @@ define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
                compute:function() {
                    this.views.map(function(iv) {
                        var model = iv.model;
-                       var vals = ce.apply_chain(model,['latitude','longitude']);
+                       var vals = model.get_chain(['latitude','longitude']);
                        if (vals && vals.length > 0) {
-                           iv.val_view.html(
-                               util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes));
+                           iv.val_view.html(util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes));
                            
                        } else {
-                           var names  = ce.apply_chain(model,['place name']);
+                           var names  = model.get_chain(['place name']);
                            if (names && names.length > 0) {
                                iv.val_view.html(names[0].get('place name'));
                            } else {
