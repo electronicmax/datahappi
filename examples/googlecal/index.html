@@ -1,6 +1,8 @@
 <html>
 	<head>
-		<script src="/datahappi/lib/require.js" data-main="./redirect"></script>
+		<script src="/datahappi/lib/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="https://apis.google.com/js/client.js"></script>
+		<script src="/datahappi/lib/require.js" data-main="./auth"></script>
 		<script type="text/javascript">
 			require.config({
 				baseUrl: "/datahappi/",
@@ -9,5 +11,6 @@
 		</script>
 	</head>
 	<body>
+		<button id="loginButton">Login</button>
 	</body>
 </html>
