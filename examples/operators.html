@@ -10,8 +10,8 @@
       <form class="form-horizontal">
 <!--        <input id="url" type="text" class="span11" value="http://data.southampton.ac.uk/dumps/events-diary/2012-07-04/events-diary.rdf"></input> <div class="load btn">Load</div> -->
 
-          <input id="definitions_url" type="text" class="span11" value="http://127.0.0.1:8888/rooms-and-buildings.rdf"></input>
-          <input id="url" type="text" class="span11" value="http://127.0.0.1:8888/events-diary.rdf"></input>
+          <input id="definitions_url" type="text" class="span11" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
+          <input id="url" type="text" class="span11" value="http://127.0.0.1:8080/events-diary.rdf"></input>
 	  <div class="load btn">Load</div>
 
       </form>
@@ -62,13 +62,25 @@
     // because we're not in the same place as the rest of our html files,
     // we have git to manually tell require how to resovle things 
     $(document).ready(function() {
+       // demo specific initialistation here
        var path = document.location.pathname;
-       path = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s 
-       path = path.slice(0,path.lastIndexOf('/'));    
-       console.log('setting baseurl to ', path);
-       require.config({ baseUrl:  path });
+       var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+       basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+       console.log('setting baseurl to ', document.location.pathname, '-', basepath);
+       /* demo specific initialisation here -- skip these -- */
+       $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
+       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
+       /* --  -- */    
+       require.config({ baseUrl:  basepath });
        require(['examples/js/operators'],function(x) { console.log(' operators example loaded > ', x); });
+       // ---------------------------------------------
+       // relative requirejs
     });
+
+
+    
+    
+    
     </script>
   <script src="../lib/codemirror2/codemirror.js"></script>
   <link href="../lib/codemirror2/codemirror.css" rel="stylesheet">  
