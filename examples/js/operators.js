@@ -51,7 +51,6 @@ define(['js/rdf/RDFCollection',
                        } else {
                            var names  = ce.apply_chain(model,['place name']);
                            if (names && names.length > 0) {
-                               console.log('names ', names);
                                iv.val_view.html(names[0].get('place name'));
                            } else {
                                iv.val_view.html(' :( ');
@@ -77,11 +76,15 @@ define(['js/rdf/RDFCollection',
 	       var buildings_url = $("#definitions_url").val();
 	       var data_url = $('#url').val();
 	       console.log('buildings ', buildings_url);
-	       console.log('data ', data_url);	       
-	       var rooms = rdfc.get_rdf(buildings_url).fetch().then(function() {
-		       console.log('loaded buildings');
-		       v.load(data_url).then(function() { console.log(' loaded events '); });               
-		   });
+	       console.log('data ', data_url);
+               var buildings = rdfc.get_rdf(buildings_url);
+               window.buildings = buildings;
+               buildings.fetch().then(function() {
+		   console.log('loaded buildings');
+		   v.load(data_url).then(function() {
+                       console.log(' loaded events ');
+                   });               
+	       });
 	   };
 	   
            $('.load').click(load);
