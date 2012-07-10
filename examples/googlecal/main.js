@@ -1,6 +1,6 @@
 define(
-	['examples/googlecal/auth','examples/googlecal/CalendarCollection'],
-	function(authorize, calendar) {
+	['examples/googlecal/auth','examples/googlecal/CalendarCollection','js/rdf/RDFCollection'],
+	function(authorize, calendar, rdfc) {
 		gapi.client.setApiKey('AIzaSyAlspkJKDkbpqRkvZDED5xT9mjYVJXnUys');
 		$(document).ready(function() {
 			$('button#loginButton').click(function() {
