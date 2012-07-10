@@ -69,7 +69,7 @@
        console.log('setting baseurl to ', document.location.pathname, '-', basepath);
        /* demo specific initialisation here -- skip these -- */
        $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
-       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
+       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary-full.rdf'].join('/'));
        /* --  -- */    
        require.config({ baseUrl:  basepath });
        require(['examples/js/operators'],function(x) { console.log(' operators example loaded > ', x); });

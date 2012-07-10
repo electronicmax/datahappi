@@ -40,7 +40,9 @@ define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
                compute:function() {
                    this.views.map(function(iv) {
                        var model = iv.model;
+                       if (model.get_chain === undefined) {  console.error("NO GET CHAIN ", model, model.id);        }
                        var vals = model.get_chain(['latitude','longitude']);
+                       
                        if (vals && vals.length > 0) {
                            iv.val_view.html(util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes));
                            
@@ -73,7 +75,7 @@ define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
 	       var data_url = $('#url').val();
 	       console.log('buildings ', buildings_url);
 	       console.log('data ', data_url);
-               var buildings = rdfc.get_rdf(buildings_url);
+               var buildings = ce.get_rdf_collection(buildings_url);
                window.buildings = buildings;
                buildings.fetch().then(function() {
 		   console.log('loaded buildings');
@@ -81,7 +83,8 @@ define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
                        console.log(' loaded events ');
                    });               
 	       });
-	   };           $('.load').click(load);
+	   };
+           $('.load').click(load);
            $('form').submit(load);
            window.rdf = rdfc;
            window.ce = ce;

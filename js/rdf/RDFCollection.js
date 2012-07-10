@@ -9,7 +9,8 @@ define([],
         };
         var modelsbyuri = {};
         
-        var Model = Backbone.Model.extend({ idAttribute:"_id" });           
+        var Model = Backbone.Model.extend({ idAttribute:"_id" });
+        
         var get_model = function(uri, modeltype) {
             if (!(uri in modelsbyuri)) {
                 modelsbyuri[uri] = modeltype ? new modeltype({_id:uri}) : new Model({_id:uri});
@@ -28,7 +29,9 @@ define([],
                         if (v === undefined) { return; }
                         return v.map(function(vv) {
                             if (vv.type === 'literal') { return vv.value; }
-                            if (vv.type === 'uri' || vv.type == 'bnode') { return get_model(vv.value, this_.model); }
+                            if (vv.type === 'uri' || vv.type == 'bnode') {
+                                return get_model(vv.value, this_.model);
+                            }
                             throw new Error("dont know how to handle ", vv);
                         });
                     };                            
@@ -49,7 +52,6 @@ define([],
                             el.textContent = el.textContent.replace(/ ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])/, 'T$1');
                         });                           
                         var dbload = $.rdf().load(xml, {});
-                        window._DEBUG_DB = dbload; // TODO eliminate
                         var json = dbload.databank.dump();
                         var json_ms = _(json).keys().map(function(k) {
                             var m = get_model(k, this_.model);
@@ -69,7 +71,6 @@ define([],
     return {
         RDFModel:Model,
         RDFCollection:RDFQCollection,
-        get_model:get_model,
         get_rdf:function(rdfSource){return new RDFQCollection(rdfSource);}
     };
 });
