@@ -8,35 +8,34 @@ define([],
             return $.get(proxy_url, { url : url });
         };
         var modelsbyuri = {};
+        
         var Model = Backbone.Model.extend({ idAttribute:"_id" });           
-        var get_model = function(uri) {
+        var get_model = function(uri, modeltype) {
             if (!(uri in modelsbyuri)) {
-                modelsbyuri[uri] = new Model({_id:uri});
+                modelsbyuri[uri] = modeltype ? new modeltype({_id:uri}) : new Model({_id:uri});
             }
             return modelsbyuri[uri];
         };
-        var _convert_helper=function(v) {
-            if (v.type === 'literal') { return v.value; }
-            if (v.type === 'uri' || v.type == 'bnode') { return get_model(v.value); }
-            throw new Error("dont know how to handle ", v);
-        }
-        var convert_rdfv = function(v){
-            if (v === undefined) { return; }
-            if (v.length === 0) { return []; }
-                // if (v.length == 1) {  return _convert_helper(v[0]);       }
-                return v.map(_convert_helper);
-            };
-            var convert_values = function(o) {
-                var new_o = {};
-                _(o).map(function(v,k) { new_o[k] = convert_rdfv(v); });
-                return new_o;
-            };
-            var RDFQCollection =
+        var RDFQCollection =
             Backbone.Collection.extend({
                 initialize:function(src_url) {
                     // console.log("loading from ", src_url);
                     this.src_url = src_url;
                 },
+                _convert_values : function(o) {
+                    var this_ = this;
+                    var convert_rdfv = function(v){
+                        if (v === undefined) { return; }
+                        return v.map(function(vv) {
+                            if (vv.type === 'literal') { return vv.value; }
+                            if (vv.type === 'uri' || vv.type == 'bnode') { return get_model(vv.value, this_.model); }
+                            throw new Error("dont know how to handle ", vv);
+                        });
+                    };                            
+                    var new_o = {};
+                    _(o).map(function(v,k) { new_o[k] = convert_rdfv(v); });
+                    return new_o;
+                },                        
                 fetch:function(options) {
                     var this_ = this;
                     var d = new $.Deferred();
@@ -53,8 +52,10 @@ define([],
                         window._DEBUG_DB = dbload; // TODO eliminate
                         var json = dbload.databank.dump();
                         var json_ms = _(json).keys().map(function(k) {
-                            var m = get_model(k);
-                            _(m.attributes).extend(_(convert_values(json[k])).extend({_id:k}));
+                            var m = get_model(k, this_.model);
+                            _(m.attributes).chain()
+                               .extend({_id:k})
+                               .extend(this_._convert_values(json[k]));
                             return m;
                         });
                         this_.reset(json_ms);
@@ -66,6 +67,8 @@ define([],
                 }
             });           
     return {
+        RDFModel:Model,
+        RDFCollection:RDFQCollection,
         get_model:get_model,
         get_rdf:function(rdfSource){return new RDFQCollection(rdfSource);}
     };
