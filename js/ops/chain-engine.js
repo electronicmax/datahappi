@@ -51,31 +51,32 @@ define(['js/rdf/RDFCollection','js/ops/ops'],
                this.models = [];
            };
            FnCache.prototype = {
-               get_value:function(fn,m) {
-                   var m_id = m.id;
-                   var apps = this.cache[m_id] && this.cache[m_id].filter(function(fnapp) { return fnapp[0] == fn; });
+               get_value:function(fn,m,target) {
+                   var m_id = m.id || m.attributes._oid;
+                   // console.log('getting value ', m_id);
+                   var apps = this.cache[m_id] && this.cache[m_id].filter(function(fnapp) { return fnapp[0] == fn && EQ(fnapp[1],target); });
                    if (apps && apps.length) {
-                       console.log('apps ', apps);
-                       return apps[0][1];
+                       return [true,apps[0][1]];
                    }
-                   return undefined; // 
+                   return [false]; // 
                },
-               set_value:function(fn, m, v) {
+               set_value:function(fn, m, target, v) {
                    // fn is the function to be applied
                    // m is a model                   
                    var this_ = this;
-                   var m_id = m.id;                   
+                   var m_id = m.id || m.attributes._oid;
                    if (this.models.indexOf(m) < 0) {
                        // don't have the model yet, let's keep track of it in case it changes
                        this.models.push(m);
                        m.bind("change", function() { this_.flush_model(m); });
                    }
-                   this.cache[m_id] = this.cache[m_id] !== undefined ? this.cache[m_id].filter(function(fnapp) { return fnapp[0] != fn; }).concat([fn, v]) : [[fn, v]];
+                   var new_entry = [fn, _({}).extend(target), v];
+                   this.cache[m_id] = this.cache[m_id] !== undefined ? this.cache[m_id].filter(function(fnapp) { return !(fnapp[0] == fn && EQ(fnapp[1],target)); }).concat([new_entry]) : [new_entry];
                    return v;
                },
                flush_model:function(m) {
-                   console.log('trigger on ', m, ' cache clearing ', this.cache[m.id].length , ' cached items');
-                   delete this.cache[m.id];
+                   // console.log('trigger on ', m, ' cache clearing ', this.cache[m.id].length , ' cached items');
+                   delete this.cache[m.id||m.attributes._oid];
                }
            };
            // ---------------------------------
@@ -84,20 +85,22 @@ define(['js/rdf/RDFCollection','js/ops/ops'],
            
            var chain = function(src_entity, target_type) {
                // forward chains from the src_entity to the target_type
-               console.log('chain ', src_entity.id, target_type);
+               // console.log('chain ', src_entity.id || src_entity.attributes._oid, target_type);
                var rechain = arguments.callee;
                if (satisfies(src_entity, target_type)) {
                    return [[]];
                } // goal achieved.
                // find transforms that will give us our current destination
                var selected_Ts = TRANSFORMERS.filter(function(T) { return satisfies(src_entity, T.domain);    });
-               console.log('candidates ', selected_Ts.length);
+               // console.log('candidates ', selected_Ts.length);
+               
                var next = selected_Ts.map(function(T) {
-                   // var cached = _chain_cache.get_value(T,src_entity);
-                   // if (cached) {
-                   //     console.log("cached ! value ", cached);
-                   //     return cached;
-                   // }
+                   // caching turn on!!
+                   var cached = _chain_cache.get_value(T,src_entity,target_type);
+                   if (cached[0]) {
+                       // console.log("cached ! value ", cached);
+                       return cached[1];
+                   }
                    
                    // not cached; proceeed                   
                    var vals = T.fn(src_entity);
@@ -111,10 +114,10 @@ define(['js/rdf/RDFCollection','js/ops/ops'],
                            return chain_tail.map(function(tail_t) { return [[T,model_v]].concat(tail_t); });
                        });
                        var result = flatten(tails);
-                       return result;
+                       return _chain_cache.set_value(T,src_entity,target_type,result);
                    }                   
 		   // not defined
-		   return undefined;
+		   return _chain_cache.set_value(T,src_entity,undefined);
                }).filter(DEFINED);           
                return flatten(next);
            };

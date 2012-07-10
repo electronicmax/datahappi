@@ -81,9 +81,7 @@ define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
                        console.log(' loaded events ');
                    });               
 	       });
-	   };
-	   
-           $('.load').click(load);
+	   };           $('.load').click(load);
            $('form').submit(load);
            window.rdf = rdfc;
            window.ce = ce;
