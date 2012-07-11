@@ -1,5 +1,5 @@
-define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCollection'],
-       function(rdfc, ce, util, cc) {
+define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCollection', 'js/googlecal/auth'],
+       function(rdfc, ce, util, cc, authorize) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
                class:'instance',
@@ -95,10 +95,11 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCol
            $('button#loadGCal').click(function() {
                authorize(function() {
                    cc.get_calendar().fetch().then(function(calCollection) {
-                       var eventView = new V({el:$('.main')[0]});
                        calCollection.models.map(function(calendar) {
-                           calendar.eventCollection.fetch().then(function() {
-                               //Print the events
+                           calendar.eventCollection.fetch().then(function(eventCollection) {
+                               eventCollection.models.map(function(event) {
+                                   v.collection.add(event);
+                               });
                            });
                        });
                    });
