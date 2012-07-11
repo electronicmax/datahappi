@@ -6,7 +6,7 @@ var http = require('http'),
       'Access-Control-Allow-Headers' : 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Authorization'
     },
     httpProxy = require('http-proxy'),
-    url  = require('url');;
+    url  = require('url');
 
 httpProxy.createServer(function (req, res, proxy) {
     if (req.method === 'OPTIONS') {

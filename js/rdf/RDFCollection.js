@@ -1,19 +1,21 @@
-define([],
-    function() {
-	   var kill_port = function(host_string) {
-	       return host_string.search(/:\d+/g) >= 0 ?  host_string.slice(0,host_string.indexOf(':')) : host_string;
-	   };
+define(['js/rdf/name-resolver'],
+    function(nameresolver) {
+	var kill_port = function(host_string) {
+	    return host_string.search(/:\d+/g) >= 0 ?  host_string.slice(0,host_string.indexOf(':')) : host_string;
+	};
         var fetch_by_proxy = function(url,proxy_url) {
             proxy_url = proxy_url || "http://"+ kill_port(document.location.host) + ":9292";
             return $.get(proxy_url, { url : url });
         };
         var modelsbyuri = {};
-        
         var Model = Backbone.Model.extend({ idAttribute:"_id" });
         
+        var create_model = function(uri,modeltype) {
+            return modeltype ? new modeltype({_id:uri}) : new Model({_id:uri});
+        };
         var get_model = function(uri, modeltype) {
             if (!(uri in modelsbyuri)) {
-                modelsbyuri[uri] = modeltype ? new modeltype({_id:uri}) : new Model({_id:uri});
+                modelsbyuri[uri] = create_model(uri,modeltype); 
             }
             return modelsbyuri[uri];
         };
@@ -58,6 +60,10 @@ define([],
                             _(m.attributes).chain()
                                .extend({_id:k})
                                .extend(this_._convert_values(json[k]));
+                            
+                            // register its names with named entity resolver
+                            nameresolver.register_model(m);
+                            
                             return m;
                         });
                         this_.reset(json_ms);
