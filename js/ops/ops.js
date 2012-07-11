@@ -1,5 +1,5 @@
-define([],
-       function() {
+define(['js/rdf/name-resolver'],
+       function(nameResolver) {
            return {
                operators: [
                    {
@@ -82,6 +82,16 @@ define([],
                        fn: function(x) {
                            return { _oid:x.id, "name": x.get("http://xmlns.com/foaf/0.1/name")[0] };
                        }
-                   }                   
+                   },
+                   {
+					//TODO Make a chain to go from an event location to a building or room, which then have locations.
+                       domain:['location'],
+                       fn: function(event) {
+                           var locationModels = _(event.get('location').map(function(l) {
+								return nameResolver.resolve(l);
+							})).flatten();
+                           return { _oid:event.id, "http://purl.org/NET/c4dm/event.owl#place":locationModels };
+                       }
+                   }
                ]};
     });
