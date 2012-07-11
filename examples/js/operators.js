@@ -1,6 +1,5 @@
-// TODO: On button click, load google calendar collection into table and show lat/longs.
 define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCollection'],
-       function(rdfc, ce, util) {
+       function(rdfc, ce, util, cc) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
                class:'instance',
@@ -69,28 +68,43 @@ define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCol
                    return d.promise();
                },
            });
-	   
+   
            var v = new V({el:$('.main')[0]});
-	   var load = function() {
-	       var buildings_url = $("#definitions_url").val();
-	       var data_url = $('#url').val();
-	       console.log('buildings ', buildings_url);
-	       console.log('data ', data_url);
+           var load = function() {
+               var buildings_url = $("#definitions_url").val();
+               var data_url = $('#url').val();
+               console.log('buildings ', buildings_url);
+               console.log('data ', data_url);
                var buildings = ce.get_rdf_collection(buildings_url);
                window.buildings = buildings;
                buildings.fetch().then(function() {
-		   console.log('loaded buildings');
-		   v.load(data_url).then(function() {
+                   console.log('loaded buildings');
+                   v.load(data_url).then(function() {
                        console.log(' loaded events ');
                    });               
-	       });
-	   };
+               });
+           };
            $('.load').click(load);
            $('form').submit(load);
            window.rdf = rdfc;
            window.ce = ce;
            window.view = v;
            load();
+
+           // TODO: On button click, load google calendar collection into table and show lat/longs.
+           $('button#loadGCal').click(function() {
+               authorize(function() {
+                   cc.get_calendar().fetch().then(function(calCollection) {
+                       var eventView = new V({el:$('.main')[0]});
+                       calCollection.models.map(function(calendar) {
+                           calendar.eventCollection.fetch().then(function() {
+                               //Print the events
+                           });
+                       });
+                   });
+               });
+           });
+
            return {};
        });
 
