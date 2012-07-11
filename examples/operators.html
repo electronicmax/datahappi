@@ -7,24 +7,22 @@
       <h1 class="lead">Data Morphos</h1>
       <form class="form-horizontal">
 <!--        <input id="url" type="text" class="span11" value="http://data.southampton.ac.uk/dumps/events-diary/2012-07-04/events-diary.rdf"></input> <div class="load btn">Load</div> -->
-
           <input id="definitions_url" type="text" class="span11" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
           <input id="url" type="text" class="span11" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>
-	  <div class="load btn">Load</div>
-
+          <div class="load btn">Load</div>
       </form>
-		<button id="gCalBtn" class="btn" >Load Google Calendar</button>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Thing</th>
-                      <th>Properties</th>
-                      <th>Lat/Lon</th>
-                    </tr>
-                  </thead>
-                  <tbody id="values">
-                  </tbody>
-                </table>        
+        <button id="loadGCal" class="btn" >Load Google Calendar</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Thing</th>
+              <th>Properties</th>
+              <th>Lat/Lon</th>
+            </tr>
+          </thead>
+          <tbody id="values">
+          </tbody>
+        </table>        
   </body>
   <script style="text/template" id="prop_template">
        <%
@@ -68,7 +66,7 @@
        console.log('setting baseurl to ', document.location.pathname, '-', basepath);
        /* demo specific initialisation here -- skip these -- */
        $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
-       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary-full.rdf'].join('/'));
+       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
        /* --  -- */    
        require.config({ baseUrl:  basepath });
        require(['examples/js/operators'],function(x) { console.log(' operators example loaded > ', x); });
@@ -88,4 +86,5 @@
   <script type="text/javascript" src="../lib/rdfquery/jquery.rdf.xml.js"></script>
   <script type="text/javascript" src="../lib/rdfquery/jquery.rdf.turtle.js"></script>  
   <script type="text/javascript" src="../lib/rdfquery/jquery.rdf.json.js"></script>
+  <script src="https://apis.google.com/js/client.js"></script>
 </html>

@@ -43,7 +43,7 @@ define(['js/utils'],
                        function(m) {
                            return _(m.attributes).keys().map(
                                function(x) {
-                                   var start = Math.max(0,x.lastIndexOf('/') + 1,x.lastIndexOf('#') + );
+                                   var start = Math.max(0,x.lastIndexOf('/') + 1,x.lastIndexOf('#') + 1);
                                    return x.slice(start);
                                }).join(',');
                        },

@@ -5,9 +5,10 @@ define(
         'js/ops/chain-engine',
         'js/utils',
         'js/CalendarCollection',
-        'js/ui/TableView'
+        'js/ui/TableView',
+        'js/googlecal/auth',        
     ],
-    function(rdfc, ce, util, cc, tv) {
+    function(rdfc, ce, util, cc,  tv, auth) {
            var v = new tv.TableView({el:$('.main')[0]});
 	   var load = function() {
 	       var buildings_url = $("#definitions_url").val();
@@ -32,6 +33,23 @@ define(
            window.ce = ce;
            window.view = v;
            load();
+        
+           // TODO: On button click, load google calendar collection into table and show lat/longs.
+           $('button#loadGCal').click(function() {
+               auth(function(x) {
+                   console.log('auth complete ', x);
+                   cc.get_calendar().fetch().then(function(calCollection) {
+                       calCollection.models.map(function(calendar) {
+                           calendar.eventCollection.fetch().then(function(eventCollection) {
+                               eventCollection.models.map(function(event) {
+                                   v.collection.add(event);
+                               });
+                           });
+                       });
+                   });
+               });
+           });
+
            return {};
        });
 
