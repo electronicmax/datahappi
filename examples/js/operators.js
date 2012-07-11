@@ -1,4 +1,5 @@
-define(['js/rdf/RDFCollection','/js/ops/chain-engine','js/utils'],
+// TODO: On button click, load google calendar collection into table and show lat/longs.
+define(['js/rdf/RDFCollection','js/ops/chain-engine','js/utils', 'js/CalendarCollection'],
        function(rdfc, ce, util) {
            var ItemView = Backbone.View.extend({
                tagName:'div',
