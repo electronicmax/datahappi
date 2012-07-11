@@ -71,6 +71,7 @@ define([],
     return {
         RDFModel:Model,
         RDFCollection:RDFQCollection,
+        get_cached_model:function(uri) {   return modelsbyuri[uri];    },
         get_rdf:function(rdfSource){return new RDFQCollection(rdfSource);}
     };
 });
