@@ -10,6 +10,7 @@ define(
 				var that = this;
 				var deferred = $.Deferred();
 				var _convert_val = function(v,k) {
+					if (['id','_id'].indexOf(k) >= 0) { return v; }
 					if (!_(v).isArray()) { v = [v]; }
 					return v.map(function(vv) {
 						// value specific coercion here e.g., date time formats to our date time format
@@ -22,11 +23,16 @@ define(
 					_(evt).keys().map(function(k) {
 						new_evt[k] = _convert_val(evt[k],k);
 					});
+					new_evt['_id'] = evt['id'];
+					delete evt['id'];
 					return new_evt;
 				};   
 				gapi.client.load('calendar', 'v3', function() {
 					gapi.client.calendar.events.list({calendarId:that._id}).execute(function(eventList) {
-						that.reset(eventList.items.map(function(evt) { return _convert_event(evt); }));
+						console.log('eventList : ', eventList);
+						if (eventList.items) {
+							that.reset(eventList.items.map(function(evt) { return _convert_event(evt); }));
+						}
 						deferred.resolve(that);
 					});
 				});

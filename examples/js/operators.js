@@ -37,7 +37,6 @@ define(
            // TODO: On button click, load google calendar collection into table and show lat/longs.
            $('button#loadGCal').click(function() {
                auth(function(x) {
-                   console.log('auth complete ', x);
                    cc.get_calendar().fetch().then(function(calCollection) {
                        calCollection.models.map(function(calendar) {
                            calendar.eventCollection.fetch().then(function(eventCollection) {

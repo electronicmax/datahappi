@@ -40,11 +40,11 @@
           return x.slice(x.lastIndexOf('/')+1);
        };
        var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
-       if (label && _(label).isString()) {
+       if (label && _(label).isString() && m['_id']) {
           print("<a href='"+m['_id']+"'>"+label+"</a>");              
-       } else if (label && _(label).isArray()) {
+       } else if (label && _(label).isArray() && m['_id']) {
           print("<a href='"+m['_id']+"'>"+label[0]+"</a>");       
-       } else if (_(label).isUndefined()) {
+       } else if (_(label).isUndefined() && m['_id']) {
           print("<a href='"+m['_id']+"'>"+lastpath(m['_id'])+"</a>");
        } else {
           print('???');
