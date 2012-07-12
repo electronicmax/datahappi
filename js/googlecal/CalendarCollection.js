@@ -26,10 +26,9 @@ define(
 					new_evt['_id'] = evt['id'];
 					delete evt['id'];
 					return new_evt;
-				};   
+				};
 				gapi.client.load('calendar', 'v3', function() {
 					gapi.client.calendar.events.list({calendarId:that._id}).execute(function(eventList) {
-						console.log('eventList : ', eventList);
 						if (eventList.items) {
 							that.reset(eventList.items.map(function(evt) { return _convert_event(evt); }));
 						}
