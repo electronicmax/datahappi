@@ -20,8 +20,17 @@ define(['js/utils'], function(util) {
 			var this_ = this;
 			_(this.options.columns).map(
 				function(val,property) {
+					if (val === undefined) { val = '<i>undefined</i>'; }
 					if (_(val).isFunction()) { val = val(m); }
-					$("<td></td>").append(val).appendTo(this_.el);
+					if (_(val).isNumber()) { val = val.toString(); }
+					if (_(val).isObject() && val instanceof Backbone.Model) { val = val.attributes._id || val.attibutes._oid; }
+					if (_(val).isObject()) { return "object"; }
+					if (_(val).isString()) {
+						$("<td></td>").append(val).appendTo(this_.el);
+					} else {
+						console.error("Could not convert ", val);
+						$("<td></td>").append("error").appendTo(this_.el);
+					}
 				});
 			return this.el;				
 		}			
