@@ -20,7 +20,7 @@ define(['js/utils'], function(util) {
 			var this_ = this;
 			_(this.options.columns).map(
 				function(val,property) {
-					if (typeof val === 'undefined') { val = '<i>undefined</i>'; console.log(val); }
+					if (_.isUndefined(val)) { val = '<i>undefined</i>'; console.log(val); }
 					if (_(val).isFunction()) { val = val(m); }
 					if (_(val).isNumber()) { val = val.toString(); }
 					if (_(val).isObject() && val instanceof Backbone.Model) { val = val.attributes._id || val.attibutes._oid; }
