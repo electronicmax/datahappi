@@ -18,12 +18,12 @@ define(['js/rdf/RDFCollection','js/ops/ops'],function(rdfc,ops) {
 	var to_model =  function(o) {
 	    // might be a model -> keep a model.
 	    // might be an object not a model --> coerce to model
-	    
+
 	    if (o === undefined) { throw new Error("Cant to_model on undefined "); }
-	    if (!o instanceof Object) { throw new Error("Got a ", o, " require an object "); }
+	    if (!(o instanceof Object)) { throw new Error("Got a ", o, " require an object "); }
 	    if (o instanceof Backbone.Model) { return o; }
 	    return new ChainModel(o);
-	};           
+	};
 	var TRANSFORMERS = ops.operators;
 	var EQ = function(l1,l2) {   return l1.length == l2.length && _(l1).difference(l2).length === 0;       };
 	var flatten = function(L) {  return L.reduce(function(x,y) { return x.concat(y); }, []);        };           
