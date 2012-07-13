@@ -9,9 +9,9 @@ define(['js/utils'], function(util) {
 				_(this.options.template || this.template).template({m:this.options.model.toJSON()})
 			);
 			return this.el;
-		}			   
+		}
 	});
-	
+
 	var RowView = Backbone.View.extend({
 		tagName:'tr',
 		initialize:function() {},
@@ -20,12 +20,13 @@ define(['js/utils'], function(util) {
 			var this_ = this;
 			_(this.options.columns).map(
 				function(val,property) {
+					if (_.isArray(val) && val.length === 1) {val = val[0];} //If val is a single vlaue array, take the value out of the array.
 					if (_(val).isFunction()) { val = val(m); }
 					if (_.isUndefined(val)) { val = '<i>undefined</i>'; }
 					if (_(val).isNumber()) { val = val.toString(); }
 					if (_(val).isObject() && val instanceof Backbone.Model) { val = val.attributes._id || val.attibutes._oid; }
-					if (_(val).isObject() && !_(val).isElement()) { return "object"; } // return if val is an object, but not if it is an element object
-					if (_.isArray(val) && val.length === 1) {val = val[0];} //If val is a single vlaue array, take the value out of the array.
+					//if (_(val).isObject() && !_(val).isElement()) { return "object"; } // return if val is an object, but not if it is an element object
+					if (_(val).isObject() && !_(val).isElement()) { val = "non-element object"; } // return if val is an object, but not if it is an element object
 					if (_(val).isString() || _(val).isElement()) { // jQuery can handle html strings and element objects.
 						$("<td></td>").append(val).appendTo(this_.el);
 					} else {
@@ -54,22 +55,22 @@ define(['js/utils'], function(util) {
 						}).join(',');
 				},
 				function(m) {
-					if (! m.get_chain) { return 'no chain'; }
+					if (! m.get_chain) { return 'model does not have \'get_chain\' method'; }
 					var vals = m.get_chain(['latitude','longitude']);
 					if (vals && vals.length > 0) {
-						return util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes);							   
+						return util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes);
 					} else {
-						var names  = m.get_chain(['place name']);
+						var names = m.get_chain(['place name']);
 						if (names && names.length > 0) {
 							return names[0].get('place name');
 						} else {
 							return ':(';
 						}
-					}						   
+					}
 					return ' ? ';
 				}];
 
-		},					   
+		},
 		_handle_add:function(m) {
 			if (this.row_views[m.id] !== undefined) { throw new Error("Cannot add view twice"); }
 			var rw = new RowView({model:m, columns:this.options.columns});
@@ -85,9 +86,9 @@ define(['js/utils'], function(util) {
 				});
 			}
 		},
-		render:function() {  return this.el;  }
+		render:function() { return this.el; }
 	});
-	
+
 	return {
 		TableView : TableView
 	}
