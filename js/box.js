@@ -1,10 +1,10 @@
 define([], function() {
 
 	var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
+	
 	var clone_view = function(src_view) {
 		// makes a new view from the same model as src_model
 		var view = new src_view.constructor(src_view.options);
-		console.log(">>> clone ", view, src_view, src_view.constructor);
 		window.srcview = src_view;
 		view.render();
 		return view;
