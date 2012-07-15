@@ -1,0 +1,65 @@
+.box(@bordercolor: #EEEEEE) {
+  position:relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  &.over {
+     padding:15px;
+  }      
+  .uplt, .uprt, .btlt, .btrt {
+	  width:10px; height:10px;
+  }
+  padding:8px;
+  .uplt {
+      border-left:1px solid @bordercolor;
+      border-top:1px solid @bordercolor;
+      position:absolute;
+      top:0; left:0;
+  }
+  .uprt {
+      border-right:1px solid @bordercolor;
+      border-top:1px solid @bordercolor;
+      position:absolute;
+      top:0; right:0;
+  } 
+  .btlt {
+      border-bottom:1px solid @bordercolor;
+      border-left:1px solid @bordercolor;
+      position:absolute;
+      bottom:0; left:0;
+  } 
+  .btrt {
+      border-bottom:1px solid @bordercolor;
+      border-right:1px solid @bordercolor;
+      position:absolute;
+      bottom:0; right:0;
+  }
+  .items {
+      width:100%;
+      div {
+          display:inline-block;
+          margin:0px;
+      }     
+  } 
+  input {
+    color:rgba(0,0,50,0.6);
+    text-align:right;
+    position:absolute;
+    right:25px; bottom:-4px;
+    margin:0px; padding:0px; 
+    background:rgba(255,255,255,0);
+    width:100px;
+    font-size:10px;
+    border:none !important;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+  }   
+}
+
+.greybox {
+    .box(#999999);
+}        
+.simple {
+    font-size:8pt;
+    padding:4px;
+    width:20px;
+}       
