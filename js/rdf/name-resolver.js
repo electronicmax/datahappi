@@ -10,7 +10,7 @@ define([],
 		window.name_to_model = {};
 		var model_to_names = {};
 		var add_name = function(model,name) {
-			name = name.toLowerCase() // Only deal with lowercase, so matching is not case-sensitive.
+			name = name.toLowerCase().trim(); // Only deal with lowercase, so matching is not case-sensitive.
 			// add the {name} -> model mapping
 			var names = get_names_for(model);
 			if (names.indexOf(name) <= 0) {
@@ -26,7 +26,8 @@ define([],
 			return model;
 		};
 		var resolve = function(name) {
-			return _(name_to_model[name.toLowerCase()] || []).clone();
+			name = name.toLowerCase().trim();
+			return _(name_to_model[name] || []).clone();
 		};
 		var get_names_for=function(model) {
 			return _(model_to_names[model.id] || []).clone();
