@@ -25,7 +25,7 @@
   </body>
   <script type="text/template" id="instance_template">
        <%
-       var lastpath = function(x) {
+		  var lastpath = function(x) {
           if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
           return x.slice(x.lastIndexOf('/')+1);
        };

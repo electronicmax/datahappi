@@ -66,6 +66,17 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.greybox .microtoolbox {
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 10px;
+}
 .simple {
   font-size: 8pt;
   padding: 4px;

@@ -1,7 +1,7 @@
 /* this is for the box example only  */
 define(
 	[
-		'js/box',
+		'js/ui/propertybox',
 		'js/draggableview',
 		'js/ui/TableView',
 		'js/rdf/RDFCollection',
@@ -17,7 +17,10 @@ define(
 		
        $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
        $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
- 	   $('#new_group').click(function() {  var bv = new box.BoxView();  $('#things').append(bv.render()); });
+ 	   $('#new_group').click(function() {
+		   var bv = new box.PropExpandableBoxView();
+		   $('#things').append(bv.render());
+	   });
 		$('body').prepend((new dv.Simple()).render());
 		var v = new tv.TableView({
 			el:$('table')[0],
