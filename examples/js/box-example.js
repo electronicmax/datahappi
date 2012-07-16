@@ -55,6 +55,6 @@ define(
 		window.rdf = rdfc;
 		window.ce = ce;
 		window.view = v;
-		load();		
+		// load();		
 	});
 
