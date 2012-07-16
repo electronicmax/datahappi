@@ -18,9 +18,7 @@ define(
 				modelsbyuri[uri] = create_model(uri,modeltype); 
 			}
 			return modelsbyuri[uri];
-		};
-
-		
+		};		
 		var RDFQCollection = Backbone.Collection.extend({
 			initialize:function(src_url) {
 				// console.log("loading from ", src_url);

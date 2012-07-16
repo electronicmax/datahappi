@@ -91,8 +91,9 @@ define(['js/utils'], function(util) {
 	});
 
 	return {
-		TableView : TableView
-	}
+		TableView : TableView,
+		GenericItemView: ItemView
+	};
 });
 
 

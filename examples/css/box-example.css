@@ -1,0 +1,7 @@
+.table {
+  max-height: 200px;
+  overflow: scroll;
+}
+.instance {
+  padding: 2px;
+}
