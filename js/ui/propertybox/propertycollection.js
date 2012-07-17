@@ -14,22 +14,21 @@ define(
 			initialize:function() {
 				var this_ = this;
 				util.assert(this.options.collection, "No collection passed");
-				this.options.collection.bind('change', function() { this_._changed(); });
+				this.options.collection.bind('change', function(m) { this_._changed(m); });
+				this.options.collection.map(function(m) { this_._changed(m); });
 			},
-			_changed:function(){
+			_changed:function(model){
 				// TODO :: iterates over all of the objects in our collection
 				// finds our properties and adds nice Models representing each
 				// of them to us.
-				that = this;
-				attributes = []
-				this.options.collection.models.map(function(model) {
-					model.attributes.map(function(attribute) {
-						properties[properties.length] = attribute;
+				var that = this;
+				_(model.attributes).map(function(val, key) {
+					if (_.isUndefined(that.get(key))) {
+						var p = new PropertyModel({_id:key});
+						that.add(p);
 					}
-				}
-				_.uniq(attributes).map(function(attribute) {
-					this.add(new PropertyModel([], attribute));
-				}
+					that.get(key).trigger("change");
+				}	
 			}
 		});
 		return {
