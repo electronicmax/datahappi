@@ -1,8 +1,9 @@
 #!/bin/bash
-
 while true; do
-	echo "compilin'"
-	lessc box.less > box.css
-	lessc ../examples/css/box-example.less > ../examples/css/box-example.css
+	for i in *.less ; do 
+		[[ -f "$i" ]] || continue
+		echo "compilin' " "${i%.less}.css"
+		lessc "$i" > "${i%.less}.css"
+	done
 	sleep 1
 done
