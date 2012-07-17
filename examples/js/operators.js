@@ -5,7 +5,7 @@ define([
 		'js/utils',
 		'js/googlecal/CalendarCollection',
 		'js/googlecal/auth',
-		'js/ui/TableView'
+		'js/ui/tableview'
 	],
 	function(rdfc, ce, util, cc, auth, tv) {
 

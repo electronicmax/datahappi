@@ -1,6 +1,6 @@
 define(['js/box'],function(box) {
 	var toolbar_template = '<div class="microtoolbox"><span class="expand_props icon-comment-alt2"></span><span class="expand_props icon-logout"></span></div>';
-	var PropertyExpandoBox = box.BoxView.extend({
+	var InstanceBox = box.BoxView.extend({
 		events: {
 			'click .expand_props' : 'expand_props'
 		},
@@ -19,5 +19,5 @@ define(['js/box'],function(box) {
 			$('#things').append(bv.render());
 		}
 	});
-	return { PropExpandableBoxView:PropertyExpandoBox};
+	return { InstanceBox:InstanceBox };
 });
