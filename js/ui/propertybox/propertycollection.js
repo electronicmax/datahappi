@@ -20,11 +20,21 @@ define(
 				// TODO :: iterates over all of the objects in our collection
 				// finds our properties and adds nice Models representing each
 				// of them to us.
+				that = this;
+				attributes = []
+				this.options.collection.models.map(function(model) {
+					model.attributes.map(function(attribute) {
+						properties[properties.length] = attribute;
+					}
+				}
+				_.uniq(attributes).map(function(attribute) {
+					this.add(new PropertyModel([], attribute));
+				}
 			}
 		});
 		return {
 			PropertyCollection:PropertyCollection
-		}
+		};
 	}
 );
 
