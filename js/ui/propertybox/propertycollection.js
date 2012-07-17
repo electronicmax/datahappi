@@ -1,6 +1,6 @@
 define(
 	[
-		'js/models/PropertyModel',
+		'js/ui/propertybox/propertymodel',
 		'js/utils'
 	],
 	function(PropertyModel, util) {
@@ -28,12 +28,9 @@ define(
 						that.add(p);
 					}
 					that.get(key).trigger("change");
-				}	
+				});
 			}
-		});
-		return {
-			PropertyCollection:PropertyCollection
-		};
-	}
-);
+		});			
+		return {  PropertyCollection:PropertyCollection	};
+});
 

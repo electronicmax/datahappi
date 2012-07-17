@@ -20,7 +20,11 @@ define([], function() {
 		render:function() {
 			var this_ = this;
 			this.$el.html(_(this.template).template({label:this.options.label || 'stuff'}));
-			this.$el.draggable();
+			this.$el.draggable({
+				drag:function(evt,ui) {
+					this_.trigger('drag', ui.offset);
+				}
+			});
 			this.options.views_collection.map(function(v) { this_._add_view(v); });
 			this.$el.droppable({
 				accept:'.item, .simple',
