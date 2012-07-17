@@ -14,8 +14,10 @@ define(['js/box'],function(box) {
 			return this.el;
 		},
 		expand_props:function(){
-			console.log('expand props');
-		}		
+			// console.log('expand props');
+			var bv = new box.BoxView();
+			$('#things').append(bv.render());
+		}
 	});
 	return { InstanceBox:InstanceBox };
 });
