@@ -1,6 +1,4 @@
-define(
-	[],
-	function() {
+define([],function() {
 		var to_base_value= function(v) {
 			if (v instanceof Backbone.Model) { return v.id; }
 			if (v instanceof Object) { throw Error(" cannot base value of object ");  }
@@ -34,10 +32,7 @@ define(
 				this.set({'entropy': entropy});
 			}
 		});
-
-		return {
-			PropertyModel:PropertyModel
-		};
+		return { PropertyModel:PropertyModel };
 	}
 );
 

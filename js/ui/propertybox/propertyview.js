@@ -1,12 +1,11 @@
 /* this is for the box example only  */
 define(
 	[
-		'js/ui/propertybox/PropertyModel',
-		'js/ui/propertybox/PropertyCollection',
-		'js/draggableview'
+		'js/ui/propertybox/propertycollection',
+		'js/draggableview',
 		'js/ui/minibar'
 	],
-	function(PropertyModel, PropertyCollection, dv) {
+	function(propertymodel, propertycollection, dv) {
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
 			tagName:"div",
@@ -24,7 +23,7 @@ define(
 				this._update_coverage();
 				this._update_entropy();
 				return this.el;
-			}
+			},
 			_update_coverage:function() {
 				var c = this.options.model.get('coverage');
 				this.$el.find('.coverage').css('right',(this.$el().width() * (1-c))+"px");
@@ -42,7 +41,8 @@ define(
 			template:"", // TODO.
 			initialize:function() {
 				var this_ = this;
-				this.collection = new PropertyCollection(this.options.collection);
+				// propertycollections contain propertymodels
+				this.collection = new propertycollection.PropertyCollection(this.options.collection);
 				this.collection.bind("change", function() { this_._update(); });
 				this.ptov = {};
 			},
@@ -50,10 +50,14 @@ define(
 				this.$el.html(_(template).template());
 				return this.el;
 			},
+			setPosition:function() {
+				this.$el.css("top", x.top);
+				this.$el.css("left", x.left);
+  		    },
 			_update:function() {
 				var ptov = this.ptov;
 				this.collection.map(function(p) {
-					if (ptov[p.id]!) {
+					if (!ptov[p.id]) {
 						var pv = new PropertyView({model:p})
 						ptov[p.id] = pv;
 					}
@@ -64,12 +68,9 @@ define(
 					var v = ptov[pid];
 					v.remove();
 					delete ptov[pid];
-				});
-			}
+				}));
+			}			
 		});
-
-		return {
-			PropertyBox:PropertyBox
-		};
+		return { PropertyBox:PropertyBox };
 	});
 

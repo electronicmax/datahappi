@@ -1,12 +1,12 @@
 define(
 	[
-		'js/models/PropertyModel',
+		'js/ui/propertybox/propertymodel',
 		'js/utils',
 		'js/ops/chain-engine'
 	],
 	function(pm, util, ce) {
 		var PropertyCollection = Backbone.Collection.extend({
-			model:PropertyModel,
+			model:pm.PropertyModel,
 
 			// Order models by their coverage, with higher coverage first.
 			comparator: function(model) {
@@ -26,17 +26,9 @@ define(
 						that.add(p);
 					}
 					that.get(key).trigger("change");
-				}	
+				});
 			}
-			chain_get:function(properties) {
-				return this.map(function(model) {
-					return model.get_chain(properties);
-				}
-			}
-		});
-		return {
-			PropertyCollection:PropertyCollection
-		};
-	}
-);
+		});			
+		return {  PropertyCollection:PropertyCollection	};
+});
 
