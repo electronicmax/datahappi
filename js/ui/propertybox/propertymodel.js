@@ -27,10 +27,7 @@ define([],function() {
 				this.set({'entropy': entropy});
 			}
 		});
-
-		return {
-			PropertyModel:PropertyModel
-		};
+		return { PropertyModel:PropertyModel };
 	}
 );
 

@@ -5,7 +5,7 @@ define(
 	],
 	function(pm, util) {
 		var PropertyCollection = Backbone.Collection.extend({
-			model:PropertyModel,
+			model:pm.PropertyModel,
 
 			// Order models by their coverage, with higher coverage first.
 			comparator: function(model) {
