@@ -1,9 +1,10 @@
 define(
 	[
 		'js/models/PropertyModel',
-		'js/utils'
+		'js/utils',
+		'js/ops/chain-engine'
 	],
-	function(pm, util) {
+	function(pm, util, ce) {
 		var PropertyCollection = Backbone.Collection.extend({
 			model:PropertyModel,
 
@@ -26,6 +27,11 @@ define(
 					}
 					that.get(key).trigger("change");
 				}	
+			}
+			chain_get:function(properties) {
+				return this.map(function(model) {
+					return model.get_chain(properties);
+				}
 			}
 		});
 		return {
