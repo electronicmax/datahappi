@@ -3,13 +3,13 @@ define(
 		'js/ui/propertybox/propertymodel',
 		'js/utils'
 	],
-	function(PropertyModel, util) {
+	function(pm, util) {
 		var PropertyCollection = Backbone.Collection.extend({
 			model:PropertyModel,
 
-			// Order models by their coverage.
+			// Order models by their coverage, with higher coverage first.
 			comparator: function(model) {
-				return model.coverage();
+				return -model.coverage();
 			},
 			initialize:function() {
 				var this_ = this;
@@ -18,13 +18,10 @@ define(
 				this.options.collection.map(function(m) { this_._changed(m); });
 			},
 			_changed:function(model){
-				// TODO :: iterates over all of the objects in our collection
-				// finds our properties and adds nice Models representing each
-				// of them to us.
 				var that = this;
 				_(model.attributes).map(function(val, key) {
 					if (_.isUndefined(that.get(key))) {
-						var p = new PropertyModel({_id:key});
+						var p = new pm.PropertyModel({_id:key});
 						that.add(p);
 					}
 					that.get(key).trigger("change");
