@@ -8,14 +8,21 @@ define(
 	function(PropertyModel, PropertyCollection, dv) {
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
-			template:"<div></div>",
+			tagName:"div",
+			className:"property-view",
+			template:"<%= name %>",
 			render:function() {
+				this.$el.html(_(template).template(this.options.model.toJSON()));
+				this.$el.data("view", this);
+				this.$el.data("model", this.options.model);
 				return this.el;
 			}
 		});
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
-			template:"<div></div>", // TODO.
+			tagName:"div",
+			className:"property-box",			
+			template:"", // TODO.
 			initialize:function() {
 				var this_ = this;
 				this.collection = new PropertyCollection(this.options.collection);
@@ -23,7 +30,7 @@ define(
 				this.ptov = {};
 			},
 			render:function() {
-				this.$el.html(template);
+				this.$el.html(_(template).template());
 				return this.el;
 			},
 			_update:function() {
