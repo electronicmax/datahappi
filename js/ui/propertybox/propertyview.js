@@ -13,24 +13,28 @@ define(
 			className:"property-view",
 			template:"<%= name %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div>",
 			initialize:function() {
-				this.options.model.bind("change:coverage", function() { });
-				this.options.model.bind("change:entropy", function() { });
+				var this_ = this;
+				this.options.model.bind("change:coverage", function() { this_._update_coverage(); });
+				this.options.model.bind("change:entropy", function() { this_._update_entropy(); });
 			},
 			render:function() {
 				this.$el.html(_(template).template(this.options.model.toJSON()));
 				this.$el.data("view", this);
 				this.$el.data("model", this.options.model);
+				this._update_coverage();
+				this._update_entropy();
 				return this.el;
 			}
 			_update_coverage:function() {
 				var c = this.options.model.get('coverage');
-				this.$el.find('.coverage').css('width',c*100+"%");
+				this.$el.find('.coverage').css('right',(this.$el().width() * (1-c))+"px");
 			},
 			_update_entropy:function() {
 				var e = this.options.model.get('entropy');
-				this.$el.find('.entropy').css('width',c*100+"%");
+				this.$el.find('.entropy').css('right',(this.$el().width() * (1-e))+"px");
 			}			
 		});
+		
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
 			tagName:"div",
