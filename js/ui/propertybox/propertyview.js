@@ -4,19 +4,32 @@ define(
 		'js/ui/propertybox/PropertyModel',
 		'js/ui/propertybox/PropertyCollection',
 		'js/draggableview'
+		'js/ui/minibar'
 	],
 	function(PropertyModel, PropertyCollection, dv) {
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
 			tagName:"div",
 			className:"property-view",
-			template:"<%= name %>",
+			template:"<%= name %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div>",
+			initialize:function() {
+				this.options.model.bind("change:coverage", function() { });
+				this.options.model.bind("change:entropy", function() { });
+			},
 			render:function() {
 				this.$el.html(_(template).template(this.options.model.toJSON()));
 				this.$el.data("view", this);
 				this.$el.data("model", this.options.model);
 				return this.el;
 			}
+			_update_coverage:function() {
+				var c = this.options.model.get('coverage');
+				this.$el.find('.coverage').css('width',c*100+"%");
+			},
+			_update_entropy:function() {
+				var e = this.options.model.get('entropy');
+				this.$el.find('.entropy').css('width',c*100+"%");
+			}			
 		});
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */

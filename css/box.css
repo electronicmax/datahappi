@@ -89,3 +89,24 @@
   padding: 4px;
   width: 20px;
 }
+/* properties */
+.property-view .converage-container,
+.property-view .entropy-container {
+  width: 50px;
+  height: 1em;
+  border: 1px solid #AAA;
+}
+.property-view .converage-container div,
+.property-view .entropy-container div {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+.property-view .coverage-container div {
+  background-color: #AEE;
+}
+.property-view .entropy-container div {
+  background-color: #EAA;
+}

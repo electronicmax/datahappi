@@ -81,3 +81,17 @@
     width:20px;
 }
 
+/* properties */
+.property-view {
+    @minichart-width: 50px;
+   .converage-container, .entropy-container {
+       width: @minichart-width;
+       height: 1em;
+       div {
+          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
+       }
+       border:1px solid #AAA;
+   }
+   .coverage-container { div { background-color:#AEE; }  }
+   .entropy-container { div { background-color:#EAA; }  }                   
+}              

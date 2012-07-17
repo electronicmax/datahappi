@@ -2,7 +2,7 @@ define(
 	[],
 	function() {
 		PropertyModel = Backbone.Model.extend({
-			converage: function() {
+			coverage: function() {
 				return 0;
 			},
 			entropy: function() {
