@@ -1,9 +1,10 @@
 define(
 	[
 		'js/ui/propertybox/propertymodel',
-		'js/utils'
+		'js/utils',
+		'js/ops/chain-engine'
 	],
-	function(pm, util) {
+	function(pm, util, ce) {
 		var PropertyCollection = Backbone.Collection.extend({
 			model:pm.PropertyModel,
 
