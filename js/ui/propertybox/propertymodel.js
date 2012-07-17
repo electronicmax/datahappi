@@ -9,7 +9,9 @@ define(
 				return 0;
 			}
 		});
-		return PropertyModel;
+		return {
+			PropertyModel:PropertyModel
+		}
 	}
 );
 

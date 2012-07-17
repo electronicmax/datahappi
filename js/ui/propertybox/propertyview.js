@@ -12,7 +12,7 @@ define(
 			render:function() {
 				return this.el;
 			}
-		});		
+		});
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
 			template:"<div></div>", // TODO.
@@ -43,7 +43,7 @@ define(
 				});
 			}
 		});
-		
+
 		return {
 			PropertyBox:PropertyBox
 		};
