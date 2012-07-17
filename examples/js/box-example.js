@@ -3,7 +3,7 @@ define(
 	[
 		'js/ui/instancebox',
 		'js/draggableview',
-		'js/ui/TableView',
+		'js/ui/tableview',
 		'js/rdf/RDFCollection',
 		'js/ops/chain-engine',
 		'js/utils',
