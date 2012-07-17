@@ -11,16 +11,18 @@ define(
 		 'js/googlecal/auth',
 	],
 	function(box, dv, tv, rdfc, ce, util, cc, auth) {
-       var path = document.location.pathname;
-       var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
-       basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-		
+		var path = document.location.pathname;
+		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+
+		var new_group = function() {
+			var bv = new box.InstanceBox();
+			$('#things').append(bv.render());
+		};
+	
        $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
        $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
- 	   $('#new_group').click(function() {
-		   var bv = new box.InstanceBox();
-		   $('#things').append(bv.render());
-	   });
+ 	   $('#new_group').click(new_group); 
 		$('body').prepend((new dv.Simple()).render());
 		var v = new tv.TableView({
 			el:$('table')[0],
@@ -55,6 +57,7 @@ define(
 		window.rdf = rdfc;
 		window.ce = ce;
 		window.view = v;
-		// load();		
+		load();
+     	new_group();
 	});
 

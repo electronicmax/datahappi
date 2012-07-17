@@ -5,5 +5,5 @@ while true; do
 		echo "compilin' " "${i%.less}.css"
 		lessc "$i" > "${i%.less}.css"
 	done
-	sleep 1
+	sleep 5
 done

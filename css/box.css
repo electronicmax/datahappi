@@ -90,23 +90,37 @@
   width: 20px;
 }
 /* properties */
-.property-view .converage-container,
-.property-view .entropy-container {
-  width: 50px;
+.property-box {
+  background: rgba(240, 240, 240, 0.8);
+  text-align: right;
+  padding: 4px;
+  font-size: 0.6em;
+}
+.property-box .converage-container,
+.property-box .entropy-container {
+  display: inline-block;
+  position: relative;
+  width: 30px;
   height: 1em;
   border: 1px solid #AAA;
 }
-.property-view .converage-container div,
-.property-view .entropy-container div {
+.property-box .converage-container div,
+.property-box .entropy-container div {
   position: absolute;
   left: 0px;
   top: 0px;
   bottom: 0px;
   right: 0px;
 }
-.property-view .coverage-container div {
+.property-box .coverage-container {
+  display: none;
+}
+.property-box .coverage-container div {
   background-color: #AEE;
 }
-.property-view .entropy-container div {
+.property-box .entropy-container {
+  display: none;
+}
+.property-box .entropy-container div {
   background-color: #EAA;
 }

@@ -6,28 +6,29 @@ define(
 	],
 	function(pm, util, ce) {
 		var PropertyCollection = Backbone.Collection.extend({
-			model:pm.PropertyModel,
-
-			// Order models by their coverage, with higher coverage first.
-			comparator: function(model) {
-				return -model.coverage();
-			},
-			initialize:function(options) {
-				console.log('options ', options);
-				this.options = options;				
+			initialize:function(models, options) {
 				var this_ = this;
-				util.assert(this.options.collection, "No collection passed");
-				this.options.collection.bind('change', function(m) { this_._changed(m); });
-				this.options.collection.map(function(m) { this_._changed(m); });
+				var src_c = options.src_collection;
+				util.assert(!_(src_c).isUndefined(), "No collection passed");
+				src_c.on('change', function(m) { this_._changed(m); })
+					.on('add', function(m) { this_._changed(m); })
+				    .on('remove', function(m) { this_._changed(m); })
+					.map(function(m) { console.log("firing change on ", m); this_._changed(m); });
 			},
+			comparator: function(model) {
+				// Order models by their coverage, with higher coverage first.
+				return - (model.get("coverage") || 0);
+			},			
 			_changed:function(model){
-				var that = this;
+				var this_ = this;
 				_(model.attributes).map(function(val, key) {
-					if (_.isUndefined(that.get(key))) {
+					if (key == '_id') { return; }
+					if (_.isUndefined(this_.get(key))) {
 						var p = new pm.PropertyModel({_id:key});
-						that.add(p);
+						this_.add(p);
+					} else {
+						this_.trigger("change", p);
 					}
-					that.get(key).trigger("change");
 				});
 			}
 		});			

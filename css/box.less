@@ -82,9 +82,15 @@
 }
 
 /* properties */
-.property-view {
-    @minichart-width: 50px;
+.property-box {
+	background:rgba(240,240,240,0.8);
+	text-align:right;
+	padding:4px;	
+    @minichart-width: 30px;
+	font-size:0.6em;
    .converage-container, .entropy-container {
+	   display:inline-block;
+	   position:relative;
        width: @minichart-width;
        height: 1em;
        div {
@@ -92,6 +98,6 @@
        }
        border:1px solid #AAA;
    }
-   .coverage-container { div { background-color:#AEE; }  }
-   .entropy-container { div { background-color:#EAA; }  }                   
+   .coverage-container {  display:none; div { background-color:#AEE; }   }
+   .entropy-container {  display:none; div { background-color:#EAA; }  }                   
 }              

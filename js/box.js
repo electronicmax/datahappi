@@ -15,6 +15,7 @@ define([], function() {
 		className:'greybox',
 		initialize:function() {
 			this.options.views_collection = this.options.views_collection ? this.options.views_collection : new Backbone.Collection();
+			
 			this.render();
 		},
 		render:function() {
@@ -47,6 +48,7 @@ define([], function() {
 			this.$el.find('.items').append(v.render());
 		},
 		add:function(v) {
+			console.log('adding view ', v);
 			this.options.views_collection.add(v);
 			this._add_view(v);
 		}
