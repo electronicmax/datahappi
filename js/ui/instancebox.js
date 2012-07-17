@@ -22,7 +22,7 @@ define(['js/box', 'js/ui/propertybox/propertyview'],function(box, pview) {
 				return;
 			}
 			// make visible
-			this.pview = new pview.PropertyBox();
+			this.pview = new pview.PropertyBox({collection:this.options.views_collection.map(function(x) { return x.model; })});
 			this.$el.parent().append(pview.render());
 			this._update_pview_offset({top:this.$el.css("top"), left:parseInt(this.$el.css('left'))});
 		},

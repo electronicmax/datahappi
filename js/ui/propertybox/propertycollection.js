@@ -11,7 +11,9 @@ define(
 			comparator: function(model) {
 				return -model.coverage();
 			},
-			initialize:function() {
+			initialize:function(options) {
+				console.log('options ', options);
+				this.options = options;				
 				var this_ = this;
 				util.assert(this.options.collection, "No collection passed");
 				this.options.collection.bind('change', function(m) { this_._changed(m); });

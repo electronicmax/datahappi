@@ -2,10 +2,9 @@
 define(
 	[
 		'js/ui/propertybox/propertycollection',
-		'js/draggableview',
-		'js/ui/minibar'
+		'js/draggableview'
 	],
-	function(propertymodel, propertycollection, dv) {
+	function(propertycollection, dv) {
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
 			tagName:"div",
@@ -42,7 +41,7 @@ define(
 			initialize:function() {
 				var this_ = this;
 				// propertycollections contain propertymodels
-				this.collection = new propertycollection.PropertyCollection(this.options.collection);
+				this.collection = new propertycollection.PropertyCollection({collection:this.options.collection});
 				this.collection.bind("change", function() { this_._update(); });
 				this.ptov = {};
 			},
