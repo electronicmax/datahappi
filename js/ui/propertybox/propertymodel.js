@@ -10,9 +10,6 @@ define(
 		var PropertyModel = Backbone.Model.extend({
 			idAttribute:"_id",
 			initialize:function() {
-				// make sure that this.attributes._id is the property name
-				this.attributes._id = this.options.propertyName;
-
 				this.bind("change", function() {
 					that._update_entropy();
 					that._update_coverage();
