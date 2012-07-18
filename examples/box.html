@@ -5,24 +5,28 @@
   <link href="css/box-example.css" rel="stylesheet">
   <title> operators  </title>
   <body>
-	<div class="container-fluid">
-	  <div id="new_group" class="btn">new group</div><p>
-	  <div class="span8">
-        <input id="definitions_url" type="text" class="span4" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
-        <input id="url" type="text" class="span4" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>
-        <div class="load btn">Load</div>
-		<p>
-		  <div class="table">
-			<table class="table">
-			  <thead></thead>
-			  <tbody id="values"></tbody>
-			</table>
-		  </div>
-		</p>
+	<div class="container">
+	  
+	  <div>
+		<div class="span8">
+          <input id="definitions_url" type="text" class="span4" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
+          <input id="url" type="text" class="span4" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>
+          <div class="load btn">Load</div> 		<div id="new_group" class="btn">new group</div><p>
+
+		  <p>
+			<div class="table">
+			  <table class="table">
+				<thead></thead>
+				<tbody id="values"></tbody>
+			  </table>
+			</div>
+		  </p>
+		</div>
+		<div id="things" class="span4"></div>
 	  </div>
-      <div id="things" class="span4"></div>
 	</div>
   </body>
+  
   <script type="text/template" id="instance_template">
        <%
 		  var lastpath = function(x) {

@@ -20,10 +20,9 @@ define(
 			$('#things').append(bv.render());
 		};
 	
-       $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
-       $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
- 	   $('#new_group').click(new_group); 
-		$('body').prepend((new dv.Simple()).render());
+		$("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
+		$("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/')); 		$('#new_group').click(new_group); 
+		// $('body').prepend((new dv.Simple()).render());
 		var v = new tv.TableView({
 			el:$('table')[0],
 			columns:[
