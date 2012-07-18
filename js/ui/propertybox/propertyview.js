@@ -8,7 +8,7 @@ define(
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
 			events: {
-				'click' : '_propclick'
+				'click .propmodel' : '_propclick'
 			},
 			tagName:"div",
 			className:"property-view",
@@ -34,8 +34,8 @@ define(
 				var e = this.options.model.get('entropy');
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
 			},
-			_propclick: function() {
-				console.log(this.options.model.id)
+			_propclick: function(x) {
+				console.log('oh hi', this.options.model.id); // this.options.model.id)
 			}
 		});
 
@@ -46,7 +46,6 @@ define(
 			template:"", // TODO.
 			initialize:function() {
 				var this_ = this;
-				this.ptov = {};				
 				// propertycollections contain propertymodels
 				this.collection = new propertycollection.PropertyCollection(undefined, {
 					src_collection:this.options.src_collection
@@ -54,12 +53,12 @@ define(
 				this.collection.on("change", function() {this_._update();})
 					.on("add",function() { this_._update(); })
 					.on("remove",function() { this_._update(); });
-				this_._update();
 			},
 			render:function() {
 				var this_ = this;
+				this.ptov = {};
 				this.$el.html(_(this.template).template());
-				_(this.ptov).values().map(function(v) { this_._add_view(v);  });
+				this._update(); // we might have properties already ... so populate them
 				return this.el;
 			},
 			_add_view:function(v) {
