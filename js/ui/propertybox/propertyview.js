@@ -7,16 +7,16 @@ define(
 	function(propertycollection, dv) {
 		var PropertyView = Backbone.View.extend({
 			// paints a nice property.
+			events: {
+				'click' : '_propclick'
+			},
 			tagName:"div",
 			className:"property-view",
-			template:"<%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div>",
+			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function() {
 				var this_ = this;
 				this.options.model.bind("change:coverage", function() { this_._update_coverage(); });
 				this.options.model.bind("change:entropy", function() { this_._update_entropy(); });
-				this.$el.click(function() {
-					console.log(this_.options.model.id)
-				});
 			},
 			render:function() {
 				this.$el.html(_(this.template).template(this.options.model.toJSON()));
@@ -33,7 +33,10 @@ define(
 			_update_entropy:function() {
 				var e = this.options.model.get('entropy');
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
-			}			
+			},
+			_propclick: function() {
+				console.log(this.options.model.id)
+			}
 		});
 
 		var PropertyBox = Backbone.View.extend({
