@@ -14,6 +14,9 @@ define(
 				var this_ = this;
 				this.options.model.bind("change:coverage", function() { this_._update_coverage(); });
 				this.options.model.bind("change:entropy", function() { this_._update_entropy(); });
+				this.$el.click(function() {
+					console.log(this_.options.model.id)
+				});
 			},
 			render:function() {
 				this.$el.html(_(this.template).template(this.options.model.toJSON()));
@@ -32,7 +35,7 @@ define(
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
 			}			
 		});
-		
+
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
 			tagName:"div",
