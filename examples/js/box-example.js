@@ -1,5 +1,4 @@
 /* this is for the box example only  */
-<<<<<<< HEAD
 define(
 	[
 		'js/ui/instancebox',
