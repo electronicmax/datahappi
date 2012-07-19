@@ -1,7 +1,10 @@
 define([],function() {
-	// a happy model 
+
+	// Maxels support:
+	//    co-reference declarations (e.g, m1 iss m2)
+	//    lazy forward chaining -- applies all rules all the time
+
 	var Maxel = Backbone.Model.extend({
-		// change from standard - everything during
 		idAttribute:"_id",
 		initialize:function(src_json, options) {
 			this.entailed = {};
@@ -9,6 +12,7 @@ define([],function() {
 			if (!_(src_json).isUndefined()) {
 				_(this.attributes).extend( this._convert_json(src_json) );
 			}
+			this._inference = options.enable_incremental_inference;
 			return this;
 		},
 		_convert_json:function(o) {
