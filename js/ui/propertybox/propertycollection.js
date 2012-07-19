@@ -26,7 +26,7 @@ define(
 				_(model.attributes).map(function(val, key) {
 					if (key == '_id') { return; }
 					if (_.isUndefined(this_.get(key))) {
-						this_._add_property_models(model, val);
+						this_._add_property_models(model, key);
 					} else {
 						this_.trigger("change", p); // What is the significance of this?
 					}
@@ -51,7 +51,7 @@ define(
 						_.keys(model.get(key)).filter(function(propertyName) {
 							return _.isObject(this_.get(propertyName));
 						}).map(function(propertyName) {
-							this_._add_property_models(model, propertyName, expandListIndex + 1);
+							this_._add_property_models(model, propertyName, expandListIndex+1);
 						});
 					}
 				} else {
