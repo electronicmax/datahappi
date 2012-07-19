@@ -51,6 +51,8 @@ define(
 		};
 		$('.load').click(load);
 		$('form').submit(load);
+
+		load();
 		
 		window.rdf = rdfc;
 		window.ce = ce;
