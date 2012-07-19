@@ -35,14 +35,14 @@ define(
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
 			},
 			_propclick: function(x) {
-				console.log('oh hi', this.options.model.id); // this.options.model.id)
+				this.options.collection._expand_property(this.options.model.get("_id"));
 			}
 		});
 
 		var PropertyBox = Backbone.View.extend({
 			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
 			tagName:"div",
-			className:"property-box",			
+			className:"property-box",
 			template:"", // TODO.
 			initialize:function() {
 				var this_ = this;
@@ -73,7 +73,7 @@ define(
 				var this_ = this;
 				this.collection.map(function(p) {
 					if (!ptov[p.id]) {
-						var pv = new PropertyView({model:p})
+						var pv = new PropertyView({model:p, collection:this_.collection})
 						ptov[p.id] = pv;
 						this_._add_view(pv);
 					}
