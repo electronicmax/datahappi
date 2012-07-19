@@ -19,7 +19,7 @@
 				<div id="sources">
 					Sources (3 selected)
 					<ul>
-						<li>buildings</li>
+						<li><input type="checkbox" />buildings</li>
 						<li>things</li>
 						<li>elephants</li>
 						<li>dooberries</li>
@@ -43,6 +43,17 @@
 					</p>
 				</div>
 				<div id="things" class="span4"></div>
+				<hr />
+				<div id="slidecontainer">
+					<div id="slider">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</div>
 			</div><!--/panel-->
 
 			<div id="tab">
@@ -130,6 +141,13 @@
 			$("#mainpanel").click(function(){
 				$("#slidepanel").animate({
 					left: -$("#datapanel").outerWidth() 
+				});
+			});
+
+			$("li").mouseover(function(e){
+				console.log("e", e);
+				$(e.target).animate({
+					left: -300 
 				});
 			});
 

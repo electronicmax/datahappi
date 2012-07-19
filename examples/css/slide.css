@@ -18,6 +18,7 @@
 	float: left;
 	border: 1px solid #DDD;
 	border-radius: 2px;
+	background: #FFF;
 }
 
 #datapanel {
@@ -36,4 +37,26 @@ html, body, #mainpanel {
 	height: 100%;
 	/*margin: 0;*/
 	/*padding: 0;*/
+}
+
+
+#slidecontainer {
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: clip;
+}
+#slider {
+	width: auto;
+	height: 2em;
+	overflow-x: scroll;
+	overflow-y: clip;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	position: relative;
+	left: 0;
 }
