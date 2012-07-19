@@ -1,7 +1,7 @@
 define(
 	[
 		'js/box',
-		'js/ui/propertybox/propertyview',
+		'js/ui/propertybox/propertyview'
 	],
 	function(box, pview) {
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="expand_props icon-logout"></span></div>';

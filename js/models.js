@@ -4,7 +4,16 @@ define(['js/ops/incremental-forward'],function(rh) {
 	//    co-reference declarations (e.g, m1 iss m2)
 	//    lazy forward chaining -- applies all rules all the time
 
-	var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length == 0; };
+	var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
+	var DEFINED = function(x) { return !_(x).isUndefined(); };
+	var TO_OBJ = function(pairs) {
+		var o = {};
+		pairs.map(function(pair) {
+			o[pair[0]] = pair[1];
+		});
+		return o;
+	};
+	
 	
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
@@ -23,6 +32,7 @@ define(['js/ops/incremental-forward'],function(rh) {
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
 				var rules = chainer.get_triggers(changed_props);
+				console.log(" apply rules -- triggers ", rules.map(function(x) { return x.name; }));
 				// try each the rule
 				rules.map(function(r) { try { return r.fn(this_);} catch(e) { console.log(e);}})
 					.filter(function(x) { return !_(x).isUndefined(); })
@@ -73,9 +83,7 @@ define(['js/ops/incremental-forward'],function(rh) {
 		s:function(prop,val) {
 			var arg = {};
 			arg[prop] = val;
-			arg = this._convert_json(arg);
-			this.constructor.__super__.set.apply(this, [arg]);
-			return this;
+			return this.set(arg);
 		},
 		_make_changelist:function(props) {
 			var changelist = {};
@@ -83,6 +91,7 @@ define(['js/ops/incremental-forward'],function(rh) {
 			return changelist;
 		},
 		setEntailed:function(prop,val) {
+			console.log('set entailed ', prop, val);
 			var this_ = this;
 			if (val !== undefined) {
 				var arg = {};
@@ -93,12 +102,15 @@ define(['js/ops/incremental-forward'],function(rh) {
 			// prop = { foo : 132 }
 			var new_vals = this._convert_json(prop);
 			// filter new vals for only those that have actually changed
-			var changed_keys = _(new_vals).keys().filter(function(x) {
-				return _(new_vals[x]).difference(this_.entailed[x]) > 0;
-			});
-			this._merge_attrs(this.entailed, new_vals);
-			var changelist = this._make_changelist(changed_keys);
-			if (changed_keys.length > 0) {
+			console.log("new vals > ", new_vals);
+			var changed = TO_OBJ(_(new_vals).map(function(v,x) {
+				return _(v).difference(this_.g(x)).length > 0 ? [x,v] : undefined;
+			}).filter(DEFINED));
+			console.log("changed >>> ", changed);			
+			// this._merge_attrs(this.entailed, changed);
+			_(this.entailed).extend(changed);
+			var changelist = this._make_changelist(_(changed).keys());
+			if (_(changed).keys() > 0) {
 				this.trigger('change', this, {changes :changelist});
 				changed_keys.map(function(k) {
 					this.trigger('change:'+k, this, { changes : changelist });
