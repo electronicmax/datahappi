@@ -1,6 +1,6 @@
-define(['js/ops/ops'], function(ops) {
-	var IncrementalRuleHelper = function() {
-		this.ruleset = ops.operators;
+define(['js/ops/forward-ops'], function(ops) {
+	var IncrementalRuleHelper = function(options) {
+		this.ruleset = options.ruleset || ops.operators;
 	};
 	IncrementalRuleHelper.prototype = {
 		set_ruleset:function(ruleset) {

@@ -18,7 +18,13 @@ define(['js/models','js/utils'],function(m,utils) {
 			assert(m1.g('zab').length == 1 && m1.get('zab')[0] == 'rab', "set didn't work" );
 		},
 		function() {
-			// chaining
+			// chaining!
+			var m1 = new m.Maxel(
+				{_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "foo", "http://www.w3.org/1999/02/22-rdf-syntax-ns#label": "love" },
+				{ enable_incremental_inference: true }
+			);
+			console.log(" keys ", m1.keys(), m1.attributes, m1.entailed);
+			window.m1 = m1;
 		}		
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
