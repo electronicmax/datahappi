@@ -13,7 +13,9 @@ define(
 				src_c.on('change', function(m) { this_._changed(m); })
 					.on('add', function(m) { this_._changed(m); })
 				    .on('remove', function(m) { this_._changed(m); })
-					.map(function(m) { console.log("firing change on ", m); this_._changed(m); });
+					.map(function(m) {
+						console.log("firing change on ", m); this_._changed(m);
+					});
 			},
 			comparator: function(model) {
 				// Order models by their coverage, with higher coverage first.
@@ -24,14 +26,40 @@ define(
 				_(model.attributes).map(function(val, key) {
 					if (key == '_id') { return; }
 					if (_.isUndefined(this_.get(key))) {
-						var p = new pm.PropertyModel({_id:key});
-						this_.add(p);
+						this_._add_property_models(model, val);
 					} else {
-						this_.trigger("change", p);
+						this_.trigger("change", p); // What is the significance of this?
 					}
 				});
+			},
+			_expand_list:[],
+			_expand_property:function(propertyID) {
+				console.log('expanding ', propertyID);
+				_expand_list.push(propertyID);
+				this.trigger("change", p);
+			},
+			// Calling with a model and the name of one of its properties, this method
+			// adds the model property to the collection, unless the property is being
+			// chained upon, in which case the properties of the subject being pointed to 
+			// by the intitial properties are added. In the case of one of these properties
+			// being chained upon, the method recurses. So far untested.
+			_add_property_models:function(model, propertyName, expandListIndex) {
+				this_ = this;
+				if (!expandListIndex) { expandListIndex=0; }
+				if (_expand_list[expandListIndex] === propertyName) {
+					if _.isObject(model.get(key)) {
+						_.keys(model.get(key)).filter(function(propertyName) {
+							return _.isObject(this_.get(propertyName));
+						}).map(function(propertyName) {
+							this_._add_property_models(model, propertyName, expandListIndex + 1);
+						});
+					}
+				} else {
+					this.add(new pm.PropertyModel({_id:propertyName}));
+				}
 			}
 		});			
 		return {  PropertyCollection:PropertyCollection	};
-});
+	}
+);
 
