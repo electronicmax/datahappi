@@ -9,7 +9,17 @@ define(['js/models','js/utils'],function(m,utils) {
 			m1.setSameAs(m2);
 			console.log('merge keys ', m1.keys());
 			assert(m1.keys().length == 4, "merge keys mistmatch");
-		}
+			assert(m1.map(function(x) { return x; }).length == m1.keys().length, "map !== keys");
+			console.log(m1.map(function(v,k) { return v; }));
+			// set test
+			m1.s("bar", "baz");
+			assert(m2.g('bar').length == 1 && m2.get('bar')[0] == 'baz', "set didn't work" );
+			m2.s("zab", "rab");
+			assert(m1.g('zab').length == 1 && m1.get('zab')[0] == 'rab', "set didn't work" );
+		},
+		function() {
+			// chaining
+		}		
 	];
-	return { run : function() { tests.map(function(t) { t(); }); } };
+	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
 });
