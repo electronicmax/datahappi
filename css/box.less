@@ -81,3 +81,24 @@
     width:20px;
 }
 
+/* properties */
+.property-box {
+	background:rgba(250,250,250,0.8);
+	text-align:right;
+	padding:4px;	
+    @minichart-width: 30px;
+	font-size:0.6em;
+
+   .converage-container, .entropy-container {
+	   display:inline-block;
+	   position:relative;
+       width: @minichart-width;
+       height: 1em;
+       div {
+          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
+       }
+       border:1px solid #AAA;
+   }
+   .coverage-container {  display:none; div { background-color:#AEE; }   }
+   .entropy-container {  display:none; div { background-color:#EAA; }  }                   
+}              

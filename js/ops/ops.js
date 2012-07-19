@@ -1,6 +1,6 @@
 define(['js/rdf/name-resolver'], function(nameResolver) {
 	return {
-	    operators: [
+		operators: [
 			{
 				domain:["within"],
 				fn: function(x) {
@@ -75,14 +75,14 @@ define(['js/rdf/name-resolver'], function(nameResolver) {
 			},
 			{
 				domain:["http://www.w3.org/2000/01/rdf-schema#label"],
-				range:['name'],					   
+				range:['name'],
 				fn: function(x) {
 					return { _oid:x.id, "name": x.get("http://www.w3.org/2000/01/rdf-schema#label")[0] };
 				}
 			},
 			{
 				domain:["http://xmlns.com/foaf/0.1/name"],
-				range:['name'],					   					   
+				range:['name'],
 				fn: function(x) {
 					return { _oid:x.id, "name": x.get("http://xmlns.com/foaf/0.1/name")[0] };
 				}

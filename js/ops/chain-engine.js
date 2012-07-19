@@ -1,18 +1,18 @@
-define(['js/rdf/RDFCollection','js/ops/ops'],function(rdfc,ops) {           
+define(['js/rdf/RDFCollection','js/ops/ops'],function(rdfc,ops) {
 	var apply_chain = function(src_entity,target_type) {
-	    var c = chain(src_entity,target_type);
-	    return c.map(function(x) { return x[x.length - 1][1]; });
+		var c = chain(src_entity,target_type);
+		return c.map(function(x) { return x[x.length - 1][1]; });
 	};           
 	var ChainModel = rdfc.RDFModel.extend({
-	    idAttribute:"_id",               
-	    get_chain:function(props) {
+		idAttribute:"_id",               
+		get_chain:function(props) {
 			if (_(props).isArray()) {
 				// list of properties
 				return apply_chain(this, props);
 			} else {
 				return apply_chain(this, [props]);
 			}
-	    }
+		}
 	});
 	var ChainRDFCollection = rdfc.RDFCollection.extend({ model:ChainModel  });
 	var to_model =  function(o) {

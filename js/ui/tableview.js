@@ -20,7 +20,7 @@ define(['js/utils'], function(util) {
 			var this_ = this;
 			_(this.options.columns).map(
 				function(val,property) {
-					oldVal = $.extend({}, val);
+					var oldVal = $.extend({}, val);
 					if (_(val).isFunction()) { val = val(m); }
 					if (_.isArray(val) && val.length === 1) {val = val[0];} //If val is a single vlaue array, take the value out of the array.
 					if (_.isUndefined(val)) { val = '<i>undefined</i>'; }

@@ -1,9 +1,10 @@
 /* this is for the box example only  */
+<<<<<<< HEAD
 define(
 	[
-		'js/ui/propertybox',
+		'js/ui/instancebox',
 		'js/draggableview',
-		'js/ui/TableView',
+		'js/ui/tableview',
 		'js/rdf/RDFCollection',
 		'js/ops/chain-engine',
 		'js/utils',
@@ -14,14 +15,19 @@ define(
        var path = document.location.pathname;
        var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
        basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+
+
+	var new_group = function() {
+		var bv = new box.InstanceBox();
+		$('#things').append(bv.render());
+	};
+	
 		
        $("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
        $("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
- 	   $('#new_group').click(function() {
-		   var bv = new box.PropExpandableBoxView();
-		   $('#things').append(bv.render());
-	   });
-		$('body').prepend((new dv.Simple()).render());
+	$('#new_group').click(new_group); 
+
+		// $('body').prepend((new dv.Simple()).render());
 		var v = new tv.TableView({
 			el:$('table')[0],
 			columns:[
@@ -57,6 +63,6 @@ define(
 		window.rdf = rdfc;
 		window.ce = ce;
 		window.view = v;
-		// load();		
-	});
+    new_group();
+});
 

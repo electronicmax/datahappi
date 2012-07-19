@@ -1,4 +1,5 @@
 #!/bin/bash
+
 while true; do
 	for i in *.less ; do 
 		[[ -f "$i" ]] || continue
