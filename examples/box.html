@@ -18,12 +18,12 @@
 			<div id="datapanel">
 				<div id="sources">
 					Sources (3 selected)
-					<ul>
+					<ul><!-- 
 						<li><input type="checkbox" />buildings</li>
 						<li>things</li>
 						<li>elephants</li>
 						<li>dooberries</li>
-						<li><input type="text" value="new source url"></input></li>
+						<li><input type="text" value="new source url"></input></li> -->
 					</ul>
 				</div><!--sources-->
 				<hr>
@@ -44,20 +44,10 @@
 				</div>
 				<div id="things" class="span4"></div>
 				<hr />
-				<div id="slidecontainer">
-					<div id="slider">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</div>
-				</div>
 			</div><!--/panel-->
 
 			<div id="tab">
-				<a id="toggle_data" href="#">Toggle Panel</a>
+				<a id="toggle_data" href="#"><h1><span class="icon-logout-1"></span><h1></a>
 		</div> <!--/tab-->
 
 	</div> <!--/slidepanel-->
@@ -116,7 +106,7 @@
 	<script src="../lib/require.js"></script>
 	<script type="text/javascript">
 		// because we're not in the same place as the rest of our html files,
-		// we have git to manually tell require how to resovle things 
+		// we have got to manually tell require how to resolve things 
 		$(document).ready(function() {
 				// demo specific initialistation here
 			var path = document.location.pathname;
@@ -126,22 +116,30 @@
 			require.config({ baseUrl:  basepath });
 			require(['examples/js/box-example'],function() {});
 
+			function slideOut () {
+				$("#slidepanel").animate({ left: 0 }, function() {
+					$("#tab").addClass("flip-horizontal"); 
+				});
+			}
+			function slideIn () {
+				$("#slidepanel").animate({ left: -$("#datapanel").outerWidth() }, function() {
+					$("#tab").removeClass("flip-horizontal");
+				});
+			}
 			// set up panel toggle handler
 			$("#toggle_data").click(function(){
-				$("#slidepanel").animate({
-					left: parseInt($("#slidepanel").css('left'),10) == 0 ?
-					-$("#datapanel").outerWidth() :
-					0
-				});
+				if ( parseInt($("#slidepanel").css('left'),10) == 0 ){
+					slideIn();
+				} else {
+					slideOut();
+				}
 			});
 
 			// expand panel on load
-			$("#slidepanel").animate({ left: 0 });
+			slideOut();
 
 			$("#mainpanel").click(function(){
-				$("#slidepanel").animate({
-					left: -$("#datapanel").outerWidth() 
-				});
+				slideIn();
 			});
 
 			$("li").mouseover(function(e){
