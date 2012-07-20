@@ -68,18 +68,18 @@ define(
 			}
 		});
 		var load = function() {
-			// var buildings_url = $("#definitions_url").val();
-			// var data_url = $('#url').val();
-			// var buildings = ce.get_rdf_collection(buildings_url);
-			// buildings.fetch().then(function() {
-			// 	console.log('loaded buildings');
-			// 	var data =  ce.get_rdf_collection(data_url);
-			// 	data.fetch().then(function() {
-			// 		console.log(' loaded events ');
-			// 		data.each(function(b) { v.collection.add(b); });
-			// 	});
-			// 	buildings.each(function(b) { v.collection.add(b); });
-			// });
+			var buildings_url = $("#definitions_url").val();
+			var data_url = $('#url').val();
+			var buildings = ce.get_rdf_collection(buildings_url);
+			buildings.fetch().then(function() {
+				console.log('loaded buildings');
+				var data =  ce.get_rdf_collection(data_url);
+				data.fetch().then(function() {
+					console.log(' loaded events ');
+					data.each(function(b) { v.collection.add(b); });
+				});
+				buildings.each(function(b) { v.collection.add(b); });
+			});
 var buildings_source = new Source({ name: "Buildings", url: $("#definitions_url").val()});
 var events_source = new Source({ name: "Events", url: $('#url').val()})
 

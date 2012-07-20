@@ -55,7 +55,6 @@ define(
 					.on("remove",function() { this_._update(); });
 			},
 			render:function() {
-				var this_ = this;
 				this.ptov = {};
 				this.$el.html(_(this.template).template());
 				this._update(); // we might have properties already ... so populate them
@@ -67,13 +66,13 @@ define(
 			setPosition:function(x) {
 				this.$el.css("top", x.top);
 				this.$el.css("left", x.left);
-  		    },
+			},
 			_update:function(p) {
 				var ptov = this.ptov;
 				var this_ = this;
 				this.collection.map(function(p) {
 					if (!ptov[p.id]) {
-						var pv = new PropertyView({model:p, collection:this_.collection})
+						var pv = new PropertyView({model:p, collection:this_.collection});
 						ptov[p.id] = pv;
 						this_._add_view(pv);
 					}
@@ -85,7 +84,7 @@ define(
 					v.remove();
 					delete ptov[pid];
 				});
-			}			
+			}
 		});
 		return { PropertyBox:PropertyBox };
 	});
