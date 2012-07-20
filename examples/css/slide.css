@@ -19,6 +19,7 @@
 	border: 1px solid #DDD;
 	border-radius: 2px;
 	background: #FFF;
+	text-align: center;
 }
 
 #datapanel {
@@ -59,4 +60,14 @@ ul {
 li {
 	position: relative;
 	left: 0;
+}
+
+.flip-horizontal {
+	display: inline-block;
+	-moz-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	transform: scaleX(-1);
+	-ms-filter: fliph; /*IE*/
+	filter: fliph; /*IE*/
 }
