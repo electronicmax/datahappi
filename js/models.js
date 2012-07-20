@@ -4,7 +4,10 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	//    co-reference declarations (e.g, m1 iss m2)
 	//    lazy forward chaining -- applies all rules all the time
 
-	var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
+	// significant change from regular models: attributes are _always_
+	// arrays -- although many can be of length 0
+	// var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
+	
 	var DEFINED = function(x) { return !_(x).isUndefined(); };
 	var TO_OBJ = util.TO_OBJ;
 	
@@ -14,7 +17,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.entailed = {};
 			this.sameas = [];
 			if (!_(src_json).isUndefined()) {
-				_(this.attributes).extend( this._convert_json(src_json) );
+				_(this.attributes).extend( this._all_values_to_arrays(src_json) );
 			}
 			this.set_up_inference(options);
 			return this;
@@ -46,12 +49,18 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			apply_rules(this.keys());
 			return this;
 		},
-		_convert_json:function(o) {
+		_value_to_array:function(k,v) {
+			if (k == '_id') { return v; }
+			if (!_(v).isUndefined() && !_(v).isArray()) {
+				return [v];
+			}
+			return v;			
+		},		
+		_all_values_to_arrays:function(o) {
+			if (!_(o).isObject()) { console.error(' not an object', o); return o; }
 			var cleaned = o;
-			_(o).map(function(v,k) {
-				if (k == '_id') { cleaned[k] = v; return; }
-				if (!_(v).isUndefined() && !_(v).isArray()) { cleaned[k] = [v]; }
-			});
+			var this_ = this;
+			_(o).map(function(v,k) { return this_._value_to_array(k,v); });
 			return cleaned;
 		},
 		get:function(p) {
@@ -79,12 +88,16 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				target[k] = _(target[k] || []).union(src[k]);
 			});
 		},
-		set:function(o,options) {
-			var this_ = this;
-			this.constructor.__super__.set.apply(this, [this._convert_json(o), options]);
+		set:function(k,v,options) {
+			// check if this was called with k,v format, not {k:v} format.
+			if (!_(v).isUndefined()) {
+				v = this._value_to_array(k,v);
+			} else {
+				k = this._all_values_to_arrays(k);
+			}				
+			this.constructor.__super__.set.apply(this,[k,v,options]);
 			return this;
 		},
-		s:function(prop,val) { return this.set(TO_OBJ([[prop,val]]));},
 		_trigger_change:function(changed_props) {
 			var this_ = this;
 			var _make_changelist = function(props) {
@@ -101,19 +114,30 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			}
 			return;
 		},
+		_do_sets_and_unsets:function(s) {
+			var this_ = this, sets = {};
+			_(s).map(function(v,k) {
+				if (_(v).isArray() && v.length === 0) {
+					this_.unset(k);
+				} else { sets[k] = v; }
+			});
+			this.set(sets);
+			return this;
+		},
 		setEntailed:function(props,rule,replace) {
 			var this_ = this;
 			console.log('set entailed ', props,rule,replace);
 			// if replace then we're just performing a regular set
 			if (replace) {
+				console.log("REPLACE ", props);
 				_(props).map(function(v,p) { delete this_.entailed[p]; });
-				return this.set(props);
+				this._do_sets_and_unsets(props);
+				return this;
 			}
 			// otherwise set entailed -- coner
 			// now everything is in single object format;
-			var new_vals = this._convert_json(props);
+			var new_vals = this._all_values_to_arrays(props);
 			// filter new vals for only those that have actually changed
-			console.log("new vals > ", new_vals);
 			var changed = TO_OBJ(
 				_(new_vals).map(function(v,p) {
 					var old_val = this_.entailed[p] ? this_.entailed[p][rule.id] : undefined;
@@ -150,5 +174,6 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		}		
 	});
 	Maxel.prototype.g = Maxel.prototype.get;
+	Maxel.prototype.s = Maxel.prototype.set;
 	return { Maxel : Maxel };
 });

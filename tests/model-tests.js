@@ -25,6 +25,8 @@ define(['js/models','js/utils'],function(m,utils) {
 			);
 			console.log(" keys ", m1.keys(), m1.attributes, m1.entailed);
 			window.m1 = m1;
+			m1.s('foo#bar','foo');
+			m1.unset('foo#bar');
 		}		
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
