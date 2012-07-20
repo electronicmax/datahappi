@@ -28,19 +28,17 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
 				var rules = chainer.get_triggers(changed_props);
-				console.log(" apply rules -- triggers ", rules.map(function(x) { return x.id; }));
+				// console.log(" apply rules -- triggers ", rules.map(function(x) { return x.id; }));
 				// try each the rule
 				return rules.map(function(r) {
 					try {
 						var result = r.fn(this_);
-						console.log("r > ", r, r.fn.toString(), result);
 						return result;
 					} catch(e) {
 						console.error(e);
 					}
 				}).filter(function(x) { return !_(x).isUndefined(); })
 					.map(function(diffset) {
-						console.log('diffset > ', diffset);
 						return diffset.applyDiffs();
 					});
 			};
@@ -126,10 +124,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		},
 		setEntailed:function(props,rule,replace) {
 			var this_ = this;
-			console.log('set entailed ', props,rule,replace);
 			// if replace then we're just performing a regular set
 			if (replace) {
-				console.log("REPLACE ", props);
 				_(props).map(function(v,p) { delete this_.entailed[p]; });
 				this._do_sets_and_unsets(props);
 				return this;
@@ -145,7 +141,6 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 					return _(v).difference(old_val).length > 0 ? [p,v] : undefined;
 				}).filter(DEFINED)
 			);				
-			console.log("changed bits >>> ", changed);			
 			_(changed).map(function(v,p) {
 				this_.entailed[p] = this_.entailed[p] || {};
 				this_.entailed[p][rule.id] = v;
