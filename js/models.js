@@ -1,4 +1,4 @@
-define(['js/ops/incremental-forward'],function(rh) {
+define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 
 	// Maxels support:
 	//    co-reference declarations (e.g, m1 iss m2)
@@ -6,14 +6,7 @@ define(['js/ops/incremental-forward'],function(rh) {
 
 	var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
 	var DEFINED = function(x) { return !_(x).isUndefined(); };
-	var TO_OBJ = function(pairs) {
-		var o = {};
-		pairs.map(function(pair) {
-			o[pair[0]] = pair[1];
-		});
-		return o;
-	};
-	
+	var TO_OBJ = util.TO_OBJ;
 	
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
@@ -32,11 +25,21 @@ define(['js/ops/incremental-forward'],function(rh) {
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
 				var rules = chainer.get_triggers(changed_props);
-				console.log(" apply rules -- triggers ", rules.map(function(x) { return x.name; }));
+				console.log(" apply rules -- triggers ", rules.map(function(x) { return x.id; }));
 				// try each the rule
-				rules.map(function(r) { try { return r.fn(this_);} catch(e) { console.log(e);}})
-					.filter(function(x) { return !_(x).isUndefined(); })
-					.map(function(entailed) {this_.setEntailed(entailed);});
+				return rules.map(function(r) {
+					try {
+						var result = r.fn(this_);
+						console.log("r > ", r, r.fn.toString(), result);
+						return result;
+					} catch(e) {
+						console.error(e);
+					}
+				}).filter(function(x) { return !_(x).isUndefined(); })
+					.map(function(diffset) {
+						console.log('diffset > ', diffset);
+						return diffset.applyDiffs();
+					});
 			};
 			this.on("change", function(z,k) { apply_rules(_(k.changes).keys()); });
 			// first apply to all thingies
@@ -52,7 +55,7 @@ define(['js/ops/incremental-forward'],function(rh) {
 			return cleaned;
 		},
 		get:function(p) {
-			return _( (this.entailed && this.entailed[p]) || []).union( this.constructor.__super__.get.apply(this,[p]) || [] ); // or undefined
+			return _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union( this.constructor.__super__.get.apply(this,[p]) || [] ); // or undefined
 		},
 		keys:function() {
 			return _( _(this.attributes).keys() ).union(_(this.entailed).keys());
@@ -76,46 +79,55 @@ define(['js/ops/incremental-forward'],function(rh) {
 				target[k] = _(target[k] || []).union(src[k]);
 			});
 		},
-		set:function(o) {
-			this.constructor.__super__.set.apply(this, [this._convert_json(o)]);
+		set:function(o,options) {
+			var this_ = this;
+			this.constructor.__super__.set.apply(this, [this._convert_json(o), options]);
 			return this;
 		},
-		s:function(prop,val) {
-			var arg = {};
-			arg[prop] = val;
-			return this.set(arg);
-		},
-		_make_changelist:function(props) {
-			var changelist = {};
-			_(props).keys().map(function(k) { changelist[k] = true; });
-			return changelist;
-		},
-		setEntailed:function(prop,val) {
-			console.log('set entailed ', prop, val);
+		s:function(prop,val) { return this.set(TO_OBJ([[prop,val]]));},
+		_trigger_change:function(changed_props) {
 			var this_ = this;
-			if (val !== undefined) {
-				var arg = {};
-				arg[prop] = val;
-				prop = arg;				
-			}
-			// now everything is in single object format;
-			// prop = { foo : 132 }
-			var new_vals = this._convert_json(prop);
-			// filter new vals for only those that have actually changed
-			console.log("new vals > ", new_vals);
-			var changed = TO_OBJ(_(new_vals).map(function(v,x) {
-				return _(v).difference(this_.g(x)).length > 0 ? [x,v] : undefined;
-			}).filter(DEFINED));
-			console.log("changed >>> ", changed);			
-			// this._merge_attrs(this.entailed, changed);
-			_(this.entailed).extend(changed);
-			var changelist = this._make_changelist(_(changed).keys());
-			if (_(changed).keys() > 0) {
-				this.trigger('change', this, {changes :changelist});
-				changed_keys.map(function(k) {
-					this.trigger('change:'+k, this, { changes : changelist });
+			var _make_changelist = function(props) {
+				// creates strange dictionary property to conform to Backbone
+				var changelist = {};
+				_(props).keys().map(function(k) { changelist[k] = true; });
+				return changelist;
+			}, changelist = _make_changelist(changed_props);
+			if (changed_props.length > 0) {
+				this.trigger('change', this, { changes : changelist });
+				changed_props.map(function(k) {
+					this_.trigger('change:' + k, this, { changes : changelist });
 				});
 			}
+			return;
+		},
+		setEntailed:function(props,rule,replace) {
+			var this_ = this;
+			console.log('set entailed ', props,rule,replace);
+			// if replace then we're just performing a regular set
+			if (replace) {
+				_(props).map(function(v,p) { delete this_.entailed[p]; });
+				return this.set(props);
+			}
+			// otherwise set entailed -- coner
+			// now everything is in single object format;
+			var new_vals = this._convert_json(props);
+			// filter new vals for only those that have actually changed
+			console.log("new vals > ", new_vals);
+			var changed = TO_OBJ(
+				_(new_vals).map(function(v,p) {
+					var old_val = this_.entailed[p] ? this_.entailed[p][rule.id] : undefined;
+					if (old_val === undefined) { old_val = []; }
+					return _(v).difference(old_val).length > 0 ? [p,v] : undefined;
+				}).filter(DEFINED)
+			);				
+			console.log("changed bits >>> ", changed);			
+			_(changed).map(function(v,p) {
+				this_.entailed[p] = this_.entailed[p] || {};
+				this_.entailed[p][rule.id] = v;
+			});
+			this._trigger_change(_(changed).keys());
+			return this;
 		},
 		setSameAs:function(m) {
 			// sets m to be the sameAs us, which destructively
