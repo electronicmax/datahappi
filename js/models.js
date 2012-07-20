@@ -1,9 +1,20 @@
-define([],function() {
+define(['js/ops/incremental-forward'],function(rh) {
 
 	// Maxels support:
 	//    co-reference declarations (e.g, m1 iss m2)
 	//    lazy forward chaining -- applies all rules all the time
 
+	var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
+	var DEFINED = function(x) { return !_(x).isUndefined(); };
+	var TO_OBJ = function(pairs) {
+		var o = {};
+		pairs.map(function(pair) {
+			o[pair[0]] = pair[1];
+		});
+		return o;
+	};
+	
+	
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
 		initialize:function(src_json, options) {
@@ -12,7 +23,24 @@ define([],function() {
 			if (!_(src_json).isUndefined()) {
 				_(this.attributes).extend( this._convert_json(src_json) );
 			}
-			this._inference = options.enable_incremental_inference;
+			this.set_up_inference(options);
+			return this;
+		},
+		set_up_inference:function(options) {
+			if (!(options && options.enable_incremental_inference)) { return ; }
+			var chainer = new rh.RuleHelper({ruleset:options.inference_ruleset});
+			var this_ = this;			
+			var apply_rules = function(changed_props) {
+				var rules = chainer.get_triggers(changed_props);
+				console.log(" apply rules -- triggers ", rules.map(function(x) { return x.name; }));
+				// try each the rule
+				rules.map(function(r) { try { return r.fn(this_);} catch(e) { console.log(e);}})
+					.filter(function(x) { return !_(x).isUndefined(); })
+					.map(function(entailed) {this_.setEntailed(entailed);});
+			};
+			this.on("change", function(z,k) { apply_rules(_(k.changes).keys()); });
+			// first apply to all thingies
+			apply_rules(this.keys());
 			return this;
 		},
 		_convert_json:function(o) {
@@ -24,13 +52,10 @@ define([],function() {
 			return cleaned;
 		},
 		get:function(p) {
-			// check attributes first, then entailed properties
-			var _got = this.constructor.__super__.get.apply(this,[p]);
-			if (!_(_got).isUndefined()) { return _got; }
-			return this.entailed[p] || []; // or undefined
+			return _( (this.entailed && this.entailed[p]) || []).union( this.constructor.__super__.get.apply(this,[p]) || [] ); // or undefined
 		},
 		keys:function() {
-			return _(_(this.attributes).keys()).union(_(this.entailed).keys());
+			return _( _(this.attributes).keys() ).union(_(this.entailed).keys());
 		},
 		map:function(f) {
 			var this_ = this;
@@ -58,14 +83,39 @@ define([],function() {
 		s:function(prop,val) {
 			var arg = {};
 			arg[prop] = val;
-			arg = this._convert_json(arg);
-			this.constructor.__super__.set.apply(this, [arg]);
-			return this;
+			return this.set(arg);
+		},
+		_make_changelist:function(props) {
+			var changelist = {};
+			_(props).keys().map(function(k) { changelist[k] = true; });
+			return changelist;
 		},
 		setEntailed:function(prop,val) {
-			this._merge_attrs(this.entailed, this._import_json({prop:val}));
-			this.trigger('changed:'+prop,val);
-			this.trigger('changed',val);
+			console.log('set entailed ', prop, val);
+			var this_ = this;
+			if (val !== undefined) {
+				var arg = {};
+				arg[prop] = val;
+				prop = arg;				
+			}
+			// now everything is in single object format;
+			// prop = { foo : 132 }
+			var new_vals = this._convert_json(prop);
+			// filter new vals for only those that have actually changed
+			console.log("new vals > ", new_vals);
+			var changed = TO_OBJ(_(new_vals).map(function(v,x) {
+				return _(v).difference(this_.g(x)).length > 0 ? [x,v] : undefined;
+			}).filter(DEFINED));
+			console.log("changed >>> ", changed);			
+			// this._merge_attrs(this.entailed, changed);
+			_(this.entailed).extend(changed);
+			var changelist = this._make_changelist(_(changed).keys());
+			if (_(changed).keys() > 0) {
+				this.trigger('change', this, {changes :changelist});
+				changed_keys.map(function(k) {
+					this.trigger('change:'+k, this, { changes : changelist });
+				});
+			}
 		},
 		setSameAs:function(m) {
 			// sets m to be the sameAs us, which destructively
