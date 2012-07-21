@@ -27,6 +27,18 @@ define(['js/models','js/utils'],function(m,utils) {
 			window.m1 = m1;
 			m1.s('foo#bar','foo');
 			m1.unset('foo#bar');
+		},
+		function() {
+			// from rdf
+			
+			var path = document.location.pathname;
+			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+			
+			var val = "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/');
+			var events = ("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
+			var c = new m.get_rdf(val);
+			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
 		}		
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };

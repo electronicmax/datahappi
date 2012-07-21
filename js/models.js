@@ -1,4 +1,4 @@
-define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
+define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],function(rh,util,rdf) {
 
 	// Maxels support:
 	//    co-reference declarations (e.g, m1 iss m2)
@@ -10,6 +10,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	
 	var DEFINED = function(x) { return !_(x).isUndefined(); };
 	var TO_OBJ = util.TO_OBJ;
+	var chainer;
 	
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
@@ -23,8 +24,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return this;
 		},
 		set_up_inference:function(options) {
-			if (!(options && options.enable_incremental_inference)) { return ; }
-			var chainer = new rh.RuleHelper({ruleset:options.inference_ruleset});
+			// if (!(options && options.enable_incremental_inference)) { return ; }
+			if (chainer === undefined) {chainer = new rh.RuleHelper({ruleset:options && options.inference_ruleset});	}
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
 				var rules = chainer.get_triggers(changed_props);
@@ -37,8 +38,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 					} catch(e) {
 						console.error(e);
 					}
-				}).filter(function(x) { return !_(x).isUndefined(); })
+				}).filter(function(x) { return !_(x).isUndefined() && x.getDiffs().length > 0; })
 					.map(function(diffset) {
+						// console.log('applying diffsets ', diffset);
 						return diffset.applyDiffs();
 					});
 			};
@@ -55,7 +57,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return v;			
 		},		
 		_all_values_to_arrays:function(o) {
-			if (!_(o).isObject()) { console.error(' not an object', o); return o; }
+			if (!_(o).isObject()) {	console.error(' not an object', o); return o; }
 			var cleaned = o;
 			var this_ = this;
 			_(o).map(function(v,k) { return this_._value_to_array(k,v); });
@@ -170,5 +172,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	});
 	Maxel.prototype.g = Maxel.prototype.get;
 	Maxel.prototype.s = Maxel.prototype.set;
-	return { Maxel : Maxel };
+	var Mollection = rdf.RDFCollection.extend({ model:Maxel });
+	return {
+		Maxel : Maxel,
+		get_rdf:function(u) { return new Mollection(undefined, {src_url:u}); }
+	};	
 });

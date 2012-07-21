@@ -19,8 +19,10 @@ define(['js/rdf/name-resolver','js/ops/rule-diffs'], function(nameResolver, diff
 				fn: function(x) {
 					var result = diffs.diffs(this,x);
 					x.map(function(v,k) {
+						var old_k = k;
 						var lio = k.substring(Math.max(0,k.lastIndexOf('/') + 1,k.lastIndexOf('#') + 1));
-						if (lio == k) { return; }
+						if (lio === k) { return; }
+						//	console.log('queueing replacement ', old_k, lio);
 						result.replace(k,[]); // eliminate old name with URI
 						result.add(lio,v);
 					});
