@@ -5,12 +5,12 @@ define(
 	'js/draggableview',
 	'js/ui/tableview',
 	'js/rdf/RDFCollection',
-	'js/ops/chain-engine',
+	'js/models',
 	'js/utils',
 	'js/googlecal/CalendarCollection',
-	'js/googlecal/auth',
+	'js/googlecal/auth'
 	],
-	function(box, dv, tv, rdfc, ce, util, cc, auth) {
+	function(box, dv, tv, rdfc, model, util, cc, auth) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
@@ -41,60 +41,89 @@ define(
 			]
 		});
 
-		Source = Backbone.Model.extend({
+		var Source = Backbone.Model.extend({
 			name: "Things",
 			url: ""
 		});
 
-		Sources = Backbone.Collection.extend({
+		var Sources = Backbone.Collection.extend({
 			initialize: function (models, options) {
 				var handler = options.view.addSource.bind(options.view);
 				this.bind("add", handler);
 				this.add(models);
 			}
 		});
-
-		SourcesView = Backbone.View.extend({
+		
+		var SourcesView = Backbone.View.extend({
 			el: $("#sources ul"),
 			initialize: function () {
 				this.render();
 			},
 			render: function () {
-				null;
+				// null; // what?! 
 			},
 			addSource: function (model) {
 				console.log("adding ", model.get('name'));
 				this.$el.append("<li>" + model.get('name') + "</li>");
 			}
 		});
+		
+		function slideOut () {
+			$("#slidepanel").animate({ left: 0 }, function() {
+				$("#tab").addClass("flip-horizontal"); 
+			});
+		}
+		function slideIn () {
+			$("#slidepanel").animate({ left: -$("#datapanel").outerWidth() }, function() {
+				$("#tab").removeClass("flip-horizontal");
+			});
+		}
+		// set up panel toggle handler
+		$("#toggle_data").click(function(){
+			if ( parseInt($("#slidepanel").css('left'),10) === 0 ){
+				slideIn();
+			} else {
+				slideOut();
+			}
+		});		
+		$("#mainpanel").click(function(){
+			slideIn();
+		});		
+		$("li").mouseover(function(e){
+			console.log("e", e);
+			$(e.target).animate({
+				left: -300 
+			});
+		});
+		
 		var load = function() {
-		var buildings_url = $("#definitions_url").val();
+			var buildings_url = $("#definitions_url").val();
 			var data_url = $('#url').val();
-			var buildings = ce.get_rdf_collection(buildings_url);
+			var buildings = model.get_rdf(buildings_url);
 			buildings.fetch().then(function() {
 				console.log('loaded buildings');
-				var data =  ce.get_rdf_collection(data_url);
+				var data =  model.get_rdf(data_url);
 				data.fetch().then(function() {
 					console.log(' loaded events ');
 					data.each(function(b) { v.collection.add(b); });
 				});
 				buildings.each(function(b) { v.collection.add(b); });
-			});
-var buildings_source = new Source({ name: "Buildings", url: $("#definitions_url").val()});
-var events_source = new Source({ name: "Events", url: $('#url').val()})
+			});						
+			var buildings_source = new Source({ name: "Buildings", url: $("#definitions_url").val()});
+			var events_source = new Source({ name: "Events", url: $('#url').val()});
+			var sourcesView = new SourcesView();
+			var sources = new Sources ( [buildings_source, events_source], {view: sourcesView});
+			$("#sources").append(sourcesView.render());
+			// expand panel on load
+			slideOut();			
+		};
+		$('.load').click(load);
+		$('form').submit(load);
 
-var sourcesView = new SourcesView();
-var sources = new Sources ( [buildings_source, events_source], {view: sourcesView});
-$("#sources").append(sourcesView.render());
-};
-$('.load').click(load);
-$('form').submit(load);
+		load();
 
-load();
-
-window.rdf = rdfc;
-window.ce = ce;
-window.view = v;
-new_group();
-});
+		window.rdf = rdfc;
+		window.view = v;
+		new_group();
+	});
 

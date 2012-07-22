@@ -116,40 +116,6 @@
 			require.config({ baseUrl:  basepath });
 			require(['examples/js/box-example'],function() {});
 
-			function slideOut () {
-				$("#slidepanel").animate({ left: 0 }, function() {
-					$("#tab").addClass("flip-horizontal"); 
-				});
-			}
-			function slideIn () {
-				$("#slidepanel").animate({ left: -$("#datapanel").outerWidth() }, function() {
-					$("#tab").removeClass("flip-horizontal");
-				});
-			}
-			// set up panel toggle handler
-			$("#toggle_data").click(function(){
-				if ( parseInt($("#slidepanel").css('left'),10) == 0 ){
-					slideIn();
-				} else {
-					slideOut();
-				}
-			});
-
-			// expand panel on load
-			slideOut();
-
-			$("#mainpanel").click(function(){
-				slideIn();
-			});
-
-			$("li").mouseover(function(e){
-				console.log("e", e);
-				$(e.target).animate({
-					left: -300 
-				});
-			});
-
-
 		});    
 	</script>
 	<script src="../lib/codemirror2/codemirror.js"></script>

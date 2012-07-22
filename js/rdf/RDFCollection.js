@@ -21,7 +21,7 @@ define(
 		};		
 		var RDFQCollection = Backbone.Collection.extend({
 			initialize:function(models,options) {
-				console.log("loading from ", options.src_url);
+				console.log("loading from ", options && options.src_url);
 				this.src_url = options.src_url;
 			},
 			_convert_values : function(o) {
@@ -72,6 +72,9 @@ define(
 			RDFModel:Model,
 			RDFCollection:RDFQCollection,
 			get_cached_model:function(uri) {   return modelsbyuri[uri];    },
-			get_rdf:function(rdfSource){return new RDFQCollection(undefined,{src_url:rdfSource});}
+			get_rdf:function(rdfSource){
+				console.log("get_rdf source", rdfSource);
+				return new RDFQCollection(undefined,{src_url:rdfSource});
+			}
 		};
 	});
