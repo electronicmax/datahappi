@@ -45,7 +45,6 @@ define(['js/utils'], function(util) {
 			this.row_views = {};
 			this.collection.bind("add", function(x) {this_._handle_add(x); });
 			this.collection.bind("remove", function(x) { this_._handle_remove(x); });
-			this.render();
 			this.options.columns = this.options.columns || [
 				function(m) { return (new ItemView({model:m})).render(); },
 				function(m) {

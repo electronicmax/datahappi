@@ -1,0 +1,73 @@
+@import "../../js/ui/font-propertybox/fontello.css";
+
+#box-example {
+	.table {
+		max-height: 200px;
+		overflow: scroll;
+	}
+	.instance {
+		padding: 2px;
+	}
+	
+.slidepanel {
+	position: fixed;   /* Panel will overlap content */
+	top: 0;
+	left: -300px;
+	height: 100%;
+	z-index: 999;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.tab {
+	width: 42px;
+	position: absolute;
+	bottom: 40px;
+	right: -42px;
+	z-index: 999;
+	float: left;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	background: #FFF;
+	text-align: center;
+}
+
+.datapanel {
+	height: 100%;
+	width: 300px;
+	background: #FFF;
+	overflow: hidden;
+	position: relative;
+	z-index: 3;
+	float: left;
+	left: 0;
+	border-right: 1px solid #DDD;
+}
+
+html, body, #mainpanel {
+	height: 100%;
+	/*margin: 0;*/
+	/*padding: 0;*/
+}
+
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	position: relative;
+	left: 0;
+}
+
+.flip-horizontal {
+	display: inline-block;
+	-moz-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	transform: scaleX(-1);
+	-ms-filter: fliph; /*IE*/
+	filter: fliph; /*IE*/
+}
+}
+	
