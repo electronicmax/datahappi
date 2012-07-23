@@ -35,7 +35,7 @@ define(
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
 			},
 			_propclick: function(x) {
-				this.options.collection._expand_property(this.options.model.get("_id"));
+				this.options.collection.chain_forwards(this.options.model.get("_id"));
 			}
 		});
 
