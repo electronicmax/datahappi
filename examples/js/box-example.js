@@ -96,22 +96,17 @@ define(
 			},
 			slideOut:function() {
 				var this_ = this;
-				this.$el.animate({ left: 0 }, function() {
-					this_.$el.find(".tab").addClass("flip-horizontal"); 
-				});
+				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".tab").addClass("flip-horizontal"); });
 			},
 			slideIn:function () {
 				var this_ = this;
-				this.$el.animate({ left: -$("#datapanel").outerWidth() }, function() {
+				this.$el.animate({ left: - this.$el.find(".datapanel").outerWidth() }, function() {
 					this_.$el.find(".tab").removeClass("flip-horizontal");
 				});
 			},
 			toggle_data:function() {
-				if ( parseInt(this.$el.css('left'),10) === 0 ){
-					this.slideIn();
-				} else {
-					this.slideOut();
-				}
+				console.log('toggle_data');
+				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideIn();	} else { this.slideOut();	}
 			}			
 		});
 		// ???
