@@ -6,6 +6,7 @@ define(
 	],
 	function(pm, util, ce) {
 		var PropertyCollection = Backbone.Collection.extend({
+			model:pm.PropertyModel,
 			initialize:function(models, options) {
 				var this_ = this;
 				var src_c = options.src_collection; // The subjects which the properties pertain to. Required.
@@ -55,7 +56,7 @@ define(
 				}
 
 				propsToAdd.map(function(propName) {
-					this_.add({_id:propName});
+					this_.add(new pm.PropertyModel({_id:propName}));
 				});
 			},
 			_current_chain:[],
