@@ -35,7 +35,7 @@ define(['js/utils'], function(util) {
 						$("<td></td>").append("error").appendTo(this_.el);
 					}
 				});
-			return this.el;
+			return this;
 		}
 	});
 	var TableView = Backbone.View.extend({
@@ -75,7 +75,8 @@ define(['js/utils'], function(util) {
 			if (this.row_views[m.id] !== undefined) { throw new Error("Cannot add view twice"); }
 			var rw = new RowView({model:m, columns:this.options.columns});
 			this.row_views[m.id] = rw;
-			this.$el.find('tbody').append(rw.render());
+			console.log('rendering and displaying ', rw, m.attributes._id);
+			this.$el.find('tbody').append(rw.render().el);
 		},
 		_handle_remove:function(m) {
 			var this_ = this;

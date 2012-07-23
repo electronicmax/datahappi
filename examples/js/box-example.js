@@ -13,14 +13,15 @@ define(
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-
+		
 		var Source = Backbone.Model.extend({
 			defaults: {name: "Things", url: ""	},
 			fetch:function() {
 				var d = util.deferred();
+				console.log('source fetching ', this.get('url'), this);
 				var c = model.get_rdf(this.get('url'));
 				c.fetch().then(function() {
-					console.log('caling resolve ');
+					console.log('calling resolve ');
 					d.resolve(c);
 				});
 				return d.promise(); 
@@ -73,7 +74,7 @@ define(
 				}).render().el);
 				
 				var things_view = new tv.TableView({
-					el:this.$el.find('table')[0],
+					el:this.$el.find('.things')[0],
 					columns:[
 						function(m) {
 							var view = new tv.GenericItemView({model:m});
@@ -89,7 +90,7 @@ define(
 					console.log('loading from ', source.get('url'));
 					source.fetch().then(function(data) {
 						console.log("got data > ", data);
-						data.map(function(datum) { things_view.add(datum); });
+						data.map(function(datum) { things_view.collection.add(datum); });
 					});
 				});
 				
@@ -122,8 +123,8 @@ define(
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			
-			var buildings = new Source({	name: "Buildings", url: $("#definitions_url").val() });
-			var events = new Source({ name: "Events", url: $('#url').val() });
+			var buildings = new Source({	name: "Buildings", url: $('.definitions_url').val() });
+			var events = new Source({ name: "Events", url: $('.url').val() });
 			var sbv = new SidebarView({
 				sources: [buildings, events],
 				el : $('.slidepanel')[0]
