@@ -1,47 +1,52 @@
 @import "../../js/ui/font-propertybox/fontello.css";
 
 #box_example {
+	position:relative;
+	@slider-width : 300px;
+	@slider-peek: 8px;
     .table {
-		max-height: 200px;
 		overflow: scroll;
 	}
 	.instance {
 		padding: 2px;
 	}
     .slidepanel {
-	  position: fixed;   /* Panel will overlap content */
+ 	  position: fixed;   /* Panel will overlap content */
 	  top: 0;
-	  left: -300px;
+	  left: @slider-peek - @slider-width;
 	  height: 100%;
 	  z-index: 999;
 	  margin-top: auto;
   	  margin-bottom: auto;
     }
     .tab {
-   	   width: 42px;
+       padding:0.5em 0 0.5em 0;		
+   	   width: 20px;
        position: absolute;
 	   bottom: 40px;
-	   right: -42px;
+	   right: -18px;
 	   z-index: 999;
-	   float: left;
-	   border: 1px solid #DDD;
-	   border-radius: 2px;
+	   border-top: 1px solid #AAA;
+	   border-bottom: 1px solid #AAA;
+	   border-right: 1px solid #AAA;	   	   
+	   border-radius: 5px;
 	   background: #FFF;
 	   text-align: center;
+	   box-shadow: 1px 1px #aaa;
     }
    .datapanel {
 	  height: 100%;
-	  width: 300px;
+	  width: @slider-width;
 	  background: #FFF;
 	  overflow: hidden;
 	  position: relative;
 	  z-index: 3;
-	  float: left;
 	  left: 0;
 	  border-right: 1px solid #DDD;
     }
-    html, body, #mainpanel {
+    html, body, .workspace {
 	  height: 100%;
+	  position:relative;
   	  /*margin: 0;*/
   	  /*padding: 0;*/
     }
@@ -53,8 +58,7 @@
         left: 0;
     }
     .flip-horizontal {
-        display: inline-block;
-   	   -moz-transform: scaleX(-1);
+       -moz-transform: scaleX(-1);
 	   -webkit-transform: scaleX(-1);
 	   -o-transform: scaleX(-1);
 	   transform: scaleX(-1);

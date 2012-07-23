@@ -56,7 +56,7 @@ define(
 		var SidebarView = Backbone.View.extend({
 			events: {
 				"click .new_group": "_new_group",
-				"click .toggle_data":"toggle_data"
+				"click .tab":"toggle_data"
 			},
 			initialize:function(options) {
 				
@@ -64,7 +64,7 @@ define(
 			_new_group : function() {
 				var bv = new box.InstanceBox();
 				// TODO do something about this --- move out to parent widget
-				$('#mainpanel').append(bv.render());
+				$('.workspace').append(bv.render());
 			},
 			render:function() {
 				var sourcec = new SourceCollection(this.options.sources);
@@ -86,61 +86,78 @@ define(
 						}
 					]
 				});
-				sourcec.map(function(source) {
-					console.log('loading from ', source.get('url'));
-					source.fetch().then(function(data) {
-						console.log("got data > ", data);
+				setTimeout(function() { 
+					sourcec.map(function(source) {
+						console.log('loading from ', source.get('url'));
+						source.fetch().then(function(data) {
+							console.log("got data > ", data);
 						data.map(function(datum) { things_view.collection.add(datum); });
+						});
 					});
-				});
+				}, 1000);
 				
 			},
 			slideOut:function() {
 				var this_ = this;
-				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".tab").addClass("flip-horizontal"); });
+				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".icon-logout-1").addClass("flip-horizontal"); });
+				$('.workspace').animate({left:this.$el.find(".datapanel").outerWidth()});
 			},
-			slideIn:function () {
+			slideAway:function () {
 				var this_ = this;
-				this.$el.animate({ left: - this.$el.find(".datapanel").outerWidth() }, function() {
-					this_.$el.find(".tab").removeClass("flip-horizontal");
+				this.$el.animate({ left: 8 - this.$el.find(".datapanel").outerWidth()  }, function() {
+					this_.$el.find(".icon-logout-1").removeClass("flip-horizontal");
 				});
+				$('.workspace').animate({left:8});
 			},
 			toggle_data:function() {
-				console.log('toggle_data');
-				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideIn();	} else { this.slideOut();	}
+				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideAway();	} else { this.slideOut();	}
 			}			
 		});
-		// ???
-		$("li").mouseover(function(e){
-			console.log("e", e);
-			$(e.target).animate({
-				left: -300 
-			});
+		
+		// // ??? don't know what these guys are supposed to do (?)
+		//$("li").mouseover(function(e){
+		//console.log("e", e);
+		//$(e.target).animate({
+		//left: -300 
+		//});
+		//});
+
+		var WorkspaceView = Backbone.View.extend({
+			events: {
+				'click ':'_workspace_clicked'
+			},
+			initialize:function() {
+				
+			},
+			render:function() {
+				this.sidebar = new SidebarView({
+					sources: this.options.data_sources,
+					el : this.$el.find('.slidepanel')[0]
+				});
+				this.sidebar.render();
+				this.sidebar.slideOut();
+				return this;
+			},
+			_workspace_clicked:function() {
+				var this_ = this;
+				$(".workspace").click(function(){ this_.sidebar.slideAway();  });
+			}
 		});
-		// ---		
-		var load = function() {
-			// prepopulate the thingies
+		
+		// // ---		
+		(function() {
+			// prepopulate all the things! 
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			
-			var buildings = new Source({	name: "Buildings", url: $('.definitions_url').val() });
+			var buildings = new Source({ name: "Buildings", url: $('.definitions_url').val() });
 			var events = new Source({ name: "Events", url: $('.url').val() });
-			var sbv = new SidebarView({
-				sources: [buildings, events],
-				el : $('.slidepanel')[0]
+			var wview = new WorkspaceView({
+				data_sources: [buildings, events],
+				el : $('#box_example')[0]
 			});
-		
-			$("#mainpanel").click(function(){
-				sbv.slideIn();
-			});
-			console.log('calling render');
-			sbv.render();
-			console.log(' done rendering ');
-			sbv.slideOut();
-			// sbv._new_group();
-		};
-		$('.load').click(load);
-		$('form').submit(load);
-		load();
+			wview.render();
+			wview.sidebar.slideOut();
+		})();
 	});
 

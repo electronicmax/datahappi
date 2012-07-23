@@ -1,6 +1,8 @@
 @import "../../js/ui/font-propertybox/fontello.css";
+#box_example {
+  position: relative;
+}
 #box_example .table {
-  max-height: 200px;
   overflow: scroll;
 }
 #box_example .instance {
@@ -11,23 +13,26 @@
   /* Panel will overlap content */
 
   top: 0;
-  left: -300px;
+  left: -292px;
   height: 100%;
   z-index: 999;
   margin-top: auto;
   margin-bottom: auto;
 }
 #box_example .tab {
-  width: 42px;
+  padding: 0.5em 0 0.5em 0;
+  width: 20px;
   position: absolute;
   bottom: 40px;
-  right: -42px;
+  right: -18px;
   z-index: 999;
-  float: left;
-  border: 1px solid #DDD;
-  border-radius: 2px;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+  border-right: 1px solid #AAA;
+  border-radius: 5px;
   background: #FFF;
   text-align: center;
+  box-shadow: 1px 1px #aaa;
 }
 #box_example .datapanel {
   height: 100%;
@@ -36,14 +41,14 @@
   overflow: hidden;
   position: relative;
   z-index: 3;
-  float: left;
   left: 0;
   border-right: 1px solid #DDD;
 }
 #box_example html,
 #box_example body,
-#box_example #mainpanel {
+#box_example .workspace {
   height: 100%;
+  position: relative;
   /*margin: 0;*/
 
   /*padding: 0;*/
@@ -57,7 +62,6 @@
   left: 0;
 }
 #box_example .flip-horizontal {
-  display: inline-block;
   -moz-transform: scalex(-1);
   -webkit-transform: scalex(-1);
   -o-transform: scalex(-1);
