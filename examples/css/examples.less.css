@@ -2,8 +2,25 @@
 #box_example {
   position: relative;
 }
-#box_example .table {
+#box_example .sources {
+  width: 100%;
+  height: 100px;
+}
+#box_example .things {
+  width: 100%;
+}
+#box_example .things input {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+#box_example .things .tablecontainer {
+  height: 100%;
+  background: #fafafa;
   overflow: scroll;
+}
+#box_example .things table {
+  margin-bottom: 100px;
 }
 #box_example .instance {
   padding: 2px;
