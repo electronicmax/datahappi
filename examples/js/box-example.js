@@ -15,8 +15,8 @@ define(
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 
 		var Source = Backbone.Model.extend({
-			defaults: {	name: "Things", url: ""	},
-			get:function() {
+			defaults: {name: "Things", url: ""	},
+			fetch:function() {
 				var d = util.deferred();
 				var c = model.get_rdf(this.get('url'));
 				c.fetch().then(function() {
@@ -87,7 +87,7 @@ define(
 				});
 				sourcec.map(function(source) {
 					console.log('loading from ', source.get('url'));
-					source.get().then(function(data) {
+					source.fetch().then(function(data) {
 						console.log("got data > ", data);
 						data.map(function(datum) { things_view.add(datum); });
 					});
