@@ -24,7 +24,7 @@ define(
 
 		$("#definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 		$("#url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-		$('#new_group').click(new_group); 
+		$('#new_group').click(new_group);
 
 		// $('body').prepend((new dv.Simple()).render());
 		var things_view = new tv.TableView({
@@ -51,7 +51,7 @@ define(
 				this.bind("add", handler);
 				this.add(models);
 			}
-		});		
+		});
 		var SourcesView = Backbone.View.extend({
 			el: $("#sources ul"),
 			initialize: function () {
@@ -65,10 +65,10 @@ define(
 				this.$el.append("<li>" + model.get('name') + "</li>");
 			}
 		});
-		
+
 		function slideOut () {
 			$("#slidepanel").animate({ left: 0 }, function() {
-				$("#tab").addClass("flip-horizontal"); 
+				$("#tab").addClass("flip-horizontal");
 			});
 		}
 		function slideIn () {
@@ -83,24 +83,24 @@ define(
 			} else {
 				slideOut();
 			}
-		});		
+		});
 		$("#mainpanel").click(function(){
 			slideIn();
-		});		
+		});
 		$("li").mouseover(function(e){
 			console.log("e", e);
 			$(e.target).animate({
-				left: -300 
+				left: -300
 			});
 		});
-		
+
 		var load = function() {
 			var buildings_url = $("#definitions_url").val();
 			var data_url = $('#url').val();
-			var buildings = ce.get_rdf_collection(buildings_url);
+			var buildings = model.get_rdf(buildings_url);
 			buildings.fetch().then(function() {
 				console.log('loaded buildings');
-				var data =  ce.get_rdf_collection(data_url);
+				var data =  model.get_rdf(data_url);
 				data.fetch().then(function() {
 					console.log(' loaded events ');
 					data.each(function(b) { things_view.collection.add(b); });
@@ -113,7 +113,7 @@ define(
 			var sources = new Sources ( [buildings_source, events_source], {view: sourcesView});
 			$("#sources").append(sourcesView.render());
 			// expand panel on load
-			slideOut();			
+			slideOut();
 		};
 		$('.load').click(load);
 		$('form').submit(load);
