@@ -20,11 +20,25 @@ define(['js/models','js/utils'],function(m,utils) {
 		function() {
 			// chaining!
 			var m1 = new m.Maxel(
-				{_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "foo", "http://www.w3.org/1999/02/22-rdf-syntax-ns#label": "love" },
+				{_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990", "http://foo.com/bar": "quux" },
 				{ enable_incremental_inference: true }
 			);
 			console.log(" keys ", m1.keys(), m1.attributes, m1.entailed);
 			window.m1 = m1;
+			m1.s('foo#bar','foo');
+			m1.unset('foo#bar');
+		},
+		function() {
+			// from rdf
+			
+			var path = document.location.pathname;
+			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+			
+			var val = "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/');
+			var events = ("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
+			var c = new m.get_rdf(val);
+			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
 		}		
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };

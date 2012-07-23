@@ -20,9 +20,9 @@ define(
 			return modelsbyuri[uri];
 		};		
 		var RDFQCollection = Backbone.Collection.extend({
-			initialize:function(src_url) {
-				// console.log("loading from ", src_url);
-				this.src_url = src_url;
+			initialize:function(models,options) {
+				console.log("loading from ", options && options.src_url);
+				this.src_url = options.src_url;
 			},
 			_convert_values : function(o) {
 				var this_ = this;
@@ -44,7 +44,6 @@ define(
 				var this_ = this;
 				var d = new $.Deferred();
 				fetch_by_proxy(this.src_url).then(function(xml) {
-					window.r = $(xml)
 					/* Preprocess - Fix all buggy dates */
 					var startTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "start"));
 					var endTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "end"));
@@ -56,13 +55,9 @@ define(
 					var json = dbload.databank.dump();
 					var json_ms = _(json).keys().map(function(k) {
 						var m = get_model(k, this_.model);
-						_(m.attributes).chain()
-							.extend({_id:k})
-							.extend(this_._convert_values(json[k]));
-						
+						m.set(_({_id:k}).extend(this_._convert_values(json[k])));
 						// register its names with named entity resolver
-						nameresolver.register_model(m);
-						
+						nameresolver.register_model(m);						
 						return m;
 					});
 					this_.reset(json_ms);
@@ -77,6 +72,9 @@ define(
 			RDFModel:Model,
 			RDFCollection:RDFQCollection,
 			get_cached_model:function(uri) {   return modelsbyuri[uri];    },
-			get_rdf:function(rdfSource){return new RDFQCollection(rdfSource);}
+			get_rdf:function(rdfSource){
+				console.log("get_rdf source", rdfSource);
+				return new RDFQCollection(undefined,{src_url:rdfSource});
+			}
 		};
 	});
