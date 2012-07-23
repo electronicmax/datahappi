@@ -1,15 +1,16 @@
 /* this is for the box example only  */
 define(
 	[
-	'js/ui/instancebox',
-	'js/draggableview',
-	'js/ui/tableview',
-	'js/models',
-	'js/utils',
-	'js/googlecal/CalendarCollection',
-	'js/googlecal/auth'
+		'js/box',
+		'js/ui/instancebox',
+		'js/draggableview',
+		'js/ui/tableview',
+		'js/models',
+		'js/utils',
+		'js/googlecal/CalendarCollection',
+		'js/googlecal/auth'
 	],
-	function(box, dv, tv, model, util, cc, auth) {
+	function(box, ibox, dv, tv, model, util, cc, auth) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
@@ -61,11 +62,7 @@ define(
 			initialize:function(options) {
 				
 			},
-			_new_group : function() {
-				var bv = new box.InstanceBox();
-				// TODO do something about this --- move out to parent widget
-				$('.workspace').append(bv.render());
-			},
+			_new_group : function() {this.trigger("new_group");	},
 			render:function() {
 				var sourcec = new SourceCollection(this.options.sources);
 				this.$el.find(".sources").append(new SourcesView({
@@ -130,13 +127,37 @@ define(
 				
 			},
 			render:function() {
+				var this_ = this;
 				this.sidebar = new SidebarView({
 					sources: this.options.data_sources,
 					el : this.$el.find('.slidepanel')[0]
 				});
+				this.sidebar.bind('new_group', function() { this_._new_group(); });
 				this.sidebar.render();
 				this.sidebar.slideOut();
+				this.$el.droppable({
+					accept:'.item, .simple',
+					tolerance:"touch",
+					over:function(event, ui) {
+						if (event.target !== this_.el) { return ; }
+						console.log("workspace over ", event, ui);
+					},
+					out:function(event, ui) {},				
+					drop: function( event, ui ) {
+						if (event.target !== this_.el) { return ; }
+						var target_box = this_._new_group();
+						target_box.add(box.clone_view(ui.draggable.data("view")));
+						event.stopPropagation();
+						return false;
+					}
+			});				
 				return this;
+			},
+			_new_group:function() {
+				var box = new ibox.InstanceBox();
+				// TODO do something about this --- move out to parent widget
+				$('.workspace').append(box.render());
+				return box;
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
