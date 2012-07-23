@@ -7,9 +7,10 @@ define(
 	'js/models',
 	'js/utils',
 	'js/googlecal/CalendarCollection',
-	'js/googlecal/auth'
+	'js/googlecal/auth',
+	'js/ops/chain-engine'
 	],
-	function(box, dv, tv, model, util, cc, auth) {
+	function(box, dv, tv, model, util, cc, auth, ce) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
