@@ -1,12 +1,12 @@
 @import "../../js/ui/font-propertybox/fontello.css";
-#box-example .table {
+#box_example .table {
   max-height: 200px;
   overflow: scroll;
 }
-#box-example .instance {
+#box_example .instance {
   padding: 2px;
 }
-#box-example .slidepanel {
+#box_example .slidepanel {
   position: fixed;
   /* Panel will overlap content */
 
@@ -17,7 +17,7 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-#box-example .tab {
+#box_example .tab {
   width: 42px;
   position: absolute;
   bottom: 40px;
@@ -29,7 +29,7 @@
   background: #FFF;
   text-align: center;
 }
-#box-example .datapanel {
+#box_example .datapanel {
   height: 100%;
   width: 300px;
   background: #FFF;
@@ -40,23 +40,23 @@
   left: 0;
   border-right: 1px solid #DDD;
 }
-#box-example html,
-#box-example body,
-#box-example #mainpanel {
+#box_example html,
+#box_example body,
+#box_example #mainpanel {
   height: 100%;
   /*margin: 0;*/
 
   /*padding: 0;*/
 
 }
-#box-example ul {
+#box_example ul {
   list-style-type: none;
 }
-#box-example li {
+#box_example li {
   position: relative;
   left: 0;
 }
-#box-example .flip-horizontal {
+#box_example .flip-horizontal {
   display: inline-block;
   -moz-transform: scalex(-1);
   -webkit-transform: scalex(-1);
