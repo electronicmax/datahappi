@@ -149,11 +149,11 @@ define(
 			// prepopulate all the things! 
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			
-			var buildings = new Source({ name: "Buildings", url: $('.definitions_url').val() });
-			var events = new Source({ name: "Events", url: $('.url').val() });
 			var wview = new WorkspaceView({
-				data_sources: [buildings, events],
+				data_sources: [
+					//new Source({ name: "Buildings", url: $('.definitions_url').val() }),
+					new Source({ name: "Events", url: $('.url').val() })
+				],				
 				el : $('#box_example')[0]
 			});
 			wview.render();
