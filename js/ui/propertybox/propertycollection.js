@@ -8,7 +8,7 @@ define(
 		var PropertyCollection = Backbone.Collection.extend({
 			initialize:function(models, options) {
 				var this_ = this;
-				var src_c = options.src_collection; // The properties to be shown in the box.
+				var src_c = options.src_collection; // The subjects which the properties pertain to. Required.
 				util.assert(!_(src_c).isUndefined(), "No collection passed");
 				src_c.on('change', function(m) { this_._change(m); })
 					.on('add', function(m) { this_._change_add(m); })
@@ -16,11 +16,15 @@ define(
 					.map(function(m) {
 						this_._change_add(m);
 					});
+				src_c.map(function(srcModel) {
+					src_c.trigger('add', srcModel);
+				});
 			},
 			comparator: function(model) {
-				// Order models by their coverage, with higher coverage first.
-				return - (model.get("coverage") || 0);
+				// Order property models by their coverage, with higher coverage first.
+				return -(model.get("coverage") || 0);
 			},
+			/*
 			_changed:function(srcModel){
 				var this_ = this;
 				_(srcModel.attributes).map(function(val, key) {
@@ -32,25 +36,29 @@ define(
 					}
 				});
 			},
+			*/
+			_change:function(srcModel) {},
+			_change_remove:function(srcModel) {},
 			_change_add:function(srcModel) {
 				var this_ = this;
-				var propsToAdd = _.map(_.clone(srcModel.attributes), function(val, prop) {
-					prop = [prop];
-				});
-				_expanded_order.map(function(propExpanded) {
-					if (_.has(propsToAdd, propExpanded)) {
-						newProps = propsToAdd[propExpanded].map(function(propObj) {
-							propObj = _.clone(propObj);
-							if (_.isObject(propObj)) {
-								// return 
-							} else {
-								// newprops is a primitive. Not too sure what to do here.
-							}
-						});
-					}
+
+				var currentChain = _.clone(this._current_chain);
+				var propsToAdd = _.uniq(srcModel.attributes);
+
+				// While there are properties to display and expanded properties...
+				while (propsToAdd && currentChain.length > 0) {
+					// ...follow the chain one step...
+					srcModel = srcModel.get(currentChain.shift());
+
+					// ...and get the properties.
+					propsToAdd = _.uniq(srcModel.attributes);
+				}
+
+				propsToAdd.map(function(propName) {
+					this_.add({_id:propName});
 				});
 			},
-			_expanded_order:[],
+			_current_chain:[],
 			_expand_property:function(propertyID) {
 				console.log('expanding ', propertyID);
 				this._expand_list.push(propertyID);
