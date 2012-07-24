@@ -47,13 +47,19 @@ define(
 				var currentChain = _.clone(this._current_chain);
 				var propsToAdd = _.uniq(srcModel.attributes);
 
-				// While there are properties to display and expanded properties...
-				while (propsToAdd && currentChain.length > 0) {
-					// ...follow the chain one step...
-					srcModel = srcModel.get(currentChain.shift());
+				if (currentChain.length > 0) {
+					propsToAdd = srcModel.entailed;
+					// While there are properties to display and expanded properties...
+					while (propsToAdd && currentChain.length > 0) {
+						propsToAdd = propsToAdd[currentChain.shift()];
+						/*
+						// ...follow the chain one step...
+						srcModel = srcModel.get(currentChain.shift());
 
-					// ...and get the properties.
-					propsToAdd = _.uniq(srcModel.attributes | []);
+						// ...and get the properties.
+						propsToAdd = _.uniq(srcModel.attributes | []);
+						*/
+					}
 				}
 
 				propsToAdd.map(function(propName) {
@@ -63,7 +69,7 @@ define(
 			_current_chain:[],
 			chain_forwards:function(chainProperty) {
 				// Slow, dumb solution. Probably optimize/fix.
-				this_ = this;
+				var this_ = this;
 				this._current_chain.push(chainProperty);
 				/*
 				newProperties = _.uniq(_.flatten(this_.map(function(oldProperty) {
