@@ -28,7 +28,6 @@ define([], function() {
 			});
 			this.options.views_collection.map(function(v) { this_._add_view(v); });
 			this.$el.droppable({
-				greedy:true, // magical for allowing nesting of droppables
 				accept:'.item, .simple',
 				tolerance:"touch",
 				over:function(event, ui) {
@@ -38,7 +37,6 @@ define([], function() {
 					$(this).removeClass("over");
 				},				
 				drop: function( event, ui ) {
-					// console.log("boxdropped ", event, ui, event.target == this_.el);
 					$(this).removeClass("over");
 					var view = clone_view(ui.draggable.data("view"));
 					this_.add(view);
@@ -55,8 +53,5 @@ define([], function() {
 			this._add_view(v);
 		}
 	});
-	return {
-		BoxView : BoxView,
-		clone_view : clone_view
-	};
+	return { BoxView : BoxView };
 });

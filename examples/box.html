@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-<<<<<<< HEAD
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link href="../css/box.css" rel="stylesheet">
 		<link href="css/box-example.css" rel="stylesheet">
-=======
-	  <!-- bootstrap basics -->
-	  <link href="../css/bootstrap.css" rel="stylesheet">
->>>>>>> 6bff4d4926ca7b2c028d399869b6a1c342d0dca8
 
-	  <!-- reusable box widget css -->
-	  <link href="../css/box.css" rel="stylesheet">
 
-	  <!-- specific to this example --> 
-	  <link href="css/examples.less.css" rel="stylesheet">
 
-<<<<<<< HEAD
 		<link rel="stylesheet" href="css/slide.css" type="text/css" media="screen" />
 
 
 		<title> box  </title>
-=======
-	  <!-- slider widghet --> 
-	  <link rel="stylesheet" href="css/slide.css" type="text/css" media="screen" />
-	  
-	  <title>datataco lab</title>
->>>>>>> 6bff4d4926ca7b2c028d399869b6a1c342d0dca8
 	</head>
-	<body id="box_example">
-		<div class="slidepanel">
-			<div class="datapanel">
-				<div class="sources">
+	<body>
+
+		<div id="slidepanel">
+			<div id="datapanel">
+				<div id="sources">
 					Sources (3 selected)
 					<ul><!-- 
 						<li><input type="checkbox" />buildings</li>
@@ -40,48 +25,62 @@
 						<li>dooberries</li>
 						<li><input type="text" value="new source url"></input></li> -->
 					</ul>
-					<input type="hidden" class="definitions_url span4" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
-					<input type="hidden" class="url span4" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>					
-					<div class="load btn">Load</div>
-					<div class="new_group btn">new group</div>					
 				</div><!--sources-->
-				<div class="things">
-				<input type="text" value="&lt;property&gt;:&lt;value&gt; or &lt;name&gt;"></input>
-				<div class="tablecontainer">
-				  <table class="table">
-					<thead></thead>
-					<tbody class="values"></tbody>
-				  </table>
+				<hr>
+				<input type="text" value="&lt;property&gt;:&lt;value&gt; or &lt;name&gt;"></input><br>
+				<div id="new_group" class="btn">new group</div>
+				<div>
+					<input id="definitions_url" type="hidden" class="span4" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
+					<input id="url" type="hidden" class="span4" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>
+					<div class="load btn">Load</div>
+					<p>
+						<div class="table">
+							<table class="table">
+								<thead></thead>
+								<tbody id="values"></tbody>
+							</table>
+						</div>
+					</p>
 				</div>
-				</div>
+				<div id="things" class="span4"></div>
+				<hr />
 			</div><!--/panel-->
-			<div class="tab">
-			  <a class="toggle_data" href="#">
-				<h4><span class="icon-logout-1"></span><h4>
-			  </a>
-			</div> <!--/tab-->
-		</div> <!--/slidepanel-->
-		<div class="container-fluid workspace">
-		  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-		  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<div id="tab">
+				<a id="toggle_data" href="#"><h1><span class="icon-logout-1"></span><h1></a>
+		</div> <!--/tab-->
 
-		  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div> <!--/slidepanel-->
+
+
+
+
+
+
+
+
+
+		<div class="container-fluid" id="mainpanel">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		</div>
 	</body>
 	<script type="text/template" id="instance_template">
@@ -133,5 +132,7 @@
 	<script type="text/javascript" src="../lib/rdfquery/jquery.rdf.json.js"></script>
 	<!-- // <script src="https://apis.google.com/js/client.js"></script> -->
 	<script src="../lib/jquery-ui.js"></script>  
+
+
 	<!-- // <script src="js/slide.js" type="text/javascript"></script> -->
 </html>
