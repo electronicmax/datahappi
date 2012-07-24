@@ -1,23 +1,25 @@
 /* this is for the box example only  */
 define(
 	[
-	'js/ui/instancebox',
-	'js/draggableview',
-	'js/ui/tableview',
-	'js/models',
-	'js/utils',
-	'js/googlecal/CalendarCollection',
-	'js/googlecal/auth'
+		'js/box',
+		'js/ui/instancebox',
+		'js/draggableview',
+		'js/ui/tableview',
+		'js/models',
+		'js/utils',
+		'js/googlecal/CalendarCollection',
+		'js/googlecal/auth'
 	],
-	function(box, dv, tv, model, util, cc, auth) {
+	function(box, ibox, dv, tv, model, util, cc, auth) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-
+		
 		var Source = Backbone.Model.extend({
 			defaults: {name: "Things", url: ""	},
 			fetch:function() {
 				var d = util.deferred();
+				console.log('source fetching ', this.get('url'), this);
 				var c = model.get_rdf(this.get('url'));
 				c.fetch().then(function() {
 					console.log('calling resolve ');
@@ -69,16 +71,12 @@ define(
 		var SidebarView = Backbone.View.extend({
 			events: {
 				"click .new_group": "_new_group",
-				"click .toggle_data":"toggle_data"
+				"click .tab":"toggle_data"
 			},
 			initialize:function(options) {
 				
 			},
-			_new_group : function() {
-				var bv = new box.InstanceBox();
-				// TODO do something about this --- move out to parent widget
-				$('#mainpanel').append(bv.render());
-			},
+			_new_group : function() {this.trigger("new_group");	},
 			render:function() {
 				var sourcec = new SourceCollection(this.options.sources);
 				this.$el.find(".sources").append(new SourcesView({
@@ -87,7 +85,7 @@ define(
 				}).render().el).append(new SliderView().render().el);
 				
 				var things_view = new tv.TableView({
-					el:this.$el.find('table')[0],
+					el:this.$el.find('.things')[0],
 					columns:[
 						function(m) {
 							var view = new tv.GenericItemView({model:m});
@@ -99,53 +97,94 @@ define(
 						}
 					]
 				});
-				sourcec.map(function(source) {
-					console.log('loading from ', source.get('url'));
-					source.fetch().then(function(data) {
-						console.log("got data > ", data);
-						data.map(function(datum) { things_view.add(datum); });
+				setTimeout(function() { 
+					sourcec.map(function(source) {
+						console.log('loading from ', source.get('url'));
+						source.fetch().then(function(data) {
+							console.log("got data > ", data);
+						data.map(function(datum) { things_view.collection.add(datum); });
+						});
 					});
-				});
+				}, 1000);
 				
 			},
 			slideOut:function() {
 				var this_ = this;
-				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".tab").addClass("flip-horizontal"); });
+				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".icon-logout-1").addClass("flip-horizontal"); });
+				$('.workspace').animate({left:this.$el.find(".datapanel").outerWidth()});
 			},
-			slideIn:function () {
+			slideAway:function () {
 				var this_ = this;
-				this.$el.animate({ left: - this.$el.find(".datapanel").outerWidth() }, function() {
-					this_.$el.find(".tab").removeClass("flip-horizontal");
+				this.$el.animate({ left: 8 - this.$el.find(".datapanel").outerWidth()}, function() {
+					this_.$el.find(".icon-logout-1").removeClass("flip-horizontal");
 				});
+				$('.workspace').animate({left:8});
 			},
 			toggle_data:function() {
-				console.log('toggle_data');
-				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideIn();	} else { this.slideOut();	}
+				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideAway();	} else { this.slideOut();	}
 			}			
 		});
-		// ---		
-		var load = function() {
-			var buildings = new Source({	name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') });
-			var events = new Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') });
-			var sbv = new SidebarView({
-				sources: [buildings, events],
-				el : $('.slidepanel')[0]
-			});
+
+		var WorkspaceView = Backbone.View.extend({
+			events: {
+				'click ':'_workspace_clicked'
+			},
+			initialize:function() {
+				
+			},
+			render:function() {
+				var this_ = this;
+				this.sidebar = new SidebarView({
+					sources: this.options.data_sources,
+					el : this.$el.find('.slidepanel')[0]
+				});
+				this.sidebar.bind('new_group', function() { this_._new_group(); });
+				this.sidebar.render();
+				this.sidebar.slideOut();
+				this.$el.droppable({
+					accept:'.item, .simple',
+					tolerance:"touch",
+					over:function(event, ui) {
+						if (event.target !== this_.el) { return ; }
+						console.log("workspace over ", event, ui);
+					},
+					out:function(event, ui) {},				
+					drop: function( event, ui ) {
+						if (event.target !== this_.el) { return ; }
+						var target_box = this_._new_group();
+						target_box.add(box.clone_view(ui.draggable.data("view")));
+						event.stopPropagation();
+						return false;
+					}
+			});				
+				return this;
+			},
+			_new_group:function() {
+				var box = new ibox.InstanceBox();
+				// TODO do something about this --- move out to parent widget
+				$('.workspace').append(box.render());
+				return box;
+			},
+			_workspace_clicked:function() {
+				var this_ = this;
+				$(".workspace").click(function(){ this_.sidebar.slideAway();  });
+			}
+		});
 		
-			$("#mainpanel").click(function(){
-				sbv.slideIn();
+		// // ---		
+		(function() {
+			// prepopulate all the things! 
+			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
+			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
+			var wview = new WorkspaceView({
+				data_sources: [
+					//new Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
+					new Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') })
+				],				
+				el : $('#box_example')[0]
 			});
-
-			$(".slider ul").css( 'width', function() { 
-				return 310 * $(this).children().length;
-			});
-
-			console.log('calling render');
-			sbv.render();
-			console.log(' done rendering ');
-			sbv.slideOut();
-			// sbv._new_group();
-		};
-		load();
+			wview.render();
+			wview.sidebar.slideOut();
+		})();
 	});
 
