@@ -32,7 +32,8 @@ define(
 		var SourceView = Backbone.View.extend({
 			tagName: "li",
 			className: "source",
-			initialize:function
+			initialize:function() {
+				}
 		});
 		
 		var SourceCollection = Backbone.Collection.extend({
