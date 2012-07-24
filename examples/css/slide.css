@@ -41,17 +41,20 @@ html, body, #mainpanel {
 }
 
 
-#slidecontainer {
+.slider {
 	width: 100%;
-	overflow-x: scroll;
-	overflow-y: clip;
+	display: block;
+	overflow: scroll;
 }
-#slider {
-	width: auto;
-	height: 2em;
-	overflow-x: scroll;
-	overflow-y: clip;
+.slider ul {
+	
 }
+.slider ul li {
+	display: inline-block;
+	width: 300px;
+	overflow: hidden;
+}
+
 
 ul {
 	list-style-type: none;

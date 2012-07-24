@@ -20,7 +20,7 @@ define(
 				var d = util.deferred();
 				var c = model.get_rdf(this.get('url'));
 				c.fetch().then(function() {
-					console.log('caling resolve ');
+					console.log('calling resolve ');
 					d.resolve(c);
 				});
 				return d.promise(); 
@@ -28,15 +28,7 @@ define(
 		});
 		
 		var SourceCollection = Backbone.Collection.extend({
-			model:Source // specify model type
-			// no need to do this manually, Backbone's model magic
-			// automatically converts all json objects passed in
-			// to the model types specified above.
-			// initialize: function (models, options) {
-			//var handler = options.view.addSource.bind(options.view); // ?!?
-			//this.bind("add", handler);
-			//this.add(models);
-			//}
+			model:Source
 		});		
 
 		var SourcesView = Backbone.View.extend({
@@ -51,6 +43,28 @@ define(
 				return this;
 			}
 		});		
+
+		var SliderView = Backbone.View.extend({
+			tagName: "div",
+			className: "slider",
+			initialize:function() {
+				var this_ = this;
+				this.$el.html('<ul style="width:620px"><li><span id="sourcetype" contenteditable>Add a source</span></li>' +
+					'<li> &gt; <span id="sourcetype" contenteditable>New source url</span></li></ul>');
+				this
+				this.$el.find("#sourcetype").keypress(function(e) {
+					if(e.which == 13) {
+						var li = this_.$el.find("li")[0];
+						$(li).css('width', 'auto');
+						e.preventDefault();
+						return false;
+					}
+				});
+			},
+			render:function() {
+				return this;
+			}
+		});
 
 		var SidebarView = Backbone.View.extend({
 			events: {
@@ -70,7 +84,7 @@ define(
 				this.$el.find(".sources").append(new SourcesView({
 					el: this.$el.find(".sources ul"),
 					collection:sourcec
-				}).render().el);
+				}).render().el).append(new SliderView().render().el);
 				
 				var things_view = new tv.TableView({
 					el:this.$el.find('table')[0],
@@ -109,21 +123,10 @@ define(
 				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideIn();	} else { this.slideOut();	}
 			}			
 		});
-		// ???
-		$("li").mouseover(function(e){
-			console.log("e", e);
-			$(e.target).animate({
-				left: -300 
-			});
-		});
 		// ---		
 		var load = function() {
-			// prepopulate the thingies
-			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
-			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			
-			var buildings = new Source({	name: "Buildings", url: $("#definitions_url").val() });
-			var events = new Source({ name: "Events", url: $('#url').val() });
+			var buildings = new Source({	name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') });
+			var events = new Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') });
 			var sbv = new SidebarView({
 				sources: [buildings, events],
 				el : $('.slidepanel')[0]
@@ -132,14 +135,17 @@ define(
 			$("#mainpanel").click(function(){
 				sbv.slideIn();
 			});
+
+			$(".slider ul").css( 'width', function() { 
+				return 310 * $(this).children().length;
+			});
+
 			console.log('calling render');
 			sbv.render();
 			console.log(' done rendering ');
 			sbv.slideOut();
 			// sbv._new_group();
 		};
-		$('.load').click(load);
-		$('form').submit(load);
 		load();
 	});
 
