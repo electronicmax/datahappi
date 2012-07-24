@@ -28,6 +28,12 @@ define(
 				return d.promise(); 
 			}
 		});
+
+		var SourceView = Backbone.View.extend({
+			tagName: "li",
+			className: "source",
+			initialize:function
+		});
 		
 		var SourceCollection = Backbone.Collection.extend({
 			model:Source
