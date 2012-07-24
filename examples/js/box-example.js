@@ -85,29 +85,38 @@ define(
 				});
 				setTimeout(function() { 
 					sourcec.map(function(source) {
-						console.log('loading from ', source.get('url'));
 						source.fetch().then(function(data) {
-							console.log("got data > ", data);
-						data.map(function(datum) { things_view.collection.add(datum); });
+							data.map(function(datum) { things_view.collection.add(datum); });
 						});
 					});
 				}, 1000);
 				
 			},
 			slideOut:function() {
-				var this_ = this;
-				this.$el.animate({ left: 0 }, function() {	this_.$el.find(".icon-logout-1").addClass("flip-horizontal"); });
-				$('.workspace').animate({left:this.$el.find(".datapanel").outerWidth()});
+				if ((this._slider_animation && !this._slider_animation.isResolved()) || this.isVisible()) { return; }
+				var this_ = this, sliderd = util.deferred(), workspaced = util.deferred();
+				this.$el.animate({ left: 0 }, function() {
+					this_.$el.find(".icon-logout-1").addClass("flip-horizontal");
+					sliderd.resolve();
+				});
+				$('.workspace').animate({ left:this.$el.find(".datapanel").outerWidth()	}, workspaced.resolve);
+				return this._slider_animation = util.whend([sliderd,workspaced]);
 			},
 			slideAway:function () {
-				var this_ = this;
+				if ((this._slider_animation && !this._slider_animation.isResolved()) || !this.isVisible()) { return; }
+				var this_ = this, sliderd = util.deferred(), workspaced = util.deferred()	;			
 				this.$el.animate({ left: 8 - this.$el.find(".datapanel").outerWidth()  }, function() {
 					this_.$el.find(".icon-logout-1").removeClass("flip-horizontal");
+					sliderd.resolve();
 				});
-				$('.workspace').animate({left:8});
+				$('.workspace').animate({left:8}, workspaced.resolve);
+				return this._slider_animation = util.whend([sliderd,workspaced]);
+			},
+			isVisible:function() {
+				return parseInt(this.$el.css('left'),10) === 0;
 			},
 			toggle_data:function() {
-				if ( parseInt(this.$el.css('left'),10) === 0 ){	this.slideAway();	} else { this.slideOut();	}
+				this.isVisible() ? this.slideAway() : this.slideOut();
 			}			
 		});
 		
