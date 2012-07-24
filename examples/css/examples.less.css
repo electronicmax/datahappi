@@ -7,10 +7,15 @@
   height: 100px;
 }
 #box_example .things {
-  width: 100%;
+  position: absolute;
+  top: 100px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border: 1px solid #eee;
 }
 #box_example .things input {
-  width: 90%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
@@ -20,7 +25,7 @@
   overflow: scroll;
 }
 #box_example .things table {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 #box_example .instance {
   padding: 2px;
