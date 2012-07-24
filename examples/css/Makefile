@@ -1,5 +1,5 @@
 
 ALL = _made
 
-examples.less.css : *.less
-	lessc *.less > examples.less.css
+examples.css : examples.less
+	lessc examples.less > examples.css
