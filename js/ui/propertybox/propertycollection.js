@@ -47,18 +47,16 @@ define(
 				var currentChain = _.clone(this._current_chain);
 				var propsToAdd = _.uniq(srcModel.attributes);
 
-				if (currentChain.length > 0) {
+				if (currentChain.length > 0 && currentChain.shift() === srcModel.get("_id")[0]) {
 					propsToAdd = srcModel.entailed;
-					// While there are properties to display and expanded properties...
 					while (propsToAdd && currentChain.length > 0) {
 						propsToAdd = propsToAdd[currentChain.shift()];
-						/*
-						// ...follow the chain one step...
-						srcModel = srcModel.get(currentChain.shift());
-
-						// ...and get the properties.
-						propsToAdd = _.uniq(srcModel.attributes | []);
-						*/
+					}
+					if (_.isObject(propsToAdd)) {
+						propsToAdd = _.keys(propsToAdd);
+					} else {
+						// A primitive has been reached.
+						// Could highlight it a different colour or something.
 					}
 				}
 
