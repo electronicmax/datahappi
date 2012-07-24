@@ -12,35 +12,25 @@
 
 		<title> box  </title>
 	</head>
-	<body>
-
-		<div id="slidepanel">
-			<div id="datapanel">
-				<div id="sources">
-					Sources (3 selected)
-					<ul><!-- 
-						<li><input type="checkbox" />buildings</li>
-						<li>things</li>
-						<li>elephants</li>
-						<li>dooberries</li>
-						<li><input type="text" value="new source url"></input></li> -->
+	<body id="box_example">
+		<div class="slidepanel">
+			<div class="datapanel">
+				Sources:
+				<div class="sources">
+					<ul>
+						<!--populated by the sourcesView-->
 					</ul>
 				</div><!--sources-->
 				<hr>
-				<input type="text" value="&lt;property&gt;:&lt;value&gt; or &lt;name&gt;"></input><br>
-				<div id="new_group" class="btn">new group</div>
-				<div>
-					<input id="definitions_url" type="hidden" class="span4" value="http://127.0.0.1:8080/rooms-and-buildings.rdf"></input>
-					<input id="url" type="hidden" class="span4" value="http://127.0.0.1:8080/events-diary-full.rdf"></input>
-					<div class="load btn">Load</div>
-					<p>
-						<div class="table">
-							<table class="table">
-								<thead></thead>
-								<tbody id="values"></tbody>
-							</table>
-						</div>
-					</p>
+				<div class="things">
+					<input type="text" placeholder="&lt;property&gt;:&lt;value&gt; or &lt;name&gt;"></input>
+					<a class="new_group" href="#"><span class="icon-indent-left"></span></a>
+					<div class="tablecontainer">
+					  <table class="table">
+						<thead></thead>
+						<tbody class="values"></tbody>
+					  </table>
+					</div>
 				</div>
 				<div id="things" class="span4"></div>
 				<hr />
