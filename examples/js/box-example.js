@@ -32,7 +32,36 @@ define(
 		var SourceView = Backbone.View.extend({
 			tagName: "li",
 			className: "source",
-			initialize:function
+			initialize:function () {
+				var this_ = this;
+				console.log("model",this.options.model);
+			},
+			render:function () {
+				var this_ = this;
+				this.$el.html(this.options.model.get('name') + '<div class="items"></div>');
+				console.log(".items",this.$el.find('.items')[0]);
+				var things_view = new tv.TableView({
+					el:this.$el.find('.items')[0],
+					columns:[
+						function(m) {
+							var view = new tv.GenericItemView({model:m});
+							view.render();
+							view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
+							view.$el.data('view',view);
+							view.$el.data('model',view.options.model);
+							return view.el;
+						}
+					]
+				});
+				setTimeout(function() { 
+					console.log("model",this_.options.model);
+					this_.options.model.fetch().then(function(data) {
+						data.map(function(datum) { things_view.collection.add(datum); });
+					});
+				}, 1000);
+				console.log(things_view);
+				return this;
+			}
 		});
 		
 		var SourceCollection = Backbone.Collection.extend({
@@ -45,7 +74,7 @@ define(
 				this.$el.html(''); 
 				this.options.collection.models.map(function(model) {
 					try {
-						this_.$el.append("<li>" + model.get('name') + "</li>");
+						this_.$el.append(new SourceView({model:model}).render().el);
 					} catch(e) { console.error(e); }
 				});
 				return this;
@@ -90,26 +119,29 @@ define(
 					collection:sourcec
 				}).render().el).append(new SliderView().render().el);
 				
-				var things_view = new tv.TableView({
-					el:this.$el.find('.things')[0],
-					columns:[
-						function(m) {
-							var view = new tv.GenericItemView({model:m});
-							view.render();
-							view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
-							view.$el.data('view',view);
-							view.$el.data('model',view.options.model);
-							return view.el;
-						}
-					]
-				});
-				setTimeout(function() { 
-					sourcec.map(function(source) {
-						source.fetch().then(function(data) {
-							data.map(function(datum) { things_view.collection.add(datum); });
-						});
-					});
-				}, 1000);
+
+				// var things_view = new tv.TableView({
+				// 	el:this.$el.find('.things')[0],
+				// 	columns:[
+				// 		function(m) {
+				// 			var view = new tv.GenericItemView({model:m});
+				// 			view.render();
+				// 			view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
+				// 			view.$el.data('view',view);
+				// 			view.$el.data('model',view.options.model);
+				// 			return view.el;
+				// 		}
+				// 	]
+				// });
+
+
+				// setTimeout(function() { 
+				// 	sourcec.map(function(source) {
+				// 		source.fetch().then(function(data) {
+				// 			data.map(function(datum) { things_view.collection.add(datum); });
+				// 		});
+				// 	});
+				// }, 1000);
 				
 			},
 			slideOut:function() {
