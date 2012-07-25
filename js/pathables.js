@@ -14,6 +14,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			// dmodel must be a DereferenceableModel
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
+			console.log(property, dmodel.attributes, dmodel);
 			return dmodel.get(property) !== undefined;
 		},
 		apply: function(dmodel) {
