@@ -83,6 +83,9 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				return { step: popped_step, value: popped_val };
 			}
 			return undefined;
+		},
+		get_last_value:function() {
+			return this.values[this.values.length - 1];
 		}
 	});
 
