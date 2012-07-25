@@ -5,10 +5,10 @@ define(['js/models', 'js/utils'], function(models,utils) {
 */
 
 	// pathsteps -- start with path step: single unit of dereference
-	var Pathstep = Backbone.Model.extend({
+	var Step = Backbone.Model.extend({
 		defaults: { position: -1 }	
 	});
-	var PropertyDereferenceStep = Pathstep.extend({
+	var PropertyDereferenceStep = Step.extend({
 		defaults: { type: "dereference-pathstep", property: undefined },
 		test: function(dmodel) {
 			// dmodel must be a DereferenceableModel
@@ -23,14 +23,14 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		}
 	});
 
-	// Paths -- each a collection of Pathsteps
-	var Pathsteps = Backbone.Collection.extend({
-		model:Pathstep,
+	// Paths -- each a collection of Steps
+	var Steps = Backbone.Collection.extend({
+		model:Step,
 		comparator:function(component) {return component.get("position"); }
 	});	
 	var Path = Backbone.Model.extend({
 		initialize:function(attrs, options) {
-			this.set({"steps": new Pathsteps((this.options && this.options.steps.concat([])) || [])});
+			this.set({"steps": new Steps((this.options && this.options.steps.concat([])) || [])});
 		},
 		clone:function(path) {
 			return new Path(undefined, { steps: path.get("steps").models });
@@ -60,18 +60,43 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		try_dereference:function(property_name) {
 			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
 		},
-		try_extend_path:function(step) {
+		try_extend_path:function(step_or_path) {
+			if (step_or_path instanceof Path) {
+				return this._try_extend_path_by_path(step_or_path);
+			}
+			console.assert(step_or_path instanceof Step, "It's not a path, and it's not a step. WHAT IS IT?");
+			return this._try_extend_path_by_step(step_or_path);
+		},
+		_try_extend_path_by_step:function(step) {
 			// returns changes us in place or undefined if fail
 			if (step.test(this)) {
-				var value = step.apply(this);
-				this.path.add_step(step);
-				this.values.push(value);
-				this.trigger('path_change', this.value);
+				var next_value = step.apply(this.get_last_value());
+				this.path.add_step(this.get_last_value());
+				this.values.push(next_value);
 				return this.values;
 			}
 			// dereference fail, don't extend the path
 			return undefined;
 		},
+		_try_extend_path_by_path:function(path) {
+			// save the current path and values
+			var this_ = this;
+			var old_steps = this.path.get("steps").models.concat([]);
+			var old_vals = this.values.concat([]);
+
+			// only succeed if the entire path succeeds. otherwise fall back
+			var cur_val = true;
+			for (var ii = 0; ii < path.get("steps").length && !_.isUndefined(cur_val); ii++) {
+				var step = path.get("steps").at(ii);
+				cur_val = this_._try_extend_path_by_path(step, true);
+			}
+			if (_.isUndefined(cur_val)) {
+				// ROLL BACK! WE FAILED :'(
+				this.values = old_vals; // :'(
+				this.path.get("steps").reset();
+				this.path.get("steps").add(old_steps); // :'(
+			}
+		},		
 		get_path_length: function(){ return this.path.get_steps().length; },
 		get_path_values: function(){ return this.values.concat([]); },
 		value_at:function(step) { return this.values[step]; },
@@ -100,8 +125,16 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		initialize:function() {
 			var this_ = this;
 			this.paths = new Paths();
-			this.bind("add", function(m) {
-				m.bind("path_change", function() { this_._update_paths(); });
+			this.bind("add", function(new_model) {
+				// apply path to this m.
+				if (new_model instanceof Pathable) {
+					// m is a pathable
+					var dereferenced = false;
+					for (var p_i = 0; p_i < this_.paths.length && !(dereferenced); p_i++) {
+						dereferenced = this_.paths[p_i].try_apply_path(new_model);
+					}
+				}
+				new_model.path.bind("change", function() { this_._update_paths(); });
 				this_._update_paths();				
 			});
 			this.bind("remove", function() { this_._update_paths(); });
@@ -122,7 +155,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 	});
 	
 	return {
-		Pathstep:Pathstep,
+		Step:Step,
 		PropertyDereferenceStep: PropertyDereferenceStep,
 		Pathable: Pathable,
 		Pathables: Pathables,
