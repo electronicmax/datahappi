@@ -48,10 +48,15 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 
 			pathCollection = new pathables.Pathables(bros);
 
-			console.log("before extend", pathCollection);
+			console.log("before extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
 			var step = new pathables.PropertyDereferenceStep({property:"likes"});
 			pathCollection.try_extend_path(step);
-			console.log("after extend", pathCollection);
+			console.log("after extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
+
+			var dave = {_id:"Dave", likes:"Marmite"};
+			dave['bro'] = dave;
+			pathCollection.add(new pathables.Pathable(dave));
+			console.log("after addition of dave", pathCollection.models.map(function(p) {return p.get_last_value()}));
 		}
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
