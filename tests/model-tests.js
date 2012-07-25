@@ -40,22 +40,21 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
 		},
 		function() {
-			var bob = {_id:"Bob", likes:"Jelly"};
-			var tom = {_id:"Tom", likes:"Jam"};
-			bob['bro'] = tom;
-			tom['bro'] = bob;
-			var bros = [new pathables.Pathable(bob), new pathables.Pathable(tom)];
+			var bob = new pathables.Pathable({_id:"Bob", likes:"Jelly"});
+			var tom = new pathables.Pathable({_id:"Tom", likes:"Jam"});
+			bob.set({'bro':tom});
+			tom.set({'bro':bob});
 
-			pathCollection = new pathables.Pathables(bros);
+			pathCollection = new pathables.Pathables([bob, tom]);
 
 			console.log("before extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
-			var step = new pathables.PropertyDereferenceStep({property:"likes"});
+			var step = new pathables.PropertyDereferenceStep({property:"bro"});
 			pathCollection.try_extend_path(step);
 			console.log("after extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
 
-			var dave = {_id:"Dave", likes:"Marmite"};
-			dave['bro'] = dave;
-			pathCollection.add(new pathables.Pathable(dave));
+			var dave = new pathables.Pathable({_id:"Dave", likes:"Marmite"});
+			dave.set({'bro':dave});
+			pathCollection.add(dave);
 			console.log("after addition of dave", pathCollection.models.map(function(p) {return p.get_last_value()}));
 		}
 	];
