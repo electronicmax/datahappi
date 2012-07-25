@@ -65,16 +65,21 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
 		},
 		try_extend_path:function(step_or_path) {
+			console.log("STEP OR PATH ? ", step_or_path, step_or_path instanceof Path);
 			if (step_or_path instanceof Path) {
+				console.log("PATH ");
 				return this._try_extend_path_by_path(step_or_path);
 			}
+			console.log("STEP");
 			console.assert(step_or_path instanceof Step, "It's not a path, and it's not a step. WHAT IS IT?");
 			return this._try_extend_path_by_step(step_or_path);
 		},
 		_try_extend_path_by_step:function(step) {
 			// returns changes us in place or undefined if fail
-			if (step.test(this)) {
+			console.log("_try_extend_path_by_step ", step, this, this.path, this.get_last_value())
+			if (step.test(this.get_last_value())) {
 				var next_value = step.apply(this.get_last_value());
+				console.log("next value > ", next_value);
 				this.path.add_step(step);
 				this.values.push(next_value);
 				return this.values;
@@ -90,9 +95,11 @@ define(['js/models', 'js/utils'], function(models,utils) {
 
 			// only succeed if the entire path succeeds. otherwise fall back
 			var cur_val = true;
+			console.log('path ', path);
 			for (var ii = 0; ii < path.get("steps").length && !_.isUndefined(cur_val); ii++) {
 				var step = path.get("steps").at(ii);
-				cur_val = this_._try_extend_path_by_path(step, true);
+				console.log("step ", ii, step);
+				cur_val = this_._try_extend_path_by_step(step);
 			}
 			if (_.isUndefined(cur_val)) {
 				// ROLL BACK! WE FAILED :'(
@@ -100,6 +107,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				this.path.get("steps").reset();
 				this.path.get("steps").add(old_steps); // :'(
 			}
+			return cur_val;
 		},		
 		get_path_length: function(){ return this.path.get_steps().length; },
 		get_path_values: function(){ return this.values.concat([]); },
@@ -135,7 +143,6 @@ define(['js/models', 'js/utils'], function(models,utils) {
 					var dereferenced = false;
 					var paths = this_.get_paths();
 					for (var p_i = 0; p_i < paths.length && !(dereferenced); p_i++) {
-						console.log('trying ', paths[p_i]);
 						dereferenced = new_model.try_extend_path(paths[p_i]);
 					}
 				}
@@ -145,9 +152,9 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			var paths = this.map(function(pathable) { return pathable.path; });
 			return paths; // TEMP
 		},
-		try_extend_path:function(step) {
+		try_extend_path:function(path_or_step) {
 			return this.map(function(pathable) {
-				var result = pathable.try_extend_path(step);
+				var result = pathable.try_extend_path(path_or_step);
 				return [pathable, result];
 			});
 		},

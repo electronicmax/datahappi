@@ -54,7 +54,7 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			console.log("after extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
 
 			var dave = {_id:"Dave", likes:"Marmite"};
-			dave['bro'] = dave;
+			// dave['bro'] = dave;
 			pathCollection.add(new pathables.Pathable(dave));
 			console.log("after addition of dave", pathCollection.models.map(function(p) {return p.get_last_value()}));
 		}
