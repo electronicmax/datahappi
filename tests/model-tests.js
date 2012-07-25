@@ -43,7 +43,7 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 		function() {
 			var bob = new pathables.Pathable({_id:"Bob", likes:"Curry"});
 			var bob = new pathables.Pathable();
-			pathCollection = new pathables.Pathables([bob]);
+			// pathCollection = new pathables.Pathables([bob]);
 			/*
 			var tom = new pathables.Pathable({_id:"Tom", likes:"Chilli"});
 			bob['bro'] = tom;

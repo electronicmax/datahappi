@@ -64,7 +64,9 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 			return cleaned;
 		},
 		get:function(p) {
-			return _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union( this.constructor.__super__.get.apply(this,[p]) || [] ); // or undefined
+			return _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union(
+				Backbone.Model.prototype.get.apply(this,[p]) || []
+			); // or undefined
 		},
 		keys:function() {
 			return _( _(this.attributes).keys() ).union(_(this.entailed).keys());
@@ -95,8 +97,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 			} else {
 				k = this._all_values_to_arrays(k);
 			}				
-			this.constructor.__super__.set.apply(this,[k,v,options]);
-			return this;
+			return Backbone.Model.prototype.set.apply(this,[k,v,options]);
 		},
 		_trigger_change:function(changed_props) {
 			var this_ = this;

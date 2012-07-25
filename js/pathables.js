@@ -30,7 +30,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 	});	
 	var Path = Backbone.Model.extend({
 		initialize:function(attrs, options) {
-			this.set({"steps": new Pathsteps(this.options.steps.concat([]) || [])});
+			this.set({"steps": new Pathsteps((this.options && this.options.steps.concat([])) || [])});
 		},
 		clone:function(path) {
 			return new Path(undefined, { steps: path.get("steps").models });
@@ -53,7 +53,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 	// of paths
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
-			this.constructor.__super__.initialize(attrs,options);
+			models.Maxel.prototype.initialize.apply(this, arguments);
 			this.path = new Path();
 			this.values = [this]; // start at path empty/ 
 		},
