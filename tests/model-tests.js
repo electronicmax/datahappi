@@ -1,9 +1,9 @@
-define(['js/models','js/utils'],function(m,utils) {
+define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 	var assert = utils.assert;
 	tests = [
 		function() {
 			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
-			var m2 = new m.Maxel({_id: "http://plus.google.com/id//203920392", name : "max electronic van kleek", posts:["foo"] });
+			var m2 = new m.Maxel({_id: "http://plus.google.com/id/203920392", name : "max electronic van kleek", posts:["foo"] });
 			assert(m1.keys().length == 3, "keys mismatch");
 			assert(m2.keys().length == 3, "keys mismatch");
 			m1.setSameAs(m2);
@@ -39,7 +39,19 @@ define(['js/models','js/utils'],function(m,utils) {
 			var events = ("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			var c = new m.get_rdf(val);
 			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
-		}		
+		},
+		function() {
+			var bob = new pathables.Pathable({_id:"Bob", likes:"Curry"});
+			var bob = new pathables.Pathable();
+			pathCollection = new pathables.Pathables([bob]);
+			/*
+			var tom = new pathables.Pathable({_id:"Tom", likes:"Chilli"});
+			bob['bro'] = tom;
+			tom['bro'] = null;
+			pathCollection.add(bob);
+			pathCollection.add(tom);
+			*/
+		}
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
 });

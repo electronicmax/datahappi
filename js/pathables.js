@@ -5,7 +5,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 */
 
 	// pathsteps -- start with path step: single unit of dereference
-	var Pathstep = Backbone.Models.extend({
+	var Pathstep = Backbone.Model.extend({
 		defaults: { position: -1 }	
 	});
 	var PropertyDereferenceStep = Pathstep.extend({
@@ -30,14 +30,14 @@ define(['js/models', 'js/utils'], function(models,utils) {
 	});	
 	var Path = Backbone.Model.extend({
 		initialize:function(attrs, options) {
-			this.set("steps", new Pathsteps(this.options.steps.concat([]) || []));
+			this.set({"steps": new Pathsteps(this.options.steps.concat([]) || [])});
 		},
-		clone:function() {
+		clone:function(path) {
 			return new Path(undefined, { steps: path.get("steps").models });
 		},
 		add_step:function(new_step) {
 			var steps = this.get("steps");
-			new_step.set("position", steps.length);
+			new_step.set({"position" : steps.length});
 			steps.add(new_step);
 		},
 		get_steps:function() { return this.get("steps"); },
@@ -51,15 +51,14 @@ define(['js/models', 'js/utils'], function(models,utils) {
 
 	// Pathable is our main Model class that can be the origin (root)
 	// of paths
-	
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
-			this.constructor.__super__.prototype.initialize(attrs,options);
+			this.constructor.__super__.initialize(attrs,options);
 			this.path = new Path();
 			this.values = [this]; // start at path empty/ 
 		},
 		try_dereference:function(property_name) {
-			return this.try_extend_path( new PropertyDereferenceStep({ property : property }) );
+			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
 		},
 		try_extend_path:function(step) {
 			// returns changes us in place or undefined if fail
@@ -75,7 +74,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		},
 		get_path_length: function(){ return this.path.get_steps().length; },
 		get_path_values: function(){ return this.values.concat([]); },
-		value_at:function(step) { return this.values[i]; },
+		value_at:function(step) { return this.values[step]; },
 		pop:function() {
 			// gets rid of last dereferenced step
 			if(this.path.length > 0) {
@@ -105,7 +104,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			this.bind("remove", function() { this_._update_paths(); });
 		},
 		_update_paths:function() {
-			this.paths = _.uniq(util.flatten(this.map(function(pathable) { return pathable.path; })));
+			this.paths = _.uniq(utils.flatten(this.map(function(pathable) { return pathable.path; })));
 			return this.paths;
 		},
 		try_extend_path:function(step) {
