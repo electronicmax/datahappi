@@ -133,15 +133,17 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				if (new_model instanceof Pathable) {
 					// m is a pathable
 					var dereferenced = false;
-					for (var p_i = 0; p_i < this_.paths.length && !(dereferenced); p_i++) {
-						console.log('trying ', this_.paths[p_i], this_.paths[p_i].try_apply_path(new_model));
-						dereferenced = this_.paths[p_i].try_apply_path(new_model);
+					var paths = this_.get_paths();
+					for (var p_i = 0; p_i < paths.length && !(dereferenced); p_i++) {
+						console.log('trying ', paths[p_i]);
+						dereferenced = new_model.try_extend_path(paths[p_i]);
 					}
 				}
 			});
 		},
 		get_paths:function() {
 			var paths = this.map(function(pathable) { return pathable.path; });
+			return paths; // TEMP
 		},
 		try_extend_path:function(step) {
 			return this.map(function(pathable) {
