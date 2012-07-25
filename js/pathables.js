@@ -75,7 +75,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			// returns changes us in place or undefined if fail
 			if (step.test(this)) {
 				var next_value = step.apply(this.get_last_value());
-				this.path.add_step(this.get_last_value());
+				this.path.add_step(step);
 				this.values.push(next_value);
 				return this.values;
 			}
