@@ -49,6 +49,9 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		}
 	});
 
+	// Pathable is our main Model class that can be the origin (root)
+	// of paths
+	
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
 			this.constructor.__super__.prototype.initialize(attrs,options);
@@ -86,13 +89,33 @@ define(['js/models', 'js/utils'], function(models,utils) {
 
 	// 
 	var Paths = Backbone.Collection.extend({model:Path});
+
+	// Pathable Collection - this collection also keeps track of
+	// all of the unqiue paths that have been applied to all of
+	// the pathables, and has convenience methods fore 
 	var Pathables = Backbone.Collection.extend({
 		model:Pathable,
+		initialize:function() {
+			var this_ = this;
+			this.paths = new Paths();
+			this.bind("add", function(m) {
+				m.bind("path_change", function() { this_._update_paths(); });
+				this_._update_paths();				
+			});
+			this.bind("remove", function() { this_._update_paths(); });
+		},
+		_update_paths:function() {
+			this.paths = _.uniq(util.flatten(this.map(function(pathable) { return pathable.path; })));
+			return this.paths;
+		},
 		try_extend_path:function(step) {
 			return this.map(function(pathable) {
 				var result = pathable.try_extend_path(step);
 				return [pathable, result];
 			});
+		},
+		get_paths:function() {
+			return this.paths.concat([]); // return a clone of the unique paths
 		}
 	});
 	
