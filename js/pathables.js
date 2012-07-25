@@ -124,24 +124,20 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		model:Pathable,
 		initialize:function() {
 			var this_ = this;
-			this.paths = new Paths();
 			this.bind("add", function(new_model) {
 				// apply path to this m.
 				if (new_model instanceof Pathable) {
 					// m is a pathable
 					var dereferenced = false;
 					for (var p_i = 0; p_i < this_.paths.length && !(dereferenced); p_i++) {
+						console.log('trying ', this_.paths[p_i], this_.paths[p_i].try_apply_path(new_model));
 						dereferenced = this_.paths[p_i].try_apply_path(new_model);
 					}
 				}
-				new_model.path.bind("change", function() { this_._update_paths(); });
-				this_._update_paths();				
 			});
-			this.bind("remove", function() { this_._update_paths(); });
 		},
-		_update_paths:function() {
-			this.paths = _.uniq(utils.flatten(this.map(function(pathable) { return pathable.path; })));
-			return this.paths;
+		get_paths:function() {
+			var paths = this.map(function(pathable) { return pathable.path; });
 		},
 		try_extend_path:function(step) {
 			return this.map(function(pathable) {
@@ -149,9 +145,6 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				return [pathable, result];
 			});
 		},
-		get_paths:function() {
-			return this.paths.concat([]); // return a clone of the unique paths
-		}
 	});
 	
 	return {
