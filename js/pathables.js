@@ -77,32 +77,40 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		},
 		_try_extend_path_by_step:function(step) {
 			// returns changes us in place or undefined if fail
-			console.log("_try_extend_path_by_step ", step, this, this.path, this.get_last_value())
-			if (step.test(this.get_last_value())) {
-				var next_value = step.apply(this.get_last_value());
-				console.log("next value > ", next_value);
+			var last_value = this.get_last_value();
+			var next_value = undefined;
+			console.log("_try_extend_path_by_step ", step, this, this.path, last_value)
+			if (_.isArray(last_value)) {
+				var next_vals = last_value.map(function(v) {
+					return step.apply(v);
+				}).filter(utils.DEFINED);
+				if (next_vals.length >= 0) {
+					next_value = utils.flatten(next_vals);
+				}
+			}	else {
+				next_value = step.apply(this.get_last_value());
+			}
+			if (utils.DEFINED(next_value)) {
 				this.path.add_step(step);
 				this.values.push(next_value);
-				return this.values;
 			}
-			// dereference fail, don't extend the path
-			return undefined;
+			return next_value;
 		},
 		_try_extend_path_by_path:function(path) {
 			// save the current path and values
+			console.log('try extend path by path ', path);
 			var this_ = this;
 			var old_steps = this.path.get("steps").models.concat([]);
 			var old_vals = this.values.concat([]);
-
 			// only succeed if the entire path succeeds. otherwise fall back
 			var cur_val = true;
-			console.log('path ', path);
 			for (var ii = 0; ii < path.get("steps").length && !_.isUndefined(cur_val); ii++) {
 				var step = path.get("steps").at(ii);
-				console.log("step ", ii, step);
+				console.log("TEPBP > attempting step ", ii, step);
 				cur_val = this_._try_extend_path_by_step(step);
 			}
 			if (_.isUndefined(cur_val)) {
+				console.log(" step failed! abort! ");
 				// ROLL BACK! WE FAILED :'(
 				this.values = old_vals; // :'(
 				this.path.get("steps").reset();
@@ -141,9 +149,9 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				// apply path to this m.
 				if (new_model instanceof Pathable) {
 					// m is a pathable
-					var dereferenced = false;
+					var dereferenced = undefined;
 					var paths = this_.get_paths();
-					for (var p_i = 0; p_i < paths.length && !(dereferenced); p_i++) {
+					for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
 						dereferenced = new_model.try_extend_path(paths[p_i]);
 					}
 				}
