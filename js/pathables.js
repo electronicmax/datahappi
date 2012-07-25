@@ -46,6 +46,10 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			var last_step = steps.at(steps.length - 1);
 			steps.remove(last_step);
 			return last_step;
+		},
+		matches:function(p) {
+			return this.get("steps").length == p.get("steps").length &&
+				this.get("steps").difference(p.get("steps")).length == 0;
 		}
 	});
 
