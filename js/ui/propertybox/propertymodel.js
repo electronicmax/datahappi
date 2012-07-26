@@ -1,9 +1,10 @@
 define(
 	[
+		'js/ui/propertybox/pathablecollection',
 		'js/ui/propertybox/propertyview',
 		'js/pathables'
 	],
-	function(pv, pathables) {
+	function(pc, pv, pathables) {
 		/* A model representing a single property which may be the next step in a
 		 * chain for one or more models in a pathables collection.
 		 *
@@ -22,7 +23,7 @@ define(
 					property:options.property,
 					pathables:options.pathables
 				});
-				this.pathable_collection.on('change', function(p) { _update_coverage(); _update_entropy(); });
+				this.pathable_collection.on('change', function(p) { this._update_coverage(); this._update_entropy(); });
 
 				this.view = new pv.PropertyView();
 			},
@@ -38,6 +39,13 @@ define(
 				this.set({'entropy': entropy});
 			}
 		});
+
+		/* Helper function used in determining entropy */
+		to_base_value= function(v) {
+			if (v instanceof Backbone.Model) { return v.id; }
+			if (v instanceof Object) { throw Error(" cannot base value of object ");  }
+			return v.valueOf();
+		};
 
 		return { PropertyModel:PropertyModel };
 	}
