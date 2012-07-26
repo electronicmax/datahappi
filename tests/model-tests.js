@@ -46,9 +46,9 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			var tom = new pathables.Pathable({_id:"Tom", likes:"Jam"});
 			var dom = new pathables.Pathable({_id:"Dom", bro:"Blah"});
 			var pathCollection = new pathables.Pathables([bob, tom, dom]);
-			//l("deref likes ");
-			//pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
-			//l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			l("deref likes ");
+			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
+			l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
 			l("deref bro ");
 			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
 			l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
