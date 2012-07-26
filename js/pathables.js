@@ -13,13 +13,12 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			// dmodel must be a DereferenceableModel
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
-			console.log(property, dmodel.attributes, dmodel);
-			return dmodel.get(property) !== undefined;
+			return dmodel && dmodel.get && utils.DEFINED(dmodel.get(property));
 		},
 		apply: function(dmodel) {
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
-			return dmodel && dmodel.get && dmodel.get(property);			
+			return dmodel && dmodel.get && dmodel.get(property);
 		}
 	});
 
@@ -72,16 +71,22 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		_try_extend_path_by_step:function(step) {
 			// returns changes us in place or undefined if fail
 			var last_value = this.get_last_value();
-			var next_value = undefined;
-			console.log("_try_extend_path_by_step ", step, this, this.path, last_value);
+			var next_value;
+			console.log("_try_extend_path_by_step ", this.id, "->", step.get("property"), " (steps so far ", this.path.get("steps").map(function(x) { return x.get("property"); }), ")", last_value);
 			if (_.isArray(last_value)) {
-				var next_vals = last_value.map(function(v) {return step.apply(v); })
-					.filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
+				console.log("is array - testing -- ", last_value);
+				var next_vals = last_value.map(function(v) {
+					if (step.test(v)) { return step.apply(v); }
+				}).filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
 				if (next_vals.length > 0) { 	next_value = utils.flatten(next_vals);		}
 			} else {
-				next_value = step.apply(this.get_last_value());
+				console.log("not array - testing -- ", last_value);
+				if (step.test(this.get_last_value())) {
+					next_value = step.apply(this.get_last_value());
+				}
 			}
 			if (utils.DEFINED(next_value)) {
+				console.log("adding step ", step, " and pushing value ", next_value);
 				this.path.add_step(step);
 				this.values.push(next_value);
 			}

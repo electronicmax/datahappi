@@ -64,9 +64,10 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 			return cleaned;
 		},
 		get:function(p) {
-			return _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union(
+			var l = _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union(
 				Backbone.Model.prototype.get.apply(this,[p]) || []
 			); // or undefined
+			if (l.length) { return l; }
 		},
 		keys:function() {
 			return _( _(this.attributes).keys() ).union(_(this.entailed).keys());
