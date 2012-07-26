@@ -1,5 +1,5 @@
 define(['js/utils'], function(util) {
-	var ItemView = Backbone.View.extend({
+	var GenericItemView = Backbone.View.extend({
 		tagName:'div',
 		className:'instance',
 		template:$('#instance_template').text(),
@@ -11,7 +11,6 @@ define(['js/utils'], function(util) {
 			return this.el;
 		}
 	});
-
 	var RowView = Backbone.View.extend({
 		tagName:'tr',
 		initialize:function() {},
@@ -19,10 +18,11 @@ define(['js/utils'], function(util) {
 			var m = this.options.model;
 			var this_ = this;
 			_(this.options.columns).map(
-				function(val,property) {
+				function(val) {
 					var oldVal = $.extend({}, val);
-					if (_(val).isFunction()) { val = val(m); }
-					if (_.isArray(val) && val.length === 1) {val = val[0];} //If val is a single vlaue array, take the value out of the array.
+					if (_(val).isFunction()) { val = val(m); return arguments.callee(val); }
+					if (val && val.el) { this_.$el.append(val.el); return val; }
+					if (_.isArray(val) && val.length === 1) { val = val[0]; } //If val is a single vlaue array, take the value out of the array.
 					if (_.isUndefined(val)) { val = '<i>undefined</i>'; }
 					if (_(val).isNumber()) { val = val.toString(); }
 					if (_(val).isObject() && val instanceof Backbone.Model) { val = val.attributes._id || val.attibutes._oid; }
@@ -38,6 +38,7 @@ define(['js/utils'], function(util) {
 			return this.el;
 		}
 	});
+
 	var TableView = Backbone.View.extend({
 		initialize:function() {
 			var this_ = this;
@@ -92,7 +93,7 @@ define(['js/utils'], function(util) {
 
 	return {
 		TableView : TableView,
-		GenericItemView: ItemView
+		GenericItemView: GenericItemView
 	};
 });
 

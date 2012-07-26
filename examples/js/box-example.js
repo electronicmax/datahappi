@@ -8,38 +8,32 @@ define(
 		'js/models',
 		'js/utils',
 		'js/googlecal/CalendarCollection',
-		'js/googlecal/auth'
+		'js/googlecal/auth',
+		'examples/js/box-views'
 	],
-	function(box, ibox, dv, tv, model, util, cc, auth) {
+	function(box, ibox, dv, tv, model, util, cc, auth,bv) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 		
 		var Source = Backbone.Model.extend({
-			defaults: {name: "Things", url: ""	},
+			defaults: {name: "Things", url: "" },
 			fetch:function() {
 				var d = util.deferred();
 				console.log('source fetching ', this.get('url'), this);
 				var c = model.get_rdf(this.get('url'));
-				c.fetch().then(function() {
-					console.log('calling resolve ');
-					d.resolve(c);
-				});
+				c.fetch().then(function() {	d.resolve(c); });
 				return d.promise(); 
 			}
 		});
-
 		var SourceView = Backbone.View.extend({
 			tagName: "li",
 			className: "source",
-			initialize:function() {
-				}
-		});
-		
+			initialize:function() {}
+		});		
 		var SourceCollection = Backbone.Collection.extend({
 			model:Source
 		});		
-
 		var SourcesView = Backbone.View.extend({
 			render:function() {
 				var this_ = this;
@@ -95,12 +89,10 @@ define(
 					el:this.$el.find('.things')[0],
 					columns:[
 						function(m) {
-							var view = new tv.GenericItemView({model:m});
+							var view = new bv.ThingListItemView({model:m});
 							view.render();
 							view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
-							view.$el.data('view',view);
-							view.$el.data('model',view.options.model);
-							return view.el;
+							return view;
 						}
 					]
 				});
@@ -168,6 +160,7 @@ define(
 					drop: function( event, ui ) {
 						if (event.target !== this_.el) { return ; }
 						var target_box = this_._new_group();
+						console.log('view to drag ', ui.draggable.data("view"));
 						target_box.add(box.clone_view(ui.draggable.data("view")));
 						event.stopPropagation();
 						return false;

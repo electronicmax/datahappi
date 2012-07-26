@@ -47,7 +47,7 @@ define([], function() {
 			return this.el;
 		},
 		_add_view:function(v) {
-			this.$el.find('.items').append(v.render());
+			this.$el.find('.items').append(v.render().el);
 		},
 		add:function(v) {
 			console.log('adding view ', v);

@@ -95,3 +95,9 @@
   /*IE*/
 
 }
+#box_example .thing-listitem .thing-label a {
+  font-size: 0.5em;
+}
+#box_example .thing-listitem .props {
+  display: none;
+}

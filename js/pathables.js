@@ -3,7 +3,6 @@ define(['js/models', 'js/utils'], function(models,utils) {
   initial sketch of dereferencing core data structure
   based on discussion w/ Skinna in UGLabs 24 July 2012
 */
-
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
 		defaults: { position: -1 }	
@@ -66,12 +65,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
 		},
 		try_extend_path:function(step_or_path) {
-			console.log("STEP OR PATH ? ", step_or_path, step_or_path instanceof Path);
-			if (step_or_path instanceof Path) {
-				console.log("PATH ");
-				return this._try_extend_path_by_path(step_or_path);
-			}
-			console.log("STEP");
+			if (step_or_path instanceof Path) {	return this._try_extend_path_by_path(step_or_path);	}
 			console.assert(step_or_path instanceof Step, "It's not a path, and it's not a step. WHAT IS IT?");
 			return this._try_extend_path_by_step(step_or_path);
 		},
@@ -83,7 +77,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			if (_.isArray(last_value)) {
 				var next_vals = last_value.map(function(v) {
 					return step.apply(v);
-				}).filter(utils.DEFINED);
+				}).filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
 				if (next_vals.length >= 0) {
 					next_value = utils.flatten(next_vals);
 				}
