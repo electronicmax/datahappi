@@ -79,7 +79,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			// returns changes us in place or undefined if fail
 			var last_value = this.get_last_value();
 			var next_value = undefined;
-			console.log("_try_extend_path_by_step ", step, this, this.path, last_value)
+			console.log("_try_extend_path_by_step ", step, this, this.path, last_value);
 			if (_.isArray(last_value)) {
 				var next_vals = last_value.map(function(v) {
 					return step.apply(v);
@@ -166,14 +166,16 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				var result = pathable.try_extend_path(path_or_step);
 				return [pathable, result];
 			});
-		},
+		}
 	});
-	
+
 	return {
 		Step:Step,
 		PropertyDereferenceStep: PropertyDereferenceStep,
+		Steps:Steps,
 		Pathable: Pathable,
 		Pathables: Pathables,
+		Path:Path,
 		Paths: Paths
 	};
 });
