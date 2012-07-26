@@ -19,7 +19,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		apply: function(dmodel) {
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
-			return dmodel.get(property);			
+			return dmodel && dmodel.get && dmodel.get(property);			
 		}
 	});
 
@@ -75,19 +75,17 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			var next_value = undefined;
 			console.log("_try_extend_path_by_step ", step, this, this.path, last_value);
 			if (_.isArray(last_value)) {
-				var next_vals = last_value.map(function(v) {
-					return step.apply(v);
-				}).filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
-				if (next_vals.length >= 0) {
-					next_value = utils.flatten(next_vals);
-				}
-			}	else {
+				var next_vals = last_value.map(function(v) {return step.apply(v); })
+					.filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
+				if (next_vals.length > 0) { 	next_value = utils.flatten(next_vals);		}
+			} else {
 				next_value = step.apply(this.get_last_value());
 			}
 			if (utils.DEFINED(next_value)) {
 				this.path.add_step(step);
 				this.values.push(next_value);
 			}
+			console.log("_try_extend_path_by_step returning ", next_value);
 			return next_value;
 		},
 		_try_extend_path_by_path:function(path) {
@@ -141,14 +139,13 @@ define(['js/models', 'js/utils'], function(models,utils) {
 			var this_ = this;
 			this.bind("add", function(new_model) {
 				// apply path to this m.
-				if (new_model instanceof Pathable) {
-					// m is a pathable
-					var dereferenced = undefined;
-					var paths = this_.get_paths();
-					for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
-						console.log("TRYING TO APPLY PATH ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }));
-						dereferenced = new_model.try_extend_path(paths[p_i]);
-					}
+				utils.assert(new_model instanceof Pathable, "Only pathables can be dereferenced");
+				// m is a pathable
+				var dereferenced = undefined;
+				var paths = this_.get_paths();
+				for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
+					// console.log("TRYING TO APPLY PATH ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }));
+					dereferenced = new_model.try_extend_path(paths[p_i]);
 				}
 			});
 		},

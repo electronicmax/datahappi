@@ -1,5 +1,6 @@
 define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 	var assert = utils.assert;
+	var l = function() { console.log.apply(console,arguments); };
 	tests = [
 		function() {
 			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
@@ -40,15 +41,29 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
 		},
 		function() {
-			console.log("Adding Bob and Tom to Pathables...");
+			l(">>> Double deref test <<< ");
+			var bob = new pathables.Pathable({_id:"Bob", likes:"Jelly"});
+			var tom = new pathables.Pathable({_id:"Tom", likes:"Jam"});
+			var dom = new pathables.Pathable({_id:"Dom", bro:"Blah"});
+			var pathCollection = new pathables.Pathables([bob, tom, dom]);
+			//l("deref likes ");
+			//pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
+			//l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			l("deref bro ");
+			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
+			l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+		},
+		function() {
+			console.log(">>> Mega pathables test <<< ");			
+			console.log("=========== Adding Bob and Tom to Pathables...");
 			var bob = new pathables.Pathable({_id:"Bob", likes:"Jelly"});
 			var tom = new pathables.Pathable({_id:"Tom", likes:"Jam"});
 			bob.set({'bro':tom});
 			tom.set({'bro':bob});
 			pathCollection = new pathables.Pathables([bob, tom]);
 			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
-			//console.log("Dereferencing on 'bro'...");
-			//pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
+			console.log("Dereferencing on 'bro'...");
+			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
 			console.log("Dereferencing on 'likes'...");
 			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
 			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
@@ -68,8 +83,8 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 
 			console.log("extending path by ->likes->tastes");
 			var path = new pathables.Path();
-			path.add_step(new pathables.Step({position:'likes'}));
-			path.add_step(new pathables.Step({position:'tastes'}));
+			path.add_step(new pathables.PropertyDereferenceStep({property:'likes'}));
+			path.add_step(new pathables.PropertyDereferenceStep({property:'tastes'}));
 			pathCollection.try_extend_path(path);
 			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
 		}
