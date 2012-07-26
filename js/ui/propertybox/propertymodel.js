@@ -1,7 +1,7 @@
 define([],function() {
 		var to_base_value= function(v) {
 			if (v instanceof Backbone.Model) { return v.id; }
-			if (v instanceof Object) { throw Error(" cannot base value of object ");  }
+			if (v instanceof Object) { throw Error(" cannot base value of object "); }
 			return v.valueOf();
 		};
 		var PropertyModel = Backbone.Model.extend({

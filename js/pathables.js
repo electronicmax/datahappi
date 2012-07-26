@@ -78,7 +78,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 				var next_vals = last_value.map(function(v) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
-				if (next_vals.length > 0) { 	next_value = utils.flatten(next_vals);		}
+				if (next_vals.length > 0) { next_value = utils.flatten(next_vals); }
 			} else {
 				console.log("not array - testing -- ", last_value);
 				if (step.test(this.get_last_value())) {
@@ -173,6 +173,6 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		Pathable: Pathable,
 		Pathables: Pathables,
 		Path:Path,
-		Paths: Paths
+		Paths:Paths
 	};
 });

@@ -2,11 +2,17 @@
 define(
 	[
 		'js/ui/propertybox/propertycollection',
-		'js/draggableview'
+		'js/box',
+		'js/pathables',
 	],
-	function(propertycollection, dv) {
+	function(pc, box, pathables) {
+		/* A selectable area showing a property which may be made the next step in a
+		 * path for one or more pathables.
+		 *
+		 * Required options:
+		 * property: String
+		 * pathables: pathables.Pathables */
 		var PropertyView = Backbone.View.extend({
-			// paints a nice property.
 			events: {
 				'click .propmodel' : '_propclick'
 			},
@@ -15,6 +21,7 @@ define(
 			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function() {
 				var this_ = this;
+				this.property_collection = new pc.PropertyCollection();
 				this.options.model.bind("change:coverage", function() { this_._update_coverage(); });
 				this.options.model.bind("change:entropy", function() { this_._update_entropy(); });
 			},
@@ -39,18 +46,17 @@ define(
 			}
 		});
 
-		var PropertyBox = Backbone.View.extend({
-			/* @requires: src 'collection' of models to generate properties for -- passed in to options  */
-			tagName:"div",
-			className:"property-box",
-			template:"", // TODO.
+		var PropertyViewCollection = Backbone.Collection.extend({
+
+		});
+
+		var PropertyBox = box.BoxView.extend({
+			events: {},
 			initialize:function() {
 				var this_ = this;
-				// propertycollections contain propertymodels
-				this.collection = new propertycollection.PropertyCollection(undefined, {
-					src_collection:this.options.src_collection
-				});
-				this.collection.on("change", function() {this_._update();})
+				this.property_collection = new PropertyViewCollection();
+				this.property_collection
+					.on("change", function() {this_._update();})
 					.on("add",function() { this_._update(); })
 					.on("remove",function() { this_._update(); });
 			},
@@ -70,7 +76,7 @@ define(
 			_update:function(p) {
 				var ptov = this.ptov;
 				var this_ = this;
-				this.collection.map(function(p) {
+				this.property_collection.map(function(p) {
 					if (!ptov[p.id]) {
 						var pv = new PropertyView({model:p, collection:this_.collection});
 						ptov[p.id] = pv;

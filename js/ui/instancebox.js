@@ -1,9 +1,10 @@
 define(
 	[
 		'js/box',
-		'js/ui/propertybox/propertyview'
+		'js/ui/propertybox/propertyview',
+		'js/pathables'
 	],
-	function(box, pview) {
+	function(box, pview, pathables) {
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="expand_props icon-logout"></span></div>';
 		var InstanceBox = box.BoxView.extend({
 			events: {
@@ -15,7 +16,7 @@ define(
 				this.bind('drag', function(offset) { this_._update_pview_offset(offset); });
 
 				// make a parallel structure for our property view
-				this.models_collection = new Backbone.Collection();
+				this.models_collection = new pathables.Pathables();
 				this.options.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
 					v = v.attributes;

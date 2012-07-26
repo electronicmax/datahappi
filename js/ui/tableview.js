@@ -48,7 +48,7 @@ define(['js/utils'], function(util) {
 			this.collection.bind("remove", function(x) { this_._handle_remove(x); });
 			this.render();
 			this.options.columns = this.options.columns || [
-				function(m) { return (new ItemView({model:m})).render(); },
+				function(m) { return (new ItemView({model:m})).render(); }, // Should be GeneticItemView?
 				function(m) {
 					return _(m.attributes).keys().map(
 						function(x) {
