@@ -101,4 +101,5 @@
 }
 #box_example .thing-listitem .props {
   display: none;
+  font-size: 0.7em;
 }
