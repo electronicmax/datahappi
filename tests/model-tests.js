@@ -40,24 +40,38 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
 		},
 		function() {
+			console.log("Adding Bob and Tom to Pathables...");
 			var bob = new pathables.Pathable({_id:"Bob", likes:"Jelly"});
 			var tom = new pathables.Pathable({_id:"Tom", likes:"Jam"});
 			bob.set({'bro':tom});
 			tom.set({'bro':bob});
-
 			pathCollection = new pathables.Pathables([bob, tom]);
+			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			//console.log("Dereferencing on 'bro'...");
+			//pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
+			console.log("Dereferencing on 'likes'...");
+			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
+			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
 
-			console.log("before extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
-			var step = new pathables.PropertyDereferenceStep({property:"bro"});
-			pathCollection.try_extend_path(step);
-			var step = new pathables.PropertyDereferenceStep({property:"likes"});
-			pathCollection.try_extend_path(step);
-			console.log("after extend", pathCollection.models.map(function(p) {return p.get_last_value()}));
-
+			console.log("Adding Dave...");
 			var dave = new pathables.Pathable({_id:"Dave", likes:"Marmite"});
 			dave.set({'bro':dave});
 			pathCollection.add(dave);
-			console.log("after addition of dave", pathCollection.models.map(function(p) {return p.get_last_value()}));
+			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+
+			console.log("Adding Jeff...");
+			var lemonJelly = new pathables.Pathable({_id:"Lemon Jelly", colour:"Yellow", tastes:"Repugnant"});
+			var lemonJam = new pathables.Pathable({_id:"Lemon Jam", tastes:"Fetid"});
+			var jeff = new pathables.Pathable({_id:"Jeff", likes:[lemonJelly, lemonJam]});
+			pathCollection.add(jeff);
+			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+
+			console.log("extending path by ->likes->tastes");
+			var path = new pathables.Path();
+			path.add_step(new pathables.Step({position:'likes'}));
+			path.add_step(new pathables.Step({position:'tastes'}));
+			pathCollection.try_extend_path(path);
+			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
 		}
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
