@@ -1,4 +1,4 @@
-define(['js/models', 'js/utils'], function(models,utils) {
+define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,utils) {
 /*
   initial sketch of dereferencing core data structure
   based on discussion w/ Skinna in UGLabs 24 July 2012
@@ -138,10 +138,11 @@ define(['js/models', 'js/utils'], function(models,utils) {
 	// Pathable Collection - this collection also keeps track of
 	// all of the unqiue paths that have been applied to all of
 	// the pathables, and has convenience methods fore 
-	var Pathables = Backbone.Collection.extend({
+	var Pathables = rdfc.RDFCollection.extend({
 		model:Pathable,
-		initialize:function() {
-			var this_ = this;
+		initialize:function(models, options) {
+			rdfc.RDFCollection.prototype.initialize.apply(this,arguments);
+			var this_ = this;			
 			this.bind("add", function(new_model) {
 				// apply path to this m.
 				utils.assert(new_model instanceof Pathable, "Only pathables can be dereferenced");
@@ -173,6 +174,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 		Pathable: Pathable,
 		Pathables: Pathables,
 		Path:Path,
-		Paths:Paths
+		Paths: Paths,
+		get_rdf:function(u) { return new Pathables(undefined, {src_url:u}); }
 	};
 });

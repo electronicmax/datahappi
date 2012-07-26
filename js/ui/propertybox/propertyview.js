@@ -1,9 +1,8 @@
 define(
 	[
-		'js/ui/propertybox/propertycollection',
 		'js/pathables'
 	],
-	function(pc, pathables) {
+	function(pathables) {
 		/* A selectable area showing a property which may be made the next step in a
 		 * path for one or more pathables.
 		 *
@@ -19,7 +18,6 @@ define(
 			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function() {
 				var this_ = this;
-				this.property_collection = new pc.PropertyCollection();
 				this.options.model.bind("change:coverage", function() { this_._update_coverage(); });
 				this.options.model.bind("change:entropy", function() { this_._update_entropy(); });
 			},

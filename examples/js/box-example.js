@@ -6,12 +6,13 @@ define(
 		'js/draggableview',
 		'js/ui/tableview',
 		'js/models',
+		'js/pathables',
 		'js/utils',
 		'js/googlecal/CalendarCollection',
 		'js/googlecal/auth',
 		'examples/js/box-views'
 	],
-	function(box, ibox, dv, tv, model, util, cc, auth,bv) {
+	function(box, ibox, dv, tv, model, pathables, util, cc, auth,bv) {
 		var path = document.location.pathname;
 		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
@@ -21,7 +22,7 @@ define(
 			fetch:function() {
 				var d = util.deferred();
 				console.log('source fetching ', this.get('url'), this);
-				var c = model.get_rdf(this.get('url'));
+				var c = pathables.get_rdf(this.get('url'));
 				c.fetch().then(function() {	d.resolve(c); });
 				return d.promise(); 
 			}
