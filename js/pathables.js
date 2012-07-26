@@ -146,6 +146,7 @@ define(['js/models', 'js/utils'], function(models,utils) {
 					var dereferenced = undefined;
 					var paths = this_.get_paths();
 					for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
+						console.log("TRYING TO APPLY PATH ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }));
 						dereferenced = new_model.try_extend_path(paths[p_i]);
 					}
 				}
