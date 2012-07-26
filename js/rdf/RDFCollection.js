@@ -1,6 +1,6 @@
 define(
-	['js/rdf/name-resolver'],
-	function(nameresolver) {
+	['js/utils', 'js/rdf/name-resolver'],
+	function(utils, nameresolver) {
 		var kill_port = function(host_string) {
 			return host_string.search(/:\d+/g) >= 0 ?  host_string.slice(0,host_string.indexOf(':')) : host_string;
 		};
@@ -22,7 +22,7 @@ define(
 		var RDFQCollection = Backbone.Collection.extend({
 			initialize:function(models,options) {
 				console.log("loading from ", options && options.src_url);
-				this.src_url = options.src_url;
+				this.options = options;
 			},
 			_convert_values : function(o) {
 				var this_ = this;
@@ -43,7 +43,8 @@ define(
 			fetch:function(options) {
 				var this_ = this;
 				var d = new $.Deferred();
-				fetch_by_proxy(this.src_url).then(function(xml) {
+				utils.assert(this.options && this.options.src_url, "No src url defined :( ");
+				fetch_by_proxy(this.options.src_url).then(function(xml) {
 					/* Preprocess - Fix all buggy dates */
 					var startTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "start"));
 					var endTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "end"));
