@@ -1,4 +1,11 @@
 @import "../../js/ui/font-propertybox/fontello.css";
+html,
+body {
+  height: 100%;
+  margin: 0;
+  position: relative;
+  padding: 0;
+}
 #box_example {
   position: relative;
 }
@@ -6,7 +13,12 @@
   width: 100%;
   height: 100px;
 }
+#box_example .new-source-url {
+  display: none;
+  width: 100%;
+}
 #box_example .things {
+  background-color: white;
   position: absolute;
   top: 100px;
   bottom: 0px;
@@ -21,14 +33,18 @@
 }
 #box_example .things .tablecontainer {
   height: 100%;
-  background: #fafafa;
   overflow: scroll;
 }
 #box_example .things table {
   margin-bottom: 50px;
 }
+#box_example .greybox:over {
+  background: #fafafa;
+}
 #box_example .instance {
-  padding: 2px;
+  padding: 3px 2px 3px 3px;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: padding 0.2s ease-in-out;
 }
 #box_example .slidepanel {
   padding: 6px 5px 3px 0px;
@@ -67,18 +83,14 @@
   left: 0;
   border-right: 1px solid #DDD;
 }
-#box_example html,
-#box_example body,
 #box_example .workspace {
+  width: 100%;
   height: 100%;
   position: relative;
   /*margin: 0;*/
 
   /*padding: 0;*/
 
-}
-#box_example ul {
-  list-style-type: none;
 }
 #box_example li {
   position: relative;

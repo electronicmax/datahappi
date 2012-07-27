@@ -18,12 +18,16 @@ define(
 		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 		
 		var Source = Backbone.Model.extend({
-			defaults: {name: "Things", url: "" },
+			idAttribute: "name",
+			defaults: { name: "Things", url: "" },
 			fetch:function() {
+				var this_ = this;
 				var d = util.deferred();
-				console.log('source fetching ', this.get('url'), this);
 				var c = pathables.get_rdf(this.get('url'));
-				c.fetch().then(function() {	d.resolve(c); });
+				c.fetch().then(function() {
+					c.map(function(m) { m.set({source:this_}); });
+					d.resolve(c);
+				});
 				return d.promise(); 
 			}
 		});
@@ -36,18 +40,40 @@ define(
 			model:Source
 		});		
 		var SourcesView = Backbone.View.extend({
+			events : {
+				"click .add-new-source" : "_show_source_url",
+				"keyup .new-source-url" : "_add_source",
+			},
+			initialize:function() {
+				var this_ = this;
+				this.options.collection.bind('add', function(m) { this_._add(m); });
+			},
 			render:function() {
 				var this_ = this;
-				this.$el.html(''); 
+				this.$el.find('ul').html(''); 
 				this.options.collection.models.map(function(model) {
-					try {
-						this_.$el.append("<li>" + model.get('name') + "</li>");
-					} catch(e) { console.error(e); }
+					this_._add(model);
 				});
 				return this;
-			}
-		});		
+			},
+			_add:function(m) {
+				this.$el.find('ul').append("<li>" + m.get('name') + "</li>");
+			},
+			_show_source_url:function() {
+				console.log('showing it ', this.$el.find('.new-source-url'));
+				this.$el.find('.new-source-url').slideDown();
+			},
+			_add_source:function(event) {
+				if (event.keyCode!==13) { return; }
+				var v = this.$el.find('.new-source-url').val();
+				this.$el.find('.new-source-url').slideUp().val('');
+				var newsrc = { name : v.length > 10 ? v.slice(0, 10) + '...' : v, url: v };
+				this.options.collection.add(newsrc);
+			}			
+		});
 
+
+		
 		var SliderView = Backbone.View.extend({
 			tagName: "div",
 			className: "slider",
@@ -81,11 +107,7 @@ define(
 			_new_group : function() {this.trigger("new_group");	},
 			render:function() {
 				var sourcec = new SourceCollection(this.options.sources);
-				this.$el.find(".sources").append(new SourcesView({
-					el: this.$el.find(".sources ul"),
-					collection:sourcec
-				}).render().el).append(new SliderView().render().el);
-				
+				var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec }).render(); // .append(new SliderView().render().el);
 				var things_view = new tv.TableView({
 					el:this.$el.find('.things')[0],
 					columns:[
@@ -151,18 +173,21 @@ define(
 				this.sidebar.render();
 				this.sidebar.slideOut();
 				this.$el.droppable({
-					accept:'.item, .simple',
+					accept:'.item',
 					tolerance:"touch",
 					over:function(event, ui) {
+						console.log("OVER workspace ");
 						if (event.target !== this_.el) { return ; }
 						console.log("workspace over ", event, ui);
 					},
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
+						console.log("EVENT ", event, " UI " , ui);
 						if (event.target !== this_.el) { return ; }
 						var target_box = this_._new_group();
 						console.log('view to drag ', ui.draggable.data("view"));
 						target_box.add(box.clone_view(ui.draggable.data("view")));
+						target_box.setTopLeft(event.pageY - target_box.$el.height(), event.pageX - 300);
 						event.stopPropagation();
 						return false;
 					}

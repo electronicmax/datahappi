@@ -6,28 +6,26 @@
 
 	  <!-- reusable box widget css -->
 	  <link href="../css/box.css" rel="stylesheet">
-
 	  <!-- specific to this example --> 
 	  <link href="css/examples.css" rel="stylesheet">
-
+	  
 	  <!-- slider widghet --> 
-	  <link rel="stylesheet" href="css/slide.css" type="text/css" media="screen" />
+	  <!--<link rel="stylesheet" href="css/slide.css" type="text/css" media="screen" />-->
 	  
 	  <title>datataco lab</title>
 	</head>
 	<body id="box_example">
 		<div class="slidepanel">
 			<div class="datapanel">
-				Sources:
 				<div class="sources">
-					<ul>
-						<!--populated by the sourcesView-->
+					<ul><!--populated by the sourcesView-->
 					</ul>
+					<div class="btn add-new-source">add source</div>
+					<input type="text" class="new-source-url"></input>
 				</div><!--sources-->
 				<hr>
 				<div class="things">
-					<input type="text" placeholder="&lt;property&gt;:&lt;value&gt; or &lt;name&gt;"></input>
-					<a class="new_group" href="#"><span class="icon-indent-left"></span></a>
+					<!--<a class="new_group" href="#"><span class="icon-indent-left"></span></a>-->
 					<div class="tablecontainer">
 					  <table class="table">
 						<thead></thead>
@@ -42,7 +40,7 @@
 			  </a>
 			</div> <!--/tab-->
 		</div> <!--/slidepanel-->
-		<div class="container-fluid workspace">
+		<div class="workspace">
 		  <!--
 		  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -73,6 +71,10 @@
 			if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
 			return x.slice(x.lastIndexOf('/')+1);
 		};
+	    var to_str = function(v) {
+	        if (v.id) { return v.id; }
+	        return v.toString();
+     	};
 		var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
 		if (label && _(label).isString() && m['_id']) {
 			label = label + " <a href='"+m['_id']+"'>src</a>";          
@@ -82,7 +84,7 @@
 			label = lastpath(m['_id']) + " <a href='"+m['_id']+"'>src</a>";
 		}
    	    print("<div class='thing-listitem'><span class='thing-label'>"+label+"</span>");
-	    var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+v.toString()+'</li>'; }).join('');
+	    var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+ to_str(v) +'</li>'; }).join('');
  	    print("<div class='props'><ul>"+propslist+"</ul></div></div>");
 	%>
 	</script>    

@@ -1,8 +1,9 @@
 .box(@bordercolor: #EEEEEE) {
   position:absolute;
   top:10px;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: padding 0.5s ease-in-out;
+  
+  max-width:400px;
   &.over {
      padding:15px;
   }      
@@ -35,7 +36,6 @@
       bottom:0; right:0;
   }
   .items {
-      width:100%;
       div {
           display:inline-block;
           margin:0px;
@@ -49,7 +49,6 @@
     left:0px; bottom:-20px;
     margin:0px; padding:0px; 
     background:rgba(255,255,255,0);
-    width:80%;
     font-size:10pt;
     border:none !important;
     -webkit-box-shadow:none;
@@ -71,7 +70,6 @@
 	}
   }             
 }
-
 .greybox {
    .box(#999999);
 }        

@@ -18,6 +18,9 @@ define([], function() {
 			
 			this.render();
 		},
+		setTopLeft:function(top,left) {
+			this.$el.css("top",top).css("left",left);
+		},
 		render:function() {
 			var this_ = this;
 			this.$el.html(_(this.template).template({label:this.options.label || 'stuff'}));
@@ -29,7 +32,7 @@ define([], function() {
 			this.options.views_collection.map(function(v) { this_._add_view(v); });
 			this.$el.droppable({
 				greedy:true, // magical for allowing nesting of droppables
-				accept:'.item, .simple',
+				accept:'.item',
 				tolerance:"touch",
 				over:function(event, ui) {
 					$(this).addClass("over");
