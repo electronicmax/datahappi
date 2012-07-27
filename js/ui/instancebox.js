@@ -23,7 +23,9 @@ define(
 					hidden:true,
 					pathables:this.pathables
 				});
+				$('.workspace').append(this.propbox.render());
 
+				// TODO: Ask max how this is different to having a 'drag' function.
 				this.bind('drag', function(offset) { this_._update_propbox(offset); });
 
 				/*
@@ -50,9 +52,6 @@ define(
 				} else {
 					this.propbox.hide();
 				}
-				/* Not too sure what this code does; it may be redundant.
-				this.$el.parent().append(this.propbox.render());
-				*/
 			},
 			_update_propbox:function(offset) {
 				this.propbox.setPosition({top:offset.top, left:offset.left});

@@ -11,7 +11,7 @@ define(
 		 * Required options:
 		 * pathables: Pathables */
 		var PropertyBox = box.BoxView.extend({
-			events: {},
+			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
 				var this_ = this;
 				this.constructor.__super__.initialize.apply(this, [options])
@@ -20,6 +20,7 @@ define(
 				this.options.pathables
 					.on("add", function(p) {this_._update_add(p)})
 					.on("remove", function(p) {this_._update_remove(p)});
+
 				/*
 				this.property_collection = new pc.PropertyCollection();
 				this.property_collection
