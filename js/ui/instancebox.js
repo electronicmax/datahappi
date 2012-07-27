@@ -2,9 +2,10 @@ define(
 	[
 		'js/box',
 		'js/ui/propertybox/propertybox',
-		'js/pathables'
+		'js/pathables',
+		'js/ui/pathableview'
 	],
-	function(box, pbox, pathables) {
+	function(box, pbox, pathables, pathableview) {
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div>';
 		var InstanceBox = box.BoxView.extend({
 			events: {
@@ -22,17 +23,14 @@ define(
 
 				this.bind('drag', function(offset) { this_._update_propbox(offset); });
 
-				/*
 				this.options.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
-					v = v.attributes;
-					this_.models_collection.add(v.options.model);
+					this_.models_collection.add(v.attributes.options.model);
 				});
 				this.options.views_collection.bind('remove', function(v) {
-					v = v.attributes;
-					this_.models_collection.remove(v.options.model);
+					console.log('> removing model ', v.attributes.options.model);
+					this_.models_collection.remove(v.attributes.options.model);
 				});
-				*/
 			},
 			render:function() {
 				console.log('asking for const');
@@ -47,7 +45,7 @@ define(
 				} else {
 					this.propbox.hide();
 				}
-				/* Not soo sure what this code does; it may be redundant.
+				/* Not too sure what this code does; it may be redundant.
 				this.$el.parent().append(this.propbox.render());
 				*/
 			},

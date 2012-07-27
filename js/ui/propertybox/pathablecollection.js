@@ -26,26 +26,39 @@ define(
 					!_(this.pathables).isUndefined(),
 					"PathableCollection was not passed a pathables (pathables.Pathables)");
 
+				// TODO: Entropy and coverage calcs can be made more efficient by storing values and only changing them when a single pathable is added or removed.
 				this.pathables
 					.on('add', function(p) { this_._change_add(p); })
 					.on('remove', function(p) { this_._change_remove(p); })
-					.map(function(p) { // TODO: Is this block neccessary as well as the following block?
+					.on('change', function() {
+						this_._update_coverage();
+						this_._update_entropy();
+					}).map(function(p) {
 						this_._change_add(p);
 					});
-				// Simulate the pathables collection being empty and filling up.
-				this.pathables.map(function(pathable) {
-					this_.pathables.trigger('add', pathable);
-				});
 			},
 			_change_remove:function(pathable) {
 				// If a pathable does not exist in the pathables collection, it cannot exist in this collection.
+				this.trigger("change");
+				this.trigger("remove", pathable);
 				this.remove(pathable);
 			},
 			_change_add:function(pathable) {
+				// If a pathable is added which may be chained on this property, add it to this collection.
 				var chainedPathable = pathable.get_last_value();
 				if (_.isObject(chainedPathable) && _.keys(chainedPathable.attributes).indexOf(this.property) > -1) {
+					this.trigger("change");
+					this.trigger("add", pathable);
 					this.add(pathable);
 				}
+			},
+			_update_coverage:function() {
+				var c = this.options.model.get('coverage');
+				this.$el.find('.coverage').css('right',(this.$el.width() * (1-c))+"px");
+			},
+			_update_entropy:function() {
+				var e = this.options.model.get('entropy');
+				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
 			}
 		});
 		return { PathableCollection:PathableCollection };
