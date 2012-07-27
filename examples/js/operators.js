@@ -1,6 +1,6 @@
 // TODO: On button click, load google calendar collection into table and show lat/longs.
 define([
-		'js/rdf/RDFCollection',
+		'js/RDFCollection',
 		'js/ops/chain-engine',
 		'js/utils',
 		'js/googlecal/CalendarCollection',
@@ -8,7 +8,6 @@ define([
 		'js/ui/tableview'
 	],
 	function(rdfc, ce, util, cc, auth, tv) {
-
 		var v = new tv.TableView({el:$('.main')[0]});
 		var load = function() {
 			var buildings_url = $("#definitions_url").val();

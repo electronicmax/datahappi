@@ -41,12 +41,13 @@ define(
 		});		
 		var SourcesView = Backbone.View.extend({
 			events : {
-				"click .add-new-source" : "_show_source_url",
+				"click .new-source-add-button" : "_show_source_url",
 				"keyup .new-source-url" : "_add_source",
 			},
 			initialize:function() {
 				var this_ = this;
 				this.options.collection.bind('add', function(m) { this_._add(m); });
+				if (this.options.sidebar) { this.options.sidebar.bind('slideAway', function() { this_._hide_source_url(); }); }
 			},
 			render:function() {
 				var this_ = this;
@@ -63,10 +64,13 @@ define(
 				console.log('showing it ', this.$el.find('.new-source-url'));
 				this.$el.find('.new-source-url').slideDown();
 			},
+			_hide_source_url:function() {
+				this.$el.find('.new-source-url').slideUp().val('');
+			},																 
 			_add_source:function(event) {
 				if (event.keyCode!==13) { return; }
 				var v = this.$el.find('.new-source-url').val();
-				this.$el.find('.new-source-url').slideUp().val('');
+				this._hide_source_url();				
 				var newsrc = { name : v.length > 10 ? v.slice(0, 10) + '...' : v, url: v };
 				this.options.collection.add(newsrc);
 			}			
@@ -107,7 +111,7 @@ define(
 			_new_group : function() {this.trigger("new_group");	},
 			render:function() {
 				var sourcec = new SourceCollection(this.options.sources);
-				var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec }).render(); // .append(new SliderView().render().el);
+				var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); // .append(new SliderView().render().el);
 				var things_view = new tv.TableView({
 					el:this.$el.find('.things')[0],
 					columns:[
@@ -136,6 +140,7 @@ define(
 					sliderd.resolve();
 				});
 				$('.workspace').animate({ left:this.$el.find(".datapanel").outerWidth()	}, workspaced.resolve);
+				this.trigger('slideOut');				
 				return this._slider_animation = util.whend([sliderd,workspaced]);
 			},
 			slideAway:function () {
@@ -146,6 +151,7 @@ define(
 					sliderd.resolve();
 				});
 				$('.workspace').animate({left:8}, workspaced.resolve);
+				this.trigger('slideAway');				
 				return this._slider_animation = util.whend([sliderd,workspaced]);
 			},
 			isVisible:function() {

@@ -13,6 +13,12 @@ body {
   width: 100%;
   height: 100px;
 }
+#box_example .new-source-add-button {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  padding: 0px;
+}
 #box_example .new-source-url {
   display: none;
   width: 100%;

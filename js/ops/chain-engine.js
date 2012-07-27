@@ -120,7 +120,7 @@ define(['js/rdf/RDFCollection','js/ops/ops'],function(rdfc,ops) {
 	};
 	
 	return {
-		get_rdf_collection:function(x) { return new ChainRDFCollection(x); },
+		get_rdf_collection:function(x) { return new ChainRDFCollection(undefined, { src_url: x }); },
 		ChainModel:ChainModel,
 		to_chain_model:function(m) { return new ChainModel(m.attributes); },
 		transformers:TRANSFORMERS,
