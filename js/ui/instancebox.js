@@ -1,22 +1,28 @@
 define(
 	[
 		'js/box',
-		'js/ui/propertybox/propertyview',
+		'js/ui/propertybox/propertybox',
 		'js/pathables'
 	],
-	function(box, pview, pathables) {
-		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="expand_props icon-logout"></span></div>';
+	function(box, pbox, pathables) {
+		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div>';
 		var InstanceBox = box.BoxView.extend({
 			events: {
-				'click .expand_props' : 'expand_props'
+				'click .toggle_props' : 'toggle_props'
 			},
 			initialize:function() {
 				var this_ = this;
 				this.constructor.__super__.initialize.apply(this);
-				this.bind('drag', function(offset) { this_._update_pview_offset(offset); });
 
-				// make a parallel structure for our property view
-				this.models_collection = new pathables.Pathables();
+				// The collection of pathables which this InstanceBox uses.
+				this.pathables = new pathables.Pathables();
+
+				// The PropertyBox belonging to this InstanceBox; initially hidden.
+				this.propbox = new pbox.PropertyBox({hidden:true});
+
+				this.bind('drag', function(offset) { this_._update_propbox(offset); });
+
+				/*
 				this.options.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
 					v = v.attributes;
@@ -26,6 +32,7 @@ define(
 					v = v.attributes;
 					this_.models_collection.remove(v.options.model);
 				});
+				*/
 			},
 			render:function() {
 				console.log('asking for const');
@@ -33,21 +40,19 @@ define(
 				this.$el.append($(toolbar_template));
 				return this.el;
 			},
-			expand_props:function() {
-				if (this.pview) {
-					this.pview.remove();
-					delete this.pview;
-					return;
+			toggle_props:function() {
+				if (this.propbox.hidden) {
+					this.propbox.show();
+					this._update_propbox({top:this.$el.css("top"), left:parseInt(this.$el.css('left'), 10)});
+				} else {
+					this.propbox.hide();
 				}
-				// make visible
-				this.pview = new pview.PropertyBox({src_collection:this.models_collection});
-				this.$el.parent().append(this.pview.render());
-				this._update_pview_offset({top:this.$el.css("top"), left:parseInt(this.$el.css('left'), 10)});
+				/* Not soo sure what this code does; it may be redundant.
+				this.$el.parent().append(this.propbox.render());
+				*/
 			},
-			_update_pview_offset:function(offset) {
-				if (this.pview) {
-					this.pview.setPosition({top:offset.top, left:offset.left});
-				}
+			_update_propbox:function(offset) {
+				this.propbox.setPosition({top:offset.top, left:offset.left});
 			}
 		});
 		return { InstanceBox:InstanceBox };

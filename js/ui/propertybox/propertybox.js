@@ -1,15 +1,16 @@
 define(
 	[
 		'js/box',
-		'js/ui/propertybox/propertymodel'
+		'js/ui/propertybox/propertymodel',
+		'js/ui/propertybox/propertycollection'
 	],
-	function(box, pm) {
+	function(box, pm, pc) {
 		/* The floating box containing the list of clickable properties */
 		var PropertyBox = box.BoxView.extend({
 			events: {},
 			initialize:function() {
 				var this_ = this;
-				this.property_views = [];
+				this.property_collection = new pc.PropertyCollection();
 				this.property_collection
 					.on("change", function() {this_._update();})
 					.on("add",function() { this_._update(); })
