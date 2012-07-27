@@ -20,7 +20,7 @@ define(
 			initialize:function() {
 				this.id = this.property;
 
-				this.pathable_collection = new pathablecollection.PathableCollection({
+				this.pathable_collection = new pathablecollection.PathableCollection({}, {
 					property:this.options.property,
 					pathables:this.options.pathables
 				});

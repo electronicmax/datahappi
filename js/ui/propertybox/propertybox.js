@@ -18,8 +18,8 @@ define(
 
 				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
-					.on("add", function(p) {this_._update_add(p)})
-					.on("remove", function(p) {this_._update_remove(p)});
+					.on("add", function(p) {this_._update_add(p);})
+					.on("remove", function(p) {this_._update_remove(p);});
 			},
 			render:function() {
 				console.log("Rendering PropertyBox");
@@ -57,11 +57,12 @@ define(
 				});
 			},
 			_update_add:function(pathable) {
+				this_ = this;
 				pathable.map(function(attribute) {
-					if (!this.options.views_collection.get(attribute)) {
-						this.options.views_collection.add(new pview.PropertyView({
+					if (!this_.options.views_collection.get(attribute)) {
+						this_.options.views_collection.add(new pview.PropertyView({
 							property:attribute,
-							pathables:this.options.pathables
+							pathables:this_.options.pathables
 						}));
 					}
 				});
