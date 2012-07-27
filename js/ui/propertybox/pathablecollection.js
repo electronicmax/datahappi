@@ -52,6 +52,7 @@ define(
 					this.add(pathable);
 				}
 			},
+			/*
 			_update_coverage:function() {
 				var c = this.options.model.get('coverage');
 				this.$el.find('.coverage').css('right',(this.$el.width() * (1-c))+"px");
@@ -59,6 +60,18 @@ define(
 			_update_entropy:function() {
 				var e = this.options.model.get('entropy');
 				this.$el.find('.entropy').css('right',(this.$el.width() * (1-e))+"px");
+			}
+			*/
+			_update_coverage:function() {
+				var coverage = this.pathable_collection.models.length * 1.0/this.pathables.length;
+				this.set({'coverage': coverage});
+			},
+			_update_entropy:function() {
+				var values = this.pathable_collection.map(function(p) {
+					return to_base_value(p.get(this.property));
+				});
+				var entropy = _.uniq(values).length * 1.0 / values.length;
+				this.set({'entropy': entropy});
 			}
 		});
 		return { PathableCollection:PathableCollection };
