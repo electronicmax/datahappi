@@ -12,8 +12,9 @@ define(
 		 * pathables: Pathables */
 		var PropertyBox = box.BoxView.extend({
 			events: {},
-			initialize:function() {
+			initialize:function(options) {
 				var this_ = this;
+				this.constructor.__super__.initialize.apply(this, [options])
 
 				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
@@ -29,14 +30,12 @@ define(
 			},
 			render:function() {
 				console.log("Rendering PropertyBox");
+				this.constructor.__super__.render.apply(this);
 				/*
 				this.ptov = {};
 				this.$el.html(_(this.template).template());
 				this._update(); // we might have properties already ... so populate them
-				return this.el;
 				*/
-				this.constructor.__super__.render.apply(this);
-				this.$el.append($(toolbar_template)); // TODO: this doesn't exist anywhere?
 				return this.el;
 			},
 			_add_view:function(v) {

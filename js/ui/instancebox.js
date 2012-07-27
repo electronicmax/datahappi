@@ -11,18 +11,22 @@ define(
 			events: {
 				'click .toggle_props' : 'toggle_props'
 			},
-			initialize:function() {
+			initialize:function(options) {
 				var this_ = this;
-				this.constructor.__super__.initialize.apply(this);
+				this.constructor.__super__.initialize.apply(this, [options])
 
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 
 				// The PropertyBox belonging to this InstanceBox; initially hidden.
-				this.propbox = new pbox.PropertyBox({hidden:true});
+				this.propbox = new pbox.PropertyBox({
+					hidden:true,
+					pathables:this.pathables
+				});
 
 				this.bind('drag', function(offset) { this_._update_propbox(offset); });
 
+				/*
 				this.options.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
 					this_.models_collection.add(v.attributes.options.model);
@@ -31,6 +35,7 @@ define(
 					console.log('> removing model ', v.attributes.options.model);
 					this_.models_collection.remove(v.attributes.options.model);
 				});
+				*/
 			},
 			render:function() {
 				console.log('asking for const');
