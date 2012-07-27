@@ -62,7 +62,6 @@ define([], function() {
 		show:function() {
 			this.hidden = false;
 			// TODO: Unhide.
-			this.render();
 			console.log("Unhiding Box");
 		},
 		hide:function() {

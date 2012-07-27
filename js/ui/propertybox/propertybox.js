@@ -31,9 +31,11 @@ define(
 				*/
 				return this.el;
 			},
+			/*
 			_add_view:function(v) {
 				this.$el.append(v.render());
 			},
+			*/
 			setPosition:function(x) {
 				this.$el.css("top", x.top);
 				this.$el.css("left", x.left);
@@ -58,10 +60,12 @@ define(
 			},
 			_update_add:function(pathable) {
 				this_ = this;
-				pathable.map(function(attribute) {
+				pathable.map(function(attribute, property) {
+					if (property === "_id") { return; }
 					if (!this_.options.views_collection.get(attribute)) {
-						this_.options.views_collection.add(new pview.PropertyView({
-							property:attribute,
+						// this_.options.views_collection.add(new pview.PropertyView({
+						this_.add(new pview.PropertyView({
+							property:property,
 							pathables:this_.options.pathables
 						}));
 					}

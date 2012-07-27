@@ -26,12 +26,13 @@ define(
 				});
 			},
 			render:function() {
-				this.$el.html(_(this.template).template(this.options.model.toJSON()));
+				this.el = this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy+"<br>";
+				/*
+				this.$el.html(_(this.template).template(this.pathable_collection.toJSON()));
 				this.$el.data("view", this);
 				this.$el.data("model", this.options.model);
-				this._update_coverage();
-				this._update_entropy();
-				return this.el;
+				*/
+				return this;
 			},
 			_propclick: function(x) {
 				// Loads has changed - I doubt this works anymore.
