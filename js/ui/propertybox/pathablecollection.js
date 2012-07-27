@@ -1,10 +1,9 @@
 define(
 	[
 		'js/utils',
-		'js/ops/chain-engine',
 		'js/pathables'
 	],
-	function(util, ce, pathables) {
+	function(util, pathables) {
 		/* A set of pathables pointed to by a view which all may be chained on a
 		 * specific property. Must handle the pathing on pathables once its
 		 * PropertyView has been clicked.
@@ -35,6 +34,10 @@ define(
 					}).map(function(p) {
 						this_._change_add(p);
 					});
+
+				// TODO: Do we need these? Not if the collection always starts empty.
+				this._update_coverage();
+				this._update_entropy();
 			},
 			_change_remove:function(pathable) {
 				// If a pathable does not exist in the pathables collection, it cannot exist in this collection.
@@ -62,17 +65,31 @@ define(
 			}
 			*/
 			_update_coverage:function() {
-				var coverage = this.pathable_collection.models.length * 1.0/this.pathables.length;
-				this.set({'coverage': coverage});
+				this.coverage = this.length * 1.0/this.pathables.length;
 			},
 			_update_entropy:function() {
-				var values = this.pathable_collection.map(function(p) {
-					return to_base_value(p.get(this.property));
+				// What about MUTLIPLE VALUES???????
+
+				// Temporary code just so it works.
+				this.entropy = 0;
+				return;
+
+
+				this_= this;
+				var values = this.map(function(p) {
+					return to_base_value(p.get(this_.property));
 				});
-				var entropy = _.uniq(values).length * 1.0 / values.length;
-				this.set({'entropy': entropy});
+				this.entropy = _.uniq(values).length * 1.0 / values.length;
 			}
 		});
+
+		/* Helper function used in determining entropy */
+		to_base_value = function(v) {
+			if (v instanceof Backbone.Model) { return v.id; }
+			if (v instanceof Object) { throw Error(" cannot base value of object ");  }
+			return v.valueOf();
+		};
+
 		return { PathableCollection:PathableCollection };
 	}
 );

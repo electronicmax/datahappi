@@ -27,7 +27,7 @@ define(
 				console.log(this);
 			},
 			render:function() {
-				this.el = this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy+"<br>";
+				this.el = this.options.property+" coverage(broke):"+this.pathable_collection.coverage+" entropy(broke):"+this.pathable_collection.entropy+"<br>";
 				/*
 				this.$el.html(_(this.template).template(this.pathable_collection.toJSON()));
 				this.$el.data("view", this);
@@ -42,7 +42,7 @@ define(
 			}
 		});
 
-		return { 
+		return {
 			PropertyView:PropertyView
 		};
 	}

@@ -3,9 +3,8 @@ define(
 		'js/box',
 		'js/ui/propertybox/propertybox',
 		'js/pathables',
-		'js/ui/pathableview'
 	],
-	function(box, pbox, pathables, pathableview) {
+	function(box, pbox, pathables) {
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div>';
 		var InstanceBox = box.BoxView.extend({
 			events: {
