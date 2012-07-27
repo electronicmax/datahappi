@@ -14,7 +14,6 @@ define(
 				var this_ = this;
 				this.constructor.__super__.initialize.apply(this, [options]);
 
-				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
 					.on("add", function(p) {this_._update_add(p);})
 					.on("remove", function(p) {this_._update_remove(p);});
@@ -32,8 +31,7 @@ define(
 				this_ = this;
 				pathable.map(function(attribute, property) {
 					if (property === "_id") { return; }
-					if (!this_.options.views_collection.get(attribute)) {
-						// this_.options.views_collection.add(new pview.PropertyView({
+					if (!this_.options.views_collection.get(property)) {
 						this_.add(new pview.PropertyView({
 							property:property,
 							pathables:this_.options.pathables

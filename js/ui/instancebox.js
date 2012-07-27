@@ -13,7 +13,7 @@ define(
 			},
 			initialize:function(options) {
 				var this_ = this;
-				this.constructor.__super__.initialize.apply(this, [options])
+				this.constructor.__super__.initialize.apply(this, [options]);
 
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();

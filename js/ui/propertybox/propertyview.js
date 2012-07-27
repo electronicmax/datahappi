@@ -18,12 +18,13 @@ define(
 			className:"property-view",
 			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function() {
-				this.id = this.property;
+				this.id = this.options.property;
 
 				this.pathable_collection = new pathablecollection.PathableCollection({}, {
 					property:this.options.property,
 					pathables:this.options.pathables
 				});
+				console.log(this);
 			},
 			render:function() {
 				this.el = this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy+"<br>";
@@ -37,6 +38,7 @@ define(
 			_propclick: function(x) {
 				// Loads has changed - I doubt this works anymore.
 				// this.options.collection.chain_forwards(this.options.model.get("_id"));
+				consolelog("Clicked: ", this.id);
 			}
 		});
 
