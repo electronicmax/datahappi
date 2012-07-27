@@ -14,20 +14,12 @@ define(
 			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
 				var this_ = this;
-				this.constructor.__super__.initialize.apply(this, [options])
+				this.constructor.__super__.initialize.apply(this, [options]);
 
 				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
 					.on("add", function(p) {this_._update_add(p)})
 					.on("remove", function(p) {this_._update_remove(p)});
-
-				/*
-				this.property_collection = new pc.PropertyCollection();
-				this.property_collection
-					.on("change", function() {this_._update();})
-					.on("add",function() { this_._update(); })
-					.on("remove",function() { this_._update(); });
-				*/
 			},
 			render:function() {
 				console.log("Rendering PropertyBox");
@@ -65,9 +57,9 @@ define(
 				});
 			},
 			_update_add:function(pathable) {
-				pathable.attributes.map(function(attribute) {
-					if (!this.views_collection.get(attribute)) {
-						this.views_collection.add(new pview.PropertyView({
+				pathable.map(function(attribute) {
+					if (!this.options.views_collection.get(attribute)) {
+						this.options.views_collection.add(new pview.PropertyView({
 							property:attribute,
 							pathables:this.options.pathables
 						}));

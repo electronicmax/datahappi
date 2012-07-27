@@ -18,6 +18,9 @@ define(
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 
+				// TODO: Remove.
+				window.pathables = this.pathables;
+
 				// The PropertyBox belonging to this InstanceBox; initially hidden.
 				this.propbox = new pbox.PropertyBox({
 					hidden:true,
@@ -28,6 +31,11 @@ define(
 				// TODO: Ask max how this is different to having a 'drag' function.
 				this.bind('drag', function(offset) { this_._update_propbox(offset); });
 
+				this.options.views_collection.on('add', function(view) {
+					this_.pathables.add(view.get('model'));
+				}).on('remove', function(view) {
+					this_.pathables.remove(view.get('model'));
+				});
 				/*
 				this.options.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
