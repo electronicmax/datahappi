@@ -77,8 +77,9 @@
 			label = lastpath(m['_id']) + " <a href='"+m['_id']+"'>src</a>";
 		}
    	    print("<div class='thing-listitem'><span class='thing-label'>"+label+"</span>");
-	    var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+ to_str(v) +'</li>'; }).join('');
- 	    print("<div class='props'><ul>"+propslist+"</ul></div></div>");
+	  
+	    // var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+ to_str(v) +'</li>'; }).join('');
+ 	    // print("<div class='props'><ul>"+propslist+"</ul></div></div>");
 	%>
 	</script>    
 	<script src="../../lib/jquery-1.7.2.min.js" type="text/javascript"></script>

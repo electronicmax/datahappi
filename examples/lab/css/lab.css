@@ -58,9 +58,6 @@ body .workspace {
 body .workspace .greybox {
   position: absolute !important;
 }
-body .greybox:over {
-  background: #fafafa;
-}
 body .item {
   padding: 3px 2px 3px 3px;
   -webkit-transition: background-color 0.2s ease-in-out;

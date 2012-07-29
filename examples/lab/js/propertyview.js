@@ -14,7 +14,7 @@ define(
 			events: {
 				'click .propmodel' : '_propclick'
 			},
-			tagName:"div",
+			tagName:"li",
 			className:"property-view",
 			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function() {
@@ -26,7 +26,7 @@ define(
 				});
 			},
 			render:function() {
-				this.el = this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy+"<br>";
+				this.$el.html(this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy);
 				/*
 				this.$el.html(_(this.template).template(this.pathable_collection.toJSON()));
 				this.$el.data("view", this);

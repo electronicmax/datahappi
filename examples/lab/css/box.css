@@ -2,7 +2,8 @@
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  max-width: 400px;
+  max-width: 450px;
+  min-width: 300px;
   padding: 8px;
 }
 .greybox.over {
@@ -86,37 +87,29 @@
   width: 20px;
 }
 /* properties */
-.property-box {
-  background: rgba(250, 250, 250, 0.8);
-  text-align: right;
-  padding: 4px;
-  font-size: 0.6em;
-}
-.property-box .converage-container,
-.property-box .entropy-container {
-  display: inline-block;
-  position: relative;
-  width: 30px;
-  height: 1em;
-  border: 1px solid #AAA;
-}
-.property-box .converage-container div,
-.property-box .entropy-container div {
+.properties {
   position: absolute;
   left: 0px;
-  top: 0px;
-  bottom: 0px;
   right: 0px;
+  min-width: 200px;
+  bottom: -250px;
+  overflow: auto;
+  background: rgba(250, 250, 250, 0.8);
+  padding: 4px;
+  font-size: 0.7em;
+  vertical-align: top;
 }
-.property-box .coverage-container {
-  display: none;
-}
-.property-box .coverage-container div {
-  background-color: #AEE;
-}
-.property-box .entropy-container {
-  display: none;
-}
-.property-box .entropy-container div {
-  background-color: #EAA;
-}
+/*
+    .converage-container, .entropy-container {
+	   display:inline-block;
+	   position:relative;
+       width: @minichart-width;
+       height: 1em;
+       div {
+          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
+       }
+       border:1px solid #AAA;
+   }
+   .coverage-container {  display:none; div { background-color:#AEE; }   }
+   .entropy-container {  display:none; div { background-color:#EAA; }  }
+   */

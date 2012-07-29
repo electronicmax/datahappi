@@ -9,13 +9,12 @@ define(
 		 * Required options:
 		 * pathables: Pathables */
 
-		var template = "<ul class='items'></ul>";
+		var template = "<ul class='propitems'></ul>";
 		var PropertyBox = box.BoxView.extend({
 			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
+				this.constructor.__super__.initialize.apply(this, [_({ item_container_class : "propitems" }).extend(options)]);
 				var this_ = this;
-				this.constructor.__super__.initialize.apply(this, [options]);
-				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
 					.on("add", function(p) {this_._update_add(p);})
 					.on("remove", function(p) {this_._update_remove(p);});

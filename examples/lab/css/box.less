@@ -1,9 +1,14 @@
+@boxminwidth : 300px;
+@boxwidth : 450px;
+@propswidth : 300px;
+@propsheight : 200px;
+
 .box(@bordercolor: #EEEEEE) {
   position:absolute;
   top:10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  
-  max-width:400px;
+  max-width:@boxwidth;
+  min-width:@boxminwidth;
   &.over {
      padding:15px;
   }      
@@ -80,14 +85,22 @@
 }
 
 /* properties */
-.property-box {
+.properties {
+    position:absolute;
+    left:0px;
+    right:0px;
+    min-width:200px;
+    bottom:-1 * (@propsheight + 50);
+    overflow:auto;
 	background:rgba(250,250,250,0.8);
-	text-align:right;
 	padding:4px;	
     @minichart-width: 30px;
-	font-size:0.6em;
+	font-size:0.7em;
+    vertical-align:top;
+ }
 
-   .converage-container, .entropy-container {
+ /*
+    .converage-container, .entropy-container {
 	   display:inline-block;
 	   position:relative;
        width: @minichart-width;
@@ -98,5 +111,5 @@
        border:1px solid #AAA;
    }
    .coverage-container {  display:none; div { background-color:#AEE; }   }
-   .entropy-container {  display:none; div { background-color:#EAA; }  }                   
-}              
+   .entropy-container {  display:none; div { background-color:#EAA; }  }
+   */
