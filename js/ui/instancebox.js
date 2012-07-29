@@ -12,9 +12,9 @@ define(
 				'click .toggle_props' : 'toggle_props'
 			},
 			initialize:function(options) {
+				this.constructor.__super__.initialize.apply(this, [options]);
+				
 				var this_ = this;
-				this.constructor.__super__.initialize.apply(this, [options])
-
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 
@@ -29,7 +29,7 @@ define(
 				$('.workspace').append(this.propbox.render());
 
 				// TODO: Ask max how this is different to having a 'drag' function.
-				this.bind('drag', function(offset) { this_._update_propbox(offset); });
+				this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
 
 				this.options.views_collection.on('add', function(view) {
 					this_.pathables.add(view.get('model'));
@@ -56,13 +56,13 @@ define(
 			toggle_props:function() {
 				if (this.propbox.hidden) {
 					this.propbox.show();
-					this._update_propbox({top:this.$el.css("top"), left:parseInt(this.$el.css('left'), 10)});
+					this._update_propbox(parseInt(this.$el.css("top"),10), parseInt(this.$el.css('left'), 10));
 				} else {
 					this.propbox.hide();
 				}
 			},
-			_update_propbox:function(offset) {
-				this.propbox.setPosition({top:offset.top, left:offset.left});
+			_update_propbox:function(top,left) {
+				this.propbox.setTopLeft(top,left);
 			}
 		});
 		return { InstanceBox:InstanceBox };

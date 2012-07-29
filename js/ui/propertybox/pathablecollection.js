@@ -1,10 +1,9 @@
 define(
 	[
 		'js/utils',
-		'js/ops/chain-engine',
 		'js/pathables'
 	],
-	function(util, ce, pathables) {
+	function(util, pathables) {
 		/* A set of pathables pointed to by a view which all may be chained on a
 		 * specific property. Must handle the pathing on pathables once its
 		 * PropertyView has been clicked.

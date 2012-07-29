@@ -135,9 +135,17 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	// 
 	var Paths = Backbone.Collection.extend({model:Path});
 
-	// Pathable Collection - this collection also keeps track of
-	// all of the unqiue paths that have been applied to all of
-	// the pathables, and has convenience methods fore 
+	/*
+	  Pathable Collection - this collection also keeps track of
+	  all of the unique paths that have been applied to all of
+	  the pathables, and has convenience methods for extending
+	  the path
+
+	  Duties: When a new pathable is added, automatically tries
+	  dereferencing it according to the set of deref operations
+	  that have been performed
+	  
+	*/
 	var Pathables = rdfc.RDFCollection.extend({
 		model:Pathable,
 		initialize:function(models, options) {
@@ -157,7 +165,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		},
 		get_paths:function() {
 			var paths = this.map(function(pathable) { return pathable.path; });
-			return paths; // TEMP
+			return paths; // TODO: filter for unique ones otherwise you will gettons of dupes			
 		},
 		try_extend_path:function(path_or_step) {
 			return this.map(function(pathable) {

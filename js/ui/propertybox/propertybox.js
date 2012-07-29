@@ -13,7 +13,6 @@ define(
 			initialize:function(options) {
 				var this_ = this;
 				this.constructor.__super__.initialize.apply(this, [options]);
-
 				// TODO: See if the line '.on("add", _update_add)' works too.
 				this.options.pathables
 					.on("add", function(p) {this_._update_add(p);})
@@ -23,10 +22,6 @@ define(
 				console.log("Rendering PropertyBox");
 				this.constructor.__super__.render.apply(this);
 				return this.el;
-			},
-			setPosition:function(x) {
-				this.$el.css("top", x.top);
-				this.$el.css("left", x.left);
 			},
 			_update_add:function(pathable) {
 				this_ = this;
