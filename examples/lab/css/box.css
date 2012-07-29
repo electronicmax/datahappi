@@ -95,8 +95,9 @@
   bottom: -190px;
   height: 170px;
   border-top: none;
+  border-bottom: none;
+  border-right: none;
   border-left: 1px solid #EEE;
-  border-bottom: 1px solid #EEE;
   overflow: auto;
   padding: 4px;
   font-size: 0.7em;

@@ -17,16 +17,22 @@ define(
 			tagName:"li",
 			className:"property-view",
 			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
-			initialize:function() {
-				this.id = this.property;
-
+			initialize:function(options) {
+				this.id = options.property;
+				console.log("this id is ", this.id);
+				/*
 				this.pathable_collection = new pathablecollection.PathableCollection({}, {
 					property:this.options.property,
 					pathables:this.options.pathables
 				});
+				*/
 			},
 			render:function() {
-				this.$el.html(this.options.property+" "+this.options.pathables.coverage+" "+this.options.pathables.entropy);
+				this.$el.html(this.options.property);
+				this.$el.data("property", this.options.property);
+				
+				// TODO: reenable this later --
+				// +" "+this.options.pathables.coverage+" "+this.options.pathables.entropy);
 				/*
 				this.$el.html(_(this.template).template(this.pathable_collection.toJSON()));
 				this.$el.data("view", this);

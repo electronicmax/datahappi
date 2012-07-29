@@ -22,7 +22,6 @@ define([], function() {
 		},
 		_add_view:function(v) {
 			// requires there be an 'items' subelement under us.
-			console.log('adding to ', this.options.item_container_class);
 			this.$el.find("." + this.options.item_container_class).append(v.render().el);
 		},
 		add:function(v) {
