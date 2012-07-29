@@ -1,41 +1,19 @@
 @import "../../../js/ui/font-propertybox/fontello.css";
 body {
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  bottom: 0px;
   margin: 0;
   padding: 0;
 }
-body .sources {
+body .slidepanel .sources {
   width: 100%;
   height: 100px;
 }
-body .sources .source-entry {
+body .slidepanel .sources .source-entry {
   color: #888;
 }
-body .sources .source-entry.selected {
+body .slidepanel .sources .source-entry.selected {
   color: #000;
 }
-body .workspace {
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-}
-body .new-source-add-button {
-  position: absolute;
-  top: 0px;
-  right: 3px;
-  padding: 0px;
-}
-body .new-source-url {
-  display: none;
-  width: 100%;
-}
-body .things {
+body .slidepanel .things {
   background-color: white;
   position: absolute;
   top: 100px;
@@ -44,25 +22,50 @@ body .things {
   right: 0px;
   border: 1px solid #eee;
 }
-body .things input {
+body .slidepanel .things input {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
-body .things .tablecontainer {
+body .slidepanel .things .tablecontainer {
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
+  background-color: white;
+  border: 10px solid #ddd;
+  border-radius: 34px 0px 0px 34px;
+  padding: 10px 30px 13px 13px;
 }
-body .things table {
+body .slidepanel .things table {
   margin-bottom: 50px;
+}
+body .slidepanel .new-source-add-button {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  padding: 0px;
+}
+body .slidepanel .new-source-url {
+  display: none;
+  width: 100%;
+}
+body .workspace {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+body .workspace .greybox {
+  position: absolute !important;
 }
 body .greybox:over {
   background: #fafafa;
 }
-body .instance {
+body .item {
   padding: 3px 2px 3px 3px;
   -webkit-transition: background-color 0.2s ease-in-out;
   -webkit-transition: padding 0.2s ease-in-out;
+  z-index: 1000;
 }
 body .slidepanel {
   padding: 6px 5px 3px 0px;

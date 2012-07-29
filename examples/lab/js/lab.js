@@ -12,7 +12,6 @@ define(
 		'js/googlecal/auth'
 	],
 	function(sources, sidebar, pathables, box, ibox, views, util, cc, auth) {
-		
 		var Main = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
@@ -39,9 +38,11 @@ define(
 					drop: function( event, ui ) {
 						// if (event.target !== this_.el) { return ; }
 						console.log("WORKSPACE.DROP ", event, " UI " , ui);
+						console.log('position > ', ui.helper.position().top, ui.helper.offset());
 						var target_box = this_._new_group();
 						target_box.add(box.clone_view(ui.draggable.data("view")));
-						target_box.setTopLeft(event.pageY - target_box.$el.height(), event.pageX - 300);
+						console.log('setting ', ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
+						target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 						event.stopPropagation();
 						return false;
 					}
@@ -70,7 +71,7 @@ define(
 			var wview = new Main({
 				el : $('body'),				
 				data_sources: [
-					//new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
+					new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
 					new sources.Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') })
 				],				
 			});

@@ -21,9 +21,7 @@ define(
 		render:function() {
 			var this_ = this;
 			this.$el.find('ul').html(''); 
-			this.options.collection.models.map(function(model) {
-				this_._add(model);
-			});
+			this.options.collection.models.map(function(model) { this_._add(model);	});
 			return this;
 		},
 		_add:function(m) {
@@ -69,7 +67,8 @@ define(
 					function(m) {
 						var view = new views.ThingListItemView({model:m});
 						view.render();
-						view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
+						// make this draggable
+						view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
 						return view;
 					}
 				]

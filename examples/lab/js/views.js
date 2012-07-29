@@ -1,9 +1,8 @@
 define(['js/utils'], function(utils) {
-
 	// first attempt at ta
 	var ThingListItemView = Backbone.View.extend({
 		tagName:'div',
-		className:'instance',
+		className:'item',
 		template:$('#thing-listitem-template').text(),
 		events:{
 			'dblclick .thing-label' : '_toggle_props'
