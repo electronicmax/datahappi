@@ -1,9 +1,9 @@
 define(
 	[
-		'js/box',
-		'js/ui/propertybox/propertybox',
-		'js/pathables',
-		'js/ui/pathableview'
+		'examples/lab/js/box',
+		'examples/lab/js/propertybox',
+		'examples/lab/js/pathables',
+		'examples/lab/js/pathableview'
 	],
 	function(box, pbox, pathables, pathableview) {
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div>';

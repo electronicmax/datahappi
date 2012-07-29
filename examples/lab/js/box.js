@@ -16,8 +16,7 @@ define([], function() {
 		initialize:function() {
 			this.options.views_collection = this.options.views_collection ? this.options.views_collection : new Backbone.Collection();
 			// BoxView can be passed a 'hidden' option, and is shown by default.
-			this.hidden = (!!this.options.hidden) || false;
-
+			this.hidden = (this.options.hidden === true);
 			this.render();
 		},
 		setTopLeft:function(top,left) {
@@ -27,9 +26,7 @@ define([], function() {
 			var this_ = this;
 			this.$el.html(_(this.template).template({label:this.options.label || 'stuff'}));
 			this.$el.draggable({
-				drag:function(evt,ui) {
-					this_.trigger('drag', ui.offset);
-				}
+				drag:function(evt,ui) {	this_.trigger('drag', ui.offset); }
 			});
 			this.options.views_collection.map(function(v) { this_._add_view(v); });
 			this.$el.droppable({

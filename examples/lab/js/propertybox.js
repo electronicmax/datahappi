@@ -1,7 +1,7 @@
 define(
 	[
-		'js/box',
-		'js/ui/propertybox/propertyview'
+		'examples/lab/js/box',
+		'examples/lab/js/propertyview'
 	],
 	function(box, pview) {
 		/* The floating box containing the list of clickable properties for a patricular Pathables collection.

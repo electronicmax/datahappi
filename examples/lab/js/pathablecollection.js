@@ -1,7 +1,7 @@
 define(
 	[
 		'js/utils',
-		'js/pathables'
+		'examples/lab/js/pathables'
 	],
 	function(util, pathables) {
 		/* A set of pathables pointed to by a view which all may be chained on a

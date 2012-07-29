@@ -1,0 +1,123 @@
+@import "../../js/ui/font-propertybox/fontello.css";
+html,
+body {
+  height: 100%;
+  margin: 0;
+  position: relative;
+  padding: 0;
+}
+#box_example {
+  position: relative;
+}
+#box_example .sources {
+  width: 100%;
+  height: 100px;
+}
+#box_example .new-source-add-button {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  padding: 0px;
+}
+#box_example .new-source-url {
+  display: none;
+  width: 100%;
+}
+#box_example .things {
+  background-color: white;
+  position: absolute;
+  top: 100px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border: 1px solid #eee;
+}
+#box_example .things input {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+#box_example .things .tablecontainer {
+  height: 100%;
+  overflow: scroll;
+}
+#box_example .things table {
+  margin-bottom: 50px;
+}
+#box_example .greybox:over {
+  background: #fafafa;
+}
+#box_example .instance {
+  padding: 3px 2px 3px 3px;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: padding 0.2s ease-in-out;
+}
+#box_example .slidepanel {
+  padding: 6px 5px 3px 0px;
+  position: fixed;
+  /* Panel will overlap content */
+
+  top: 0;
+  left: -292px;
+  height: 100%;
+  z-index: 999;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#box_example .tab {
+  padding: 0.5em 0 0.5em 0;
+  width: 20px;
+  position: absolute;
+  bottom: 40px;
+  right: -18px;
+  z-index: 999;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+  border-right: 1px solid #AAA;
+  border-radius: 5px;
+  background: #FFF;
+  text-align: center;
+  box-shadow: 1px 1px #aaa;
+}
+#box_example .datapanel {
+  height: 100%;
+  width: 300px;
+  background: #FFF;
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+  left: 0;
+  border-right: 1px solid #DDD;
+}
+#box_example .workspace {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /*margin: 0;*/
+
+  /*padding: 0;*/
+
+}
+#box_example li {
+  position: relative;
+  left: 0;
+}
+#box_example .flip-horizontal {
+  -moz-transform: scalex(-1);
+  -webkit-transform: scalex(-1);
+  -o-transform: scalex(-1);
+  transform: scalex(-1);
+  -ms-filter: fliph;
+  /*IE*/
+
+  filter: fliph;
+  /*IE*/
+
+}
+#box_example .thing-listitem .thing-label a {
+  font-size: 0.5em;
+}
+#box_example .thing-listitem .props {
+  display: none;
+  font-size: 0.7em;
+}

@@ -1,22 +1,16 @@
 /* this is for the box example only  */
 define(
 	[
-		'js/box',
-		'js/ui/instancebox',
-		'js/draggableview',
+		'examples/lab/js/pathables',
+		'examples/lab/js/box',
+		'examples/lab/js/instancebox',
+		'examples/lab/js/views',
 		'js/ui/tableview',
-		'js/models',
-		'js/pathables',
 		'js/utils',
 		'js/googlecal/CalendarCollection',
 		'js/googlecal/auth',
-		'examples/js/box-views'
 	],
-	function(box, ibox, dv, tv, model, pathables, util, cc, auth,bv) {
-		var path = document.location.pathname;
-		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
-		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-		
+	function(pathables, box, ibox, views, tv, util, cc, auth) {
 		var Source = Backbone.Model.extend({
 			idAttribute: "name",
 			defaults: { name: "Things", url: "" },
@@ -116,7 +110,7 @@ define(
 					el:this.$el.find('.things')[0],
 					columns:[
 						function(m) {
-							var view = new bv.ThingListItemView({model:m});
+							var view = new views.ThingListItemView({model:m});
 							view.render();
 							view.$el.addClass('item').draggable({revert:"invalid", helper:"clone", appendTo:'body'});
 							return view;
@@ -214,7 +208,10 @@ define(
 		
 		// // ---		
 		(function() {
-			// prepopulate all the things! 
+			// prepopulate all the things!
+			var path = document.location.pathname;
+			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			var wview = new WorkspaceView({

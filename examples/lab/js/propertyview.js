@@ -1,7 +1,7 @@
 define(
 	[
-		'js/pathables',
-		'js/ui/propertybox/pathablecollection'
+		'examples/lab/js/pathables',
+		'examples/lab/js/pathablecollection'
 	],
 	function(pathables, pathablecollection) {
 		/* A selectable area showing a property which may be made the next step in a
