@@ -6,7 +6,8 @@ define(
 		'examples/lab/js/pathableview'
 	],
 	function(box, pbox, pathables, pathableview) {
-		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div>';
+		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
+		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span><div class="propbox"></div></div>';
 		var InstanceBox = box.BoxView.extend({
 			events: {
 				'click .toggle_props' : 'toggle_props'
@@ -18,37 +19,59 @@ define(
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 
-				// this stuff should go into render
-				// The PropertyBox belonging to this InstanceBox; initially hidden.
-				this.propbox = new pbox.PropertyBox({
-					hidden:true,
-					pathables:this.pathables
-				});
-				$('.workspace').append(this.propbox.render().el);
-
 				// TODO: Ask max how this is different to having a 'drag' function.
-				this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
+				// this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
 
-				this.options.views_collection.on('add', function(view) {
+				this.views_collection.on('add', function(view) {
 					this_.pathables.add(view.get('model'));
 				}).on('remove', function(view) {
 					this_.pathables.remove(view.get('model'));
 				});
 				/*
-				this.options.views_collection.bind('add', function(v) {
+				this.views_collection.bind('add', function(v) {
 					console.log('> adding model ', v.attributes.options.model);
 					this_.models_collection.add(v.attributes.options.model);
 				});
-				this.options.views_collection.bind('remove', function(v) {
+				this.views_collection.bind('remove', function(v) {
 					console.log('> removing model ', v.attributes.options.model);
 					this_.models_collection.remove(v.attributes.options.model);
 				});
 				*/
 			},
 			render:function() {
-				console.log('asking for const');
+				// this stuff should go into render
+				// The PropertyBox belonging to this InstanceBox; initially hidden.
 				this.constructor.__super__.render.apply(this);
+				
+				var this_ = this;
+				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
+				this.$el.draggable({
+					drag:function(evt,ui) {	this_.trigger('drag', ui.offset); }
+				});
+				this.views_collection.map(function(v) { this_._add_view(v); });
+				this.$el.droppable({
+					greedy:true, // magical for allowing nesting of droppables
+					accept:'.item',
+					tolerance:"touch",
+					over:function(event, ui) {
+						$(this).addClass("over");
+					},
+					out:function(event, ui) {
+						$(this).removeClass("over");
+					},
+					drop: function( event, ui ) {
+						// console.log("boxdropped ", event, ui, event.target == this_.el);
+						$(this).removeClass("over");
+						var view = clone_view(ui.draggable.data("view"));
+						this_.add(view);
+					}
+				});				
 				this.$el.append($(toolbar_template));
+				this.propbox = new pbox.PropertyBox({
+					el: this.$el.find('.propbox'),
+					hidden:true,
+					pathables:this.pathables
+				});
 				return this;
 			},
 			toggle_props:function() {

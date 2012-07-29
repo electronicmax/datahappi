@@ -8,6 +8,8 @@ define(
 		 *
 		 * Required options:
 		 * pathables: Pathables */
+
+		var template = "<ul class='items'></ul>";
 		var PropertyBox = box.BoxView.extend({
 			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
@@ -20,13 +22,13 @@ define(
 			},
 			render:function() {
 				this.constructor.__super__.render.apply(this);
-				return this;
 			},
 			_update_add:function(pathable) {
 				var this_ = this;
+				this.$el.html(template);
 				pathable.map(function(attribute, property) {
 					if (property === "_id") { return; }
-					if (!this_.options.views_collection.get(attribute)) {
+					if (!this_.views_collection.get(attribute)) {
 						// this_.options.views_collection.add(new pview.PropertyView({
 						this_.add(new pview.PropertyView({
 							property:property,

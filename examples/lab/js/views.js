@@ -7,7 +7,8 @@ define(['js/utils'], function(utils) {
 		events:{
 			'dblclick .thing-label' : '_toggle_props'
 		},
-		initialize:function() {},
+		initialize:function() {
+		},
 		render:function() {
 			this.$el.html(
 				_(this.options.template || this.template).template({m:this.options.model.toJSON()})
