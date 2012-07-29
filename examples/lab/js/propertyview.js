@@ -12,11 +12,11 @@ define(
 		 * pathables: pathables.Pathables */
 		var PropertyView = Backbone.View.extend({
 			events: {
-				'click .propmodel' : '_propclick'
+				'click' : '_propclick'
 			},
 			tagName:"li",
 			className:"property-view",
-			template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
+			//template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function(options) {
 				this.id = options.property;
 				console.log("this id is ", this.id);
@@ -43,6 +43,7 @@ define(
 			_propclick: function(x) {
 				// Loads has changed - I doubt this works anymore.
 				// this.options.collection.chain_forwards(this.options.model.get("_id"));
+				this.trigger('click', this.options.property);
 			}
 		});
 

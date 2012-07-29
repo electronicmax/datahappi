@@ -66,12 +66,17 @@ define(
 					}
 				});				
 				this.$el.append($(toolbar_template));
-				this.propbox = new pbox.PropertyBox({
+				var propbox = new pbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,
 					pathables:this.pathables
 				});
-				this.propbox.render();
+				propbox.render();
+				propbox.bind('property-click', function(propertyname) {
+					console.log('property-click! ', propertyname);
+					propbox.hide();
+				});
+				this.propbox = propbox;
 				return this;
 			},
 			toggle_props:function() {

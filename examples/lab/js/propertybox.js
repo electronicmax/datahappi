@@ -29,10 +29,12 @@ define(
 					if (property === "_id") { return; }
 					if (!this_.views_collection.get(attribute)) {
 						// this_.options.views_collection.add(new pview.PropertyView({
-						this_.add(new pview.PropertyView({
+						var pv = new pview.PropertyView({
 							property:property,
 							pathables:this_.options.pathables
-						}));
+						});
+						this_.add(pv);
+						pv.bind('click', function(p) { this_.trigger('property-click', p); });
 					}
 				});
 			},
