@@ -5,7 +5,6 @@ define([], function() {
 	var clone_view = function(src_view) {
 		// makes a new view from the same model as src_model
 		var view = new src_view.constructor(src_view.options);
-		window.srcview = src_view;
 		view.render();
 		return view;
 	};

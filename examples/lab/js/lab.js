@@ -13,9 +13,9 @@ define(
 	],
 	function(sources, sidebar, pathables, box, ibox, views, util, cc, auth) {
 		
-		var WorkspaceView = Backbone.View.extend({
+		var Main = Backbone.View.extend({
 			events: {
-				'click ':'_workspace_clicked'
+				'click .workspace ':'_workspace_clicked'
 			},
 			initialize:function() {
 				
@@ -29,37 +29,33 @@ define(
 				this.sidebar.bind('new_group', function() { this_._new_group(); });
 				this.sidebar.render();
 				this.sidebar.slideOut();
-				this.$el.droppable({
+				this.$el.find('.workspace').droppable({
 					accept:'.item',
 					tolerance:"touch",
 					over:function(event, ui) {
-						console.log("OVER workspace ");
-						if (event.target !== this_.el) { return ; }
-						console.log("workspace over ", event, ui);
+						console.log("WORKSPACE OVER", event, ui);
 					},
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
-						console.log("EVENT ", event, " UI " , ui);
-						if (event.target !== this_.el) { return ; }
+						// if (event.target !== this_.el) { return ; }
+						console.log("WORKSPACE.DROP ", event, " UI " , ui);
 						var target_box = this_._new_group();
-						console.log('view to drag ', ui.draggable.data("view"));
 						target_box.add(box.clone_view(ui.draggable.data("view")));
 						target_box.setTopLeft(event.pageY - target_box.$el.height(), event.pageX - 300);
 						event.stopPropagation();
 						return false;
 					}
-			});				
+				});				
 				return this;
 			},
 			_new_group:function() {
 				var box = new ibox.InstanceBox();
-				// TODO do something about this --- move out to parent widget
-				$('.workspace').append(box.render().el);
+				this.$el.find(".workspace").append(box.render().el);
 				return box;
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
-				$(".workspace").click(function(){ this_.sidebar.slideAway();  });
+				this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
 			}
 		});
 		
@@ -71,14 +67,16 @@ define(
 
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			var wview = new WorkspaceView({
+			var wview = new Main({
+				el : $('body'),				
 				data_sources: [
 					//new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
 					new sources.Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') })
 				],				
-				el : $('#box_example')[0]
 			});
 			wview.render();
+			console.log("el > ", wview.el, wview.$el.find('.workspace'));
+			
 			wview.sidebar.slideOut();
 		})();
 	});

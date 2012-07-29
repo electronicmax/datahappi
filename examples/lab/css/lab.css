@@ -1,29 +1,41 @@
-@import "../../js/ui/font-propertybox/fontello.css";
-html,
+@import "../../../js/ui/font-propertybox/fontello.css";
 body {
-  height: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  bottom: 0px;
   margin: 0;
-  position: relative;
   padding: 0;
 }
-#box_example {
-  position: relative;
-}
-#box_example .sources {
+body .sources {
   width: 100%;
   height: 100px;
 }
-#box_example .new-source-add-button {
+body .sources .source-entry {
+  color: #888;
+}
+body .sources .source-entry.selected {
+  color: #000;
+}
+body .workspace {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+body .new-source-add-button {
   position: absolute;
   top: 0px;
   right: 3px;
   padding: 0px;
 }
-#box_example .new-source-url {
+body .new-source-url {
   display: none;
   width: 100%;
 }
-#box_example .things {
+body .things {
   background-color: white;
   position: absolute;
   top: 100px;
@@ -32,27 +44,27 @@ body {
   right: 0px;
   border: 1px solid #eee;
 }
-#box_example .things input {
+body .things input {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
-#box_example .things .tablecontainer {
+body .things .tablecontainer {
   height: 100%;
   overflow: scroll;
 }
-#box_example .things table {
+body .things table {
   margin-bottom: 50px;
 }
-#box_example .greybox:over {
+body .greybox:over {
   background: #fafafa;
 }
-#box_example .instance {
+body .instance {
   padding: 3px 2px 3px 3px;
   -webkit-transition: background-color 0.2s ease-in-out;
   -webkit-transition: padding 0.2s ease-in-out;
 }
-#box_example .slidepanel {
+body .slidepanel {
   padding: 6px 5px 3px 0px;
   position: fixed;
   /* Panel will overlap content */
@@ -64,7 +76,7 @@ body {
   margin-top: auto;
   margin-bottom: auto;
 }
-#box_example .tab {
+body .tab {
   padding: 0.5em 0 0.5em 0;
   width: 20px;
   position: absolute;
@@ -79,7 +91,7 @@ body {
   text-align: center;
   box-shadow: 1px 1px #aaa;
 }
-#box_example .datapanel {
+body .datapanel {
   height: 100%;
   width: 300px;
   background: #FFF;
@@ -89,20 +101,11 @@ body {
   left: 0;
   border-right: 1px solid #DDD;
 }
-#box_example .workspace {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  /*margin: 0;*/
-
-  /*padding: 0;*/
-
-}
-#box_example li {
+body li {
   position: relative;
   left: 0;
 }
-#box_example .flip-horizontal {
+body .flip-horizontal {
   -moz-transform: scalex(-1);
   -webkit-transform: scalex(-1);
   -o-transform: scalex(-1);
@@ -114,10 +117,10 @@ body {
   /*IE*/
 
 }
-#box_example .thing-listitem .thing-label a {
+body .thing-listitem .thing-label a {
   font-size: 0.5em;
 }
-#box_example .thing-listitem .props {
+body .thing-listitem .props {
   display: none;
   font-size: 0.7em;
 }

@@ -6,10 +6,12 @@ define(
 		'js/utils'
 	],
 	function(sources,views,tv,util) {
+		
 	var SourcesView = Backbone.View.extend({
 		events : {
 			"click .new-source-add-button" : "_show_source_url",
-			"keyup .new-source-url" : "_add_source"
+			"keyup .new-source-url" : "_add_source",
+			"click .source-entry" : "_toggle_source"
 		},
 		initialize:function() {
 			var this_ = this;
@@ -25,7 +27,15 @@ define(
 			return this;
 		},
 		_add:function(m) {
-			this.$el.find('ul').append("<li>" + m.get('name') + "</li>");
+			var new_src = $("(<li class='source-entry'>" + m.get('name') + "</li>");
+			this.$el.find('ul').append(new_src);
+			new_src.data("model", m);
+		},
+		_toggle_source:function(evt) {
+			console.log('toggle src ', evt, evt.target, evt.currenTarget, $(evt.target).data('model'));
+			var source = $(evt.target).data('model');
+			this.trigger($(evt.target).hasClass('selected') ? 'source-disabled' : 'source-enabled', source);
+			$(evt.target).toggleClass('selected');
 		},
 		_show_source_url:function() {
 			console.log('showing it ', this.$el.find('.new-source-url'));
