@@ -21,10 +21,10 @@ define(
 			},
 			render:function() {
 				this.constructor.__super__.render.apply(this);
+				this.$el.html(template);
 			},
 			_update_add:function(pathable) {
 				var this_ = this;
-				this.$el.html(template);
 				pathable.map(function(attribute, property) {
 					if (property === "_id") { return; }
 					if (!this_.views_collection.get(attribute)) {

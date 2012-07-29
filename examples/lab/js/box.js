@@ -30,13 +30,13 @@ define([], function() {
 			this._add_view(v);
 		},
 		show:function() {
-			if (this.$el.is(":hidden")) { this.$el.slideDown(); }
+			if (this.$el.is(":hidden")) { this.$el.show(); }
 		},
 		hide:function() {
-			if (!this.$el.is(":hidden")) {	this.$el.slideUp();  }
+			if (!this.$el.is(":hidden")) {	this.$el.hide();  }
 		},
 		toggle_visibility:function() {
-			if (this.$el.is(":hidden")) { this.$el.slideDown(); } else { this.$el.slideUp(); }
+			if (this.$el.is(":hidden")) { this.$el.show(); } else { this.$el.hide(); }
 		}
 	});
 	return {

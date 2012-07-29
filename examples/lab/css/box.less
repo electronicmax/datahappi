@@ -1,7 +1,7 @@
 @boxminwidth : 300px;
 @boxwidth : 450px;
 @propswidth : 300px;
-@propsheight : 200px;
+@propsheight : 170px;
 
 .box(@bordercolor: #EEEEEE) {
   position:absolute;
@@ -90,13 +90,20 @@
     left:0px;
     right:0px;
     min-width:200px;
-    bottom:-1 * (@propsheight + 50);
+	bottom: (-1 * @propsheight) - 20px;	
+	height:@propsheight;
+	border-top:none;
+	border-left:1px solid #EEE;
+	border-bottom:1px solid #EEE;
+    
     overflow:auto;
-	background:rgba(250,250,250,0.8);
 	padding:4px;	
     @minichart-width: 30px;
 	font-size:0.7em;
     vertical-align:top;
+	.propitems {
+		vertical-align:top;		
+	}
  }
 
  /*

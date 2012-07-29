@@ -92,11 +92,17 @@
   left: 0px;
   right: 0px;
   min-width: 200px;
-  bottom: -250px;
+  bottom: -190px;
+  height: 170px;
+  border-top: none;
+  border-left: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
   overflow: auto;
-  background: rgba(250, 250, 250, 0.8);
   padding: 4px;
   font-size: 0.7em;
+  vertical-align: top;
+}
+.properties .propitems {
   vertical-align: top;
 }
 /*
