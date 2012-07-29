@@ -209,9 +209,9 @@ define(
 		// // ---		
 		(function() {
 			// prepopulate all the things!
-			var path = document.location.pathname;
-			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
-			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+			var basepath = window.__basepath__;
+			util.assert(basepath, "__basepath__ not set");
+
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			var wview = new WorkspaceView({
