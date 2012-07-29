@@ -18,15 +18,13 @@ define(
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 
-				// TODO: Remove.
-				window.pathables = this.pathables;
-
+				// this stuff should go into render
 				// The PropertyBox belonging to this InstanceBox; initially hidden.
 				this.propbox = new pbox.PropertyBox({
 					hidden:true,
 					pathables:this.pathables
 				});
-				$('.workspace').append(this.propbox.render());
+				$('.workspace').append(this.propbox.render().el);
 
 				// TODO: Ask max how this is different to having a 'drag' function.
 				this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
@@ -51,7 +49,7 @@ define(
 				console.log('asking for const');
 				this.constructor.__super__.render.apply(this);
 				this.$el.append($(toolbar_template));
-				return this.el;
+				return this;
 			},
 			toggle_props:function() {
 				if (this.propbox.hidden) {

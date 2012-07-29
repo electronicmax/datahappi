@@ -19,12 +19,11 @@ define(
 					.on("remove", function(p) {this_._update_remove(p);});
 			},
 			render:function() {
-				console.log("Rendering PropertyBox");
 				this.constructor.__super__.render.apply(this);
-				return this.el;
+				return this;
 			},
 			_update_add:function(pathable) {
-				this_ = this;
+				var this_ = this;
 				pathable.map(function(attribute, property) {
 					if (property === "_id") { return; }
 					if (!this_.options.views_collection.get(attribute)) {

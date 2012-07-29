@@ -15,9 +15,6 @@ define([], function() {
 		className:'greybox',
 		initialize:function() {
 			this.options.views_collection = this.options.views_collection ? this.options.views_collection : new Backbone.Collection();
-			// BoxView can be passed a 'hidden' option, and is shown by default.
-			this.hidden = (this.options.hidden === true);
-			this.render();
 		},
 		setTopLeft:function(top,left) {
 			this.$el.css("top",top).css("left",left);
@@ -46,24 +43,19 @@ define([], function() {
 					this_.add(view);
 				}
 			});
-			return this.el;
+			return this;
 		},
 		_add_view:function(v) {
 			this.$el.find('.items').append(v.render().el);
 		},
 		add:function(v) {
-			console.log('adding view ', v);
 			this.options.views_collection.add(v);
 			this._add_view(v);
 		},
 		show:function() {
-			this.hidden = false;
-			// TODO: Unhide.
 			console.log("Unhiding Box");
 		},
 		hide:function() {
-			this.hidden = true;
-			//TODO: Hide.
 			console.log("Hiding Box");
 		}
 	});

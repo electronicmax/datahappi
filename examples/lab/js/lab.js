@@ -197,7 +197,7 @@ define(
 			_new_group:function() {
 				var box = new ibox.InstanceBox();
 				// TODO do something about this --- move out to parent widget
-				$('.workspace').append(box.render());
+				$('.workspace').append(box.render().el);
 				return box;
 			},
 			_workspace_clicked:function() {
