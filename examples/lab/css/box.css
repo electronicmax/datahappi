@@ -45,7 +45,8 @@
   right: 0;
 }
 .greybox .items div {
-  display: inline-block;
+  /*display:inline-block;*/
+
   margin: 0px;
 }
 .greybox input {

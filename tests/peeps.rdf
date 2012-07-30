@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cat="http://hip.cat/ont#"  xml:base="http://hip.cat/mydata">
+  <rdf:Description rdf:about="#alice">
+	<rdfs:label>Alice</rdfs:label>
+	<cat:home>
+	  <rdf:Description rdf:about="#aliceaddress">
+		<cat:address>29 Oxford St, Southampton SO5 W1J</cat:address>
+	  </rdf:Description>
+	</cat:home>
+	<cat:phone>075372982938</cat:phone>
+  </rdf:Description>  
+  <rdf:Description rdf:about="#bob">
+	<rdfs:label>Bob</rdfs:label>
+	<cat:home>
+	  <rdf:Description rdf:about="#bobaddress">
+		<cat:address>59 Elkhorn Drive, Boise ID 83709 USA</cat:address>
+	  </rdf:Description>
+	</cat:home>
+	<cat:phone>075372982938</cat:phone>
+  </rdf:Description>
+  <rdf:Description rdf:about="#charlie">
+	<rdfs:label>Charlie</rdfs:label>
+	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
+	<cat:phone>075372982938</cat:phone>
+  </rdf:Description>  
+</rdf:RDF>
