@@ -22,6 +22,7 @@ define(
 				var this_ = this;
 				this.options.pathables
 					.on("add", function(p) {
+						console.log(" THINGY BEING ADDED > ", p, " - ", p.path.get("steps").models.length );
 						p.on("dereference", function() { this_.render(); });
 						this_.render(); 
 					})
