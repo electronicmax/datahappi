@@ -15,7 +15,9 @@ define(['js/utils'], function(utils) {
 		},
 		_update_template:function() {
 			var val = this.options.model.get_last_value();
-			if (val.toJSON()) { val = val.toJSON(); }			
+			if (val.toJSON) { val = val.toJSON(); }
+			if (_(val).isArray()) { val = val[0]; }
+			if (val.toJSON) { val = val.toJSON(); }			
 			this.$el.html(_(this.options.template || this.template).template({m:val}));
 		},
 		render:function() {
@@ -26,7 +28,6 @@ define(['js/utils'], function(utils) {
 			return this;
 		},
 		_toggle_props:function() {
-			console.log('doubleclick');
 			if (this.$el.find('.props:hidden').length) {
 				this.$el.find('.props').slideDown();
 			} else {

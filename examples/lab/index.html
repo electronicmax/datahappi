@@ -83,8 +83,10 @@
 			label = label[0] + " <a href='"+m['_id']+"'>src</a>";       
 		} else if (_(label).isUndefined() && m['_id']) {
 			label = lastpath(m['_id']) + " <a href='"+m['_id']+"'>src</a>";
-		} else {
-  	       label = m.valueOf().toString();
+		} else if (_(label).isUndefined() && _(m).isObject()) {
+  	       label = _(m).map(function(v,k){ return k+":"+v.valueOf().toString(); }).join(',');
+	    } else {
+	      label = m.valueOf().toString();
       	}
    	    print("<div class='thing-listitem'><span class='thing-label'>"+label+"</span>");
 	  
