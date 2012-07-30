@@ -83,7 +83,9 @@
 			label = label[0] + " <a href='"+m['_id']+"'>src</a>";       
 		} else if (_(label).isUndefined() && m['_id']) {
 			label = lastpath(m['_id']) + " <a href='"+m['_id']+"'>src</a>";
-		}
+		} else {
+  	       label = m.valueOf().toString();
+      	}
    	    print("<div class='thing-listitem'><span class='thing-label'>"+label+"</span>");
 	  
 	    // var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+ to_str(v) +'</li>'; }).join('');

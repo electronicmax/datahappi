@@ -6,13 +6,20 @@ define(['js/utils'], function(utils) {
 		template:$('#thing-listitem-template').text(),
 		events:{
 			'dblclick .thing-label' : '_toggle_props'
-		},
+		},		
 		initialize:function() {
+			var this_ = this;
+			this.options.model.bind('dereference',function() {
+				this_._update_template();
+			});
+		},
+		_update_template:function() {
+			var val = this.options.model.get_last_value();
+			if (val.toJSON()) { val = val.toJSON(); }			
+			this.$el.html(_(this.options.template || this.template).template({m:val}));
 		},
 		render:function() {
-			this.$el.html(
-				_(this.options.template || this.template).template({m:this.options.model.toJSON()})
-			);
+			this._update_template();
 			this.$el.data('view',this);
 			this.$el.data('model',this.options.model);
 			this.$el.attr("uri", this.options.model.id);

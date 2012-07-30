@@ -44,10 +44,10 @@ define(
 				this.constructor.__super__.render.apply(this);				
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
-				this.$el.draggable({
-					drag:function(evt,ui) {	this_.trigger('drag', ui.offset); }
-				});
+				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }		});
 				this.views_collection.map(function(v) { this_._add_view(v); });
+
+				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
 					accept:'.item',
@@ -64,8 +64,12 @@ define(
 						var view = box.clone_view(ui.draggable.data("view"));
 						this_.add(view);
 					}
-				});				
+				});
+				
+				// add a toolbar.
 				this.$el.append($(toolbar_template));
+
+				// add a property box. 
 				var propbox = new pbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,

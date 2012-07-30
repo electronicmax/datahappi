@@ -89,6 +89,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 				console.log("adding step ", step, " and pushing value ", next_value);
 				this.path.add_step(step);
 				this.values.push(next_value);
+				this.trigger('dereference',next_value);
 			}
 			console.log("_try_extend_path_by_step returning ", next_value);
 			return next_value;
