@@ -18,10 +18,18 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 			this.entailed = {};
 			this.sameas = [];
 			if (!_(src_json).isUndefined()) {
+				this.original_json = _.clone(src_json);
 				_(this.attributes).extend( this._all_values_to_arrays(src_json) );
 			}
 			this.set_up_inference(options);
 			return this;
+		},
+		clone:function() {
+			var c = new this.constructor(this.original_json, _({}).extend(this.options));
+			c.entailed = _.clone(this.entailed);
+			c.attributes = _.clone(this.attributes);			
+			c.trigger('change');
+			return c;
 		},
 		set_up_inference:function(options) {
 			// if (!(options && options.enable_incremental_inference)) { return ; }
@@ -44,7 +52,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 						return diffset.applyDiffs();
 					});
 			};
-			this.on("change", function(z,k) { apply_rules(_(k.changes).keys()); });
+			this.on("change", function(z,k) { apply_rules((!_.isUndefined(k) && _(k.changes).keys()) || this_.attributes); });
 			// first apply to all thingies
 			apply_rules(this.keys());
 			return this;

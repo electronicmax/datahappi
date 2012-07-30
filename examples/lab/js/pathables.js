@@ -57,6 +57,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
 			models.Maxel.prototype.initialize.apply(this, arguments);
+			console.log('new pathables yo');
 			this.path = new Path();
 			this.values = [this]; // start at path empty/ 
 		},

@@ -3,7 +3,15 @@ define([], function() {
 
 	var clone_view = function(src_view) {
 		// makes a new view from the same model as src_model
-		var view = new src_view.constructor(src_view.options);
+		var model = src_view.options.model;
+		console.log("clone_view: MODEL ", model.keys().length, model.keys().join(',') );
+		if (model.clone) { model = model.clone();	}
+		console.log("CLONED MODEL ", model.keys().length, model.keys().join(',') );		
+		//model = new model.constructor(_({}).extend(model.attributes));
+		//console.log("clone_view: MODEL -after ", model.keys().length, model.toJSON(), model.map(function(v,k) { return k+":"+v.valueOf(); }));
+		console.log("new model ", src_view.options.model.attributes, model.attributes);
+		var options = _({}).extend(src_view.options, {model:model});
+		var view = new src_view.constructor(options);
 		view.render();
 		return view;
 	};
