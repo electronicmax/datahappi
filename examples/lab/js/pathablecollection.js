@@ -34,6 +34,7 @@ define(
 					}).map(function(p) {
 						this_._change_add(p);
 					});
+				this._update_coverage();
 			},
 			_change_remove:function(pathable) {
 				// If a pathable does not exist in the pathables collection, it cannot exist in this collection.
@@ -61,17 +62,26 @@ define(
 			}
 			*/
 			_update_coverage:function() {
-				var coverage = this.pathable_collection.models.length * 1.0/this.pathables.length;
-				this.set({'coverage': coverage});
+				var coverage = this.models.length * 1.0/this.pathables.length;
+				this.coverage = coverage;
 			},
 			_update_entropy:function() {
-				var values = this.pathable_collection.map(function(p) {
-					return to_base_value(p.get(this.property));
+				this_ = this;
+				var values = this.map(function(p) {
+					return to_base_value(p.get(this_.property));
 				});
 				var entropy = _.uniq(values).length * 1.0 / values.length;
-				this.set({'entropy': entropy});
+				this.entropy = entropy;
 			}
 		});
+
+		/* Helper function used in determining entropy */
+		to_base_value= function(v) {
+			if (v instanceof Backbone.Model) { return v.id; }
+			if (v instanceof Object) { throw Error(" cannot base value of object ");  }
+			return v.valueOf();
+		};
+
 		return { PathableCollection:PathableCollection };
 	}
 );

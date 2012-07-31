@@ -20,15 +20,13 @@ define(
 			initialize:function(options) {
 				this.id = options.property;
 				console.log("this id is ", this.id);
-				/*
 				this.pathable_collection = new pathablecollection.PathableCollection({}, {
 					property:this.options.property,
 					pathables:this.options.pathables
 				});
-				*/
 			},
 			render:function() {
-				this.$el.html(this.options.property);
+				this.$el.html(this.options.property+" "+this.pathable_collection.coverage);
 				this.$el.data("property", this.options.property);
 				
 				// TODO: reenable this later --
