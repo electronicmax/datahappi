@@ -45,11 +45,15 @@ define(
 			_change_add:function(pathable) {
 				// If a pathable is added which may be chained on this property, add it to this collection.
 				var chainedPathable = pathable.get_last_value();
-				if (_.isObject(chainedPathable) && _.keys(chainedPathable.attributes).indexOf(this.property) > -1) {
-					this.trigger("change");
-					this.trigger("add", pathable);
-					this.add(pathable);
-				}
+				if (!_.isArray(chainedPathable)) {chainedPathable = [chainedPathable];}
+
+				chainedPathable.map(function(e) {
+					if (_.isObject(e) && _.keys(e.attributes).indexOf(this.property) > -1) {
+						this.trigger("change");
+						this.trigger("add", pathable);
+						this.add(pathable);
+					}
+				});
 			},
 			/*
 			_update_coverage:function() {
