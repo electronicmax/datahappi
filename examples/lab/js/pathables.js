@@ -193,33 +193,36 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			rdfc.RDFCollection.prototype.initialize.apply(this,arguments);
 			var this_ = this;
 			this.paths = new Paths();
-			this.bind("add", function(new_model) {
+			this.bind("add remove", function(new_model) {
 				// NEW MODEL ADDED > 
 				// GO THROUGH Paths previously applied and apply them to this new model
 				this_._dereference_model(new_model);
 			});
+			this.paths.bind("add remove", function(new_model) {
+				// recompute for all
+				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
+			});			
 		},
 		_dereference_model:function(m) {
 			// starts m from scratch and tries to dereference it using each path
-			// in order of this.paths			
+			// in order of this.paths - which is essentially the priority
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
-			var dereferenced;
+			var dereferenced_path;
 			var paths = this.paths.models;
-			for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
-				dereferenced = m.try_set_path(paths[p_i]);
-				console.log("trying to set path ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }), utils.DEFINED(dereferenced));				
+			for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced_path); p_i++) {
+				dereferenced_path = utils.DEFINED(m.try_set_path(paths[p_i])) ? paths[p_i] : undefined;
+				console.log("trying to set path ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }), utils.DEFINED(dereferenced_path));				
 			}
-			return dereferenced;
+			return dereferenced_path;
 		},
 		add_path:function(path, position) {
 			// @path : path to add
 			// @position: optional - will insert at position if specified, append otherwise
 			var this_ = this;
 			this.paths.insertAt(path, utils.DEFINED(position) ? position : this.paths.length);
-			this.map(function(pathable) {
-				this_._dereference_model(pathable);
-			});
-		}
+			// trigger will automatically recompute above
+		},
+		remove_path:function(path) { this.paths.remove(path); }
 	});
 
 	return {

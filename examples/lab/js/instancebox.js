@@ -69,6 +69,8 @@ define(
 				propbox.render();
 				propbox.bind('property-click', function(propertyname) {
 					console.log('property-click! ', propertyname);
+					// get paths from the pathables
+					
 					this_.pathables.try_extend_path(new pathables.PropertyDereferenceStep({ property : propertyname }));
 					propbox.hide();
 				});
