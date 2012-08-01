@@ -2,10 +2,11 @@ define(
 	[
 		'examples/lab/js/box',
 		'examples/lab/js/propertybox',
+		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
 		'examples/lab/js/pathableview'
 	],
-	function(box, pbox, pathables, pathableview) {
+	function(box, propbox, pathbox, pathables, pathableview) {
 		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
 		var InstanceBox = box.BoxView.extend({
@@ -65,23 +66,35 @@ define(
 						this_.add(view);
 					}
 				});
-				
+
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
 
-				// add a property box. 
-				var propbox = new pbox.PropertyBox({
+				// add a property box.
+				var propertybox = new propbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,
 					pathables:this.pathables
 				});
-				propbox.render();
-				propbox.bind('property-click', function(propertyname) {
+				propertybox.render();
+				propertybox.bind('property-click', function(propertyname) {
 					console.log('property-click! ', propertyname);
 					this_.pathables.try_extend_path(new pathables.PropertyDereferenceStep({ property : propertyname }));
-					propbox.hide();
+					propertybox.hide();
 				});
-				this.propbox = propbox;
+				this.propbox = propertybox;
+
+				/*
+				// add a path box. 
+				var pathbox_ = new pathbox.PathBox({
+					el: this.$el.find('.paths'),
+					hidden:true,
+				});
+				pathbox_.render();
+				// When a path is added, add it to the pathbox.
+				this.pathbox = pathbox_;
+				*/
+
 				return this;
 			},
 			toggle_props:function() {

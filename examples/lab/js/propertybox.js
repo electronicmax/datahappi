@@ -46,7 +46,6 @@ define(
 					val.map(function(attribute, property) {
 						if (property === "_id") { return; }
 						if (!this_.views_collection.get(property)) {
-							// this_.options.views_collection.add(new pview.PropertyView({
 							var pv = new pview.PropertyView({
 								property:property,
 								pathables:this_.options.pathables
