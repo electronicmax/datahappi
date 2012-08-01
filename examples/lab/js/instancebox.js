@@ -14,29 +14,17 @@ define(
 				'click .toggle_props' : 'toggle_props'
 			},
 			initialize:function(options) {
-				this.constructor.__super__.initialize.apply(this, [options]);
+				box.BoxView.prototype.constructor.apply(this.arguments);
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-
 				// TODO: Ask max how this is different to having a 'drag' function.
 				// this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
-
 				this.views_collection.on('add', function(view) {
 					this_.pathables.add(view.get('model'));
 				}).on('remove', function(view) {
 					this_.pathables.remove(view.get('model'));
 				});
-				/*
-				this.views_collection.bind('add', function(v) {
-					console.log('> adding model ', v.attributes.options.model);
-					this_.models_collection.add(v.attributes.options.model);
-				});
-				this.views_collection.bind('remove', function(v) {
-					console.log('> removing model ', v.attributes.options.model);
-					this_.models_collection.remove(v.attributes.options.model);
-				});
-				*/
 			},
 			render:function() {
 				// this stuff should go into render
@@ -46,7 +34,6 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }		});
 				this.views_collection.map(function(v) { this_._add_view(v); });
-
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -64,11 +51,14 @@ define(
 						var view = box.clone_view(ui.draggable.data("view"));
 						this_.add(view);
 					}
-				});
-				
+				});				
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
-
+				// add a property box
+				this._render_property_box();
+				return this;
+			},
+			_make_property_box:function() {
 				// add a property box. 
 				var propbox = new pbox.PropertyBox({
 					el: this.$el.find('.properties'),
@@ -82,7 +72,7 @@ define(
 					propbox.hide();
 				});
 				this.propbox = propbox;
-				return this;
+				return propbox;
 			},
 			toggle_props:function() {
 				this.propbox.toggle_visibility();
@@ -91,6 +81,15 @@ define(
 				this.propbox.setTopLeft(top,left);
 			}
 		});
+
+		var InstanceBoxShadow = InstanceBox.extend({
+			className:'shadowbox',
+			initialize:function() {
+				InstanceBox.prototype.initalize.apply(this,arguments);
+				this.master = this.options.master_box;
+			}			
+		});
+		
 		return { InstanceBox:InstanceBox };
 	}
 );

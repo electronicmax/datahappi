@@ -5,7 +5,8 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 */
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
-		defaults: { position: -1 }	
+		defaults: { position: -1 },
+		valueOf:function(){ utils.assert(false, "subclasses needs to define valueof :( "); }
 	});
 	var PropertyDereferenceStep = Step.extend({
 		defaults: { type: "dereference-pathstep", property: undefined },
@@ -19,17 +20,23 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
 			return dmodel && dmodel.get && dmodel.get(property);
-		}
+		},
+		valueOf:function(){ return this.property; }
 	});
 
 	// Paths -- each a collection of Steps
 	var Steps = Backbone.Collection.extend({
 		model:Step,
 		comparator:function(component) {return component.get("position"); }
-	});	
+	});
+	
 	var Path = Backbone.Model.extend({
+		idAttribute:"_id",
 		initialize:function(attrs, options) {
-			this.set({"steps": new Steps((this.options && this.options.steps.concat([])) || [])});
+			var this_ = this;
+			var steps = new Steps((this.options && this.options.steps.concat([])) || []);
+			this.set({"steps": steps});
+			steps.on("add remove", function() { this_._update_id(); });
 		},
 		clone:function(path) {
 			return new Path(undefined, { steps: path.get("steps").models });
@@ -39,7 +46,9 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			new_step.set({"position" : steps.length});
 			steps.add(new_step);
 		},
-		get_steps:function() { return this.get("steps"); },
+		get_steps:function() {
+			return this.get("steps");
+		},
 		pop:function() {
 			var steps = this.get_steps();
 			var last_step = steps.at(steps.length - 1);
@@ -47,19 +56,39 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			return last_step;
 		},
 		matches:function(p) {
-			return this.get("steps").length == p.get("steps").length &&
-				this.get("steps").difference(p.get("steps")).length == 0;
+			return this.get("steps").length == p.get("steps").length &&	this.get("steps").difference(p.get("steps")).length === 0;
+		},
+		_update_id:function() {
+			var new_id = this.steps.map(function(x) { return x.valueOf().toString(); }).join(',');
+			this.set({_id: new_id });
 		}
 	});
-
+	
 	// Pathable is our main Model class that can be the origin (root)
 	// of paths
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
 			models.Maxel.prototype.initialize.apply(this, arguments);
 			console.log('new pathables yo');
+			this._set_path_to_root();
+		},
+		_set_path_to_root:function() {
 			this.path = new Path();
 			this.values = [this]; // start at path empty/ 
+		},
+		try_set_path:function(p) {
+			// sets an entire path from root -> terminus, and returns the terminal
+			// value if successful
+			var old_path = this.path;
+			var old_values = this.values;
+			this._set_path_to_root();
+			var terminus = this.try_extend_path(p);
+			if (!utils.DEFINED(terminus)) {
+				this.values = old_values;
+				this.path = old_path;
+				return undefined;
+			}
+			return terminus;
 		},
 		try_dereference:function(property_name) {
 			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
@@ -135,44 +164,56 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	});
 
 	// 
-	var Paths = Backbone.Collection.extend({model:Path});
+	var Paths = Backbone.Collection.extend({
+		model:Path,
+		comparator:function(path) {
+			return path.get("path_priority");
+		},
+		insertAt:function(p,i) {
+			this.models.slice(i).map(function(path) {
+				path.set({ path_priority : path.get("path_priority") + 1 });
+			});
+			p.set({path_priority:i});
+			this.add(p);
+			return p;
+		}
+	});
 
 	/*
-	  Pathable Collection - this collection also keeps track of
-	  all of the unique paths that have been applied to all of
-	  the pathables, and has convenience methods for extending
-	  the path
+	Pathable Collection - this collection also keeps track of
+	all of the unique paths that have been applied to all of
+	the pathables, and has convenience methods for extending
+	the path
 
-	  Duties: When a new pathable is added, automatically tries
-	  dereferencing it according to the set of deref operations
-	  that have been performed
-	  
+	Duties: When a new pathable is added, automatically tries
+	dereferencing it according to the set of deref operations
+	that have been performed
 	*/
 	var Pathables = rdfc.RDFCollection.extend({
 		model:Pathable,
 		initialize:function(models, options) {
 			rdfc.RDFCollection.prototype.initialize.apply(this,arguments);
-			var this_ = this;			
-			this.bind("add", function(new_model) {
-				// apply path to this m.
-				utils.assert(new_model instanceof Pathable, "Only pathables can be dereferenced");
-				// m is a pathable
-				var dereferenced = undefined;
-				var paths = this_.get_paths();
-				for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
-					// console.log("TRYING TO APPLY PATH ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }));
-					dereferenced = new_model.try_extend_path(paths[p_i]);
-				}
-			});
+			var this_ = this;
+			this.paths = new Paths();
+			this.bind("add", function(new_model) { this_._dereference_model(new_model); });
 		},
-		get_paths:function() {
-			var paths = this.map(function(pathable) { return pathable.path; });
-			return paths; // TODO: filter for unique ones otherwise you will gettons of dupes			
+		_dereference_model:function(m) {
+			// NEW MODEL ADDED > 
+			// GO THROUGH Paths previously applied and apply them to this new model
+			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
+			// m is a pathable
+			var dereferenced;
+			var paths = this.get_paths();
+			for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced); p_i++) {
+				dereferenced = m.try_set_path(paths[p_i]);
+			}
+			return dereferenced;
 		},
-		try_extend_path:function(path_or_step) {
-			return this.map(function(pathable) {
-				var result = pathable.try_extend_path(path_or_step);
-				return [pathable, result];
+		add_path:function(p, position) {
+			var this_ = this;
+			this.paths.insertAt(p, utils.DEFINED(position) ? position : this.paths.length);
+			this.pathables.map(function(pathable) {
+				this_._dereference_model(pathable);
 			});
 		}
 	});
@@ -188,3 +229,34 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		get_rdf:function(u) { return new Pathables(undefined, {src_url:u}); }
 	};
 });
+
+
+/*
+  		// try_extend_path:function(path_or_step) {
+		// 	// new path being added
+		// 	var this_ = this;
+		// 	var superceded_paths = [];
+		// 	var new_paths =
+		// 		this.pathables
+		// 		.map(function(pathable) {
+		// 			var superceded_path = pathable.path.clone();
+		// 			var result = utils.DEFINED(pathable.try_extend_path(path_or_step));
+		// 			if (utils.DEFINED(result)) {
+		// 				superceded_paths.push(superceded_path);
+		// 				return pathable.path;
+		// 			}
+		// 		})
+		// 		.filter(util.DEFINED);
+			
+		// 	new_paths.map(function(new_path) {
+		// 		if (!this_.paths.get(new_path.id)) {
+		// 			this_.paths.add(new_path.clone);
+		// 		}
+		// 	});
+		// 	var current_paths = pathable.map(function(x) { return x.path.id; });
+		// 	superceded_paths
+		// 		.filter(function(path)  { return paths.indexOf(path) < 0;  } )
+		// 		.map(function(dead_path) { this_.paths.remove(dead_path); });
+			
+		// }
+*/
