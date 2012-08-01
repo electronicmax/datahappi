@@ -48,6 +48,7 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			var pathCollection = new pathables.Pathables([bob, tom, dom]);
 			l("deref likes ");
 			var p1 = new pathables.Path([new pathables.PropertyDereferenceStep({property:"likes"})]);
+			l("try path ", pathCollection.try_path(p1));
 			pathCollection.add_path(p1);
 			l("dereferencing likes >> get_last_value for all models: ", 
 			  pathCollection.models.map(function(p) {
@@ -68,16 +69,12 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			bob.set({'bro':tom});
 			tom.set({'bro':bob});
 			pathCollection = new pathables.Pathables([bob, tom]);
-			l("get_last_value at root  ", 
-			  pathCollection.models.map(function(p) {
-				  return p.get_last_value()[0].id ? p.get_last_value()[0].id : p.get_last_value()[0];
-			  }));
-			
-			console.log("Dereferencing on 'bro'...");
-			var p = new pathables.Path( [
+			console.log("Dereferencing on 'bro' -> 'likes' ...");
+			var p = new pathables.Path([
 				new pathables.PropertyDereferenceStep({property:"bro"}),
 				new pathables.PropertyDereferenceStep({property:"likes"})
-			]);							   
+			]);
+			l(' path now has ', p.get('steps').length, pathCollection.try_path(p) );
 			pathCollection.add_path(p);
 			l("get_last_value bro -> likes  ", 
 			  pathCollection.models.map(function(p) {
@@ -108,7 +105,10 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			var likespath = new pathables.Path();
 			likespath.add_step(new pathables.PropertyDereferenceStep({property:'likes'}));
 			likespath.add_step(new pathables.PropertyDereferenceStep({property:'tastes'}));
+			l("likespath >> ", likespath.get('steps').map(function(x) { return x.id; }));
+			l("BEFORE > path collection now has ", pathCollection.paths.length);			
 			pathCollection.add_path(likespath);
+			l("AFTER > path collection now has ", pathCollection.paths.length);
 
 			l("get_last_value bro -> likes  ", 
 			  pathCollection.models.map(function(p) {

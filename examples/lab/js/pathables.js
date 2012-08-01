@@ -3,11 +3,14 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
   initial sketch of dereferencing core data structure
   based on discussion w/ Skinna in UGLabs 24 July 2012
 */
+	var defined = utils.DEFINED;
+	
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
 		defaults: { position: -1 },
 		valueOf:function(){ utils.assert(false, "subclasses needs to define valueof :( "); }
 	});
+	
 	var PropertyDereferenceStep = Step.extend({
 		idAttribute:'property',
 		defaults: { type: "dereference-pathstep", property: undefined },
@@ -15,7 +18,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			// dmodel must be a DereferenceableModel
 			var property = this.get("property");			
 			utils.assert(!_.isUndefined(property), "Tried to dereference a null property");
-			return dmodel && dmodel.get && utils.DEFINED(dmodel.get(property));
+			return dmodel && dmodel.get && defined(dmodel.get(property));
 		},
 		apply: function(dmodel) {
 			var property = this.get("property");			
@@ -28,7 +31,9 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	// Paths -- each a collection of Steps
 	var Steps = Backbone.Collection.extend({
 		model:Step,
-		comparator:function(component) {return component.get("position"); }
+		comparator:function(component) {
+			return component.get("position");
+		}
 	});
 	
 	var Path = Backbone.Model.extend({
@@ -41,7 +46,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			steps.on("add remove", function() { this_._update_id(); });
 		},
 		clone:function(path) {
-			return new Path(undefined, { steps: path.get("steps").models });
+			return new Path(this.get("steps").models);
 		},
 		add_step:function(new_step) {
 			var steps = this.get("steps");
@@ -71,92 +76,55 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	var Pathable = models.Maxel.extend({
 		initialize:function(attrs, options) {
 			models.Maxel.prototype.initialize.apply(this, arguments);
-			this._set_path_to_root();
+			this.reset_path();
 		},
-		_set_path_to_root:function() {
+		reset_path:function() {
 			this.path = new Path();
-			this.values = [[this]]; // start at path empty/ 
+			this.values = [[this]]; // start at path empty/
 		},
-		try_set_path:function(p) {
+		try_path:function(path, from_root) {
 			// sets an entire path from root -> terminus, and returns the terminal
 			// value if successful
-			var old_path = this.path;
-			var old_values = this.values;
-			this._set_path_to_root();
-			var terminus = this.try_extend_path(p);
-			if (!utils.DEFINED(terminus)) {
-				this.values = old_values;
-				this.path = old_path;
-				return undefined;
-			}
-			return terminus;
-		},
-		try_dereference:function(property_name) {
-			return this.try_extend_path( new PropertyDereferenceStep({ property : property_name }) );
-		},
-		try_extend_path:function(step_or_path) {
-			if (step_or_path instanceof Path) {	return this._try_extend_path_by_path(step_or_path);	}
-			console.assert(step_or_path instanceof Step, "It's not a path, and it's not a step. WHAT IS IT?");
-			return this._try_extend_path_by_step(step_or_path);
-		},
-		_try_extend_path_by_step:function(step) {
-			// returns changes us in place or undefined if fail
-			var last_value = this.get_last_value();
-			var next_value;
-			if (_.isArray(last_value)) {
-				var next_vals = last_value.map(function(v) {
+			var cur_val = [this], values = [[this]], steps = path.get("steps");
+			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
+				var step = steps.at(ii);
+				cur_val = utils.flatten(cur_val.map(function(v) {
+					console.log('testing ', (v && v.id) || v, ' -> ', step.id, step.test(v) );
 					if (step.test(v)) { return step.apply(v); }
-				}).filter(utils.DEFINED); // NOTE : we lose all values that failed to dereference :/
-				if (next_vals.length > 0) {
-					next_value = utils.flatten(next_vals);
-				}
-			} else {
-				if (step.test(this.get_last_value())) {
-					next_value = step.apply(this.get_last_value());
-				}
+				}).filter(defined));
+				values.push(cur_val);
 			}
-			if (utils.DEFINED(next_value)) {
-				this.path.add_step(step);
-				this.values.push(next_value);
-				this.trigger('dereference',next_value);
-			}
-			// console.log("_try_extend_path_by_step returning ", next_value);
-			return next_value;
+			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
-		_try_extend_path_by_path:function(path) {
-			// save the current path and values
-			var this_ = this;
-			var old_steps = this.path.get("steps").models.concat([]);
-			var old_vals = this.values.concat([]);
-			// only succeed if the entire path succeeds. otherwise fall back
-			var cur_val = true;
-			for (var ii = 0; ii < path.get("steps").length && !_.isUndefined(cur_val); ii++) {
-				var step = path.get("steps").at(ii);
-				cur_val = this_._try_extend_path_by_step(step);
+		try_step:function(step,from_root) {
+			if (from_root) {return this.try_path(new Path([step]));	}
+			var p = this.path.clone();
+			p.steps.add(step);
+			return this.try_path(p);
+		},
+		set_path:function(p) {
+			var values = this.try_path(p, true);
+			if (defined(values)) {
+				this.path = p.clone();
+				this.values = values;
+				return _(values).clone();
+			}			
+		},
+		extend_path:function(step) {
+			var p = this.path.clone();
+			p.steps.add(step);
+			var values = this.try_step(p);
+			if (defined(values)) {
+				this.path = p;
+				this.values = values;
 			}
-			if (_.isUndefined(cur_val)) {
-				// ROLL BACK! WE FAILED :'(
-				this.values = old_vals; // :'(
-				this.path.get("steps").reset();
-				this.path.get("steps").add(old_steps); // :'(
-			}
-			return cur_val;
-		},		
-		get_path_length: function(){ return this.path.get_steps().length; },
-		get_path_values: function(){ return this.values.concat([]); },
-		value_at:function(step) { return this.values[step]; },
-		pop:function() {
-			// gets rid of last dereferenced step
-			if(this.path.length > 0) {
-				var popped_step = this.path.pop();
-				var popped_val = this.values.pop();
-				return { step: popped_step, value: popped_val };
-			}
-			return undefined;
 		},
 		get_last_value:function() {
 			return this.values[this.values.length - 1];
-		}
+		},
+		get_path_length: function(){ return this.path.get_steps().length; },
+		get_path_values: function(){ return this.values.concat([]); },
+		value_at:function(step) { return this.values[step]; }
 	});
 
 	// 
@@ -169,10 +137,8 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			this.models.slice(i).map(function(path) {
 				path.set({ path_priority : path.get("path_priority") + 1 });
 			});
-			console.log('setting priority ', i, p.get('steps').length);
 			p.set({path_priority:i});
 			this.add(p);
-			console.log('added now -- paths ', this.length);
 			return p;
 		}
 	});
@@ -207,19 +173,24 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			// starts m from scratch and tries to dereference it using each path
 			// in order of this.paths - which is essentially the priority
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
-			var dereferenced_path;
 			var paths = this.paths.models;
-			for (var p_i = 0; p_i < paths.length && !utils.DEFINED(dereferenced_path); p_i++) {
-				dereferenced_path = utils.DEFINED(m.try_set_path(paths[p_i])) ? paths[p_i] : undefined;
-				console.log("trying to set path ", paths[p_i].get("steps").map(function(x) { return x.get("property"); }), utils.DEFINED(dereferenced_path));				
+			for (var p_i = 0; p_i < paths.length; p_i++) {
+				var path = paths[p_i];
+				var result = m.try_path(path);
+				if (defined(result)) {
+					console.log('>> setting path ', path.get('steps').length);
+					return m.set_path(path);
+				} 
 			}
-			return dereferenced_path;
+		},
+		try_path:function(path) {
+			return this.map(function(pathable) { return pathable.try_path(path); });
 		},
 		add_path:function(path, position) {
 			// @path : path to add
 			// @position: optional - will insert at position if specified, append otherwise
 			var this_ = this;
-			this.paths.insertAt(path, utils.DEFINED(position) ? position : this.paths.length);
+			this.paths.insertAt(path, defined(position) ? position : this.paths.length);
 			// trigger will automatically recompute above
 		},
 		remove_path:function(path) { this.paths.remove(path); }
@@ -237,33 +208,3 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	};
 });
 
-
-/*
-  		// try_extend_path:function(path_or_step) {
-		// 	// new path being added
-		// 	var this_ = this;
-		// 	var superceded_paths = [];
-		// 	var new_paths =
-		// 		this.pathables
-		// 		.map(function(pathable) {
-		// 			var superceded_path = pathable.path.clone();
-		// 			var result = utils.DEFINED(pathable.try_extend_path(path_or_step));
-		// 			if (utils.DEFINED(result)) {
-		// 				superceded_paths.push(superceded_path);
-		// 				return pathable.path;
-		// 			}
-		// 		})
-		// 		.filter(util.DEFINED);
-			
-		// 	new_paths.map(function(new_path) {
-		// 		if (!this_.paths.get(new_path.id)) {
-		// 			this_.paths.add(new_path.clone);
-		// 		}
-		// 	});
-		// 	var current_paths = pathable.map(function(x) { return x.path.id; });
-		// 	superceded_paths
-		// 		.filter(function(path)  { return paths.indexOf(path) < 0;  } )
-		// 		.map(function(dead_path) { this_.paths.remove(dead_path); });
-			
-		// }
-*/
