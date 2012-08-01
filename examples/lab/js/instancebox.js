@@ -14,7 +14,7 @@ define(
 				'click .toggle_props' : 'toggle_props'
 			},
 			initialize:function(options) {
-				box.BoxView.prototype.constructor.apply(this.arguments);
+				box.BoxView.prototype.constructor.apply(this,arguments);
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
@@ -59,7 +59,8 @@ define(
 				return this;
 			},
 			_make_property_box:function() {
-				// add a property box. 
+				// add a property box.
+				var this_ = this;
 				var propbox = new pbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,
