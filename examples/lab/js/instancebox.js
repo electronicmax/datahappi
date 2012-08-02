@@ -55,12 +55,12 @@ define(
 						var view = box.clone_view(ui.draggable.data("view"));
 						this_.add(view);
 					}
-				});				
+				});
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
 				// add a property box
 				this._make_property_box();
-				// this._make_path_box(); Work in progress.
+				// this._make_path_box(); Probably soon to be redundant.
 				return this;
 			},
 			_make_property_box:function() {
@@ -72,6 +72,7 @@ define(
 					pathables:this.pathables
 				});
 				propertybox.render();
+				/*
 				propertybox.bind('property-click', function(propertyname) {
 					// get paths from the pathables
 					console.log("PROPERTY CLICK ", propertyname);
@@ -91,12 +92,14 @@ define(
 
 					console.log("> result of dereference op >> ", this_.pathables.paths.length);
 					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
-					
-					propbox.hide();
+
+					propertybox.hide();
 				});
+				*/
 				this.propbox = propertybox;
 				return propertybox;
 			},
+			/*
 			_make_path_box:function() {
 				// add a path box.
 				var pathbox_ = new pathbox.PathBox({
@@ -108,6 +111,7 @@ define(
 				this.pathbox = pathbox_;
 				return pathbox;
 			},
+			*/
 			toggle_paths:function() {
 				this.pathbox.toggle_visibility();
 			},
@@ -124,9 +128,9 @@ define(
 			initialize:function() {
 				InstanceBox.prototype.initalize.apply(this,arguments);
 				this.master = this.options.master_box;
-			}			
+			}
 		});
-		
+
 		return { InstanceBox:InstanceBox };
 	}
 );

@@ -201,11 +201,13 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		add_path:function(path, position) {
 			// @path : path to add
 			// @position: optional - will insert at position if specified, append otherwise
-			var this_ = this;
 			this.paths.insertAt(path, defined(position) ? position : this.paths.length);
 			// trigger will automatically recompute above
 		},
-		remove_path:function(path) { this.paths.remove(path); }
+		remove_path:function(path) { this.paths.remove(path); },
+		coverage:function(attribute) {
+			 return 1; //TODO
+		}
 	});
 
 	return {
