@@ -8,11 +8,12 @@ define(
 	],
 	function(box, propbox, pathbox, pathables, pathableview) {
 		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
-		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
+		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
-				'click .toggle_props' : 'toggle_props'
+				'click .toggle_props' : 'toggle_props',
+				'click .toggle_paths' : 'toggle_paths',
 			},
 			initialize:function(options) {
 				this.constructor.__super__.initialize.apply(this, [options]);
@@ -80,22 +81,22 @@ define(
 				propertybox.bind('property-click', function(propertyname) {
 					console.log('property-click! ', propertyname);
 					this_.pathables.try_extend_path(new pathables.PropertyDereferenceStep({ property : propertyname }));
-					propertybox.hide();
 				});
 				this.propbox = propertybox;
 
-				/*
-				// add a path box. 
+				// add a path box.
 				var pathbox_ = new pathbox.PathBox({
 					el: this.$el.find('.paths'),
 					hidden:true,
+					pathables:this.pathables
 				});
 				pathbox_.render();
-				// When a path is added, add it to the pathbox.
 				this.pathbox = pathbox_;
-				*/
 
 				return this;
+			},
+			toggle_paths:function() {
+				this.pathbox.toggle_visibility();
 			},
 			toggle_props:function() {
 				this.propbox.toggle_visibility();

@@ -188,3 +188,4 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		get_rdf:function(u) { return new Pathables(undefined, {src_url:u}); }
 	};
 });
+

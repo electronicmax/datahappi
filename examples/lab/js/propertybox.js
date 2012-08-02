@@ -27,14 +27,14 @@ define(
 						this_.render(); 
 					})
 					.on("remove", function(p) { this_.render(p); });
-				this.options.pathables.map(function(p) {p.on("dereference", function() { this_.render(); })	});
+				this.options.pathables.map(function(p) {p.on("dereference", function() { this_.render(); }); });
 			},
 			render:function() {
 				var this_ = this;
 				this.constructor.__super__.render.apply(this);
 				this.$el.html(template);
 				this.views_collection.reset();
-				this.options.pathables.map(function(p) { this_._update_views(p); 	});				
+				this.options.pathables.map(function(p) { this_._update_views(p); });
 				this.views_collection.map(function(pv) { console.log("pv > ", pv); this_._add_view(pv.attributes); });
 				return this;
 			},
@@ -55,7 +55,7 @@ define(
 						}
 					});
 				}
-			},
+			}
 		});
 
 		return { PropertyBox:PropertyBox };

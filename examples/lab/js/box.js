@@ -37,13 +37,16 @@ define([], function() {
 			this._add_view(v);
 		},
 		show:function() {
-			if (this.$el.is(":hidden")) { this.$el.show(); }
+			if (this.$el.is(":hidden")) { this.$el.show(); console.log("Box shown"); }
 		},
 		hide:function() {
-			if (!this.$el.is(":hidden")) {	this.$el.hide();  }
+			if (!this.$el.is(":hidden")) {	this.$el.hide(); console.log("Box hidden"); }
 		},
 		toggle_visibility:function() {
 			if (this.$el.is(":hidden")) { this.$el.show(); } else { this.$el.hide(); }
+		},
+		get_view_count:function() {
+			return this.views_collection.size();
 		}
 	});
 	return {
