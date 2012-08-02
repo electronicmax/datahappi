@@ -44,7 +44,9 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		constructor:function(arg1, arg2) {
 			this.constructor.__super__.constructor.apply( this, [] );
 			var this_ = this;
-			var steps = new Steps((arg1 && arg1.concat([])) || []);
+			var steplist = arg1 && arg1.length ? arg1.map(function(x) { return x.clone(); }) : [];
+			_(steplist).each(function(x, index) { x.set({position:index}); });			
+			var steps = new Steps(steplist); 
 			this.set({"steps": steps});
 			steps.on("add remove", function() { this_._update_id(); });
 		},
@@ -54,8 +56,9 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		add_step:function(new_step) {
 			var steps = this.get("steps");
 			new_step = new_step.clone();
-			new_step.set({"position" : steps.length});
+			new_step.set({position : steps.length});
 			steps.add(new_step);
+			console.log('steps positions now ', steps.length, steps.map(function(x) { return x.get('position'); }));
 			return this;
 		},
 		get_steps:function() {
