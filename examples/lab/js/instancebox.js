@@ -74,20 +74,21 @@ define(
 					console.log("PROPERTY CLICK ", propertyname);
 					var step = new pathables.PropertyDereferenceStep({property:propertyname});
 					this_.pathables.paths.map(function(path) {
-							// check to see if we extend path by
-							var pc = path.clone().add_step(step);
+						var pc = path.clone().add_step(step);
 						console.log("trying path ", pc.get('steps').map(function(x) { return x.id }));
-							var result = this_.pathables.try_path(pc);
-						console.log(' result ', result);
-							if (defined(result)) {
-								// did pass, so add it
-								path.add_step(step);
-							}
-							// skip
+						var result = this_.pathables.try_path(pc);
+						console.log(' result ', result,  " adding step>  ", defined(result));
+						if (defined(result)) {
+							path.add_step(step);
+							console.log("path now has ", path.get('steps').map(function(x) { return x.id; }));
 						}
-					);
+					});
 					var solo = new pathables.Path([step]);
-					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}					
+					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
+
+					console.log("> result of dereference op >> ", this_.pathables.paths.length);
+					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
+					
 					propbox.hide();
 				});
 				this.propbox = propbox;
