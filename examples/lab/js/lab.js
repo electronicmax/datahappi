@@ -66,7 +66,7 @@ define(
 			var wview = new Main({
 				el : $('body'),				
 				data_sources: [
-					new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
+					// new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
 					// new sources.Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') }),
 					new sources.Source({ name: "Address Book", url: "http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/') })					
 				]

@@ -8,6 +8,9 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
 		defaults: { position: -1 },
+		clone:function() {
+			return new this.constructor(this.attributes);
+		},
 		valueOf:function(){ utils.assert(false, "subclasses needs to define valueof :( "); }
 	});
 	
@@ -50,8 +53,10 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		},
 		add_step:function(new_step) {
 			var steps = this.get("steps");
+			new_step = new_step.clone();
 			new_step.set({"position" : steps.length});
 			steps.add(new_step);
+			return this;
 		},
 		get_steps:function() {
 			return this.get("steps");
@@ -68,6 +73,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		_update_id:function() {
 			var new_id = this.get("steps").map(function(x) { return x.id; }).join(',');
 			this.set({_id: new_id });
+			return this;
 		}
 	});
 	
@@ -89,7 +95,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
 				cur_val = utils.flatten(cur_val.map(function(v) {
-					console.log('testing ', (v && v.id) || v, ' -> ', step.id, step.test(v) );
+					// console.log('testing ', (v && v.id) || v, ' -> ', step.id, step.test(v) );
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
@@ -98,26 +104,19 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		},
 		try_step:function(step,from_root) {
 			if (from_root) {return this.try_path(new Path([step]));	}
-			var p = this.path.clone();
-			p.steps.add(step);
-			return this.try_path(p);
+			return this.try_path(this.path.clone().add_step(step));
 		},
 		set_path:function(p) {
 			var values = this.try_path(p, true);
 			if (defined(values)) {
 				this.path = p.clone();
-				this.values = values;
-				return _(values).clone();
+				this.values = _(values).clone();
+				this.trigger('dereference');
+				return values;
 			}			
 		},
 		extend_path:function(step) {
-			var p = this.path.clone();
-			p.steps.add(step);
-			var values = this.try_step(p);
-			if (defined(values)) {
-				this.path = p;
-				this.values = values;
-			}
+			return this.set_path(this.path.clone().add_step(step));
 		},
 		get_last_value:function() {
 			return this.values[this.values.length - 1];
@@ -184,7 +183,12 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			}
 		},
 		try_path:function(path) {
-			return this.map(function(pathable) { return pathable.try_path(path); });
+			var result = this.map(function(pathable) {
+				console.log('trying path ', pathable.id, ' -> ', path.get('steps').map(function(x) { return x.id }), pathable.attributes, pathable.entailed);
+				var result = pathable.try_path(path);
+				return result;
+			}).filter(defined);
+			if (result.length > 0) { return result; }
 		},
 		add_path:function(path, position) {
 			// @path : path to add

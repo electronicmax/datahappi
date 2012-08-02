@@ -15,35 +15,29 @@ define(
 				'click' : '_propclick'
 			},
 			tagName:"li",
-			className:"property-view",
-			//template:"<div class='propmodel'><%= _id %><div class='coverage-container'><div class='coverage'></div></div><div class='entropy-container'><div class='entropy'></div></div></div>",
 			initialize:function(options) {
 				this.id = options.property;
 				console.log("this id is ", this.id);
-				/*
-				this.pathable_collection = new pathablecollection.PathableCollection({}, {
-					property:this.options.property,
-					pathables:this.options.pathables
-				});
-				*/
 			},
 			render:function() {
 				this.$el.html(this.options.property);
+				this.$el.addClass(this._get_coverage_class(this.coverage));
 				this.$el.data("property", this.options.property);
-				
-				// TODO: reenable this later --
-				// +" "+this.options.pathables.coverage+" "+this.options.pathables.entropy);
-				/*
-				this.$el.html(_(this.template).template(this.pathable_collection.toJSON()));
-				this.$el.data("view", this);
-				this.$el.data("model", this.options.model);
-				*/
 				return this;
 			},
+			
 			_propclick: function(x) {
 				// Loads has changed - I doubt this works anymore.
 				// this.options.collection.chain_forwards(this.options.model.get("_id"));
 				this.trigger('click', this.options.property);
+			},
+			_get_coverage_class:function(c) {
+				if (c < 2) { return 'coverage-small'; }
+				else if (c < 5) { return 'coverage-medium'; }
+				return 'coverage-large';
+			},
+			setCoverage:function(c) {
+				this.coverage = c || 0;
 			}
 		});
 

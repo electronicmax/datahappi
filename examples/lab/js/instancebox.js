@@ -3,18 +3,20 @@ define(
 		'examples/lab/js/box',
 		'examples/lab/js/propertybox',
 		'examples/lab/js/pathables',
-		'examples/lab/js/pathableview'
+		'examples/lab/js/pathableview',
+		'js/utils'
 	],
-	function(box, pbox, pathables, pathableview) {
+	function(box, pbox, pathables, pathableview, utils) {
 		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="icon-comment-alt2"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
+		var defined = utils.DEFINED;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props'
 			},
 			initialize:function(options) {
-				box.BoxView.prototype.constructor.apply(this,arguments);
+				box.BoxView.prototype.initialize.apply(this,arguments);
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
@@ -55,7 +57,7 @@ define(
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
 				// add a property box
-				this._render_property_box();
+				this._make_property_box();
 				return this;
 			},
 			_make_property_box:function() {
@@ -68,10 +70,24 @@ define(
 				});
 				propbox.render();
 				propbox.bind('property-click', function(propertyname) {
-					console.log('property-click! ', propertyname);
 					// get paths from the pathables
-					
-					this_.pathables.try_extend_path(new pathables.PropertyDereferenceStep({ property : propertyname }));
+					console.log("PROPERTY CLICK ", propertyname);
+					var step = new pathables.PropertyDereferenceStep({property:propertyname});
+					this_.pathables.paths.map(function(path) {
+							// check to see if we extend path by
+							var pc = path.clone().add_step(step);
+						console.log("trying path ", pc.get('steps').map(function(x) { return x.id }));
+							var result = this_.pathables.try_path(pc);
+						console.log(' result ', result);
+							if (defined(result)) {
+								// did pass, so add it
+								path.add_step(step);
+							}
+							// skip
+						}
+					);
+					var solo = new pathables.Path([step]);
+					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}					
 					propbox.hide();
 				});
 				this.propbox = propbox;
