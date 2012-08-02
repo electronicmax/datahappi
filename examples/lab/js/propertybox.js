@@ -28,7 +28,10 @@ define(
 						this_.render(); 
 					})
 					.on("remove", function() { this_.render(); });
-				this.options.pathables.paths.on("add remove", function() { this_.render(); });
+				this.options.pathables.paths.on("add remove pathchange", function(x) {
+					console.log('pathchange', x);
+					this_.render();
+				});
 				this.options.pathables.map(function(p) { p.on("dereference", function() { this_.render(); }); });
 			},
 			render:function() {
@@ -42,6 +45,7 @@ define(
 			},
 			_update_views:function(pathable) {
 				var this_ = this;
+				console.log('dealing with pathable ', pathable.id, pathable.path.get('steps').length, pathable.values.length, pathable.path.get('steps').map(function(x) { return x.id; }), pathable.get_last_value());
 				var val = get_first(pathable.get_last_value());
 				if (val instanceof pathables.Pathable) {
 					val.map(function(attribute, property) {

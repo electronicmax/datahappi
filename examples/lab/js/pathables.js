@@ -48,7 +48,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 			_(steplist).each(function(x, index) { x.set({position:index}); });			
 			var steps = new Steps(steplist); 
 			this.set({"steps": steps});
-			steps.on("add remove", function() { this_._update_id(); });
+			steps.on("add remove", function() { this_._update_id(); this_.trigger('change'); });
 		},
 		clone:function(path) {
 			return new Path(this.get("steps").models);
@@ -135,6 +135,11 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		comparator:function(path) {
 			return path.get("path_priority");
 		},
+		add:function(x) {
+			Backbone.Collection.prototype.add.apply(this,arguments);
+			var this_ = this;
+			x.on('change', function() { this_.trigger('pathchange', x); }); // TODO: remove?
+		},
 		insertAt:function(p,i) {
 			this.models.slice(i).map(function(path) {
 				path.set({ path_priority : path.get("path_priority") + 1 });
@@ -166,7 +171,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 				// GO THROUGH Paths previously applied and apply them to this new model
 				this_._dereference_model(new_model);
 			});
-			this.paths.bind("add remove", function(new_model) {
+			this.paths.bind("add remove pathchange", function(new_model) {
 				// recompute for all
 				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
 			});			
