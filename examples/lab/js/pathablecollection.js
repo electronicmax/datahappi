@@ -70,7 +70,7 @@ define(
 				this.coverage = coverage;
 			},
 			_update_entropy:function() {
-				this_ = this;
+				var this_ = this;
 				var values = this.map(function(p) {
 					return to_base_value(p.get(this_.property));
 				});

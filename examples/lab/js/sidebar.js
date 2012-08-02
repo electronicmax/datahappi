@@ -50,6 +50,7 @@ define(
 			this.options.collection.add(newsrc);
 		}			
 	});		
+
 	var SidebarView = Backbone.View.extend({
 		events: {
 			"click .tab":"toggle_data"

@@ -56,9 +56,9 @@ define(
 				this.render();
 			},
 			render:function() {
-				this_ = this;
+				var this_ = this;
 				this.el = "-> <select><option>Extend path...</option>";
-				options = _.uniq(_.flatten(this.options.pathables.map(function(pathable) {
+				var options = _.uniq(_.flatten(this.options.pathables.map(function(pathable) {
 					var next_pathable = pathable.get(this_.options.property);
 					if (next_pathable instanceof pathables.Pathable) {
 						return next_pathable.attributes;

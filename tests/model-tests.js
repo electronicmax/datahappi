@@ -1,8 +1,9 @@
-define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
+define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pathables) {
 	var assert = utils.assert;
 	var l = function() { console.log.apply(console,arguments); };
 	tests = [
 		function() {
+			l('hello');
 			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
 			var m2 = new m.Maxel({_id: "http://plus.google.com/id/203920392", name : "max electronic van kleek", posts:["foo"] });
 			assert(m1.keys().length == 3, "keys mismatch");
@@ -34,7 +35,6 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			var path = document.location.pathname;
 			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-
 			var val = "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/');
 			var events = ("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			var c = new m.get_rdf(val);
@@ -47,11 +47,19 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			var dom = new pathables.Pathable({_id:"Dom", bro:"Blah"});
 			var pathCollection = new pathables.Pathables([bob, tom, dom]);
 			l("deref likes ");
-			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
-			l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			var p1 = new pathables.Path([new pathables.PropertyDereferenceStep({property:"likes"})]);
+			l("try path ", pathCollection.try_path(p1));
+			pathCollection.add_path(p1);
+			l("dereferencing likes >> get_last_value for all models: ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value().id ? p.get_last_value().id : p.get_last_value(); }));
 			l("deref bro ");
-			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
-			l("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			var p2 = new pathables.Path([new pathables.PropertyDereferenceStep({property:"bro"})]);
+			pathCollection.add_path(p2, 0);
+			l("dereferencing likes >> get_last_value for all models: ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value().id ? p.get_last_value().id : p.get_last_value(); }));
+			
 		},
 		function() {
 			console.log(">>> Mega pathables test <<< ");			
@@ -61,32 +69,53 @@ define(['js/models','js/utils','js/pathables'],function(m,utils,pathables) {
 			bob.set({'bro':tom});
 			tom.set({'bro':bob});
 			pathCollection = new pathables.Pathables([bob, tom]);
-			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
-			console.log("Dereferencing on 'bro'...");
-			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"bro"}));
-			console.log("Dereferencing on 'likes'...");
-			pathCollection.try_extend_path(new pathables.PropertyDereferenceStep({property:"likes"}));
-			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			console.log("Dereferencing on 'bro' -> 'likes' ...");
+			var p = new pathables.Path([
+				new pathables.PropertyDereferenceStep({property:"bro"}),
+				new pathables.PropertyDereferenceStep({property:"likes"})
+			]);
+			l(' path now has ', p.get('steps').length, pathCollection.try_path(p) );
+			pathCollection.add_path(p);
+			l("get_last_value bro -> likes  ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value()[0].id ? p.get_last_value()[0].id : p.get_last_value()[0];
+			  }));
 
+			
 			console.log("Adding Dave...");
 			var dave = new pathables.Pathable({_id:"Dave", likes:"Marmite"});
 			dave.set({'bro':dave});
 			pathCollection.add(dave);
-			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			l("get_last_value bro -> likes  ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value()[0].id ? p.get_last_value()[0].id : p.get_last_value()[0];
+			  }));
 
 			console.log("Adding Jeff...");
 			var lemonJelly = new pathables.Pathable({_id:"Lemon Jelly", colour:"Yellow", tastes:"Repugnant"});
 			var lemonJam = new pathables.Pathable({_id:"Lemon Jam", tastes:"Fetid"});
 			var jeff = new pathables.Pathable({_id:"Jeff", likes:[lemonJelly, lemonJam]});
 			pathCollection.add(jeff);
-			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
 
-			console.log("extending path by ->likes->tastes");
-			var path = new pathables.Path();
-			path.add_step(new pathables.PropertyDereferenceStep({property:'likes'}));
-			path.add_step(new pathables.PropertyDereferenceStep({property:'tastes'}));
-			pathCollection.try_extend_path(path);
-			console.log("get_last_value for all models: ",pathCollection.models.map(function(p) {return p.get_last_value()}));
+			l("get_last_value bro -> likes  ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value()[0].id ? p.get_last_value()[0].id : p.get_last_value()[0];
+			  }));
+			
+			var likespath = new pathables.Path();
+			likespath.add_step(new pathables.PropertyDereferenceStep({property:'likes'}));
+			likespath.add_step(new pathables.PropertyDereferenceStep({property:'tastes'}));
+			l("likespath >> ", likespath.get('steps').map(function(x) { return x.id; }));
+			l("BEFORE > path collection now has ", pathCollection.paths.length);			
+			pathCollection.add_path(likespath);
+			l("AFTER > path collection now has ", pathCollection.paths.length);
+
+			l("get_last_value bro -> likes  ", 
+			  pathCollection.models.map(function(p) {
+				  return p.get_last_value().map(function(x) { return x.id ? x.id : x; }).join(',');
+			  }));
+			
+			
 		}
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };

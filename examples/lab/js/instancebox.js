@@ -4,41 +4,31 @@ define(
 		'examples/lab/js/propertybox',
 		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
-		'examples/lab/js/pathableview'
+		'examples/lab/js/pathableview',
+		'js/utils'
 	],
-	function(box, propbox, pathbox, pathables, pathableview) {
+	function(box, propbox, pathbox, pathables, pathableview, utils) {
 		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
+		var defined = utils.DEFINED;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props',
-				'click .toggle_paths' : 'toggle_paths',
+				'click .toggle_paths' : 'toggle_paths'
 			},
 			initialize:function(options) {
-				this.constructor.__super__.initialize.apply(this, [options]);
+				box.BoxView.prototype.initialize.apply(this,arguments);
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-
 				// TODO: Ask max how this is different to having a 'drag' function.
 				// this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
-
 				this.views_collection.on('add', function(view) {
 					this_.pathables.add(view.get('model'));
 				}).on('remove', function(view) {
 					this_.pathables.remove(view.get('model'));
 				});
-				/*
-				this.views_collection.bind('add', function(v) {
-					console.log('> adding model ', v.attributes.options.model);
-					this_.models_collection.add(v.attributes.options.model);
-				});
-				this.views_collection.bind('remove', function(v) {
-					console.log('> removing model ', v.attributes.options.model);
-					this_.models_collection.remove(v.attributes.options.model);
-				});
-				*/
 			},
 			render:function() {
 				// this stuff should go into render
@@ -48,7 +38,6 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }		});
 				this.views_collection.map(function(v) { this_._add_view(v); });
-
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -66,12 +55,17 @@ define(
 						var view = box.clone_view(ui.draggable.data("view"));
 						this_.add(view);
 					}
-				});
-
+				});				
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
-
+				// add a property box
+				this._make_property_box();
+				// this._make_path_box(); Work in progress.
+				return this;
+			},
+			_make_property_box:function() {
 				// add a property box.
+				var this_ = this;
 				var propertybox = new propbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,
@@ -79,11 +73,30 @@ define(
 				});
 				propertybox.render();
 				propertybox.bind('property-click', function(propertyname) {
-					console.log('property-click! ', propertyname);
-					this_.pathables.try_extend_path(new pathables.PropertyDereferenceStep({ property : propertyname }));
+					// get paths from the pathables
+					console.log("PROPERTY CLICK ", propertyname);
+					var step = new pathables.PropertyDereferenceStep({property:propertyname});
+					this_.pathables.paths.map(function(path) {
+							// check to see if we extend path by
+							var pc = path.clone().add_step(step);
+						console.log("trying path ", pc.get('steps').map(function(x) { return x.id; }));
+							var result = this_.pathables.try_path(pc);
+						console.log(' result ', result);
+							if (defined(result)) {
+								// did pass, so add it
+								path.add_step(step);
+							}
+							// skip
+						}
+					);
+					var solo = new pathables.Path([step]);
+					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}					
+					propertybox.hide();
 				});
 				this.propbox = propertybox;
-
+				return propertybox;
+			},
+			_make_path_box:function() {
 				// add a path box.
 				var pathbox_ = new pathbox.PathBox({
 					el: this.$el.find('.paths'),
@@ -92,8 +105,7 @@ define(
 				});
 				pathbox_.render();
 				this.pathbox = pathbox_;
-
-				return this;
+				return pathbox;
 			},
 			toggle_paths:function() {
 				this.pathbox.toggle_visibility();
@@ -105,6 +117,15 @@ define(
 				this.propbox.setTopLeft(top,left);
 			}
 		});
+
+		var InstanceBoxShadow = InstanceBox.extend({
+			className:'shadowbox',
+			initialize:function() {
+				InstanceBox.prototype.initalize.apply(this,arguments);
+				this.master = this.options.master_box;
+			}			
+		});
+		
 		return { InstanceBox:InstanceBox };
 	}
 );

@@ -31,17 +31,12 @@ define(
 				this.$el.find('.workspace').droppable({
 					accept:'.item',
 					tolerance:"touch",
-					over:function(event, ui) {
-						console.log("WORKSPACE OVER", event, ui);
-					},
+					over:function(event, ui) { console.log("WORKSPACE OVER", event, ui); },
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
 						// if (event.target !== this_.el) { return ; }
-						console.log("WORKSPACE.DROP ", event, " UI " , ui);
-						console.log('position > ', ui.helper.position().top, ui.helper.offset());
 						var target_box = this_._new_group();
 						target_box.add(box.clone_view(ui.draggable.data("view")));
-						console.log('setting ', ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 						target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 						event.stopPropagation();
 						return false;
@@ -50,7 +45,7 @@ define(
 				return this;
 			},
 			_new_group:function() {
-				var box = new ibox.InstanceBox();
+				var box = new ibox.InstanceBox({dragouttable:true});
 				this.$el.find(".workspace").append(box.render().el);
 				return box;
 			},
