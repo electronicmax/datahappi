@@ -31,7 +31,7 @@ define(
 				this.$el.find('.workspace').droppable({
 					accept:'.item',
 					tolerance:"touch",
-					over:function(event, ui) { console.log("WORKSPACE OVER", event, ui); },
+					over:function(event, ui) {},
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
 						// if (event.target !== this_.el) { return ; }
@@ -68,7 +68,7 @@ define(
 				data_sources: [
 					// new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
 					// new sources.Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') }),
-					sources.get_source("Address Book", "http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/') )
+					sources.get_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'), "Sample peeps" )
 				]
 			});
 			wview.render();

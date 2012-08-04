@@ -1,4 +1,4 @@
-define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],function(rh,util,rdf) {
+define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,source) {
 
 	// Maxels support:
 	//    co-reference declarations (e.g, m1 iss m2)
@@ -182,9 +182,10 @@ define(['js/ops/incremental-forward','js/utils', 'js/rdf/RDFCollection'],functio
 	});
 	Maxel.prototype.g = Maxel.prototype.get;
 	Maxel.prototype.s = Maxel.prototype.set;
-	var Mollection = rdf.RDFCollection.extend({ model:Maxel });
 	return {
 		Maxel : Maxel,
-		get_rdf:function(u) { return new Mollection(undefined, {src_url:u}); }
+		get_from_source:function(url) {
+			return source.get_from_source({src_url:url, modeltype:Maxel});
+		}
 	};	
 });
