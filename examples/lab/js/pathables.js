@@ -215,7 +215,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		Pathables: Pathables,
 		Path:Path,
 		Paths: Paths,
-		get_data:function(url) { return source.get_from_source(url, Pathable, Pathables); }
+		get_from_source:function(url) { return source.get_from_source(url, Pathable, Pathables); }
 	};
 });
 

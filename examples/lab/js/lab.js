@@ -1,9 +1,8 @@
 /* this is for the box example only  */
 define(
 	[
-		'examples/lab/js/sources',
-		'examples/lab/js/sidebar',		
 		'examples/lab/js/pathables',
+		'examples/lab/js/sidebar',		
 		'examples/lab/js/box',
 		'examples/lab/js/instancebox',
 		'examples/lab/js/views',
@@ -11,7 +10,7 @@ define(
 		'js/googlecal/CalendarCollection',
 		'js/googlecal/auth'
 	],
-	function(sources, sidebar, pathables, box, ibox, views, util, cc, auth) {
+	function(pathables, sidebar, box, ibox, views, util, cc, auth) {
 		var Main = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
@@ -68,7 +67,7 @@ define(
 				data_sources: [
 					// new sources.Source({ name: "Buildings", url: "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/') }),
 					// new sources.Source({ name: "Events", url: "http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/') }),
-					sources.get_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'), "Sample peeps" )
+					pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/') )
 				]
 			});
 			wview.render();

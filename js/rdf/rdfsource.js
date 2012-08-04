@@ -22,12 +22,8 @@ define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 				return new_o;
 			},                        
 			fetch:function() {
-				var this_ = this;
-				var d = new $.Deferred();
-				var c_class = this.get('collectiontype') && this.get('collectiontype') || Backbone.Collection;
-				console.log('c_class is ', c_class, c_class == Backbone.Collection);
-				var c = new c_class();
-				var src_url = this.get('src_url');
+				// fills collection passed in to this.get("collection") or creates a new one, returns deferred 
+				var this_ = this, d = new $.Deferred(), src_url = this.get('src_url'), c = this.get('collection') || new Backbone.Collection();
 				utils.assert(src_url, "No src url defined :( ");
 				this._fetch_by_proxy(src_url).then(function(xml) {
 					/* Preprocess - Fix all buggy dates */

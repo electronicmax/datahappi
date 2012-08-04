@@ -37,15 +37,23 @@ define(['js/basemodel', 'js/utils'], function(basemodel, utils) {
 	var get_from_source = function(src_url, modelclass, collectionclass) {
 		var suffix = src_url.slice(src_url.lastIndexOf('.'));
 		if (source_modules[suffix] !== undefined) {
-			var d = utils.deferred();
-			require([source_modules[suffix]], function(module) {
-				(new module.Source({
-					src_url:src_url,
-					modeltype:modelclass,
-					collectiontype:collectionclass
-				})).fetch().then(d.resolve);
-			});
-			return d;
+			var source_d = utils.deferred();
+			var collection = new ((collectionclass || Backbone.Collection).extend({
+				fetch:function() {
+					var this_ = this;
+					var p = utils.deferred();
+					source_d.then(function(source) {
+						this_.source = source;
+						source.fetch().then(p.resolve);
+					});
+					return p.promise();						
+				}
+			}))();
+			require([source_modules[suffix]],
+					function(module) {
+						source_d.resolve(new module.Source({ src_url:src_url, modeltype:modelclass, collection:collection} ));
+					});
+			return collection;			
 		}
 		throw new Error("can't handle data of type ", src_url);
 	};
