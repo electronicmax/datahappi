@@ -185,7 +185,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 	return {
 		Maxel : Maxel,
 		get_from_source:function(url) {
-			return source.get_from_source({src_url:url, modeltype:Maxel});
+			return source.get_from_source(url,Maxel);
 		}
 	};	
 });

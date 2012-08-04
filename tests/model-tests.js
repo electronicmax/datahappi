@@ -31,14 +31,18 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			m1.unset('foo#bar');
 		},
 		function() {
-			// from rdf
+			// tests from rdf
 			var path = document.location.pathname;
 			var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
 			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 			var val = "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/');
-			var events = ("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			var c = new m.get_rdf(val);
-			c.fetch().then(function(x) { window.EVTs = c; console.log('done!'); });
+			console.log('asking to load from val ', val);
+			m.get_from_source(val).then(function(c) {
+				console.log('got a collection of ', c.length );
+				assert( c.length > 0 && c.at(0) instanceof m.Maxel, ' length is zero or not a maxel ');
+				window.EVTs = c;
+				console.log('done!');
+			});
 		},
 		function() {
 			l(">>> Double deref test <<< ");

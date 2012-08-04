@@ -1,4 +1,4 @@
-define(['js/basemodel', 'js/utils'], function(basemodel, rdfsource, utils) {
+define(['js/basemodel', 'js/utils'], function(basemodel, utils) {
 	var source_modules = {
 		'.rdf': 'js/rdf/rdfsource',
 		'.xml': 'js/rdf/rdfsource',
@@ -11,15 +11,17 @@ define(['js/basemodel', 'js/utils'], function(basemodel, rdfsource, utils) {
 		proxy_url = proxy_url || "http://"+ kill_port(document.location.host) + ":9292";
 		return $.get(proxy_url, { url : url });
 	};
+	
 	var Source = Backbone.Model.extend({
 		idAttribute: "name",
 		defaults: { name: "Things", url: "", modeltype: basemodel.BaseModel },
 		initialize:function() {
+			Backbone.Model.prototype.initialize.apply(this,arguments);
 			this._modelsbyuri = {};
 		},
 		_get_model : function(uri) {
 			if (!(uri in this._modelsbyuri)) {
-				this._modelsbyuri[uri] = new this.modeltype({_id:uri});
+				this._modelsbyuri[uri] = new ( this.get("modeltype") )({_id:uri});
 			}
 			return this._modelsbyuri[uri];
 		},
@@ -30,14 +32,18 @@ define(['js/basemodel', 'js/utils'], function(basemodel, rdfsource, utils) {
 		model:Source
 	});
 
-	// dispatches based upon 
-	var get_from_source = function(src_url, modeltype) {
-		//
+	// modelclass = custom model class or basemodel.BaseModel
+	// collectionclass = custom collection to put things into or Backbone.Collection
+	var get_from_source = function(src_url, modelclass, collectionclass) {
 		var suffix = src_url.slice(src_url.lastIndexOf('.'));
 		if (source_modules[suffix] !== undefined) {
 			var d = utils.deferred();
 			require([source_modules[suffix]], function(module) {
-				(new module.Source({modeltype:modeltype})).fetch().then(d.resolve);
+				(new module.Source({
+					src_url:src_url,
+					modeltype:modelclass,
+					collectiontype:collectionclass
+				})).fetch().then(d.resolve);
 			});
 			return d;
 		}

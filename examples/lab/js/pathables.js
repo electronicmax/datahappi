@@ -1,4 +1,4 @@
-define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,utils) {
+define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 /*
   initial sketch of dereferencing core data structure
   based on discussion w/ Skinna in UGLabs 24 July 2012
@@ -160,10 +160,10 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 	dereferencing it according to the set of deref operations
 	that have been performed
 	*/
-	var Pathables = rdfc.RDFCollection.extend({
+	var Pathables = Backbone.Collection.extend({
 		model:Pathable,
 		initialize:function(models, options) {
-			rdfc.RDFCollection.prototype.initialize.apply(this,arguments);
+			Backbone.Collection.prototype.initialize.apply(this,arguments);
 			var this_ = this;
 			this.paths = new Paths();
 			this.bind("add remove", function(new_model) {
@@ -197,13 +197,12 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 				return result;
 			}).filter(defined);
 			if (result.length > 0) { return result; }
-		},
+		},		
+		// @path : path to add
+		// @position: optional - will insert at position if specified, append otherwise
 		add_path:function(path, position) {
-			// @path : path to add
-			// @position: optional - will insert at position if specified, append otherwise
-			var this_ = this;
+			// trigger will automatically recompute above			
 			this.paths.insertAt(path, defined(position) ? position : this.paths.length);
-			// trigger will automatically recompute above
 		},
 		remove_path:function(path) { this.paths.remove(path); }
 	});
@@ -216,7 +215,7 @@ define(['js/rdf/RDFCollection','js/models', 'js/utils'], function(rdfc,models,ut
 		Pathables: Pathables,
 		Path:Path,
 		Paths: Paths,
-		get_rdf:function(u) { return new Pathables(undefined, {src_url:u}); }
+		get_data:function(url) { return source.get_from_source(url, Pathable, Pathables); }
 	};
 });
 

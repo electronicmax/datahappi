@@ -1,9 +1,9 @@
 define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 	function(source, basemodel, utils, nameresolver) {
 		var RDFSource = source.Source.extend({
-			initialize:function() {
+			initialize:function(options) {
 				source.Source.prototype.initialize.apply(this,arguments);
-				console.log("loading rdf from ", this.options && this.options.src_url);
+				console.log("loading rdf from ", this.get('src_url'));
 			},
 			_convert_values : function(o) {
 				var this_ = this;
@@ -24,9 +24,12 @@ define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 			fetch:function() {
 				var this_ = this;
 				var d = new $.Deferred();
-				var c = new Backbone.Collection();
-				utils.assert(this.options && this.options.src_url, "No src url defined :( ");
-				this._fetch_by_proxy(this.options.src_url).then(function(xml) {
+				var c_class = this.get('collectiontype') && this.get('collectiontype') || Backbone.Collection;
+				console.log('c_class is ', c_class, c_class == Backbone.Collection);
+				var c = new c_class();
+				var src_url = this.get('src_url');
+				utils.assert(src_url, "No src url defined :( ");
+				this._fetch_by_proxy(src_url).then(function(xml) {
 					/* Preprocess - Fix all buggy dates */
 					var startTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "start"));
 					var endTimes = Array.prototype.slice.call(xml.getElementsByTagNameNS("*", "end"));
@@ -51,11 +54,5 @@ define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 				return d;
 			}
 		});           
-		return {
-			Source:RDFSource,
-			get_rdf:function(rdfSource){
-				console.log("get_rdf source", rdfSource);
-				return new RDFSource({src_url:rdfSource}).fetch();
-			}
-		};
+		return { Source:RDFSource };
 	});
