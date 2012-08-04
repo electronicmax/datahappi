@@ -37,11 +37,13 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 			var val = "http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/');
 			console.log('asking to load from val ', val);
-			m.get_from_source(val).fetch().then(function(c) {
-				console.log('got a collection of ', c.length );
-				assert( c.length > 0 && c.at(0) instanceof m.Maxel, ' length is zero or not a maxel ');
-				window.EVTs = c;
-				console.log('done!');
+			m.get_from_source(val).then(function(source) {
+				source.fetch().then(function(c) {
+					console.log('got a collection of ', c.length );
+					assert( c.length > 0 && c.at(0) instanceof m.Maxel, ' length is zero or not a maxel ');
+					window.EVTs = c;
+					console.log('done!');
+				});
 			});
 		},
 		function() {

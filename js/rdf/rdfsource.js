@@ -21,9 +21,11 @@ define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 				_(o).map(function(v,k) { new_o[k] = convert_rdfv(v); });
 				return new_o;
 			},                        
-			fetch:function() {
-				// fills collection passed in to this.get("collection") or creates a new one, returns deferred 
-				var this_ = this, d = new $.Deferred(), src_url = this.get('src_url'), c = this.get('collection') || new Backbone.Collection();
+			fetch:function(collection) {
+				// fills collection passed in returns deferred
+				collection = collection || this.collection;
+				var this_ = this, d = new $.Deferred(), src_url = this.get('url');
+				console.log("FETCHING FROM ", src_url);
 				utils.assert(src_url, "No src url defined :( ");
 				this._fetch_by_proxy(src_url).then(function(xml) {
 					/* Preprocess - Fix all buggy dates */
@@ -42,8 +44,8 @@ define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
 						nameresolver.register_model(m);						
 						return m;
 					});
-					c.reset(json_ms);
-					d.resolve(c);
+					collection.reset(json_ms);
+					d.resolve(collection);
 				}, function(err) {
 					console.error("Fetch failed with status " + err.status + ", check the proxy is running: $> ps -a | grep proxy");
 				});

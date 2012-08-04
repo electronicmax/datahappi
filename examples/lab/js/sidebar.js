@@ -1,6 +1,6 @@
 define(
 	[
-		'examples/lab/js/sources',
+		'js/source',
 		'examples/lab/js/views',		
 		'js/ui/tableview',
 		'js/utils'
@@ -60,7 +60,9 @@ define(
 			console.assert(this.options.el, "must provide an el for sidebar");
 		},
 		render:function() {
+			console.log(" GOT ", this.options.sources.length, " SOURCES ", this.options.sources, typeof(this.options.sources));
 			var sourcec = new sources.SourceCollection(this.options.sources);
+			console.log(" BUT ENDED UP WITH  ", sourcec.length, " SOURCES ", sourcec.models, this.options.sources.length);
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); 
 			var things_view = new tv.TableView({
 				el:this.$el.find('.things')[0],
@@ -74,9 +76,12 @@ define(
 					}
 				]
 			});
-			setTimeout(function() { 
-				sourcec.map(function(source) {
-					source.fetch().then(function(data) {
+			setTimeout(function() {
+				console.log('sourcec length ', sourcec.length);
+				sourcec.map(function(src) {
+					console.log("SOURCE ", src.get('src_url'));
+					src.fetch().then(function(data) {
+						console.log('adding data from source ', src.get('src_url'), data.length);
 						data.map(function(datum) { things_view.collection.add(datum); });
 					});
 				});
