@@ -1,5 +1,5 @@
-define(['js/source', 'js/basemodel','js/utils', 'js/rdf/name-resolver'],
-	function(source, basemodel, utils, nameresolver) {
+define(['js/source','js/utils', 'js/rdf/name-resolver'],
+	function(source, utils, nameresolver) {
 		var RDFSource = source.Source.extend({
 			initialize:function(options) {
 				source.Source.prototype.initialize.apply(this,arguments);
