@@ -40,12 +40,13 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 		},
 		render:function() {
 			var this_ = this;
-			this.$el.find('ul').html(''); 
+			this.$el.find('ul').html('');
 			this.options.collection.models.map(function(model) { this_._add(model);	});
 			return this;
 		},
-		_add:function(m) {
-			var new_src = $("(<li class='source-entry selected'>" + m.get('name') + "</li>");
+		_add:function(m){
+			var name = m.get('name') && m.get('name').length > 0 ? m.get('name') : m.id.slice(m.id.lastIndexOf('/') + 1);
+			var new_src = $("(<li class='source-entry selected'>" + name + "</li>");
 			this.$el.find('ul').append(new_src);
 			new_src.data("model", m);
 		},

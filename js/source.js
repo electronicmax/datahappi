@@ -14,7 +14,7 @@ define(['js/basemodel', 'js/utils'], function(basemodel, utils) {
 	
 	var Source = Backbone.Model.extend({
 		idAttribute: "url",
-		defaults: { name: "Things", url: "", modeltype: basemodel.BaseModel },
+		defaults: { url: "", modeltype: basemodel.BaseModel },
 		initialize:function() {
 			Backbone.Model.prototype.initialize.apply(this,arguments);
 			this._modelsbyuri = {};
