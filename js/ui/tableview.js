@@ -19,6 +19,7 @@ define(['js/utils'], function(util) {
 		render:function() {
 			var m = this.options.model;
 			var this_ = this;
+			this.$el.html('');
 			_(this.options.columns).map(function(val) {
 				var oldVal = $.extend({}, val);
 				if (_(val).isFunction()) { val = val(m); return arguments.callee(val); }
@@ -37,7 +38,9 @@ define(['js/utils'], function(util) {
 				}
 			});
 			return this.el;
-		}
+		},
+		hide:function() { this.$el.hide(); },
+		show:function() { this.$el.show(); }
 	});
 
 	var TableView = Backbone.View.extend({

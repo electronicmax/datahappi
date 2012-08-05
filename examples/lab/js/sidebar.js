@@ -1,12 +1,5 @@
-define(
-	[
-		'js/source',
-		'examples/lab/js/views',		
-		'js/ui/tableview',
-		'js/utils'
-	],
-	function(sources,views,tv,util) {
-
+define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],function(sources,views,tv,util) {
+	var defined = util.DEFINED;
 	var ThingsView = tv.TableView.extend({
 		columns:[
 			function(m) {
@@ -17,10 +10,18 @@ define(
 			}
 		],
 		setSourceEnabled:function(src) {
-			console.log('setting source enabled ', src);
+			console.log('setting source enabled ', src.id);
+			var els = _(this.row_views).values()
+				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+				.filter(defined);
+			$(els).show();
 		},
 		setSourceDisabled:function(src) {
-			console.log('setting source disabled ', src);			
+			console.log('setting source disabled ', src.id);
+			var els = _(this.row_views).values()
+				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+				.filter(defined);
+			$(els).hide();
 		}		
 	});
 		
