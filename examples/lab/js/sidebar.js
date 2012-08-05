@@ -6,6 +6,23 @@ define(
 		'js/utils'
 	],
 	function(sources,views,tv,util) {
+
+	var ThingsView = tv.TableView.extend({
+		columns:[
+			function(m) {
+				var view = new views.ThingListItemView({model:m});
+				view.render();
+				view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
+				return view;
+			}
+		],
+		setSourceEnabled:function(src) {
+			console.log('setting source enabled ', src);
+		},
+		setSourceDisabled:function(src) {
+			console.log('setting source disabled ', src);			
+		}		
+	});
 		
 	var SourcesView = Backbone.View.extend({
 		events : {
@@ -16,7 +33,9 @@ define(
 		initialize:function() {
 			var this_ = this;
 			this.options.collection.bind('add', function(m) { this_._add(m); });
-			if (this.options.sidebar) { this.options.sidebar.bind('slideAway', function() { this_._hide_source_url(); }); }
+			if (this.options.sidebar) {
+				this.options.sidebar.bind('slideAway', function() { this_._hide_source_url(); });
+			}
 		},
 		render:function() {
 			var this_ = this;
@@ -25,12 +44,11 @@ define(
 			return this;
 		},
 		_add:function(m) {
-			var new_src = $("(<li class='source-entry'>" + m.get('name') + "</li>");
+			var new_src = $("(<li class='source-entry selected'>" + m.get('name') + "</li>");
 			this.$el.find('ul').append(new_src);
 			new_src.data("model", m);
 		},
 		_toggle_source:function(evt) {
-			console.log('toggle src ', evt, evt.target, evt.currenTarget, $(evt.target).data('model'));
 			var source = $(evt.target).data('model');
 			this.trigger($(evt.target).hasClass('selected') ? 'source-disabled' : 'source-enabled', source);
 			$(evt.target).toggleClass('selected');
@@ -60,22 +78,11 @@ define(
 			console.assert(this.options.el, "must provide an el for sidebar");
 		},
 		render:function() {
-			console.log(" GOT ", this.options.sources.length, " SOURCES ", this.options.sources, typeof(this.options.sources));
 			var sourcec = new sources.SourceCollection(this.options.sources);
-			console.log(" BUT ENDED UP WITH  ", sourcec.length, " SOURCES ", sourcec.models, this.options.sources.length);
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); 
-			var things_view = new tv.TableView({
-				el:this.$el.find('.things')[0],
-				columns:[
-					function(m) {
-						var view = new views.ThingListItemView({model:m});
-						view.render();
-						// make this draggable
-						view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
-						return view;
-					}
-				]
-			});
+			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
+			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
+			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
 			setTimeout(function() {
 				console.log('sourcec length ', sourcec.length);
 				sourcec.map(function(src) {
