@@ -22,10 +22,11 @@ define(
 					property:this.options.property,
 					pathables:this.options.pathables
 				});
+				this.coverage = 0;
 			},
 			render:function() {
 				this.$el.html(this.options.property);
-				this.$el.addClass(this._get_coverage_class(this.coverage));
+				this.$el.addClass(this._get_coverage_class());
 				this.$el.data("property", this.options.property);
 				return this;
 			},
@@ -34,16 +35,17 @@ define(
 				// this.options.collection.chain_forwards(this.options.model.get("_id"));
 				this.trigger('click', this.options.property);
 			},
-			_get_coverage_class:function(c) {
+			_get_coverage_class:function() {
+				var c = this.coverage;
 				if (c < 2) { return 'coverage-small'; }
 				else if (c < 5) { return 'coverage-medium'; }
 				return 'coverage-large';
 			},
 			setCoverage:function(c) {
 				this.coverage = c || 0;
+				console.log('>>>>> --- setting coverage ', this.coverage);
 			}
 		});
-
 		return { 
 			PropertyView:PropertyView
 		};

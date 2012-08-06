@@ -31,16 +31,17 @@ define([], function() {
 		_add_view:function(v) {
 			// requires there be an 'items' subelement under us.
 			this.$el.find("." + this.options.item_container_class).append(v.render().el);
+			return this;
 		},
 		add:function(v) {
 			this.views_collection.add(v);
 			this._add_view(v);
 		},
 		show:function() {
-			if (this.$el.is(":hidden")) { this.$el.show(); console.log("Box shown"); }
+			if (this.$el.is(":hidden")) { this.$el.show(); }
 		},
 		hide:function() {
-			if (!this.$el.is(":hidden")) {	this.$el.hide(); console.log("Box hidden"); }
+			if (!this.$el.is(":hidden")) { this.$el.hide();  }
 		},
 		toggle_visibility:function() {
 			if (this.$el.is(":hidden")) { this.$el.show(); } else { this.$el.hide(); }

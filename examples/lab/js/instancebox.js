@@ -22,9 +22,9 @@ define(
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-				// TODO: Ask max how this is different to having a 'drag' function.
-				// this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
-				this.views_collection.on('add', function(view) {
+
+				// when a new view gets added to us indirectly by box.js
+				this.views_collection.on('add', function(view) {	
 					this_.pathables.add(view.get('model'));
 				}).on('remove', function(view) {
 					this_.pathables.remove(view.get('model'));
@@ -36,6 +36,7 @@ define(
 				this.constructor.__super__.render.apply(this);				
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
+				// dragging the box
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }		});
 				this.views_collection.map(function(v) { this_._add_view(v); });
 				// set up to receive droppables
@@ -50,10 +51,8 @@ define(
 						$(this).removeClass("over");
 					},
 					drop: function( event, ui ) {
-						// console.log("boxdropped ", event, ui, event.target == this_.el);
 						$(this).removeClass("over");
-						var view = box.clone_view(ui.draggable.data("view"));
-						this_.add(view);
+						this_.add(box.clone_view(ui.draggable.data("view")));
 					}
 				});				
 				// add a toolbar.

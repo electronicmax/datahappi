@@ -44,10 +44,14 @@
   bottom: 0;
   right: 0;
 }
-.greybox .items div {
+.greybox .items .item {
   /*display:inline-block;*/
 
   margin: 0px;
+  width: 200px;
+}
+.greybox .items .item:hover {
+  border: 1px solid #eee;
 }
 .greybox input {
   font-family: "District", "Droid Sans", "Lucida Sans";
