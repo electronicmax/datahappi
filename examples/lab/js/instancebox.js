@@ -22,13 +22,14 @@ define(
 				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-
 				// when a new view gets added to us indirectly by box.js
-				this.views_collection.on('add', function(view) {	
-					this_.pathables.add(view.get('model'));
-				}).on('remove', function(view) {
-					this_.pathables.remove(view.get('model'));
-				});
+				this.views_collection.on('add', function(view) {
+					var m = view.attributes.options.model;
+					if (this_.pathables.get(m.id)) { console.warn(' we already have a model of that type '); }
+					console.log('before >> ', this_.pathables.length);
+					this_.pathables.add(m);
+					console.log('after >> ', this_.pathables.length);
+				}).on('remove', function(view) { this_.pathables.remove(view.get('model')); });
 			},
 			render:function() {
 				// this stuff should go into render
@@ -77,17 +78,11 @@ define(
 					var step = new pathables.PropertyDereferenceStep({property:propertyname});
 					this_.pathables.paths.map(function(path) {
 						var pc = path.clone().add_step(step);
-						console.log("trying path ", pc.get('steps').map(function(x) { return x.id }));
 						var result = this_.pathables.try_path(pc);
-						console.log(' result ', result,  " adding step>  ", defined(result));
-						if (defined(result)) {
-							path.add_step(step);
-							console.log("path now has ", path.get('steps').map(function(x) { return x.id; }));
-						}
+						if (defined(result)) { path.add_step(step); }
 					});
 					var solo = new pathables.Path([step]);
 					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
-
 					console.log(' -> paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
 					propertybox.hide();
 				});

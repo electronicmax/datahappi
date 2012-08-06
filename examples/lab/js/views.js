@@ -4,9 +4,7 @@ define(['js/utils'], function(utils) {
 		tagName:'div',
 		className:'item',
 		template:$('#thing-listitem-template').text(),
-		events:{
-			'dblclick .thing-label' : '_toggle_props'
-		},		
+		events:{ 'dblclick .thing-label' : '_toggle_props'},		
 		initialize:function() {
 			var this_ = this;
 			this.options.model.bind('dereference',function() {
