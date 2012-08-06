@@ -64,3 +64,5 @@ def writerdf():
 	FILE = open("banks.rdf", 'w')
 	FILE.write(getrdf())
 	FILE.close()
+
+writerdf();

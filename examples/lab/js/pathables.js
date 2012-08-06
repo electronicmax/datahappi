@@ -197,14 +197,19 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				return result;
 			}).filter(defined);
 			if (result.length > 0) { return result; }
-		},		
+		},
 		// @path : path to add
 		// @position: optional - will insert at position if specified, append otherwise
 		add_path:function(path, position) {
-			// trigger will automatically recompute above			
+			// @path : path to add
+			// @position: optional - will insert at position if specified, append otherwise
 			this.paths.insertAt(path, defined(position) ? position : this.paths.length);
+			// trigger will automatically recompute above
 		},
-		remove_path:function(path) { this.paths.remove(path); }
+		remove_path:function(path) { this.paths.remove(path); },
+		coverage:function(attribute) {
+			 return 1; //TODO
+		}
 	});
 
 	return {

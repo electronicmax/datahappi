@@ -4,7 +4,7 @@ define(
 		'examples/lab/js/propertyview',
 		'examples/lab/js/pathables'
 	],
-	function(box, pview, pathables) {
+	function(box, propview, pathables) {
 		/* The floating box containing the list of clickable properties for a patricular Pathables collection.
 		 *
 		 * Required options:
@@ -39,8 +39,9 @@ define(
 				box.BoxView.prototype.render.apply(this, arguments);
 				this.$el.html(template);
 				this.views_collection.reset();
-				this.options.pathables.map(function(p) { this_._update_views(p); });
+				this.views_collection.add(new propview.PropertyView({pathables:this_.options.pathables}));
 				this.views_collection.map(function(pv) { this_._add_view(pv.attributes); });
+
 				return this;
 			},
 			_update_views:function(pathable) {
@@ -51,7 +52,7 @@ define(
 					val.map(function(attribute, property) {
 						if (property === "_id") { return; }
 						if (!this_.views_collection.get(property)) {
-							var pv = new pview.PropertyView({
+							var pv = new propview.PropertyView({
 								property:property,
 								pathables:this_.options.pathables
 							});
