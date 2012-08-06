@@ -58,6 +58,7 @@ define(
 						// Remove undefined's and primitives
 						return !_.isUndefined(pathable) && _.isObject(pathable);
 					}));
+					delete this_.next_chain_view;
 					if (next_pathables.models.length > 0) {
 						this_.next_chain_view = new PropertyViewChain_Subsequent({
 							pathables:next_pathables
