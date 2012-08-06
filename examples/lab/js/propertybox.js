@@ -39,7 +39,11 @@ define(
 				box.BoxView.prototype.render.apply(this, arguments);
 				this.$el.html(template);
 				this.views_collection.reset();
-				this.options.pathables.map(function(p) { this_._update_views(p); });
+
+
+				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originall was; should probably discuss and look into further.
+				this.views_collection.add(new propview.PropertyView({pathables:this_.options.pathables}));
+
 				this.get_item_views().map(function(pv) { this_._render_view(pv); });
 				return this;
 			},
