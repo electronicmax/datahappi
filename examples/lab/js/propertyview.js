@@ -113,7 +113,8 @@ define(
 			},
 			_pathable_add:function(pathable) {
 				var this_ = this;
-				_.union(_.keys(pathable.entailed || {}), _.keys(pathable.attributes)).filter(function(attribute) {
+				console.log(' pathable is >> ', pathable);
+				pathable.keys().filter(function(attribute) {
 					return !(_.isUndefined(attribute) || attribute === "_id");
 				}).map(function(attribute) {
 					var model_attributes = {};

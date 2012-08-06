@@ -1,4 +1,4 @@
-define(['js/basemodel', 'js/utils'], function(basemodel, utils) {
+define(['js/basemodel', 'js/models', 'js/utils'], function(basemodel, maxel, utils) {
 	var source_modules = {
 		'.rdf': 'js/rdf/rdfsource',
 		'.xml': 'js/rdf/rdfsource',
@@ -12,16 +12,17 @@ define(['js/basemodel', 'js/utils'], function(basemodel, utils) {
 		return $.get(proxy_url, { url : url });
 	};
 	
-	var Source = Backbone.Model.extend({
+	var Source = maxel.Maxel.extend({
 		idAttribute: "url",
 		defaults: { url: "", modeltype: basemodel.BaseModel },
-		initialize:function() {
-			Backbone.Model.prototype.initialize.apply(this,arguments);
+		initialize:function(attributes) {
+			attributes = _({}).chain().extend(this.defaults).extend(attributes || {}).value();
+			maxel.Maxel.prototype.initialize.apply(this,[attributes]);
 			this._modelsbyuri = {};
 		},
 		_get_model : function(uri) {
 			if (!(uri in this._modelsbyuri)) {
-				this._modelsbyuri[uri] = new ( this.get("modeltype") )({_id:uri});
+				this._modelsbyuri[uri] = new ( this.get("modeltype")[0] )({_id:uri});
 			}
 			return this._modelsbyuri[uri];
 		},

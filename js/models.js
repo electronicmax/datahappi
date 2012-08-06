@@ -78,7 +78,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 			if (l.length) { return l; }
 		},
 		keys:function() {
-			return _( _(this.attributes).keys() ).union(_(this.entailed).keys());
+			return _( _(this.attributes).keys() ).union( _(this.entailed).keys() );
 		},
 		map:function(f) {
 			var this_ = this;

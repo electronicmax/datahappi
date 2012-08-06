@@ -24,7 +24,7 @@ define(['js/source','js/utils', 'js/rdf/name-resolver'],
 			fetch:function(collection) {
 				// fills collection passed in returns deferred
 				collection = collection || this.collection;
-				var this_ = this, d = new $.Deferred(), src_url = this.get('url');
+				var this_ = this, d = new $.Deferred(), src_url = this.get('url')[0];
 				console.log("FETCHING FROM ", src_url);
 				utils.assert(src_url, "No src url defined :( ");
 				this._fetch_by_proxy(src_url).then(function(xml) {
