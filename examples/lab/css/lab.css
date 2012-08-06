@@ -7,6 +7,9 @@ body .slidepanel .sources {
   width: 100%;
   height: 100px;
 }
+body .slidepanel .sources ul {
+  list-style-type: none;
+}
 body .slidepanel .sources .source-entry {
   color: #888;
 }

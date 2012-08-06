@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ns1="http://volant.ecs.soton.ac.uk/predicates/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878076">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-50</ns1:cost>
+    <ns1:item>Laptop battery refund</ns1:item>
+    <ns1:item rdf:resource="2010-12-18T09:18:21Z"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878354">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</ns1:cost>
+    <ns1:item rdf:resource="2011-03-27T17:46:46Z"/>
+    <ns1:item>New car</ns1:item>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#879276">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</ns1:cost>
+    <ns1:item rdf:resource="2011-06-18T12:50:27Z"/>
+    <ns1:item>Insurance</ns1:item>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#877287">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</ns1:cost>
+    <ns1:item rdf:resource="2009-10-10T09:55:31Z"/>
+    <ns1:item>Restaurant meal</ns1:item>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878042">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">50</ns1:cost>
+    <ns1:item rdf:resource="2010-08-21T03:56:15Z"/>
+    <ns1:item>Laptop battery</ns1:item>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#877673">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">450</ns1:cost>
+    <ns1:item rdf:resource="2010-03-31T02:17:44Z"/>
+    <ns1:item>Laptop</ns1:item>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#876650">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">130</ns1:cost>
+    <ns1:item>Direct Debit: Rent</ns1:item>
+    <ns1:item rdf:resource="2008-07-14T04:08:51Z"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#880952">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</ns1:cost>
+    <ns1:item>Cash machine withdrawal</ns1:item>
+    <ns1:item rdf:resource="2011-10-23T00:37:44Z"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#880230">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-500</ns1:cost>
+    <ns1:item>Payday</ns1:item>
+    <ns1:item rdf:resource="2011-08-26T12:43:31Z"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890">
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878076"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878354"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#879276"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#877287"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#878042"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#877673"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#876650"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#880952"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#880230"/>
+    <ns1:transaction rdf:resource="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#876994"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://volant.ecs.soton.ac.uk/accounts/1234567890/transactions#876994">
+    <ns1:cost rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</ns1:cost>
+    <ns1:item>Cash machine withdrawal</ns1:item>
+    <ns1:item rdf:resource="2009-03-18T09:28:51Z"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -92,7 +92,6 @@ define(
 
 					console.log("> result of dereference op >> ", this_.pathables.paths.length);
 					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
-
 					propertybox.hide();
 				});
 				*/

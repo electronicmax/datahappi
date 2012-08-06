@@ -1,11 +1,29 @@
-define(
-	[
-		'examples/lab/js/sources',
-		'examples/lab/js/views',		
-		'js/ui/tableview',
-		'js/utils'
-	],
-	function(sources,views,tv,util) {
+define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],function(sources,views,tv,util) {
+	var defined = util.DEFINED;
+	var ThingsView = tv.TableView.extend({
+		columns:[
+			function(m) {
+				var view = new views.ThingListItemView({model:m});
+				view.render();
+				view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
+				return view;
+			}
+		],
+		setSourceEnabled:function(src) {
+			console.log('setting source enabled ', src.id);
+			var els = _(this.row_views).values()
+				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+				.filter(defined);
+			$(els).show();
+		},
+		setSourceDisabled:function(src) {
+			console.log('setting source disabled ', src.id);
+			var els = _(this.row_views).values()
+				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+				.filter(defined);
+			$(els).hide();
+		}		
+	});
 		
 	var SourcesView = Backbone.View.extend({
 		events : {
@@ -16,21 +34,23 @@ define(
 		initialize:function() {
 			var this_ = this;
 			this.options.collection.bind('add', function(m) { this_._add(m); });
-			if (this.options.sidebar) { this.options.sidebar.bind('slideAway', function() { this_._hide_source_url(); }); }
+			if (this.options.sidebar) {
+				this.options.sidebar.bind('slideAway', function() { this_._hide_source_url(); });
+			}
 		},
 		render:function() {
 			var this_ = this;
-			this.$el.find('ul').html(''); 
+			this.$el.find('ul').html('');
 			this.options.collection.models.map(function(model) { this_._add(model);	});
 			return this;
 		},
-		_add:function(m) {
-			var new_src = $("(<li class='source-entry'>" + m.get('name') + "</li>");
+		_add:function(m){
+			var name = m.get('name') && m.get('name').length > 0 ? m.get('name') : m.id.slice(m.id.lastIndexOf('/') + 1);
+			var new_src = $("(<li class='source-entry selected'>" + name + "</li>");
 			this.$el.find('ul').append(new_src);
 			new_src.data("model", m);
 		},
 		_toggle_source:function(evt) {
-			console.log('toggle src ', evt, evt.target, evt.currenTarget, $(evt.target).data('model'));
 			var source = $(evt.target).data('model');
 			this.trigger($(evt.target).hasClass('selected') ? 'source-disabled' : 'source-enabled', source);
 			$(evt.target).toggleClass('selected');
@@ -62,21 +82,15 @@ define(
 		render:function() {
 			var sourcec = new sources.SourceCollection(this.options.sources);
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); 
-			var things_view = new tv.TableView({
-				el:this.$el.find('.things')[0],
-				columns:[
-					function(m) {
-						var view = new views.ThingListItemView({model:m});
-						view.render();
-						// make this draggable
-						view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
-						return view;
-					}
-				]
-			});
-			setTimeout(function() { 
-				sourcec.map(function(source) {
-					source.fetch().then(function(data) {
+			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
+			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
+			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
+			setTimeout(function() {
+				console.log('sourcec length ', sourcec.length);
+				sourcec.map(function(src) {
+					console.log("SOURCE ", src.get('src_url'));
+					src.fetch().then(function(data) {
+						console.log('adding data from source ', src.get('src_url'), data.length);
 						data.map(function(datum) { things_view.collection.add(datum); });
 					});
 				});
