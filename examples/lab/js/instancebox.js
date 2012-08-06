@@ -88,9 +88,7 @@ define(
 					var solo = new pathables.Path([step]);
 					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
 
-					console.log("> result of dereference op >> ", this_.pathables.paths.length);
-					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
-					
+					console.log(' -> paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
 					propertybox.hide();
 				});
 				this.propbox = propertybox;
