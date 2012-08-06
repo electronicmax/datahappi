@@ -39,12 +39,16 @@ define(
 				// When a new value is selected, set the next link accordingly.
 				this.prop_select.change(function() {
 					console.log(this_.prop_select.val());
-					// TODO: next_pathables <- the pathables which have been chained on this.options.pathables witht he attribute this.prop_select.val()
-					var next_pathables = this_.options.pathables;
+					var step = new pathables.PropertyDereferenceStep({property:this_.prop_select.val()});
+					var next_pathables = new pathables.Pathables(_.uniq(_.flatten(this_.options.pathables.map(function(pathable) {
+						var path = pathable.try_step(step);
+						if (path) {return _.last(path);}
+					}))).filter(function(pathable) {
+						return !_.isUndefined(pathable) && _.isObject(pathable);
+					}));
 					this_.next_chain_view = new PropertyViewChain_Subsequent({
 						pathables:next_pathables
 					});
-					console.log("next_chain_view: "+this_.next_chain_view);
 					this_.render();
 				});
 
@@ -52,7 +56,7 @@ define(
 				this.select_model.on('change', function() {
 					this_.prop_select.children().remove();
 					// TODO: Once a value has been selected, remove 'extend chain...' and replace it with blank or somewhing, which deletes the box and all its children when selected.
-					this_.prop_select.append("<option value=''>"+this_.initial_text+"</option>");
+					this_.prop_select.append("<option value=''>"+this_.initial_text+"</option>"); // Top option saying something like "Extend path..."
 					_.map(this_.select_model.attributes, function(coverage, attribute) {
 						// TODO: Order by coverage.
 						this_.prop_select.append("<option value='"+attribute+"'>"+attribute+": "+coverage+"</option>");
