@@ -22,7 +22,7 @@ define(
 				this.$el.html(template);
 				this.views_collection.reset();
 				this.options.pathables.map(function(p) { this_._update_views(p); });
-				this.views_collection.map(function(pv) { console.log("pv > ", pv); this_._add_view(pv.attributes); });
+				this.views_collection.map(function(pv) { console.log("pv > ", pv); this_._render_view(pv.attributes); });
 				return this;
 			},
 			_update_views:function() {
