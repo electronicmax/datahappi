@@ -20,7 +20,9 @@ define([], function() {
 		defaults: { item_container_class : 'items' },
 		initialize:function(options) {
 			this.options = _({}).extend(this.defaults, options);
-			this.views_collection = this.options.views_collection ? this.options.views_collection : new Backbone.Collection();
+			this.views_collection = this.options.views_collection ?
+				this.options.views_collection :
+				new Backbone.Collection();
 		},
 		setTopLeft:function(top,left) {
 			this.$el.css("top",top).css("left",left);
@@ -28,19 +30,24 @@ define([], function() {
 		render:function() {
 			return this;
 		},
-		_add_view:function(v) {
+		_render_view:function(v) {
 			// requires there be an 'items' subelement under us.
 			this.$el.find("." + this.options.item_container_class).append(v.render().el);
+			return this;
+		},
+		get_item_views:function() {
+			return this.views_collection.models.map(function(x) {
+				return x.attributes;
+			});
 		},
 		add:function(v) {
 			this.views_collection.add(v);
-			this._add_view(v);
 		},
 		show:function() {
-			if (this.$el.is(":hidden")) { this.$el.show(); console.log("Box shown"); }
+			if (this.$el.is(":hidden")) { this.$el.show(); }
 		},
 		hide:function() {
-			if (!this.$el.is(":hidden")) {	this.$el.hide(); console.log("Box hidden"); }
+			if (!this.$el.is(":hidden")) { this.$el.hide();  }
 		},
 		toggle_visibility:function() {
 			if (this.$el.is(":hidden")) { this.$el.show(); } else { this.$el.hide(); }

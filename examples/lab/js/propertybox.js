@@ -39,9 +39,8 @@ define(
 				box.BoxView.prototype.render.apply(this, arguments);
 				this.$el.html(template);
 				this.views_collection.reset();
-				this.views_collection.add(new propview.PropertyView({pathables:this_.options.pathables}));
-				this.views_collection.map(function(pv) { this_._add_view(pv.attributes); });
-
+				this.options.pathables.map(function(p) { this_._update_views(p); });
+				this.get_item_views().map(function(pv) { this_._render_view(pv); });
 				return this;
 			},
 			_update_views:function(pathable) {

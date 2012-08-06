@@ -5,7 +5,6 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			function(m) {
 				var view = new views.ThingListItemView({model:m});
 				view.render();
-				view.$el.draggable({revert:"invalid",helper:"clone",appendTo:'body'});
 				return view;
 			}
 		],

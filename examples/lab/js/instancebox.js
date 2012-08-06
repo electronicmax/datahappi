@@ -11,6 +11,7 @@ define(
 		var template = '<div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
 		var defined = utils.DEFINED;
+		
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
@@ -19,16 +20,8 @@ define(
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
-				var this_ = this;
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-				// TODO: Ask max how this is different to having a 'drag' function.
-				// this.bind('drag', function(offset) { console.log('update propbox position '); this_._update_propbox(offset.top, offset.left); });
-				this.views_collection.on('add', function(view) {
-					this_.pathables.add(view.get('model'));
-				}).on('remove', function(view) {
-					this_.pathables.remove(view.get('model'));
-				});
 			},
 			render:function() {
 				// this stuff should go into render
@@ -36,8 +29,9 @@ define(
 				this.constructor.__super__.render.apply(this);				
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
-				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }		});
-				this.views_collection.map(function(v) { this_._add_view(v); });
+				// dragging the box
+				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
+				this.get_item_views().map(function(v) {	this_._render_view(v);	});
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -50,18 +44,42 @@ define(
 						$(this).removeClass("over");
 					},
 					drop: function( event, ui ) {
-						// console.log("boxdropped ", event, ui, event.target == this_.el);
 						$(this).removeClass("over");
-						var view = box.clone_view(ui.draggable.data("view"));
-						this_.add(view);
+						var v = box.clone_view(ui.draggable.data("view"));
+						this_.add(v);
+						this_._render_view(v);
 					}
 				});
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
 				// add a property box
 				this._make_property_box();
-				// this._make_path_box(); Probably soon to be redundant.
 				return this;
+			},
+			add:function(itemview) {
+				// warning: this method shadows parent 
+				var m = itemview.options.model;
+				var this_ = this;
+				if (this_.pathables.get(m.id)) {
+					// warn: we already have a pathable there so eeks
+					itemview.options.model = this_.pathables.get(m.id);
+				} else {
+					this_.pathables.add(m);
+				}
+				var lvc = this.views_collection.length;
+				this.views_collection.add(itemview);
+				console.log("instancebox :: ADD ITEM : before - ", lvc, ' after - ', this.views_collection.length);				
+			},
+			remove:function(itemview) {
+				var m = itemview.options.model;
+				var this_ = this;
+				if (this.get_item_views().filter(function(iv) {	return iv.options.model.id == m.id;	}).length == 1) {
+					this_.pathables.remove(m);
+   			    }
+				var lvc = this.views_collection.length;
+				this.views_collection.remove(itemview);
+				itemview.$el.remove();
+				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			_make_property_box:function() {
 				// add a property box.
@@ -79,17 +97,11 @@ define(
 					var step = new pathables.PropertyDereferenceStep({property:propertyname});
 					this_.pathables.paths.map(function(path) {
 						var pc = path.clone().add_step(step);
-						console.log("trying path ", pc.get('steps').map(function(x) { return x.id }));
 						var result = this_.pathables.try_path(pc);
-						console.log(' result ', result,  " adding step>  ", defined(result));
-						if (defined(result)) {
-							path.add_step(step);
-							console.log("path now has ", path.get('steps').map(function(x) { return x.id; }));
-						}
+						if (defined(result)) { path.add_step(step); }
 					});
 					var solo = new pathables.Path([step]);
 					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
-
 					console.log("> result of dereference op >> ", this_.pathables.paths.length);
 					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
 					propertybox.hide();
@@ -122,6 +134,7 @@ define(
 			}
 		});
 
+		/*
 		var InstanceBoxShadow = InstanceBox.extend({
 			className:'shadowbox',
 			initialize:function() {
@@ -129,7 +142,8 @@ define(
 				this.master = this.options.master_box;
 			}
 		});
-
+		*/
+		
 		return { InstanceBox:InstanceBox };
 	}
 );

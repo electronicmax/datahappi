@@ -29,20 +29,15 @@ define([
 					over:function(event, ui) {},
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
-						// if (event.target !== this_.el) { return ; }
-						var target_box = this_._new_group();
+						var target_box = new ibox.InstanceBox();
+						console.log('ui draggable data view is ', ui.draggable.data("view"));
 						target_box.add(box.clone_view(ui.draggable.data("view")));
 						target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
-						event.stopPropagation();
+						this_.$el.find(".workspace").append(target_box.render().el);
 						return false;
 					}
 				});				
 				return this;
-			},
-			_new_group:function() {
-				var box = new ibox.InstanceBox({dragouttable:true});
-				this.$el.find(".workspace").append(box.render().el);
-				return box;
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
@@ -57,9 +52,10 @@ define([
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			$.when(pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
-				  pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/')))
-				.then(function() {
+			$.when(
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))
+//				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/'))
+			).then(function() {
 					var srcs = _.toArray(arguments);
 					console.log("WHEN >>> ", srcs, srcs.length);
 					var wview = new Main({el : $('body'), data_sources: srcs});

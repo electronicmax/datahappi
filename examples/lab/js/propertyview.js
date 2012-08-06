@@ -21,15 +21,22 @@ define(
 				this.property_view_chain.on("change", function() {
 					this_.trigger("change", this_.get_path());
 				});
+
+				this.coverage = 0;
 			},
 			render:function() {
+				/*
+				  this.$el.html(this.options.property);
+				  this.$el.addClass(this._get_coverage_class());
+				  this.$el.data("property", this.options.property);
+				*/
 				this.$el.html(this.property_view_chain.render().el);
 				return this;
 			},
 			get_path:function() {
 				return this.property_view_chain.get_path().filter(function(step) {
 					return !_.isUndefined(step)
-				});;
+				});
 			}
 		});
 
@@ -92,6 +99,16 @@ define(
 				var html = $("<div></div>").append(this.prop_select).append(next_chain_link);
 				this.$el.html(html);
 				return this;
+			},
+			_get_coverage_class:function() {
+				var c = this.coverage;
+				if (c < 2) { return 'coverage-small'; }
+				else if (c < 5) { return 'coverage-medium'; }
+				return 'coverage-large';
+			},
+			setCoverage:function(c) {
+				this.coverage = c || 0;
+				console.log('>>>>> --- setting coverage ', this.coverage);
 			},
 			_pathable_add:function(pathable) {
 				var this_ = this;
