@@ -27,17 +27,20 @@ define(
 				var this_ = this;
 				this.next_chain_view = undefined;
 
-				this.prop_select = $("<select></select>");
+				this.prop_select = $("<select></select>");	// The combobox listing all avaliable properties for the next step in a chain.
+				this.select_model = new Backbone.Model();	// The conceptual model behind the combobox.
+
 				// When a new value is selected, set the next link accordingly.
 				this.prop_select.change(function() {
 					console.log(this_.prop_select.val());
 					// TODO: next_pathables <- the pathables which have been chained on this.options.pathables witht he attribute this.prop_select.val()
 					var next_pathables = this_.options.pathables;
-					this.next_chain_view = new PropertyViewChain_Subsequent({
+					this_.next_chain_view = new PropertyViewChain_Subsequent({
 						pathables:next_pathables
 					});
+					console.log("next_chain_view: "+this_.next_chain_view);
+					this_.render();
 				});
-				this.select_model = new Backbone.Model();
 
 				// When the select_model changed, remove and re-add all elements in the prop_select.
 				this.select_model.on('change', function() {
@@ -59,7 +62,8 @@ define(
 			},
 			render:function() {
 				var next_chain_link = this.next_chain_view ? this.next_chain_view.render().el : '';
-				this.$el.html(this.prop_select.after(next_chain_link));
+				var html = $("<div></div>").append(this.prop_select).append(next_chain_link);
+				this.$el.html(html);
 				return this;
 			},
 			_pathable_add:function(pathable) {
@@ -86,7 +90,10 @@ define(
 		});
 
 		return {
-			PropertyView:PropertyView
+			PropertyView:PropertyView,
+			PropertyViewElement:PropertyViewElement,
+			PropertyViewChain:PropertyViewChain,
+			PropertyViewChain_Subsequent:PropertyViewChain_Subsequent
 		};
 	}
 );
