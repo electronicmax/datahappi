@@ -131,6 +131,7 @@ body .item {
   margin: 0px;
   width: 200px;
   padding: 0 0 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0);
 }
 body .item .thing-label a {
   font-size: 0.5em;
