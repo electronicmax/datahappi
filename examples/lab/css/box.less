@@ -11,7 +11,13 @@
   min-width:@boxminwidth;
   &.over {
      padding:15px;
-  }      
+  }
+  &:hover .box-delete { display:block; }
+  .box-delete {
+      display:none;
+      position:absolute;
+      top:5px; right:5px;
+  }       
   .uplt, .uprt, .btlt, .btrt {
 	  width:10px; height:10px;
   }
@@ -40,14 +46,6 @@
       position:absolute;
       bottom:0; right:0;
   }
-  .items {
-      .item {
-          /*display:inline-block;*/
-          margin:0px;
-		  &:hover {  border:1px solid #eee;  }
-		  width:200px;
-      }     
-  } 
   input {
     font-family:"District", "Droid Sans", "Lucida Sans";
     color:rgba(0,0,50,0.6);
@@ -60,7 +58,7 @@
     border:none !important;
     -webkit-box-shadow:none;
     box-shadow:none;
-	&:hover, &:focus {color:black;	}
+	&:hover, &:focus { color:black;	}
   }
   .microtoolbox {
     color:rgba(0,0,50,0.6);
@@ -71,9 +69,7 @@
     width:80%;
     font-size:14px;
 	span {
-		&:hover {
-			color:black;
-		}
+		&:hover { color:black;	}
 	}
   }             
 }
@@ -101,12 +97,14 @@
     @minichart-width: 30px;
 	font-size:0.7em;
     vertical-align:top;
-	.propitems {
-		vertical-align:top;		
+	ul.propitems {
+		vertical-align:top;
+        list-style-type:none;
+        margin:0px 0px 10px 10px;
 	}
     .coverage-small { font-size:10pt; }
     .coverage-medium { font-size:12pt; }
-    .coverage-large { font-size:14pt; }          
+    .coverage-large { font-size:14pt; }
  }
 
  /*
