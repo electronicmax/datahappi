@@ -15,10 +15,13 @@ define(
 			return v;
 		};
 		var PropertyBox = box.BoxView.extend({
-			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
-				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options)]);
 				var this_ = this;
+				this.constructor.__super__.initialize.apply(this, [
+					_({
+						item_container_class:"propitems"
+					}).extend(options)]
+				);
 				this.options.pathables
 					.on("add", function(p) {
 						// new pathable was added, so update ourselves
@@ -42,7 +45,10 @@ define(
 
 
 				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originall was; should probably discuss and look into further.
-				this.views_collection.add(new propview.PropertyView({pathables:this_.options.pathables}));
+				this.views_collection.add(new propview.PropertyView({
+					pathables:this_.options.pathables,
+					path_priority:0
+				}));
 
 				this.get_item_views().map(function(pv) { this_._render_view(pv); });
 				return this;
@@ -67,6 +73,15 @@ define(
 						}
 					});
 				}
+			},
+			get_paths:function() {
+				paths = this.views_collection.map(function(prop_view) {
+					return prop_view.attributes.get_path();
+				}).filter(function(path) {
+					return (path.get_steps().length > 0);
+				});
+
+				return new pathables.Paths(paths);
 			}
 		});
 

@@ -9,7 +9,8 @@ define(
 		 *  fires and returns the new path as the first argument.
 		 *
 		 * Required options:
-		 * pathables: pathables.Pathables */
+		 * pathables: pathables.Pathables
+		 * path_priority: int; The precidence of this path, 0 being highest. */
 		var PropertyView = Backbone.View.extend({
 			initialize:function() {
 				var this_ = this;
@@ -20,7 +21,6 @@ define(
 				// Whenever the visual combobox path is changed, trigger a change event.
 				this.property_view_chain.on("change", function() {
 					this_.trigger("change", this_.get_path());
-					console.log(this_.get_path());
 				});
 
 				this.coverage = 0;
@@ -41,7 +41,7 @@ define(
 					return !_.isUndefined(property);
 				}).map(function(property) {
 					path.add_step(new pathables.Step({
-						property:property,
+						property:property
 					}));
 				});
 
@@ -137,7 +137,7 @@ define(
 			get_path:function() {
 				var selectedOption = $(":selected", this.prop_select);
 				if (_.isUndefined(selectedOption) || selectedOption.hasClass('no-path')) {
-					return undefined
+					return [undefined]
 				} else {
 					return this.next_chain_view ?
 						[this.prop_select.val()].concat(this.next_chain_view.get_path()) :

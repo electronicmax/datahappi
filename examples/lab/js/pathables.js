@@ -129,16 +129,18 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		value_at:function(step) { return this.values[step]; }
 	});
 
-	// 
 	var Paths = Backbone.Collection.extend({
 		model:Path,
 		comparator:function(path) {
 			return path.get("path_priority");
 		},
-		add:function(x) {
+		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
-			x.on('change', function() { this_.trigger('pathchange', x); }); // TODO: remove?
+			// x.on('change', function() { this_.trigger('pathchange', x); });
+			path_array.map(function(path) {
+				path.on('change', function() { this_.trigger('pathchange', x); });
+			});
 		},
 		insertAt:function(p,i) {
 			this.models.slice(i).map(function(path) {
