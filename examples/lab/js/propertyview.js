@@ -20,6 +20,7 @@ define(
 				// Whenever the visual combobox path is changed, trigger a change event.
 				this.property_view_chain.on("change", function() {
 					this_.trigger("change", this_.get_path());
+					console.log(this_.get_path());
 				});
 
 				this.coverage = 0;
@@ -40,7 +41,7 @@ define(
 					return !_.isUndefined(property);
 				}).map(function(property) {
 					path.add_step(new pathables.Step({
-						property:step,
+						property:property,
 					}));
 				});
 
