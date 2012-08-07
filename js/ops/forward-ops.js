@@ -1,4 +1,4 @@
-define(['js/rdf/name-resolver','js/ops/rule-diffs'], function(nameResolver, diffs) {
+define(['js/rdf/name-resolver','js/ops/rule-diffs', 'js/utils'], function(nameResolver, diffs, utils) {
 	return {
 		operators: [
 			{
@@ -27,6 +27,22 @@ define(['js/rdf/name-resolver','js/ops/rule-diffs'], function(nameResolver, diff
 						result.add(lio,v);
 					});
 					return result;
+				}
+			},
+			{
+				id:'geocode',
+				domain:[],
+				fn:function(thing) {
+					var result = diffs.diffs(this,thing);
+					thing.map(function(vals,k) {
+						vals.map(function(v) {
+							if (typeof(v) == 'string' && utils.indexOf_uk_postcode(v) >= 0) {
+								// try to geolocate
+								console.log('potential postcode -- now please geolocate (?)', v);
+							}
+						})
+					});
+					return;
 				}
 			}
 		]
