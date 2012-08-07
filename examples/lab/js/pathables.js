@@ -139,7 +139,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var this_ = this;
 			// x.on('change', function() { this_.trigger('pathchange', x); });
 			path_array.map(function(path) {
-				path.on('change', function() { this_.trigger('pathchange', x); });
+				path.on('change', function() { this_.trigger('pathchange', path_array); });
 			});
 		},
 		insertAt:function(p,i) {
@@ -209,6 +209,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			// trigger will automatically recompute above
 		},
 		remove_path:function(path) { this.paths.remove(path); },
+		reset_paths:function(paths) { this.paths = paths; },
 		coverage:function(attribute) {
 			 return 1; //TODO
 		}

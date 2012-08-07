@@ -12,7 +12,6 @@ define(
 		var template = "<ul class='pathitems'></ul>";
 		var PathBox = box.BoxView.extend({
 			initialize:function(options) {
-				var this_ = this;
 				this.constructor.__super__.initialize.apply(this, [_({ item_container_class : "pathitems" }).extend(options)]);
 				this.views_collection.add(new PathView({pathables:this.options.pathables}));
 			},

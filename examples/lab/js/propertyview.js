@@ -21,6 +21,7 @@ define(
 				// Whenever the visual combobox path is changed, trigger a change event.
 				this.property_view_chain.on("change", function() {
 					this_.trigger("change", this_.get_path());
+					console.log("woop 1");
 				});
 
 				this.coverage = 0;
@@ -75,7 +76,7 @@ define(
 
 						// Whenever the child combobox triggers a change event, pass it up.
 						this_.next_chain_view.on("change", function() {
-							this_.trigger("change")
+							this_.trigger("change");
 						});
 					}
 					this_.render();
@@ -102,7 +103,7 @@ define(
 				// When a new option is selected, trigger a "change" event.
 				this.prop_select.change(function(){
 					this_.trigger("change");
-				})
+				});
 			},
 			render:function() {
 				var next_chain_link = this.next_chain_view ? this.next_chain_view.render().el : '';
@@ -137,7 +138,7 @@ define(
 			get_path:function() {
 				var selectedOption = $(":selected", this.prop_select);
 				if (_.isUndefined(selectedOption) || selectedOption.hasClass('no-path')) {
-					return [undefined]
+					return [undefined];
 				} else {
 					return this.next_chain_view ?
 						[this.prop_select.val()].concat(this.next_chain_view.get_path()) :

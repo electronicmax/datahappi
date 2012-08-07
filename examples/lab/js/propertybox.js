@@ -44,11 +44,17 @@ define(
 				this.views_collection.reset();
 
 
-				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originall was; should probably discuss and look into further.
-				this.views_collection.add(new propview.PropertyView({
+				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originaly was; should probably look into further.
+				var new_view = new propview.PropertyView({
 					pathables:this_.options.pathables,
 					path_priority:0
-				}));
+				});
+				new_view.on("change", function(path) {
+					this_.trigger("change", path);
+					console.log("woop 2");
+				});
+
+				this.views_collection.add(new_view);
 
 				this.get_item_views().map(function(pv) { this_._render_view(pv); });
 				return this;
