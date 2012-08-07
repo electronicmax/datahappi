@@ -9,6 +9,15 @@
 .greybox.over {
   padding: 15px;
 }
+.greybox:hover .box-delete {
+  display: block;
+}
+.greybox .box-delete {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
 .greybox .uplt,
 .greybox .uprt,
 .greybox .btlt,
@@ -43,15 +52,6 @@
   position: absolute;
   bottom: 0;
   right: 0;
-}
-.greybox .items .item {
-  /*display:inline-block;*/
-
-  margin: 0px;
-  width: 200px;
-}
-.greybox .items .item:hover {
-  border: 1px solid #eee;
 }
 .greybox input {
   font-family: "District", "Droid Sans", "Lucida Sans";
@@ -108,8 +108,10 @@
   font-size: 0.7em;
   vertical-align: top;
 }
-.properties .propitems {
+.properties ul.propitems {
   vertical-align: top;
+  list-style-type: none;
+  margin: 0px 0px 10px 10px;
 }
 .properties .coverage-small {
   font-size: 10pt;

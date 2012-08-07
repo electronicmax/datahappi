@@ -1,4 +1,7 @@
-@import "../../../js/ui/font-propertybox/fontello.css";
+@import "fontello/fontello.css";
+
+@import "fontello/fontello-codes.css";
+/*@import "../../../js/ui/font-propertybox/fontello.css";*/
 body {
   margin: 0;
   padding: 0;
@@ -120,10 +123,35 @@ body .flip-horizontal {
   /*IE*/
 
 }
-body .thing-listitem .thing-label a {
+body .things .item:hover .delete {
+  display: none;
+}
+body .item {
+  position: relative;
+  margin: 0px;
+  width: 200px;
+  padding: 0 0 0 4px;
+}
+body .item .thing-label a {
   font-size: 0.5em;
 }
-body .thing-listitem .props {
+body .item:hover {
+  border: 1px solid #eee;
+}
+body .item:hover .delete {
+  display: block;
+}
+body .item .props {
   display: none;
   font-size: 0.7em;
+}
+body .item .delete {
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 5px;
+  display: none;
+  opacity: 0.8;
+  font-size: 1.0em;
 }
