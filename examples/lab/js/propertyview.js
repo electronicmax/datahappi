@@ -34,9 +34,17 @@ define(
 				return this;
 			},
 			get_path:function() {
-				return this.property_view_chain.get_path().filter(function(step) {
-					return !_.isUndefined(step)
+				var path = new pathables.Path();
+
+				this.property_view_chain.get_path().filter(function(property) {
+					return !_.isUndefined(property);
+				}).map(function(property) {
+					path.add_step(new pathables.Step({
+						property:step,
+					}));
 				});
+
+				return path;
 			}
 		});
 
