@@ -4,7 +4,7 @@
 	<rdfs:label>Alice</rdfs:label>
 	<cat:home>
 	  <rdf:Description rdf:about="#aliceaddress">
-		<cat:address>29 Oxford St, Southampton SO5 W1J</cat:address>
+		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>075372982938</cat:phone>

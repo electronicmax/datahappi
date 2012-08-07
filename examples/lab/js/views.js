@@ -4,7 +4,10 @@ define(['js/utils'], function(utils) {
 		tagName:'div',
 		className:'item',
 		template:$('#thing-listitem-template').text(),
-		events:{ 'dblclick .thing-label' : '_toggle_props'},		
+		events:{
+			'dblclick .thing-label' : '_toggle_props',
+			'click .delete' : '_cb_delete'
+		},		
 		initialize:function() {
 			var this_ = this;
 			this.options.model.bind('dereference',function() {
@@ -34,6 +37,9 @@ define(['js/utils'], function(utils) {
 			} else {
 				this.$el.find('.props').slideUp();
 			}
+		},
+		_cb_delete:function() {
+			this.trigger('delete');
 		}
 	});
 

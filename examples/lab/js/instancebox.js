@@ -16,7 +16,8 @@ define(
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props',
-				'click .toggle_paths' : 'toggle_paths'
+				'click .toggle_paths' : 'toggle_paths',
+				'click .box-delete' : '_cb_delete'
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
@@ -52,6 +53,7 @@ define(
 				});
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
+				this.$el.data('view', this);
 				// add a property box
 				this._make_property_box();
 				return this;
@@ -68,6 +70,9 @@ define(
 				}
 				var lvc = this.views_collection.length;
 				this.views_collection.add(itemview);
+				itemview.on('delete', function() {
+					itemview.$el.fadeOut('fast', function() { this_.remove(itemview); });
+				});
 				console.log("instancebox :: ADD ITEM : before - ", lvc, ' after - ', this.views_collection.length);				
 			},
 			remove:function(itemview) {
@@ -135,6 +140,10 @@ define(
 			},
 			_update_propbox:function(top,left) {
 				this.propbox.setTopLeft(top,left);
+			},
+			_cb_delete:function() {
+				var this_ = this;
+				this.$el.fadeOut(function() { this_.$el.remove(); });
 			}
 		});
 
