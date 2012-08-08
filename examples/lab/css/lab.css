@@ -156,11 +156,17 @@ body .item .delete {
   opacity: 0.8;
   font-size: 1.0em;
 }
+body .hist {
+  text-align: right;
+}
 body .hist div {
+  overflow: hidden;
   font: 8px sans-serif;
   background-color: steelblue;
   text-align: right;
   padding: 3px;
   margin: 1px;
+  height: 12px;
   color: white;
+  line-height: 1.5em;
 }

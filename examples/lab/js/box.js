@@ -15,13 +15,17 @@ define([], function() {
 	};
 
 	var ViewCollection = Backbone.Collection.extend({
+		/*
+		  It's really a pain in the butt to keep views in
+		  collections. This makes it a little bit easier.
+		*/		   
 		initialize:function() {
 			
 		},
 		get_views:function() {
 			return Backbone.Collection.prototype.map(function(x) { return x.attributes; });
 		},
-		get:function(p) {
+		get:function(p, x) {
 			var val = Backbone.Collection.prototype.get.apply(this,arguments);
 			if (val) { return val.attributes; }
 		},
@@ -33,18 +37,20 @@ define([], function() {
 			var val = Backbone.Collection.prototype.add.apply(this,arguments);						
 			var this_ = this;
 			if (!_(v).isArray()) { v = [v]; }
-			v.map(function(vv) {
-				vv.on('all', function(eventName) { this_.trigger(eventName, vv); }, this_);
-			});
+			v.map(function(vv) { vv.on('all', function(eventName) { this_.trigger(eventName, vv); }, this_);});
 			return val;
 		},
 		remove:function(v) {
-			var val = Backbone.Collection.prototype.remove.apply(this,arguments);			
 			var this_ = this;
 			if (!_(v).isArray()) { v = [v]; }
-			v.map(function(vv) {
-				vv.off(null, null, this_);
+			var vids = v.map(function(x) { return x.cid; });
+			var to_kill = this.models.filter(function(x) {
+				console.log('cid ', x.cid);
+				return vids.indexOf(x.attributes.cid) >= 0;
 			});
+			console.log("TO KILL ", to_kill); 
+			var val = Backbone.Collection.prototype.remove.apply(this,[to_kill]);
+			to_kill.map(function(vv) { vv.attributes.off('all', null, this_); });
 			return val;
 		},
 		map:function(fn) {

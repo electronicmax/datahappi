@@ -1,6 +1,7 @@
 define(['js/utils'], function(utils) {
 	// first attempt at ta
 	var ThingListItemView = Backbone.View.extend({
+		idAttribute:"model_id",
 		tagName:'div',
 		className:'item',
 		template:$('#thing-listitem-template').text(),
@@ -12,6 +13,7 @@ define(['js/utils'], function(utils) {
 			var this_ = this;
 			this.options.model.on('change dereference',function() { this_._update_template(); }, this);
 			this.options.model.on('all',function(eventName, x) { this_.trigger(eventName, x);}, this);
+			this.model_id = this.options.model.id;
 		},
 		_update_template:function() {
 			var val = this.options.model.get_last_value();
