@@ -41,7 +41,7 @@ define(
 				this.property_view_chain.get_path().filter(function(property) {
 					return !_.isUndefined(property);
 				}).map(function(property) {
-					path.add_step(new pathables.Step({
+					path.add_step(new pathables.PropertyDereferenceStep({
 						property:property
 					}));
 				});
