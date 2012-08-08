@@ -31,11 +31,13 @@ define(
 						this_.render(); 
 					})
 					.on("remove", function() { this_.render(); });
+				/* Commenting this out fixed the problem of the comboboxes resetting whenever changed. Shrug.
 				this.options.pathables.paths.on("add remove pathchange", function(x) {
 					console.log('pathchange', x);
 					this_.render();
 				});
 				this.options.pathables.map(function(p) { p.on("dereference", function() { this_.render(); }); });
+				*/
 			},
 			render:function() {
 				var this_ = this;

@@ -136,7 +136,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			// If path_array is a single element, turn it into a single-element array
-			if (!_.isArray(path_array)) {path_array = [path_array]}
+			if (!_.isArray(path_array)) {path_array = [path_array];}
 
 			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
@@ -221,7 +221,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			});
 		},
 		coverage:function(attribute) {
-			 return 1; //TODO
+			return 1; //TODO
 		}
 	});
 
