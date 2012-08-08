@@ -5,9 +5,7 @@ define(['js/utils'],function(utils) {
 			if (this.options.views) { this._register_change();	}
 		},
 		get_pathables:function() {
-			return this.options.views.map(function(x) {
-				return x.attributes.options.model;
-			});
+			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
 		render:function() {
 			console.log('render!!');
@@ -50,7 +48,10 @@ define(['js/utils'],function(utils) {
 		},
 		_register_change:function() {
 			var this_ = this;
-			this.options.views.on('add remove', function() { this_.render(); });
+			this.options.views.on('all', function(eventName) {
+				console.log("histogram got a >> ", eventName, 'from view collection');
+				this_.render();
+			}, this);
 		}
 	});
 	return { HistView: HistView };

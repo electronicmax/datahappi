@@ -17,21 +17,20 @@ define(
 		var PropertyBox = box.BoxView.extend({
 			// events: {}, Fill out so clicking a property expands it and etc.
 			initialize:function(options) {
-				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options)]);
+				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options)])
 				var this_ = this;
 				this.options.pathables
 					.on("add", function(p) {
 						// new pathable was added, so update ourselves
-						console.log(" THINGY BEING ADDED > ", p, " - ", p.path.get("steps").models.length );
+						console.log("propertybox::add > ", p, " - ", p.path.get("steps").models.length );
 						// register interest in future dereferences of it
-						p.on("dereference", function() { this_.render(); });
+						p.on("dereference", function() { this_.render(); }, this_);
 						this_.render(); 
-					})
-					.on("remove", function() { this_.render(); });
-				this.options.pathables.paths.on("add remove pathchange", function(x) {
-					console.log('pathchange', x);
-					this_.render();
-				});
+					}).on("remove", function(x) {
+						this_.render();
+						x.off(null, null, this_);
+					});
+				this.options.pathables.paths.on("add remove pathchange", function(x) { this_.render();	});
 				this.options.pathables.map(function(p) { p.on("dereference", function() { this_.render(); }); });
 			},
 			render:function() {
@@ -40,7 +39,7 @@ define(
 				this.$el.html(template);
 				this.views_collection.reset();
 				this.options.pathables.map(function(p) { this_._update_views(p); });
-				this.get_item_views().map(function(pv) { this_._render_view(pv); });
+				this.views_collection.map(function(pv) { this_._render_view(pv); });
 				return this;
 			},
 			_update_views:function(pathable) {
@@ -58,7 +57,7 @@ define(
 							this_.views_collection.add(pv);
 							pv.bind('click', function(p) { this_.trigger('property-click', p); });
 						} else {
-							var view = this_.views_collection.get(property).attributes;
+							var view = this_.views_collection.get(property);
 							view.setCoverage(view.coverage+1);
 						}
 					});

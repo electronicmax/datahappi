@@ -1,6 +1,4 @@
 define([], function() {
-
-
 	var clone_view = function(src_view) {
 		// makes a new view from the same model as src_model
 		var model = src_view.options.model;
@@ -15,14 +13,57 @@ define([], function() {
 		view.render();
 		return view;
 	};
+
+	var ViewCollection = Backbone.Collection.extend({
+		initialize:function() {
+			
+		},
+		get_views:function() {
+			return Backbone.Collection.prototype.map(function(x) { return x.attributes; });
+		},
+		get:function(p) {
+			var val = Backbone.Collection.prototype.get.apply(this,arguments);
+			if (val) { return val.attributes; }
+		},
+		at:function() {
+			var m = Backbone.Collection.prototype.at.apply(this,arguments);
+			if (m) { return m.attributes; }
+		},
+		add:function(v,x) {
+			var val = Backbone.Collection.prototype.add.apply(this,arguments);						
+			var this_ = this;
+			if (!_(v).isArray()) { v = [v]; }
+			v.map(function(vv) {
+				vv.on('all', function(eventName) { this_.trigger(eventName, vv); }, this_);
+			});
+			return val;
+		},
+		remove:function(v) {
+			var val = Backbone.Collection.prototype.remove.apply(this,arguments);			
+			var this_ = this;
+			if (!_(v).isArray()) { v = [v]; }
+			v.map(function(vv) {
+				vv.off(null, null, this_);
+			});
+			return val;
+		},
+		map:function(fn) {
+			return this.models.map(function(x) { return fn(x.attributes); });
+		},
+		filter:function(fn) {
+			return this.models.filter(function(x) { return fn(x.attributes); });
+		},
+		reduce:function(fn, initial) {
+			return this.models.filter(function(x) { return fn(x.attributes); }, initial);
+		}
+	});
+	
 	var BoxView = Backbone.View.extend({
 		tagName:'div',
 		defaults: { item_container_class : 'items' },
 		initialize:function(options) {
 			this.options = _({}).extend(this.defaults, options);
-			this.views_collection = this.options.views_collection ?
-				this.options.views_collection :
-				new Backbone.Collection();
+			this.views_collection = new ViewCollection();
 		},
 		setTopLeft:function(top,left) {
 			this.$el.css("top",top).css("left",left);
@@ -35,11 +76,6 @@ define([], function() {
 			this.$el.find("." + this.options.item_container_class).append(v.render().el);
 			return this;
 		},
-		get_item_views:function() {
-			return this.views_collection.models.map(function(x) {
-				return x.attributes;
-			});
-		},
 		add:function(v) {
 			this.views_collection.add(v);
 		},
@@ -51,9 +87,6 @@ define([], function() {
 		},
 		toggle_visibility:function() {
 			if (this.$el.is(":hidden")) { this.$el.show(); } else { this.$el.hide(); }
-		},
-		get_view_count:function() {
-			return this.views_collection.size();
 		}
 	});
 	return {

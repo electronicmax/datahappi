@@ -33,7 +33,8 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
-				this.get_item_views().map(function(v) {	this_._render_view(v);	});
+				console.log('this views colleciton map ', this.views_collection.length, this.views_collection.models.length);
+				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -86,7 +87,7 @@ define(
 			remove:function(itemview) {
 				var m = itemview.options.model;
 				var this_ = this;
-				if (this.get_item_views().filter(function(iv) {	return iv.options.model.id == m.id;	}).length == 1) {
+				if (this.views_collection.filter(function(iv) {	return iv.options.model.id == m.id;	}).length == 1) {
 					this_.pathables.remove(m);
    			    }
 				var lvc = this.views_collection.length;

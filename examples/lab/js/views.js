@@ -10,9 +10,8 @@ define(['js/utils'], function(utils) {
 		},		
 		initialize:function() {
 			var this_ = this;
-			this.options.model.bind('dereference',function() {
-				this_._update_template();
-			});
+			this.options.model.on('change dereference',function() { this_._update_template(); }, this);
+			this.options.model.on('all',function(eventName, x) { this_.trigger(eventName, x);}, this);
 		},
 		_update_template:function() {
 			var val = this.options.model.get_last_value();
@@ -41,6 +40,7 @@ define(['js/utils'], function(utils) {
 		},
 		_cb_delete:function() {
 			this.trigger('delete');
+			this.options.model.off(null, null, this);
 		}
 	});
 
