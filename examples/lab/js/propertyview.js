@@ -35,8 +35,8 @@ define(
 				  this.$el.data("property", this.options.property);
 				*/
 				var html = this.property_view_chain.render().el;
-				//if (html.innerHTML === this.el.innerHTML) { this.$el.html(html); }
-				this.$el.html(html);
+				if (html.innerHTML !== this.el.innerHTML) { this.$el.html(html); }
+				//this.$el.html(html);
 				return this;
 			},
 			get_path:function() {
@@ -112,8 +112,8 @@ define(
 			render:function() {
 				var next_chain_link = this.next_chain_view ? this.next_chain_view.render().el : '';
 				var html = $("<div></div>").append(this.prop_select).append(next_chain_link);
-				// if (html.innerHTML === this.el.innerHTML) { this.$el.html(html); }
-				this.$el.html(html);
+				if (html.innerHTML !== this.el.innerHTML) { this.$el.html(html); }
+				// this.$el.html(html);
 				return this;
 			},
 			_get_coverage_class:function() {
