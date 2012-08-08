@@ -7,7 +7,7 @@ define(['js/utils'], function(utils) {
 		events:{
 			'dblclick .thing-label' : '_toggle_props',
 			'click .delete' : '_cb_delete'
-		},		
+		},
 		initialize:function() {
 			var this_ = this;
 			this.options.model.bind('dereference',function() {
@@ -18,7 +18,7 @@ define(['js/utils'], function(utils) {
 			var val = this.options.model.get_last_value();
 			if (val.toJSON) { val = val.toJSON(); }
 			if (_(val).isArray()) { val = val[0]; }
-			if (val.toJSON) { val = val.toJSON(); }			
+			if (val.toJSON) { val = val.toJSON(); }
 			this.$el.html(_(this.options.template || this.template).template({m:val}));
 		},
 		render:function() {
@@ -44,5 +44,4 @@ define(['js/utils'], function(utils) {
 	});
 
 	return { ThingListItemView : ThingListItemView };
-
 });

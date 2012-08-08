@@ -11,7 +11,7 @@ define(
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
 		var defined = utils.DEFINED;
-		
+
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
@@ -20,14 +20,22 @@ define(
 				'click .box-delete' : '_cb_delete'
 			},
 			initialize:function(options) {
+				var this_ = this;
 				box.BoxView.prototype.initialize.apply(this,arguments);
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
+				/*
+				this.pathables.on("change", function() {
+					this_.get_item_views().map(function(view) {
+						view.render();
+					});
+				});
+				*/
 			},
 			render:function() {
 				// this stuff should go into render
 				// The PropertyBox belonging to this InstanceBox; initially hidden.
-				this.constructor.__super__.render.apply(this);				
+				this.constructor.__super__.render.apply(this);
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
@@ -59,7 +67,7 @@ define(
 				return this;
 			},
 			add:function(itemview) {
-				// warning: this method shadows parent 
+				// warning: this method shadows parent
 				var m = itemview.options.model;
 				var this_ = this;
 				if (this_.pathables.get(m.id)) {
@@ -73,7 +81,7 @@ define(
 				itemview.on('delete', function() {
 					itemview.$el.fadeOut('fast', function() { this_.remove(itemview); });
 				});
-				console.log("instancebox :: ADD ITEM : before - ", lvc, ' after - ', this.views_collection.length);				
+				console.log("instancebox :: ADD ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			remove:function(itemview) {
 				var m = itemview.options.model;

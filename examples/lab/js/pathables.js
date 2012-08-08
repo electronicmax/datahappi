@@ -140,7 +140,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 
 			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
-			// x.on('change', function() { this_.trigger('pathchange', x); });
 			path_array.map(function(path) {
 				path.on('change', function() { this_.trigger('pathchange', path_array); });
 			});
