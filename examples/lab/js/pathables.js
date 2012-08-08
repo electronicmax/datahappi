@@ -135,6 +135,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			return path.get("path_priority");
 		},
 		add:function(path_array) {
+			// If path_array is a single element, turn it into a single-element array
+			if (!_.isArray(path_array)) {path_array = [path_array]}
+
 			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
 			// x.on('change', function() { this_.trigger('pathchange', x); });
@@ -209,7 +212,15 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			// trigger will automatically recompute above
 		},
 		remove_path:function(path) { this.paths.remove(path); },
-		reset_paths:function(paths) { this.paths = paths; },
+		reset_paths:function(paths) {
+			this_ = this;
+			this.paths.map(function(path) {
+				this_.remove_path(path);
+			});
+			paths.map(function(path) {
+				this_.add_path(path);
+			});
+		},
 		coverage:function(attribute) {
 			 return 1; //TODO
 		}
