@@ -7,6 +7,7 @@
 	  <!-- specific to this example --> 
 	  <link href="css/lab.css" rel="stylesheet">
 	  <link href="css/box.css" rel="stylesheet">
+	  <link href="../../lib/nvd3/css/nv.d3.css" rel="stylesheet">
 	  <title>lab</title>
 	</head>
 	<body>
@@ -114,9 +115,11 @@
 			require(['examples/lab/js/lab'],function() {});
 		});    
 	</script>
+	<!-- codemirror -->
 	<script src="../../lib/codemirror2/codemirror.js"></script>
 	<link href="../../lib/codemirror2/codemirror.css" rel="stylesheet">  
-	<script src="../../lib/codemirror2/mode/javascript/javascript.js"></script>  
+	<script src="../../lib/codemirror2/mode/javascript/javascript.js"></script>
+	<!-- rdfquery --> 
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.uri.js"></script>
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.xmlns.js"></script>
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.curie.js"></script>      
@@ -126,7 +129,12 @@
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.xml.js"></script>
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.turtle.js"></script>  
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.json.js"></script>
-	<!-- // <script src="https://apis.google.com/js/client.js"></script> -->
+	<!-- graphing support --> 
+	<script type="text/javascript" src="../../lib/nvd3/lib/d3.v2.js"></script>
+	<script type="text/javascript" src="../../lib/nvd3/nv.d3.js"></script>
+	<!-- -->
+	<!-- google apis --> 
+	<!-- <script src="https://apis.google.com/js/client.js"></script> -->
+	<!-- drag and drop support --> 
 	<script src="../../lib/jquery-ui.js"></script>  
-	<!-- // <script src="js/slide.js" type="text/javascript"></script> -->
 </html>
