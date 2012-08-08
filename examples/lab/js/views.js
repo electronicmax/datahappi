@@ -11,9 +11,16 @@ define(['js/utils'], function(utils) {
 		},		
 		initialize:function() {
 			var this_ = this;
-			this.options.model.on('change dereference',function() { this_._update_template(); }, this);
-			this.options.model.on('all',function(eventName, x) { this_.trigger(eventName, x);}, this);
-			this.model_id = this.options.model.id;
+			this.setModel(this.options.model);
+		},
+		setModel:function(m) {
+			var this_ = this;
+			if (this.options.model) {
+				this.options.model.off(null, null, this);
+			}
+			m.on('change dereference',function() { this_._update_template(); }, this);
+			m.on('all',function(eventName, x) { this_.trigger(eventName, x);}, this);
+			this.options.model = m;			
 		},
 		_update_template:function() {
 			var val = this.options.model.get_last_value();

@@ -73,7 +73,8 @@ define(
 				var this_ = this;
 				if (this_.pathables.get(m.id)) {
 					// warn: we already have a pathable there so eeks
-					itemview.options.model = this_.pathables.get(m.id);
+					console.log('already have a pathable for him ', this_.pathables.get(m.id));
+					itemview.setModel(this_.pathables.get(m.id));
 				} else {
 					this_.pathables.add(m);
 				}
