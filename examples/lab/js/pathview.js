@@ -17,21 +17,20 @@ define(
 			render:function() {
 				var this_ = this;
 				var next_steps = _.uniq(_.flatten(this.pathables.try_path(this.path).map(function(pathable_array) {
-					return pathable_array.map(function(pathable) {
-						return pathable[0].entailedKeys();
-					});
-				})));
+					var next_object = _.last(pathable_array)[0]	
+					return next_object instanceof pathables.Pathable ? next_object.entailedKeys() : undefined;
+				})).filter(function(pathable) {
+					return !_.isUndefined(pathable);
+				}));
 
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {
 					return step_model.id;
 				});
 
-				var html = this.template({
+				this.$el.html(this.template({
 					previous_steps:previous_steps,
 					next_steps:next_steps
-				});
-
-				this.$el.html(html);
+				}));
 
 				this.$(".next-step-select").change(function() { this_.path_extend().render(); });
 
@@ -41,9 +40,10 @@ define(
 				var selected_val = this.$(":selected").val();
 
 				if (!_.isUndefined(selected_val)) {
-					this.path.add_step(new pathables.PropertyDereferenceStep({
+					var step = new pathables.PropertyDereferenceStep({
 						property:selected_val
-					}));
+					});
+					this.path.add_step(step);
 				}
 
 				return this;

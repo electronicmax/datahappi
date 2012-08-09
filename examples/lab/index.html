@@ -78,7 +78,7 @@
 				return step+" -> ";
 			}).join('');
 		}
-		print(step_trace(previous_steps)+"<select class='next-step-select'>"+step_options(next_steps)+"</select>");
+		print(step_trace(previous_steps)+"<select class='next-step-select'><option val=''>Extend path...</option>"+step_options(next_steps)+"</select>");
 	%>
 	</script>
 	<script type="text/template" id="thing-listitem-template">
