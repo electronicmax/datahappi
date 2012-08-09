@@ -1,8 +1,8 @@
 define(
 	[
-		'examples/lab/js/pathables',
+		'examples/lab/js/pathables'
 	],
-	function(pathables, pathablecollection) {
+	function(pathables) {
 		"use strict";
 
 		/* @pathables:	Pathables collection belonging to the instancebox.
@@ -17,7 +17,7 @@ define(
 			render:function() {
 				var this_ = this;
 				var next_steps = _.uniq(_.flatten(this.pathables.try_path(this.path).map(function(pathable_array) {
-					var next_object = _.last(pathable_array)[0]	
+					var next_object = _.last(pathable_array)[0];
 					return next_object instanceof pathables.Pathable ? next_object.entailedKeys() : undefined;
 				})).filter(function(pathable) {
 					return !_.isUndefined(pathable);
@@ -49,10 +49,11 @@ define(
 				return this;
 			},
 			path_remove:function() {
+				// TODO: Remove this view and delete the path.
 				return this;
 			},
 			path_move:function() {
-				// Change the position of the path.
+				// TODO: Change the position of the path.
 				return this;
 			}
 		});
