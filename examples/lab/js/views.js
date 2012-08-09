@@ -1,6 +1,7 @@
 define(['js/utils'], function(utils) {
 	// first attempt at ta
 	var ThingListItemView = Backbone.View.extend({
+		idAttribute:"model_id",
 		tagName:'div',
 		className:'item',
 		template:$('#thing-listitem-template').text(),
@@ -10,9 +11,16 @@ define(['js/utils'], function(utils) {
 		},
 		initialize:function() {
 			var this_ = this;
-			this.options.model.bind('dereference',function() {
-				this_._update_template();
-			});
+			this.setModel(this.options.model);
+		},
+		setModel:function(m) {
+			var this_ = this;
+			if (this.options.model) {
+				this.options.model.off(null, null, this);
+			}
+			m.on('change dereference',function() { this_._update_template(); }, this);
+			m.on('all',function(eventName, x) { this_.trigger(eventName, x);}, this);
+			this.options.model = m;			
 		},
 		_update_template:function() {
 			var val = this.options.model.get_last_value();
@@ -40,6 +48,7 @@ define(['js/utils'], function(utils) {
 		},
 		_cb_delete:function() {
 			this.trigger('delete');
+			this.options.model.off(null, null, this);
 		}
 	});
 
