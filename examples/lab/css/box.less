@@ -135,7 +135,7 @@
    	  top:100%;	right:5px; width:20px;
 	  height:10px;
 	  margin-top:-20px;
-	  border-left:1px solid #eee;
+	  // border-left:1px solid #eee;
 	  height:100px;
 	  text-align:right;
 	  div.bars-horizontal {
@@ -151,7 +151,14 @@
 	  }
 	  rect {
 		  stroke:white;
-		  fill:steelblue;
+		  fill:rgba(0,200,255,0.5);
+		  &.brush {
+			  stroke:rgba(0,200,255,0.5);
+		  }
+		  &.unbrush {
+			  fill:none;
+			  stroke:rgba(0,200,255,0.5);
+		  }		  
 	  }
   }
 }

@@ -25,12 +25,32 @@ define(['js/utils'],function(utils) {
 		// 		.text(function(d) { return ''+d[0]; });
 		// 	return this;
 		// },
+
+		_brush_value:function(d) {
+			this.trigger('brush', d);
+			this.$el.find('rect').each(function() {
+				var $t = $(this);
+				if ($t.attr('data-val') == d) {
+					$t.attr('class', 'brush');
+				} else {
+					$t.attr('class', 'unbrush');
+				}
+			});
+		},
+
+		_unbrush_value:function(d) {
+			this.trigger('unbrush', d);
+			this.$el.find('rect').each(function() {
+				var $t = $(this);
+				$t.attr('class', '');
+			});
+		},
 		
 		render:function() {
-			this.$el.html('');
 			var data = this._generate_data(this.get_pathables());
 			var barwidth = 5;
 			var height = 20;
+			var this_ = this;
 
 			// console.log('d3 max ', d3.max(data.map(function(x) { return x[1]; })));
 			
@@ -38,19 +58,28 @@ define(['js/utils'],function(utils) {
 				.domain([0, d3.max(data.map(function(x) { return x[1]; }))])
 				.range([0,height]);
 
-			console.log(' data is >> ', data);
-			
+			// enter
 			d3.select(this.el)
 				.selectAll('rect')
-				.data(data)
+				.data(data, function(d) { return d[0]; })
 				.enter()
-				.append('rect');
+				.append('rect')
+				.on('mouseover', function(d) { this_._brush_value(d[0]); })
+				.on('mouseout', function(d) { this_._unbrush_value(d[1]); });
 
+			// update
 			d3.select(this.el).selectAll('rect')
+				.data(data, function(d) { return d[0]; })			
 				.attr('y', function(d,i) { console.log('yscale ', yscale(d[1])); return height - yscale(d[1]); })
 				.attr('x', function(d,i) { return i*barwidth; })
 				.attr('height', function(d) { return yscale(d[1]); })
-				.attr('width', barwidth);
+				.attr('width', barwidth)
+				.attr('data-val', function(d) { return d[0]; });
+
+			// exit
+			d3.select(this.el).selectAll('rect')
+				.data(data, function(d) { return d[0]; })			
+				.exit().remove();
 			
 			return this;
 		},		
