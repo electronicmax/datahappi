@@ -5,7 +5,7 @@ define(
 		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
 		'examples/lab/js/pathableview',
-		'examples/lab/js/histogrammer',
+		'examples/lab/js/sparkhist',
 		'js/utils'
 	],
 	function(box, propbox, pathbox, pathables, pathableview, histogram, utils) {
@@ -61,15 +61,16 @@ define(
 				this.hist = new histogram.HistView({ el:this.$el.find('.hist')[0], views:this.views_collection	});
 				this.hist.on('brush', function(d) {
 					var hits = this_.views_collection.filter(function(v) {
-						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
 					});
-					// hits.map(function(v) { return v.attributes.$el.addClass('brush'); });
+					hits.map(function(v) { return v.$el.addClass('brush'); });
 				});
 				this.hist.on('unbrush', function(d) {
+					console.log('unbrush ', d);
 					var hits = this_.views_collection.filter(function(v) {
-						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
 					});
-					// hits.map(function(v) { return v.attributes.$el.removeClass('brush'); });
+					hits.map(function(v) { return v.$el.removeClass('brush'); });
 				});
 				this.hist.render();
 				return this;

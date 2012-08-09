@@ -64,12 +64,6 @@ body .workspace {
 body .workspace .greybox {
   position: absolute !important;
 }
-body .item {
-  padding: 3px 2px 3px 3px;
-  -webkit-transition: background-color 0.2s ease-in-out;
-  -webkit-transition: padding 0.2s ease-in-out;
-  z-index: 1000;
-}
 body .slidepanel {
   padding: 6px 5px 3px 0px;
   position: fixed;
@@ -127,12 +121,14 @@ body .things .item:hover .delete {
   display: none;
 }
 body .item {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: padding 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0);
   position: relative;
   margin: 0px;
   width: 200px;
   padding: 0 0 0 4px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0);
 }
 body .item .thing-label a {
   font-size: 0.5em;
@@ -142,6 +138,9 @@ body .item:hover {
 }
 body .item:hover .delete {
   display: block;
+}
+body .item.brush {
+  background-color: rgba(0, 200, 255, 0.1);
 }
 body .item .props {
   display: none;
