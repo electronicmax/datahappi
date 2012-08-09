@@ -5,9 +5,6 @@ define(
 	function(pathables, pathablecollection) {
 		"use strict";
 
-		// All objects in this require module; c-like prototyping required by strict mode.
-		var PathView;
-
 		/* @pathables:	Pathables collection belonging to the instancebox.
 		 * @path:		The path this view displays/modifies. */
 		var PathView = Backbone.View.extend({
@@ -25,12 +22,18 @@ define(
 					});
 				})));
 
-				this.$el.html(this.template({
-					previous_steps:this.path.get_steps(),
-					next_steps:next_steps
-				}));
+				var previous_steps = this.path.get_steps().models.map(function(step_model) {
+					return step_model.id;
+				});
 
-				this.$(".next-step-select").change(function() { this_.path_extend(); });
+				var html = this.template({
+					previous_steps:previous_steps,
+					next_steps:next_steps
+				});
+
+				this.$el.html(html);
+
+				this.$(".next-step-select").change(function() { this_.path_extend().render(); });
 
 				return this;
 			},
@@ -42,11 +45,15 @@ define(
 						property:selected_val
 					}));
 				}
+
+				return this;
 			},
 			path_remove:function() {
+				return this;
 			},
 			path_move:function() {
 				// Change the position of the path.
+				return this;
 			}
 		});
 

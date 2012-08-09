@@ -48,6 +48,7 @@ define(
 
 				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originaly was; should probably look into further.
 				var new_path = new pathables.Path();
+				this.options.pathables.add_path(new_path);
 				var new_view = new pathview.PathView({
 					pathables:this_.options.pathables,
 					path:new_path
