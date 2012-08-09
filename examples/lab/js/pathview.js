@@ -1,7 +1,6 @@
 define(
 	[
 		'examples/lab/js/pathables',
-		'examples/lab/js/pathablecollection'
 	],
 	function(pathables, pathablecollection) {
 		"use strict";
@@ -39,7 +38,9 @@ define(
 				var selected_val = this.$(":selected").val();
 
 				if (!_.isUndefined(selected_val)) {
-					this.path.add_step();
+					this.path.add_step(new pathables.PropertyDereferenceStep({
+						property:selected_val
+					}));
 				}
 			},
 			path_remove:function() {
