@@ -111,7 +111,10 @@ body {
 		margin:0px;
 		width:200px;
 		padding:0 0 0 4px;
-		.thing-label a { font-size:0.5em; }
+		overflow:hidden;
+		.thing-label a {
+			font-size:0.5em;
+		}
 		border:1px solid rgba(255,255,255,0);                
 		&:hover {
 			border:1px solid #eee;
@@ -128,20 +131,6 @@ body {
 			display: none;
 			opacity:0.8;
 			font-size:1.0em;
-		}
-	}
-	.hist {
-		text-align:right;
-		div {
-			overflow:hidden;
-			font:8px sans-serif;
-			background-color:steelblue;
-			text-align:right;
-			padding:3px;
-			margin:1px;
-			height:12px;
-			color:white;
-			line-height:1.5em;
 		}
 	}
 }

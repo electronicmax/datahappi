@@ -107,7 +107,6 @@ define(
 				propertybox.render();
 				propertybox.bind('property-click', function(propertyname) {
 					// get paths from the pathables
-					console.log("PROPERTY CLICK ", propertyname);
 					var step = new pathables.PropertyDereferenceStep({property:propertyname});
 					this_.pathables.paths.map(function(path) {
 						var pc = path.clone().add_step(step);
@@ -115,9 +114,10 @@ define(
 						if (defined(result)) { path.add_step(step); }
 					});
 					var solo = new pathables.Path([step]);
-					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
-					console.log(' -> paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
-					propertybox.hide();
+					if (defined(this_.pathables.try_path(solo))) {
+						this_.pathables.add_path(solo);
+					}
+					// propertybox.hide();
 				});
 				this.propbox = propertybox;
 				return propertybox;

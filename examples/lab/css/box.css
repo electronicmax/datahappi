@@ -3,8 +3,11 @@
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
   max-width: 450px;
-  min-width: 300px;
+  min-width: 240px;
+  border-right: 1px solid #aaeeff;
   padding: 12px;
+  /* properties */
+
 }
 .greybox.over {
   padding: 15px;
@@ -33,6 +36,7 @@
   left: 0;
 }
 .greybox .uprt {
+  display: none;
   border-right: 1px solid #999999;
   border-top: 1px solid #999999;
   position: absolute;
@@ -47,6 +51,7 @@
   left: 0;
 }
 .greybox .btrt {
+  display: none;
   border-bottom: 1px solid #999999;
   border-right: 1px solid #999999;
   position: absolute;
@@ -73,6 +78,7 @@
   color: black;
 }
 .greybox .microtoolbox {
+  display: none;
   color: rgba(0, 0, 50, 0.6);
   text-align: right;
   position: absolute;
@@ -86,41 +92,91 @@
 .greybox .microtoolbox span:hover {
   color: black;
 }
-.simple {
-  font-size: 8pt;
-  padding: 4px;
-  width: 20px;
-}
-/* properties */
-.properties {
+.greybox .properties {
   position: absolute;
-  left: 0px;
-  right: 0px;
-  min-width: 200px;
-  bottom: -190px;
-  height: 170px;
+  left: 100%;
+  top: 0px;
+  min-width: 100px;
+  height: 100px;
+  overflow: none;
+  /*height:@propsheight;*/
+
   border-top: none;
   border-bottom: none;
   border-right: none;
-  border-left: 1px solid #EEE;
-  overflow: auto;
   padding: 4px;
   font-size: 0.7em;
   vertical-align: top;
 }
-.properties ul.propitems {
+.greybox .properties ul.propitems {
   vertical-align: top;
   list-style-type: none;
   margin: 0px 0px 10px 10px;
 }
-.properties .coverage-small {
+.greybox .properties .coverage-small {
   font-size: 10pt;
 }
-.properties .coverage-medium {
+.greybox .properties .coverage-medium {
   font-size: 12pt;
 }
-.properties .coverage-large {
+.greybox .properties .coverage-large {
   font-size: 14pt;
+}
+.greybox .properties .uplt {
+  display: none;
+  border-left: 1px solid #aaeeff;
+  border-top: 1px solid #aaeeff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .properties .uprt {
+  display: block;
+  border-right: 1px solid #aaeeff;
+  border-top: 1px solid #aaeeff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .properties .btlt {
+  display: none;
+  border-bottom: 1px solid #aaeeff;
+  border-left: 1px solid #aaeeff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .properties .btrt {
+  display: block;
+  border-bottom: 1px solid #aaeeff;
+  border-right: 1px solid #aaeeff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox .hist {
+  position: absolute;
+  top: 100%;
+  margin-top: 18px;
+  border-left: 1px solid #eee;
+  height: 100px;
+  text-align: right;
+}
+.greybox .hist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.simple {
+  font-size: 8pt;
+  padding: 4px;
+  width: 20px;
 }
 /*
     .converage-container, .entropy-container {

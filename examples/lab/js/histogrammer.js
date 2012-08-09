@@ -8,10 +8,8 @@ define(['js/utils'],function(utils) {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
 		render:function() {
-			console.log('render!!');
 			this.$el.html('');
 			var data = this._generate_data(this.get_pathables());
-			
 			var xscale = d3.scale.linear()
 				.domain([0, 10]) // d3.max(data.map(function(x) { return x[1]; }))])
 				.range(["0px","200px"]);
@@ -21,6 +19,7 @@ define(['js/utils'],function(utils) {
 				.data(data)
 				.enter()
 				.append('div')
+				.attr('class', 'bars-horizontal')
 				.attr('data-value', function(d) { console.log(' d -- > ', d); return '' + d[0]; }) // for easy debugging
 				.style("width", function(d) { return xscale(d[1]); })
 				.text(function(d) { return ''+d[0]; });

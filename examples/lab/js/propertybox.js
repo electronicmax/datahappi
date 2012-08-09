@@ -9,7 +9,7 @@ define(
 		 *
 		 * Required options:
 		 * pathables: Pathables */
-		var template = "<ul class='propitems'></ul>";
+		var template = "<div class='uplt'></div><div class='uprt'></div><div class='btlt'></div><div class='btrt'></div><ul class='propitems'></ul>";
 		var get_first = function(v) {
 			if (_(v).isArray()) { return v[0]; }
 			return v;

@@ -1,7 +1,8 @@
-@boxminwidth : 300px;
+@boxminwidth : 240px;
 @boxwidth : 450px;
 @propswidth : 300px;
-@propsheight : 170px;
+@propsheight : 130px;
+@propertybordercolor: #aef;
 
 .box(@bordercolor: #EEEEEE) {
   position:absolute;
@@ -9,6 +10,8 @@
   -webkit-transition: padding 0.5s ease-in-out;
   max-width:@boxwidth;
   min-width:@boxminwidth;
+  border-right:1px solid @propertybordercolor;      
+  
   &.over {
      padding:15px;
   }
@@ -29,6 +32,7 @@
       top:0; left:0;
   }
   .uprt {
+	  display:none;
       border-right:1px solid @bordercolor;
       border-top:1px solid @bordercolor;
       position:absolute;
@@ -41,6 +45,7 @@
       bottom:0; left:0;
   } 
   .btrt {
+	  display:none;
       border-bottom:1px solid @bordercolor;
       border-right:1px solid @bordercolor;
       position:absolute;
@@ -61,6 +66,7 @@
 	&:hover, &:focus { color:black;	}
   }
   .microtoolbox {
+	display:none;
     color:rgba(0,0,50,0.6);
     text-align:right;
     position:absolute;
@@ -71,7 +77,78 @@
 	span {
 		&:hover { color:black;	}
 	}
-  }             
+  }
+  /* properties */
+  .properties {
+      position:absolute;
+      left:100%;
+	  top:0px;
+      min-width:100px;
+	  height:100px;
+	  overflow:none;
+	  /*height:@propsheight;*/
+	  border-top:none; border-bottom:none; border-right:none;
+	  padding:4px;	
+      @minichart-width: 30px;
+	  font-size:0.7em;
+      vertical-align:top;
+	  ul.propitems {
+		  vertical-align:top;
+          list-style-type:none;
+          margin:0px 0px 10px 10px;
+	  }
+      .coverage-small { font-size:10pt; }
+      .coverage-medium { font-size:12pt; }
+      .coverage-large { font-size:14pt; }
+	  .uplt {
+		  display:none;
+		  border-left:1px solid @propertybordercolor;
+		  border-top:1px solid @propertybordercolor;
+		  position:absolute;
+		  top:0; left:0;
+	  }
+	  .uprt {
+		  display:block;
+		  border-right:1px solid @propertybordercolor;
+		  border-top:1px solid @propertybordercolor;
+		  position:absolute;
+		  top:0; right:0;
+	  } 
+	  .btlt {
+		  display:none;
+		  border-bottom:1px solid @propertybordercolor;
+		  border-left:1px solid @propertybordercolor;
+		  position:absolute;
+		  bottom:0; left:0;
+	  } 
+	  .btrt {
+		  display:block;
+		  border-bottom:1px solid @propertybordercolor;
+		  border-right:1px solid @propertybordercolor;
+		  position:absolute;
+		  bottom:0; right:0;
+	  }
+	  
+  }
+  .hist {
+	  position:absolute;
+   	  top:100%;
+	  margin-top:18px;
+	  border-left:1px solid #eee;
+	  height:100px;
+	  text-align:right;
+	  div.bars-horizontal {
+			overflow:hidden;
+			font:8px sans-serif;
+			background-color:steelblue;
+			text-align:right;
+			padding:3px;
+			margin:1px;
+			height:12px;
+			color:white;
+			line-height:1.5em;
+	  }
+  }
 }
 .greybox {
    .box(#999999);
@@ -82,30 +159,6 @@
     width:20px;
 }
 
-/* properties */
-.properties {
-    position:absolute;
-    left:0px;
-    right:0px;
-    min-width:200px;
-	bottom: (-1 * @propsheight) - 20px;	
-	height:@propsheight;
-	border-top:none; border-bottom:none; border-right:none;
-	border-left:1px solid #EEE;
-    overflow:auto;
-	padding:4px;	
-    @minichart-width: 30px;
-	font-size:0.7em;
-    vertical-align:top;
-	ul.propitems {
-		vertical-align:top;
-        list-style-type:none;
-        margin:0px 0px 10px 10px;
-	}
-    .coverage-small { font-size:10pt; }
-    .coverage-medium { font-size:12pt; }
-    .coverage-large { font-size:14pt; }
- }
 
  /*
     .converage-container, .entropy-container {
