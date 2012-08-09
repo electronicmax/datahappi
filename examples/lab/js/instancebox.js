@@ -59,6 +59,18 @@ define(
 				// add a property box
 				this._make_property_box();
 				this.hist = new histogram.HistView({ el:this.$el.find('.hist')[0], views:this.views_collection	});
+				this.hist.on('brush', function(d) {
+					var hits = this_.views_collection.filter(function(v) {
+						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+					});
+					// hits.map(function(v) { return v.attributes.$el.addClass('brush'); });
+				});
+				this.hist.on('unbrush', function(d) {
+					var hits = this_.views_collection.filter(function(v) {
+						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+					});
+					// hits.map(function(v) { return v.attributes.$el.removeClass('brush'); });
+				});
 				this.hist.render();
 				return this;
 			},

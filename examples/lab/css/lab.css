@@ -148,6 +148,7 @@ body .item .props {
   font-size: 0.7em;
 }
 body .item .delete {
+  z-index: 1000;
   position: absolute;
   top: 2px;
   margin: 0px;
