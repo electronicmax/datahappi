@@ -180,10 +180,7 @@
   fill: rgba(0, 200, 255, 0.5);
 }
 .greybox .hist rect.brush {
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .hist rect.unbrush {
-  fill: none;
+  fill: white;
   stroke: rgba(0, 200, 255, 0.5);
 }
 .simple {
