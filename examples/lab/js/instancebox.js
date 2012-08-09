@@ -10,7 +10,7 @@ define(
 	],
 	function(box, propbox, pathbox, pathables, pathableview, histogram, utils) {
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
-		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div><div class="hist"></div>';
+		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="hist"></svg>';
 		var defined = utils.DEFINED;
 		
 		var InstanceBox = box.BoxView.extend({
@@ -58,12 +58,7 @@ define(
 				this.$el.data('view', this);
 				// add a property box
 				this._make_property_box();
-				
-				this.hist = new histogram.HistView({
-					el:this.$el.find('.hist')[0],
-					views:this.views_collection
-				});
-				
+				this.hist = new histogram.HistView({ el:this.$el.find('.hist')[0], views:this.views_collection	});
 				this.hist.render();
 				return this;
 			},
