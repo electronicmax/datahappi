@@ -23,7 +23,6 @@ define(
 				// Whenever the visual combobox path is changed, trigger a change event.
 				this.property_view_chain.on("change", function() {
 					this_.trigger("change", this_.get_path());
-					console.log("woop 1");
 				});
 
 				this.coverage = 0;
@@ -111,7 +110,8 @@ define(
 			},
 			render:function() {
 				var next_chain_link = this.next_chain_view ? this.next_chain_view.render().el : '';
-				var html = $("<div></div>").append(this.prop_select).append(next_chain_link);
+				//var html = $("<div></div>").append(this.prop_select).append(next_chain_link);
+				var html = $(this.prop_select).append(next_chain_link);
 				if (html.innerHTML !== this.el.innerHTML) { this.$el.html(html); }
 				// this.$el.html(html);
 				return this;

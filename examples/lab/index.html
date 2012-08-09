@@ -66,6 +66,21 @@
 		  </div>
 		</div>
 	</body>
+	<script type="text/template" id="pathview-template">
+	<%
+		var step_options = function(step_list) {
+			return step_list.map(function(step) {
+				return "<option class='next-step-option' value='"+step+"'>"+step+"</option>";
+			}).join('');
+		}
+		var step_trace = function(step_list) {
+			return step_list.map(function(step) {
+				return step+" -> ";
+			}).join('');
+		}
+		print(step_trace(previous_steps)+"<select class='next-step-select'>"+step_options(next_steps)+"</select>");
+	%>
+	</script>
 	<script type="text/template" id="thing-listitem-template">
 	<%	   
 		var lastpath = function(x) {

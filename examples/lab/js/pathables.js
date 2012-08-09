@@ -38,7 +38,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			return component.get("position");
 		}
 	});
-	
+
 	var Path = Backbone.Model.extend({
 		idAttribute:"_id",
 		constructor:function(arg1, arg2) {

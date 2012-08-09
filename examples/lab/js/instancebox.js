@@ -125,7 +125,6 @@ define(
 				this.propbox = propertybox;
 				this.propbox.on("change", function() {
 					this_.pathables.reset_paths(this_.propbox.get_paths());
-					console.log("woop 3");
 				});
 				return propertybox;
 			},
