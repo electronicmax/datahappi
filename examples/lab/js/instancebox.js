@@ -12,7 +12,6 @@ define(
 		"use strict";
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="hist"></svg>';
-		var defined = utils.DEFINED;
 
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
@@ -21,8 +20,8 @@ define(
 				'click .box-delete' : '_cb_delete'
 			},
 			initialize:function(options) {
-				var this_ = this;
 				box.BoxView.prototype.initialize.apply(this,arguments);
+
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 			},
@@ -107,34 +106,12 @@ define(
 			},
 			_make_property_box:function() {
 				// add a property box.
-				var this_ = this;
-				var propertybox = new propbox.PropertyBox({
+				this.propbox = new propbox.PropertyBox({
 					el: this.$el.find('.properties'),
 					hidden:true,
 					pathables:this.pathables
-				});
-				propertybox.render();
-				/*
-				propertybox.bind('property-click', function(propertyname) {
-					// get paths from the pathables
-					var step = new pathables.PropertyDereferenceStep({property:propertyname});
-					this_.pathables.paths.map(function(path) {
-						var pc = path.clone().add_step(step);
-						var result = this_.pathables.try_path(pc);
-						if (defined(result)) { path.add_step(step); }
-					});
-					var solo = new pathables.Path([step]);
-					if (defined(this_.pathables.try_path(solo))) {
-						this_.pathables.add_path(solo);
-					}
-					// propertybox.hide();
-				});
-				*/
-				this.propbox = propertybox;
-				this.propbox.on("change", function() {
-					this_.pathables.reset_paths(this_.propbox.get_paths());
-				});
-				return propertybox;
+				}).render();
+				return this.propbox;
 			},
 			toggle_props:function() {
 				this.propbox.toggle_visibility();

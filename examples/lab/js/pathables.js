@@ -213,7 +213,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		remove_path:function(path) { this.paths.remove(path); },
 		reset_paths:function(paths) {
-			this_ = this;
+			var this_ = this;
 			this.paths.map(function(path) {
 				this_.remove_path(path);
 			});

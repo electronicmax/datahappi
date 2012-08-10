@@ -9,14 +9,9 @@ define(
 		 *
 		 * Required options:
 		 * pathables: Pathables */
-		var get_first = function(v) {
-			if (_(v).isArray()) { return v[0]; }
-			return v;
-		};
 		var PropertyBox = box.BoxView.extend({
 			initialize:function(options) {
 				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options) ]);
-				var this_ = this;
 			},
 			render:function() {
 				var this_ = this;

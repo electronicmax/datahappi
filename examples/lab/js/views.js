@@ -10,7 +10,6 @@ define(['js/utils'], function(utils) {
 			'click .delete' : '_cb_delete'
 		},
 		initialize:function() {
-			var this_ = this;
 			this.setModel(this.options.model);
 		},
 		setModel:function(m) {
@@ -35,7 +34,7 @@ define(['js/utils'], function(utils) {
 			this.$el.data('model',this.options.model);
 			this.$el.attr("uri", this.options.model.id);
 			this.$el.draggable({
-				revert:"invalid", helper:"clone", appendTo:'body',
+				revert:"invalid", helper:"clone", appendTo:'body'
 			});
 			return this;
 		},
