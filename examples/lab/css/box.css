@@ -156,7 +156,7 @@
   bottom: 0;
   right: 0;
 }
-.greybox .hist {
+.greybox .sparkhist {
   zindex: -10;
   position: absolute;
   top: 100%;
@@ -167,7 +167,7 @@
   height: 100px;
   text-align: right;
 }
-.greybox .hist div.bars-horizontal {
+.greybox .sparkhist div.bars-horizontal {
   overflow: hidden;
   font: 8px sans-serif;
   background-color: steelblue;
@@ -178,11 +178,11 @@
   color: white;
   line-height: 1.5em;
 }
-.greybox .hist rect {
+.greybox .sparkhist rect {
   stroke: white;
   fill: rgba(0, 200, 255, 0.5);
 }
-.greybox .hist rect.brush {
+.greybox .sparkhist rect.brush {
   fill: white;
   stroke: rgba(0, 200, 255, 0.5);
 }

@@ -1,31 +1,12 @@
 define(['js/utils'],function(utils) {
 	var HistView = Backbone.View.extend({
-		template:"<div class='hist'></div>",		
+		template:"<div class='sparkhist'></div>",		
 		initialize:function() {
 			if (this.options.views) { this._register_change();	}
 		},
 		get_pathables:function() {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
-		
-		// render_divs:function() {
-		// 	this.$el.html('');
-		// 	var data = this._generate_data(this.get_pathables());
-		// 	var xscale = d3.scale.linear()
-		// 		.domain([0, 10]) // d3.max(data.map(function(x) { return x[1]; }))])
-		// 		.range(["0px","200px"]);
-		// 	var chart = d3.select(this.el)
-		// 		.selectAll('div')
-		// 		.data(data)
-		// 		.enter()
-		// 		.append('div')
-		// 		.attr('class', 'bars-horizontal')
-		// 		.attr('data-value', function(d) { console.log(' d -- > ', d); return '' + d[0]; }) // for easy debugging
-		// 		.style("width", function(d) { return xscale(d[1]); })
-		// 		.text(function(d) { return ''+d[0]; });
-		// 	return this;
-		// },
-
 		_brush_value:function(d) {
 			this.trigger('brush', d);
 			this.$el.find('rect').each(function() {
@@ -37,15 +18,13 @@ define(['js/utils'],function(utils) {
 				}
 			});
 		},
-
 		_unbrush_value:function(d) {
 			this.trigger('unbrush', d);
 			this.$el.find('rect').each(function() {
 				var $t = $(this);
 				$t.attr('class', '');
 			});
-		},
-		
+		},		
 		render:function() {
 			var data = this._generate_data(this.get_pathables());
 			var barwidth = 5;
@@ -103,10 +82,7 @@ define(['js/utils'],function(utils) {
 		},
 		_register_change:function() {
 			var this_ = this;
-			this.options.views.on('all', function(eventName) {
-				console.log("histogram got a >> ", eventName, 'from view collection');
-				this_.render();
-			}, this);
+			this.options.views.on('all', function(eventName) { this_.render(); }, this);
 		}
 	});
 	return { HistView: HistView };
