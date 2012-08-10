@@ -222,7 +222,11 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			});
 		},
 		coverage:function(attribute) {
-			return 1; //TODO
+			var all_models = this.length;
+			var models_with_attribute = this.filter(function(model) {
+				return model.has(attribute);
+			}).length;
+			return models_with_attribute/all_models;
 		}
 	});
 
