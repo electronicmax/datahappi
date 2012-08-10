@@ -9,13 +9,14 @@ define(
 		 *
 		 * Required options:
 		 * pathables: Pathables */
-		var template = "<ul class='propitems'></ul>";
+		var template = "<div class='uplt'></div><div class='uprt'></div><div class='btlt'></div><div class='btrt'></div><ul class='propitems'></ul>";
 		var get_first = function(v) {
 			if (_(v).isArray()) { return v[0]; }
 			return v;
 		};
 		var PropertyBox = box.BoxView.extend({
 			initialize:function(options) {
+				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options)])
 				var this_ = this;
 				this.constructor.__super__.initialize.apply(this, [
 					_({
@@ -25,26 +26,22 @@ define(
 				this.options.pathables
 					.on("add", function(p) {
 						// new pathable was added, so update ourselves
-						console.log(" THINGY BEING ADDED > ", p, " - ", p.path.get("steps").models.length );
+						console.log("propertybox::add > ", p, " - ", p.path.get("steps").models.length );
 						// register interest in future dereferences of it
-						p.on("dereference", function() { this_.render(); });
+						p.on("dereference", function() { this_.render(); }, this_);
 						this_.render(); 
-					})
-					.on("remove", function() { this_.render(); });
-				/* Commenting this out fixed the problem of the comboboxes resetting whenever changed. Shrug.
-				this.options.pathables.paths.on("add remove pathchange", function(x) {
-					console.log('pathchange', x);
-					this_.render();
-				});
+					}).on("remove", function(x) {
+						this_.render();
+						x.off(null, null, this_);
+					});
+				this.options.pathables.paths.on("add remove pathchange", function(x) { this_.render();	});
 				this.options.pathables.map(function(p) { p.on("dereference", function() { this_.render(); }); });
-				*/
 			},
 			render:function() {
 				var this_ = this;
 				box.BoxView.prototype.render.apply(this, arguments);
 				this.$el.html(template);
 				this.views_collection.reset();
-
 
 				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originaly was; should probably look into further.
 				var new_path = new pathables.Path();
@@ -58,8 +55,10 @@ define(
 				});
 
 				this.views_collection.add(new_view);
+				this.views_collection.map(function(pv) { this_._render_view(pv); });				
 
-				this.get_item_views().map(function(pv) { this_._render_view(pv); });
+				// this.options.pathables.map(function(p) { this_._update_views(p); });
+
 				return this;
 			},
 			_update_views:function(pathable) {
@@ -77,7 +76,7 @@ define(
 							this_.views_collection.add(pv);
 							pv.bind('click', function(p) { this_.trigger('property-click', p); });
 						} else {
-							var view = this_.views_collection.get(property).attributes;
+							var view = this_.views_collection.get(property);
 							view.setCoverage(view.coverage+1);
 						}
 					});

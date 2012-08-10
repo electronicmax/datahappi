@@ -5,13 +5,14 @@ define(
 		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
 		'examples/lab/js/pathableview',
+		'examples/lab/js/histogrammer',
 		'js/utils'
 	],
-	function(box, propbox, pathbox, pathables, pathableview, utils) {
-		"use strict";
 
+	function(box, propbox, pathbox, pathables, pathableview, histogram, utils) {	
+		"use strict";
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
-		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div>';
+		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="hist"></svg>';
 		var defined = utils.DEFINED;
 
 		var InstanceBox = box.BoxView.extend({
@@ -42,7 +43,8 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
-				this.get_item_views().map(function(v) {	this_._render_view(v);	});
+				console.log('this views colleciton map ', this.views_collection.length, this.views_collection.models.length);
+				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -66,6 +68,20 @@ define(
 				this.$el.data('view', this);
 				// add a property box
 				this._make_property_box();
+				this.hist = new histogram.HistView({ el:this.$el.find('.hist')[0], views:this.views_collection	});
+				this.hist.on('brush', function(d) {
+					var hits = this_.views_collection.filter(function(v) {
+						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+					});
+					// hits.map(function(v) { return v.attributes.$el.addClass('brush'); });
+				});
+				this.hist.on('unbrush', function(d) {
+					var hits = this_.views_collection.filter(function(v) {
+						return v.options.model.get_last_value().map(function(x) { return x.id }).indexOf(d) >= 0; 
+					});
+					// hits.map(function(v) { return v.attributes.$el.removeClass('brush'); });
+				});
+				this.hist.render();
 				return this;
 			},
 			add:function(itemview) {
@@ -74,7 +90,8 @@ define(
 				var this_ = this;
 				if (this_.pathables.get(m.id)) {
 					// warn: we already have a pathable there so eeks
-					itemview.options.model = this_.pathables.get(m.id);
+					console.log('already have a pathable for him ', this_.pathables.get(m.id));
+					itemview.setModel(this_.pathables.get(m.id));
 				} else {
 					this_.pathables.add(m);
 				}
@@ -88,7 +105,7 @@ define(
 			remove:function(itemview) {
 				var m = itemview.options.model;
 				var this_ = this;
-				if (this.get_item_views().filter(function(iv) {	return iv.options.model.id == m.id;	}).length == 1) {
+				if (this.views_collection.filter(function(iv) {	return iv.options.model.id == m.id;	}).length == 1) {
 					this_.pathables.remove(m);
    			    }
 				var lvc = this.views_collection.length;
@@ -108,7 +125,6 @@ define(
 				/*
 				propertybox.bind('property-click', function(propertyname) {
 					// get paths from the pathables
-					console.log("PROPERTY CLICK ", propertyname);
 					var step = new pathables.PropertyDereferenceStep({property:propertyname});
 					this_.pathables.paths.map(function(path) {
 						var pc = path.clone().add_step(step);
@@ -116,10 +132,10 @@ define(
 						if (defined(result)) { path.add_step(step); }
 					});
 					var solo = new pathables.Path([step]);
-					if (defined(this_.pathables.try_path(solo))) { this_.pathables.add_path(solo);	}
-					console.log("> result of dereference op >> ", this_.pathables.paths.length);
-					console.log(' paths -> ', this_.pathables.paths.map(function(path) { return path.get('steps').map(function(x) { return x.id; }).join(','); }));
-					propertybox.hide();
+					if (defined(this_.pathables.try_path(solo))) {
+						this_.pathables.add_path(solo);
+					}
+					// propertybox.hide();
 				});
 				*/
 				this.propbox = propertybox;
