@@ -1,6 +1,6 @@
 define([], function() {
 	// histogram widget using d3
-	var HistWidget = Backbone.View.extend({
+	tvar HistWidget = Backbone.View.extend({
 		className:'visual',
 		tagName:'div',
 		template:'<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><div class="yaxis"></div><div class="xaxis"></div><svg class="plot"></svg>',
@@ -80,13 +80,18 @@ define([], function() {
 			
 			return this;
 		},
+		_cb_delete:function() {
+			this.$el.fadeOut();
+		},
 		_update_plot:function() {
 			if (this.options.series === undefined) {
 				this.
 			}
 		},
 		render:function() {
+			var this_ = this;
 			this.$el.html(this.template);
+			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});			
 			this.$el.find('.yaxis').droppable({
 				greedy:true,  accept:'.greybox', tolerance:"touch",
 				over:function(event, ui) { $(this).addClass("over"); },

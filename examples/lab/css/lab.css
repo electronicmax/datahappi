@@ -157,3 +157,35 @@ body .item .delete {
   opacity: 0.8;
   font-size: 1.0em;
 }
+body .visual {
+  position: absolute;
+  border-left: 1px solid #008000;
+}
+body .visual .uplt {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body .visual .uprt {
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+body .visual .btlt {
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+body .visual .btrt {
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

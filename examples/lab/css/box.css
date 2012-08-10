@@ -191,17 +191,3 @@
   padding: 4px;
   width: 20px;
 }
-/*
-    .converage-container, .entropy-container {
-	   display:inline-block;
-	   position:relative;
-       width: @minichart-width;
-       height: 1em;
-       div {
-          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
-       }
-       border:1px solid #AAA;
-   }
-   .coverage-container {  display:none; div { background-color:#AEE; }   }
-   .entropy-container {  display:none; div { background-color:#EAA; }  }
-   */
