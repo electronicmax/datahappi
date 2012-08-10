@@ -13,6 +13,7 @@ define(
 				this.pathables = this.options.pathables;
 				this.path = this.options.path;
 				this.position = this.pathables.paths.length;
+				// TODO: Upon addition/removal of pathables, do...what?
 			},
 			render:function() {
 				var this_ = this;

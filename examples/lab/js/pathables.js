@@ -135,10 +135,11 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			return path.get("path_priority");
 		},
 		add:function(path_array) {
+			Backbone.Collection.prototype.add.apply(this,arguments);
+
 			// If path_array is a single element, turn it into a single-element array
 			if (!_.isArray(path_array)) {path_array = [path_array];}
 
-			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
 			path_array.map(function(path) {
 				path.on('change', function() { this_.trigger('pathchange', path_array); });
