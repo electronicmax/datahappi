@@ -51,12 +51,6 @@ body {
          position:absolute !important;
       }     
     }
-	.item {
-		padding: 3px 2px 3px 3px;
-        -webkit-transition: background-color 0.2s ease-in-out;
-        -webkit-transition: padding 0.2s ease-in-out;          
-        z-index:1000;
- 	 }
     .slidepanel {
       padding:6px 5px 3px 0px;
  	  position: fixed;   /* Panel will overlap content */
@@ -107,19 +101,23 @@ body {
 	// hide 'x' for the things in the source list 
 	.things .item:hover .delete { display:none; }
 	.item {
+		// padding: 3px 2px 3px 3px;
+        -webkit-transition: background-color 0.2s ease-in-out;
+        -webkit-transition: padding 0.2s ease-in-out;
+		border:1px solid rgba(255,255,255,0);                		
 		position:relative;
 		margin:0px;
 		width:200px;
 		padding:0 0 0 4px;
 		overflow:hidden;
-		.thing-label a {
-			font-size:0.5em;
-		}
-		border:1px solid rgba(255,255,255,0);                
+		.thing-label a { font-size:0.5em;	}
 		&:hover {
 			border:1px solid #eee;
 			.delete { display:block; }
-		}		
+		}
+		&.brush {
+			background-color:rgba(0,200,255,0.1);
+		}
 		.props {
 			display:none;
 			font-size:0.7em;

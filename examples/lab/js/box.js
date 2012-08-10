@@ -57,10 +57,10 @@ define([], function() {
 			return this.models.map(function(x) { return fn(x.attributes); });
 		},
 		filter:function(fn) {
-			return this.models.filter(function(x) { return fn(x.attributes); });
+			return this.models.filter(function(x) { return fn(x.attributes); }).map(function(x) { return x.attributes; });
 		},
 		reduce:function(fn, initial) {
-			return this.models.filter(function(x) { return fn(x.attributes); }, initial);
+			return this.models.reduce(function(x) { return fn(x.attributes); }, initial);
 		}
 	});
 	

@@ -65,7 +65,7 @@ define(['js/utils'],function(utils) {
 				.enter()
 				.append('rect')
 				.on('mouseover', function(d) { this_._brush_value(d[0]); })
-				.on('mouseout', function(d) { this_._unbrush_value(d[1]); });
+				.on('mouseout', function(d) { this_._unbrush_value(d[0]); });
 
 			// update
 			d3.select(this.el).selectAll('rect')
