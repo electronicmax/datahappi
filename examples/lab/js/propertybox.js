@@ -45,7 +45,15 @@ define(
 					pathables:this_.options.pathables,
 					path:path
 				});
+				view.on("remove", function() {
+					this_.views_collection.remove(view);
+					this_.options.pathables.remove_path(path);
+					view.remove();
+					this_.render();
+				});
 				this.views_collection.add(view);
+
+				window.box = this;
 
 				return this;
 			},

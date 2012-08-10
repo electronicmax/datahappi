@@ -15,7 +15,6 @@ define(
 				this.path = this.options.path;
 				this.position = this.pathables.paths.length;
 
-				// TODO: Upon addition/removal of pathables, do...what?
 				this.pathables
 					.on("add remove", function(args) { this_.render(args) });
 			},
@@ -41,6 +40,8 @@ define(
 					this_.path_extend().render();
 				});
 
+				this.$el.find(".remove-path-button").click(function() { this_.path_remove(); });
+
 				return this;
 			},
 			path_extend:function() {
@@ -56,7 +57,8 @@ define(
 				return this;
 			},
 			path_remove:function() {
-				// TODO: Remove this view and delete the path.
+				// Removal is the responsibility of the containing propertybox.
+				this.trigger("remove");
 				return this;
 			},
 			path_move:function() {
