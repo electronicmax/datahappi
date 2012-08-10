@@ -10,10 +10,14 @@ define(
 		var PathView = Backbone.View.extend({
 			template:_.template($('#pathview-template').html()),
 			initialize:function() {
+				var this_ = this;
 				this.pathables = this.options.pathables;
 				this.path = this.options.path;
 				this.position = this.pathables.paths.length;
+
 				// TODO: Upon addition/removal of pathables, do...what?
+				this.pathables
+					.on("add remove", function(args) { this_.render(args) });
 			},
 			render:function() {
 				var this_ = this;
@@ -36,8 +40,6 @@ define(
 				this.$el.find(".next-step-select").change(function() {
 					this_.path_extend().render();
 				});
-
-				window.box = this.$el.find(".next-step-select");
 
 				return this;
 			},
