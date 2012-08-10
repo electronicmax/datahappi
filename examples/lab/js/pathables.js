@@ -61,8 +61,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			console.log('steps positions now ', steps.length, steps.map(function(x) { return x.get('position'); }));
 			return this;
 		},
-		get_steps:function() {
-			return this.get("steps");
+		get_steps:function() { return this.get("steps");	},
+		get_last_step:function() {
+			var steps = this.get("steps");
+			return steps[steps.length - 1];
 		},
 		pop:function() {
 			var steps = this.get_steps();

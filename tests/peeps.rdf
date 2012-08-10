@@ -8,6 +8,7 @@
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>075372982938</cat:phone>
+	<cat:age>21</cat:age>
   </rdf:Description>  
   <rdf:Description rdf:about="#bob">
 	<rdfs:label>Bob</rdfs:label>
@@ -17,10 +18,12 @@
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>617-992-8822</cat:phone>
+	<cat:age>29</cat:age>	
   </rdf:Description>
   <rdf:Description rdf:about="#charlie">
 	<rdfs:label>Charlie</rdfs:label>
 	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
 	<cat:phone>074827382981</cat:phone>
+	<cat:age>32</cat:age>
   </rdf:Description>  
 </rdf:RDF>

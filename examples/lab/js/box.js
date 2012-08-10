@@ -37,12 +37,10 @@ define([], function() {
 			if (!_(v).isArray()) { v = [v]; }
 			var vids = v.map(function(x) { return x.cid; });
 			var to_kill = this.models.filter(function(x) {
-				console.log('cid ', x.cid);
 				return vids.indexOf(x.attributes.cid) >= 0;
 			});
-			console.log("TO KILL ", to_kill); 
 			var val = Backbone.Collection.prototype.remove.apply(this,[to_kill]);
-			to_kill.map(function(vv) { vv.attributes.off('all', null, this_); });
+			to_kill.map(function(vv) { vv.attributes.off(null, null, this_); });
 			return val;
 		},
 		map:function(fn) {

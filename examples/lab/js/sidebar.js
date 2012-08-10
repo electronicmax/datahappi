@@ -105,7 +105,7 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			});
 			$('.workspace').animate({ left:this.$el.find(".datapanel").outerWidth()	}, workspaced.resolve);
 			this.trigger('slideOut');				
-			return this._slider_animation = util.whend([sliderd,workspaced]);
+			return this; // this._slider_animation = util.whend([sliderd,workspaced]);
 		},
 		slideAway:function () {
 			if ((this._slider_animation && !this._slider_animation.state() == 'resolved') || !this.isVisible()) { return; }
@@ -116,7 +116,7 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			});
 			$('.workspace').animate({left:8}, workspaced.resolve);
 			this.trigger('slideAway');				
-			return this._slider_animation = util.whend([sliderd,workspaced]);
+			return this; // this._slider_animation = util.whend([sliderd,workspaced]);
 		},
 		isVisible:function() {
 			return parseInt(this.$el.css('left'),10) === 0;
