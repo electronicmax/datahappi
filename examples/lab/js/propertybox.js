@@ -17,15 +17,6 @@ define(
 			initialize:function(options) {
 				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options) ]);
 				var this_ = this;
-
-				// TODO: Replace this with a button which, when clicked, adds new pathviews.
-				var initial_path = new pathables.Path();
-				this.options.pathables.add_path(initial_path);
-				var initial_view = new pathview.PathView({
-					pathables:this_.options.pathables,
-					path:initial_path
-				});
-				this.views_collection.add(initial_view);
 			},
 			render:function() {
 				var this_ = this;
@@ -40,31 +31,28 @@ define(
 				this.$el.html(html);
 
 				this.views_collection.map(function(path_view) {
-					return this_.$el.find('ul').append(path_view.render().el);
+					this_.$el.find('ul').append(path_view.render().el);
 				});
+
+				var new_path_button = $("<button>+</button>");
+				new_path_button.click(function(){ this_.add_path().render(); });
+				this.$el.append(new_path_button);
 
 				return this;
 			},
-			_update_views:function(pathable) {
+			add_path:function(path) {
+				/* Adds a new path and UI element to add steps to the path.
+				 * @path: Optional; the path added to the pathables set and the UI, by default has no existing steps. */
 				var this_ = this;
-				console.log('dealing with pathable ', pathable.id, pathable.path.get('steps').length, pathable.values.length, pathable.path.get('steps').map(function(x) { return x.id; }), pathable.get_last_value());
-				var val = get_first(pathable.get_last_value());
-				if (val instanceof pathables.Pathable) {
-					val.map(function(attribute, property) {
-						if (property === "_id") { return; }
-						if (!this_.views_collection.get(property)) {
-							var pv = new propview.PropertyView({
-								property:property,
-								pathables:this_.options.pathables
-							});
-							this_.views_collection.add(pv);
-							pv.bind('click', function(p) { this_.trigger('property-click', p); });
-						} else {
-							var view = this_.views_collection.get(property);
-							view.setCoverage(view.coverage+1);
-						}
-					});
-				}
+				path = path || new pathables.Path();
+				this.options.pathables.add_path(path);
+				var view = new pathview.PathView({
+					pathables:this_.options.pathables,
+					path:path
+				});
+				this.views_collection.add(view);
+
+				return this;
 			},
 			get_paths:function() {
 				paths = this.views_collection.map(function(prop_view) {
