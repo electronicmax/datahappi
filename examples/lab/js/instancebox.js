@@ -2,24 +2,22 @@ define(
 	[
 		'examples/lab/js/box',
 		'examples/lab/js/propertybox',
-		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
 		'examples/lab/js/pathableview',
 		'examples/lab/js/histogrammer',
 		'js/utils'
 	],
 
-	function(box, propbox, pathbox, pathables, pathableview, histogram, utils) {	
+	function(box, propbox, pathables, pathableview, histogram, utils) {
 		"use strict";
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
-		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="hist"></svg>';
+		var toolbar_template = '<div class="microtoolbox"><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="hist"></svg>';
 		var defined = utils.DEFINED;
 
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props',
-				'click .toggle_paths' : 'toggle_paths',
 				'click .box-delete' : '_cb_delete'
 			},
 			initialize:function(options) {
@@ -27,13 +25,6 @@ define(
 				box.BoxView.prototype.initialize.apply(this,arguments);
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
-				/*
-				this.pathables.on("change", function() {
-					this_.get_item_views().map(function(view) {
-						view.render();
-					});
-				});
-				*/
 			},
 			render:function() {
 				// this stuff should go into render
@@ -144,22 +135,6 @@ define(
 				});
 				return propertybox;
 			},
-			/*
-			_make_path_box:function() {
-				// add a path box.
-				var pathbox_ = new pathbox.PathBox({
-					el: this.$el.find('.paths'),
-					hidden:true,
-					pathables:this.pathables
-				});
-				pathbox_.render();
-				this.pathbox = pathbox_;
-				return pathbox;
-			},
-			*/
-			toggle_paths:function() {
-				this.pathbox.toggle_visibility();
-			},
 			toggle_props:function() {
 				this.propbox.toggle_visibility();
 			},
@@ -181,7 +156,7 @@ define(
 			}
 		});
 		*/
-		
+
 		return { InstanceBox:InstanceBox };
 	}
 );

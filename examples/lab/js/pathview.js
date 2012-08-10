@@ -33,12 +33,16 @@ define(
 					next_steps:next_steps
 				}));
 
-				this.$(".next-step-select").change(function() { this_.path_extend().render(); });
+				this.$el.find(".next-step-select").change(function() {
+					this_.path_extend().render();
+				});
+
+				window.box = this.$el.find(".next-step-select");
 
 				return this;
 			},
 			path_extend:function() {
-				var selected_val = this.$(":selected").val();
+				var selected_val = this.$el.find(":selected").val();
 
 				if (!_.isUndefined(selected_val)) {
 					var step = new pathables.PropertyDereferenceStep({

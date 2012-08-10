@@ -15,10 +15,10 @@ define(
 		};
 		var PropertyBox = box.BoxView.extend({
 			initialize:function(options) {
-				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options)])
+				this.constructor.__super__.initialize.apply(this, [ _({ item_container_class : "propitems" }).extend(options) ]);
 				var this_ = this;
 
-				// TODO: Replace this with a button which, whebn clicked, adds new pathviews.
+				// TODO: Replace this with a button which, when clicked, adds new pathviews.
 				var initial_path = new pathables.Path();
 				this.options.pathables.add_path(initial_path);
 				var initial_view = new pathview.PathView({
@@ -26,22 +26,6 @@ define(
 					path:initial_path
 				});
 				this.views_collection.add(initial_view);
-
-				/* This can be handled in individual pathviews.
-				this.options.pathables
-					.on("add", function(p) {
-						// new pathable was added, so update ourselves
-						console.log("propertybox::add > ", p, " - ", p.path.get("steps").models.length );
-						// register interest in future dereferences of it
-						p.on("dereference", function() { this_.render(); }, this_);
-						this_.render();
-					}).on("remove", function(x) {
-						this_.render();
-						x.off(null, null, this_);
-					});
-				this.options.pathables.paths.on("add remove pathchange", function(x) { this_.render();	});
-				this.options.pathables.map(function(p) { p.on("dereference", function() { this_.render(); }); });
-				*/
 			},
 			render:function() {
 				var this_ = this;
@@ -52,32 +36,12 @@ define(
 				html += 	"<div class='btlt'></div>";
 				html +=		"<div class='btrt'></div>";
 
-				html += "<ul class='propitems'>";
-				html += this.views_collection.map(function(path_view) {
-					return path_view.render().el.innerHTML;
-				}).join('');
-				html += "</ul>";
-
+				html += "<ul class='propitems'></ul>";
 				this.$el.html(html);
-				/*
-				this.views_collection.reset();
 
-				//this.options.pathables.map(function(p) { this_._update_views(p); }); Replaced this with line below, which was how it originaly was; should probably look into further.
-				var new_path = new pathables.Path();
-				this.options.pathables.add_path(new_path);
-				var new_view = new pathview.PathView({
-					pathables:this_.options.pathables,
-					path:new_path
+				this.views_collection.map(function(path_view) {
+					return this_.$el.find('ul').append(path_view.render().el);
 				});
-				new_view.on("change", function(path) {
-					this_.trigger("change", path);
-				});
-
-				this.views_collection.add(new_view);
-				this.views_collection.map(function(pv) { this_._render_view(pv); });
-
-				// this.options.pathables.map(function(p) { this_._update_views(p); });
-				*/
 
 				return this;
 			},

@@ -30,13 +30,9 @@ define([
 					out:function(event, ui) {},				
 					drop: function( event, ui ) {
 						var target_box = new ibox.InstanceBox();
-						window.target_box = target_box;
 						target_box.add(box.clone_view(ui.draggable.data("view")));
 						target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 						this_.$el.find(".workspace").append(target_box.render().el);
-
-						// TODO: Remove.
-						window.box = target_box;
 						return false;
 					}
 				});				
