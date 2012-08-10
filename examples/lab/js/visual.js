@@ -1,6 +1,7 @@
 define([], function() {
+	
 	// histogram widget using d3
-	tvar HistWidget = Backbone.View.extend({
+	var Visual = Backbone.View.extend({
 		className:'visual',
 		tagName:'div',
 		template:'<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><div class="yaxis"></div><div class="xaxis"></div><svg class="plot"></svg>',
@@ -137,7 +138,7 @@ define([], function() {
 			});
 		},
 	});
-	return { HistWidget: HistWidget };
+	return { Visual: Visual };
 });
 
 
