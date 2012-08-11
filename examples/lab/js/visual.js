@@ -10,13 +10,13 @@ define([], function() {
 	var Visual = Backbone.View.extend({
 		className:'visual',
 		tagName:'div',
-		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="yaxis"><span class="lbl"><i>no values selected</i></span></div><div class="xaxis"><span class="lbl"><i>no series selected</i></span></div><svg class="plot"></svg>',
+		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="yaxis"><span class="lbl"><i>(drag here to set data)</i></span></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},										 
 		initialize:function() {
 			if (this.options.series) { this.setSeries(this.options.series); }
-			if (this.options.data) { this.setData(this.options.data); }
+			if (this.options.views) { this.setData(this.options.views); }
 		},
 		setSeries:function(s) {
 			if (this.options.series) {
@@ -27,13 +27,15 @@ define([], function() {
 			this.options.series.on('all', function() { this_._update_plot(); }, this);
 		},
 		setData:function(s) {
-			console.log('setting data ');
-			if (this.options.data) {
-				this.options.data.off(null, null, this);
+			if (this.options.views) {
+				this.options.views.off(null, null, this);
 			}
 			var this_ = this;
-			this.options.data = s;
-			this.options.data.on('all', function() { this_._update_plot(); }, this);
+			this.options.views = s;
+			this.options.views.on('all', function(eventType) {
+				console.log('got an event ', eventType, " updating plot ");
+				this_._update_plot();
+			}, this);
 			this_._update_plot();
 		},		
 		_brush_value:function(d) {
@@ -57,7 +59,8 @@ define([], function() {
 		_hist_series:function(svg_p, series_pathables, max_count) {
 			var this_ = this, height = this.$el.find('svg').height();
 			var data = this._get_counts(series_pathables);
-			var barwidth = this.$el.find('svg').width() / data.length - spacing;
+			var spacing = 2;
+			var barwidth = (this.$el.find('svg').width() / data.length) - spacing;
 			var yscale = d3.scale.linear()
 				.domain([0,max_count])
 				.range([0,height]);
@@ -76,7 +79,7 @@ define([], function() {
 				.selectAll('rect')
 				.data(data, function(d) { return d[0]; })			
 				.attr('y', function(d,i) { return height - yscale(d[1]); })
-				.attr('x', function(d,i) { return i*(barwidth + 2) + 2; })
+				.attr('x', function(d,i) { return i*(barwidth); })
 				.attr('height', function(d) { return yscale(d[1]); })
 				.attr('width', barwidth)
 				.attr('data-val', function(d) { return d[0]; });
@@ -94,7 +97,7 @@ define([], function() {
 		},
 		_update_plot:function() {
 			var plot = d3.select('.plot');			
-			if (this.options.data === undefined) {
+			if (this.options.views === undefined) {
 				d3.selectAll('text')
 					.data([0])
 					.enter()
@@ -106,10 +109,11 @@ define([], function() {
 				return;
 			} else {
 				d3.selectAll('text').remove();
-			}
-			var max_count = d3.max(this._get_counts(this.options.data).map(function(x) { return x[1]; }));
+			};
+			var max_count = d3.max(this._get_counts(this.options.views).map(function(x) { return x[1]; }));
 			if (this.options.series === undefined) {
-				this._hist_series(plot, this.options.data, max_count);
+				console.log('no series defined, plotting as one >> ', plot, this.options.views, max_count);
+				this._hist_series(plot, this.options.views, max_count);
 			} else {
 				// subdivide into groups based upon the series dataset
 				// var pathables_by_series = {};
@@ -126,19 +130,18 @@ define([], function() {
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_y_label = $(this).find('lbl').html();
-					$(this).find('lbl').html('display values'); 
+					$(this).find('.lbl').html('display values'); 
 				},
 				out:function(event, ui) {
 					$(this).removeClass("over");
-					$(this).find('lbl').html(old_y_label);
+					$(this).find('.lbl').html(old_y_label);
 				},
 				drop: function( event, ui ) {
 					var view = ui.draggable.data("view");
-					var pathables = view.pathables;
-					var laststep = view.pathables.paths.length ? view.pathables.paths.length.at(0).get_last_step() : 'items';
+					var views = view.views_collection;
 					$(this).removeClass("over");
-					$(this).find('lbl').html('selected '+ laststep.valueOf() + ' of ' + pathables.length);
-					this_.setData(view.pathables);
+					$(this).find('.lbl').html('selected ' + views.length);
+					this_.setData(	views );
 				}
 			});			
 			this.$el.find('.xaxis').droppable({
@@ -148,25 +151,25 @@ define([], function() {
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_x_label = $(this).find('label').html();
-					$(this).find('lbl').html('set as series'); 					
+					$(this).find('.lbl').html('set as series'); 					
 				},
 				out:function(event, ui) {
 					$(this).removeClass("over");
-					$(this).find('lbl').html(old_x_label);					
+					$(this).find('.lbl').html(old_x_label);					
 				},
 				drop: function( event, ui ) {
 					var view = ui.draggable.data("view");
 					var laststep = view.pathables.paths.at(0).get_last_step();
 					$(this).removeClass("over");
-					$(this).find('lbl').html('grouped by '+ laststep.valueOf());
-					this_.setSeries(view.pathables);					
+					$(this).find('.lbl').html('grouped by '+ laststep.valueOf());
+					this_.setSeries(view.view_collection);					
 				}				
 			});
 			console.log(' update plot >> ');
-			// this._update_plot();
 			return this;
 		},		
-		_get_counts:function(pathables) {
+		_get_counts:function(views) {
+			var pathables = views.map(function(x) { return x.options.model ; });
 			var values = pathables.map(function(p) { return p.get_last_value()[0]; });
 			var raws = values.map(to_raw_value);
 			var uniqs = _.uniq(raws);			

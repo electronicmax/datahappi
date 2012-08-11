@@ -64,7 +64,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		get_steps:function() { return this.get("steps");	},
 		get_last_step:function() {
 			var steps = this.get("steps");
-			return steps[steps.length - 1];
+			return steps.get(steps.length - 1);
 		},
 		pop:function() {
 			var steps = this.get_steps();
@@ -134,13 +134,14 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	// 
 	var Paths = Backbone.Collection.extend({
 		model:Path,
-		comparator:function(path) {
-			return path.get("path_priority");
-		},
+		comparator:function(path) {	return path.get("path_priority"); },
 		add:function(x) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
 			var this_ = this;
 			x.on('change', function() { this_.trigger('pathchange', x); }); // TODO: remove?
+			if (_.isUndefined(x.get('path_priority'))) {
+				x.set({path_priority:this.length});
+			}
 		},
 		insertAt:function(p,i) {
 			this.models.slice(i).map(function(path) {
