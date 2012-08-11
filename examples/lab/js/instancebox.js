@@ -57,23 +57,31 @@ define(
 				this.$el.append($(toolbar_template));
 				this.$el.data('view', this);
 				// add a property box
-				this._make_property_box();
-				this.hist = new histogram.HistView({ el:this.$el.find('.sparkhist')[0], views:this.views_collection	});
-				this.hist.on('brush', function(d) {
+				
+				this.propbox = this._make_property_box();
+				this.hist = this._make_micro_hist();
+				return this;
+			},
+			_make_micro_hist:function() {
+				var hist = new histogram.HistView({
+					el:this.$el.find('.sparkhist')[0],
+					views:this.views_collection
+				});				
+				hist.on('brush', function(d) {
 					var hits = this_.views_collection.filter(function(v) {
 						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
 					});
 					hits.map(function(v) { return v.$el.addClass('brush'); });
 				});
-				this.hist.on('unbrush', function(d) {
+				hist.on('unbrush', function(d) {
 					console.log('unbrush ', d);
 					var hits = this_.views_collection.filter(function(v) {
 						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
 					});
 					hits.map(function(v) { return v.$el.removeClass('brush'); });
 				});
-				this.hist.render();
-				return this;
+				hist.render();
+				return hist;
 			},
 			add:function(itemview) {
 				// warning: this method shadows parent 
@@ -127,7 +135,6 @@ define(
 					}
 					// propertybox.hide();
 				});
-				this.propbox = propertybox;
 				return propertybox;
 			},
 			_make_path_box:function() {
