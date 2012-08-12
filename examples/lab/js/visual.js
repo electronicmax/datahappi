@@ -56,10 +56,10 @@ define(['js/utils'], function(utils) {
 			if (this.options.views) { this.setData(this.options.views); }
 		},
 		setSeries:function(s) {
+			var this_ = this;
 			if (this.options.series) {
 				this.options.series.off(null, null, this);
 			}
-			var this_ = this;
 			this.options.series = s;
 			this.options.series.on('all', function() { this_._update_plot(); }, this);
 		},
