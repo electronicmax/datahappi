@@ -57,8 +57,9 @@ define(
 				this.$el.append($(toolbar_template));
 				this.$el.data('view', this);
 				// add a property box
+
 				
-				this.propbox = this._make_property_box();
+				// this.propbox = this._make_property_box();
 				this.hist = this._make_micro_hist();
 				return this;
 			},
@@ -98,6 +99,9 @@ define(
 				itemview.on('delete', function() {
 					itemview.$el.fadeOut('fast', function() { this_.remove(itemview); });
 				});
+				itemview.on('property-click', function(evt, ui) {
+					this_._dereference_by_property($(evt.target).attr('data-prop'));
+				});
 				console.log("instancebox :: ADD ITEM : before - ", lvc, ' after - ', this.views_collection.length);				
 			},
 			remove:function(itemview) {
@@ -111,6 +115,23 @@ define(
 				itemview.$el.remove();
 				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
+			_dereference_by_property:function(propertyname) {
+				console.log(" _dereference_by_property ", propertyname);
+				var this_ = this;
+				var step = new pathables.PropertyDereferenceStep({property:propertyname});
+				this_.pathables.paths.map(function(path) {
+					var pc = path.clone().add_step(step);
+					var result = this_.pathables.try_path(pc);
+					console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
+					if (defined(result)) { path.add_step(step); }
+				});
+
+				// now try it just solo
+				var solo = new pathables.Path([step]);
+				if (defined(this_.pathables.try_path(solo))) {
+					this_.pathables.add_path(solo);
+				}
+			},
 			_make_property_box:function() {
 				// add a property box.
 				var this_ = this;
@@ -121,22 +142,7 @@ define(
 				});
 				propertybox.render();
 				propertybox.bind('property-click', function(propertyname) {
-					// get paths from the pathables
-					var step = new pathables.PropertyDereferenceStep({property:propertyname});
-					this_.pathables.paths.map(function(path) {
-						var pc = path.clone().add_step(step);
-						var result = this_.pathables.try_path(pc);
-						console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
-						if (defined(result)) {
-							path.add_step(step);
-						}
-					});
-
-					// now try it just solo
-					var solo = new pathables.Path([step]);
-					if (defined(this_.pathables.try_path(solo))) {
-						this_.pathables.add_path(solo);
-					}
+					this_._dereference_by_property(propertyname); 
 				});
 				return propertybox;
 			},

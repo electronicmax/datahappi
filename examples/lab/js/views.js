@@ -56,7 +56,8 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 		template:pathableview_templ,
 		className:'pathable-view item',
 		events:{
-			'click .delete' : '_cb_delete'
+			'click .delete' : '_cb_delete',
+			'click .proplabel' : '_prop_select'
 		},
 		render:function() {
 			var this_ = this;
@@ -100,7 +101,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			
 			// update next properties
 			var next_properties = _.uniq(utils.flatten(	m.get_last_value().map(function(lv) { return this_._props_of(lv); })));
-			console.log("NEXT PROPERTIES ARE ", next_properties);
 
 			// instantiate template
 			var prop_template = $template.find('#prop').children();
@@ -109,7 +109,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			_(next_properties).each(function(np, i) {
 				var child =	$props.children()[i];
 				if (_.isUndefined(child)) {
-					console.log(' properties enter selection >  ', np, child);				
 					child = prop_template.clone().appendTo( $props );
 				}
 				$(child).html(np);
@@ -118,9 +117,9 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			$props.children().slice(next_properties.length).map(function() {
 				$(this).remove();
 			});
-
 			return this;			
 		},
+		_prop_select:function(p) {	this.trigger('property-click', p);	},
 		_props_of:function(v) {
 			// determines the properties of a particular value --
 			if (v instanceof Backbone.Model) { return v.keys(); }
