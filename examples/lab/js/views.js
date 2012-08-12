@@ -1,6 +1,6 @@
 define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pathableview.html'], function(pathables,utils, pathableview_templ) {
-	// first attempt at ta
 	var defined = utils.DEFINED;
+
 	var CommonView = Backbone.View.extend({
 		initialize:function() {
 			this.setModel(this.options.model);

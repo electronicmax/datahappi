@@ -1,4 +1,4 @@
-define([], function() {
+define(['js/utils'], function(utils) {
 
 	var VisualBase = Backbone.View.extend({
 		_to_raw_value : function(x) {
@@ -31,7 +31,16 @@ define([], function() {
 				var $t = $(this);
 				$t.attr('class', '');
 			});
-		}				
+		},		
+		_get_counts:function(views){ 
+			var pathables = views.map(function(x) { return x.options.model ; });
+			var values = utils.flatten(pathables.map(function(p) { return p.get_last_value(); }));
+			var raws = values.map(this._to_raw_value);
+			var uniqs = _.uniq(raws);			
+			return uniqs.sort().map(function(val) {
+				return [val, raws.filter(function(raw) { return val == raw; }).length];
+			});
+		}		
 	});
 	
 	// histogram widget using d3
@@ -175,15 +184,6 @@ define([], function() {
 				}				
 			});
 			return this;
-		},		
-		_get_counts:function(views){ 
-			var pathables = views.map(function(x) { return x.options.model ; });
-			var values = pathables.map(function(p) { return p.get_last_value()[0]; });
-			var raws = values.map(this._to_raw_value);
-			var uniqs = _.uniq(raws);			
-			return uniqs.sort().map(function(val) {
-				return [val, raws.filter(function(raw) { return val == raw; }).length];
-			});
 		}
 	});
 	return {

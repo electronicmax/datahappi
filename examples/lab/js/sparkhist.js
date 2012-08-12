@@ -9,7 +9,7 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
 		render:function() {
-			var data = this._generate_data(this.get_pathables());
+			var data = this._get_counts(this.options.views);
 			var barwidth = 5;
 			var height = 20;
 			var this_ = this;
@@ -45,15 +45,6 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			
 			return this;
 		},		
-		_generate_data:function(pathables) {
-			var values = pathables.map(function(p) { return p.get_last_value()[0]; });
-			var raws = values.map(this._to_raw_value);
-			console.log(' raws >> ', raws);
-			var uniqs = _.uniq(raws);			
-			return uniqs.sort().map(function(val) {
-				return [val, raws.filter(function(raw) { return val == raw; }).length];
-			});
-		},
 		setData:function(views) {
 			this.options.views = views;
 			this._register_change();
