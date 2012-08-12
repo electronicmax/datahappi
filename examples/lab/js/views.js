@@ -109,11 +109,18 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			// enter-update
 			_(next_properties).each(function(np, i) {
 				var child =	$props.children()[i];
-				if (_.isUndefined(child)) {	child = prop_template.clone().appendTo( $props );	}
-				child.find('.label').html(np);
+				console.log(' properties enter selection >  ', np, child);				
+				if (_.isUndefined(child)) {
+					child = prop_template.clone().appendTo( $props );
+					console.log('new child ', child);
+				}
+				child.html(np);
 				child.attr('data-prop', np);
 			});
-			$props.children().slice(next_properties.length).map(function(v) { v.remove(); });
+			$props.children().slice(next_properties.length).map(function(v) {
+				console.log(' properties exit selection >  ', v);
+				v.remove();
+			});
 
 			return this;			
 		},

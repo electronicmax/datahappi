@@ -25,5 +25,7 @@
 	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
 	<cat:phone>074827382981</cat:phone>
 	<cat:age>32</cat:age>
+	<cat:friends rdf:resource="#bob"/>
+	<cat:friends rdf:resource="#alice"/>
   </rdf:Description>  
 </rdf:RDF>
