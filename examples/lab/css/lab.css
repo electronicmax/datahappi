@@ -192,12 +192,11 @@ body .pathable-view:hover {
 body .pathable-view:hover .delete {
   display: block;
 }
-body .pathable-view .leaves {
-  display: none;
-}
 body .pathable-view .proplabel {
-  font-size: 0.5em;
+  display: inline-block;
+  font-size: 0.7em;
   color: #aaa;
+  padding: 1px;
 }
 body .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);

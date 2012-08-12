@@ -17,7 +17,6 @@ define(
 			tagName:"li",
 			initialize:function(options) {
 				this.id = options.property;
-				console.log("this id is ", this.id);
 				this.pathable_collection = new pathablecollection.PathableCollection({}, {
 					property:this.options.property,
 					pathables:this.options.pathables

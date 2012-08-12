@@ -75,33 +75,32 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			// step 1 > update name.
 			this.$el.find('.name').html(this._get_label(m));
 
-			// step 2 > update overall mode.
-			if (!(m instanceof pathables.Pathable) || m.path.get('steps').length === 0) {
-				// exit if we're not a model
-				this._set_mode('root');
-				return this;
-			}
-			
-			this._set_mode('leaves');
-		
 			// step 3 > update values -- list of values at this level
 			var $values = this.$el.find('.values');
-			var val_template = $template.find('#value').children();
-			var last_values = m.get_last_value();
-			_(last_values).each(function(v, i) {
-				var child =	$values.children()[i];
-				if (_.isUndefined(child)) {
-					child = val_template.clone().appendTo( $values );
-				}
-				$(child).html(this_._get_label(v));
-				$(child).attr('data-val', this_._get_label(v));
-				$(child).data('val', v);								
-			});
-			// exit selection
-			$values.children().slice(last_values.length).map(function(v) {	v.remove(); });
+
+			// step 2 > update overall mode.
+			if (!(m instanceof pathables.Pathable) || m.path.get('steps').length === 0) {
+				// standalone
+				$values.html('');
+			} else {
+				var val_template = $template.find('#value').children();
+				var last_values = m.get_last_value();				
+				_(last_values).each(function(v, i) {
+					var child =	$values.children()[i];
+					if (_.isUndefined(child)) {
+						child = val_template.clone().appendTo( $values );
+					}
+					$(child).html(this_._get_label(v));
+					$(child).attr('data-val', this_._get_label(v));
+					$(child).data('val', v);								
+				});
+				// exit selection
+				$values.children().slice(last_values.length).map(function(v) {	v.remove(); });
+			}			
 			
 			// update next properties
 			var next_properties = _.uniq(utils.flatten(	m.get_last_value().map(function(lv) { return this_._props_of(lv); })));
+			console.log("NEXT PROPERTIES ARE ", next_properties);
 
 			// instantiate template
 			var prop_template = $template.find('#prop').children();
@@ -109,17 +108,15 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			// enter-update
 			_(next_properties).each(function(np, i) {
 				var child =	$props.children()[i];
-				console.log(' properties enter selection >  ', np, child);				
 				if (_.isUndefined(child)) {
+					console.log(' properties enter selection >  ', np, child);				
 					child = prop_template.clone().appendTo( $props );
-					console.log('new child ', child);
 				}
-				child.html(np);
-				child.attr('data-prop', np);
+				$(child).html(np);
+				$(child).attr('data-prop', np);
 			});
-			$props.children().slice(next_properties.length).map(function(v) {
-				console.log(' properties exit selection >  ', v);
-				v.remove();
+			$props.children().slice(next_properties.length).map(function() {
+				$(this).remove();
 			});
 
 			return this;			
@@ -128,16 +125,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			// determines the properties of a particular value --
 			if (v instanceof Backbone.Model) { return v.keys(); }
 			return [];
-		},
-		_set_mode:function(r) {
-			var e = this.$el;
-			if (r == 'root') {
-				e.find('.root').slideDown();
-				e.find('.leaves').slideUp();
-				return;
-			}
-			e.find('.root').slideUp();
-			e.find('.leaves').slideDown();
 		}
 	});
 	

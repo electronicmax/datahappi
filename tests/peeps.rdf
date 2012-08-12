@@ -9,6 +9,7 @@
 	</cat:home>
 	<cat:phone>075372982938</cat:phone>
 	<cat:age>21</cat:age>
+	<cat:friends rdf:resource="#charlie"/>	
   </rdf:Description>  
   <rdf:Description rdf:about="#bob">
 	<rdfs:label>Bob</rdfs:label>
