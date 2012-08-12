@@ -47,7 +47,7 @@ define(
 					},
 					drop: function( event, ui ) {
 						$(this).removeClass("over");
-						var model = ui.draggable.data("view").options.model;
+						var model = ui.draggable.data("view").options.model.clone();
 						var v = new view.PathableView({model:model});
 						this_.add(v);
 						this_._render_view(v);
@@ -74,11 +74,9 @@ define(
 					});
 				};
 				hist.on('brush', function(model_ids) {
-					console.log('brush >> ', model_ids);
 					find_views_by_ids(model_ids).map(function(v) {	return v.$el.addClass('brush');	});
 				});				
 				hist.on('unbrush', function(model_ids) {
-					console.log('unbrush >> ', model_ids);
 					find_views_by_ids(model_ids).map(function(v) { return v.$el.removeClass('brush'); });
 				});
 				hist.render();

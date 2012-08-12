@@ -7,9 +7,9 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 		},
 		setModel:function(m) {
 			var this_ = this;
-			m = m.clone();
 			if (this.options.model) { this.options.model.off(null, null, this);	}
 			m.on('all',function(eventName, x) {
+				console.log(' CommonView >> got ', eventName, x);
 				this_.render();
 				this_.trigger(eventName, x);
 			}, this);
@@ -54,7 +54,7 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 	// show pathables in a lovely way
 	var PathableView = CommonView.extend({
 		template:pathableview_templ,
-		className:'pathable-view',
+		className:'pathable-view item',
 		events:{
 			'click .delete' : '_cb_delete'
 		},
@@ -66,6 +66,11 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 
 			// step 0: set up shell if it doesn't exist
 			if (!this.$el.html().length) {	this.$el.append($lens_template);	}
+
+			this.$el.data('view',this); // for when someone drags us into a box
+			// this.$el.data('model',this.options.model);
+			this.$el.attr("data-uri", this.options.model.id);
+			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});			
 			
 			// step 1 > update name.
 			this.$el.find('.name').html(this._get_label(m));
@@ -88,7 +93,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 				if (_.isUndefined(child)) {
 					child = val_template.clone().appendTo( $values );
 				}
-				console.log(' value and label ', child, v, this_._get_label(v));
 				$(child).html(this_._get_label(v));
 				$(child).attr('data-val', this_._get_label(v));
 				$(child).data('val', v);								
@@ -119,7 +123,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			return [];
 		},
 		_set_mode:function(r) {
-			console.log('setting mooooode ', r);
 			var e = this.$el;
 			if (r == 'root') {
 				e.find('.root').slideDown();

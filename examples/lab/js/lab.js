@@ -18,7 +18,6 @@ define([
 			initialize:function() {	},
 			render:function() {
 				var this_ = this, workspace = this.$el.find('.workspace');
-				
 				this.sidebar =
 					(new sidebar.SidebarView({	sources: this.options.data_sources,	el : this.$el.find('.slidepanel')[0]}))
 					.on('new_group', function() { this_._new_group(); })
@@ -39,8 +38,7 @@ define([
 						out:function(event, ui) {},				
 						drop: function( event, ui ) {
 							var target_box = new ibox.InstanceBox();
-							var model = ui.draggable.data("view").options.model;
-							window.target_box = target_box;
+							var model = ui.draggable.data("view").options.model.clone();
 							target_box.add(new views.PathableView({model:model}));
 							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 							this_.$el.find(".workspace").append(target_box.render().el);

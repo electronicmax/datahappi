@@ -15,7 +15,6 @@ define([], function() {
 			}).map(function(x) { return x.options.model.id; }));
 		},
 		_brush_value:function(raw_value) {
-			console.log('brush value found ', this._find_ids_of_pathables_with_raw_value(raw_value));
 			this.trigger('brush', this._find_ids_of_pathables_with_raw_value(raw_value));			
 			this.$el.find('rect').each(function() {
 				var $t = $(this);
@@ -62,7 +61,6 @@ define([], function() {
 			var this_ = this;
 			this.options.views = s;
 			this.options.views.on('all', function(eventType) {
-				console.log('got an event ', eventType, " updating plot ");
 				this_._update_plot();
 			}, this);
 			this_._update_plot();
@@ -123,7 +121,7 @@ define([], function() {
 			}
 			var max_count = d3.max(this._get_counts(this.options.views).map(function(x) { return x[1]; }));
 			if (this.options.series === undefined) {
-				console.log('no series defined, plotting as one >> ', plot, this.options.views, max_count);
+				// console.log('no series defined, plotting as one >> ', plot, this.options.views, max_count);
 				this._hist_series(plot, this.options.views, max_count);
 			} else {
 				// subdivide into groups based upon the series dataset
@@ -176,7 +174,6 @@ define([], function() {
 					this_.setSeries(view.view_collection);					
 				}				
 			});
-			console.log(' update plot >> ');
 			return this;
 		},		
 		_get_counts:function(views){ 
