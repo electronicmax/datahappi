@@ -1,5 +1,6 @@
-define(['js/utils'],function(utils) {
-	var HistView = Backbone.View.extend({
+define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
+	
+	var HistView = visual.VisualBase.extend({
 		template:"<div class='sparkhist'></div>",		
 		initialize:function() {
 			if (this.options.views) { this._register_change();	}
@@ -7,24 +8,6 @@ define(['js/utils'],function(utils) {
 		get_pathables:function() {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
-		_brush_value:function(d) {
-			this.trigger('brush', d);
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				if ($t.attr('data-val') == d) {
-					$t.attr('class', 'brush');
-				} else {
-					$t.attr('class', 'unbrush');
-				}
-			});
-		},
-		_unbrush_value:function(d) {
-			this.trigger('unbrush', d);
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				$t.attr('class', '');
-			});
-		},		
 		render:function() {
 			var data = this._generate_data(this.get_pathables());
 			var barwidth = 5;
@@ -63,13 +46,8 @@ define(['js/utils'],function(utils) {
 			return this;
 		},		
 		_generate_data:function(pathables) {
-			var to_raw_value = function(x) {
-				if (x instanceof Backbone.Model) {	return x.id;}
-				if (x.valueOf) { return x.valueOf(); }
-				return x;
-			};
 			var values = pathables.map(function(p) { return p.get_last_value()[0]; });
-			var raws = values.map(to_raw_value);
+			var raws = values.map(this._to_raw_value);
 			console.log(' raws >> ', raws);
 			var uniqs = _.uniq(raws);			
 			return uniqs.sort().map(function(val) {

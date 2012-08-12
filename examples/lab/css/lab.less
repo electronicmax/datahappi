@@ -114,8 +114,7 @@ body {
     }
 	// hide 'x' for the things in the source list 
 	.things .item:hover .delete { display:none; }
-	.item {
-		// padding: 3px 2px 3px 3px;
+	.things .item {
         -webkit-transition: background-color 0.2s ease-in-out;
         -webkit-transition: padding 0.2s ease-in-out;
 		border:1px solid rgba(255,255,255,0);                		
@@ -128,9 +127,6 @@ body {
 		&:hover {
 			border:1px solid #eee;
 			.delete { display:block; }
-		}
-		&.brush {
-			background-color:rgba(0,200,255,0.1);
 		}
 		.props {
 			display:none;
@@ -145,6 +141,33 @@ body {
 			opacity:0.8;
 			font-size:1.0em;
 		}
+	}
+
+	// new item
+	.pathable-view {
+		position:relative;
+		border: 1px solid white;
+		padding:5px;
+		width:200px;		
+		.delete {
+			z-index:1000; 
+			position:absolute;
+			right:0px; margin:0px; padding:0px;
+			padding:none;
+			font-size:1.0em;
+			display:block;
+		}
+		&:hover {
+			border:1px solid rgba(200,200,200,0.5);
+			.delete { display: block; }
+		}
+		.leaves { display: none; }
+		.proplabel {
+			font-size:0.5em; color: #aaa;
+		}
+		&.brush {
+			background-color:rgba(0,200,255,0.1);
+		}		
 	}
 
     // --- ---

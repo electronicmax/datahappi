@@ -4,11 +4,11 @@ define(
 		'examples/lab/js/propertybox',
 		'examples/lab/js/pathbox',
 		'examples/lab/js/pathables',
-		'examples/lab/js/pathableview',
+		'examples/lab/js/views',
 		'examples/lab/js/sparkhist',
 		'js/utils'
 	],
-	function(box, propbox, pathbox, pathables, pathableview, histogram, utils) {
+	function(box, propbox, pathbox, pathables, view, histogram, utils) {
 		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><div class="properties"></div><svg class="sparkhist"></svg>';
 		var defined = utils.DEFINED;
@@ -33,7 +33,6 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
 				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
-				console.log('this views colleciton map ', this.views_collection.length, this.views_collection.models.length);
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				// set up to receive droppables
 				this.$el.droppable({
@@ -48,7 +47,8 @@ define(
 					},
 					drop: function( event, ui ) {
 						$(this).removeClass("over");
-						var v = box.clone_view(ui.draggable.data("view"));
+						var model = ui.draggable.data("view").options.model;
+						var v = new view.PathableView({model:model});
 						this_.add(v);
 						this_._render_view(v);
 					}
@@ -63,22 +63,23 @@ define(
 				return this;
 			},
 			_make_micro_hist:function() {
+				var this_ = this;
 				var hist = new histogram.HistView({
 					el:this.$el.find('.sparkhist')[0],
 					views:this.views_collection
-				});				
-				hist.on('brush', function(d) {
-					var hits = this_.views_collection.filter(function(v) {
-						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
-					});
-					hits.map(function(v) { return v.$el.addClass('brush'); });
 				});
-				hist.on('unbrush', function(d) {
-					console.log('unbrush ', d);
-					var hits = this_.views_collection.filter(function(v) {
-						return v.options.model.get_last_value().map(function(x) { return x.id; }).indexOf(d) >= 0; 
+				var find_views_by_ids = function(model_ids) {
+					return this_.views_collection.filter(function(v) {
+						return model_ids.indexOf(v.options.model.id) >= 0; 
 					});
-					hits.map(function(v) { return v.$el.removeClass('brush'); });
+				};
+				hist.on('brush', function(model_ids) {
+					console.log('brush >> ', model_ids);
+					find_views_by_ids(model_ids).map(function(v) {	return v.$el.addClass('brush');	});
+				});				
+				hist.on('unbrush', function(model_ids) {
+					console.log('unbrush >> ', model_ids);
+					find_views_by_ids(model_ids).map(function(v) { return v.$el.removeClass('brush'); });
 				});
 				hist.render();
 				return hist;

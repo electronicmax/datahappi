@@ -39,8 +39,9 @@ define([
 						out:function(event, ui) {},				
 						drop: function( event, ui ) {
 							var target_box = new ibox.InstanceBox();
+							var model = ui.draggable.data("view").options.model;
 							window.target_box = target_box;
-							target_box.add(box.clone_view(ui.draggable.data("view")));
+							target_box.add(new views.PathableView({model:model}));
 							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 							this_.$el.find(".workspace").append(target_box.render().el);
 							return false;
@@ -71,7 +72,7 @@ define([
 					var wview = new Main({el : $('body'), data_sources: srcs});
 					wview.render();
 					console.log("el > ", wview.el, wview.$el.find('.workspace'));
-					wview.sidebar.slideOut();
+					wview.sidebar.slideOut('very fast');
 				});
 		})();		
 	});

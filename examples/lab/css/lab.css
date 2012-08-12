@@ -136,7 +136,7 @@ body .flip-horizontal {
 body .things .item:hover .delete {
   display: none;
 }
-body .item {
+body .things .item {
   -webkit-transition: background-color 0.2s ease-in-out;
   -webkit-transition: padding 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, 0);
@@ -146,23 +146,20 @@ body .item {
   padding: 0 0 0 4px;
   overflow: hidden;
 }
-body .item .thing-label a {
+body .things .item .thing-label a {
   font-size: 0.5em;
 }
-body .item:hover {
+body .things .item:hover {
   border: 1px solid #eee;
 }
-body .item:hover .delete {
+body .things .item:hover .delete {
   display: block;
 }
-body .item.brush {
-  background-color: rgba(0, 200, 255, 0.1);
-}
-body .item .props {
+body .things .item .props {
   display: none;
   font-size: 0.7em;
 }
-body .item .delete {
+body .things .item .delete {
   z-index: 1000;
   position: absolute;
   top: 2px;
@@ -172,6 +169,38 @@ body .item .delete {
   display: none;
   opacity: 0.8;
   font-size: 1.0em;
+}
+body .pathable-view {
+  position: relative;
+  border: 1px solid white;
+  padding: 5px;
+  width: 200px;
+}
+body .pathable-view .delete {
+  z-index: 1000;
+  position: absolute;
+  right: 0px;
+  margin: 0px;
+  padding: 0px;
+  padding: none;
+  font-size: 1.0em;
+  display: block;
+}
+body .pathable-view:hover {
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+body .pathable-view:hover .delete {
+  display: block;
+}
+body .pathable-view .leaves {
+  display: none;
+}
+body .pathable-view .proplabel {
+  font-size: 0.5em;
+  color: #aaa;
+}
+body .pathable-view.brush {
+  background-color: rgba(0, 200, 255, 0.1);
 }
 body .visual {
   width: 250px;

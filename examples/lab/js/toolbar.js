@@ -10,11 +10,10 @@ define([],function() {
 		_click_button:function(evt, ui) {
 			var this_ = this;
 			var classes = _($(evt.target).attr('class').split(/\s+/)).without('btn');
-			classes.map(function(c) { this_.trigger(c); })
+			classes.map(function(c) { this_.trigger(c); });
 		}
 	});
 	return {
 		Toolbar:ToolbarView
 	};
 });
-	   
