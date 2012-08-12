@@ -96,7 +96,7 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 					$(child).data('val', v);								
 				});
 				// exit selection
-				$values.children().slice(last_values.length).map(function(v) {	v.remove(); });
+				$values.children().slice(last_values.length).map(function(v) { $(this).remove(); });
 			}			
 			
 			// update next properties
@@ -114,9 +114,7 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 				$(child).html(np);
 				$(child).attr('data-prop', np);
 			});
-			$props.children().slice(next_properties.length).map(function() {
-				$(this).remove();
-			});
+			$props.children().slice(next_properties.length).map(function() { $(this).remove(); });
 			return this;			
 		},
 		_prop_select:function(p) {	this.trigger('property-click', p);	},
