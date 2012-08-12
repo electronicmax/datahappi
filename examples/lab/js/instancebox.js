@@ -126,13 +126,17 @@ define(
 					this_.pathables.paths.map(function(path) {
 						var pc = path.clone().add_step(step);
 						var result = this_.pathables.try_path(pc);
-						if (defined(result)) { path.add_step(step); }
+						console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
+						if (defined(result)) {
+							path.add_step(step);
+						}
 					});
+
+					// now try it just solo
 					var solo = new pathables.Path([step]);
 					if (defined(this_.pathables.try_path(solo))) {
 						this_.pathables.add_path(solo);
 					}
-					// propertybox.hide();
 				});
 				return propertybox;
 			},

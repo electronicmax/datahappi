@@ -15,7 +15,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	});
 	
 	var PropertyDereferenceStep = Step.extend({
-		idAttribute:'property',
+		idAttribute:'position',
 		defaults: { type: "dereference-pathstep", property: undefined },
 		test: function(dmodel) {
 			// dmodel must be a DereferenceableModel
@@ -99,8 +99,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var cur_val = [this], values = [[this]], steps = path.get("steps");
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
+				console.log(' cur val > ', cur_val, ' > step > ', step);
 				cur_val = utils.flatten(cur_val.map(function(v) {
-					// console.log('testing ', (v && v.id) || v, ' -> ', step.id, step.test(v) );
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
