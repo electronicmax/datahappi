@@ -9,6 +9,7 @@ define(
 		 * @path:		The path this view displays/modifies. */
 		var PathView = Backbone.View.extend({
 			template:_.template($('#pathview-template').html()),
+			className:'path',
 			initialize:function() {
 				var this_ = this;
 				this.pathables = this.options.pathables;
@@ -17,6 +18,11 @@ define(
 
 				this.pathables
 					.on("add remove", function(args) { this_.render(args) });
+				this.pathables.paths
+					.on("all", function(args) {
+						console.log('path change ');
+						this_.render(args);
+					});				
 			},
 			render:function() {
 				var this_ = this;

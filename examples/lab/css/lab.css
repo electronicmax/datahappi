@@ -226,34 +226,6 @@ body .visual {
   width: 250px;
   height: 200px;
   border: 1px solid rgba(0, 180, 0, 0.2);
-  /*
-		.uplt {
-			.corner_thingy;
-			border-left:1px solid white;
-			border-top:1px solid white;
-			top:-1px; left:-1px;
-		}
-		.uprt {
-			.corner_thingy;
-			border-right:1px solid white;
-			border-top:1px solid white;
-			top:-1px; right:-1px;
-		} 
-		.btlt {
-			.corner_thingy;
-			border-bottom:1px solid white;
-			border-left:1px solid white;
-			position:absolute;
-			bottom:-1px; left:-1px;
-		} 
-		.btrt {
-			.corner_thingy;
-			border-bottom:1px solid white;
-			border-right:1px solid white;
-			bottom:-1px; right:-1px;			
-		}
-		*/
-
 }
 body .visual .corner_thingy {
   width: 50px;

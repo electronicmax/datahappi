@@ -80,55 +80,32 @@
   }
   /* properties */
   .properties {
+	  background-color:#eef;
       position:absolute;
       left:100%;
 	  top:0px;
-      min-width:100px;
+      width:200px;
 	  height:100px;
 	  overflow:none;
 	  /*height:@propsheight;*/
 	  border-top:none; border-bottom:none; border-right:none;
 	  padding:4px;	
-      @minichart-width: 30px;
-	  font-size:0.7em;
       vertical-align:top;
-	  ul.propitems {
-		  vertical-align:top;
-          list-style-type:none;
-          margin:0px 0px 10px 10px;
-	  }
+	  .path {
+		  background-color:#fff;
+		  padding:0px; margin:0px;
+		  font-size:0.9em;
+		  * {
+			  margin:0px; padding:0px; border:none;
+		  }
+		  select {
+			  width:100px !important;
+			  border:none !important;
+		  }
+	  }	  
       .coverage-small { font-size:10pt; }
       .coverage-medium { font-size:12pt; }
       .coverage-large { font-size:14pt; }
-	  .uplt {
-		  display:none;
-		  border-left:1px solid @propertybordercolor;
-		  border-top:1px solid @propertybordercolor;
-		  position:absolute;
-		  top:0; left:0;
-	  }
-	  .uprt {
-		  display:block;
-		  border-right:1px solid @propertybordercolor;
-		  border-top:1px solid @propertybordercolor;
-		  position:absolute;
-		  top:0; right:0;
-	  } 
-	  .btlt {
-		  display:none;
-		  border-bottom:1px solid @propertybordercolor;
-		  border-left:1px solid @propertybordercolor;
-		  position:absolute;
-		  bottom:0; left:0;
-	  } 
-	  .btrt {
-		  display:block;
-		  border-bottom:1px solid @propertybordercolor;
-		  border-right:1px solid @propertybordercolor;
-		  position:absolute;
-		  bottom:0; right:0;
-	  }
-	  
   }
   // mini histogram sparkline
   .sparkhist { 

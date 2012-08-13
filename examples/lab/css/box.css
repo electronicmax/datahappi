@@ -92,10 +92,11 @@
   color: black;
 }
 .greybox .properties {
+  background-color: #eef;
   position: absolute;
   left: 100%;
   top: 0px;
-  min-width: 100px;
+  width: 200px;
   height: 100px;
   overflow: none;
   /*height:@propsheight;*/
@@ -104,13 +105,22 @@
   border-bottom: none;
   border-right: none;
   padding: 4px;
-  font-size: 0.7em;
   vertical-align: top;
 }
-.greybox .properties ul.propitems {
-  vertical-align: top;
-  list-style-type: none;
-  margin: 0px 0px 10px 10px;
+.greybox .properties .path {
+  background-color: #fff;
+  padding: 0px;
+  margin: 0px;
+  font-size: 0.9em;
+}
+.greybox .properties .path * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .path select {
+  width: 100px !important;
+  border: none !important;
 }
 .greybox .properties .coverage-small {
   font-size: 10pt;
@@ -120,38 +130,6 @@
 }
 .greybox .properties .coverage-large {
   font-size: 14pt;
-}
-.greybox .properties .uplt {
-  display: none;
-  border-left: 1px solid #aaeeff;
-  border-top: 1px solid #aaeeff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .properties .uprt {
-  display: block;
-  border-right: 1px solid #aaeeff;
-  border-top: 1px solid #aaeeff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .properties .btlt {
-  display: none;
-  border-bottom: 1px solid #aaeeff;
-  border-left: 1px solid #aaeeff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .properties .btrt {
-  display: block;
-  border-bottom: 1px solid #aaeeff;
-  border-right: 1px solid #aaeeff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }
 .greybox .sparkhist {
   zindex: -10;

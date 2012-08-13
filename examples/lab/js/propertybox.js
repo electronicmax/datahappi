@@ -17,16 +17,11 @@ define(
 				var this_ = this;
 				box.BoxView.prototype.render.apply(this, arguments);
 
-				var html =	"<div class='uplt'></div>";
-				html += 	"<div class='uprt'></div>";
-				html += 	"<div class='btlt'></div>";
-				html +=		"<div class='btrt'></div>";
-
-				html += "<ul class='propitems'></ul>";
+				var html =	"<div class='propitems'></div>";
 				this.$el.html(html);
 
 				this.views_collection.map(function(path_view) {
-					this_.$el.find('ul').append(path_view.render().el);
+					this_.$el.find('.propitems').append(path_view.render().el);
 				});
 
 				var new_path_button = $("<button>+</button>");
