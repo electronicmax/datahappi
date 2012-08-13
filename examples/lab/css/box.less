@@ -82,7 +82,7 @@
   /* properties */
   .properties {
 	  z-index:3;
-	  background-color:rgba(240,240,240,0.8);
+	  background-color:#fff; 
 	  border-top:1px solid #eee;
 	  border-bottom:1px solid #eee;
 	  border-right:1px solid #eee;
@@ -92,23 +92,24 @@
       position:absolute;
       left:98%;
 	  top:14px;
-      width:150px;  height:100px;
-	  overflow:none;
+      bottom:14px; 
+      width:200px; 
+	  overflow:auto;
       vertical-align:top;
 	  .propitems {
-		  margin:0px;
-		  padding:0px;
-		  width: 100%;
+		  margin:0px; padding:0px;  width: 100%;
 		  list-style-type:none !important;
-		  li.path { 
-			  margin:0px 0px 5px 0px !important;
-			  padding:0px !important;
+		  // paths
+		  li.path {
+			  border-bottom:1px solid #eee;
+			  margin:3px 0px 3px 0px !important;
+			  padding:3px 3px 3px 3px !important;
 			  background-color:#fff;
 			  padding:0px; 
 			  position:relative;
 			  .steps {
-				  padding:0px 0px 1px 2px;
-				  font-size:7pt !important;
+				  padding:0px 0px 1px 15px;
+				  font-size:9pt !important;
 				  vertical-align:middle !important;
 				  * {
 					  margin:0px; padding:0px; border:none;
@@ -116,7 +117,7 @@
 				  .delete {
 					  z-index:10; margin:0px; padding:0px;
 					  position:absolute;
-					  top:2px; right:1px;
+					  top:5px; left:1px;
 				  }		  
 				  select {
 					  border:1px solid #eee !important;
@@ -127,6 +128,11 @@
 				  }
 			  }
 		  }
+	  }
+	  .new-path-btn {
+		  position:absolute;
+		  bottom:5px;
+		  left: 5px;
 	  }
   }
   // mini histogram sparkline
