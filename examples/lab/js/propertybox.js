@@ -18,6 +18,7 @@ define(
 				box.BoxView.prototype.render.apply(this, arguments);
 
 				var html =	"<ul id='sortable' class='propitems'></div>";
+				this.$el.html(html);
 
 				$( "#sortable" ).sortable({
 					change:function() {
@@ -26,8 +27,6 @@ define(
 				});
 				$( "#sortable" ).disableSelection();
 
-				this.$el.html(html);
-
 				this.views_collection.map(function(path_view) {
 					this_.$el.find('.propitems').append(path_view.render().el);
 				});
@@ -35,7 +34,6 @@ define(
 				var new_path_button = $("<button>+</button>");
 				new_path_button.click(function(){ this_.add_path().render(); });
 				this.$el.append(new_path_button);
-
 				return this;
 			},
 			add_path:function(path) {
