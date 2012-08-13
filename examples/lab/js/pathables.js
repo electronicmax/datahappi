@@ -106,7 +106,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				values.push(cur_val);
 			}
 
-			console.log("TRY PATH ", steps.map(function(x) { return x.valueOf(); }).join(',') + " cur_val:", cur_val.length, " values:", values.length, " steps:", steps.length);
+			console.log("TRY PATH ", this.id, steps.models.map(function(x) { return x.get('property'); }),
+						cur_val.length > 0 && values.length == steps.length + 1 ? 'win' : 'fail');
 			
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
@@ -200,10 +201,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
 			var paths = this.paths.models;
 			console.log('~~~~~~~ paths length ', paths.length);
-			if (paths.length === 0) {
-				console.log('resetting path of ', m);
-				return m.reset_path();
-			}
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
 				var result = m.try_path(path);
@@ -212,6 +209,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 					return m.set_path(path);
 				} 
 			}
+			// no paths met us, let's just reset 
+			return m.reset_path();			
 		},
 		try_path:function(path) {
 			var result = this.map(function(pathable) {
