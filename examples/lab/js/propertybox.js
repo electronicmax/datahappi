@@ -18,7 +18,6 @@ define(
 				box.BoxView.prototype.render.apply(this, arguments);
 
 				var html =	"<ul id='sortable' class='propitems'></div>";
-				
 				this.$el.html(html);
 
 				$( "#sortable" ).sortable({
@@ -35,7 +34,6 @@ define(
 				var new_path_button = $("<button>+</button>");
 				new_path_button.click(function(){ this_.add_path().render(); });
 				this.$el.append(new_path_button);
-
 				return this;
 			},
 			add_path:function(path) {
