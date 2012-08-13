@@ -114,7 +114,11 @@ define(
 				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			_dereference_by_property:function(propertyname) {
-				console.log(" _dereference_by_property ", propertyname);
+				// TODO -- check the extension logic to see if it does this:
+				//   for each path, try to apply extension
+				//     - did the extension affect any pathable? if so, keep it - else abandon extension!
+				//     - did the new extended path leave anyone behind? if so, add a clone of the unextended path at _lower priority_ (under) XX 
+				//     - make sure you try solo at the end -- [] + [[step]]! 
 				var this_ = this;
 				var step = new pathables.PropertyDereferenceStep({property:propertyname});
 				this_.pathables.paths.map(function(path) {
@@ -123,7 +127,6 @@ define(
 					console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
 					if (defined(result)) { path.add_step(step); }
 				});
-
 				// now try it just solo
 				var solo = new pathables.Path([step]);
 				if (defined(this_.pathables.try_path(solo))) {
