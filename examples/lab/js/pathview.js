@@ -18,12 +18,12 @@ define(
 				this.position = this.pathables.paths.length;
 
 				this.pathables
-					.on("add remove", function(args) { this_.render(args) });
+					.on("add remove", function(args) { this_.render(args); });
 				this.pathables.paths
 					.on("all", function(args) {
 						console.log('path change ');
 						this_.render(args);
-					});				
+					});
 			},
 			render:function() {
 				var this_ = this;
