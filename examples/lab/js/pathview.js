@@ -47,7 +47,7 @@ define(
 					this_.path_extend().render();
 				});
 
-				this.$el.find(".remove-path-button").click(function() { this_.path_remove(); });
+				this.$el.find(".delete").click(function() { this_.path_remove(); });
 
 				return this;
 			},
