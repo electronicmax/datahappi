@@ -18,7 +18,7 @@ define(
 				this.position = this.pathables.paths.length;
 				this.pathables
 					.on("add remove", function(args) { this_.render(args); });
-				this.pathables.paths
+				this.path
 					.on("all", function(eventType, args) {
 						this_.render();
 					});
