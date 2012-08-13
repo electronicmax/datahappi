@@ -2,26 +2,18 @@ define([], function() {
 	var clone_view = function(src_view) {
 		// makes a new view from the same model as src_model
 		var model = src_view.options.model;
-		console.log("clone_view: MODEL ", model.keys().length, model.keys().join(',') );
 		if (model.clone) { model = model.clone();	}
-		console.log("CLONED MODEL ", model.keys().length, model.keys().join(',') );		
-		//model = new model.constructor(_({}).extend(model.attributes));
-		//console.log("clone_view: MODEL -after ", model.keys().length, model.toJSON(), model.map(function(v,k) { return k+":"+v.valueOf(); }));
-		console.log("new model ", src_view.options.model.attributes, model.attributes);
 		var options = _({}).extend(src_view.options, {model:model});
 		var view = new src_view.constructor(options);
 		view.render();
 		return view;
 	};
-
+	/*
+	  It's really a pain in the butt to keep views in
+	  collections. This makes it a little bit easier.
+	*/		   
 	var ViewCollection = Backbone.Collection.extend({
-		/*
-		  It's really a pain in the butt to keep views in
-		  collections. This makes it a little bit easier.
-		*/		   
-		initialize:function() {
-			
-		},
+		initialize:function() {},
 		get_views:function() {
 			return Backbone.Collection.prototype.map(function(x) { return x.attributes; });
 		},
@@ -45,12 +37,10 @@ define([], function() {
 			if (!_(v).isArray()) { v = [v]; }
 			var vids = v.map(function(x) { return x.cid; });
 			var to_kill = this.models.filter(function(x) {
-				console.log('cid ', x.cid);
 				return vids.indexOf(x.attributes.cid) >= 0;
 			});
-			console.log("TO KILL ", to_kill); 
 			var val = Backbone.Collection.prototype.remove.apply(this,[to_kill]);
-			to_kill.map(function(vv) { vv.attributes.off('all', null, this_); });
+			to_kill.map(function(vv) { vv.attributes.off(null, null, this_); });
 			return val;
 		},
 		map:function(fn) {

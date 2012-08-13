@@ -1,32 +1,32 @@
 @boxminwidth : 240px;
-@boxwidth : 450px;
+@boxwidth : 320px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
 
-.box(@bordercolor: #EEEEEE) {
+.box(@bordercolor: #4af) {
   position:absolute;
   top:10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  max-width:@boxwidth;
+  width:@boxwidth;
   min-width:@boxminwidth;
-  border-right:1px solid @propertybordercolor;      
+  // border-right:1px solid @propertybordercolor;      
+
+  padding:12px 20px 12px 12px;
+  &.over { padding:20px;  }
   
-  &.over {
-     padding:15px;
-  }
   &:hover .box-delete { display:block; }
   .box-delete {
 	  z-index:10;
       display:none;
       position:absolute;
-      top:5px; right:5px;
+      top:7px; right:10px;
 	  font-size:1.2em;
   }       
   .uplt, .uprt, .btlt, .btrt {
 	  width:10px; height:10px;
   }
-  padding:12px;
+
   .uplt {
       border-left:1px solid @bordercolor;
       border-top:1px solid @bordercolor;
@@ -34,7 +34,6 @@
       top:0; left:0;
   }
   .uprt {
-	  display:none;
       border-right:1px solid @bordercolor;
       border-top:1px solid @bordercolor;
       position:absolute;
@@ -47,7 +46,6 @@
       bottom:0; left:0;
   } 
   .btrt {
-	  display:none;
       border-bottom:1px solid @bordercolor;
       border-right:1px solid @bordercolor;
       position:absolute;
@@ -132,7 +130,8 @@
 	  }
 	  
   }
-  .hist {
+  // mini histogram sparkline
+  .sparkhist { 
 	  zindex:-10;
 	  position:absolute;
    	  top:100%;	right:5px; width:20px;
@@ -163,27 +162,12 @@
 	  }
   }
 }
+
 .greybox {
-   .box(#999999);
+   .box;
 }        
 .simple {
     font-size:8pt;
     padding:4px;
     width:20px;
 }
-
-
- /*
-    .converage-container, .entropy-container {
-	   display:inline-block;
-	   position:relative;
-       width: @minichart-width;
-       height: 1em;
-       div {
-          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
-       }
-       border:1px solid #AAA;
-   }
-   .coverage-container {  display:none; div { background-color:#AEE; }   }
-   .entropy-container {  display:none; div { background-color:#EAA; }  }
-   */

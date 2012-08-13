@@ -2,6 +2,18 @@
 
 @import "fontello/fontello-codes.css";
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
+.fullsize {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.label {
+  color: #555;
+  background-color: rgba(230, 230, 230, 0.6);
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
 body {
   margin: 0;
   padding: 0;
@@ -64,6 +76,15 @@ body .workspace {
 body .workspace .greybox {
   position: absolute !important;
 }
+body .workspace .toolbar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 38px;
+  background: rgba(200, 200, 200, 0.11);
+  padding: 10px 0 0 5px;
+}
 body .slidepanel {
   padding: 6px 5px 3px 0px;
   position: fixed;
@@ -120,7 +141,7 @@ body .flip-horizontal {
 body .things .item:hover .delete {
   display: none;
 }
-body .item {
+body .things .item {
   -webkit-transition: background-color 0.2s ease-in-out;
   -webkit-transition: padding 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, 0);
@@ -130,23 +151,20 @@ body .item {
   padding: 0 0 0 4px;
   overflow: hidden;
 }
-body .item .thing-label a {
+body .things .item .thing-label a {
   font-size: 0.5em;
 }
-body .item:hover {
+body .things .item:hover {
   border: 1px solid #eee;
 }
-body .item:hover .delete {
+body .things .item:hover .delete {
   display: block;
 }
-body .item.brush {
-  background-color: rgba(0, 200, 255, 0.1);
-}
-body .item .props {
+body .things .item .props {
   display: none;
   font-size: 0.7em;
 }
-body .item .delete {
+body .things .item .delete {
   z-index: 1000;
   position: absolute;
   top: 2px;
@@ -156,4 +174,173 @@ body .item .delete {
   display: none;
   opacity: 0.8;
   font-size: 1.0em;
+}
+body .pathable-view {
+  position: relative;
+  border: 1px solid white;
+  padding: 5px;
+  width: 300px;
+  margin-right: 15px;
+}
+body .pathable-view .name {
+  padding: 0px 0px 0px 3px;
+}
+body .pathable-view .delete {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  margin: 0px;
+  padding: 0px;
+  z-index: 1000;
+  padding: none;
+  font-size: 1.0em;
+  display: block;
+}
+body .pathable-view:hover {
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+body .pathable-view:hover .delete {
+  display: block;
+}
+body .pathable-view .proplabel {
+  margin: 0px;
+  display: inline-block;
+  font-size: 0.7em;
+  color: #aaa;
+  padding: 0px 0px 0px 5px;
+  height: 0.5em;
+  vertical-align: middle;
+  line-height: 5px;
+}
+body .pathable-view .proplabel:hover {
+  color: #000;
+}
+body .pathable-view .values {
+  margin: 0px;
+  padding: 0px;
+}
+body .pathable-view.brush {
+  background-color: rgba(0, 200, 255, 0.1);
+}
+body .visual {
+  width: 250px;
+  height: 200px;
+  border: 1px solid rgba(0, 180, 0, 0.2);
+  /*
+		.uplt {
+			.corner_thingy;
+			border-left:1px solid white;
+			border-top:1px solid white;
+			top:-1px; left:-1px;
+		}
+		.uprt {
+			.corner_thingy;
+			border-right:1px solid white;
+			border-top:1px solid white;
+			top:-1px; right:-1px;
+		} 
+		.btlt {
+			.corner_thingy;
+			border-bottom:1px solid white;
+			border-left:1px solid white;
+			position:absolute;
+			bottom:-1px; left:-1px;
+		} 
+		.btrt {
+			.corner_thingy;
+			border-bottom:1px solid white;
+			border-right:1px solid white;
+			bottom:-1px; right:-1px;			
+		}
+		*/
+
+}
+body .visual .corner_thingy {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 100;
+}
+body .visual svg {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 220px;
+  height: 170px;
+}
+body .visual .delete {
+  z-index: 1000;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 5px;
+  display: none;
+  opacity: 0.8;
+  font-size: 1.0em;
+}
+body .visual .droparea {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+}
+body .visual .droparea.over {
+  box-shadow: inset 0 0 5px green;
+}
+body .visual .droparea .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+body .visual .xaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 30px;
+}
+body .visual .xaxis.over {
+  box-shadow: inset 0 0 5px green;
+}
+body .visual .xaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+body .visual .yaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  transform: rotate(90deg);
+  left: 30px;
+  top: 0px;
+  width: 199px;
+  height: 30px;
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  top: 0px;
+  z-index: 5;
+}
+body .visual .yaxis.over {
+  box-shadow: inset 0 0 5px green;
+}
+body .visual .yaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
 }

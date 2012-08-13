@@ -15,7 +15,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	});
 	
 	var PropertyDereferenceStep = Step.extend({
-		idAttribute:'property',
+		idAttribute:'position',
 		defaults: { type: "dereference-pathstep", property: undefined },
 		test: function(dmodel) {
 			// dmodel must be a DereferenceableModel
@@ -61,8 +61,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			console.log('steps positions now ', steps.length, steps.map(function(x) { return x.get('position'); }));
 			return this;
 		},
-		get_steps:function() {
-			return this.get("steps");
+		get_steps:function() { return this.get("steps");	},
+		get_last_step:function() {
+			var steps = this.get("steps");
+			return steps.get(steps.length - 1);
 		},
 		pop:function() {
 			var steps = this.get_steps();
@@ -97,8 +99,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var cur_val = [this], values = [[this]], steps = path.get("steps");
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
+				console.log(' cur val > ', cur_val, ' > step > ', step);
 				cur_val = utils.flatten(cur_val.map(function(v) {
-					// console.log('testing ', (v && v.id) || v, ' -> ', step.id, step.test(v) );
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
@@ -136,11 +138,19 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
-
-			// If path_array is a single element, turn it into a single-element array
-			if (!_.isArray(path_array)) {path_array = [path_array];}
-
 			var this_ = this;
+			
+			// If path_array is a single element, turn it into a single-element array
+			if (!_.isArray(path_array)) {
+				path_array = [path_array];
+			}
+			
+			_(path_array).each(function(path, i) {
+				if (_.isUndefined(path.get('path_priority'))) {
+					path.set({path_priority:this_.length + i});
+				}
+			});
+			
 			path_array.map(function(path) {
 				path.on('change', function() { this_.trigger('pathchange', path_array); });
 			});

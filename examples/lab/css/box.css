@@ -2,15 +2,14 @@
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  max-width: 450px;
+  width: 320px;
   min-width: 240px;
-  border-right: 1px solid #aaeeff;
-  padding: 12px;
+  padding: 12px 20px 12px 12px;
   /* properties */
 
 }
 .greybox.over {
-  padding: 15px;
+  padding: 20px;
 }
 .greybox:hover .box-delete {
   display: block;
@@ -19,8 +18,8 @@
   z-index: 10;
   display: none;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 7px;
+  right: 10px;
   font-size: 1.2em;
 }
 .greybox .uplt,
@@ -31,31 +30,29 @@
   height: 10px;
 }
 .greybox .uplt {
-  border-left: 1px solid #999999;
-  border-top: 1px solid #999999;
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
   position: absolute;
   top: 0;
   left: 0;
 }
 .greybox .uprt {
-  display: none;
-  border-right: 1px solid #999999;
-  border-top: 1px solid #999999;
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
   position: absolute;
   top: 0;
   right: 0;
 }
 .greybox .btlt {
-  border-bottom: 1px solid #999999;
-  border-left: 1px solid #999999;
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
   position: absolute;
   bottom: 0;
   left: 0;
 }
 .greybox .btrt {
-  display: none;
-  border-bottom: 1px solid #999999;
-  border-right: 1px solid #999999;
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -156,7 +153,7 @@
   bottom: 0;
   right: 0;
 }
-.greybox .hist {
+.greybox .sparkhist {
   zindex: -10;
   position: absolute;
   top: 100%;
@@ -167,7 +164,7 @@
   height: 100px;
   text-align: right;
 }
-.greybox .hist div.bars-horizontal {
+.greybox .sparkhist div.bars-horizontal {
   overflow: hidden;
   font: 8px sans-serif;
   background-color: steelblue;
@@ -178,11 +175,11 @@
   color: white;
   line-height: 1.5em;
 }
-.greybox .hist rect {
+.greybox .sparkhist rect {
   stroke: white;
   fill: rgba(0, 200, 255, 0.5);
 }
-.greybox .hist rect.brush {
+.greybox .sparkhist rect.brush {
   fill: white;
   stroke: rgba(0, 200, 255, 0.5);
 }
@@ -191,17 +188,3 @@
   padding: 4px;
   width: 20px;
 }
-/*
-    .converage-container, .entropy-container {
-	   display:inline-block;
-	   position:relative;
-       width: @minichart-width;
-       height: 1em;
-       div {
-          position:absolute; left:0px; top:0px; bottom:0px; right:0px;
-       }
-       border:1px solid #AAA;
-   }
-   .coverage-container {  display:none; div { background-color:#AEE; }   }
-   .entropy-container {  display:none; div { background-color:#EAA; }  }
-   */
