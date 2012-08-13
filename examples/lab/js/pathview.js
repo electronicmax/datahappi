@@ -9,6 +9,7 @@ define(
 		 * @path:		The path this view displays/modifies. */
 		var PathView = Backbone.View.extend({
 			template:_.template($('#pathview-template').html()),
+			tagName:'li',
 			className:'path',
 			initialize:function() {
 				var this_ = this;
@@ -34,7 +35,7 @@ define(
 				}));
 
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {
-					return step_model.id;
+					return step_model.get("property");
 				});
 
 				this.$el.html(this.template({

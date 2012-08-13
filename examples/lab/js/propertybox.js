@@ -17,8 +17,16 @@ define(
 				var this_ = this;
 				box.BoxView.prototype.render.apply(this, arguments);
 
-				var html =	"<div class='propitems'></div>";
+				var html =	"<ul id='sortable' class='propitems'></div>";
+				
 				this.$el.html(html);
+
+				$( "#sortable" ).sortable({
+					change:function() {
+						console.log("Pathviews Shuffled");
+					}
+				});
+				$( "#sortable" ).disableSelection();
 
 				this.views_collection.map(function(path_view) {
 					this_.$el.find('.propitems').append(path_view.render().el);
