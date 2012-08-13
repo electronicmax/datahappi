@@ -1,4 +1,5 @@
 .greybox {
+  z-index: 5;
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
@@ -92,19 +93,20 @@
   color: black;
 }
 .greybox .properties {
-  background-color: #eef;
+  z-index: 3;
+  background-color: rgba(240, 240, 240, 0.8);
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-left: none;
+  padding: 0px 2px 0px 7px;
+  border-radius: 5px;
   position: absolute;
-  left: 100%;
-  top: 0px;
-  width: 200px;
+  left: 98%;
+  top: 14px;
+  width: 150px;
   height: 100px;
   overflow: none;
-  /*height:@propsheight;*/
-
-  border-top: none;
-  border-bottom: none;
-  border-right: none;
-  padding: 4px;
   vertical-align: top;
 }
 .greybox .properties .propitems {
@@ -113,41 +115,37 @@
   width: 100%;
   list-style-type: none !important;
 }
-.greybox .properties .propitems li {
-  margin: 0px !important;
+.greybox .properties .propitems li.path {
+  margin: 0px 0px 5px 0px !important;
   padding: 0px !important;
-}
-.greybox .properties .path {
-  position: relative;
   background-color: #fff;
   padding: 0px;
-  margin: 0px;
-  font-size: 0.9em;
+  position: relative;
 }
-.greybox .properties .path * {
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 2px;
+  font-size: 7pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
   margin: 0px;
   padding: 0px;
   border: none;
 }
-.greybox .properties .path .delete {
+.greybox .properties .propitems li.path .steps .delete {
   z-index: 10;
+  margin: 0px;
+  padding: 0px;
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 2px;
+  right: 1px;
 }
-.greybox .properties .path select {
-  width: 100px !important;
-  border: none !important;
+.greybox .properties .propitems li.path .steps select {
+  border: 1px solid #eee !important;
   font-size: 7pt !important;
-}
-.greybox .properties .coverage-small {
-  font-size: 10pt;
-}
-.greybox .properties .coverage-medium {
-  font-size: 12pt;
-}
-.greybox .properties .coverage-large {
-  font-size: 14pt;
+  line-height: 12px !important;
+  height: 16px !important;
+  width: 80px !important;
 }
 .greybox .sparkhist {
   zindex: -10;

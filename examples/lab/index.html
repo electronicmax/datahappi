@@ -3,7 +3,8 @@
 	<head>
 	  <!-- bootstrap basics -->
 	  <link href="../../css/bootstrap.css" rel="stylesheet">
-	  <link href="../../css/jquery-ui.css" rel="stylesheet">	  
+	  <link href="../../css/jquery-ui.css" rel="stylesheet">
+	  <!--<link href="../../lib/chosen/chosen.css" rel="stylesheet">	  -->
 	  <!-- specific to this example --> 
 	  <link href="css/lab.css" rel="stylesheet">
 	  <link href="css/box.css" rel="stylesheet">
@@ -47,10 +48,10 @@
 		}
 		var step_trace = function(step_list) {
 			return step_list.map(function(step) {
-				return step+" -> ";
+				return step+" &gt; ";
 			}).join('');
 		}
-		print(step_trace(previous_steps)+"<select class='next-step-select'><option value=''>Extend path...</option>"+step_options(next_steps)+"</select><div class='delete icon-cancel'></div>");
+		print("<div class='steps'>"+step_trace(previous_steps)+"<select class='next-step-select'><option value=''>Extend path...</option>"+step_options(next_steps)+"</select><div class='delete icon-cancel'></div></div>");
 	%>
 	</script>
 	<script type="text/template" id="thing-listitem-template">
@@ -116,6 +117,7 @@
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.xml.js"></script>
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.turtle.js"></script>  
 	<script type="text/javascript" src="../../lib/rdfquery/jquery.rdf.json.js"></script>
+	<!--<script type="text/javascript" src="../../lib/chosen/chosen.jquery.js"></script>-->
 	
 	<!-- graphing support --> 
 	<script type="text/javascript" src="../../lib/d3.v2.min.js"></script>
