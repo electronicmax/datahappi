@@ -138,19 +138,18 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
+			console.log("AAAAAAAAAAAAAAAAAAAAADDDD ", path_array);
 			var this_ = this;
 			
 			// If path_array is a single element, turn it into a single-element array
 			if (!_.isArray(path_array)) {
 				path_array = [path_array];
-			}
-			
+			}			
 			_(path_array).each(function(path, i) {
 				if (_.isUndefined(path.get('path_priority'))) {
 					path.set({path_priority:this_.length + i});
 				}
-			});
-			
+			});			
 			path_array.map(function(path) {
 				path.on('change', function() { this_.trigger('pathchange', path_array); });
 			});
