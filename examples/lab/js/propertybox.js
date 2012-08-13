@@ -22,8 +22,15 @@ define(
 				html += 	"<div class='btlt'></div>";
 				html +=		"<div class='btrt'></div>";
 
-				html += "<ul class='propitems'></ul>";
+				html += "<ul id='sortable' class='propitems'></ul>";
 				this.$el.html(html);
+
+				$( "#sortable" ).sortable({
+					change:function() {
+						console.log("Pathviews Shuffled");
+					}
+				});
+				$( "#sortable" ).disableSelection();
 
 				this.views_collection.map(function(path_view) {
 					this_.$el.find('ul').append(path_view.render().el);

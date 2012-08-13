@@ -28,7 +28,7 @@ define(
 				}));
 
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {
-					return step_model.id;
+					return step_model.get("property");
 				});
 
 				this.$el.html(this.template({
