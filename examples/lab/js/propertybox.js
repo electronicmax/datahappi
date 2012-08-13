@@ -21,8 +21,8 @@ define(
 				this.$el.html("").append(ul);
 
 				ul.sortable({
-					change:function() {
-						console.log("Pathviews Shuffled");
+					stop:function() {
+						console.log(arguments);
 					}
 				}).disableSelection();
 
