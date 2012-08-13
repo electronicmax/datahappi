@@ -98,16 +98,24 @@
 	  border-top:none; border-bottom:none; border-right:none;
 	  padding:4px;	
       vertical-align:top;
+	  // paths
 	  .path {
+		  position:relative;
 		  background-color:#fff;
 		  padding:0px; margin:0px;
 		  font-size:0.9em;
 		  * {
 			  margin:0px; padding:0px; border:none;
-		  }
+		  }		  
+		  .delete {
+			  z-index:10;
+			  position:absolute;
+			  top:5px; right:10px;
+		  }		  
 		  select {
 			  width:100px !important;
 			  border:none !important;
+			  font-size:7pt !important;
 		  }
 	  }	  
       .coverage-small { font-size:10pt; }

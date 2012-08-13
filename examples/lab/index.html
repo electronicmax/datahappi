@@ -50,7 +50,7 @@
 				return step+" -> ";
 			}).join('');
 		}
-		print(step_trace(previous_steps)+"<select class='next-step-select'><option value=''>Extend path...</option>"+step_options(next_steps)+"</select><button class='remove-path-button'>X</button>");
+		print(step_trace(previous_steps)+"<select class='next-step-select'><option value=''>Extend path...</option>"+step_options(next_steps)+"</select><div class='delete icon-cancel'></div>");
 	%>
 	</script>
 	<script type="text/template" id="thing-listitem-template">

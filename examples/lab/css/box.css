@@ -118,6 +118,7 @@
   padding: 0px !important;
 }
 .greybox .properties .path {
+  position: relative;
   background-color: #fff;
   padding: 0px;
   margin: 0px;
@@ -128,9 +129,16 @@
   padding: 0px;
   border: none;
 }
+.greybox .properties .path .delete {
+  z-index: 10;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
 .greybox .properties .path select {
   width: 100px !important;
   border: none !important;
+  font-size: 7pt !important;
 }
 .greybox .properties .coverage-small {
   font-size: 10pt;

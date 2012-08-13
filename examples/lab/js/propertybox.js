@@ -30,9 +30,10 @@ define(
 					this_.$el.find('.propitems').append(path_view.render().el);
 				});
 
-				var new_path_button = $("<button>+</button>");
-				new_path_button.click(function(){ this_.add_path().render(); });
-				this.$el.append(new_path_button);
+				var new_path_button = $("<div class='icon-list-add'></div>")
+					.click(function(){ this_.add_path().render(); })
+					.appendTo(this.$el);
+			
 				return this;
 			},
 			add_path:function(path) {
