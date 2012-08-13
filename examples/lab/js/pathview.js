@@ -25,7 +25,8 @@ define(
 			},
 			render:function() {
 				var this_ = this;
-				var next_steps = _.uniq(_.flatten(this.pathables.try_path(this.path).map(function(pathable_array) {
+				var path_values = this.pathables.try_path(this.path) || [];
+				var next_steps = _.uniq(_.flatten(path_values.map(function(pathable_array) {
 					var next_object = _.last(pathable_array)[0];
 					return next_object instanceof pathables.Pathable ? next_object.entailedKeys() : undefined;
 				})).filter(function(pathable) {

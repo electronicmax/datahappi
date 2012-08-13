@@ -105,10 +105,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				}).filter(defined));
 				values.push(cur_val);
 			}
-
-			console.log("TRY PATH ", this.id, steps.models.map(function(x) { return x.get('property'); }),
-						cur_val.length > 0 && values.length == steps.length + 1 ? 'win' : 'fail');
-			
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
 		try_step:function(step,from_root) {
@@ -142,7 +138,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
-			console.log("AAAAAAAAAAAAAAAAAAAAADDDD ", path_array);
 			var this_ = this;
 			
 			// If path_array is a single element, turn it into a single-element array
@@ -191,7 +186,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			});
 			this.paths.bind("all", function(eventType, new_model) {
 				// recompute for all
-				console.log('paths event ', eventType, new_model);
 				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
 			});			
 		},
@@ -200,12 +194,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			// in order of this.paths - which is essentially the priority
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
 			var paths = this.paths.models;
-			console.log('~~~~~~~ paths length ', paths.length);
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
 				var result = m.try_path(path);
 				if (defined(result)) {
-					console.log('>> setting path ', path.get('steps').length);
 					return m.set_path(path);
 				} 
 			}
@@ -214,11 +206,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		try_path:function(path) {
 			var result = this.map(function(pathable) {
-				console.log('trying path ', pathable.id, ' -> ', path.get('steps').map(function(x) { return x.id; }), pathable.attributes, pathable.entailed);
-				var result = pathable.try_path(path);
-				return result;
+				return pathable.try_path(path);
 			}).filter(defined);
-			if (result.length > 0) { return result; }
+			if (result.length > 0) { return result } 
 		},
 		// @path : path to add
 		// @position: optional - will insert at position if specified, append otherwise
