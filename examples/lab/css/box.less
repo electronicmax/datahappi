@@ -1,16 +1,16 @@
 @boxminwidth : 240px;
-@boxwidth : 450px;
+@boxwidth : 360px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
 
-.box(@bordercolor: #EEEEEE) {
+.box(@bordercolor: #4af) {
   position:absolute;
   top:10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  max-width:@boxwidth;
+  width:@boxwidth;
   min-width:@boxminwidth;
-  border-right:1px solid @propertybordercolor;      
+  // border-right:1px solid @propertybordercolor;      
   
   &.over {
      padding:15px;
@@ -34,7 +34,6 @@
       top:0; left:0;
   }
   .uprt {
-	  display:none;
       border-right:1px solid @bordercolor;
       border-top:1px solid @bordercolor;
       position:absolute;
@@ -47,7 +46,6 @@
       bottom:0; left:0;
   } 
   .btrt {
-	  display:none;
       border-bottom:1px solid @bordercolor;
       border-right:1px solid @bordercolor;
       position:absolute;
@@ -166,7 +164,7 @@
 }
 
 .greybox {
-   .box(#999999);
+   .box;
 }        
 .simple {
     font-size:8pt;

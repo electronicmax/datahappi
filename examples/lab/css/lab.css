@@ -186,11 +186,12 @@ body .pathable-view .name {
   padding: 0px 0px 0px 3px;
 }
 body .pathable-view .delete {
-  z-index: 1000;
   position: absolute;
+  top: 0px;
   right: 0px;
   margin: 0px;
   padding: 0px;
+  z-index: 1000;
   padding: none;
   font-size: 1.0em;
   display: block;
