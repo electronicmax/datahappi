@@ -38,8 +38,6 @@ define(
 				var this_ = this;
 				this.$el.html("");				
 				box.BoxView.prototype.render.apply(this, arguments);
-
-
 				// create propitems class
 				$("<ul class='propitems'></div>")
 					.appendTo(this.$el)

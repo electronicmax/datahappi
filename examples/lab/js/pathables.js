@@ -92,6 +92,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		reset_path:function() {
 			this.path = new Path();
 			this.values = [[this]]; // start at path empty/
+			this.trigger('dereference');			
 		},
 		try_path:function(path, from_root) {
 			// sets an entire path from root -> terminus, and returns the terminal
@@ -99,12 +100,14 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var cur_val = [this], values = [[this]], steps = path.get("steps");
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
-				console.log(' cur val > ', cur_val, ' > step > ', step);
 				cur_val = utils.flatten(cur_val.map(function(v) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
 			}
+
+			console.log("TRY PATH ", steps.map(function(x) { return x.valueOf(); }).join(',') + " cur_val:", cur_val.length, " values:", values.length, " steps:", steps.length);
+			
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
 		try_step:function(step,from_root) {
@@ -151,7 +154,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				}
 			});			
 			path_array.map(function(path) {
-				path.on('change', function() { this_.trigger('pathchange', path_array); });
+				path.on('change', function() { this_.trigger('pathchange', path); });
 			});
 		},
 		insertAt:function(p,i) {
@@ -185,8 +188,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				// GO THROUGH Paths previously applied and apply them to this new model
 				this_._dereference_model(new_model);
 			});
-			this.paths.bind("add remove pathchange", function(new_model) {
+			this.paths.bind("all", function(eventType, new_model) {
 				// recompute for all
+				console.log('paths event ', eventType, new_model);
 				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
 			});			
 		},
@@ -195,6 +199,11 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			// in order of this.paths - which is essentially the priority
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
 			var paths = this.paths.models;
+			console.log('~~~~~~~ paths length ', paths.length);
+			if (paths.length === 0) {
+				console.log('resetting path of ', m);
+				return m.reset_path();
+			}
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
 				var result = m.try_path(path);
