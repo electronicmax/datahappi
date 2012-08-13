@@ -2,14 +2,14 @@
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  width: 360px;
+  width: 320px;
   min-width: 240px;
-  padding: 12px;
+  padding: 12px 20px 12px 12px;
   /* properties */
 
 }
 .greybox.over {
-  padding: 15px;
+  padding: 20px;
 }
 .greybox:hover .box-delete {
   display: block;
@@ -18,8 +18,8 @@
   z-index: 10;
   display: none;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 7px;
+  right: 10px;
   font-size: 1.2em;
 }
 .greybox .uplt,

@@ -1,5 +1,5 @@
 @boxminwidth : 240px;
-@boxwidth : 360px;
+@boxwidth : 320px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
@@ -11,22 +11,22 @@
   width:@boxwidth;
   min-width:@boxminwidth;
   // border-right:1px solid @propertybordercolor;      
+
+  padding:12px 20px 12px 12px;
+  &.over { padding:20px;  }
   
-  &.over {
-     padding:15px;
-  }
   &:hover .box-delete { display:block; }
   .box-delete {
 	  z-index:10;
       display:none;
       position:absolute;
-      top:5px; right:5px;
+      top:7px; right:10px;
 	  font-size:1.2em;
   }       
   .uplt, .uprt, .btlt, .btrt {
 	  width:10px; height:10px;
   }
-  padding:12px;
+
   .uplt {
       border-left:1px solid @bordercolor;
       border-top:1px solid @bordercolor;
