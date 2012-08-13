@@ -92,6 +92,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		reset_path:function() {
 			this.path = new Path();
 			this.values = [[this]]; // start at path empty/
+			this.trigger('dereference');			
 		},
 		try_path:function(path, from_root) {
 			// sets an entire path from root -> terminus, and returns the terminal
@@ -99,7 +100,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var cur_val = [this], values = [[this]], steps = path.get("steps");
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
-				console.log(' cur val > ', cur_val, ' > step > ', step);
 				cur_val = utils.flatten(cur_val.map(function(v) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
@@ -138,7 +138,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
-			console.log("AAAAAAAAAAAAAAAAAAAAADDDD ", path_array);
 			var this_ = this;
 			
 			// If path_array is a single element, turn it into a single-element array
@@ -151,7 +150,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				}
 			});			
 			path_array.map(function(path) {
-				path.on('change', function() { this_.trigger('pathchange', path_array); });
+				path.on('change', function() { this_.trigger('pathchange', path); });
 			});
 		},
 		insertAt:function(p,i) {
@@ -185,7 +184,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				// GO THROUGH Paths previously applied and apply them to this new model
 				this_._dereference_model(new_model);
 			});
-			this.paths.bind("add remove pathchange", function(new_model) {
+			this.paths.bind("all", function(eventType, new_model) {
 				// recompute for all
 				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
 			});			
@@ -199,18 +198,17 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				var path = paths[p_i];
 				var result = m.try_path(path);
 				if (defined(result)) {
-					console.log('>> setting path ', path.get('steps').length);
 					return m.set_path(path);
 				} 
 			}
+			// no paths met us, let's just reset 
+			return m.reset_path();			
 		},
 		try_path:function(path) {
 			var result = this.map(function(pathable) {
-				console.log('trying path ', pathable.id, ' -> ', path.get('steps').map(function(x) { return x.id; }), pathable.attributes, pathable.entailed);
-				var result = pathable.try_path(path);
-				return result;
+				return pathable.try_path(path);
 			}).filter(defined);
-			if (result.length > 0) { return result; }
+			if (result.length > 0) { return result } 
 		},
 		// @path : path to add
 		// @position: optional - will insert at position if specified, append otherwise

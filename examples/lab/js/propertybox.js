@@ -38,17 +38,13 @@ define(
 				var this_ = this;
 				this.$el.html("");				
 				box.BoxView.prototype.render.apply(this, arguments);
-
-
 				// create propitems class
 				$("<ul class='propitems'></div>")
 					.appendTo(this.$el)
 					.sortable({
-						change:function() {
-							console.log("Pathviews Shuffled");
-						},
-						stop:function() {
-							console.log(arguments);
+						stop:function(evt,ui) {
+							var view = $(evt.toElement).data('view');
+							console.log('lets see if we have a view ', view.path.get('steps').models.map(function(x) { return x.get('property'); }));
 						}
 					}).disableSelection();
 				
