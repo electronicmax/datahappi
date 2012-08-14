@@ -49,7 +49,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var steps = new Steps(steplist); 
 			this.set({"steps": steps});
 			this_._update_rid();
-			// steps.on("add remove", function() { this_._update_id(); this_.trigger('change'); });
+			steps.on("add remove", function() {
+				// this_._update_id();
+				this_.trigger('change');
+			});
 		},
 		clone:function(path) {
 			return new Path(this.get("steps").models);

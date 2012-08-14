@@ -48,16 +48,18 @@ define(
 
 				this.$el.find(".delete").click(function() { this_.path_remove(); });
 
+				/* 
 				this.$el.on("reorder", function(e, index) {
 					console.log("Before reorder: ", this_.pathables.paths.map(function(path) {
 						return "path: " + path.get('steps').map(function(x) { return x.get('property'); }) + " pri : " +  path.get("path_priority"); 
 					}));
-					this_.pathables.paths.remove(this_.path);
-					this_.pathables.paths.insertAt(this_.path, index);
+					// this_.pathables.paths.remove(this_.path);
+					// this_.pathables.paths.insertAt(this_.path, index);
 					console.log("After ", this_.pathables.paths.map(function(path) {
 						return "path:" + path.get('steps').map(function(x) { return x.get('property'); }) + " pri : " +  path.get("path_priority"); 
 					}));
 				});
+				*/
 
 				// put a pointer from the DOM back to us so that the shuffler
 				// can find us out

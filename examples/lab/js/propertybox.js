@@ -40,9 +40,17 @@ define(
 					.appendTo(this.$el)
 					.sortable({
 						stop:function(evt,ui) {
-							ui.item.trigger('reorder', ui.item.index());
-							// var view = $(evt.toElement).data('view');
-							// console.log('lets see if we have a view ', view.path.get('steps').models.map(function(x) { return x.get('property'); }));
+							this_.$el.find('.path').each(function(x) {
+								var view = $(this).data('view');
+								view.path.set({path_priority:x});
+							});
+							// DEBUGGING path priorities
+							// this_.$el.find('.path').each(function() {
+							// 	console.log(' >> ',
+							// 				$(this).data('view').path.get('steps').map(function(x) { return x.get('property'); }).join(','), ' - ',
+							// 				$(this).data('view').path.get('path_priority')
+							// 			   );
+							// });							
 						}
 					}).disableSelection();
 				
