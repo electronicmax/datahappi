@@ -32,7 +32,7 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			// update
 			d3.select(this.el).selectAll('rect')
 				.data(data, function(d) { return d[0]; })			
-				.attr('y', function(d,i) { console.log('yscale ', yscale(d[1])); return height - yscale(d[1]); })
+				.attr('y', function(d,i) { return height - yscale(d[1]); })
 				.attr('x', function(d,i) { return i*barwidth; })
 				.attr('height', function(d) { return yscale(d[1]); })
 				.attr('width', barwidth)
