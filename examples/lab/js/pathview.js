@@ -53,7 +53,7 @@ define(
 						return "path: " + path.get('steps').map(function(x) { return x.get('property'); }) + " pri : " +  path.get("path_priority"); 
 					}));
 					this_.pathables.paths.remove(this_.path);
-					this_.pathables.paths.insertAt(this_.path);
+					this_.pathables.paths.insertAt(this_.path, index);
 					console.log("After ", this_.pathables.paths.map(function(path) {
 						return "path:" + path.get('steps').map(function(x) { return x.get('property'); }) + " pri : " +  path.get("path_priority"); 
 					}));

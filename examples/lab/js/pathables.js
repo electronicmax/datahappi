@@ -48,7 +48,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			_(steplist).each(function(x, index) { x.set({position:index}); });			
 			var steps = new Steps(steplist); 
 			this.set({"steps": steps});
-			steps.on("add remove", function() { this_._update_id(); this_.trigger('change'); });
+			this_._update_rid();
+			// steps.on("add remove", function() { this_._update_id(); this_.trigger('change'); });
 		},
 		clone:function(path) {
 			return new Path(this.get("steps").models);
@@ -79,7 +80,11 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var new_id = this.get("steps").map(function(x) { return x.id; }).join(',');
 			this.set({_id: new_id });
 			return this;
-		}
+		},
+		_update_rid:function() {
+			this.set({_id: (new Date()).valueOf() });
+			return this;
+		}		
 	});
 	
 	// Pathable is our main Model class that can be the origin (root)
@@ -154,9 +159,16 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			});
 		},
 		insertAt:function(p,i) {
-			this.models.slice(i).map(function(path) {
-				path.set({ path_priority : path.get("path_priority") + 1 });
+			console.log("insertAt ", p.get('steps').map(function(s) { return s.get('property'); }), i);
+			if (_(i).isUndefined()) { i = this.models.length; }
+			_(this.models).each(function(path, j) {
+				if (j < i) {
+					path.set({ path_priority : j });
+				} else {
+					path.set({ path_priority : j + 1 });
+				}
 			});
+			console.log(' finally, setting >> ', p.id, ' - ', p.get('steps').map(function(s) { return s.get('property'); }), ' -> ', i);			
 			p.set({path_priority:i});
 			this.add(p);
 			return p;
