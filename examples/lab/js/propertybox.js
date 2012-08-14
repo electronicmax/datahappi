@@ -36,7 +36,7 @@ define(
 				this.$el.html("");				
 				box.BoxView.prototype.render.apply(this, arguments);
 				// create propitems class
-				$("<ul class='propitems'></div>")
+				$("<ul class='propitems'></ul>")
 					.appendTo(this.$el)
 					.sortable({
 						stop:function(evt,ui) {
