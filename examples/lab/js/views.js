@@ -9,7 +9,6 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 			var this_ = this;
 			if (this.options.model) { this.options.model.off(null, null, this);	}
 			m.on('all',function(eventName, x) {
-				console.log(' CommonView >> got ', eventName, x);
 				this_.render();
 				this_.trigger(eventName, x);
 			}, this);
