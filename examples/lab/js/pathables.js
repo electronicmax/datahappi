@@ -201,7 +201,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			});
 			this.paths.bind("all", function(eventType, new_model) {
 				// recompute for all
-				this_.map(function(pathable) { return this_._dereference_model(pathable); });				
+				console.log('PATHS triggering event type ', eventType);
+				this_.map(function(pathable) {
+					return this_._dereference_model(pathable);
+				});
 			});			
 		},
 		_dereference_model:function(m) {
@@ -211,8 +214,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var paths = this.paths.models;
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
+				console.log('trying path for ', m.id, ' - ', path.get('path_priority'), ' --- ', path.get('steps').map(function(x) { return x.get('property'); }));
 				var result = m.try_path(path);
 				if (defined(result)) {
+					console.log('SETTING path for ', m.id, ' - ', path.get('steps').map(function(x) { return x.get('property'); }));
 					return m.set_path(path);
 				} 
 			}

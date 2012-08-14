@@ -42,15 +42,11 @@ define(
 						stop:function(evt,ui) {
 							this_.$el.find('.path').each(function(x) {
 								var view = $(this).data('view');
-								view.path.set({path_priority:x});
+								view.path.set({path_priority:x}, {silent:true});
 							});
-							// DEBUGGING path priorities
-							// this_.$el.find('.path').each(function() {
-							// 	console.log(' >> ',
-							// 				$(this).data('view').path.get('steps').map(function(x) { return x.get('property'); }).join(','), ' - ',
-							// 				$(this).data('view').path.get('path_priority')
-							// 			   );
-							// });							
+							// things actually don't sort on property change :'( 
+							this_.options.pathables.paths.sort();
+							this_.options.pathables.paths.trigger('change');							
 						}
 					}).disableSelection();
 				
