@@ -40,8 +40,9 @@ define(
 					.appendTo(this.$el)
 					.sortable({
 						stop:function(evt,ui) {
-							var view = $(evt.toElement).data('view');
-							console.log('lets see if we have a view ', view.path.get('steps').models.map(function(x) { return x.get('property'); }));
+							ui.item.trigger('reorder', ui.item.index());
+							// var view = $(evt.toElement).data('view');
+							// console.log('lets see if we have a view ', view.path.get('steps').models.map(function(x) { return x.get('property'); }));
 						}
 					}).disableSelection();
 				
@@ -59,9 +60,14 @@ define(
 			add_path:function(path) {
 				/* Adds a new path and UI element to add steps to the path.
 				 * @path: Optional; the path added to the pathables set and the UI, by default has no existing steps. */
-				var this_ = this;
+				console.log("Priority before add: ",this.options.pathables.paths.map(function(path) {
+					return path.get_steps();
+				}));
 				path = path || new pathables.Path();
-				this.options.pathables.add_path(path);				
+				this.options.pathables.add_path(path);
+				console.log("Priority after add: ",this.options.pathables.paths.map(function(path) {
+					return path.get_steps();
+				}));
 				return this;
 			},
 			get_paths:function() {
