@@ -52,7 +52,7 @@ define(
 					console.log("Before reorder: ", this_.pathables.paths.map(function(path) {
 						return path.get_steps();
 					}));
-					this_.pathables.paths.remove(this_.path);
+					this_.pathables.paths.remove(this_.path, {silent:true});
 					this_.pathables.paths.insertAt(this_.path);
 					console.log("After reorder: ", this_.pathables.paths.map(function(path) {
 						return path.get_steps();
