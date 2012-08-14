@@ -5,6 +5,7 @@
 @propertybordercolor: #aef;
 
 .box(@bordercolor: #4af) {
+  z-index:5;
   position:absolute;
   top:10px;
   -webkit-transition: padding 0.5s ease-in-out;
@@ -80,47 +81,59 @@
   }
   /* properties */
   .properties {
-	  .propitems {
-		  margin:0px;
-		  padding:0px;
-		  width: 100%;
-		  list-style-type:none !important;
-		  li { margin:0px !important; padding:0px !important; }
-	  }
-	  background-color:#eef;
+	  z-index:3;
+	  background-color:#fff; 
+	  border-top:1px solid #eee;
+	  border-bottom:1px solid #eee;
+	  border-right:1px solid #eee;
+	  border-left:none;
+	  padding:0px 2px 0px 7px;
+	  border-radius:5px;
       position:absolute;
-      left:100%;
-	  top:0px;
-      width:200px;
-	  height:100px;
-	  overflow:none;
-	  /*height:@propsheight;*/
-	  border-top:none; border-bottom:none; border-right:none;
-	  padding:4px;	
+      left:98%;
+	  top:14px;
+      bottom:14px; 
+      width:200px; 
+	  overflow:auto;
       vertical-align:top;
-	  // paths
-	  .path {
-		  position:relative;
-		  background-color:#fff;
-		  padding:0px; margin:0px;
-		  font-size:0.9em;
-		  * {
-			  margin:0px; padding:0px; border:none;
-		  }		  
-		  .delete {
-			  z-index:10;
-			  position:absolute;
-			  top:5px; right:10px;
-		  }		  
-		  select {
-			  width:100px !important;
-			  border:none !important;
-			  font-size:7pt !important;
+	  .propitems {
+		  margin:0px; padding:0px;  width: 100%;
+		  list-style-type:none !important;
+		  // paths
+		  li.path {
+			  border-bottom:1px solid #eee;
+			  margin:3px 0px 3px 0px !important;
+			  padding:3px 3px 3px 3px !important;
+			  background-color:#fff;
+			  padding:0px; 
+			  position:relative;
+			  .steps {
+				  padding:0px 0px 1px 15px;
+				  font-size:9pt !important;
+				  vertical-align:middle !important;
+				  * {
+					  margin:0px; padding:0px; border:none;
+				  }		  
+				  .delete {
+					  z-index:10; margin:0px; padding:0px;
+					  position:absolute;
+					  top:5px; left:1px;
+				  }		  
+				  select {
+					  border:1px solid #eee !important;
+					  font-size:7pt !important;			  
+					  line-height:12px !important;
+					  height:16px !important;
+					  width:80px !important;
+				  }
+			  }
 		  }
-	  }	  
-      .coverage-small { font-size:10pt; }
-      .coverage-medium { font-size:12pt; }
-      .coverage-large { font-size:14pt; }
+	  }
+	  .new-path-btn {
+		  position:absolute;
+		  bottom:5px;
+		  left: 5px;
+	  }
   }
   // mini histogram sparkline
   .sparkhist { 

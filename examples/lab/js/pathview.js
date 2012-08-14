@@ -51,7 +51,6 @@ define(
 				// put a pointer from the DOM back to us so that the shuffler
 				// can find us out
 				this.$el.data("view", this);
-
 				return this;
 			},
 			path_extend:function() {

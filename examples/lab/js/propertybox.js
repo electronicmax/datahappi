@@ -15,7 +15,6 @@ define(
 				var this_ = this;
 				this.options.pathables.paths
 					.on('add', function(path) {
-						console.log("propertybox.pathables.path add >> ", path);
 						var view = new pathview.PathView({
 							pathables:this_.options.pathables,
 							path:path
@@ -25,10 +24,8 @@ define(
 						this_.render();
 						// we don't need to append because render will append everything this_.$el.append(view.render().el);
 					}).on('remove', function(path) {
-						console.log("propertybox.pathables.path remove path >> ", path);
 						// TODO: find corresponding path in the view for this
 						var view = this_.views_collection.filter(function(x) { return x.options.path == path; })[0];
-						console.log("found apporpriate view >> ", view);
 						view.remove();						
 						this_.views_collection.remove(view);
 						this_.render();
@@ -53,7 +50,7 @@ define(
 						.append(path_view.render().el);
 				});
 
-				$("<div class='icon-list-add'></div>")
+				$("<div class='new-path-btn icon-list-add'></div>")
 					.click(function(){ this_.add_path().render(); })
 					.appendTo(this.$el);
 				
