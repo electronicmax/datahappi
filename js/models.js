@@ -178,7 +178,28 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 		},
 		isSameAs:function(m) {
 			return this.sameas.indexOf(m) >= 0;
-		}		
+		},
+		get_label:function() {
+			// is model
+			var m = this.toJSON();
+			var lastpath = function(x) {
+				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
+				return x.slice(x.lastIndexOf('/')+1);
+			};
+			var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
+			if (label && _(label).isString() && m._id) {
+				label = label;          
+			} else if (label && _(label).isArray() && m._id) {
+				label = label[0];
+			} else if (_(label).isUndefined() && m._id) {
+				label = lastpath(m._id);
+			} else if (_(label).isUndefined() && _(m).isObject()) {
+				label = _(m).map(function(v,k){ return k+":"+v.valueOf().toString(); }).join(',');
+			} else {
+				label = m.valueOf().toString();
+			}
+			return label;			
+		}
 	});
 	Maxel.prototype.g = Maxel.prototype.get;
 	Maxel.prototype.s = Maxel.prototype.set;

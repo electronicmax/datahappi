@@ -13,6 +13,11 @@ define([],function() {
 		},
 		indexOf_us_zipcode:function(s) {
 			// TODO::
-		}				
+		},
+		to_numeric:function(v) {
+			if (_(v).isNumeric()) { return v ; }
+			if (typeof(v) == 'string') { return parseFloat(v, 10); }
+			return undefined; // throw new Error("Could not convert ", v);
+		}
 	};
 });

@@ -1,4 +1,4 @@
-define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pathableview.html'], function(pathables,utils, pathableview_templ) {
+define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pathableview.html'], function(models,pathables,utils, pathableview_templ) {
 	var defined = utils.DEFINED;
 
 	var CommonView = Backbone.View.extend({
@@ -22,31 +22,17 @@ define(['examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pat
 		},
 		_is_model:function(model_or_value) {
 			return model_or_value instanceof Backbone.Model && defined(model_or_value.id);
-		},
+		},		
 		_get_label:function(model_or_value) {
-			if (typeof(model_or_value) !== 'object') {	return model_or_value.valueOf();}
-			if ( _(model_or_value).isDate() ) { return model_or_value.toString(); }
-			if (typeof(model_or_value) == 'object' && !this._is_model(model_or_value) ) {return 'some object';  }
-			
-			// is model
-			var m = model_or_value.toJSON();
-			var lastpath = function(x) {
-				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
-				return x.slice(x.lastIndexOf('/')+1);
-			};
-			var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
-			if (label && _(label).isString() && m._id) {
-				label = label + " <a href='"+m._id+"'>src</a>";          
-			} else if (label && _(label).isArray() && m._id) {
-				label = label[0] + " <a href='"+m._id+"'>src</a>";       
-			} else if (_(label).isUndefined() && m._id) {
-				label = lastpath(m._id) + " <a href='"+m._id+"'>src</a>";
-			} else if (_(label).isUndefined() && _(m).isObject()) {
-				label = _(m).map(function(v,k){ return k+":"+v.valueOf().toString(); }).join(',');
-			} else {
-				label = m.valueOf().toString();
+			var this_ = this;
+			if (model_or_value instanceof models.Maxel) { return model_or_value.get_label(); }
+			if (_(model_or_value).isArray()) {
+				return model_or_value.map(function(mv) { return this_._get_label(mv); }).join(',');
 			}
-			return label;			
+			if (typeof(model_or_value) !== 'object') {return model_or_value.valueOf();}			
+			if ( _(model_or_value).isDate() ) { return model_or_value.toString(); }
+			if (typeof(model_or_value) == 'object' && !this._is_model(model_or_value) ) { return 'some object';  }
+			throw new Error("I dont know what to do!");
 		}
 	});
 
