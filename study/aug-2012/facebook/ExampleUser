@@ -1,0 +1,61 @@
+{
+	"id": "1", 
+	"name": "Example User", 
+	"first_name": "Example", 
+	"last_name": "User", 
+	"link": "https://www.facebook.com/ExampleUser", 
+	"username": "ExampleUser", 
+	"birthday": "19/03/1979", 
+	"inspirational_people": [
+		{
+			"id": "1607015094", 
+			"name": "Linus-Torvalds"
+		}
+	], 
+	"gender": "male", 
+	"email": "Example.user@facebook.com", 
+	"timezone": 1, 
+	"locale": "en_GB", 
+	"verified": true, 
+	"updated_time": "2012-07-13T15:18:57+0000",
+	"location:{
+		"id":"108426499181164",
+		"name":"Southampton"
+	},
+	"friends": {
+		"data": [
+			{
+				"name":"Friend 1",
+				"id":"2",
+				"location:{
+					"id":"108426499181164",
+					"name":"Southampton"
+				}
+			},
+			{
+				"name":"Friend 2",
+				"id":"3",
+				"location:{
+					"id":"108426499181164",
+					"name":"Southampton"
+				}
+			},
+			{
+				"name":"Friend 3",
+				"id":"4",
+				"location:{
+					"id":"108426499181164",
+					"name":"Southampton"
+				}
+			},
+			{
+				"name":"Friend 4",
+				"id":"5",
+				"location:{
+					"id":"104074319627987",
+					"name":"Eastleigh"
+				}
+			}
+		]
+	}
+}
