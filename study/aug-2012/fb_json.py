@@ -7,6 +7,7 @@
 	managed to install with pip.
 """
 
+from cStringIO import StringIO
 import sys
 import urllib2
 import fbconsole
@@ -35,38 +36,89 @@ fbconsole.AUTH_SCOPE = [
 	"user_videos",
 	"user_website",
 	"user_work_history",
-	"email"
+	"email",
+	"read_friendlists",
+	"read_insights",
+	"read_mailbox",
+	"read_requests",
+	"read_stream",
+	"xmpp_login",
+	"ads_management",
+	"create_event",
+	"manage_friendlists",
+	"manage_notifications",
+	"user_online_presence",
+	"friends_online_presence",
+	"publish_checkins",
+	"publish_stream",
+	"rsvp_event",
+	"publish_actions",
+	"user_actions.music",
+	"user_actions.news",
+	"user_actions.video",
+	"user_games_activity"
 ]
 
-sys.stderr.write(fbconsole.authenticate())
+sys.stdout = mystdout = StringIO()
+fbconsole.authenticate()
+sys.stdout = sys.__stdout__
+
+sys.stderr.write(mystdout.getvalue())
 
 connectors = [
-	"friends",
-	"home",
+	"accounts",
+	"activities",
+	"adaccounts",
+	"albums",
+	"apprequests",
+	"books",
+	"checkins",
+	"events",
+	"family",
 	"feed",
+	"friendlists",
+	"friendrequests",
+	"friends",
+	"games",
+	"groups",
+	"home",
+	"inbox",
+	"interests",
 	"likes",
+	"links",
+	"locations",
+	"messagingfavorites",
 	"movies",
 	"music",
-	"books",
+	"mutualfriends",
 	"notes",
+	"notifications",
+	"outbox",
+	"payments",
 	"permissions",
 	"photos",
-	"albums",
-	"videos",
-	"events",
-	"groups",
-	"checkins",
-	"locations"
+	"picture",
+	"posts",
+	"scores",
+	"statuses",
+	"tagged",
+	"television",
+	"updates",
+	"videos"
 ]
 
 fb_data = fbconsole.get("/me")
 
 for connector in connectors:
+	sys.stderr.write("Loading: "+connector+"\t")
 	try:
 		connected_data = fbconsole.get("/me/"+connector)
 		fb_data[connector] = connected_data
+		sys.stderr.write("success\n")
 	except urllib2.HTTPError:
-		sys.stderr.write("HTTPError when loading: "+connector+"\n")
+		sys.stderr.write("HTTPError: Maybe permissions\n")
+	except ValueError:
+		sys.stderr.write("ValueError: Probably not decodable to JSON\n")
 
 fbconsole.logout()
 
