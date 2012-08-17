@@ -1,8 +1,9 @@
 define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
-/*
-  initial sketch of dereferencing core data structure
-  based on discussion w/ Skinna in UGLabs 24 July 2012
-*/
+	/*
+	  initial sketch of dereferencing core data structure
+	  based on discussion w/ Skinna in UGLabs 24 July 2012
+	*/
+	
 	var defined = utils.DEFINED;
 	
 	// pathsteps -- start with path step: single unit of dereference

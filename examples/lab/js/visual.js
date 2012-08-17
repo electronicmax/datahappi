@@ -1,17 +1,14 @@
 define(['js/utils'], function(utils) {
 
+	var to_raw_value = function(v) { return v.valueOf(); };
+
 	var VisualBase = Backbone.View.extend({
-		_to_raw_value : function(x) {
-			if (x instanceof Backbone.Model) { return x.id; }
-			if (x.valueOf) { return x.valueOf(); }
-			return x;
-		},
 		_find_ids_of_pathables_with_raw_value:function(raw_value) {
 			var this_ = this;
 			if (_(this.options.views).isUndefined()) { return []; }
 			return _.uniq(this.options.views.filter(function(V) {
 				var m = V.options.model;
-				return m.get_last_value().map(function(vv) { return this_._to_raw_value(vv); }).indexOf(raw_value) >= 0;
+				return m.get_last_value().map(to_raw_value).indexOf(raw_value) >= 0;
 			}).map(function(x) { return x.options.model.id; }));
 		},
 		_brush_value:function(raw_value) {
@@ -35,7 +32,7 @@ define(['js/utils'], function(utils) {
 		_get_counts:function(views){ 
 			var pathables = views.map(function(x) { return x.options.model ; });
 			var values = utils.flatten(pathables.map(function(p) { return p.get_last_value(); }));
-			var raws = values.map(this._to_raw_value);
+			var raws = values.map(to_raw_value);
 			var uniqs = _.uniq(raws);			
 			return uniqs.sort().map(function(val) {
 				return [val, raws.filter(function(raw) { return val == raw; }).length];
