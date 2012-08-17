@@ -176,6 +176,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 			}
 			return this;
 		},
+		valueOf:function() { return this.id; },
 		isSameAs:function(m) {
 			return this.sameas.indexOf(m) >= 0;
 		},
