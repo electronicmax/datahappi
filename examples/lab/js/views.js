@@ -69,7 +69,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 				// standalone
 				$values.html('');
 			} else {
-				var val_template = $template.find('#value').children();
+				var val_template = $($template.find('#value').children()[0]);
 				var last_values = m.get_last_value();				
 				_(last_values).each(function(v, i) {
 					var child =	$values.children()[i];
@@ -78,7 +78,14 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 					}
 					$(child).html(this_._get_label(v));
 					$(child).attr('data-val', this_._get_label(v));
-					$(child).data('val', v);								
+					$(child).data('val', v);
+					if (v instanceof pathables.Pathable) {
+						// then it can be accepted by other instanceboxes
+						$(child).addClass('dereferenced-model');
+					} else {
+						$(child).removeClass('dereferenced-model');
+					}
+					$(child).draggable({revert:"invalid", helper:"clone", appendTo:'body'});
 				});
 				// exit selection
 				$values.children().slice(last_values.length).map(function(v) { $(this).remove(); });

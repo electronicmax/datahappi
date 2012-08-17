@@ -35,7 +35,7 @@ define(
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
-					accept:'.item',
+					accept:'.item,.dereferenced-model',
 					tolerance:"touch",
 					over:function(event, ui) {
 						$(this).addClass("over");
@@ -45,7 +45,15 @@ define(
 					},
 					drop: function( event, ui ) {
 						$(this).removeClass("over");
-						var model = ui.draggable.data("view").options.model.clone();
+						var model;
+						if ($(ui.draggable).hasClass('dereferenced-model')) {
+							// not a model! we should replace our model with the actual val model
+							var v = ui.draggable.data('val');
+							console.assert(v instanceof pathables.Pathable, "got a non-model, shouldn't have happened");
+							model = v.clone();
+						} else {
+							model = ui.draggable.data("view").options.model.clone();
+						}
 						var v = new view.PathableView({model:model});
 						this_.add(v);
 						this_._render_view(v);
