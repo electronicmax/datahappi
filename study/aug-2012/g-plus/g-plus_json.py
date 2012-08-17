@@ -1,5 +1,6 @@
 import code
 import json
+from pprint import pprint
 
 from apiclient.discovery import build
 from oauth2client.client import OAuth2WebServerFlow
@@ -8,7 +9,7 @@ import httplib2
 
 flow = OAuth2WebServerFlow(client_id='848228885173.apps.googleusercontent.com',
 		client_secret='ZxptQrWQZRecPOZKWFb5dfTx',
-		scope='https://www.googleapis.com/auth/plus.me')
+		scope=['https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/plus.me'])
 
 auth_uri = flow.step1_get_authorize_url(redirect_uri='http://volant.ecs.soton.ac.uk/datahappi/study/aug-2012/g-plus/redirect.html')
 
@@ -23,4 +24,14 @@ service = build('plus', 'v1', http=http)
 
 me_document = service.people().get(userId='me').execute()
 
-print json.dumps(me_document)
+activities_document = service.activities().list(
+							userId='me',
+							collection='public'
+						).execute()
+
+me_document['activities'] = activities_document
+
+with open('json', 'w') as FILE:
+	FILE.write(json.dumps(me_document, sort_keys=True, indent=4))
+
+print "written output to file 'json'"
