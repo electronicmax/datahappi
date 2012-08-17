@@ -9,7 +9,10 @@ import httplib2
 
 flow = OAuth2WebServerFlow(client_id='848228885173.apps.googleusercontent.com',
 		client_secret='ZxptQrWQZRecPOZKWFb5dfTx',
-		scope=['https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/plus.me'])
+		scope=['https://www.googleapis.com/auth/userinfo.email',
+				'https://www.googleapis.com/auth/plus.me',
+				'https://www.google.com/calendar/feeds/',
+				'https://www.google.com/m8/feeds/'])
 
 auth_uri = flow.step1_get_authorize_url(redirect_uri='http://volant.ecs.soton.ac.uk/datahappi/study/aug-2012/g-plus/redirect.html')
 
@@ -21,17 +24,14 @@ http = httplib2.Http()
 http = credentials.authorize(http)
 
 service = build('plus', 'v1', http=http)
-
 me_document = service.people().get(userId='me').execute()
+me_document['activities'] = service.activities().list(
+								userId='me',
+								collection='public'
+							).execute()
+for activity in me_document['activities']['items']:
+	activity['comments'] = service.comments().list(activityId=activity['id']).execute()
 
-activities_document = service.activities().list(
-							userId='me',
-							collection='public'
-						).execute()
-
-me_document['activities'] = activities_document
-
-with open('json', 'w') as FILE:
+with open('plus_json', 'w') as FILE:
 	FILE.write(json.dumps(me_document, sort_keys=True, indent=4))
-
-print "written output to file 'json'"
+print "written output to file 'plus_json'"
