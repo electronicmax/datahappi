@@ -38,16 +38,7 @@ define([
 						out:function(event, ui) {},				
 						drop: function( event, ui ) {
 							var target_box = new ibox.InstanceBox();
-							var model;
-							if ($(ui.draggable).hasClass('dereferenced-model')) {
-								// not a model! we should replace our model with the actual val model
-								var v = ui.draggable.data('val');
-								console.assert(v instanceof pathables.Pathable, "got a non-model, shouldn't have happened");
-								model = v.clone();
-							} else {
-								model = ui.draggable.data("view").options.model.clone();
-							}
-							
+							var model = ui.draggable.data("model")().clone();
 							target_box.add(new views.PathableView({model:model}));
 							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
 							this_.$el.find(".workspace").append(target_box.render().el);

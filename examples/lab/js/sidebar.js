@@ -47,10 +47,10 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			var name = m.get('name') && m.get('name').length > 0 ? m.get('name') : m.id.slice(m.id.lastIndexOf('/') + 1);
 			var new_src = $("(<li class='source-entry selected'>" + name + "</li>");
 			this.$el.find('ul').append(new_src);
-			new_src.data("model", m);
+			new_src.data("model", function() { return m; });
 		},
 		_toggle_source:function(evt) {
-			var source = $(evt.target).data('model');
+			var source = $(evt.target).data('model')();
 			this.trigger($(evt.target).hasClass('selected') ? 'source-disabled' : 'source-enabled', source);
 			$(evt.target).toggleClass('selected');
 		},

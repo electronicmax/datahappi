@@ -54,9 +54,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			if (!this.$el.html().length) {	this.$el.append($lens_template);	}
 
 			this.$el.data('view',this); // for when someone drags us into a box
-			// this.$el.data('model',this.options.model);
+			this.$el.data('model', function() { return this_.options.model; });
 			this.$el.attr("data-uri", this.options.model.id);
-			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});			
+			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});
+			this._add_sameas_behaviour(this.$el, m);
 			
 			// step 1 > update name.
 			this.$el.find('.name').html(this._get_label(m));
@@ -77,12 +78,13 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 						child = val_template.clone().appendTo( $values );
 					}
 					$(child).html(this_._get_label(v));
-					$(child).attr('data-val', this_._get_label(v));
-					$(child).data('val', v);
+					$(child).attr('data-val', this_._get_label(v)); // for brushing 
 					if (v instanceof pathables.Pathable) {
 						// then it can be accepted by other instanceboxes
+						$(child).data('model', function() { return v; });					
 						$(child).addClass('dereferenced-model');
 					} else {
+						// primitive value, so shoudn't be supported in dnd
 						$(child).removeClass('dereferenced-model');
 					}
 					$(child).draggable({revert:"invalid", helper:"clone", appendTo:'body'});
@@ -114,6 +116,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			// determines the properties of a particular value --
 			if (v instanceof Backbone.Model) { return v.keys(); }
 			return [];
+		},
+		_add_sameas_behaviour:function(el, m) {
+			// make el draggable _and_ droppable
+			
 		}
 	});
 	
@@ -132,9 +138,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.html(_(this.options.template || this.template).template({m:val}));
 		},
 		render:function() {
-			this._update_template();
+			var this_ = this;
+			this._update_template();			
 			this.$el.data('view',this);
-			this.$el.data('model',this.options.model);
+			this.$el.data('model',function() { return this_.options.model; });
 			this.$el.attr("uri", this.options.model.id);
 			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});
 			return this;
