@@ -2,20 +2,22 @@
 @import "fontello/fontello.css";
 @import "fontello/fontello-codes.css";
 
+@import "box.css";
+@import "visual.css";
+
 @slider-width : 300px;
 @slider-peek: 8px;
 
-@visual-border-color : rgba(0,180,0,0.2);
-
-.fullsize {
-	position:absolute;
-	top:0px; left:0px; right:0px; bottom:0px;
-}
 .label {
 	color: #555;
 	background-color:rgba(230,230,230,0.6);
 	text-shadow: 0 -1px 0 rgba(255,255,255,0.25);
 }
+
+.sameas-over {
+	border:3px solid orange !important;
+}	
+
 
 body {
 	margin: 0;
@@ -147,13 +149,14 @@ body {
 		}
 	}
 
-	// new item
+	// compound pathable views
 	.pathable-view {
 		position:relative;
 		border: 1px solid white;
 		padding:5px;
 		width:300px;
 		margin-right:15px;
+		
 		.name {
 			padding:0px 0px 0px 3px;
 		}
@@ -180,64 +183,6 @@ body {
 		&.brush {
 			background-color:rgba(0,200,255,0.1);
 		}		
-	}
-
-    // --- ---
-	@visual-width:250px;
-	@visual-height:200px;
-	@visual-y-width:30px;
-	@visual-x-height:30px;	
-    .visual {
-		width:@visual-width;
-		height:@visual-height;
-		border:1px solid @visual-border-color;
-		.corner_thingy {
-			width:50px; height:50px;
-			position:absolute;			
-			z-index:100;			
-		}
-		svg {
-			position:absolute;
-			top:0px;
-			right:0px;
-			width:@visual-width - @visual-y-width;
-			height:@visual-height - @visual-x-height;
-		}
-		.delete {
-			z-index:1000; 
-			position:absolute;
-			top:2px; margin:0px; padding:0px;
-			right:5px;			
-			display: none;
-			opacity:0.8;
-			font-size:1.0em;
-		}
-		.droparea {
-			position:absolute;
-			border-top:1px solid rgba(200,200,200,0.4);			
-			&.over { box-shadow : inset 0 0 5px green;	}
-			.lbl {
-				.fullsize;
-				text-align:center;
-				vertical-align:middle;
-			}
-			font-size:0.8em;
-		}
-		.xaxis {
-			.droparea;
-			left:0px; bottom:0px; right:0px; height:@visual-x-height;
-		}
-		.yaxis {
-			.droparea;
-			transform: rotate(90deg);
-			left:30px; top:0px; width:@visual-height - 1; height:@visual-x-height;			
-			-webkit-transform: rotate(90deg);
-			transform-origin:0% 0%;
-			-webkit-transform-origin:0% 0%;
-			top:0px;
-			z-index:5;
-			.lbl {	}			
-		}
-	}
+	}	
 }
 	

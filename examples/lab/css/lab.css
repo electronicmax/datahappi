@@ -1,18 +1,18 @@
 @import "fontello/fontello.css";
 
 @import "fontello/fontello-codes.css";
+
+@import "box.css";
+
+@import "visual.css";
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
-.fullsize {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
 .label {
   color: #555;
   background-color: rgba(230, 230, 230, 0.6);
   text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+.sameas-over {
+  border: 3px solid orange !important;
 }
 body {
   margin: 0;
@@ -221,98 +221,4 @@ body .pathable-view .values {
 }
 body .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);
-}
-body .visual {
-  width: 250px;
-  height: 200px;
-  border: 1px solid rgba(0, 180, 0, 0.2);
-}
-body .visual .corner_thingy {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  z-index: 100;
-}
-body .visual svg {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 220px;
-  height: 170px;
-}
-body .visual .delete {
-  z-index: 1000;
-  position: absolute;
-  top: 2px;
-  margin: 0px;
-  padding: 0px;
-  right: 5px;
-  display: none;
-  opacity: 0.8;
-  font-size: 1.0em;
-}
-body .visual .droparea {
-  position: absolute;
-  border-top: 1px solid rgba(200, 200, 200, 0.4);
-  font-size: 0.8em;
-}
-body .visual .droparea.over {
-  box-shadow: inset 0 0 5px green;
-}
-body .visual .droparea .lbl {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  text-align: center;
-  vertical-align: middle;
-}
-body .visual .xaxis {
-  position: absolute;
-  border-top: 1px solid rgba(200, 200, 200, 0.4);
-  font-size: 0.8em;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  height: 30px;
-}
-body .visual .xaxis.over {
-  box-shadow: inset 0 0 5px green;
-}
-body .visual .xaxis .lbl {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  text-align: center;
-  vertical-align: middle;
-}
-body .visual .yaxis {
-  position: absolute;
-  border-top: 1px solid rgba(200, 200, 200, 0.4);
-  font-size: 0.8em;
-  transform: rotate(90deg);
-  left: 30px;
-  top: 0px;
-  width: 199px;
-  height: 30px;
-  -webkit-transform: rotate(90deg);
-  transform-origin: 0% 0%;
-  -webkit-transform-origin: 0% 0%;
-  top: 0px;
-  z-index: 5;
-}
-body .visual .yaxis.over {
-  box-shadow: inset 0 0 5px green;
-}
-body .visual .yaxis .lbl {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  text-align: center;
-  vertical-align: middle;
 }
