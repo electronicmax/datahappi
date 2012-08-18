@@ -65,7 +65,8 @@ define([
 //				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/'))
 			).then(function() {
 					var srcs = _.toArray(arguments);
-					console.log("WHEN >>> ", srcs, srcs.length);
+					console.log("SOURCES >>> ", srcs, srcs.length);
+				    window.__srcs__ = srcs; // DEBUG
 					var wview = new Main({el : $('body'), data_sources: srcs});
 					wview.render();
 					console.log("el > ", wview.el, wview.$el.find('.workspace'));

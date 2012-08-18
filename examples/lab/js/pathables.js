@@ -98,7 +98,10 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var this_ = this;
 			assert(!_(options.model).isUndefined(), "model must be specified");
 			this.setModel(options.model);
-			this.model.on('all', function(eventType, args) { this_.trigger(eventType, args); });
+			this.model.on('all', function(eventType, args) {
+				this_.set_path(this_.path, true);
+				this_.trigger(eventType, args);
+			});
 			this.reset_path();
 		},
 		setModel:function(m) {
@@ -109,7 +112,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		clone:function() {
 			return new Pathable({model:this.model});
 		},
-		get_last_value:function() { return this.values[this.values.length - 1]; 	},
+		get_last_value:function() {
+			return this.values[this.values.length - 1];
+		},
 		get_base_model:function() { return this.values[0][0];	},				
 		reset_path:function() {
 			this.path = new Path();
@@ -133,12 +138,12 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			if (from_root) {return this.try_path(new Path([step]));	}
 			return this.try_path(this.path.clone().add_step(step));
 		},
-		set_path:function(p) {
+		set_path:function(p, silent) {
 			var values = this.try_path(p, true);
 			if (defined(values)) {
 				this.path = p.clone();
 				this.values = _(values).clone();
-				this.trigger('dereference');
+				if (silent !== true) { this.trigger('dereference'); }
 				return values;
 			}			
 		},
