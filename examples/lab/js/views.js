@@ -81,9 +81,9 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 					}
 					$(child).html(this_._get_label(v));
 					$(child).attr('data-val', this_._get_label(v)); // for brushing 
-					if (v instanceof pathables.Pathable) {
+					if (v instanceof models.Maxel) {
 						// then it can be accepted by other instanceboxes
-						$(child).data('model', function() { return v; });					
+						$(child).data('model', function() { return new pathables.Pathable({model:v}); });					
 						$(child).addClass('dereferenced-model');
 					} else {
 						// primitive value, so shoudn't be supported in dnd
