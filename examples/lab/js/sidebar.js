@@ -85,12 +85,14 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
 			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
 			setTimeout(function() {
-				console.log('sourcec length ', sourcec.length);
 				sourcec.map(function(src) {
-					console.log("SOURCE ", src.get('src_url'));
+					console.log("SOURCE ", src.get('url'));
 					src.fetch().then(function(data) {
-						console.log('adding data from source ', src.get('src_url'), data.length);
-						data.map(function(datum) { things_view.collection.add(datum); });
+						window.DATA = data;
+						console.log('adding data from source ', src.get('url'), data.length, data);
+						data.map(function(datum) {
+							things_view.collection.add(datum);
+						});
 					});
 				});
 			}, 1000);

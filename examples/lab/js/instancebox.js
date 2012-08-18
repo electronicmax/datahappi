@@ -19,7 +19,6 @@ define(
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
-
 				// The collection of pathables which this InstanceBox uses.
 				this.pathables = new pathables.Pathables();
 			},
@@ -83,14 +82,16 @@ define(
 			},
 			add:function(itemview) {
 				// warning: this method shadows parent
-				var m = itemview.options.model;
+				var pathable = itemview.options.model; 
 				var this_ = this;
-				if (this_.pathables.get(m.id)) {
+				// this is a sneaky which consolidates the pathables of views that are
+				// added to the same box, so if one gets dereferenced then they all do.
+				if (this_.pathables.get(pathable.id)) {
 					// warn: we already have a pathable there so eeks
-					console.log('already have a pathable for him ', this_.pathables.get(m.id));
-					itemview.setModel(this_.pathables.get(m.id));
+					console.log('already have a pathable for him ', this_.pathables.get(pathable.id));
+					itemview.setModel(this_.pathables.get(pathable.id));
 				} else {
-					this_.pathables.add(m);
+					this_.pathables.add(pathable);
 				}
 				var lvc = this.views_collection.length;
 				this.views_collection.add(itemview);
@@ -156,16 +157,6 @@ define(
 				this.$el.fadeOut(function() { this_.$el.remove(); });
 			}
 		});
-
-		/*
-		var InstanceBoxShadow = InstanceBox.extend({
-			className:'shadowbox',
-			initialize:function() {
-				InstanceBox.prototype.initalize.apply(this,arguments);
-				this.master = this.options.master_box;
-			}
-		});
-		*/
 
 		return { InstanceBox:InstanceBox };
 	}

@@ -5,13 +5,12 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	*/
 	
 	var defined = utils.DEFINED;
+	var assert = utils.assert;
 	
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
 		defaults: { position: -1 },
-		clone:function() {
-			return new this.constructor(this.attributes);
-		},
+		clone:function() {	return new this.constructor(this.attributes);	},
 		valueOf:function(){ utils.assert(false, "subclasses needs to define valueof :( "); }
 	});
 	
@@ -91,22 +90,36 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		}		
 	});
 	
-	// Pathable is our main Model class that can be the origin (root)
-	// of paths
-	var Pathable = models.Maxel.extend({
-		initialize:function(attrs, options) {
-			models.Maxel.prototype.initialize.apply(this, arguments);
+	var Pathable = Backbone.Model.extend({
+		// using model we're really just a wrapper for the actual model --
+		// but we need to be a model in order to be added
+		idAttribute:'model_id',
+		initialize:function(options) {
+			var this_ = this;
+			assert(!_(options.model).isUndefined(), "model must be specified");
+			this.setModel(options.model);
+			this.model.on('all', function(eventType, args) { this_.trigger(eventType, args); });
 			this.reset_path();
 		},
+		setModel:function(m) {
+			console.log('setting model ', m, ' ', m.id);
+			this.model = m;
+			this.set({model_id : m.id });
+		},
+		clone:function() {
+			return new Pathable({model:this.model});
+		},
+		get_last_value:function() { return this.values[this.values.length - 1]; 	},
+		get_base_model:function() { return this.values[0][0];	},				
 		reset_path:function() {
 			this.path = new Path();
-			this.values = [[this]]; // start at path empty/
+			this.values = [[this.model]]; // start at path empty/
 			this.trigger('dereference');			
 		},
 		try_path:function(path, from_root) {
 			// sets an entire path from root -> terminus, and returns the terminal
 			// value if successful
-			var cur_val = [this], values = [[this]], steps = path.get("steps");
+			var cur_val = [this.model], values = [[this.model]], steps = path.get("steps");
 			for (var ii = 0; ii < steps.length && cur_val.length > 0; ii++) {
 				var step = steps.at(ii);
 				cur_val = utils.flatten(cur_val.map(function(v) {
@@ -131,9 +144,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		extend_path:function(step) {
 			return this.set_path(this.path.clone().add_step(step));
-		},
-		get_last_value:function() {
-			return this.values[this.values.length - 1];
 		},
 		get_path_length: function(){ return this.path.get_steps().length; },
 		get_path_values: function(){ return this.values.concat([]); },
@@ -195,20 +205,20 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			Backbone.Collection.prototype.initialize.apply(this,arguments);
 			var this_ = this;
 			this.paths = new Paths();
-			this.bind("add remove", function(new_model) {
-				// NEW MODEL ADDED > 
-				// GO THROUGH Paths previously applied and apply them to this new model
-				this_._dereference_model(new_model);
-			});
-			this.paths.bind("all", function(eventType, new_model) {
-				// recompute for all
-				console.log('PATHS triggering event type ', eventType);
-				this_.map(function(pathable) {
-					return this_._dereference_model(pathable);
-				});
+			this.bind("add remove", function(pathable) { this_._apply_paths(pathable);	});			
+			this.paths.bind("all", function(eventType, pathable) {
+				this_.map(function(pathable) { return this_._apply_paths(pathable); });
 			});			
 		},
-		_dereference_model:function(m) {
+		add:function(models) {
+			if (!_.isArray(models)) { models = [models]; }
+			models = models.map(function(m) { 
+				if (!(m instanceof Pathable)) { return new Pathable({model:m}); }
+				return m;
+			});
+			return Backbone.Collection.prototype.add.apply(this,[models]);
+		},
+		_apply_paths:function(m) {
 			// starts m from scratch and tries to dereference it using each path
 			// in order of this.paths - which is essentially the priority
 			utils.assert(m instanceof Pathable, "Only pathables can be dereferenced");
@@ -248,13 +258,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			paths.map(function(path) {
 				this_.add_path(path);
 			});
-		},
-		coverage:function(attribute) {
-			var all_models = this.length;
-			var models_with_attribute = this.filter(function(model) {
-				return model.has(attribute);
-			}).length;
-			return models_with_attribute/all_models;
 		}
 	});
 
@@ -266,7 +269,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		Pathables: Pathables,
 		Path:Path,
 		Paths: Paths,
-		get_from_source:function(url) { return source.get_from_source(url, Pathable, Pathables); }
+		get_from_source:function(url) {
+			return source.get_from_source(url, models.Maxel, Pathables);
+		}
 	};
 });
 

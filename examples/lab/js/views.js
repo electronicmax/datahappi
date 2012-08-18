@@ -53,7 +53,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			// step 0: set up shell if it doesn't exist
 			if (!this.$el.html().length) {
 				this.$el.append($lens_template);
-				this._add_sameas_behaviour(this.$el);
+				// this._add_sameas_behaviour(this.$el);
 			}
 
 			this.$el.data('view',this); // for when someone drags us into a box
@@ -62,7 +62,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});
 			
 			// step 1 > update name.
-			this.$el.find('.name').html(this._get_label(m));
+			this.$el.find('.name').html(this._get_label(m.get_base_model()));
 
 			// step 3 > update values -- list of values at this level
 			var $values = this.$el.find('.values');
