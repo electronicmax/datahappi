@@ -1,4 +1,30 @@
 define(['js/utils'], function(util) {
+
+	var TABLEVIEW_DEFAULT_COLUMNS = [
+		function(m) { return (new GenericItemView({model:m})).render(); },
+		function(m) {
+			return _(m.attributes).keys().map(
+				function(x) {
+					var start = Math.max(0,x.lastIndexOf('/') + 1,x.lastIndexOf('#') + 1);
+					return x.slice(start);
+				}).join(',');
+		},
+		function(m) {
+			if (! m.get_chain) { return 'model does not have \'get_chain\' method'; }
+			var vals = m.get_chain(['latitude','longitude']);
+			if (vals && vals.length > 0) {
+				return util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes);
+			} else {
+				var names = m.get_chain(['place name']);
+				if (names && names.length > 0) {
+					return names[0].get('place name');
+				} else {
+					return 'could not chain to lat/long or place name';
+				}
+			}
+			return ' ? ';
+		}
+	];
 	
 	var GenericItemView = Backbone.View.extend({
 		tagName:'div',
@@ -23,12 +49,13 @@ define(['js/utils'], function(util) {
 			_(this.options.columns).map(function(val) {
 				var oldVal = $.extend({}, val);
 				if (_(val).isFunction()) { val = val(m); return arguments.callee(val); }
-				if (val && val.el) { this_.$el.append(val.el); return val; }
+				if (val && val.el) {
+					this_.$el.append(val.el); return val;
+				}
 				if (_.isArray(val) && val.length === 1) { val = val[0]; } //If val is a single vlaue array, take the value out of the array.
 				if (_.isUndefined(val)) { val = '<i>undefined</i>'; }
 				if (_(val).isNumber()) { val = val.toString(); }
 				if (_(val).isObject() && val instanceof Backbone.Model) { val = val.attributes._id || val.attibutes._oid; }
-				//if (_(val).isObject() && !_(val).isElement()) { return "object"; } // return if val is an object, but not if it is an element object
 				if (_(val).isObject() && !_(val).isElement()) { console.log(oldVal); val = "non-element object"; } // return if val is an object, but not if it is an element object
 				if (_(val).isString() || _(val).isElement()) { // jQuery can handle html strings and element objects.
 					$("<td></td>").append(val).appendTo(this_.el);
@@ -43,40 +70,16 @@ define(['js/utils'], function(util) {
 		show:function() { this.$el.show(); }
 	});
 
+
 	var TableView = Backbone.View.extend({
 		// default columns that could be overridden
-		columns: [
-			function(m) { return (new GenericItemView({model:m})).render(); },
-			function(m) {
-				return _(m.attributes).keys().map(
-					function(x) {
-						var start = Math.max(0,x.lastIndexOf('/') + 1,x.lastIndexOf('#') + 1);
-						return x.slice(start);
-					}).join(',');
-			},
-			function(m) {
-				if (! m.get_chain) { return 'model does not have \'get_chain\' method'; }
-				var vals = m.get_chain(['latitude','longitude']);
-				if (vals && vals.length > 0) {
-					return util.t("<%= latitude %>, <%= longitude %>", vals[0].attributes);
-				} else {
-					var names = m.get_chain(['place name']);
-					if (names && names.length > 0) {
-						return names[0].get('place name');
-					} else {
-						return 'could not chain to lat/long or place name';
-					}
-				}
-				return ' ? ';
-			}
-		],
+		columns: TABLEVIEW_DEFAULT_COLUMNS,
 		initialize:function() {
 			var this_ = this;
 			this.collection = this.options.model || new Backbone.Collection();
 			this.row_views = {};
-			this.collection.bind("add", function(x) {this_._handle_add(x); });
-			this.collection.bind("remove", function(x) { this_._handle_remove(x); });
-			this.render();
+			this.collection.on("add", function(x) {	this_._handle_add(x);});
+			this.collection.on("remove", function(x) { this_._handle_remove(x);	});
 			this.options.columns = this.options.columns || this.columns;
 		},
 		_handle_add:function(m) {
@@ -94,7 +97,7 @@ define(['js/utils'], function(util) {
 				});
 			}
 		},
-		render:function() { return this.el; }
+		render:function() {	return this.el;	}
 	});
 
 	return {

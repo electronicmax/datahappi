@@ -1,5 +1,6 @@
 define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],function(sources,views,tv,util) {
 	var defined = util.DEFINED;
+	
 	var ThingsView = tv.TableView.extend({
 		columns:[
 			function(m) {
@@ -9,20 +10,33 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			}
 		],
 		setSourceEnabled:function(src) {
-			console.log('setting source enabled ', src.id);
-			var els = _(this.row_views).values()
-				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+			var els = _(this.row_views)
+				.values()
+				.map(function(rv) {
+					return rv.options.model.model.get("source")[0].id == src.id ? rv.el : undefined;
+				})
 				.filter(defined);
 			$(els).show();
 		},
 		setSourceDisabled:function(src) {
-			console.log('setting source disabled ', src.id);
 			var els = _(this.row_views).values()
-				.map(function(rv) {	return rv.options.model.get("source")[0].id == src.id ? rv.el : undefined; })
+				.map(function(rv) {
+					return rv.options.model.model.get("source")[0].id == src.id ? rv.el : undefined;
+				})
 				.filter(defined);
 			$(els).hide();
 		}		
 	});
+	
+	var SameAsView = tv.TableView.extend({
+		columns:[
+			function(m) {
+				var view = new sameasview.SameAsRelationView({models:m});
+				view.render();
+				return view;
+			}
+		]
+	});	
 		
 	var SourcesView = Backbone.View.extend({
 		events : {
@@ -84,6 +98,7 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
 			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
 			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
+			
 			setTimeout(function() {
 				sourcec.map(function(src) {
 					console.log("SOURCE ", src.get('url'));
