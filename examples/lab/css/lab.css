@@ -35,7 +35,7 @@ body .slidepanel .things {
   background-color: white;
   position: absolute;
   top: 100px;
-  bottom: 0px;
+  bottom: 100px;
   left: 0px;
   right: 0px;
   border: 1px solid #eee;
@@ -50,11 +50,17 @@ body .slidepanel .things .tablecontainer {
   overflow: auto;
   background-color: white;
   border: 10px solid #ddd;
-  border-radius: 34px 0px 0px 34px;
   padding: 10px 30px 13px 13px;
 }
 body .slidepanel .things table {
   margin-bottom: 50px;
+}
+body .slidepanel .sameas-view {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100px;
 }
 body .slidepanel .new-source-add-button {
   position: absolute;

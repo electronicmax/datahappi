@@ -1,4 +1,4 @@
-define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],function(sources,views,tv,util) {
+define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/sameasview','js/utils'],function(sources,views,tv,sameas,util) {
 	var defined = util.DEFINED;
 	var ThingsView = tv.TableView.extend({
 		columns:[
@@ -23,7 +23,6 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			$(els).hide();
 		}		
 	});
-		
 	var SourcesView = Backbone.View.extend({
 		events : {
 			"click .new-source-add-button" : "_show_source_url",
@@ -75,17 +74,24 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			"click .tab":"toggle_data"
 		},
 		initialize:function(options) {
-			// must
 			console.assert(this.options.el, "must provide an el for sidebar");
+			this.sources = new sources.SourceCollection(this.options.sources);			
 		},
 		render:function() {
-			var sourcec = new sources.SourceCollection(this.options.sources);
-			var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); 
+			var this_ = this;
+			var sv = new SourcesView({el: this.$el.find('.sources'), collection:this.sources, sidebar: this}).render(); 
 			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
+			var sameas_view = new sameas.SameasView({el:this.$el.find('.sameas-view')[0] });
+			// we need to watch any new models created by the sources,
+			// and tell our sameas watcher.
+			this.sources
+				.on('add', function(src) {	src.on('new-model', function(m) { sameasview.add_to_watch(m); }, this);	})
+				.on('remove', function(src) {src.off('all', null, this);	});					
+			
 			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
 			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
 			setTimeout(function() {
-				sourcec.map(function(src) {
+				this_.sources.map(function(src) {
 					console.log("SOURCE ", src.get('url'));
 					src.fetch().then(function(data) {
 						window.DATA = data;

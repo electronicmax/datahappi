@@ -185,7 +185,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 						this_.trigger(eventType,  m,  _(options || {}).extend({reflected_from_sameas: true}));
 					}
 				});
-				this.trigger('change');
+				this.trigger('change:sameas');
 			}
 			return this;
 		},

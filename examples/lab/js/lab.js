@@ -1,4 +1,5 @@
 define([
+	'js/models',
 	'examples/lab/js/pathables',
 	'examples/lab/js/sidebar',		
 	'examples/lab/js/box',
@@ -9,7 +10,7 @@ define([
 	'js/utils',
 	'js/googlecal/CalendarCollection',
 	'js/googlecal/auth'
-], function(pathables, sidebar, box, ibox, views, toolbar, visual, util, cc, auth) {
+], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, util, cc, auth) {
 		var Main = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
@@ -19,7 +20,10 @@ define([
 			render:function() {
 				var this_ = this, workspace = this.$el.find('.workspace');
 				this.sidebar =
-					(new sidebar.SidebarView({	sources: this.options.data_sources,	el : this.$el.find('.slidepanel')[0]}))
+					(new sidebar.SidebarView({
+						sources: this.options.data_sources,
+						el : this.$el.find('.slidepanel')[0]
+					}))
 					.on('new_group', function() { this_._new_group(); })
 					.render()
 					.slideOut();
@@ -27,8 +31,7 @@ define([
 				var tb = (new toolbar.Toolbar())
 					.on('new_visual', function() {
 						workspace.append((new visual.Visual()).render().el);
-					});
-				
+					});				
 				workspace
 					.append(tb.render().el)
 					.droppable({
@@ -60,16 +63,10 @@ define([
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			$.when(
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))
-				//	pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/'))
-			).then(function() {
+			$.when(pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')).then(
+				function() {
 					var srcs = _.toArray(arguments);
-					console.log("SOURCES >>> ", srcs, srcs.length);
-				    window.__srcs__ = srcs; // DEBUG
-					var wview = new Main({el : $('body'), data_sources: srcs});
-					wview.render();
-					console.log("el > ", wview.el, wview.$el.find('.workspace'));
+					var wview = new Main({el : $('body'), data_sources: srcs}).render();
 					wview.sidebar.slideOut('very fast');
 				});
 		})();		
