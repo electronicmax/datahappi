@@ -62,7 +62,7 @@ define([
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			$.when(
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))
-//				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/'))
+				//	pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rooms-and-buildings.rdf'].join('/'))
 			).then(function() {
 					var srcs = _.toArray(arguments);
 					console.log("SOURCES >>> ", srcs, srcs.length);

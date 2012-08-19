@@ -1,4 +1,4 @@
-define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,source) {
+define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 
 	// Maxels support:
 	//    co-reference declarations (e.g, m1 iss m2)
@@ -10,6 +10,7 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 	
 	var DEFINED = function(x) { return !_(x).isUndefined(); };
 	var TO_OBJ = util.TO_OBJ;
+	var flatten = util.flatten;
 	var chainer;
 	
 	var Maxel = Backbone.Model.extend({
@@ -27,8 +28,9 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 		clone:function() {
 			var c = new this.constructor(this.original_json, _({}).extend(this.options));
 			c.entailed = _.clone(this.entailed);
-			c.attributes = _.clone(this.attributes);			
-			c.trigger('change');
+			c.attributes = _.clone(this.attributes);
+			c.sameas = _.clone(this.sameas);
+			c.trigger('change', null, this._make_changelist(c.keys()));
 			return c;
 		},
 		set_up_inference:function(options) {
@@ -52,7 +54,9 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 						return diffset.applyDiffs();
 					});
 			};
-			this.on("change", function(z,k) { apply_rules((!_.isUndefined(k) && _(k.changes).keys()) || this_.attributes); });
+			this.on("change", function(z,k) {
+				apply_rules((!_.isUndefined(k) && _(k.changes).keys()) || this_.attributes);
+			});
 			// first apply to all thingies
 			apply_rules(this.keys());
 			return this;
@@ -70,15 +74,29 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 			var this_ = this;
 			_(o).map(function(v,k) { return this_._value_to_array(k,v); });
 			return cleaned;
+			
+		},
+		_get_entailed_values:function(p) {
+			return flatten(_((this.entailed && this.entailed[p])|| {}).values());
 		},
 		get:function(p) {
-			var l = _(util.flatten(_((this.entailed && this.entailed[p])|| {}).values())).union(
-				Backbone.Model.prototype.get.apply(this,[p]) || []
-			); // or undefined
+			var entailed_values = this._get_entailed_values(p),
+				sameas = this.sameas || [],
+				sameas_entailed_vals = flatten(sameas.map(function(x) {
+					return x._get_entailed_values(p).concat(x.attributes[p]||[]);
+				})),
+				l = _.union(entailed_values,sameas_entailed_vals, this.attributes[p] || []);
+			
 			if (l.length) { return l; }
 		},
 		keys:function() {
-			return _( _(this.attributes).keys() ).union( _(this.entailed).keys() );
+			return _.union(
+				_(this.attributes).keys(),
+				_(this.entailed).keys(),
+				flatten(this.sameas.map(function(x) {
+					return x.entailedKeys().concat(x.attrKeys());
+				}))
+			);
 		},
 		map:function(f) {
 			var this_ = this;
@@ -92,13 +110,6 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 		attrKeys:function() {
 			return _(this.attributes).keys();
 		},		
-		_merge_attrs:function(target,src) {
-			// merge carefully into target
-			_(src).map(function(v,k) {
-				if (k == '_id') { return; }
-				target[k] = _(target[k] || []).union(src[k]);
-			});
-		},
 		set:function(k,v,options) {
 			// check if this was called with k,v format, not {k:v} format.
 			if (!_(v).isUndefined()) {
@@ -108,18 +119,19 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 			}				
 			return Backbone.Model.prototype.set.apply(this,[k,v,options]);
 		},
+		_make_changelist : function(props) {
+			// creates strange dictionary property to conform to Backbone
+			var changelist = {};
+			_(props).keys().map(function(k) { changelist[k] = true; });
+			return { changes: changelist };
+		},
 		_trigger_change:function(changed_props) {
 			var this_ = this;
-			var _make_changelist = function(props) {
-				// creates strange dictionary property to conform to Backbone
-				var changelist = {};
-				_(props).keys().map(function(k) { changelist[k] = true; });
-				return changelist;
-			}, changelist = _make_changelist(changed_props);
+			var changelist = this._make_changelist(changed_props);
 			if (changed_props.length > 0) {
 				this.trigger('change', this, { changes : changelist });
 				changed_props.map(function(k) {
-					this_.trigger('change:' + k, this, { changes : changelist });
+					this_.trigger('change:' + k, this, changelist);
 				});
 			}
 			return;
@@ -166,13 +178,11 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 			var this_ = this;
 			if (this.sameas.indexOf(m) < 0) {
 				this.sameas.push(m);
-				this._merge_attrs(this.attributes,m.attributes);
 				m.setSameAs(this);
-				m.on('change', function(m,k) {
-					_(k.changes).keys().map(function(k) {
-						this_.s(k,m.g(k));
-					});					
-				});				
+				m.on('all', function(eventType,m,source) {
+					// if (source !== this) { this_.trigger(eventType, m, source);	}
+				});
+				// this.trigger('change', null, );
 			}
 			return this;
 		},
@@ -206,8 +216,5 @@ define(['js/ops/incremental-forward','js/utils', 'js/source'],function(rh,util,s
 	Maxel.prototype.s = Maxel.prototype.set;
 	return {
 		Maxel : Maxel,
-		get_from_source:function(url) {
-			return source.get_from_source(url,Maxel);
-		}
 	};	
 });

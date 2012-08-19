@@ -1,7 +1,18 @@
-define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pathables) {
+define(['js/models','js/utils'],function(m,utils,pathables) {
 	var assert = utils.assert;
 	var l = function() { console.log.apply(console,arguments); };
 	tests = [
+		function() {
+			console.log('hi');
+			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
+			var m2 = new m.Maxel({_id: "http://plus.google.com/id/203920392", name : "max electronic van kleek", posts:["foo"] });
+			window.m1 = m1;
+			console.log(" m1 > ", m1.get('name'));
+			window.m2 = m2;
+			m1.setSameAs(m2);
+			
+		}
+		/*
 		function() {
 			l('hello');
 			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
@@ -119,10 +130,9 @@ define(['js/models','js/utils','examples/lab/js/pathables'],function(m,utils,pat
 			l("get_last_value bro -> likes  ", 
 			  pathCollection.models.map(function(p) {
 				  return p.get_last_value().map(function(x) { return x.id ? x.id : x; }).join(',');
-			  }));
-			
-			
+			  }));			
 		}
+		*/
 	];
 	return { run : function() { tests.map(function(t) { t(); }); console.log("tests complete");  } };
 });
