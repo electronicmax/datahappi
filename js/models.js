@@ -30,7 +30,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			c.entailed = _.clone(this.entailed);
 			c.attributes = _.clone(this.attributes);
 			c.sameas = _.clone(this.sameas);
-			c.trigger('change', null, this._make_changelist(c.keys()));
+			c._trigger_change(c.keys());
 			return c;
 		},
 		set_up_inference:function(options) {
@@ -55,7 +55,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 					});
 			};
 			this.on("change", function(z,k) {
-				apply_rules((!_.isUndefined(k) && _(k.changes).keys()) || this_.attributes);
+				
+				apply_rules((!_.isUndefined(k) && !_.isUndefined(k.changes) && _(k.changes).keys()) || this_.attributes);
 			});
 			// first apply to all thingies
 			apply_rules(this.keys());
@@ -123,7 +124,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// creates strange dictionary property to conform to Backbone
 			var changelist = {};
 			_(props).keys().map(function(k) { changelist[k] = true; });
-			return { changes: changelist };
+			return { changes: changelist, source: this };
 		},
 		_trigger_change:function(changed_props) {
 			var this_ = this;
@@ -179,10 +180,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			if (this.sameas.indexOf(m) < 0) {
 				this.sameas.push(m);
 				m.setSameAs(this);
-				m.on('all', function(eventType,m,source) {
-					// if (source !== this) { this_.trigger(eventType, m, source);	}
+				m.on('all', function(eventType,m,options) {
+					if (_(options).isUndefined() || _(options.reflected_from_sameas).isUndefined()) {
+						this_.trigger(eventType,  m,  _(options || {}).extend({reflected_from_sameas: true}));
+					}
 				});
-				// this.trigger('change', null, );
+				this.trigger('change');
 			}
 			return this;
 		},
