@@ -35,7 +35,7 @@ define([
 				workspace
 					.append(tb.render().el)
 					.droppable({
-						accept:'.item, .dereferenced-model',
+						accept:'.item,.pathable-view,.dereferenced-model',
 						tolerance:"touch",
 						over:function(event, ui) {},
 						out:function(event, ui) {},				

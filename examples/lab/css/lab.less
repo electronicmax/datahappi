@@ -1,3 +1,4 @@
+
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
 @import "fontello/fontello.css";
 @import "fontello/fontello-codes.css";
@@ -16,12 +17,44 @@
 
 .sameas-over {
 	border:3px solid orange !important;
-}	
+}
 
-
+.ui-draggable-dragging { z-index:10000; }
+			
 body {
 	margin: 0;
   	padding: 0;
+	.item:hover .delete { display:none; }
+	.item {
+		-webkit-transition: background-color 0.2s ease-in-out;
+		-webkit-transition: padding 0.2s ease-in-out;
+		border:1px solid rgba(255,255,255,0);
+		position:relative;
+		margin:0px;
+		padding:0px 4px 0px 4px;
+		overflow:hidden;
+		text-align:right;
+		width:270px; // necessary or else dragging looks dumb.
+		.thing-label a { font-size:0.5em;	}
+		&:hover { border:1px solid #eee;	}
+		.props {
+			display:none;
+			font-size:0.7em;
+		}
+		.delete {
+			z-index:1000; 
+			position:absolute;
+			top:2px; margin:0px; padding:0px;
+			right:5px;			
+			display: none;
+			opacity:0.8;
+			font-size:1.0em;
+		}
+		&.ui-draggable-dragging {
+			border:1px solid rgba(200,200,200,0.3) !important;
+		}		
+	}			
+	
     .slidepanel { 
 	    .sources {
 			width:100%;
@@ -149,32 +182,6 @@ body {
 	    filter: fliph; /*IE*/
     }
 	// hide 'x' for the things in the source list 
-	.things .item:hover .delete { display:none; }
-	.things .item {
-        -webkit-transition: background-color 0.2s ease-in-out;
-        -webkit-transition: padding 0.2s ease-in-out;
-		border:1px solid rgba(255,255,255,0);
-		position:relative;
-		margin:0px;
-		padding:0px 4px 0px 4px;
-		overflow:hidden;
-		text-align:right;
-		.thing-label a { font-size:0.5em;	}
-		&:hover { border:1px solid #eee;	}
-		.props {
-			display:none;
-			font-size:0.7em;
-		}
-		.delete {
-			z-index:1000; 
-			position:absolute;
-			top:2px; margin:0px; padding:0px;
-			right:5px;			
-			display: none;
-			opacity:0.8;
-			font-size:1.0em;
-		}
-	}
 	
 	// compound pathable views
 	.pathable-view {

@@ -39,7 +39,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 	// show pathables in a lovely way
 	var PathableView = CommonView.extend({
 		template:pathableview_templ,
-		className:'pathable-view item',
+		className:'pathable-view',
 		events:{
 			'click .delete' : '_cb_delete',
 			'click .proplabel' : '_prop_select'
@@ -129,7 +129,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 				.add(this.$el.find('.values').children())
 				.droppable({
 					greedy:true, // magical nesting of droppables
-					accept:'.item,.dereferenced-model',
+					accept:'.item,.pathable-view,.dereferenced-model',
 					// tolerance:"touch",
 					over:function(event, ui) {
 						var thismodel = this_.options.model;
