@@ -10,9 +10,7 @@ import httplib2
 flow = OAuth2WebServerFlow(client_id='848228885173.apps.googleusercontent.com',
 		client_secret='ZxptQrWQZRecPOZKWFb5dfTx',
 		scope=['https://www.googleapis.com/auth/userinfo.email',
-				'https://www.googleapis.com/auth/plus.me',
-				'https://www.google.com/calendar/feeds/',
-				'https://www.google.com/m8/feeds/'])
+				'https://www.googleapis.com/auth/plus.me')
 
 auth_uri = flow.step1_get_authorize_url(redirect_uri='http://volant.ecs.soton.ac.uk/datahappi/study/aug-2012/g-plus/redirect.html')
 
