@@ -119,42 +119,44 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			if (v instanceof Backbone.Model) { return v.keys(); }
 			return [];
 		},
-		_add_sameas_behaviour:function(el) {
+		_add_sameas_behaviour:function() {
 			// make _el_ droppable -- with a clear warning
 			var this_ = this;
 			var highlight = function($el) { $el.addClass('sameas-over'); };
 			var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
-			$(el).droppable({
-				greedy:true, // magical nesting of droppables
-				accept:'.item,.dereferenced-model',
-				// tolerance:"touch",
-				over:function(event, ui) {
-					var thismodel = this_.options.model;
-					var thatmodel = ui.draggable.data("model")();
-					console.log('over > ', thismodel.id, thatmodel.id);					
-					if (thismodel.id !== thatmodel.id) {
-						highlight($(ui.draggable));
-						highlight(this_.$el); 
-					} else {
-						unlight(this_.$el);
-						unlight($(ui.draggable)); 
-					}
-				},
-				out:function(event, ui) {
-					unlight($(ui.draggable));
-					unlight(this_.$el); 
-				},
-				drop: function( event, ui ) {
-					var thismodel = this_.options.model.model;
-					var thatmodel = ui.draggable.data("model")().model;
-					if (thismodel.id !== thatmodel.id) {
+			this.$el.find('.name')
+				.add(this.$el.find('.values').children())
+				.droppable({
+					greedy:true, // magical nesting of droppables
+					accept:'.item,.dereferenced-model',
+					// tolerance:"touch",
+					over:function(event, ui) {
+						var thismodel = this_.options.model;
+						var thatmodel = ui.draggable.data("model")();
+						console.log('over > ', thismodel.id, thatmodel.id);					
+						if (thismodel.id !== thatmodel.id) {
+							highlight($(ui.draggable));
+							highlight(this_.$el); 
+						} else {
+							unlight(this_.$el);
+							unlight($(ui.draggable)); 
+						}
+					},
+					out:function(event, ui) {
 						unlight($(ui.draggable));
-						unlight(this_.$el); 						
-						thismodel.setSameAs(thatmodel);
+						unlight(this_.$el); 
+					},
+					drop: function( event, ui ) {
+						var thismodel = this_.options.model.model;
+						var thatmodel = ui.draggable.data("model")().model;
+						if (thismodel.id !== thatmodel.id) {
+							unlight($(ui.draggable));
+							unlight(this_.$el); 						
+							thismodel.setSameAs(thatmodel);
+						}
 					}
-				}
-			});
+				});
 		}
 	});
 	
