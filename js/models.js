@@ -184,11 +184,23 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 					if (_(options).isUndefined() || _(options.reflected_from_sameas).isUndefined()) {
 						this_.trigger(eventType,  m,  _(options || {}).extend({reflected_from_sameas: true}));
 					}
-				});
-				this.trigger('change');
+				}, this);
+				this.trigger('change:sameas');
 			}
 			return this;
 		},
+		unsetSameAs:function(m) {
+			// unsets m to be the sameAs us, which destructively
+			// modifies us
+			var this_ = this;
+			if (this.sameas.indexOf(m) >= 0) {
+				this.sameas = _(this.sameas).without(m);
+				m.unsetSameAs(this);
+				m.off('all', null, this);
+				this.trigger('change:sameas');
+			}
+			return this;
+		},		
 		valueOf:function() { return this.id; },
 		isSameAs:function(m) {
 			return this.sameas.indexOf(m) >= 0;

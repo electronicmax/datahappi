@@ -23,6 +23,7 @@ define(['js/basemodel', 'js/models', 'js/utils'], function(basemodel, maxel, uti
 		_get_model : function(uri) {
 			if (!(uri in this._modelsbyuri)) {
 				this._modelsbyuri[uri] = new ( this.get("modeltype")[0] )({_id:uri});
+				this.trigger('new-model', this._modelsbyuri[uri]); // added so that we can get notifications of creations
 			}
 			return this._modelsbyuri[uri];
 		},

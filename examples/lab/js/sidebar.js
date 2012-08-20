@@ -1,4 +1,4 @@
-define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],function(sources,views,tv,util) {
+define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/sameasview','js/utils'],function(sources,views,tv,sameas,util) {
 	var defined = util.DEFINED;
 	
 	var ThingsView = tv.TableView.extend({
@@ -27,17 +27,6 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			$(els).hide();
 		}		
 	});
-	
-	var SameAsView = tv.TableView.extend({
-		columns:[
-			function(m) {
-				var view = new sameasview.SameAsRelationView({models:m});
-				view.render();
-				return view;
-			}
-		]
-	});	
-		
 	var SourcesView = Backbone.View.extend({
 		events : {
 			"click .new-source-add-button" : "_show_source_url",
@@ -89,28 +78,34 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','js/utils'],functi
 			"click .tab":"toggle_data"
 		},
 		initialize:function(options) {
-			// must
 			console.assert(this.options.el, "must provide an el for sidebar");
+			this.sources = new sources.SourceCollection(this.options.sources);
 		},
 		render:function() {
-			var sourcec = new sources.SourceCollection(this.options.sources);
-			var sv = new SourcesView({el: this.$el.find('.sources'), collection:sourcec, sidebar: this}).render(); 
+			var this_ = this;
+			var sv = new SourcesView({el: this.$el.find('.sources'), collection:this.sources, sidebar: this}).render(); 
 			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
+			var sameas_view = new sameas.SameAsView({el:this.$el.find('.sameas-view')[0] });
+			// we need to watch any new models created by the sources,
+			// and tell our sameas watcher.
+			var watch_model = function(m) {
+				console.log(" >>>>>>>>>> creating a new model, registering it >>>>>>> ", m.id );
+				sameas_view.add_to_watch(m);
+			};
+			
+			this.sources.map(function(src) { src.on('new-model', watch_model, this); });			
+			this.sources.on('add', function(src) {	src.on('new-model', watch_model, this);			})
+				.on('remove', function(src) { src.off('all', null, this); });					
+			
 			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
 			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
-			
-			setTimeout(function() {
-				sourcec.map(function(src) {
-					console.log("SOURCE ", src.get('url'));
-					src.fetch().then(function(data) {
-						window.DATA = data;
-						console.log('adding data from source ', src.get('url'), data.length, data);
-						data.map(function(datum) {
-							things_view.collection.add(datum);
-						});
-					});
+
+			this_.sources.map(function(src) {
+				src.fetch().then(function(data) {
+					data.map(function(datum) {	things_view.collection.add(datum);	});
 				});
-			}, 1000);
+			});
+
 			return this;			
 		},
 		slideOut:function() {

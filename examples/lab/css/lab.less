@@ -35,25 +35,54 @@ body {
         .things {
 			background-color:white;    
             position:absolute;
-            top:100px; bottom:0px; left:0px; right:0px;
-            border:1px solid #eee;
+            top:100px; bottom:140px; left:0px; right:0px;
+			border-right:1px solid #eee;
+			border-top:1px solid #eee;
 		    input {
 				width: 100%;
 				margin-right: auto;
 				margin-left:auto;
 		    }
 			.tablecontainer {
-				height:100%;			
+				position:absolute;top:0px; right:0px; bottom:0px; left:0px;
 				overflow: auto;
 				background-color:white;
-				border:10px solid #ddd;
-				border-radius:34px 0px 0px 34px;
-				padding:10px 30px 13px 13px;
+				padding:10px 30px 10px 10px;
 			}
 			table {
 				margin-bottom:50px;
 			}
         }
+		.sameas-view {
+			background-color:rgba(255,170,80,0.05);
+			font-size:1.2em;
+			position:absolute;
+			left: 0px; right:0px; bottom:0px; height:140px;
+			padding:10px 4px 0px 20px;
+			text-align:right;
+			border-right:1px solid orange;
+			.sameas-relation {
+				padding:0px 24px 2px 2px;
+				border-radius:2px;
+				position:relative;
+				background:rgba(255,170,80,0.10);
+				.delete {
+					position:absolute;
+					right:2px;
+					top:2px;
+					color:rgba(50,50,50,0.50);
+					&.hover { color:black; }
+				}
+				div {
+					display:inline-block;
+					padding-left:5px; padding-right:5px;
+				}
+				&:hover {
+					background-color:rgba(200,200,200,0.2);
+				}
+			}
+			
+		}		
         .new-source-add-button { position:absolute; top: 0px; right: 3px; padding:0px; }
         .new-source-url { display:none; width:100%; }
 	}
@@ -148,6 +177,7 @@ body {
 			font-size:1.0em;
 		}
 	}
+	
 
 	// compound pathable views
 	.pathable-view {
