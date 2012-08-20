@@ -269,6 +269,10 @@ results['shared:plus,twitter'] = set(plus.keys()) & set(twitter.keys())
 results['shared:twitter,fb'] = set(twitter.keys()) & set(facebook.keys())
 results['shared:all'] = set(facebook.keys()) & set(plus.keys()) & set(twitter.keys())
 
+results['attributes:fb'] = len(facebook)
+results['attributes:plus'] = len(plus)
+results['attributes:twitter'] = len(twitter)
+
 def uniqPathDepths(schema):
 	def uniqPathDepthsRecurse(schema, currentDepth):
 		try:
