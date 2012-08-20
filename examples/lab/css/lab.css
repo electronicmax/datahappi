@@ -54,13 +54,13 @@ body .slidepanel .things .tablecontainer {
   left: 0px;
   overflow: auto;
   background-color: white;
-  padding: 10px 30px 10px 10px;
+  padding: 10px 4px 0px 20px;
 }
 body .slidepanel .things table {
   margin-bottom: 50px;
 }
 body .slidepanel .sameas-view {
-  background-color: rgba(255, 170, 80, 0.05);
+  background-color: rgba(255, 170, 80, 0.09);
   font-size: 1.2em;
   position: absolute;
   left: 0px;
@@ -75,7 +75,7 @@ body .slidepanel .sameas-view .sameas-relation {
   padding: 0px 24px 2px 2px;
   border-radius: 2px;
   position: relative;
-  background: rgba(255, 170, 80, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 body .slidepanel .sameas-view .sameas-relation .delete {
   position: absolute;
@@ -92,7 +92,7 @@ body .slidepanel .sameas-view .sameas-relation div {
   padding-right: 5px;
 }
 body .slidepanel .sameas-view .sameas-relation:hover {
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 body .slidepanel .new-source-add-button {
   position: absolute;
@@ -185,18 +185,15 @@ body .things .item {
   border: 1px solid rgba(255, 255, 255, 0);
   position: relative;
   margin: 0px;
-  width: 200px;
-  padding: 0 0 0 4px;
+  padding: 0px 4px 0px 4px;
   overflow: hidden;
+  text-align: right;
 }
 body .things .item .thing-label a {
   font-size: 0.5em;
 }
 body .things .item:hover {
   border: 1px solid #eee;
-}
-body .things .item:hover .delete {
-  display: block;
 }
 body .things .item .props {
   display: none;

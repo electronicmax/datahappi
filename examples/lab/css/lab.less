@@ -47,14 +47,14 @@ body {
 				position:absolute;top:0px; right:0px; bottom:0px; left:0px;
 				overflow: auto;
 				background-color:white;
-				padding:10px 30px 10px 10px;
+				padding:10px 4px 0px 20px;
 			}
 			table {
 				margin-bottom:50px;
 			}
         }
 		.sameas-view {
-			background-color:rgba(255,170,80,0.05);
+			background-color:rgba(255,170,80,0.09);
 			font-size:1.2em;
 			position:absolute;
 			left: 0px; right:0px; bottom:0px; height:140px;
@@ -65,7 +65,7 @@ body {
 				padding:0px 24px 2px 2px;
 				border-radius:2px;
 				position:relative;
-				background:rgba(255,170,80,0.10);
+				background-color:rgba(255,255,255,0.12); // rgba(255,170,80,0.10);
 				.delete {
 					position:absolute;
 					right:2px;
@@ -78,7 +78,7 @@ body {
 					padding-left:5px; padding-right:5px;
 				}
 				&:hover {
-					background-color:rgba(200,200,200,0.2);
+					background-color:rgba(255,255,255,0.75);
 				}
 			}
 			
@@ -152,17 +152,14 @@ body {
 	.things .item {
         -webkit-transition: background-color 0.2s ease-in-out;
         -webkit-transition: padding 0.2s ease-in-out;
-		border:1px solid rgba(255,255,255,0);                		
+		border:1px solid rgba(255,255,255,0);
 		position:relative;
 		margin:0px;
-		width:200px;
-		padding:0 0 0 4px;
+		padding:0px 4px 0px 4px;
 		overflow:hidden;
+		text-align:right;
 		.thing-label a { font-size:0.5em;	}
-		&:hover {
-			border:1px solid #eee;
-			.delete { display:block; }
-		}
+		&:hover { border:1px solid #eee;	}
 		.props {
 			display:none;
 			font-size:0.7em;
@@ -178,7 +175,6 @@ body {
 		}
 	}
 	
-
 	// compound pathable views
 	.pathable-view {
 		position:relative;
