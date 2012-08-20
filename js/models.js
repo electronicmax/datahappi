@@ -178,6 +178,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// modifies us
 			var this_ = this;
 			if (this.sameas.indexOf(m) < 0) {
+				this.sameas.map(function(sa) {
+					m.setSameAs(sa);
+				});
 				this.sameas.push(m);
 				m.setSameAs(this);
 				m.on('all', function(eventType,m,options) {
@@ -207,6 +210,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		},
 		get_label:function() {
 			// is model
+			if (this.get('label') && this.get('label').length > 0) {
+				return this.get('label').sort().join(' / ');
+			}			
 			var m = this.toJSON();
 			var lastpath = function(x) {
 				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }

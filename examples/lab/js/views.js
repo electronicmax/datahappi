@@ -53,7 +53,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			// step 0: set up shell if it doesn't exist
 			if (!this.$el.html().length) {
 				this.$el.append($lens_template);
-				// this._add_sameas_behaviour(this.$el);
+				this._add_sameas_behaviour(this.$el);
 			}
 
 			this.$el.data('view',this); // for when someone drags us into a box
@@ -126,9 +126,9 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			var unlight = function(view) { view.$el.removeClass('sameas-over'); };
 			
 			$(el).droppable({
-				// greedy:true, // magical nesting of droppables
+				greedy:true, // magical nesting of droppables
 				accept:'.item,.dereferenced-model',
-				tolerance:"touch",
+				// tolerance:"touch",
 				over:function(event, ui) {
 					var thismodel = this_.options.model;
 					var thatmodel = ui.draggable.data("model")();
@@ -145,10 +145,9 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 					unlight(this_); 
 				},
 				drop: function( event, ui ) {
-					var thismodel = this_.options.model;
-					var thatmodel = ui.draggable.data("model")();
+					var thismodel = this_.options.model.model;
+					var thatmodel = ui.draggable.data("model")().model;
 					if (thismodel.id !== thatmodel.id) {
-						console.log("OMG SETSAMEAS ", thismodel.id, 'vs', thatmodel.id);
 						unlight(ui.draggable.data("view"));
 						unlight(this_); 						
 						thismodel.setSameAs(thatmodel);
