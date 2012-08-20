@@ -54,7 +54,7 @@ body .slidepanel .things .tablecontainer {
   left: 0px;
   overflow: auto;
   background-color: white;
-  padding: 10px 30px 10px 10px;
+  padding: 10px 4px 0px 20px;
 }
 body .slidepanel .things table {
   margin-bottom: 50px;
@@ -185,18 +185,15 @@ body .things .item {
   border: 1px solid rgba(255, 255, 255, 0);
   position: relative;
   margin: 0px;
-  width: 200px;
-  padding: 0 0 0 4px;
+  padding: 0px 4px 0px 4px;
   overflow: hidden;
+  text-align: right;
 }
 body .things .item .thing-label a {
   font-size: 0.5em;
 }
 body .things .item:hover {
   border: 1px solid #eee;
-}
-body .things .item:hover .delete {
-  display: block;
 }
 body .things .item .props {
   display: none;
