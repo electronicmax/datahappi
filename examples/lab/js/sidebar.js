@@ -75,33 +75,33 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 		},
 		initialize:function(options) {
 			console.assert(this.options.el, "must provide an el for sidebar");
-			this.sources = new sources.SourceCollection(this.options.sources);			
+			this.sources = new sources.SourceCollection(this.options.sources);
 		},
 		render:function() {
 			var this_ = this;
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:this.sources, sidebar: this}).render(); 
 			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
-			var sameas_view = new sameas.SameasView({el:this.$el.find('.sameas-view')[0] });
+			var sameas_view = new sameas.SameAsView({el:this.$el.find('.sameas-view')[0] });
 			// we need to watch any new models created by the sources,
 			// and tell our sameas watcher.
-			this.sources
-				.on('add', function(src) {	src.on('new-model', function(m) { sameasview.add_to_watch(m); }, this);	})
-				.on('remove', function(src) {src.off('all', null, this);	});					
+			var watch_model = function(m) {
+				console.log(" >>>>>>>>>> creating a new model, registering it >>>>>>> ", m.id );
+				sameas_view.add_to_watch(m);
+			};
+			
+			this.sources.map(function(src) { src.on('new-model', watch_model, this); });			
+			this.sources.on('add', function(src) {	src.on('new-model', watch_model, this);			})
+				.on('remove', function(src) { src.off('all', null, this); });					
 			
 			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
 			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
-			setTimeout(function() {
-				this_.sources.map(function(src) {
-					console.log("SOURCE ", src.get('url'));
-					src.fetch().then(function(data) {
-						window.DATA = data;
-						console.log('adding data from source ', src.get('url'), data.length, data);
-						data.map(function(datum) {
-							things_view.collection.add(datum);
-						});
-					});
+
+			this_.sources.map(function(src) {
+				src.fetch().then(function(data) {
+					data.map(function(datum) {	things_view.collection.add(datum);	});
 				});
-			}, 1000);
+			});
+
 			return this;			
 		},
 		slideOut:function() {

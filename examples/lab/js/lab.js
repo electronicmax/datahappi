@@ -63,9 +63,10 @@ define([
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			$.when(pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')).then(
+			$.when(pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))).then(
 				function() {
 					var srcs = _.toArray(arguments);
+					window.__srcs__ = srcs;
 					var wview = new Main({el : $('body'), data_sources: srcs}).render();
 					wview.sidebar.slideOut('very fast');
 				});
