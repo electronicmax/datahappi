@@ -22,7 +22,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		},
 		_is_model:function(model_or_value) {
 			return model_or_value instanceof Backbone.Model && defined(model_or_value.id);
-		},		
+		},
 		_get_label:function(model_or_value) {
 			var this_ = this;
 			if (model_or_value instanceof models.Maxel) { return model_or_value.get_label(); }
@@ -80,7 +80,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 						child = val_template.clone().appendTo( $values );
 					}
 					$(child).html(this_._get_label(v));
-					$(child).attr('data-val', this_._get_label(v)); // for brushing 
+					$(child).attr('data-val', this_._get_label(v)); // for brushing
 					if (v instanceof models.Maxel) {
 						// then it can be accepted by other instanceboxes
 						$(child).data('model', function() { return new pathables.Pathable({model:v}); });					
@@ -122,8 +122,8 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		_add_sameas_behaviour:function(el) {
 			// make _el_ droppable -- with a clear warning
 			var this_ = this;
-			var highlight = function(view) { view.$el.addClass('sameas-over');	};
-			var unlight = function(view) { view.$el.removeClass('sameas-over'); };
+			var highlight = function($el) { $el.addClass('sameas-over'); };
+			var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
 			$(el).droppable({
 				greedy:true, // magical nesting of droppables
@@ -132,24 +132,25 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 				over:function(event, ui) {
 					var thismodel = this_.options.model;
 					var thatmodel = ui.draggable.data("model")();
+					console.log('over > ', thismodel.id, thatmodel.id);					
 					if (thismodel.id !== thatmodel.id) {
-						highlight(ui.draggable.data("view"));
-						highlight(this_); 
+						highlight($(ui.draggable));
+						highlight(this_.$el); 
 					} else {
-						unlight(ui.draggable.data("view"));
-						unlight(this_); 
+						unlight(this_.$el);
+						unlight($(ui.draggable)); 
 					}
 				},
 				out:function(event, ui) {
-					unlight(ui.draggable.data("view"));
-					unlight(this_); 
+					unlight($(ui.draggable));
+					unlight(this_.$el); 
 				},
 				drop: function( event, ui ) {
 					var thismodel = this_.options.model.model;
 					var thatmodel = ui.draggable.data("model")().model;
 					if (thismodel.id !== thatmodel.id) {
-						unlight(ui.draggable.data("view"));
-						unlight(this_); 						
+						unlight($(ui.draggable));
+						unlight(this_.$el); 						
 						thismodel.setSameAs(thatmodel);
 					}
 				}

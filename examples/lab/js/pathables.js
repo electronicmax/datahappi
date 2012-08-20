@@ -99,6 +99,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			assert(!_(options.model).isUndefined(), "model must be specified");
 			this.setModel(options.model);
 			this.model.on('all', function(eventType, args) {
+				console.log("model got ", this_.model.id, eventType);
 				this_.set_path(this_.path, true);
 				this_.trigger(eventType, args);
 			});

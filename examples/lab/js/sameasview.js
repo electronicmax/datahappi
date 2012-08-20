@@ -17,7 +17,7 @@ define(['js/utils'],  function(utils) {
 	var SameAsRelationView = Backbone.View.extend({
 		tagName:"div",
 		className:"sameas-relation",
-		template : "<div class='label'><%= m[0].get_label() %></div> &#8646; <div class='label'><%= m[1].get_label() %></div> <div class='delete icon-cancel''></div>",
+		template : "<div class='label'><%= m[0]._get_label() %></div> &#8646; <div class='label'><%= m[1]._get_label() %></div> <div class='delete icon-cancel''></div>",
 		events:{ 'click .delete': '_cb_delete'	},
 		initialize:function() {
 			assert(this.options.relation, "relation needs to be defined");
