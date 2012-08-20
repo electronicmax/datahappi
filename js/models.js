@@ -203,7 +203,19 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				this.trigger('change:sameas');
 			}
 			return this;
-		},		
+		},
+		clearSameAs:function(m) {
+			// unsets m to be the sameAs us, which destructively
+			// modifies us
+			var this_ = this;
+			this.sameas.map(function(m) {
+				m.unsetSameAs(this_);
+				m.off('all', null, this);
+			});
+			this.sameas = [];
+			this.trigger('change:sameas');
+			return this;
+		},				
 		valueOf:function() { return this.id; },
 		isSameAs:function(m) {
 			return this.sameas.indexOf(m) >= 0;
