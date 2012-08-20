@@ -22,7 +22,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		},
 		_is_model:function(model_or_value) {
 			return model_or_value instanceof Backbone.Model && defined(model_or_value.id);
-		},		
+		},
 		_get_label:function(model_or_value) {
 			var this_ = this;
 			if (model_or_value instanceof models.Maxel) { return model_or_value.get_label(); }
@@ -39,7 +39,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 	// show pathables in a lovely way
 	var PathableView = CommonView.extend({
 		template:pathableview_templ,
-		className:'pathable-view item',
+		className:'pathable-view',
 		events:{
 			'click .delete' : '_cb_delete',
 			'click .proplabel' : '_prop_select'
@@ -53,7 +53,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			// step 0: set up shell if it doesn't exist
 			if (!this.$el.html().length) {
 				this.$el.append($lens_template);
-				// this._add_sameas_behaviour(this.$el);
+				this._add_sameas_behaviour(this.$el);
 			}
 
 			this.$el.data('view',this); // for when someone drags us into a box
@@ -80,7 +80,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 						child = val_template.clone().appendTo( $values );
 					}
 					$(child).html(this_._get_label(v));
-					$(child).attr('data-val', this_._get_label(v)); // for brushing 
+					$(child).attr('data-val', this_._get_label(v)); // for brushing
 					if (v instanceof models.Maxel) {
 						// then it can be accepted by other instanceboxes
 						$(child).data('model', function() { return new pathables.Pathable({model:v}); });					
@@ -119,42 +119,44 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			if (v instanceof Backbone.Model) { return v.keys(); }
 			return [];
 		},
-		_add_sameas_behaviour:function(el) {
+		_add_sameas_behaviour:function() {
 			// make _el_ droppable -- with a clear warning
 			var this_ = this;
-			var highlight = function(view) { view.$el.addClass('sameas-over');	};
-			var unlight = function(view) { view.$el.removeClass('sameas-over'); };
+			var highlight = function($el) { $el.addClass('sameas-over'); };
+			var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
-			$(el).droppable({
-				// greedy:true, // magical nesting of droppables
-				accept:'.item,.dereferenced-model',
-				tolerance:"touch",
-				over:function(event, ui) {
-					var thismodel = this_.options.model;
-					var thatmodel = ui.draggable.data("model")();
-					if (thismodel.id !== thatmodel.id) {
-						highlight(ui.draggable.data("view"));
-						highlight(this_); 
-					} else {
-						unlight(ui.draggable.data("view"));
-						unlight(this_); 
+			this.$el.find('.name')
+				.add(this.$el.find('.values').children())
+				.droppable({
+					greedy:true, // magical nesting of droppables
+					accept:'.item,.pathable-view,.dereferenced-model',
+					// tolerance:"touch",
+					over:function(event, ui) {
+						var thismodel = this_.options.model;
+						var thatmodel = ui.draggable.data("model")();
+						console.log('over > ', thismodel.id, thatmodel.id);					
+						if (thismodel.id !== thatmodel.id) {
+							highlight($(ui.draggable));
+							highlight(this_.$el); 
+						} else {
+							unlight(this_.$el);
+							unlight($(ui.draggable)); 
+						}
+					},
+					out:function(event, ui) {
+						unlight($(ui.draggable));
+						unlight(this_.$el); 
+					},
+					drop: function( event, ui ) {
+						var thismodel = this_.options.model.model;
+						var thatmodel = ui.draggable.data("model")().model;
+						if (thismodel.id !== thatmodel.id) {
+							unlight($(ui.draggable));
+							unlight(this_.$el); 						
+							thismodel.setSameAs(thatmodel);
+						}
 					}
-				},
-				out:function(event, ui) {
-					unlight(ui.draggable.data("view"));
-					unlight(this_); 
-				},
-				drop: function( event, ui ) {
-					var thismodel = this_.options.model;
-					var thatmodel = ui.draggable.data("model")();
-					if (thismodel.id !== thatmodel.id) {
-						console.log("OMG SETSAMEAS ", thismodel.id, 'vs', thatmodel.id);
-						unlight(ui.draggable.data("view"));
-						unlight(this_); 						
-						thismodel.setSameAs(thatmodel);
-					}
-				}
-			});
+				});
 		}
 	});
 	

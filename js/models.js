@@ -178,6 +178,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// modifies us
 			var this_ = this;
 			if (this.sameas.indexOf(m) < 0) {
+				this.sameas.map(function(sa) {
+					m.setSameAs(sa);
+				});
 				this.sameas.push(m);
 				m.setSameAs(this);
 				m.on('all', function(eventType,m,options) {
@@ -200,13 +203,28 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				this.trigger('change:sameas');
 			}
 			return this;
-		},		
+		},
+		clearSameAs:function(m) {
+			// unsets m to be the sameAs us, which destructively
+			// modifies us
+			var this_ = this;
+			this.sameas.map(function(m) {
+				m.unsetSameAs(this_);
+				m.off('all', null, this);
+			});
+			this.sameas = [];
+			this.trigger('change:sameas');
+			return this;
+		},				
 		valueOf:function() { return this.id; },
 		isSameAs:function(m) {
 			return this.sameas.indexOf(m) >= 0;
 		},
 		get_label:function() {
-			// is model
+			if (this.sameas.length == 0) { return this._get_label(); }
+			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort().join(' / '); 
+		},
+		_get_label:function() {
 			var m = this.toJSON();
 			var lastpath = function(x) {
 				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }

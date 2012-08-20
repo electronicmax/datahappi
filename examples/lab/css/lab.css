@@ -14,9 +14,50 @@
 .sameas-over {
   border: 3px solid orange !important;
 }
+.ui-draggable-dragging {
+  z-index: 10000;
+}
 body {
   margin: 0;
   padding: 0;
+}
+body .item:hover .delete {
+  display: none;
+}
+body .item {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: padding 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0);
+  position: relative;
+  margin: 0px;
+  padding: 0px 4px 0px 4px;
+  overflow: hidden;
+  text-align: right;
+  width: 264px;
+}
+body .item .thing-label a {
+  font-size: 0.5em;
+}
+body .item:hover {
+  border: 1px solid #eee;
+}
+body .item .props {
+  display: none;
+  font-size: 0.7em;
+}
+body .item .delete {
+  z-index: 1000;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 5px;
+  display: none;
+  opacity: 0.8;
+  font-size: 1.0em;
+}
+body .item.ui-draggable-dragging {
+  border: 1px solid rgba(200, 200, 200, 0.3) !important;
 }
 body .slidepanel .sources {
   width: 100%;
@@ -73,9 +114,10 @@ body .slidepanel .sameas-view {
 }
 body .slidepanel .sameas-view .sameas-relation {
   padding: 0px 24px 2px 2px;
+  margin: 0px 0px 8px 0px;
   border-radius: 2px;
   position: relative;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.42);
 }
 body .slidepanel .sameas-view .sameas-relation .delete {
   position: absolute;
@@ -92,7 +134,7 @@ body .slidepanel .sameas-view .sameas-relation div {
   padding-right: 5px;
 }
 body .slidepanel .sameas-view .sameas-relation:hover {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 body .slidepanel .new-source-add-button {
   position: absolute;
@@ -175,40 +217,6 @@ body .flip-horizontal {
   filter: fliph;
   /*IE*/
 
-}
-body .things .item:hover .delete {
-  display: none;
-}
-body .things .item {
-  -webkit-transition: background-color 0.2s ease-in-out;
-  -webkit-transition: padding 0.2s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0);
-  position: relative;
-  margin: 0px;
-  padding: 0px 4px 0px 4px;
-  overflow: hidden;
-  text-align: right;
-}
-body .things .item .thing-label a {
-  font-size: 0.5em;
-}
-body .things .item:hover {
-  border: 1px solid #eee;
-}
-body .things .item .props {
-  display: none;
-  font-size: 0.7em;
-}
-body .things .item .delete {
-  z-index: 1000;
-  position: absolute;
-  top: 2px;
-  margin: 0px;
-  padding: 0px;
-  right: 5px;
-  display: none;
-  opacity: 0.8;
-  font-size: 1.0em;
 }
 body .pathable-view {
   position: relative;

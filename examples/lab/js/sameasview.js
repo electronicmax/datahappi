@@ -4,11 +4,16 @@ define(['js/utils'],  function(utils) {
 	var SameAsRelation = Backbone.Model.extend({
 		idAttribute:"_id",
 		initialize:function(attrs) {
-			var models = _(attrs.models).sortBy(function(x) { return x.id; });
+			this.setModels(attrs.models);
+		},
+		setModels:function(models) {
+			models = _(models).sortBy(function(x) { return x.id; });
 			this.set({
-				_id: models.map(function(x) { return x.id; }).join('-')
+				_id: models.map(function(x) { return x.id; }).join('-') || '-no models-'
 			});
+			console.log('relation ::: set models, ', this.id);			
 			this.set({models:models});
+			this.trigger('change');
 		}
 	});
 
@@ -17,13 +22,18 @@ define(['js/utils'],  function(utils) {
 	var SameAsRelationView = Backbone.View.extend({
 		tagName:"div",
 		className:"sameas-relation",
-		template : "<div class='label'><%= m[0].get_label() %></div> &#8646; <div class='label'><%= m[1].get_label() %></div> <div class='delete icon-cancel''></div>",
+		template : "<div class='equivs'></div><div class='delete icon-cancel'></div>",
 		events:{ 'click .delete': '_cb_delete'	},
 		initialize:function() {
+			var this_ = this;
 			assert(this.options.relation, "relation needs to be defined");
+			this.options.relation.on('change', function() { this_.render(); });
 		},
 		render:function() {
-			this.$el.html(_(this.template).template({ m : this.options.relation.get("models") }));
+			this.$el.html(this.template);
+			var equivs = this.$el.find('.equivs');			
+			var t  = "<div class='label'><%= m._get_label() %></div>";
+			equivs.append(this.options.relation.get("models").map(function(x) {  return _(t).template({m:x}); }).join(" &#8646; "));
 			return this;
 		},
 		_cb_delete:function() { this.trigger('delete'); }
@@ -44,25 +54,34 @@ define(['js/utils'],  function(utils) {
 				})
 				.on('remove', function(relation) {
 					// does the nasty work of updating views etc
-					this_.views[relation.id].remove();
-					delete this_.views[relation.id];
+					if (this_.views[relation.id]) {
+						this_.views[relation.id].remove();
+						delete this_.views[relation.id];
+					}
 				});
 		},
 		add_to_watch:function(m) {
 			var this_ = this;
 			m.on('change:sameas', function() {
-				m.sameas.map(function(x) {
-					var sr = new SameAsRelation({ models: [m,x] });
-					if (_(this_.relations.get(sr)).isUndefined()) {
-						this_.relations.add(sr);
-						sr.on('delete', function() { this_._delete_relation(sr); });
-					}
+				// existing selection
+				var r = this_.relations.filter(function(rr) {
+					return _(m.sameas).union(rr.get('models')).length < m.sameas.length + rr.get('models').length;
 				});
+				if (m.sameas.length === 0 && r.length > 0) {
+					r.map(function(rr) { this_.relations.remove(rr); });
+				} else if (m.sameas.length > 0  && r.length === 0) {
+					r = [new SameAsRelation({ models: _(m.sameas.concat([m])).uniq() })];
+					this_.relations.add(r[0]);
+					r[0].on('delete', function() { this_._delete_relation(r[0]); });					
+				} else {
+					r.map(function(rr) { rr.setModels(_(m.sameas.concat([m])).uniq()); });
+				}
 			}, this);
 		},
 		_delete_relation:function(relation) {
-			var m0 = relation.get('models')[0],	m1 = relation.get('models')[1];
-			m0.unsetSameAs(m1); 
+			relation.get('models').map(function(m) {
+				m.clearSameAs();
+			});
 			this.relations.remove(relation); // triggers 
 		}
 	});
