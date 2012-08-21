@@ -130,7 +130,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 				.droppable({
 					greedy:true, // magical nesting of droppables
 					accept:'.item,.pathable-view,.dereferenced-model',
-					tolerance:"touch",
+					tolerance:"pointer",
 					over:function(event, ui) {
 						var thismodel = this_.options.model;
 						var thatmodel = ui.draggable.data("model")();
