@@ -1,29 +1,38 @@
 from __future__ import division
+
+import collections
 import itertools
+import pprint
 
 from api_fields import apis
 
 results = {}
+
+def print_results():
+	pprint.pprint(results)
 
 def powerset(iterable):
 	"powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
 	s = list(iterable)
 	return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
 
+def flatten(x):
+    result = []
+    for el in x:
+        if hasattr(el, "__iter__") and not isinstance(el, basestring):
+            result.extend(flatten(el))
+        else:
+            result.append(el)
+    return result
 
-""" Get terminology overlaps """
+# Get terminology overlaps
 for combo in powerset(apis.keys()):			# For all combinations of apis..
 	if len(combo) < 2:
 		continue							# ..which include 2 or more apis..
 
-	results['intersection:'+','.join(combo)] = reduce(
-		lambda x, y: x & y,					#..intersect all of the..
-		[set(apis[api]) for api in combo])	#..sets of api attributes.
-"""
-
-results['attributes:fb'] = len(facebook)
-results['attributes:plus'] = len(plus)
-results['attributes:twitter'] = len(twitter)
+	results['intersection:'+','.join(combo)] = reduce( # ..record the..
+		lambda x, y: x & y,					# ..intersection of each element in..
+		[set(apis[api]) for api in combo])	# ..every set of api attributes.
 
 def uniqPathDepths(schema):
 	def uniqPathDepthsRecurse(schema, currentDepth):
@@ -44,29 +53,14 @@ def uniqPathDepths(schema):
 
 	return uniqPathDepthsRecurse(schema, 0)
 
-def flatten(x):
-	try:
-		it = iter(x)
-	except TypeError:
-		yield x
-	else:
-		for i in it:
-			for j in flatten(i):
-				yield j
+for api, attributes in apis.iteritems():
+	# Get attribute counts
+	results['attributes:'+api] = len(attributes)
 
-def maximumDepth(schema):
-	flatPathDepths = flatten(uniqPathDepths(schema))
-	return sorted(flatPathDepths)[-1]
+	flatPathDepths = flatten(uniqPathDepths(attributes))
+	results['maxdepth:'+api] = sorted(flatPathDepths)[-1]
+	results['avgdepth:'+api] = sum(flatPathDepths) / len(flatPathDepths)
 
-results['maxdepth:fb'] = maximumDepth(facebook)
-results['maxdepth:plus'] = maximumDepth(plus)
-results['maxdepth:twitter'] = maximumDepth(twitter)
-
-def avgDepth(schema):
-	flatPathDepths = list(flatten(uniqPathDepths(schema)))
-	return sum(flatPathDepths) / len(flatPathDepths)
-
-results['avgdepth:fb'] = avgDepth(facebook)
-results['avgdepth:plus'] = avgDepth(plus)
-results['avgdepth:twitter'] = avgDepth(twitter)
-"""
+# Print results if not imported (i.e: called from the commandline)
+if __name__ == "__main__":
+	print_results()
