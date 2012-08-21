@@ -12,7 +12,11 @@
   text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
 }
 .sameas-over {
-  border: 3px solid orange !important;
+  border: 1px solid orange !important;
+}
+.sameas-over .sameas-handle {
+  border: none !important;
+  color: orange;
 }
 .ui-draggable-dragging {
   z-index: 10000;

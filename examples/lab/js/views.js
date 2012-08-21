@@ -125,34 +125,42 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			var highlight = function($el) { $el.addClass('sameas-over'); };
 			var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
-			this.$el.find('.name')
+			this.$el.find('.sameas-handle')
 				.add(this.$el.find('.values').children())
 				.droppable({
 					greedy:true, // magical nesting of droppables
 					accept:'.item,.pathable-view,.dereferenced-model',
-					// tolerance:"touch",
+					tolerance:"touch",
 					over:function(event, ui) {
 						var thismodel = this_.options.model;
 						var thatmodel = ui.draggable.data("model")();
-						console.log('over > ', thismodel.id, thatmodel.id);					
 						if (thismodel.id !== thatmodel.id) {
 							highlight($(ui.draggable));
-							highlight(this_.$el); 
+							// highlight($(event.target));							
+							highlight(this_.$el);
+							highlight($(this));
 						} else {
 							unlight(this_.$el);
+							// unlight($(event.target));
+							unlight($(this));
 							unlight($(ui.draggable)); 
 						}
 					},
 					out:function(event, ui) {
+						unlight($(event.target));						
 						unlight($(ui.draggable));
-						unlight(this_.$el); 
+						unlight(this_.$el);
+						unlight($(this));						
 					},
 					drop: function( event, ui ) {
+						console.log('drop ', event, ui);
 						var thismodel = this_.options.model.model;
 						var thatmodel = ui.draggable.data("model")().model;
 						if (thismodel.id !== thatmodel.id) {
+							unlight($(event.target));						
 							unlight($(ui.draggable));
-							unlight(this_.$el); 						
+							unlight(this_.$el);
+							unlight($(this));													
 							thismodel.setSameAs(thatmodel);
 						}
 					}
