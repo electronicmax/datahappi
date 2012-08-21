@@ -1,14 +1,25 @@
 from __future__ import division
 import itertools
 
-from api_fields import *
+from api_fields import apis
 
 results = {}
 
-results['shared:fb,plus'] = set(facebook.keys()) & set(plus.keys())
-results['shared:plus,twitter'] = set(plus.keys()) & set(twitter.keys())
-results['shared:twitter,fb'] = set(twitter.keys()) & set(facebook.keys())
-results['shared:all'] = set(facebook.keys()) & set(plus.keys()) & set(twitter.keys())
+def powerset(iterable):
+	"powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
+	s = list(iterable)
+	return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
+
+
+""" Get terminology overlaps """
+for combo in powerset(apis.keys()):			# For all combinations of apis..
+	if len(combo) < 2:
+		continue							# ..which include 2 or more apis..
+
+	results['intersection:'+','.join(combo)] = reduce(
+		lambda x, y: x & y,					#..intersect all of the..
+		[set(apis[api]) for api in combo])	#..sets of api attributes.
+"""
 
 results['attributes:fb'] = len(facebook)
 results['attributes:plus'] = len(plus)
@@ -58,3 +69,4 @@ def avgDepth(schema):
 results['avgdepth:fb'] = avgDepth(facebook)
 results['avgdepth:plus'] = avgDepth(plus)
 results['avgdepth:twitter'] = avgDepth(twitter)
+"""
