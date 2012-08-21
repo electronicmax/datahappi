@@ -229,8 +229,12 @@ body .pathable-view {
   width: 300px;
   margin-right: 15px;
 }
+body .pathable-view .sameas-handle {
+  padding: 0px 6px 0px 0px;
+  font-size: 1.2em;
+}
 body .pathable-view .name {
-  padding: 0px 0px 0px 3px;
+  padding: 0px 0px 6px 3px;
 }
 body .pathable-view .delete {
   position: absolute;
@@ -262,9 +266,10 @@ body .pathable-view .proplabel {
 body .pathable-view .proplabel:hover {
   color: #000;
 }
-body .pathable-view .values {
+body .pathable-view .values,
+body .pathable-view .props {
   margin: 0px;
-  padding: 0px;
+  padding: 0px 0px 0px 18px;
 }
 body .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);

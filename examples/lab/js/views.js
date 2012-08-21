@@ -126,7 +126,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
 			this.$el.find('.sameas-handle')
-				.add(this.$el.find('.values').children())
+			//				.add(this.$el.find('.values').children())
 				.droppable({
 					greedy:true, // magical nesting of droppables
 					accept:'.item,.pathable-view,.dereferenced-model',
