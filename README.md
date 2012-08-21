@@ -12,9 +12,9 @@ Recommended use:
 
 1. Put src tree under a directory served by a HTTP Server, e.g., /var/www/datahappi.
 2. Launch the CORS proxy:
--  cd &lt;project dir&gt;/proxy;
--  npm install http-proxy;
--  node new-proxy
+ -  cd &lt;project dir&gt;/proxy;
+ -  npm install http-proxy;
+ -  node new-proxy
 3. Point your browser at some examples; for example http://localhost/datahappi/examples/lab/index.html
 4. Party.
 
