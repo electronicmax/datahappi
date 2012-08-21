@@ -1,10 +1,12 @@
-= WebBox - datahappi = 
+WebBox - datahappi 
+=====================
 
 Make your APP data happi - a pure-JS API for mixing private &amp;
 public data.
 
 
-== Examples & Installation ==
+Examples & Installation
+======================
 
 Recommended use:
 
@@ -16,7 +18,8 @@ Recommended use:
 3. Point your browser at some examples; for example http://localhost/datahappi/examples/lab/index.html
 4. Party.
 
-== License & Copyright ==
+License & Copyright
+======================
 
 This project forms part of WebBox, an application for end-user data management.
 Though it provides a "front end" to WebBox, this can also be used entirely 
