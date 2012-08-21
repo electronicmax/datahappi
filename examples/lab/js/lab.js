@@ -7,10 +7,11 @@ define([
 	'examples/lab/js/views',
 	'examples/lab/js/toolbar',
 	'examples/lab/js/visual',
+	'examples/lab/js/visual-map',	
 	'js/utils',
 	'js/googlecal/CalendarCollection',
 	'js/googlecal/auth'
-], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, util, cc, auth) {
+], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth) {
 		var Main = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
@@ -29,9 +30,9 @@ define([
 					.slideOut();
 				
 				var tb = (new toolbar.Toolbar())
-					.on('new_visual', function() {
-						workspace.append((new visual.Visual()).render().el);
-					});				
+					.on('new_visual', function() {	workspace.append((new visual.Visual()).render().el);})
+					.on('new_map',function() { workspace.append((new visualmap.MapVisual()).render().el); });
+				
 				workspace
 					.append(tb.render().el)
 					.droppable({

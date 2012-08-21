@@ -4,14 +4,27 @@
 @visual-y-width:30px;
 @visual-x-height:30px;
 @visual-border-color : rgba(0,180,0,0.2);
+@map-border-color : rgba(180,180,0,0.2);
 .fullsize {
 	position:absolute;
 	top:0px; left:0px; right:0px; bottom:0px;
 }
-.visual {
+.visual, .visual-map {
+	position:absolute;
 	width:@visual-width;
 	height:@visual-height;
-	border:1px solid @visual-border-color;
+	.delete {
+		z-index:1000; 
+		position:absolute;
+		top:2px; margin:0px; padding:0px;
+		right:5px;			
+		display: none;
+		opacity:0.8;
+		font-size:1.0em;
+	}
+}
+.visual {
+	border:1px solid @visual-border-color;	
 	.corner_thingy {
 		width:50px; height:50px;
 		position:absolute;			
@@ -23,15 +36,6 @@
 		right:0px;
 		width:@visual-width - @visual-y-width;
 		height:@visual-height - @visual-x-height;
-	}
-	.delete {
-		z-index:1000; 
-		position:absolute;
-		top:2px; margin:0px; padding:0px;
-		right:5px;			
-		display: none;
-		opacity:0.8;
-		font-size:1.0em;
 	}
 	.droparea {
 		position:absolute;
@@ -58,5 +62,23 @@
 		top:0px;
 		z-index:5;
 		.lbl {	}			
+	}
+}
+
+.visual-map {
+	position:relative;
+	border:1px solid @map-border-color;		
+	.map {
+		position:absolute:
+		top:0px; left:0px; right;0px; bottom:50px;
+	}
+	.dropzones {
+		position:absolute;
+		top:0px; left:0px; height:50px; bottom:0px;
+		.dropzone {
+			display:inline-block;
+			width: 25%;
+			border:1px solid rgba(200,200,200,0.3);
+		}
 	}
 }
