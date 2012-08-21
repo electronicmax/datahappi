@@ -8,10 +8,7 @@ define(['js/utils'], function(utils) {
 		events : {
 			'click .delete' : '_cb_delete'
 		},
-		defaults : {
-			center:[51.505, -0.09],
-			zoom:13,
-		},
+		defaults : { center:[51.505, -0.09], zoom:13 },
 		initialize:function() {
 			this.options = _.extend(this.defaults, this.options);
 			this.datasets = [];			
@@ -19,9 +16,13 @@ define(['js/utils'], function(utils) {
 		render:function() {
 			var this_ = this;
 			this.$el.html(this.template);
-			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
-			this.$el.css('top', 50 + 500*Math.random());
-			this.$el.css('left', 50 + 500*Math.random());
+			this.$el.draggable({
+				handle:this.$el.find('.dropzones'),
+				drag:function(evt,ui) { this_.trigger('drag', ui.offset); }
+			});
+			this.$el.css('top', 50 + 100*Math.random());
+			this.$el.css('left', 50 + 100*Math.random());
+			this.$el.data('view', this);
 			var dropzone = "<div class='dropzone'></div>";
  			[1,2,3,4].map(function(i) { this_.$el.find('.dropzones').append(dropzone);});
 			this.$el.find('.dropzone').droppable({
@@ -41,29 +42,31 @@ define(['js/utils'], function(utils) {
 					$(this).find('.lbl').html('' + views.length + 'items');
 					this_.setData(views, this_.$el.find('.dropzone').index($(this)));
 				}
-			});
-
-			// make the google map
-			this.map = L.map(this.$el.find('.map-zone')[0]).setView(this.options.center, this.options.zoom);
-			
-			L.tileLayer(_('http://{s}.tile.cloudmade.com/<%= apikey %>/997/256/{z}/{x}/{y}.png').template({apikey:this.apiKey}),
-						{
-							attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-							maxZoom: 18
-						}).addTo(this.map);			
+			});						
 			return this;
 		},
-		_update_plot:function() {
-
+		update:function() {
+			// only works upon attachment
+			if (_(this.map).isUndefined() && $('body').find(this.$el[0]).length)  {			
+				// make the google map
+				this.map = L.map(this.$el.find('.map-zone')[0]).setView(this.options.center, this.options.zoom);
+				L.tileLayer(
+					_('http://{s}.tile.cloudmade.com/<%= apikey %>/997/256/{z}/{x}/{y}.png').template({apikey:this.apiKey}),
+					{
+						attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+						maxZoom: 18
+					}).addTo(this.map);
+			}
+			return this;
 		},
 		setData:function(s, dropzone_i) {
+			var this_ = this;
 			if (this.datasets[dropzone_i]) {
 				this.datasets[dropzone_i].off(null, null, this);
 			}			
-			var this_ = this;
 			this.datasets[dropzone_i] = s;
-			s.on('all', function(eventType) {this_._update_plot();}, this);
-			this_._update_plot();
+			s.on('all', function(eventType) { this_.update(); }, this);
+			this_.update();
 		},
 		_cb_delete:function() {
 			this.trigger('delete');

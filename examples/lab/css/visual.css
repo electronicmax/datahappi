@@ -1,0 +1,138 @@
+.fullsize {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual,
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+}
+.visual .delete,
+.visual-map .delete {
+  z-index: 1000;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 5px;
+  display: none;
+  opacity: 0.8;
+  font-size: 1.0em;
+}
+.visual {
+  border: 1px solid rgba(0, 180, 0, 0.2);
+}
+.visual .corner_thingy {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 100;
+}
+.visual svg {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 320px;
+  height: 270px;
+}
+.visual .droparea {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+}
+.visual .droparea.over {
+  box-shadow: inset 0 0 5px green;
+}
+.visual .droparea .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .xaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 30px;
+}
+.visual .xaxis.over {
+  box-shadow: inset 0 0 5px green;
+}
+.visual .xaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .yaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  transform: rotate(90deg);
+  left: 30px;
+  top: 0px;
+  width: 299px;
+  height: 30px;
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  top: 0px;
+  z-index: 5;
+}
+.visual .yaxis.over {
+  box-shadow: inset 0 0 5px green;
+}
+.visual .yaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid rgba(180, 180, 0, 0.2);
+}
+.visual-map .map-zone {
+  position: absolute !important;
+  padding: 0px;
+  margin: 0px;
+  top: 0px;
+  left: 50px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual-map .dropzones {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 50px;
+  bottom: 0px;
+}
+.visual-map .dropzones .dropzone {
+  display: inline-block;
+  width: 100%;
+  height: 25%;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}

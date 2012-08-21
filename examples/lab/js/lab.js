@@ -31,7 +31,11 @@ define([
 				
 				var tb = (new toolbar.Toolbar())
 					.on('new_visual', function() {	workspace.append((new visual.Visual()).render().el);})
-					.on('new_map',function() { workspace.append((new visualmap.MapVisual()).render().el); });
+					.on('new_map',function() {
+						var map = (new visualmap.MapVisual());
+						workspace.append(map.render().el);
+						map.update();
+					});
 				
 				workspace
 					.append(tb.render().el)
