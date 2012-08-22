@@ -101,19 +101,21 @@
 			}				
 		}
 	}
-	.dropzone-0 { .dropzone-i(orange); }
-	.dropzone-1 { .dropzone-i(violet); }
-	.dropzone-2 { .dropzone-i(brown); }
-	.dropzone-3 { .dropzone-i(yellow); }	
     .leaflet-control-attribution {
         display:none !important;
     }               
 }
 
+.dropzone-0 { .dropzone-i(orange); }
+.dropzone-1 { .dropzone-i(violet); }
+.dropzone-2 { .dropzone-i(brown); }
+.dropzone-3 { .dropzone-i(yellow); }	
+
+
 
 .dropzone-i(@color) {
 	&.dropzone {
-		border-color:1px solid @color;
+		border:1px solid @color !important;
 	}
 	.uplt {
 		border-left:1px solid @color !important;

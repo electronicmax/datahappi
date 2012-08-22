@@ -13,8 +13,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		defaults : { center:[51.505, -0.09], zoom:13 },
 		initialize:function() {
 			this.options = _.extend(this.defaults, this.options);
-			this.dropzone_boxes = [];
-			this.dataset_markers = [];
+			this.dropzone_boxes = {};
+			this.markers_by_box = {};
 		},
 		render:function() {
 			var this_ = this;
@@ -27,7 +27,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.$el.css('left', 50 + 100*Math.random());
 			this.$el.data('view', this);
 			var dropzone = "<div class='dropzone'><div class='lbl'>drop here</div></div>";
-			[1,2,3,4].map(function(i) {
+			[0,1,2,3].map(function(i) {
 				$(dropzone).addClass('dropzone-'+i).appendTo(this_.$el.find('.dropzones'));
 			});
 			this.$el.find('.dropzone').droppable({
@@ -74,6 +74,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		},
 		update:function() {
 			var this_ = this;
+			var zones = [0,1,2,3];
 			
 			// only works upon attachment
 			if (_(this.map).isUndefined() && $('body').find(this.$el[0]).length)  {			
@@ -87,83 +88,83 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					}).addTo(this.map);
 			}
 
-			if (_(this.map).isUndefined()) { console.log('map is undefined :( '); return; }
+			if (_(this.map).isUndefined()) {
+				console.log('map is undefined :( '); return;
+			}
+
+			var remove_markers = function(markers) {
+				if (markers.length == 0) { return; }
+				console.log('removing markers', markers.map(function(x) { return x; }));				
+				_(markers).each(function(marker, kk) {
+					if (defined(marker)) {
+						console.log("MARKER TO REMOVE ", marker);
+						window.marker = marker;
+						window.map = this_.map;
+						this_.map.removeLayer(marker);							
+						delete markers[kk];
+					}				
+				});
+			};
+
+			var get_geo_values = function(pathables) {
+				return utils.flatten(pathables.map(
+					function(pathable) {
+						return pathable.get_last_value().map(function(val) {
+							var geo = this_.get_lat_lng(val);
+							if (defined(geo)) {	return { model: pathable, val: val, geo: geo };	}
+						}).filter(defined);
+					}));
+			};
 			
-			var last_position;
+			var last_position;			
 			// make some markers for each of the dropzone_boxes!
-			_(this.dropzone_boxes).each(function(box, i) {
-				// for each data set
-				var dataset = box.pathables;
-				var markers_by_model = this_.dataset_markers[i] || [];	// [ [model_x_markers], [model_x2_markers], ... ]
-
-				dataset.each(function(model, j) {
-					var model_markers = markers_by_model[j] || [];
-					markers_by_model[j] = model_markers;
-					
-					model.get_last_value().map(function(val, k) {
-						var geoval = this_.get_lat_lng(val);
-						if (_(geoval).isUndefined()) {
-							if  (!_.isUndefined(model_markers[k])) {
-								this_.map.removeLayer(model_markers[k]);								
-								delete model_markers[k];
-							}
-							return;
-						}
-						console.log("geo val is not undefined ", geoval);
-						var position = new L.LatLng(geoval.lat,geoval.long);
-						if (defined(model_markers[k])) {
-							model_markers[k].setLatLng(position);
-							model_markers[k].bindPopup(this_._make_popup_text(model, val));
-							model_markers[k].update();
-						} else {
-							model_markers[k] = (new L.Marker(position));
-							model_markers[k].addTo(this_.map);
-							model_markers[k].bindPopup(this_._make_popup_text(model, val));
-						}
-						last_position = position;
-					});
-
-					// exit selection per _value_
-					_(model_markers.slice(model.get_last_value().length))
-						.each(function(marker, kk) {
-							if (defined(marker)) {
-								this_.map.removeLayer(marker); 
-								delete model_markers[kk];
-							}								
-						});
+			zones.map(function(i) {
+				var box = defined(this_.dropzone_boxes[i]) ? this_.dropzone_boxes[i].pathables : [];
+				this_.markers_by_box[i] = defined(this_.markers_by_box[i]) ? this_.markers_by_box[i] : [];
+				var markers = this_.markers_by_box[i];
+				var geovalues = get_geo_values(box);
+				_(geovalues).each(function(geoval, vi) {
+					var position = new L.LatLng(geoval.geo.lat,geoval.geo.long);					
+					if (!defined(markers[vi])) {
+						markers[vi] = (new L.Marker(position));
+						markers[vi].addTo(this_.map);
+						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
+					} else {
+						markers[vi].setLatLng(position);
+						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
+						markers[vi].update();
+					}
+					last_position = position;
 				});
-				
-				// exit selection per model
-				markers_by_model.slice(dataset.length).map(function(model_markers) {
-					_(model_markers).each(function(marker, kk) {
-						if (defined(marker)) {
-							this_.map.removeLayer(marker);							
-							delete model_markers[kk];
-						}				
-					});
-				});
-				this_.dataset_markers[i] = markers_by_model;
+				// exit selection
+				remove_markers(markers.slice(geovalues.length));
+				this_.markers_by_box[i] = markers.slice(0,geovalues.length);
 			});
+
 			if (!_(last_position).isUndefined()) { this.map.panTo(last_position); }
 			return this;
 		},
 		_get_class_for_dropzone:function(i) {
-			return 'dropzone_'+i;
+			return 'dropzone-'+i;
 		},
 		setDropzoneBox:function(box, dropzone_i) {
 			var this_ = this, dropzone_class = this._get_class_for_dropzone(dropzone_i);
-			if (this.dropzone_boxes[dropzone_i]) {
-				// break previous dropzone box
-				this.dropzone_boxes.$el.removeClass(dropzone_class);
-				this.dropzone_boxes[dropzone_i].pathables.off(null, null, this);
-				this.dropzone_boxes.off(null,null,this);				
+			if (defined(this.dropzone_boxes[dropzone_i])) {
+				var oldbox = this.dropzone_boxes[dropzone_i];
+				oldbox.$el.removeClass(dropzone_class);
+				oldbox.pathables.off(null, null, this);
+				oldbox.off(null,null,this);
+				delete this.dropzone_boxes[dropzone_i];
+				this_.update();							
 			}
 			if (defined(box)) {
 				this.dropzone_boxes[dropzone_i] = box;
-				box.on('delete', function() { this_._setDropzoneBox(null, dropzone_i); }, this);
+				box.on('delete', function() {
+					this_.setDropzoneBox(undefined, dropzone_i);
+				}, this);
 				box.pathables.on('all', function(eventType) { this_.update(); }, this);
 				box.$el.addClass(dropzone_class);
-				this_.update();
+				this_.update();							
 			}
 		},
 		_cb_delete:function() {
