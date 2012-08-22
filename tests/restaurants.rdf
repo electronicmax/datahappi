@@ -86,4 +86,18 @@
         <geo:lon>-1.403933</geo:lon>
         <foaf:homepage rdf:resource="http://www.corianderlounge.com"/>
     </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r7">
+        <hygiene_rating>3</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.oldtownkitchen.co.uk/images/town_takeaway_2011.pdf"/>
+        <restaurant_type>Japanese</restaurant_type>
+        <restaurant_type>Takeaway</restaurant_type>
+        <tripadvisor_score>3.1</tripadvisor_score>
+        <yelp_rating>2.9</yelp_rating>
+        <rdfs:label>Old Town Kitchen</rdfs:label>
+        <geo:lat>50.901964</geo:lat>
+        <geo:lon>-1.403546</geo:lon>
+        <foaf:homepage rdf:resource="http://www.oldtownkitchen.co.uk"/>
+    </Restaurant>
 </rdf:RDF>
