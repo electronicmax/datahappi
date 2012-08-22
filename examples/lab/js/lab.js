@@ -68,7 +68,12 @@ define([
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			$.when(pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))).then(
+			$.when(
+				// add moar sources here
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.n3.rdf'].join('/'), "Restaurants")
+				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.n3.rdf'].join('/'), "Hygeine")
+			).then(
 				function() {
 					var srcs = _.toArray(arguments);
 					window.__srcs__ = srcs;

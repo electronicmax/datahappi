@@ -1,0 +1,80 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/chi2012-study-data/restaurants.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Class rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Restaurant">
+        <rdfs:label>Restuarant</rdfs:label>
+    </rdf:Class>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r1">
+        <hygiene_rating>4</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.cuisinenetguide.co.uk/cgi-bin/Rest_OnlineOrder_FrameControl_V3.0.asp?RestId=11834&#38;MenuSetName=To+Dine+at+Restaurant&#38;TransType=ViewMenu&#38;HowMany=5&#38;RestaurantName=zen&#38;Town=&#38;County=0&#38;Cuisine=0&#38;OnlineSystems=True&#38;SearchType=Restaurants&#38;StartPoint=1"/>
+        <restaurant_type>Japanese</restaurant_type>
+        <tripadvisor_score>4.5</tripadvisor_score>
+        <yelp_rating>4.1</yelp_rating>
+        <rdfs:label>Zen Southampton</rdfs:label>
+        <geo:lat>50.89969</geo:lat>
+        <geo:lon>-1.403589</geo:lon>
+        <foaf:homepage rdf:resource="http://zensouthampton.com"/>
+    </Restaurant>
+
+    <Coffee_Shop rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r2">
+        <hygiene_rating>5</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.thelounges.co.uk/wp-content/uploads/2012/07/LO_Menu-food-v10.pdf"/>
+        <restaurant_type>Coffee Bar</restaurant_type>
+        <tripadvisor_score>4.2</tripadvisor_score>
+        <yelp_rating>4.6</yelp_rating>
+        <rdfs:label>Trago Lounge</rdfs:label>
+        <geo:lat>50.9271</geo:lat>
+        <geo:lon>-1.391058</geo:lon>
+        <foaf:homepage rdf:resource="http://www.thelounges.co.uk/trago-lounge/"/>
+    </Coffee_Shop>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r3">
+        <hygiene_rating>4</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.cenorestaurant.com/menu/1/#starters%2Fmains"/>
+        <restaurant_type>Casual Dining</restaurant_type>
+        <tripadvisor_score>3.5</tripadvisor_score>
+        <yelp_rating>4.1</yelp_rating>
+        <rdfs:label>Ceno</rdfs:label>
+        <geo:lat>50.928263</geo:lat>
+        <geo:lon>-1.392431</geo:lon>
+        <foaf:homepage rdf:resource="http://www.cenorestaurant.com"/>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r4">
+        <hygiene_rating>5</hygiene_rating>
+        <in_town>Chilworth</in_town>
+        <menu_link rdf:resource="http://www.chilwortharms.co.uk/eat_drink_with_us/food_menu/"/>
+        <restaurant_type>Casual Dining</restaurant_type>
+        <tripadvisor_score>3.9</tripadvisor_score>
+        <yelp_rating>5</yelp_rating>
+        <rdfs:label>The Chilworth Arms</rdfs:label>
+        <geo:lat>50.964698</geo:lat>
+        <geo:lon>-1.416807</geo:lon>
+        <foaf:homepage rdf:resource="http://www.chilwortharms.co.uk"/>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r5">
+        <hygiene_rating>4</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.whitestartavern.co.uk/home/restaurant-bar/sample-dinner.php"/>
+        <restaurant_type>Casual Dining</restaurant_type>
+        <tripadvisor_score>4.0</tripadvisor_score>
+        <yelp_rating>3.8</yelp_rating>
+        <rdfs:label>The White Star Tavern</rdfs:label>
+        <geo:lat>50.900218</geo:lat>
+        <geo:lon>-1.397839</geo:lon>
+        <foaf:homepage rdf:resource="http://www.whitestartavern.co.uk"/>
+    </Restaurant>
+</rdf:RDF>

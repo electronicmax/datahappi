@@ -230,7 +230,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
 				return x.slice(x.lastIndexOf('/')+1);
 			};
-			var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
+			var label = m['http://www.w3.org/2000/01/rdf-schema#label'] || m['label'];
 			if (label && _(label).isString() && m._id) {
 				label = label;          
 			} else if (label && _(label).isArray() && m._id) {
