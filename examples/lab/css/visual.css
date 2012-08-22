@@ -148,6 +148,82 @@
   border: 1px solid rgba(200, 200, 200, 0.5);
   background-color: rgba(200, 200, 200, 0.1);
 }
+.visual-map .dropzone-0.dropzone {
+  border-color: 1px solid #ffa500;
+}
+.visual-map .dropzone-0 .uplt {
+  border-left: 1px solid #ffa500 !important;
+  border-top: 1px solid #ffa500 !important;
+}
+.visual-map .dropzone-0 .uprt {
+  border-right: 1px solid #ffa500;
+  border-top: 1px solid #ffa500 !important;
+}
+.visual-map .dropzone-0 .btlt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-left: 1px solid #ffa500 !important;
+}
+.visual-map .dropzone-0 .btrt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-right: 1px solid #ffa500 !important;
+}
+.visual-map .dropzone-1.dropzone {
+  border-color: 1px solid #ee82ee;
+}
+.visual-map .dropzone-1 .uplt {
+  border-left: 1px solid #ee82ee !important;
+  border-top: 1px solid #ee82ee !important;
+}
+.visual-map .dropzone-1 .uprt {
+  border-right: 1px solid #ee82ee;
+  border-top: 1px solid #ee82ee !important;
+}
+.visual-map .dropzone-1 .btlt {
+  border-bottom: 1px solid #ee82ee !important;
+  border-left: 1px solid #ee82ee !important;
+}
+.visual-map .dropzone-1 .btrt {
+  border-bottom: 1px solid #ee82ee !important;
+  border-right: 1px solid #ee82ee !important;
+}
+.visual-map .dropzone-2.dropzone {
+  border-color: 1px solid #a52a2a;
+}
+.visual-map .dropzone-2 .uplt {
+  border-left: 1px solid #a52a2a !important;
+  border-top: 1px solid #a52a2a !important;
+}
+.visual-map .dropzone-2 .uprt {
+  border-right: 1px solid #a52a2a;
+  border-top: 1px solid #a52a2a !important;
+}
+.visual-map .dropzone-2 .btlt {
+  border-bottom: 1px solid #a52a2a !important;
+  border-left: 1px solid #a52a2a !important;
+}
+.visual-map .dropzone-2 .btrt {
+  border-bottom: 1px solid #a52a2a !important;
+  border-right: 1px solid #a52a2a !important;
+}
+.visual-map .dropzone-3.dropzone {
+  border-color: 1px solid #ffff00;
+}
+.visual-map .dropzone-3 .uplt {
+  border-left: 1px solid #ffff00 !important;
+  border-top: 1px solid #ffff00 !important;
+}
+.visual-map .dropzone-3 .uprt {
+  border-right: 1px solid #ffff00;
+  border-top: 1px solid #ffff00 !important;
+}
+.visual-map .dropzone-3 .btlt {
+  border-bottom: 1px solid #ffff00 !important;
+  border-left: 1px solid #ffff00 !important;
+}
+.visual-map .dropzone-3 .btrt {
+  border-bottom: 1px solid #ffff00 !important;
+  border-right: 1px solid #ffff00 !important;
+}
 .visual-map .leaflet-control-attribution {
   display: none !important;
 }

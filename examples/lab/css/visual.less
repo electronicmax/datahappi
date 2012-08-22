@@ -5,6 +5,7 @@
 @visual-x-height:30px;
 @visual-border-color : rgba(0,180,0,0.2);
 @map-border-color : rgba(180,180,0,0.2);
+	
 .fullsize {
 	position:absolute;
 	top:0px; left:0px; right:0px; bottom:0px;
@@ -100,7 +101,35 @@
 			}				
 		}
 	}
+	.dropzone-0 { .dropzone-i(orange); }
+	.dropzone-1 { .dropzone-i(violet); }
+	.dropzone-2 { .dropzone-i(brown); }
+	.dropzone-3 { .dropzone-i(yellow); }	
     .leaflet-control-attribution {
         display:none !important;
     }               
+}
+
+
+.dropzone-i(@color) {
+	&.dropzone {
+		border-color:1px solid @color;
+	}
+	.uplt {
+		border-left:1px solid @color !important;
+		border-top:1px solid @color !important;
+	}
+	.uprt {
+		border-right:1px solid @color;
+		border-top:1px solid @color !important;
+
+	} 
+	.btlt {
+		border-bottom:1px solid @color !important;
+		border-left:1px solid @color !important;
+	} 
+	.btrt {
+		border-bottom:1px solid @color !important;
+		border-right:1px solid @color !important;
+	}	
 }
