@@ -29,6 +29,7 @@ body .item:hover .delete {
   display: none;
 }
 body .item {
+  cursor: pointer;
   -webkit-transition: background-color 0.2s ease-in-out;
   -webkit-transition: padding 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, 0);
@@ -71,6 +72,7 @@ body .slidepanel .sources ul {
   list-style-type: none;
 }
 body .slidepanel .sources .source-entry {
+  cursor: pointer;
   color: #888;
 }
 body .slidepanel .sources .source-entry.selected {
