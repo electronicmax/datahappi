@@ -1,0 +1,702 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/chi2012-study-data/cuisinenet/menus.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r6">
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Light lentil soup cooked with aromatic spices - served with baby naan bread</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Daal Shorba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lightly fried shredded chicken cooked with cornflour, garlic, egg and spices</item_detail>
+            <item_price>2.25</item_price>
+            <rdfs:label>Murg Shorba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken marinated with cheese, cream, yogurt and spices baked on charcoals</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Tikka Malai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken marinated in peanuts, tamarind and curry leaves cooked in a clay oven</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Mungphalli Ke Chole</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Gram flour coated chicken roasted with garlic and spices and garnished with egg</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Reshmi Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Boneless chicken stir fried with special chat masala powder and coriander</item_detail>
+            <item_price>3.95</item_price>
+            <rdfs:label>Chicken Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Spiced up minced lamb stuffed inside chicken breast, barbecued in a clay oven</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Potli Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken marinated with yogurt, spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.10</item_price>
+            <rdfs:label>Chicken Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb marinated with yogurt, spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.10</item_price>
+            <rdfs:label>Lamb Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lean duck marinated with traditional spices and yogurt, baked in a clay oven</item_detail>
+            <item_price>5.75</item_price>
+            <rdfs:label>Batak Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb chops marinated in yogurt and selected spices, then barbecued in a clay oven</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Tandoori Lamb Chops</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Slices of lamb marinated in yogurt, ginger, garlic and spices cooked in a clay oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Lamb Piccata</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Triangular pastry stuffed with blend of minced lamb and mild spices</item_detail>
+            <item_price>3.25</item_price>
+            <rdfs:label>Lamb Samosa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Minced meat cooked with selected spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Seekh Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Combination of Shami Kebab, Sheekh Kebab, Onion Bhaji, Chicken and Lamb Tikka</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Mixed Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Salmon marinated in herbs and spices, baked in a clay oven - served with salad</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Tandoori Salmon Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Mackerel marinated in yogurt and selected spices, barbecued in a tandoori oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Tandoori Mackerel</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns stir fried with special chat masala powder and coriander</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Jhinga Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns marinated in yogurt, fresh coriander and mustard, baked in an oven</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Bhatti Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Prawns marinated with garlic, peppercorns and lime juice, deep fried with corn flour</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Garlic Fried Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Prawns cooked in a medium spice sauce, served on a deep fried pancake</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Bhoona Prawn Puri</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Crabmeat sautéed with spices, coriander, coated with breadcrumbs and deep fried</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Crab Kalimiri</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lightly spiced pan fried potato cake served with tamarind sauce on a bed of chickpeas</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Tawa Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Mushrooms marinated in yoghurt, gram flour and spices grilled in a clay oven</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Tandoori Khumb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cubes of cottage cheese cooked in clay oven with peppers, tomato and onion</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Pannier Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Triangular pastry stuffed with blend of fresh vegetables and mild spices</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Vegetable Samosa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chick peas cooked with a blend of spices, tamrind, green chillies and coriander</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Chana Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Onion roundlets in a light batter with herbs and traditional spices, deep fried</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Onion Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Deep fried mashed mushroom and spinach cake</item_detail>
+            <item_price>3.75</item_price>
+            <rdfs:label>Mushroom Saag Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Potato balls with ginger, brie and roasted cashew nuts - served with tamarind sauce</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Aloo Cheese Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender boneless chicken cooked with coconut in a creamy, mild spiced sauce</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Korma (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fairly hot chicken curry with ginger and garlic - a traditional South Indian dish</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A favourite dish from the Punjab, cooked in a spicy masala sauce with a hint of garlic</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Jalandhari Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender fillets of chicken cooked with tomatoes and onions in our own blended sauce</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Rogan Josh</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lean duck cooked with capsicum, selected herbs and spices in a home made sauce</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Batak Kurchan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pieces of tender duck lightly cooked in a tandoori oven, stir fried with plum sauce, tamarind and roasted spices to give a spicy sweet and sour taste</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Tamarind Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lean duck cooked with ginger, garlic and fresh green chillies</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Batak Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender lamb cooked in a special mild and creamy sauce with subtle spices</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Korma</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb fried with tomatoes and onions, cooked in our special blended curry sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Rogan Josh</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb cooked in a fairly hot curry sauce with ginger and garlic</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb cooked in a spicy masala sauce with a hint of garlic. Speciality of Punjab</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Jalandhari Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pieces of prime beef cooked with ginger, garlic and fresh green chillies</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Beef Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Beef marinated with yoghurt and selected spices cooked in a steamy sealed pot</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Dum Ka Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cooked in a medium sauce with traditional spices, topped with creamy coconut sauce</item_detail>
+            <item_price>9.55</item_price>
+            <rdfs:label>Beef Nijami</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Crunchy sea bass fillets on spinach and mushrooms</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Masala Sea Bass</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cooked with cashew nuts, coconut milk, mustard and corander in a mild sauce</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Coriander Monkfish</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A dry distinctive combination of king prawns, tomatoes, onions and spices</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Jinga Bhuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns cooked with fresh tomatoes, capsicum and onions in chilli sauce</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Jhinga Salan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Diced king prawns prepared with selected herbs, spices and spinach</item_detail>
+            <item_price>10.55</item_price>
+            <rdfs:label>Jhinga Dhandas</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender tiger prawns cooked with garlic and ginger - a fairly hot traditional dish</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Prawn Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A sweet and sour hot chicken curry cooked with lentils</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Chicken Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A sweet and sour hot lamb curry cooked with lentils</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Lamb Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A sweet and sour hot king prawn curry cooked with lentils</item_detail>
+            <item_price>11.75</item_price>
+            <rdfs:label>Jhinga Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A spiced dish prepared in an enriched, thick sauce for a sweet and sour taste</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Chicken Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>A spiced dish prepared in an enriched, thick sauce for a sweet and sour taste</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Lamb Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawn dish spiced and prepared in a thick sauce for a sweet and sour taste</item_detail>
+            <item_price>11.75</item_price>
+            <rdfs:label>Jhinga Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Succulent pieces of marinated chicken cooked in a tandoori oven</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Tandoori Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender pieces of boneless chicken marinated, cooked in a tandoori oven</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Chicken Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender pieces of boneless lamb marinated, cooked in a tandoori oven</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Lamb Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken skewered with onion, tomato, capsicum and baked in a tandoori oven</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Chicken Shaslik</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb skewered with onion, tomato, capsicum and baked in a tandoori oven</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Lamb Shaslik</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Filleted salmon marinated in herbs and spices, grilled in a tandoori oven</item_detail>
+            <item_price>9.25</item_price>
+            <rdfs:label>Tandoori Salmon Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns marinated with yoghurt, ginger and carom and baked in a clay oven</item_detail>
+            <item_price>10.95</item_price>
+            <rdfs:label>Jhinga Ajwaini</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Broccoli, Potato, capsicum, tomato and onions barbecued in a clay oven</item_detail>
+            <item_price>6.95</item_price>
+            <rdfs:label>Baked Sabzi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Marinated chicken barbecued, then cooked in a masala sauce with almond powder</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Chicken Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Duck marinated, baked in a clay pot, prepared in a masala sauce with almond powder</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Batak Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender lamb marinated, barbecued, cooked in a masala sauce with almond powder</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Lamb Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Grilled king prawns with almond powder, cooked in a masala sauce</item_detail>
+            <item_price>10.95</item_price>
+            <rdfs:label>Bhatti Jhinga Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken tossed in the karai, cooked with onions, ginger, garlic and capsicum</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb tossed in the karai, cooked with onions, ginger, garlic and capsicum</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Duck cooked in the karai with ginger, garlic, capsicum and onions</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Duck Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Beef tossed in the karai, cooked with onion, ginger, garlic and capsicum</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Beef Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns, ginger, garlic, onions and capsicum cooked in the karai</item_detail>
+            <item_price>10.30</item_price>
+            <rdfs:label>Jhinga Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Seasonal vegetables cooked with basmati rice with selected biriani spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Vegetable Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken, basmati rice, cardamom, cinnamon, bay leaf, roasted cashew nuts and saffron cooked together at low heat, garnished with egg</item_detail>
+            <item_price>9.75</item_price>
+            <rdfs:label>Chicken Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb, basmati rice, cardamom, cinnamon, bay leaf, roasted cashew nuts and saffron cooked together at low heat, garnished with egg</item_detail>
+            <item_price>9.75</item_price>
+            <rdfs:label>Lamb Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tandoori chicken cooked with basmati rice, cardamom, dry chillies and apricots</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Bhatti Chicken Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Combination of chicken, lamb and prawn cooked with rice in a home made sauce</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Coriander Special Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Corn and cottage cheese cooked with onions, tomato and spices</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Pannier Aur Makai Bhurjee</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Spinach cooked with sliced button mushrooms</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Saag Mushrooms</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Eggplant, tomato, curry leaves and selected herbs and spices cooked with ground peanuts and sesame seeds</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Eggplant and Tomato Curry</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Ground spinach and garlic cooked with capsicum, with selected herbs and spices</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Saag Lasooni</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Smoked eggplant mashed, cooked with selected herbs and spices, topped with cream</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Baigan Bharta</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cumin and spinach-infused cottage cheese dumplings stuffed with mushrooms and raisins, served in tomato gravy</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Rattan Manjusha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Potato and cottage cheese mixed with cashew nuts, selected herbs and spices. Served in a creamy, medium spicy sauce</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Malai Kofta</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken cooked with green chillies, coriander and selected herbs and spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Coriander Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken cooked with butter, cashew nuts, tangy tomato and selected spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Butter Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken cooked with green chillies and capsicum in spicy gravy</item_detail>
+            <item_price>7.60</item_price>
+            <rdfs:label>Chicken Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken tikka cooked with green chillies and capsicum in spicy gravy</item_detail>
+            <item_price>7.60</item_price>
+            <rdfs:label>Chicken-Tikka Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tandoori Chicken cooked in hot spicy sauce and topped with chillies and garlic</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Chicken Lal Mirch</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cooked in a medium sauce with traditional spices, topped with creamy coconut sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Nijami</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender chicken cooked in a special spicy cream sauce with almonds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Chicken Pasanda</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender lamb cooked in a special spicy cream sauce with almonds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Lamb Pasanda</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb with coconut, star anise, red chilli and black peppercorn in a medium hot sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Chettinad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Cooked with dried apricots in a spicy masala sauce. Topped with crisp straw potatoes</item_detail>
+            <item_price>8.15</item_price>
+            <rdfs:label>Sally Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>King prawns skewed in a tandoori oven and cooked in spicy hot jalfrezey sauce</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Bhatti Prawn Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Boneless chicken cooked in hot spicy chilli sauce and roasted with fresh garlic</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Garlic Chilli Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken barbecued in a tandoori oven and cooked with a blend of chillies, garlic, tamarind, tomato and mustard seeds to give a sweet and sour flavour</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Tamarind Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Whole, dry roasted spices, ground to a fine paste to make a delicious preparation</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Xacutti</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken breasts marinated with selected spices, grilled in a tandoori oven and cooked with a medium spicy sauce with jalapenos. Garnished with crispy fried onions</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Chicken Nawabi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken marinated in selected herbs and spices, cooked in a mango based fruit sauce</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Mango Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken breasts stuffed with minced lamb and peas, grilled in a tandoori oven. Served on a bed of stir fried rice and topped with a spicy sweet sauce for a unique taste</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Chicken Chameli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Succulent lean duck cooked with ginger, selected herbs and spices</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Adraki Batak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Slow cooked lamb shank on the bone with a blend of aromatic spices</item_detail>
+            <item_price>9.25</item_price>
+            <rdfs:label>Dum Ki Nalli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Succulent lamb cooked with yogurt, onions and tomato with a hint of fennel seeds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Kashmiri Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tender pieces Lamb sautéed with traditional herbs and spices, cooked with crushed black pepper</item_detail>
+            <item_price>8.45</item_price>
+            <rdfs:label>Ghost Kalimirch</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lamb dish cooked with spinach, onions and spices for its unique taste</item_detail>
+            <item_price>8.55</item_price>
+            <rdfs:label>Palak Ghost</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tandoori king prawns cooked with diced peppers in a rich tangy sauce</item_detail>
+            <item_price>10.50</item_price>
+            <rdfs:label>Tamarind Jhinga</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Tiger prawns cooked with mustard seeds, onions, garlic, cumin seeds and lemon juice</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Mustard Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fried Seabass fillets tempered with aromatic spices, cooked with fenugreek in a special house sauce</item_detail>
+            <item_price>9.15</item_price>
+            <rdfs:label>Methi Machli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Hot spicy potato</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Bombay Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Potato and spinach</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Saag Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Potato and cauliflower</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Aloo Gobi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Lentils and garlic</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Tadka Dal</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Sautéed potato in cumin and fresh coriander</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Zeera Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Spinach</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Saag Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Okra</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Bhindi Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Aubergine</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Brinjal Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Potato and chickpeas</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Aloo Chana</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Mushrooms</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Mushroom Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.95</item_price>
+            <rdfs:label>Mixed Vegetable Curry</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.95</item_price>
+            <rdfs:label>Chana Massala</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.15</item_price>
+            <rdfs:label>Pilau Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.95</item_price>
+            <rdfs:label>Plain Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.50</item_price>
+            <rdfs:label>Mushroom Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.10</item_price>
+            <rdfs:label>Vegetable Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.10</item_price>
+            <rdfs:label>Tomato Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.75</item_price>
+            <rdfs:label>Plain Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.10</item_price>
+            <rdfs:label>Keema Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.10</item_price>
+            <rdfs:label>Peshwari Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.95</item_price>
+            <rdfs:label>Garlic Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.95</item_price>
+            <rdfs:label>Garlic &#38; Chilli Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.95</item_price>
+            <rdfs:label>Chapatti</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.95</item_price>
+            <rdfs:label>Cucumber Raitha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.95</item_price>
+            <rdfs:label>Mint Raitha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.45</item_price>
+            <rdfs:label>Dhai (Yoghurt)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.95</item_price>
+            <rdfs:label>Green Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.65</item_price>
+            <rdfs:label>Massala Popodum and chutneys</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.65</item_price>
+            <rdfs:label>Plain Popodum and chutneys</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>0.45</item_price>
+            <rdfs:label>Lime Pickle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Whole leg of lamb marinated for several hours in elected herbs and spices and roasted - served with rice</item_detail>
+            <item_price>44.95</item_price>
+            <rdfs:label>KURGEE LAMB - 24 hours notice required</rdfs:label>
+        </menu_item>
+        <rdfs:label>Coriander Lounge</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>

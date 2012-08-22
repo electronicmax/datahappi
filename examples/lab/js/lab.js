@@ -71,8 +71,9 @@ define([
 			$.when(
 				// add moar sources here
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.n3.rdf'].join('/'), "Restaurants")
-				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.n3.rdf'].join('/'), "Hygeine")
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.rdf'].join('/'), "Restaurants"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','menus.rdf'].join('/'), "Menus")
+				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.rdf'].join('/'), "Hygeine")
 			).then(
 				function() {
 					var srcs = _.toArray(arguments);

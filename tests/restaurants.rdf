@@ -9,10 +9,6 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Class rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Restaurant">
-        <rdfs:label>Restuarant</rdfs:label>
-    </rdf:Class>
-
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r1">
         <hygiene_rating>4</hygiene_rating>
         <in_town>Southampton</in_town>
@@ -76,5 +72,18 @@
         <geo:lat>50.900218</geo:lat>
         <geo:lon>-1.397839</geo:lon>
         <foaf:homepage rdf:resource="http://www.whitestartavern.co.uk"/>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r6">
+        <hygiene_rating>3</hygiene_rating>
+        <in_town>Southampton</in_town>
+        <menu_link rdf:resource="http://www.corianderlounge.com/coriander_lounge_menu.pdf"/>
+        <restaurant_type>Indian</restaurant_type>
+        <tripadvisor_score>3.4</tripadvisor_score>
+        <yelp_rating>4.2</yelp_rating>
+        <rdfs:label>Coriander Lounge</rdfs:label>
+        <geo:lat>50.900868</geo:lat>
+        <geo:lon>-1.403933</geo:lon>
+        <foaf:homepage rdf:resource="http://www.corianderlounge.com"/>
     </Restaurant>
 </rdf:RDF>
