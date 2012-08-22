@@ -171,20 +171,15 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 	var ThingListItemView = CommonView.extend({
 		tagName:'div',
 		className:'item',
-		template:$('#thing-listitem-template').text(),
+		template:"<span class='thing-label'><%=label%></span><div class='delete icon-cancel'></div>",
 		events:{
 			'click .delete' : '_cb_delete'
 		},		
-		_update_template:function() {
-			var val = this.options.model.get_last_value();
-			if (val.toJSON) { val = val.toJSON(); }
-			if (_(val).isArray()) { val = val[0]; }
-			if (val.toJSON) { val = val.toJSON(); }
-			this.$el.html(_(this.options.template || this.template).template({m:val}));
-		},
 		render:function() {
 			var this_ = this;
-			this._update_template();			
+			this.$el.html(_(this.template).template(
+				{label:this.options.model.model.get_label()}
+			));			
 			this.$el.data('view',this);
 			this.$el.data('model',function() { return this_.options.model; });
 			this.$el.attr("uri", this.options.model.id);

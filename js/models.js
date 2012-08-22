@@ -221,7 +221,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return this.sameas.indexOf(m) >= 0;
 		},
 		get_label:function() {
-			if (this.sameas.length == 0) { return this._get_label(); }
+			if (this.sameas.length == 0) {
+				return this._get_label();
+			}
 			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort().join(' / '); 
 		},
 		_get_label:function() {
@@ -230,7 +232,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
 				return x.slice(x.lastIndexOf('/')+1);
 			};
-			var label = m['http://www.w3.org/2000/01/rdf-schema#label'] || m['label'];
+			var label = this.get('label') && this.get('label')[0]
+				|| m['http://www.w3.org/2000/01/rdf-schema#label']
+				|| m['label'];
 			if (label && _(label).isString() && m._id) {
 				label = label;          
 			} else if (label && _(label).isArray() && m._id) {

@@ -62,37 +62,7 @@
 		print("<div class='steps'>"+step_trace(previous_steps)+"<select class='next-step-select' "+disabled+"><option value=''>"+initial_text+"</option>"+step_options(next_steps)+"</select><div class='delete icon-cancel'></div></div>");
 	%>
 	</script>
-	<script type="text/template" id="thing-listitem-template">
-	<%	   
-		var lastpath = function(x) {
-			if (x.indexOf('#') >= 0) {  return x.slice(x.lastIndexOf('#')+1); }
-			return x.slice(x.lastIndexOf('/')+1);
-		};
-	    var to_str = function(v) {
-	        if (v.id) { return v.id; }
-	        return v.toString();
-     	};
-		var label = m['http://www.w3.org/2000/01/rdf-schema#label'];
-		if (label && _(label).isString() && m['_id']) {
-			label = label + " <a href='"+m['_id']+"'>src</a>";          
-		} else if (label && _(label).isArray() && m['_id']) {
-			label = label[0] + " <a href='"+m['_id']+"'>src</a>";       
-		} else if (_(label).isUndefined() && m['_id']) {
-			label = lastpath(m['_id']) + " <a href='"+m['_id']+"'>src</a>";
-		} else if (_(label).isUndefined() && _(m).isObject()) {
-  	       label = _(m).map(function(v,k){ return k+":"+v.valueOf().toString(); }).join(',');
-	    } else {
-	      label = m.valueOf().toString();
-      	}
-   	    print("<span class='thing-label'>"+label+"</span><div class='delete icon-cancel'></div>");
-	
-	  
-	    // var propslist = _(m).map(function(v, k) { return '<li>'+k+': '+ to_str(v) +'</li>'; }).join('');
- 	    // print("<div class='props'><ul>"+propslist+"</ul></div></div>");
-	%>
-	</script>
     <script src="../../lib/jquery-1.8.0.min.js" type="text/javascript"></script>
-	<!--<script src="../../lib/jquery-1.7.2.min.js" type="text/javascript"></script>-->
 	<script src="../../lib/underscore-min.js" type="text/javascript"></script>
 	<script src="../../lib/backbone.js" type="text/javascript"></script>
 	<script src="../../lib/require.js"></script>
