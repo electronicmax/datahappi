@@ -13,7 +13,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		defaults : { center:[51.505, -0.09], zoom:13 },
 		initialize:function() {
 			this.options = _.extend(this.defaults, this.options);
-			this.datasets = [];
+			this.dropzone_boxes = [];
 			this.dataset_markers = [];
 		},
 		render:function() {
@@ -27,7 +27,9 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.$el.css('left', 50 + 100*Math.random());
 			this.$el.data('view', this);
 			var dropzone = "<div class='dropzone'><div class='lbl'>drop here</div></div>";
-			[1,2,3,4].map(function(i) { this_.$el.find('.dropzones').append(dropzone);});
+			[1,2,3,4].map(function(i) {
+				$(dropzone).addClass('dropzone-'+i).appendTo(this_.$el.find('.dropzones'));
+			});
 			this.$el.find('.dropzone').droppable({
 				greedy:true,  accept:'.greybox', tolerance:"pointer",
 				over:function(event, ui) {
@@ -44,7 +46,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					var dropzone_i = this_.$el.find('.dropzone').index($(this));
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('' + views.length + 'items');
-					this_.setData(view.pathables, dropzone_i);
+					this_.setDropzoneBox(view, dropzone_i);
 				}
 			});						
 			return this;
@@ -88,9 +90,10 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			if (_(this.map).isUndefined()) { console.log('map is undefined :( '); return; }
 			
 			var last_position;
-			// make some markers for each of the datasets!
-			_(this.datasets).each(function(dataset, i) {
+			// make some markers for each of the dropzone_boxes!
+			_(this.dropzone_boxes).each(function(box, i) {
 				// for each data set
+				var dataset = box.pathables;
 				var markers_by_model = this_.dataset_markers[i] || [];	// [ [model_x_markers], [model_x2_markers], ... ]
 
 				dataset.each(function(model, j) {
@@ -114,7 +117,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 							model_markers[k].update();
 						} else {
 							model_markers[k] = (new L.Marker(position));
-							model_markers[k].addTo(this_.map)							
+							model_markers[k].addTo(this_.map);
 							model_markers[k].bindPopup(this_._make_popup_text(model, val));
 						}
 						last_position = position;
@@ -144,15 +147,24 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			if (!_(last_position).isUndefined()) { this.map.panTo(last_position); }
 			return this;
 		},
-		setData:function(s, dropzone_i) {
-			console.log("SETTING data for dropzone ", dropzone_i, s);
-			var this_ = this;
-			if (this.datasets[dropzone_i]) {
-				this.datasets[dropzone_i].off(null, null, this);
-			}			
-			this.datasets[dropzone_i] = s;
-			s.on('all', function(eventType) { this_.update(); }, this);
-			this_.update();
+		_get_class_for_dropzone:function(i) {
+			return 'dropzone_'+i;
+		},
+		setDropzoneBox:function(box, dropzone_i) {
+			var this_ = this, dropzone_class = this._get_class_for_dropzone(dropzone_i);
+			if (this.dropzone_boxes[dropzone_i]) {
+				// break previous dropzone box
+				this.dropzone_boxes.$el.removeClass(dropzone_class);
+				this.dropzone_boxes[dropzone_i].pathables.off(null, null, this);
+				this.dropzone_boxes.off(null,null,this);				
+			}
+			if (defined(box)) {
+				this.dropzone_boxes[dropzone_i] = box;
+				box.on('delete', function() { this_._setDropzoneBox(null, dropzone_i); }, this);
+				box.pathables.on('all', function(eventType) { this_.update(); }, this);
+				box.$el.addClass(dropzone_class);
+				this_.update();
+			}
 		},
 		_cb_delete:function() {
 			this.trigger('delete');

@@ -89,7 +89,7 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 			// we need to watch any new models created by the sources,
 			// and tell our sameas watcher.
 			var watch_model = function(m) {
-				console.log(" >>>>>>>>>> creating a new model, registering it >>>>>>> ", m.id );
+				// console.log(" >>>>>>>>>> creating a new model, registering it >>>>>>> ", m.id );
 				sameas_view.add_to_watch(m);
 			};
 			

@@ -29,7 +29,9 @@ define(
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
-				this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});
+				this.$el.draggable({ drag:function(evt,ui) {
+					// this_.trigger('drag', ui.offset);
+				}});
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				// set up to receive droppables
 				this.$el.droppable({
@@ -154,6 +156,7 @@ define(
 			},
 			_cb_delete:function() {
 				var this_ = this;
+				this.trigger('delete');
 				this.$el.fadeOut(function() { this_.$el.remove(); });
 			}
 		});

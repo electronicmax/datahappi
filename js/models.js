@@ -8,9 +8,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	// arrays -- although many can be of length 0
 	// var list_EQ = function(x,y) { return x.length == y.length && _(x).difference(y).length === 0; };
 	
-	var DEFINED = function(x) { return !_(x).isUndefined(); };
-	var TO_OBJ = util.TO_OBJ;
-	var flatten = util.flatten;
+	var defined = util.DEFINED, dict = util.TO_OBJ, flatten = util.flatten;
 	var chainer;
 	
 	var Maxel = Backbone.Model.extend({
@@ -20,7 +18,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.sameas = [];
 			if (!_(src_json).isUndefined()) {
 				this.original_json = _.clone(src_json);
-				_(this.attributes).extend( this._all_values_to_arrays(src_json) );
+				this.attributes = this._all_values_to_arrays(src_json);
 			}
 			this.set_up_inference(options);
 			return this;
@@ -42,12 +40,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				// console.log(" apply rules -- triggers ", rules.map(function(x) { return x.id; }));
 				// try each the rule
 				return rules.map(function(r) {
-					try {
+//					try {
 						var result = r.fn(this_);
 						return result;
-					} catch(e) {
-						console.error(e);
-					}
+//					} catch(e) {
+//						console.error(e);
+//					}
 				}).filter(function(x) { return !_(x).isUndefined() && x.getDiffs().length > 0; })
 					.map(function(diffset) {
 						// console.log('applying diffsets ', diffset);
@@ -71,11 +69,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		},		
 		_all_values_to_arrays:function(o) {
 			if (!_(o).isObject()) {	console.error(' not an object', o); return o; }
-			var cleaned = o;
 			var this_ = this;
-			_(o).map(function(v,k) { return this_._value_to_array(k,v); });
-			return cleaned;
-			
+			// ?!?! this isn't doing anything (!!)
+			return dict(_(o).map(function(v,k) {
+				var val = this_._value_to_array(k,v);
+				if (defined(val)) { return [k,val]; }
+			}).filter(defined));
 		},
 		_get_entailed_values:function(p) {
 			return flatten(_((this.entailed && this.entailed[p])|| {}).values());
@@ -159,12 +158,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// now everything is in single object format;
 			var new_vals = this._all_values_to_arrays(props);
 			// filter new vals for only those that have actually changed
-			var changed = TO_OBJ(
+			var changed = dict(
 				_(new_vals).map(function(v,p) {
 					var old_val = this_.entailed[p] ? this_.entailed[p][rule.id] : undefined;
 					if (old_val === undefined) { old_val = []; }
 					return _(v).difference(old_val).length > 0 ? [p,v] : undefined;
-				}).filter(DEFINED)
+				}).filter(defined)
 			);				
 			_(changed).map(function(v,p) {
 				this_.entailed[p] = this_.entailed[p] || {};
