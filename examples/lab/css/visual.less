@@ -109,12 +109,18 @@
 .dropzone-0 { .dropzone-i(blue); }
 .dropzone-1 { .dropzone-i(orange); }
 .dropzone-2 { .dropzone-i(green); }
-.dropzone-3 { .dropzone-i(red); }	
+.dropzone-3 { .dropzone-i(red); }
 
 .dropzone-i(@color) {
 	&.dropzone {
-		border:1px solid @color !important;
+		border-left:1px solid @color !important;
+		border-top:1px solid rgba(200,200,200,0.4);
+		border-bottom:1px solid rgba(200,200,200,0.4);
+		background-color:fadeout(@color,90%);
 	}
+	background-color:fadeout(@color,95%);
+	.properties { background-color:fadeout(@color,95%); }
+
 	.uplt {
 		border-left:1px solid @color !important;
 		border-top:1px solid @color !important;
