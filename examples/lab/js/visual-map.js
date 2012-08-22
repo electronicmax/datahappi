@@ -27,7 +27,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.$el.css('left', 50 + 100*Math.random());
 			this.$el.data('view', this);
 			var dropzone = "<div class='dropzone'><div class='lbl'>drop here</div></div>";
- 			[1,2,3,4].map(function(i) { this_.$el.find('.dropzones').append(dropzone);});
+			[1,2,3,4].map(function(i) { this_.$el.find('.dropzones').append(dropzone);});
 			this.$el.find('.dropzone').droppable({
 				greedy:true,  accept:'.greybox', tolerance:"pointer",
 				over:function(event, ui) {
@@ -41,9 +41,10 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				drop: function( event, ui ) {
 					var view = ui.draggable.data("view");
 					var views = view.views_collection;
+					var dropzone_i = this_.$el.find('.dropzone').index($(this));
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('' + views.length + 'items');
-					this_.setData(view.pathables, this_.$el.find('.dropzone').index($(this)));
+					this_.setData(view.pathables, dropzone_i);
 				}
 			});						
 			return this;
@@ -54,14 +55,18 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				{
 					model : pathable.model.get_label(),
 					value : val.get_label ? val.get_label() : val.valueOf()
-				});				  
+				});
 		},
 		get_lat_lng:function(val) {
 			if (val instanceof models.Maxel) {
-				if (defined(val.get('lat')) && val.get('lat').length
-					&& defined(val.get('long')) && val.get('long').length) {
+				if (defined(val.get('lat')) && val.get('lat').length &&
+					defined(val.get('long')) && val.get('long').length) {
 					return { lat: val.get('lat')[0], long: val.get('long')[0] };
-				}					
+				}
+				if (defined(val.get('lat')) && val.get('lat').length &&
+					defined(val.get('lon')) && val.get('lon').length) {
+					return { lat: val.get('lat')[0], long: val.get('lon')[0] };
+				}									
 			}
 			return;
 		},
@@ -86,18 +91,17 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			// make some markers for each of the datasets!
 			_(this.datasets).each(function(dataset, i) {
 				// for each data set
-				console.log("DATASET > ", dataset);
-				var markers = this_.dataset_markers[i] || [];
+				var markers_by_model = this_.dataset_markers[i] || [];	// [ [model_x_markers], [model_x2_markers], ... ]
+
 				dataset.each(function(model, j) {
-					console.log("MODEL > ", model);					
-					var model_markers = markers[j] || [];
-					markers[j] = model_markers;					
+					var model_markers = markers_by_model[j] || [];
+					markers_by_model[j] = model_markers;
+					
 					model.get_last_value().map(function(val, k) {
-						console.log("val > ", val);											
 						var geoval = this_.get_lat_lng(val);
 						if (_(geoval).isUndefined()) {
 							if  (!_.isUndefined(model_markers[k])) {
-								model_markers[k].removeFrom(this_.map);
+								this_.map.removeLayer(model_markers[k]);								
 								delete model_markers[k];
 							}
 							return;
@@ -106,16 +110,36 @@ define(['js/models', 'js/utils'], function(models, utils) {
 						var position = new L.LatLng(geoval.lat,geoval.long);
 						if (defined(model_markers[k])) {
 							model_markers[k].setLatLng(position);
-							model_markers[k].bindPopup(this_._make_popup_text(model, val)).update();
+							model_markers[k].bindPopup(this_._make_popup_text(model, val));
+							model_markers[k].update();
 						} else {
-							model_markers[k] = (new L.Marker(position))
-								.bindPopup(this_._make_popup_text(model, val))
-								.addTo(this_.map);
+							model_markers[k] = (new L.Marker(position));
+							model_markers[k].addTo(this_.map)							
+							model_markers[k].bindPopup(this_._make_popup_text(model, val));
 						}
 						last_position = position;
 					});
+
+					// exit selection per _value_
+					_(model_markers.slice(model.get_last_value().length))
+						.each(function(marker, kk) {
+							if (defined(marker)) {
+								this_.map.removeLayer(marker); 
+								delete model_markers[kk];
+							}								
+						});
 				});
-				this_.dataset_markers[i] = markers;
+				
+				// exit selection per model
+				markers_by_model.slice(dataset.length).map(function(model_markers) {
+					_(model_markers).each(function(marker, kk) {
+						if (defined(marker)) {
+							this_.map.removeLayer(marker);							
+							delete model_markers[kk];
+						}				
+					});
+				});
+				this_.dataset_markers[i] = markers_by_model;
 			});
 			if (!_(last_position).isUndefined()) { this.map.panTo(last_position); }
 			return this;

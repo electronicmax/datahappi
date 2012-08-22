@@ -34,14 +34,14 @@ define(['js/basemodel', 'js/models', 'js/utils'], function(basemodel, maxel, uti
 	
 	// modelclass = custom model class or basemodel.BaseModel
 	// collectionclass = custom collection to put things into or Backbone.Collection
-	var get_from_source = function(src_url, modelclass, collectionclass) {
+	var get_from_source = function(src_url, modelclass, collectionclass, src_name) {
 		var suffix = src_url.slice(src_url.lastIndexOf('.'));
 		var source_d = utils.deferred();
 				
 		if (source_modules[suffix] !== undefined) {
 			require([source_modules[suffix]],
 					function(module) {
-						var src = new module.Source({ url:src_url, modeltype:modelclass });						
+						var src = new module.Source({ url:src_url, modeltype:modelclass, name:src_name  });						
 						src.collection = new ((collectionclass || Backbone.Collection).extend({
 							fetch:function() { return src.fetch(); }
 						}))();
