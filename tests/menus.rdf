@@ -7,7 +7,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu6">
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu1">
         <menu_item rdf:parseType="Resource">
             <item_detail>Light lentil soup cooked with aromatic spices - served with baby naan bread</item_detail>
             <item_price>2.95</item_price>
@@ -698,5 +698,881 @@
             <rdfs:label>KURGEE LAMB - 24 hours notice required</rdfs:label>
         </menu_item>
         <rdfs:label>Coriander Lounge</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu2">
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Maguro (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Ebi (Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Tako (Octopus)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Hamachi (Yellow Tails)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Saba (Mackerel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Amaebi (Sweet Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Ika (Squid)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Unagi (Eel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Hotate (Scallop)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Tobiko (Fish Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Ikura (Salmon Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Inari (Tofu)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Oshinko (Pickle Radish)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Tamago (Egg)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Gyu (Medium-Rare Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Tori katus (Pork Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri -  Tori katus (Chicken Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Crispy roll, Prawn, Crabs, Avocado, Cucumbers and Mayonnaise)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Maki - Zen Special</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 Pieces) Seaweed roll filled with Fresh Raw Salmon)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Salmon &#38; Salad)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Maki - Sake Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Maki - Tekka (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawn, Egg, Avocado, Crab, Cucumber &#38; Pickle)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Futo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Salmon, Tuna, Prawn &#38; Salad)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Rainbow</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Inside-out seaweed roll filled with Egg, Prawn, Avocado, Crab, Cucumber and Mayonnaise with Tobiko)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Maki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(King Prawn Tempura)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Dragon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Tempura Soft Shall Crab)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Maki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawn)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Crab Meat)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Cani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Crab meat &#38; Salad)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Maki - Cani Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Grilled eel)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Ton Katsu (Pork Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Tori Katsu (Chicken Cutlet</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Duck)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Maki - Kamo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(BBQ Beef)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Gyu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Scallop)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Maki - Hotata</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Mixed Seafood)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Maki - Mori Awase</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sweet tofu &#38; Avocado)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Inari &#38; Avocado</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Cucumber)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Kappa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Avocado</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sweet Tofu)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Inari</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pickled Plum)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Oshinko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pickled Plum)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Umeshiso</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Egg)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Tamago</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Filled with Avocado, Crab Stick, Prawn, Cucumber and Mayonnaise with Tobiko)</item_detail>
+            <item_price>4.00</item_price>
+            <rdfs:label>Temaki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Salmon)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Sake</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Tuna)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Tekka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Tempura Soft Shell Crab)</item_detail>
+            <item_price>4.00</item_price>
+            <rdfs:label>Temaki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(King Prawn Tempura)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Ebi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawn)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Crab Meat)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Cani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Grilled Eel)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Salmon Roe)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Ikura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Flying Fish Roe)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Tobiko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pickle Radish)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Temaki - Oshinko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Mixed Combination of Salmon, Tuna, Yellow Tail, Octopus &#38; Sweet Shrimps)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Sashimi - Mori Awase</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>7.90</item_price>
+            <rdfs:label>Sashimi - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Tuna)</item_detail>
+            <item_price>8.90</item_price>
+            <rdfs:label>Sashimi - Maguro</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Yellow Tail)</item_detail>
+            <item_price>9.90</item_price>
+            <rdfs:label>Sashimi - Hamachi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Octopus)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Tako</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Squid)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Ika</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sweet Shrimps)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Amaebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Oyster)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Nama Kaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Medium-Rare Beef)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Gyu Tatak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Scallop)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Sashimi - Hotate</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Egg fried rice with mixed seafood)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Steam rice served with char-grilled eel)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Unagi Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Steam rice served with roasted duck)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried king prawn, ginger &#38; spring onion with egg fried rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried chicken in spicy peanut sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Tori Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried beef in black bean sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Gyu Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried pork in hot bean sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ton Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Steam rice served with stir fried mixed vegetables &#38; tofu)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Yasai Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried mixed seafood and vegetables with curry sauce)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Seafood Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried king prawns and vegetables with curry sauce)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried beef and vegetables with curry sauce)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Beef Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Deep fried chicken breadcrumbs and vegetables with curry sauce)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Katsu Tori Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Deep fried pork cutlet breadcrumbs and vegetables with curry sauce)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Katsu Ton Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir fried mixed vegetables with curry sauce)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Beef slices with onion and eggs on top of steamed rice)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Gyudon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pork cutlet with onion and egg on top of steam rice)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Katsudon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken and egg on top of steamed rice)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Oyakodon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Char-gtrill chicken on top of steamed rice)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Teriyakido</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Char-grilled eel on top of egg fried rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Unagidon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawns, squid, chicken, roast duck, vegetables with sauce on top of steamed rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Chukadon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with prawns, scallops, squid, crabticks and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with prawns, scallops, squid, crabticks and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with roasted duck and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with roasted duck and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with slices of grilled pork and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Cha Shu Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with slices of grilled pork and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Cha Shu Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with braised pork spare ribs and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Spare Ribs Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with braised pork spare ribs and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Spare Ribs Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with breadcrumbs breast of chicken and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with breadcrumbs breast of chicken and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with mixed vegetables and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Topped with mixed vegetables and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with seafood, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with seafood, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with prawns, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with prawns, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with chicken, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with chicken, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with beef, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Gyu Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with beef, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Gyu Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with egg, mixed vegetable and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pan fried noodles with egg, mixed vegetable and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Stir Fried Beef, Chicken and Seafood)</item_detail>
+            <item_price>17.90</item_price>
+            <rdfs:label>Zen Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Marinated Deep fried Breadcrumb Chicken)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>Karaage Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Grilled Sirloin Steak sliced)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Gyu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Grilled Salmon Steak)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Sake Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Roasted Duck)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Kamo Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Shell on, Sweet &#38; Spicy Chilli Sauce)</item_detail>
+            <item_price>19.50</item_price>
+            <rdfs:label>Spicy King Prawn</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Char-Grilled Eel)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Unagi Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Deep Fried Tempura Mixed Vegetables)</item_detail>
+            <item_price>13.90</item_price>
+            <rdfs:label>Yasai Tempura Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Tofu &#38; Seaweed)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Miso Soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Steam Green Soya Bean)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Edamame</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Japanese Friend Chicken)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Tori Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Yakitori Soft Shell Crab)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Cani Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Peppercorn Squid)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Ika Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sesami Chicken Wings)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Tori Teba Kosho</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Peppercorn King Prawns)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Served with Tempura Sauce)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Agedashi Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>BBQ Ribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.90</item_price>
+            <rdfs:label>Satay Chicken Skewers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Vegetables mini Rolls)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Yasai Harumaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken Dumplings)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Soup with Chicken Dumplings)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Gyoza in Soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Vegetables Dumplings)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>yasai Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Soup with Vegetables Dumplings)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Yasai Gyoza (Soup)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Steam Pak Choi with Oyster Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Fried Japanese Mushroom with Brocco</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Stir Fried Garlic with Beansprouts</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.90</item_price>
+            <rdfs:label>Stir Fried Mixed Vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Tofu In Hot Bean Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Tofu in Black Bean Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Steamed Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.50</item_price>
+            <rdfs:label>Plain Fried Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.50</item_price>
+            <rdfs:label>Soup with Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Plain Fried Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.90</item_price>
+            <rdfs:label>Soup with Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Fries</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.90</item_price>
+            <rdfs:label>Zen Mixed Seafood</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.50</item_price>
+            <rdfs:label>Japanese Green Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawn)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ebi Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Flying Fish Roe)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Tobiko Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Medium-Rare Beef)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Gyu Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken Cutlet)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Tori Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(King Prawn, Scallops and Squid)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>Seafood Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(King Prawn)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ebi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Soft Shell Crab)</item_detail>
+            <item_price>8.90</item_price>
+            <rdfs:label>Cani Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Squid)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ika Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Mixed vegetables)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Yasi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sweet Potato)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Satumaimo Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawns, Chicken, Beef, Lamb &#38; Mixed Vegetable - 2 Skewers Each)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Mixed Combination Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Prawns with Shell on)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ebi Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Scallops)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Hotate Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Squid)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Ika Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Yakitori Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Beef)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Gyu Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Lamb)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Lamu Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pork cutlet)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Ton Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Mixed Vegetables)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Yasi Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken Cutlet, Pork Cutlet, King Prawn, Squid &#38; Potato Croquettes)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Katsu Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Chicken Cutlet)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Pork Cutlet)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ton Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Salmon)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sake Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Scallops)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Hotate Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Soft Shell Crab)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Cani Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(King Prawns)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ebi Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Lamb)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Lumu Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Sirloin Beef)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Gyu Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Squid)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ika Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(Potato Croquettes)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Korokke Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(14 pieces)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>A) Deluxe Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(18 pieces)</item_detail>
+            <item_price>22.90</item_price>
+            <rdfs:label>B) Salmon Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(26 pieces)</item_detail>
+            <item_price>29.90</item_price>
+            <rdfs:label>C)  ZEN Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(36 pieces)</item_detail>
+            <item_price>34.90</item_price>
+            <rdfs:label>D) Sashimi &#38; Sushi Combinatio</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(18 pieces)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>E) Vegetarian Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>24.90</item_price>
+            <rdfs:label>Set Meal A</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>29.90</item_price>
+            <rdfs:label>Set Meal B</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>19.90</item_price>
+            <rdfs:label>Vegetarian Set Meal</rdfs:label>
+        </menu_item>
+        <rdfs:label>Zen Southampton</rdfs:label>
     </rdf:Description>
 </rdf:RDF>
