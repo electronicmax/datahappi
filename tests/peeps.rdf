@@ -5,6 +5,8 @@
 	<cat:home>
 	  <rdf:Description rdf:about="#aliceaddress">
 		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
+		<cat:lat>31.466114</cat:lat>
+		<cat:long>34.484749</cat:long>
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>075372982938</cat:phone>
@@ -15,7 +17,9 @@
 	<rdfs:label>Bob</rdfs:label>
 	<cat:home>
 	  <rdf:Description rdf:about="#bobaddress">
-		<cat:address>59 Elkhorn Drive, Boise ID 83709 USA</cat:address>
+		<cat:address>10 Downing Street, Westminster SW1A 2AA</cat:address>
+		<cat:lat>51.5033</cat:lat>
+		<cat:long>0.127640</cat:long>
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>617-992-8822</cat:phone>

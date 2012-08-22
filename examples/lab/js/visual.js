@@ -141,7 +141,7 @@ define(['js/utils'], function(utils) {
 			this.$el.html(this.template);
 			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});			
 			this.$el.find('.yaxis').droppable({
-				greedy:true,  accept:'.item,.pathable-view', tolerance:"pointer",
+				greedy:true,  accept:'.greybox', tolerance:"pointer",
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_y_label = $(this).find('lbl').html();
@@ -160,7 +160,7 @@ define(['js/utils'], function(utils) {
 				}
 			});			
 			this.$el.find('.xaxis').droppable({
-				greedy:true, accept:'.item,.pathable-view',	tolerance:"pointer",
+				greedy:true, accept:'.greybox',	tolerance:"pointer",
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_x_label = $(this).find('label').html();
