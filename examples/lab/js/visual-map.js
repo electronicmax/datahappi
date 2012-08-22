@@ -11,6 +11,12 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			'click .delete' : '_cb_delete'
 		},
 		defaults : { center:[51.505, -0.09], zoom:13 },
+		marker_icons : {
+			0:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-icon.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)}),
+			1:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-orange.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)}),
+			2:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-icon-green.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)}),
+			3:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-red.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)})
+		},
 		initialize:function() {
 			this.options = _.extend(this.defaults, this.options);
 			this.dropzone_boxes = {};
@@ -126,7 +132,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				_(geovalues).each(function(geoval, vi) {
 					var position = new L.LatLng(geoval.geo.lat,geoval.geo.long);					
 					if (!defined(markers[vi])) {
-						markers[vi] = (new L.Marker(position));
+						markers[vi] = (new L.Marker(position, {icon:this_.marker_icons[i]}));
 						markers[vi].addTo(this_.map);
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
 					} else {

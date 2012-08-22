@@ -152,78 +152,78 @@
   display: none !important;
 }
 .dropzone-0.dropzone {
-  border: 1px solid #ffa500 !important;
+  border: 1px solid #0000ff !important;
 }
 .dropzone-0 .uplt {
+  border-left: 1px solid #0000ff !important;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .uprt {
+  border-right: 1px solid #0000ff;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .btlt {
+  border-bottom: 1px solid #0000ff !important;
+  border-left: 1px solid #0000ff !important;
+}
+.dropzone-0 .btrt {
+  border-bottom: 1px solid #0000ff !important;
+  border-right: 1px solid #0000ff !important;
+}
+.dropzone-1.dropzone {
+  border: 1px solid #ffa500 !important;
+}
+.dropzone-1 .uplt {
   border-left: 1px solid #ffa500 !important;
   border-top: 1px solid #ffa500 !important;
 }
-.dropzone-0 .uprt {
+.dropzone-1 .uprt {
   border-right: 1px solid #ffa500;
   border-top: 1px solid #ffa500 !important;
 }
-.dropzone-0 .btlt {
+.dropzone-1 .btlt {
   border-bottom: 1px solid #ffa500 !important;
   border-left: 1px solid #ffa500 !important;
 }
-.dropzone-0 .btrt {
+.dropzone-1 .btrt {
   border-bottom: 1px solid #ffa500 !important;
   border-right: 1px solid #ffa500 !important;
 }
-.dropzone-1.dropzone {
-  border: 1px solid #ee82ee !important;
-}
-.dropzone-1 .uplt {
-  border-left: 1px solid #ee82ee !important;
-  border-top: 1px solid #ee82ee !important;
-}
-.dropzone-1 .uprt {
-  border-right: 1px solid #ee82ee;
-  border-top: 1px solid #ee82ee !important;
-}
-.dropzone-1 .btlt {
-  border-bottom: 1px solid #ee82ee !important;
-  border-left: 1px solid #ee82ee !important;
-}
-.dropzone-1 .btrt {
-  border-bottom: 1px solid #ee82ee !important;
-  border-right: 1px solid #ee82ee !important;
-}
 .dropzone-2.dropzone {
-  border: 1px solid #a52a2a !important;
+  border: 1px solid #008000 !important;
 }
 .dropzone-2 .uplt {
-  border-left: 1px solid #a52a2a !important;
-  border-top: 1px solid #a52a2a !important;
+  border-left: 1px solid #008000 !important;
+  border-top: 1px solid #008000 !important;
 }
 .dropzone-2 .uprt {
-  border-right: 1px solid #a52a2a;
-  border-top: 1px solid #a52a2a !important;
+  border-right: 1px solid #008000;
+  border-top: 1px solid #008000 !important;
 }
 .dropzone-2 .btlt {
-  border-bottom: 1px solid #a52a2a !important;
-  border-left: 1px solid #a52a2a !important;
+  border-bottom: 1px solid #008000 !important;
+  border-left: 1px solid #008000 !important;
 }
 .dropzone-2 .btrt {
-  border-bottom: 1px solid #a52a2a !important;
-  border-right: 1px solid #a52a2a !important;
+  border-bottom: 1px solid #008000 !important;
+  border-right: 1px solid #008000 !important;
 }
 .dropzone-3.dropzone {
-  border: 1px solid #ffff00 !important;
+  border: 1px solid #ff0000 !important;
 }
 .dropzone-3 .uplt {
-  border-left: 1px solid #ffff00 !important;
-  border-top: 1px solid #ffff00 !important;
+  border-left: 1px solid #ff0000 !important;
+  border-top: 1px solid #ff0000 !important;
 }
 .dropzone-3 .uprt {
-  border-right: 1px solid #ffff00;
-  border-top: 1px solid #ffff00 !important;
+  border-right: 1px solid #ff0000;
+  border-top: 1px solid #ff0000 !important;
 }
 .dropzone-3 .btlt {
-  border-bottom: 1px solid #ffff00 !important;
-  border-left: 1px solid #ffff00 !important;
+  border-bottom: 1px solid #ff0000 !important;
+  border-left: 1px solid #ff0000 !important;
 }
 .dropzone-3 .btrt {
-  border-bottom: 1px solid #ffff00 !important;
-  border-right: 1px solid #ffff00 !important;
+  border-bottom: 1px solid #ff0000 !important;
+  border-right: 1px solid #ff0000 !important;
 }
