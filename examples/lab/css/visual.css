@@ -5,9 +5,25 @@
   right: 0px;
   bottom: 0px;
 }
+.visual,
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+}
+.visual .delete,
+.visual-map .delete {
+  z-index: 1000;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 5px;
+  display: none;
+  opacity: 0.8;
+  font-size: 1.0em;
+}
 .visual {
-  width: 250px;
-  height: 200px;
   border: 1px solid rgba(0, 180, 0, 0.2);
 }
 .visual .corner_thingy {
@@ -20,19 +36,8 @@
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 220px;
-  height: 170px;
-}
-.visual .delete {
-  z-index: 1000;
-  position: absolute;
-  top: 2px;
-  margin: 0px;
-  padding: 0px;
-  right: 5px;
-  display: none;
-  opacity: 0.8;
-  font-size: 1.0em;
+  width: 320px;
+  height: 270px;
 }
 .visual .droparea {
   position: absolute;
@@ -79,7 +84,7 @@
   transform: rotate(90deg);
   left: 30px;
   top: 0px;
-  width: 199px;
+  width: 299px;
   height: 30px;
   -webkit-transform: rotate(90deg);
   transform-origin: 0% 0%;
@@ -98,4 +103,51 @@
   bottom: 0px;
   text-align: center;
   vertical-align: middle;
+}
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid rgba(180, 180, 0, 0.2);
+}
+.visual-map .map-zone {
+  position: absolute !important;
+  padding: 0px;
+  margin: 0px;
+  top: 0px;
+  left: 50px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual-map .dropzones {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 50px;
+  bottom: 0px;
+}
+.visual-map .dropzones .dropzone {
+  -webkit-transition: all 1s ease-in-out;
+  display: inline-block;
+  width: 100%;
+  height: 25%;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}
+.visual-map .dropzones .dropzone .lbl {
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  font-size: 0.8em;
+}
+.visual-map .dropzones .dropzone.over {
+  padding: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  background-color: rgba(200, 200, 200, 0.1);
+}
+.visual-map .leaflet-control-attribution {
+  display: none !important;
 }

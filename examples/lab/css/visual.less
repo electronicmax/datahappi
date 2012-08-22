@@ -4,14 +4,27 @@
 @visual-y-width:30px;
 @visual-x-height:30px;
 @visual-border-color : rgba(0,180,0,0.2);
+@map-border-color : rgba(180,180,0,0.2);
 .fullsize {
 	position:absolute;
 	top:0px; left:0px; right:0px; bottom:0px;
 }
-.visual {
+.visual, .visual-map {
+	position:absolute;
 	width:@visual-width;
 	height:@visual-height;
-	border:1px solid @visual-border-color;
+	.delete {
+		z-index:1000; 
+		position:absolute;
+		top:2px; margin:0px; padding:0px;
+		right:5px;			
+		display: none;
+		opacity:0.8;
+		font-size:1.0em;
+	}
+}
+.visual {
+	border:1px solid @visual-border-color;	
 	.corner_thingy {
 		width:50px; height:50px;
 		position:absolute;			
@@ -23,15 +36,6 @@
 		right:0px;
 		width:@visual-width - @visual-y-width;
 		height:@visual-height - @visual-x-height;
-	}
-	.delete {
-		z-index:1000; 
-		position:absolute;
-		top:2px; margin:0px; padding:0px;
-		right:5px;			
-		display: none;
-		opacity:0.8;
-		font-size:1.0em;
 	}
 	.droparea {
 		position:absolute;
@@ -59,4 +63,44 @@
 		z-index:5;
 		.lbl {	}			
 	}
+}
+
+@visual-width:350px;
+@visual-height:300px;
+.visual-map {
+	position:absolute;
+	width:@visual-width;
+	height:@visual-height;
+	padding:0px; margin:0px;
+	border:1px solid @map-border-color;
+	.map-zone {
+		position:absolute !important;
+		padding:0px; margin:0px;		
+		top:0px; left:50px; right:0px; bottom:0px;
+	}
+	.dropzones {
+		padding:0px; margin:0px;		
+		position:absolute;
+		top:0px; left:0px; width:50px; bottom:0px;
+		.dropzone {
+			-webkit-transition: all 1s ease-in-out;
+			display:inline-block;
+			width: 100%; height:25%;
+			border:1px solid rgba(200,200,200,0.3);
+			.lbl {
+				-webkit-transform: rotate(90deg);
+				transform-origin:0% 0%;
+				-webkit-transform-origin:0% 0%;
+				font-size:0.8em;
+			}
+			&.over {
+				padding:20px;
+				border:1px solid rgba(200,200,200,0.5);
+				background-color:rgba(200,200,200,0.1);			
+			}				
+		}
+	}
+    .leaflet-control-attribution {
+        display:none !important;
+    }               
 }
