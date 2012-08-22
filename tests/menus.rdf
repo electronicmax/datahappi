@@ -1575,4 +1575,592 @@
         </menu_item>
         <rdfs:label>Zen Southampton</rdfs:label>
     </rdf:Description>
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu3">
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.70</item_price>
+            <rdfs:label>Sushi Nigiri - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.00</item_price>
+            <rdfs:label>Sushi Nigiri - Maguro (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.20</item_price>
+            <rdfs:label>Sushi Nigiri - Ebi (Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.80</item_price>
+            <rdfs:label>Sushi Nigiri - Hamachi (Yellow Tail)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.80</item_price>
+            <rdfs:label>Sushi Nigiri - Unagi (Eel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.80</item_price>
+            <rdfs:label>Sushi Nigiri - Tobiko (Flying Fish Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.00</item_price>
+            <rdfs:label>Sushi Nigiri - Tamago (Omelette) V</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Nigiri - Inari (Tofu)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Sushi Spicy Gunkan - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.20</item_price>
+            <rdfs:label>Sushi Spicy Gunkan - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Temaki - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.70</item_price>
+            <rdfs:label>Sushi Temaki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.90</item_price>
+            <rdfs:label>Sushi Temaki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.50</item_price>
+            <rdfs:label>Sushi Temaki - Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>8.40</item_price>
+            <rdfs:label>Sashimi - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>9.00</item_price>
+            <rdfs:label>Sashimi - Hamachi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(16 pieces) 2 pieces each of salmon, ebi and tobiko nigiri, 4 pieces old town dragon roll, 6 pieces tuna maki</item_detail>
+            <item_price>12.90</item_price>
+            <rdfs:label>Old Town Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(14 pieces) 2 pieces each of salmon, tuna and ebi nigiri and 4 pieces each of California and inari and avocado maki</item_detail>
+            <item_price>10.90</item_price>
+            <rdfs:label>Sushi Combination - Chef Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(12 pieces) 2 pieces each of tamago and inari nigiri and 4 pieces each of inari and avocado maki, 6 pieces of cucumber maki</item_detail>
+            <item_price>7.20</item_price>
+            <rdfs:label>Sushi Combination - Vegetarian Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of battered chicken with cucumber and dressing of avocado with honey mustard sauce</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Old Town Tori Katsu Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of battered chicken with cucumber and avocado</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Tori Katsu Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of shredded lettuce and roasted duck</item_detail>
+            <item_price>5.70</item_price>
+            <rdfs:label>Duck Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of cucumber and avocado with dressing of salmon and tuna</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sushi Maki - Rainbow Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of cucumber and battered prawns with dressing of avocado</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sushi Maki - Old Town Dragon Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of cucumber and battered prawns with tobiko dressing</item_detail>
+            <item_price>6.20</item_price>
+            <rdfs:label>Sushi Maki - Dragon Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of cucmber, avocado, prawns and crabstick with tobiko dressing</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Sushi Maki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>California roll wrapped in pancake and deeply fried</item_detail>
+            <item_price>6.20</item_price>
+            <rdfs:label>Sushi Maki - California Pancake Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of soft shell crab and cucumber</item_detail>
+            <item_price>8.00</item_price>
+            <rdfs:label>Sushi Maki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of shredded cucumber and barbequed eel</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Sushi Maki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of prawns, crabstick, cucumber, avocado and pickles</item_detail>
+            <item_price>5.40</item_price>
+            <rdfs:label>Sushi Maki - Futomaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of tofu, cucumber and avocado</item_detail>
+            <item_price>3.30</item_price>
+            <rdfs:label>V Sushi Maki - Inari and Avocado (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 pieces) Fillings of fresh salmon</item_detail>
+            <item_price>3.10</item_price>
+            <rdfs:label>Sushi Maki - Sake</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 pieces) Fillings of fresh tuna</item_detail>
+            <item_price>3.30</item_price>
+            <rdfs:label>Sushi Maki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 pieces) Fillings of cucumber and mayonnaise</item_detail>
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Maki - Cucumber</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of tobiko, avocado &#38; deep fried salmon skin</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Sushi Maki - Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of salmon with spicy sauce</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Spicy Sushi Maki - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of tuna with spicy sauce</item_detail>
+            <item_price>3.40</item_price>
+            <rdfs:label>Spicy Sushi Maki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Fillings of tobiko, avocado &#38; deep fried salmon skin</item_detail>
+            <item_price>5.10</item_price>
+            <rdfs:label>Spicy Sushi Maki - Crispy salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.00</item_price>
+            <rdfs:label>Steamed Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.20</item_price>
+            <rdfs:label>Chicken Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.20</item_price>
+            <rdfs:label>Roasted Pork Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.00</item_price>
+            <rdfs:label>King Prawns Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>3.00</item_price>
+            <rdfs:label>Plain Fried Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.40</item_price>
+            <rdfs:label>Chicken Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.40</item_price>
+            <rdfs:label>Roasted Pork Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Roasted Duck Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawn Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Roasted pork with gravy</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried sliced pork in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Pork in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried diced pork with soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Ma Po Tofu Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.20</item_price>
+            <rdfs:label>Kung Po Porrk</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Chicken curry with potatoes, onions and carrots</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Curry Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Crispy chicken in Japanese yakitori sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir frie chicken with spicy sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Spicy Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried sliced chicken in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Chicken in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried diced chicken with soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Ma  Po Tofu Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried prawns with spicy sauce</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Spicy Prawn</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pan fried prawns in soya sauce</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Pan fried prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried prawns with fine beans</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawns with fine beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried prawns in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawns in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried sliced beef with shredded coconut</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Rendang beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried sliced beef in black pepper sauce with onions and green and red peppers</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Beef in black pepper sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried diced beef with soft bean curd, green and red peppers in Szechuan ssauce</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Ma Po Tofu beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried seasonal vegetables</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Mixed vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stir fried fine beans with garlic</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Fine Beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Stewed potatoes with onions and carrots</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Curry Potatoes</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Ma Po Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pan fried eggs with shredded roasted pork</item_detail>
+            <item_price>4.70</item_price>
+            <rdfs:label>Fu Young - Roasted pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pan fried eggs with king prawns</item_detail>
+            <item_price>5.00</item_price>
+            <rdfs:label>Fu Young - King prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>Pan fried eggs with shredded onions</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Fu Young - Onions (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>6 pieces)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Chicken Wings in Honey Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>6 pieces)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Salt &#38; Pepper Chicken Wings</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 pieces) Japanese fried chicken</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Tori Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(6 pieces) Japanese chicken dumplings</item_detail>
+            <item_price>3.80</item_price>
+            <rdfs:label>Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(4 skewers))</item_detail>
+            <item_price>4.70</item_price>
+            <rdfs:label>Satay Chicken Skewers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(4 pieces)</item_detail>
+            <item_price>4.20</item_price>
+            <rdfs:label>Barbeque Spareribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Deep Fried Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(8 pieces)</item_detail>
+            <item_price>1.90</item_price>
+            <rdfs:label>Vegetable Springrolls (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(3 pieces) Bread crumbed vegetable</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Yasai Croquette (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.40</item_price>
+            <rdfs:label>Edamame (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.20</item_price>
+            <rdfs:label>Prawn Crackers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(4 pieces) Contents of pork</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Siu Mai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Chicken Bun</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Roasted Pork Bun</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>1.70</item_price>
+            <rdfs:label>Chips</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.80</item_price>
+            <rdfs:label>Noodle Soup - Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.80</item_price>
+            <rdfs:label>Noodle Soup - Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Noodle Soup - Roasted Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.70</item_price>
+            <rdfs:label>Noodle Soup - Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>2.30</item_price>
+            <rdfs:label>Miso soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Curry Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Lunch Box - Roasted Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Lunch Box - Roasted Duck &#38; Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(3 skewers)</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Satay Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Chicken with Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>(4)</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - BBQ spareribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Pork with Black Pepper Sauace</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Rendang Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Beef in black pepper sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Pan fried Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Prawns with fine Beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Spicy Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.30</item_price>
+            <rdfs:label>Lunch Box - (V) Ma Po Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Ma Po Tofu (Beef)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Ma Po Tofu (Pork)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>8.90</item_price>
+            <rdfs:label>Unagi Don</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.00</item_price>
+            <rdfs:label>Mee Goreng</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Nasi Goreng</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.50</item_price>
+            <rdfs:label>Nasi Lemak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.50</item_price>
+            <rdfs:label>Oily Noodle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.50</item_price>
+            <rdfs:label>Ho Fun Flat Noodle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Chicken with Chinese mushrooms</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Sambal Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.00</item_price>
+            <rdfs:label>Kai Lan Chinese Greens</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Choi Sum Chinese Greens</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.00</item_price>
+            <rdfs:label>Sambal Belacan Kang Kung</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.50</item_price>
+            <rdfs:label>Crackling Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Quarter Grilled Salted Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>8.50</item_price>
+            <rdfs:label>Stir Fried Spicy Clams</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>6.50</item_price>
+            <rdfs:label>Pork with Preserved Vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Rendang Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Kung Po Prawns Malaysian Style</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.50</item_price>
+            <rdfs:label>Kung Po Chicken Malaysian Style</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_price>5.90</item_price>
+            <rdfs:label>Salt &#38; Pepper Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.</item_detail>
+            <item_price>12.80</item_price>
+            <rdfs:label>Old Town Set Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <item_detail>PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.</item_detail>
+            <item_price>15.00</item_price>
+            <rdfs:label>Old Town Starters &#38; Sushi Combinations</rdfs:label>
+        </menu_item>
+        <rdfs:label>Old Town Kitchen</rdfs:label>
+    </rdf:Description>
 </rdf:RDF>
