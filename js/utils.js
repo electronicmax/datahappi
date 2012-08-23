@@ -18,6 +18,9 @@ define([],function() {
 			if (_(v).isNumeric()) { return v ; }
 			if (typeof(v) == 'string') { return parseFloat(v, 10); }
 			return undefined; // throw new Error("Could not convert ", v);
+		},
+		when:function(x) {
+			return $.when.apply($,x);
 		}
 	};
 });

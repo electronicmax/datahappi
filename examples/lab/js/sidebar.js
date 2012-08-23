@@ -1,5 +1,6 @@
-define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/sameasview','js/utils'],function(sources,views,tv,sameas,util) {
-	var defined = util.DEFINED;
+define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/sameasview','examples/lab/js/inventory-view','js/utils'],function(sources,views,tv,sameas,inventory,util) {
+	
+	var defined = util.DEFINED, flatten = util.flatten, deferred = util.deferred, when = util.when;
 	
 	var ThingsView = tv.TableView.extend({
 		columns:[
@@ -27,6 +28,8 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 			$(els).hide();
 		}		
 	});
+
+
 	var SourcesView = Backbone.View.extend({
 		events : {
 			"click .new-source-add-button" : "_show_source_url",
@@ -84,7 +87,6 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 		render:function() {
 			var this_ = this;
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:this.sources, sidebar: this}).render(); 
-			var things_view = new ThingsView({	el:this.$el.find('.things')[0]	});
 			var sameas_view = new sameas.SameAsView({el:this.$el.find('.sameas-view')[0] });
 			// we need to watch any new models created by the sources,
 			// and tell our sameas watcher.
@@ -95,15 +97,28 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 			
 			this.sources.map(function(src) { src.on('new-model', watch_model, this); });			
 			this.sources.on('add', function(src) {	src.on('new-model', watch_model, this);			})
-				.on('remove', function(src) { src.off('all', null, this); });					
-			
-			sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
-			sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });
+				.on('remove', function(src) { src.off('all', null, this); });
 
+			var things = new Backbone.Collection();
+			var deferreds = [];
+			
 			this_.sources.map(function(src) {
+				var d = deferred();
+				deferreds.push(d);				
 				src.fetch().then(function(data) {
-					data.map(function(datum) {	things_view.collection.add(datum);	});
+					data.map(function(datum) { things.add(datum); });
+					d.resolve();
 				});
+			});
+
+			when(deferreds).then(function() {
+				console.log("Making an inventory view");
+				var things_view = new inventory.InventoryView({
+					el:this_.$el.find('.things')[0],
+					collection:things
+				}).render();				
+				sv.on('source-enabled', function(src) { things_view.setSourceEnabled(src);  });
+				sv.on('source-disabled', function(src) { things_view.setSourceDisabled(src);  });				
 			});
 
 			return this;			

@@ -2,6 +2,7 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cat="http://hip.cat/ont#"  xml:base="http://hip.cat/mydata">
   <rdf:Description rdf:about="#alice">
 	<rdfs:label>Alice</rdfs:label>
+	<rdf:type rdf:resource="#Person"/>
 	<cat:home>
 	  <rdf:Description rdf:about="#aliceaddress">
 		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
@@ -14,6 +15,7 @@
 	<cat:friends rdf:resource="#charlie"/>	
   </rdf:Description>  
   <rdf:Description rdf:about="#bob">
+	<rdf:type rdf:resource="#Person"/>	
 	<rdfs:label>Bob</rdfs:label>
 	<cat:home>
 	  <rdf:Description rdf:about="#bobaddress">
@@ -26,6 +28,7 @@
 	<cat:age>29</cat:age>	
   </rdf:Description>
   <rdf:Description rdf:about="#charlie">
+	<rdf:type rdf:resource="#Person"/>
 	<rdfs:label>Charlie</rdfs:label>
 	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
 	<cat:phone>074827382981</cat:phone>
