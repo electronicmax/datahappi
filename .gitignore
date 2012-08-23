@@ -12,3 +12,4 @@ ehthumbs.db
 Thumbs.db
 _made
 node_modules
+*.pyc
