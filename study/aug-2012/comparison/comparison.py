@@ -3,8 +3,11 @@ from __future__ import division
 import collections
 import itertools
 import pprint
+import sys
 
-from api_fields import apis
+import pdb
+
+from api_fields import apis, equivalent_fields
 
 results = {}
 
@@ -25,41 +28,66 @@ def flatten(x):
             result.append(el)
     return result
 
-# Get terminology overlaps
-for combo in powerset(apis.keys()):			# For all combinations of apis..
-	if len(combo) < 2:
-		continue							# ..which include 2 or more apis..
+def get_canonical_fields():
+	canon = {api:set([]) for api in apis['social_networks'].keys()}
 
-	results['intersection:'+','.join(combo)] = reduce( # ..record the..
-		lambda x, y: x & y,					# ..intersection of each element in..
-		[set(apis[api]) for api in combo])	# ..every set of api attributes.
+	for canonName, fieldsByApi in equivalent_fields['social_networks'].iteritems():
+		for api, field in fieldsByApi.iteritems():
+			if field is not None:
+				canon[api].add(canonName)
 
-def uniqPathDepths(schema):
-	def uniqPathDepthsRecurse(schema, currentDepth):
-		try:
-			if not isinstance(schema, dict):
-				schema = schema[0]
-		except IndexError:
-			return currentDepth
-		except TypeError:
-			return currentDepth
+				# Test code; remove once api_fields has stopped being modified.
+				try:
+					apis['social_networks'][api][field]
+				except KeyError as e:
+					print "api '"+api+"' does not have field '"+field+"'!"
 
-		try:
-			return map(
-				lambda val: uniqPathDepthsRecurse(val, currentDepth+1),
-				schema.values())
-		except AttributeError:
-			return currentDepth
+	return canon
 
-	return uniqPathDepthsRecurse(schema, 0)
+canonical_fields = get_canonical_fields()
 
-for api, attributes in apis.iteritems():
-	# Get attribute counts
-	results['attributes:'+api] = len(attributes)
+for group_name, group_apis in apis.iteritems():
+	results[group_name] = {}
+	# Get terminology overlaps
+	for combo in powerset(group_apis.keys()):	# For all combinations of apis..
+		if len(combo) < 2:
+			continue							# ..of  2 or more apis..
 
-	flatPathDepths = flatten(uniqPathDepths(attributes))
-	results['maxdepth:'+api] = sorted(flatPathDepths)[-1]
-	results['avgdepth:'+api] = sum(flatPathDepths) / len(flatPathDepths)
+ 		# ..record the..
+		results[group_name]['shared_terminology:'+','.join(combo)] = reduce(
+			lambda x, y: x & y,			# ..intersection of each element in..
+			[set(group_apis[api]) for api in combo])	# ..every set of api attributes.
+
+		results[group_name]['equivalent_fields:'+','.join(combo)] = reduce(
+			lambda x, y: x & y,
+			[canonical_fields[api] for api in combo])
+
+	def uniqPathDepths(schema):
+		def uniqPathDepthsRecurse(schema, currentDepth):
+			try:
+				if not isinstance(schema, dict):
+					schema = schema[0]
+			except IndexError:
+				return currentDepth
+			except TypeError:
+				return currentDepth
+
+			try:
+				return map(
+					lambda val: uniqPathDepthsRecurse(val, currentDepth+1),
+					schema.values())
+			except AttributeError:
+				return currentDepth
+
+		return uniqPathDepthsRecurse(schema, 0)
+
+	for api, attributes in group_apis.iteritems():
+		# Get attribute counts
+		results[group_name]['attributes:'+api] = len(attributes)
+
+		flatPathDepths = flatten(uniqPathDepths(attributes))
+		results[group_name]['maxdepth:'+api] = sorted(flatPathDepths)[-1]
+		results[group_name]['avgdepth:'+api] = sum(flatPathDepths) / len(flatPathDepths)
 
 # Print results if not imported (i.e: called from the commandline)
 if __name__ == "__main__":
