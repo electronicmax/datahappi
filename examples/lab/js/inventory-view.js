@@ -1,5 +1,5 @@
 define(['examples/lab/js/views','js/utils'],function(views,utils) {
-	var flatten = utils.flatten, defined = utils.DEFINED, deferred = utils.deferred, when = utils.when;
+	var flatten = utils.flatten, defined = utils.DEFINED, deferred = utils.deferred, when = utils.when, hash = utils.hash;
 	var InventoryView = Backbone.View.extend({
 		className:'inventory',
 		tagName:'div',
@@ -7,7 +7,7 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 			
 		},
 		template:'',
-		category_template:"<div class='subcollection'><div class='lbl'><%= label %></div><div class='items'></div></div>",
+		category_template:"<div class='subcollection'><div class='lbl accordion-heading'><a class='accordion-toggle' data-toggle='collapse'><%= label %></a></div><div class='accordion-body items collapse'></div></div>",
 		thinglens: views.ThingListItemView,
 		initialize:function() {
 			var this_ = this;
@@ -20,7 +20,6 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 			return this.collection; // .filter(function(pathable) { return pathable.model.get("source")[0].id == src.id;});
 		},
 		render:function() {
-			console.log('render!! ', this.$el, this.collection.length);
 			var this_ = this;
 			var id_of_pathable = function(pathable) { return pathable.model.id; };
 			var ids_of_elements = function($sel) {
@@ -47,9 +46,11 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				console.log('type ', type);
 				if (type == '__misc__') {
 					if (get_subcollection_for_type('__misc__').length == 0) {
-						console.log('populating > ', _(this_.category_template).template({label:'other'}));
 						$(_(this_.category_template).template({label:'other'}))
 							.attr('class-uri', '__misc__')
+							//.attr('id','subcollection-__misc__')
+							.find('.items').attr('id','subcollection-items-__misc__').end()					
+							.find('.lbl a').attr('href','#subcollection-items-__misc__').end()
 							.appendTo(this_.$el);
 					}
 					return;
@@ -57,6 +58,9 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				if (get_subcollection_for_type(type.id).length == 0) {
 					$(_(this_.category_template).template({label:type.get_label()}))
 						.attr('class-uri', type.id)
+						//.attr('id','subcollection-'+type.id)
+						.find('.items').attr('id',"subcollection-items-"+hash(type.id)).end()					
+						.find('.lbl a').attr('data-parent', '#inventory-things').attr('href','#subcollection-items-'+hash(type.id)).end()
 						.appendTo(this_.$el);
 				}
 			});
@@ -94,7 +98,9 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				}).map(function(pathable) {
 					var lens = new this_.thinglens({model:pathable}).render();
 					this_subcollection.find('.items').append(lens.el);
-					lens.$el.attr('uri', id_of_pathable(pathable));
+					lens.$el
+						.attr('uri', id_of_pathable(pathable))
+						.attr('data-parent', 'subcollection-'+this_subcollection.attr('id'));					
 				});
 				
 				// exit selection

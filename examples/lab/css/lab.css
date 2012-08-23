@@ -6,6 +6,9 @@
 
 @import "visual.css";
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
+.btn {
+  padding: 4px 8px !important;
+}
 .label {
   color: #555;
   background-color: rgba(230, 230, 230, 0.6);
