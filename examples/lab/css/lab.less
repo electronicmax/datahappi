@@ -23,7 +23,6 @@
     }              
 }
 
-
 .ui-draggable-dragging { z-index:10000; }
 			
 body {
@@ -91,6 +90,28 @@ body {
 			}
 			table {
 				margin-bottom:50px;
+			}
+			.subcollection {
+				position:relative;
+				padding: 0px 0px 0px 0px;
+				border-top:1px solid rgba(200,200,200,0.2);				
+				.items {
+					padding:0px; margin:0px;
+					.item {
+						.lbl {
+							font-size:12pt;
+							position:absolute;
+							top:0px; left:-301px;
+							text-align:right;
+							color:rgba(100,100,100,0.7);
+							-webkit-transform: rotate(-90deg);
+							-webkit-transform-origin:100% 0%;
+							width:100%;
+							padding:0px 15px 0px 0px;
+							
+						}
+					}
+				}
 			}
         }
 		.sameas-view {
