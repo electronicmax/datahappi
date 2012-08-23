@@ -309,7 +309,7 @@ apis = {
 			"api-standard-profile-request:(url)":None,
 			"api-standard-profile-request:(headers)":None,
 			"public-profile-url":None,
-			"email_address":None,
+			"email-address":None,
 			"last-modified-timestamp":None,
 			"proposal-comments":None,
 			"associations":None,
@@ -571,7 +571,7 @@ equivalent_fields = {
 			"linkedin":"summary"},
 		"email":{
 			"facebook":"email",
-			"plus":"emails[]",
+			"plus":"emails",
 			"twitter":None,
 			"linkedin":"email-address"},
 		"work_history":{
@@ -592,11 +592,11 @@ equivalent_fields = {
 		"photo_url":{
 			"facebook":"picture", # Soon to be changed from string to {url, is_silhouette}
 			"plus":"image.url",
-			"twitter":"provile_image_url",
-			"linkedin":"picture_url"},
+			"twitter":"profile_image_url",
+			"linkedin":"picture-url"},
 		"languages_spoken":{
 			"facebook":"languages",	# [{id, name}]
-			"plus":"langagesSpoken", # [string]
+			"plus":"languagesSpoken", # [string]
 			"twitter":"lang",
 			"linkedin":"languages"}, # [{id, language:(name), proficiency:(level), proficiency(name)}]
 		"educations":{

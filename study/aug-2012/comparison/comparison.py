@@ -3,10 +3,11 @@ from __future__ import division
 import collections
 import itertools
 import pprint
+import sys
 
 import pdb
 
-from api_fields import apis
+from api_fields import apis, equivalent_fields
 
 results = {}
 
@@ -27,6 +28,24 @@ def flatten(x):
             result.append(el)
     return result
 
+def get_canonical_fields():
+	canon = {api:set([]) for api in apis['social_networks'].keys()}
+
+	for canonName, fieldsByApi in equivalent_fields['social_networks'].iteritems():
+		for api, field in fieldsByApi.iteritems():
+			if field is not None:
+				canon[api].add(canonName)
+
+				# Test code; remove once api_fields has stopped being modified.
+				try:
+					apis['social_networks'][api][field]
+				except KeyError as e:
+					print "api '"+api+"' does not have field '"+field+"'!"
+
+	return canon
+
+canonical_fields = get_canonical_fields()
+
 for group_name, group_apis in apis.iteritems():
 	results[group_name] = {}
 	# Get terminology overlaps
@@ -39,8 +58,9 @@ for group_name, group_apis in apis.iteritems():
 			lambda x, y: x & y,			# ..intersection of each element in..
 			[set(group_apis[api]) for api in combo])	# ..every set of api attributes.
 
-		#results[group_name]['equivalent_fields:'+','.join(combo)] =
-			# The number of equivalent fields shared between each api in ombo.
+		results[group_name]['equivalent_fields:'+','.join(combo)] = reduce(
+			lambda x, y: x & y,
+			[canonical_fields[api] for api in combo])
 
 	def uniqPathDepths(schema):
 		def uniqPathDepthsRecurse(schema, currentDepth):
