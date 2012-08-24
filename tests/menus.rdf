@@ -7,7 +7,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu1">
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu1">
         <menu_item rdf:parseType="Resource">
             <item_detail>Light lentil soup cooked with aromatic spices - served with baby naan bread</item_detail>
             <item_price>2.95</item_price>
@@ -698,9 +698,9 @@
             <rdfs:label>KURGEE LAMB - 24 hours notice required</rdfs:label>
         </menu_item>
         <rdfs:label>Coriander Lounge</rdfs:label>
-    </rdf:Description>
+    </Menu>
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu2">
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu2">
         <menu_item rdf:parseType="Resource">
             <item_price>2.90</item_price>
             <rdfs:label>Nigiri - Sake (Salmon)</rdfs:label>
@@ -1574,9 +1574,9 @@
             <rdfs:label>Vegetarian Set Meal</rdfs:label>
         </menu_item>
         <rdfs:label>Zen Southampton</rdfs:label>
-    </rdf:Description>
+    </Menu>
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu3">
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu3">
         <menu_item rdf:parseType="Resource">
             <item_price>2.70</item_price>
             <rdfs:label>Sushi Nigiri - Sake (Salmon)</rdfs:label>
@@ -2162,5 +2162,5 @@
             <rdfs:label>Old Town Starters &#38; Sushi Combinations</rdfs:label>
         </menu_item>
         <rdfs:label>Old Town Kitchen</rdfs:label>
-    </rdf:Description>
+    </Menu>
 </rdf:RDF>
