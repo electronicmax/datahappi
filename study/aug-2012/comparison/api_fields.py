@@ -108,7 +108,7 @@ apis = {
 		},
 
 		"plus":{
-			"kind": "plus#person",
+			"kind": "string. For a person, always plus#person",
 			"etag": "etag",
 			"objectType": "string",
 			"id": "string",
