@@ -84,7 +84,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			this.$el.fadeOut(function() { this_.$el.remove(); });
 		},
 		_update_plot:function() {
-			var plot = d3.select(this.el).select('svg');
+			var plot = d3.select(this.el).select('svg.plot');
 			console.log('this options ', this.options);
 			
 			if (!(defined(this.options.views) &&
@@ -101,7 +101,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			console.log('removing text');
 			d3.selectAll('text').remove();
 
-			if (this._plotter == undefined) { this._plotter = new this.options.plotter({el:plot});	}
+			if (this._plotter == undefined) { this._plotter = new this.options.plotter({el:plot[0]});	}
 			console.log('plotter',  this._plotter);			
 			var data =	this.options.engine.generate_data(
 				this.options.views.map(function(x) { return x.options.model }),

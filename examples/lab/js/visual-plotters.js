@@ -3,13 +3,14 @@ define(['js/utils'], function(utils) {
 	var SeriesBarPlotter = Backbone.View.extend({
 		render:function(data) {
 			// this.$el is bound to svg
-			var this_ = this, height = this.$el.height();
-			var spacing = 2;
-			var barwidth = (this.$el.find('svg').width() / data.length) - spacing;
-			var max_val = d3.max(data.map(function(x) { return x[2]; }));
-			var yscale = d3.scale.linear().domain([0,max_val]).range([0,height]);
-			var svg_p = d3.select(this.$el[0]);
-			
+			var this_ = this,
+				svg_p = d3.select(this.$el[0]),
+				height = this.$el.height(),
+				spacing = 2,
+				barwidth = (this.$el.width() / data.length) - spacing,
+				max_val = d3.max(data.map(function(x) { return x.series_val; })),
+				yscale = d3.scale.linear().domain([0,max_val]).range([0,height]);
+
 			// enter selection
 			svg_p
 				.selectAll('rect')
