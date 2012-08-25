@@ -30,7 +30,11 @@ define([
 					.slideOut();
 				
 				var tb = (new toolbar.Toolbar())
-					.on('new_visual', function() {	workspace.append((new visual.Visual()).render().el);})
+					.on('new_visual', function() {
+						var v = (new visual.Visual());
+						workspace.append(v.render().el);
+						v._update_plot();
+					})
 					.on('new_map',function() {
 						var map = (new visualmap.MapVisual());
 						workspace.append(map.render().el);
@@ -70,9 +74,9 @@ define([
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			$.when(
 				// add moar sources here
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.rdf'].join('/'), "Restaurants"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','menus.rdf'].join('/'), "Menus")
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))
+				//pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.rdf'].join('/'), "Restaurants"),
+				//pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','menus.rdf'].join('/'), "Menus")
 			).then(
 				function() {
 					var srcs = _.toArray(arguments);

@@ -43,7 +43,6 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 			
 			// subcollection enter selection
 			dude_types.map(function(type) {
-				console.log('type ', type);
 				if (type == '__misc__') {
 					if (get_subcollection_for_type('__misc__').length == 0) {
 						$(_(this_.category_template).template({label:'other'}))
@@ -88,9 +87,9 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				
 				// TODO TODO TODO -------------------------------------------------------------------
 				// enter selection
-				console.log("IDS OF ELEMENTS ", relevant_ids, 'vs', ids_of_elements($(this).find('.item')));
+				// console.log("IDS OF ELEMENTS ", relevant_ids, 'vs', ids_of_elements($(this).find('.item')));
  				var enter_ids = _(relevant_ids).difference(ids_of_elements($(this).find('.item')));
-				console.log("ENTER IDs ", enter_ids);
+				// console.log("ENTER IDs ", enter_ids);
 
 				// create for visible dudes
 				visible_dudes.filter(function(pathable) {
@@ -105,7 +104,7 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				
 				// exit selection
 				var exit_ids = _(ids_of_elements($(this).find('.item'))).difference(relevant_ids);
-				console.log(' exit ids ', exit_ids, ' - ', elements_with_ids(exit_ids));
+				// console.log(' exit ids ', exit_ids, ' - ', elements_with_ids(exit_ids));
 				$(elements_with_ids(exit_ids)).remove();
 				// update selection? no need -
 			});

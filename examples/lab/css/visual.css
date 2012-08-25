@@ -19,7 +19,7 @@
   top: 2px;
   margin: 0px;
   padding: 0px;
-  right: 5px;
+  right: 8px;
   font-size: 1.7em;
 }
 .visual {
@@ -31,7 +31,7 @@
   position: absolute;
   z-index: 100;
 }
-.visual svg {
+.visual svg.plot {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -45,6 +45,7 @@
 }
 .visual .droparea.over {
   box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
 }
 .visual .droparea .lbl {
   position: absolute;
@@ -66,6 +67,7 @@
 }
 .visual .xaxis.over {
   box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
 }
 .visual .xaxis .lbl {
   position: absolute;
@@ -93,6 +95,7 @@
 }
 .visual .yaxis.over {
   box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
 }
 .visual .yaxis .lbl {
   position: absolute;

@@ -15,7 +15,7 @@ define([],function() {
 			// TODO::
 		},
 		to_numeric:function(v) {
-			if (_(v).isNumeric()) { return v ; }
+			if (_(v).isNumber()) { return v ; }
 			if (typeof(v) == 'string') { return parseFloat(v, 10); }
 			return undefined; // throw new Error("Could not convert ", v);
 		},

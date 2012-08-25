@@ -1,6 +1,7 @@
-define(['js/utils'], function(utils) {
+define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/utils'], function(engines, plotters, utils) {
 
 	var to_raw_value = function(v) { return v.valueOf(); };
+	var defined = utils.DEFINED;
 
 	var VisualBase = Backbone.View.extend({
 		_find_ids_of_pathables_with_raw_value:function(raw_value) {
@@ -48,7 +49,12 @@ define(['js/utils'], function(utils) {
 		events : {
 			'click .delete' : '_cb_delete'
 		},
+		defaults : {
+			plotter: plotters.SeriesBarPlotter,
+			engine: engines.BarValues
+		},
 		initialize:function() {
+			this.options = _(this.defaults).extend(this.options);
 			if (this.options.series) { this.setSeries(this.options.series); }
 			if (this.options.views) { this.setData(this.options.views); }
 		},
@@ -61,79 +67,48 @@ define(['js/utils'], function(utils) {
 			this.options.series.on('all', function() { this_._update_plot(); }, this);
 		},
 		setData:function(s) {
+			console.log('setting views  ', s);
 			if (this.options.views) {
 				this.options.views.off(null, null, this);
 			}
 			var this_ = this;
 			this.options.views = s;
-			this.options.views.on('all', function(eventType) {
-				this_._update_plot();
-			}, this);
+			if (defined(this.options.views)) {
+				this.options.views.on('all', function(eventType) {	this_._update_plot(); }, this);
+			}
 			this_._update_plot();
 		},
-		_hist_series:function(svg_p, series_pathables, max_count) {
-			var this_ = this, height = this.$el.find('svg').height();
-			var data = this._get_counts(series_pathables);
-			var spacing = 2;
-			var barwidth = (this.$el.find('svg').width() / data.length) - spacing;
-			var yscale = d3.scale.linear()
-				.domain([0,max_count])
-				.range([0,height]);
-			
-			// enter selection
-			svg_p
-				.selectAll('rect')
-				.data(data, function(d) { return d[0]; })
-				.enter()
-				.append('rect')
-				.on('mouseover', function(d) { this_._brush_value(d[0]); })
-				.on('mouseout', function(d) { this_._unbrush_value(d[0]); });
-
-			// update selection
-			svg_p
-				.selectAll('rect')
-				.data(data, function(d) { return d[0]; })			
-				.attr('y', function(d,i) { return height - yscale(d[1]); })
-				.attr('x', function(d,i) { return i*(barwidth); })
-				.attr('height', function(d) { return yscale(d[1]); })
-				.attr('width', barwidth)
-				.attr('data-val', function(d) { return d[0]; });
-
-			// exit selection
-			svg_p
-				.selectAll('rect')
-				.data(data, function(d) { return d[0]; })			
-				.exit().remove();
-			
-			return this;
-		},		
 		_cb_delete:function() {
-			this.$el.fadeOut();
+			var this_ = this;
+			this.setData(undefined);
+			this.$el.fadeOut(function() { this_.$el.remove(); });
 		},
 		_update_plot:function() {
-			var plot = d3.select('.plot');			
-			if (this.options.views === undefined) {
-				d3.selectAll('text')
-					.data([0])
-					.enter()
-					.append('svg:text')
-					.attr('x', 30)
-					.attr('y', 50)
-					.attr('text-anchor','middle')
-					.text(' no data enabled ');
+			var plot = d3.select(this.el).select('svg');
+			console.log('this options ', this.options);
+			
+			if (!(defined(this.options.views) &&
+				  defined(this.options.engine) &&
+				  defined(this.options.plotter))) {
+
+				plot.selectAll('text').data([1]).enter()
+					.append('text')
+					.attr('x', 30).attr('y',50)				
+					.text('drag some data in my zones');
+				
 				return;
-			} else {
-				d3.selectAll('text').remove();
 			}
-			var max_count = d3.max(this._get_counts(this.options.views).map(function(x) { return x[1]; }));
-			if (this.options.series === undefined) {
-				// console.log('no series defined, plotting as one >> ', plot, this.options.views, max_count);
-				this._hist_series(plot, this.options.views, max_count);
-			} else {
-				// subdivide into groups based upon the series dataset
-				// var pathables_by_series = {};
-				throw new Error('pathables by series not implemented');
-			}
+			console.log('removing text');
+			d3.selectAll('text').remove();
+
+			if (this._plotter == undefined) { this._plotter = new this.options.plotter({el:plot});	}
+			console.log('plotter',  this._plotter);			
+			var data =	this.options.engine.generate_data(
+				this.options.views.map(function(x) { return x.options.model }),
+				defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model }) : []
+			);
+			console.log("generated data >> ", data);
+			this._plotter.render(data);
 		},
 		render:function() {
 			var this_ = this;
@@ -141,7 +116,7 @@ define(['js/utils'], function(utils) {
 			this.$el.html(this.template);
 			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});			
 			this.$el.find('.yaxis').droppable({
-				greedy:true,  accept:'.greybox', tolerance:"pointer",
+				greedy:true,  accept:'.greybox', tolerance:"touch",
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_y_label = $(this).find('lbl').html();
@@ -160,7 +135,7 @@ define(['js/utils'], function(utils) {
 				}
 			});			
 			this.$el.find('.xaxis').droppable({
-				greedy:true, accept:'.greybox',	tolerance:"pointer",
+				greedy:true, accept:'.greybox',	tolerance:"touch",
 				over:function(event, ui) {
 					$(this).addClass("over");
 					old_x_label = $(this).find('label').html();
