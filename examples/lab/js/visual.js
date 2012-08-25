@@ -1,45 +1,7 @@
 define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/utils'], function(engines, plotters, utils) {
 
-	var to_raw_value = function(v) { return v.valueOf(); };
 	var defined = utils.DEFINED;
-
-	var VisualBase = Backbone.View.extend({
-		_find_ids_of_pathables_with_raw_value:function(raw_value) {
-			var this_ = this;
-			if (_(this.options.views).isUndefined()) { return []; }
-			return _.uniq(this.options.views.filter(function(V) {
-				var m = V.options.model;
-				return m.get_last_value().map(to_raw_value).indexOf(raw_value) >= 0;
-			}).map(function(x) { return x.options.model.id; }));
-		},
-		_brush_value:function(raw_value) {
-			this.trigger('brush', this._find_ids_of_pathables_with_raw_value(raw_value));			
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				if ($t.attr('data-val') == raw_value) {
-					$t.attr('class', 'brush');
-				} else {
-					$t.attr('class', 'unbrush');
-				}
-			});
-		},
-		_unbrush_value:function(raw_value) {
-			this.trigger('unbrush', this._find_ids_of_pathables_with_raw_value(raw_value));
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				$t.attr('class', '');
-			});
-		},		
-		_get_counts:function(views){ 
-			var pathables = views.map(function(x) { return x.options.model ; });
-			var values = utils.flatten(pathables.map(function(p) { return p.get_last_value(); }));
-			var raws = values.map(to_raw_value);
-			var uniqs = _.uniq(raws);			
-			return uniqs.sort().map(function(val) {
-				return [val, raws.filter(function(raw) { return val == raw; }).length];
-			});
-		}		
-	});
+	var VisualBase = Backbone.View.extend({});
 	
 	// histogram widget using d3
 	var Visual = VisualBase.extend({
@@ -50,21 +12,26 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			'click .delete' : '_cb_delete'
 		},
 		defaults : {
-			plotter: plotters.SeriesBarPlotter,
-			engine: engines.BarValues
+			engines : _(engines).values(),
+			plotters : _(plotters).value(),
+			plotter_class: plotters.SeriesBarPlotter,
+			engine_class: engines.BarValues
 		},
 		initialize:function() {
 			this.options = _(this.defaults).extend(this.options);
 			if (this.options.series) { this.setSeries(this.options.series); }
 			if (this.options.views) { this.setData(this.options.views); }
+			if (!defined(this.options.engine)) { this.options.engine = this.options.engines[0]; }
 		},
 		setSeries:function(s) {
 			var this_ = this;
-			if (this.options.series) {
+			if (defined(this.options.series)) {
 				this.options.series.off(null, null, this);
 			}
 			this.options.series = s;
-			this.options.series.on('all', function() { this_._update_plot(); }, this);
+			if (defined(this.options.series)) {
+				this.options.series.on('all', function() { this_._update_plot(); }, this);
+			}
 		},
 		setData:function(s) {
 			console.log('setting views  ', s);
@@ -74,9 +41,15 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			var this_ = this;
 			this.options.views = s;
 			if (defined(this.options.views)) {
-				this.options.views.on('all', function(eventType) {	this_._update_plot(); }, this);
+				this.options.views.on('all', function(eventType) { this_._update_plot(); }, this);
 			}
 			this_._update_plot();
+		},
+		reset_engine_and_potter:function() {
+			if (defined(this.options.plotter)) { this.options.plotter.off('all', null, this); }
+			if (defined(this.options.engine)) { this.options.engine.off('all', null, this); }			
+			delete this.options.engine;
+			delete this.options.plotter;
 		},
 		_cb_delete:function() {
 			var this_ = this;
@@ -84,31 +57,32 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			this.$el.fadeOut(function() { this_.$el.remove(); });
 		},
 		_update_plot:function() {
+			var this_ = this;
 			var plot = d3.select(this.el).select('svg.plot');
-			console.log('this options ', this.options);
 			
-			if (!(defined(this.options.views) &&
-				  defined(this.options.engine) &&
-				  defined(this.options.plotter))) {
-
+			if (!(defined(this.options.views))) {
 				plot.selectAll('text').data([1]).enter()
 					.append('text')
 					.attr('x', 30).attr('y',50)				
-					.text('drag some data in my zones');
-				
+					.text('drag some data in my zones');				
 				return;
 			}
-			console.log('removing text');
 			d3.selectAll('text').remove();
-
-			if (this._plotter == undefined) { this._plotter = new this.options.plotter({el:plot[0]});	}
-			console.log('plotter',  this._plotter);			
+			
+			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
+				this.options.plotter = new this.options.plotter_class({el:plot[0]});
+				this.options.plotter.on('all', function(brushtype, pathable_combo) {
+					console.log('brushing ', brushtype, pathable_combo.pathable.id);
+					this_.options.views.trigger(brushtype, pathable_combo.pathable);
+				}, this);
+			}
+			
 			var data =	this.options.engine.generate_data(
-				this.options.views.map(function(x) { return x.options.model }),
-				defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model }) : []
+				this.options.views.map(function(x) { return x.options.model; }),
+				defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
 			);
-			console.log("generated data >> ", data);
-			this._plotter.render(data);
+
+			this.options.plotter.render(data);
 		},
 		render:function() {
 			var this_ = this;
@@ -131,7 +105,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					var views = view.views_collection;
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('selected ' + views.length);
-					this_.setData(	views );
+					this_.setData( views );
 				}
 			});			
 			this.$el.find('.xaxis').droppable({

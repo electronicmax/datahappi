@@ -288,6 +288,9 @@ body .pathable-view .values,
 body .pathable-view .props {
   margin: 0px;
   padding: 0px 0px 0px 18px;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 body .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);

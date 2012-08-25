@@ -12,6 +12,7 @@ define([
 	'js/googlecal/CalendarCollection',
 	'js/googlecal/auth'
 ], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth) {
+	
 		var Main = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
@@ -74,9 +75,9 @@ define([
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			$.when(
 				// add moar sources here
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'))
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
 				//pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','restaurants.rdf'].join('/'), "Restaurants"),
-				//pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','menus.rdf'].join('/'), "Menus")
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','menus.rdf'].join('/'), "Menus")
 			).then(
 				function() {
 					var srcs = _.toArray(arguments);

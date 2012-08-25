@@ -33,6 +33,13 @@ define(
 					// this_.trigger('drag', ui.offset);
 				}});
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
+				this.views_collection
+					.on('brush', function(model) {
+						this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
+					})
+					.on('unbrush', function(model) {
+						this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
+					});
 				// set up to receive droppables
 				this.$el.droppable({
 					greedy:true, // magical for allowing nesting of droppables
@@ -62,6 +69,7 @@ define(
 				this.hist = this._make_micro_hist();
 				return this;
 			},
+
 			_make_micro_hist:function() {
 				var this_ = this;
 				var hist = new histogram.HistView({
@@ -136,6 +144,9 @@ define(
 					this_.pathables.add_path(solo);
 				}
 			},
+			_find_views:function(model) {
+				return this.views_collection.filter(function(v) { return model == v.options.model; });
+			},			
 			_make_property_box:function() {
 				// add a property box.
 				var this_ = this;

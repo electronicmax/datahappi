@@ -1,5 +1,4 @@
 define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
-
 	
 	/* ========= utilities ============= */
 	var defined = utils.DEFINED, flatten = utils.flatten, to_numeric = utils.to_numeric;
