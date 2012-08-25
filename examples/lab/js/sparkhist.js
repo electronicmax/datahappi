@@ -55,16 +55,16 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			var this_ = this;
 			this.options.views.on('all', function(eventName) { this_.render(); }, this);
 		},
-		_find_ids_of_pathables_with_raw_value:function(raw_value) {
+		_find_pathables_with_raw_value:function(raw_value) {
 			var this_ = this;
 			if (_(this.options.views).isUndefined()) { return []; }
 			return _.uniq(this.options.views.filter(function(V) {
 				var m = V.options.model;
 				return m.get_last_value().map(to_raw_value).indexOf(raw_value) >= 0;
-			}).map(function(x) { return x.options.model.id; }));
+			}).map(function(x) { return x.options.model; }));
 		},
 		_brush_value:function(raw_value) {
-			this.trigger('brush', this._find_ids_of_pathables_with_raw_value(raw_value));			
+			this.options.views.trigger('brush', this._find_pathables_with_raw_value(raw_value));			
 			this.$el.find('rect').each(function() {
 				var $t = $(this);
 				if ($t.attr('data-val') == raw_value) {
@@ -75,7 +75,7 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			});
 		},
 		_unbrush_value:function(raw_value) {
-			this.trigger('unbrush', this._find_ids_of_pathables_with_raw_value(raw_value));
+			this.options.views.trigger('unbrush', this._find_pathables_with_raw_value(raw_value));						
 			this.$el.find('rect').each(function() {
 				var $t = $(this);
 				$t.attr('class', '');

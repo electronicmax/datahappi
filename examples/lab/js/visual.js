@@ -72,7 +72,6 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
 				this.options.plotter = new this.options.plotter_class({el:plot[0]});
 				this.options.plotter.on('all', function(brushtype, pathable_combo) {
-					console.log('brushing ', brushtype, pathable_combo.pathable.id);
 					this_.options.views.trigger(brushtype, pathable_combo.pathable);
 				}, this);
 			}

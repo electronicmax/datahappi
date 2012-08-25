@@ -35,9 +35,11 @@ define(
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				this.views_collection
 					.on('brush', function(model) {
+						model = _(model).isArray() ? model : [model];
 						this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
 					})
 					.on('unbrush', function(model) {
+						model = _(model).isArray() ? model : [model];						
 						this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
 					});
 				// set up to receive droppables
@@ -75,17 +77,6 @@ define(
 				var hist = new histogram.HistView({
 					el:this.$el.find('.sparkhist')[0],
 					views:this.views_collection
-				});
-				var find_views_by_ids = function(model_ids) {
-					return this_.views_collection.filter(function(v) {
-						return model_ids.indexOf(v.options.model.id) >= 0; 
-					});
-				};
-				hist.on('brush', function(model_ids) {
-					find_views_by_ids(model_ids).map(function(v) {	return v.$el.addClass('brush');	});
-				});				
-				hist.on('unbrush', function(model_ids) {
-					find_views_by_ids(model_ids).map(function(v) { return v.$el.removeClass('brush'); });
 				});
 				hist.render();
 				return hist;
@@ -144,8 +135,8 @@ define(
 					this_.pathables.add_path(solo);
 				}
 			},
-			_find_views:function(model) {
-				return this.views_collection.filter(function(v) { return model == v.options.model; });
+			_find_views:function(models) {
+				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model) >= 0; });
 			},			
 			_make_property_box:function() {
 				// add a property box.
