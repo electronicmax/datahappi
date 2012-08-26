@@ -1,5 +1,5 @@
 @boxminwidth : 240px;
-@boxwidth : 320px;
+@boxwidth : 340px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
@@ -13,6 +13,7 @@
 	min-width:@boxminwidth;
 	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
+	height:300px;
 	max-height:500px;
 	overflow-x:hidden;
 	overflow-y:hidden;
@@ -79,23 +80,34 @@
 			&:hover { color:black;	}
 		}
 	}
+	.items {
+		position:absolute;
+		top:16px; left:12px; right:28px; bottom:48px;
+		padding:0px 25px 0px 0px;
+		border-bottom:1px solid rgba(180,180,180,0.6);
+		overflow-x:hidden;
+		overflow-y:auto;
+	}
 	/* properties */
 	.properties {
+		position:absolute;		
 		z-index:3;
-		background-color:#fff; 
+		background-color:#fff;
+		left:12px; right:12px; bottom:0px; height:46px;
+		overflow:auto;
+		vertical-align:top;		
+		/*				
 		border-top:1px solid #eee;
 		border-bottom:1px solid #eee;
 		border-right:1px solid #eee;
 		border-left:1px solid rgba(255,255,255,0.8);
 		padding:0px 2px 0px 7px;
 		border-radius:5px;
-		position:absolute;
 		left:100%;
 		top:14px;
 		bottom:14px; 
-		width:200px; 
-		overflow:auto;
-		vertical-align:top;
+		width:200px;
+		*/
 		.propitems {
 			margin:0px; padding:0px;  width: 100%;
 			list-style-type:none !important;
@@ -131,8 +143,8 @@
 		}
 		.new-path-btn {
 			position:absolute;
-			bottom:5px;
-			left: 5px;
+			top:5px;
+			right: 5px;
 		}
 	}
 	// mini histogram sparkline

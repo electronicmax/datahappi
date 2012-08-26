@@ -3,9 +3,10 @@
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
-  width: 320px;
+  width: 340px;
   min-width: 240px;
   padding: 12px 20px 12px 12px;
+  height: 300px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -95,22 +96,40 @@
 .greybox .microtoolbox span:hover {
   color: black;
 }
+.greybox .items {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  right: 28px;
+  bottom: 48px;
+  padding: 0px 25px 0px 0px;
+  border-bottom: 1px solid rgba(180, 180, 180, 0.6);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .greybox .properties {
+  position: absolute;
   z-index: 3;
   background-color: #fff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #eee;
-  border-left: 1px solid rgba(255, 255, 255, 0.8);
-  padding: 0px 2px 0px 7px;
-  border-radius: 5px;
-  position: absolute;
-  left: 100%;
-  top: 14px;
-  bottom: 14px;
-  width: 200px;
+  left: 12px;
+  right: 12px;
+  bottom: 0px;
+  height: 46px;
   overflow: auto;
   vertical-align: top;
+  /*				
+		border-top:1px solid #eee;
+		border-bottom:1px solid #eee;
+		border-right:1px solid #eee;
+		border-left:1px solid rgba(255,255,255,0.8);
+		padding:0px 2px 0px 7px;
+		border-radius:5px;
+		left:100%;
+		top:14px;
+		bottom:14px; 
+		width:200px;
+		*/
+
 }
 .greybox .properties .propitems {
   margin: 0px;
@@ -153,8 +172,8 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  top: 5px;
+  right: 5px;
 }
 .greybox .sparkhist {
   zindex: -10;

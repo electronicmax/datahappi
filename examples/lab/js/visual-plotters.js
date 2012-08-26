@@ -21,7 +21,6 @@ define(['js/utils'], function(utils) {
 				.attr('data-pathable', function(d) { return d.series_pathable.id; })
 				.attr('data-val', function(d) { return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??'; })
 				.on('mouseover', function(d) {
-					console.log('brushing ', d.series_pathable.model.id, d.series_val);
 					this_.trigger('brush', {pathable: d.series_pathable, value: d.series_val });
 				})
 				.on('mouseout', function(d) { this_.trigger('unbrush', {pathable: d.series_pathable, value: d.series_val }); });

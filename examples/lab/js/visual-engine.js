@@ -51,7 +51,7 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 		generate_data:function(pathables, noseries) {
 			// [ { series_name : 'series name', series_vals: [ [ valname1 : val1 ] .... ] } ]
 			var val_triples = flatten(pathables.map(function(pathable) {
-				return pathable.get_last_value().map(function(val) { return [pathable, val, to_numeric(val)] ;});
+				return pathable.get_last_value().map(function(val) { return [ pathable, val, to_numeric(val)] ;});
 			}));
 			return _(val_triples)
 				.sortBy(function(x) { return x[2]; })

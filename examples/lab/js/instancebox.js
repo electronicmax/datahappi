@@ -8,7 +8,7 @@ define(
 		'js/utils'
 	],
 	function(box, propbox, pathables, view, histogram, utils) {
-		var template = '<div class="box-delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div>';
+		var template = '<div class="box-delete icon-cancel"></div><div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
 		var defined = utils.DEFINED;
 		var InstanceBox = box.BoxView.extend({
@@ -29,9 +29,10 @@ define(
 				var this_ = this;
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
-				this.$el.draggable({ drag:function(evt,ui) {
-					// this_.trigger('drag', ui.offset);
-				}});
+				this.$el.draggable({
+					cancel:".items", 
+					drag:function(evt,ui) { }, 
+				});
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				this.views_collection
 					.on('brush', function(model) {

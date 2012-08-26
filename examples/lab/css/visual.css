@@ -1,0 +1,268 @@
+.fullsize {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual,
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+}
+.visual .delete,
+.visual-map .delete {
+  z-index: 1000;
+  color: black;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 8px;
+  font-size: 1.7em;
+}
+.visual {
+  border: 1px solid rgba(0, 180, 0, 0.2);
+}
+.visual .corner_thingy {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 100;
+}
+.visual svg.plot {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 320px;
+  height: 270px;
+}
+.visual .droparea {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+}
+.visual .droparea.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
+}
+.visual .droparea .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .xaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 30px;
+}
+.visual .xaxis.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
+}
+.visual .xaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .yaxis {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  transform: rotate(90deg);
+  left: 30px;
+  top: 0px;
+  width: 299px;
+  height: 30px;
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  top: 0px;
+  z-index: 5;
+}
+.visual .yaxis.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.5);
+}
+.visual .yaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid rgba(180, 180, 0, 0.2);
+}
+.visual-map .map-zone {
+  opacity: 0.95;
+  position: absolute !important;
+  padding: 0px;
+  margin: 0px;
+  top: 0px;
+  left: 50px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual-map .dropzones {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 50px;
+  bottom: 0px;
+}
+.visual-map .dropzones .dropzone {
+  -webkit-transition: all 1s ease-in-out;
+  display: inline-block;
+  width: 100%;
+  height: 25%;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}
+.visual-map .dropzones .dropzone .lbl {
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  font-size: 0.8em;
+}
+.visual-map .dropzones .dropzone.over {
+  padding: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  background-color: rgba(200, 200, 200, 0.1);
+}
+.visual-map .leaflet-control-attribution {
+  display: none !important;
+}
+.dropzone-0 {
+  background-color: rgba(0, 0, 255, 0.050000000000000044);
+}
+.dropzone-0.dropzone {
+  border-left: 1px solid #0000ff !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(0, 0, 255, 0.09999999999999998);
+}
+.dropzone-0 .properties {
+  background-color: rgba(0, 0, 255, 0.050000000000000044);
+}
+.dropzone-0 .uplt {
+  border-left: 1px solid #0000ff !important;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .uprt {
+  border-right: 1px solid #0000ff;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .btlt {
+  border-bottom: 1px solid #0000ff !important;
+  border-left: 1px solid #0000ff !important;
+}
+.dropzone-0 .btrt {
+  border-bottom: 1px solid #0000ff !important;
+  border-right: 1px solid #0000ff !important;
+}
+.dropzone-1 {
+  background-color: rgba(255, 165, 0, 0.050000000000000044);
+}
+.dropzone-1.dropzone {
+  border-left: 1px solid #ffa500 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(255, 165, 0, 0.09999999999999998);
+}
+.dropzone-1 .properties {
+  background-color: rgba(255, 165, 0, 0.050000000000000044);
+}
+.dropzone-1 .uplt {
+  border-left: 1px solid #ffa500 !important;
+  border-top: 1px solid #ffa500 !important;
+}
+.dropzone-1 .uprt {
+  border-right: 1px solid #ffa500;
+  border-top: 1px solid #ffa500 !important;
+}
+.dropzone-1 .btlt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-left: 1px solid #ffa500 !important;
+}
+.dropzone-1 .btrt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-right: 1px solid #ffa500 !important;
+}
+.dropzone-2 {
+  background-color: rgba(0, 128, 0, 0.050000000000000044);
+}
+.dropzone-2.dropzone {
+  border-left: 1px solid #008000 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(0, 128, 0, 0.09999999999999998);
+}
+.dropzone-2 .properties {
+  background-color: rgba(0, 128, 0, 0.050000000000000044);
+}
+.dropzone-2 .uplt {
+  border-left: 1px solid #008000 !important;
+  border-top: 1px solid #008000 !important;
+}
+.dropzone-2 .uprt {
+  border-right: 1px solid #008000;
+  border-top: 1px solid #008000 !important;
+}
+.dropzone-2 .btlt {
+  border-bottom: 1px solid #008000 !important;
+  border-left: 1px solid #008000 !important;
+}
+.dropzone-2 .btrt {
+  border-bottom: 1px solid #008000 !important;
+  border-right: 1px solid #008000 !important;
+}
+.dropzone-3 {
+  background-color: rgba(255, 0, 0, 0.050000000000000044);
+}
+.dropzone-3.dropzone {
+  border-left: 1px solid #ff0000 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(255, 0, 0, 0.09999999999999998);
+}
+.dropzone-3 .properties {
+  background-color: rgba(255, 0, 0, 0.050000000000000044);
+}
+.dropzone-3 .uplt {
+  border-left: 1px solid #ff0000 !important;
+  border-top: 1px solid #ff0000 !important;
+}
+.dropzone-3 .uprt {
+  border-right: 1px solid #ff0000;
+  border-top: 1px solid #ff0000 !important;
+}
+.dropzone-3 .btlt {
+  border-bottom: 1px solid #ff0000 !important;
+  border-left: 1px solid #ff0000 !important;
+}
+.dropzone-3 .btrt {
+  border-bottom: 1px solid #ff0000 !important;
+  border-right: 1px solid #ff0000 !important;
+}

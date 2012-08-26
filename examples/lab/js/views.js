@@ -59,7 +59,12 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.data('view',this); // for when someone drags us into a box
 			this.$el.data('model', function() { return this_.options.model; });
 			this.$el.attr("data-uri", this.options.model.id);
-			this.$el.draggable({revert:"invalid", helper:"clone", appendTo:'body'});
+			this.$el.draggable({
+				handle:this.$el.find('div.labels'),
+				revert:"invalid",
+				helper:"clone",
+				appendTo:'body'
+			});
 			
 			// step 1 > update name.
 			this.$el.find('.name').html(this._get_label(m.get_base_model()));
