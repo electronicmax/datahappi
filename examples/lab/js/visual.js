@@ -1,6 +1,6 @@
 define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/utils'], function(engines, plotters, utils) {
 
-	var defined = utils.DEFINED;
+	var defined = utils.DEFINED, assert = utils.assert;
 	var VisualBase = Backbone.View.extend({});
 	
 	// histogram widget using d3
@@ -21,7 +21,6 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			this.options = _(this.defaults).extend(this.options);
 			if (this.options.series) { this.setSeries(this.options.series); }
 			if (this.options.views) { this.setData(this.options.views); }
-			if (!defined(this.options.engine)) { this.options.engine = this.options.engines[0]; }
 		},
 		setSeries:function(s) {
 			var this_ = this;
@@ -44,12 +43,6 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				this.options.views.on('all', function(eventType) { this_._update_plot(); }, this);
 			}
 			this_._update_plot();
-		},
-		reset_engine_and_potter:function() {
-			if (defined(this.options.plotter)) { this.options.plotter.off('all', null, this); }
-			if (defined(this.options.engine)) { this.options.engine.off('all', null, this); }			
-			delete this.options.engine;
-			delete this.options.plotter;
 		},
 		_cb_delete:function() {
 			var this_ = this;
@@ -74,13 +67,21 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				this.options.plotter.on('all', function(brushtype, pathable_combo) {
 					this_.options.views.trigger(brushtype, pathable_combo.pathables);
 				}, this);
+			}
+			var models = this.options.views.map(function(view) { return view.options.model; });
+			var engine = this.options.engines.filter(function(engine) { return engine.test(models) });
+			if (engine.length > 0) {
+				console.log("Using engine ", engine[0].id);
+				var data = engine[0].generate_data(
+					this.options.views.map(function(x) { return x.options.model; }),
+					defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
+				);
+				console.log(" data >> ", data);
+				this.options.plotter.render(data);
+			} else {
+				assert(false, "Could not find suitable engine ");
 			}			
-			var data =	this.options.engine.generate_data(
-				this.options.views.map(function(x) { return x.options.model; }),
-				defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
-			);
 
-			this.options.plotter.render(data);
 		},
 		render:function() {
 			var this_ = this;

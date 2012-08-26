@@ -9,7 +9,7 @@ define(['js/utils'], function(utils) {
 				height = this.$el.height(),
 				spacing = 2,
 				barwidth = ( this.$el.width() / data.length ),
-				max_val = d3.max(data.map(function(x) { return x.series_val; })),
+				max_val = d3.max(data.map(function(d) { return d.numeric; })),
 				yscale = d3.scale.linear().domain([0,max_val]).range([0,height]);
 
 			// enter selection
@@ -19,13 +19,13 @@ define(['js/utils'], function(utils) {
 				.enter()
 				.append('rect')
 				.attr('data-pathable', function(d) { return d.series_pathables[0].id; })
-				.attr('data-val', function(d) { return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??'; })
+				.attr('data-val', function(d) {
+					return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??';
+				})
 				.on('mouseover', function(d) {
-					console.log(" << BRUSH pathables ", d, d.series_pathables);
 					this_.trigger('brush', { pathables: d.series_pathables, value: d.series_val });
 				})
 				.on('mouseout', function(d) {
-					console.log(" UNBRUSH >> pathables ", d.series_pathables);
 					this_.trigger('unbrush', { pathables: d.series_pathables, value: d.series_val });
 				});
 			

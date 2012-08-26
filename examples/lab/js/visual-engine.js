@@ -2,6 +2,7 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 	
 	/* ========= utilities ============= */
 	var defined = utils.DEFINED, flatten = utils.flatten, to_numeric = utils.to_numeric, uniq = _.uniq;
+	var is_number = function(x) { return _(x).isNumber() && !_(x).isNaN(); };
 	var percentage_of_values_of_type = 0.85;
 	var to_raw_value = function(v) { return v.valueOf(); };	
 	var get_values = function(pathables)  { return pathables.map(function(pth) { return pth.get_last_value(); }); };
@@ -13,10 +14,10 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 	};
 	var has_numeric_vals = function(pathables) {
 		var vals = get_values_flat(pathables);
-		if (vals.length === 0) { return false; }		
-		return vals.filter(function(v) {
-			return _(v).isNumber() || _(parseInt(v,10)).isNumber();
-		}).length * 1.0 / vals.length > percentage_of_values_of_type;
+		if (vals.length === 0) { return false; }
+		return (vals.filter(function(v) {
+			return is_number(v) || is_number(parseInt(v,10))			
+		}).length * 1.0 / vals.length) > percentage_of_values_of_type;
 	};	
 	var has_non_numeric_vals = function(pathables) {
 		var vals = get_values(pathables);
@@ -40,6 +41,7 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 	var VisualEngineBase = Backbone.Model.extend({});
 
 	var BarValues = {
+		id:"barvalues",
 		// GBE1 groups by item; requires numeric
 		test:function(data, series) {
 			// data is _numeric_
@@ -58,13 +60,13 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 
 	var BarHist = {
 		// GBE1 groups by item; requires numeric
+		id:"barhist",
 		test:function(data, series) {
 			// data is _numeric_
 			return !has_numeric_vals(data) && _.isUndefined(series);
 		},
 		generate_data:function(pathables, noseries) {
 			var vals = get_values_flat(pathables), uniqs = uniq(vals);
-
 			return uniqs.map(function(val) {
 				// count how many per each val
 				var matches = pathables.filter(function(p) { return p.get_last_value().indexOf(val) >= 0; });
@@ -159,8 +161,8 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 	});
 
 */
-
 	return {
-		BarValues : BarValues 
+		BarValues : BarValues,
+		BarHist:BarHist
 	};
 });
