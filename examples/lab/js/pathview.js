@@ -26,9 +26,14 @@ define(
 			},
 			render:function() {
 				var this_ = this;
-				var path_values = _(this.pathables.try_path(this.path)).last() || [];
-				var next_steps = _.uniq(_.flatten(path_values.map(function(pathable_array) {
-					return flatten(pathable_array.map(function(X) { return X.keys ? X.keys() : []; }));
+				var last_values = _(flatten(
+					this.pathables.try_path(this.path)
+						.map(function(pathable_path) {
+							console.log('pathable path is ', pathable_path, ' retuerning ', _(pathable_path).last());
+							return _(pathable_path).last();
+						}))).uniq();
+				var next_steps = _.uniq(_.flatten(last_values.map(function(value) {
+					return value.keys ? value.keys() : []; 
 				})));
 				console.log(" NEXT STEPS >>>>>>>>>>>>>>>>>>>>>>>>>>>", next_steps);
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {

@@ -132,6 +132,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
+				console.log('values >> ', values);
 			}
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
