@@ -164,11 +164,18 @@
   left: 1px;
 }
 .greybox .properties .propitems li.path .steps select {
-  border: 1px solid #eee !important;
-  font-size: 7pt !important;
+  background-color: white;
+  font-size: 8pt !important;
   line-height: 12px !important;
   height: 16px !important;
-  width: 80px !important;
+  width: 90px !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+}
+.greybox .properties .propitems li.path .steps select:hover {
+  border: 1px solid rgba(255, 240, 255, 0.4) !important;
+}
+.greybox .properties .propitems li.path .steps select:focus {
+  border: 1px solid rgba(240, 240, 255, 0.4) !important;
 }
 .greybox .properties .new-path-btn {
   position: absolute;

@@ -1,9 +1,12 @@
 define(
 	[
-		'examples/lab/js/pathables'
+		'examples/lab/js/pathables',
+		'js/utils'		
 	],
-	function(pathables) {
+	function(pathables, utils) {
 		"use strict";
+
+		var defined = utils.DEFINED, flatten = utils.flatten;
 
 		/* @pathables:	Pathables collection belonging to the instancebox.
 		 * @path:		The path this view displays/modifies. */
@@ -19,20 +22,15 @@ define(
 				this.pathables
 					.on("add remove", function(args) { this_.render(args); });
 				this.path
-					.on("all", function(eventType, args) {
-						this_.render();
-					});
+					.on("all", function(eventType, args) { this_.render();	});
 			},
 			render:function() {
 				var this_ = this;
-				var path_values = this.pathables.try_path(this.path) || [];
+				var path_values = _(this.pathables.try_path(this.path)).last() || [];
 				var next_steps = _.uniq(_.flatten(path_values.map(function(pathable_array) {
-					var next_object = _.last(pathable_array)[0];
-					return next_object instanceof pathables.Pathable ? next_object.entailedKeys() : undefined;
-				})).filter(function(pathable) {
-					return !_.isUndefined(pathable);
-				}));
-
+					return flatten(pathable_array.map(function(X) { return X.keys ? X.keys() : []; }));
+				})));
+				console.log(" NEXT STEPS >>>>>>>>>>>>>>>>>>>>>>>>>>>", next_steps);
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {
 					return step_model.get("property");
 				});
