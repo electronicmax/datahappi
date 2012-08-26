@@ -7,7 +7,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 	var Visual = VisualBase.extend({
 		className:'visual',
 		tagName:'div',
-		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="yaxis"><span class="lbl"><i>(drag here to set data)</i></span></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
+		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},
@@ -88,22 +88,23 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			var old_y_label = '', old_x_label = '';
 			this.$el.html(this.template);
 			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});			
-			this.$el.find('.yaxis').droppable({
+			this.$el.find('.plot').droppable({
 				greedy:true,  accept:'.greybox', tolerance:"touch",
 				over:function(event, ui) {
-					$(this).addClass("over");
-					old_y_label = $(this).find('lbl').html();
-					$(this).find('.lbl').html('display values'); 
+					console.log('adding class over', this_.$el);
+					this_.$el.addClass("over");
+					// old_y_label = $(this).find('lbl').html();
+					//$(this).find('.lbl').html('display values'); 
 				},
 				out:function(event, ui) {
-					$(this).removeClass("over");
-					$(this).find('.lbl').html(old_y_label);
+						this_.$el.removeClass("over");
+					//$(this).find('.lbl').html(old_y_label);
 				},
 				drop: function( event, ui ) {
 					var view = ui.draggable.data("view");
 					var views = view.views_collection;
-					$(this).removeClass("over");
-					$(this).find('.lbl').html('selected ' + views.length);
+					this_.$el.removeClass("over");
+					// $(this).find('.lbl').html('selected ' + views.length);
 					this_.setData( views );
 				}
 			});			

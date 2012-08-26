@@ -24,6 +24,19 @@
 }
 .visual {
   border: 1px solid rgba(0, 180, 0, 0.2);
+  /*
+	.yaxis {
+		.droparea;
+		transform: rotate(90deg);
+		left:30px; top:0px; width:@visual-height - 1; height:@visual-x-height;			
+		-webkit-transform: rotate(90deg);
+		transform-origin:0% 0%;
+		-webkit-transform-origin:0% 0%;
+		top:0px;
+		z-index:5;
+		.lbl {	}			
+	}*/
+
 }
 .visual .corner_thingy {
   width: 50px;
@@ -34,18 +47,20 @@
 .visual svg.plot {
   position: absolute;
   top: 0px;
+  left: 0px;
   right: 0px;
-  width: 320px;
   height: 270px;
+}
+.visual svg.plot rect {
+  fill: rgba(20, 100, 20, 0.4);
+}
+.visual.over {
+  border: 2px solid rgba(50, 255, 50, 0.8);
 }
 .visual .droparea {
   position: absolute;
   border-top: 1px solid rgba(200, 200, 200, 0.4);
   font-size: 0.8em;
-}
-.visual .droparea.over {
-  box-shadow: inset 0 0 5px green;
-  background-color: rgba(100, 250, 100, 0.5);
 }
 .visual .droparea .lbl {
   position: absolute;
@@ -56,6 +71,10 @@
   text-align: center;
   vertical-align: middle;
 }
+.visual .droparea.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.3);
+}
 .visual .xaxis {
   position: absolute;
   border-top: 1px solid rgba(200, 200, 200, 0.4);
@@ -64,10 +83,6 @@
   bottom: 0px;
   right: 0px;
   height: 30px;
-}
-.visual .xaxis.over {
-  box-shadow: inset 0 0 5px green;
-  background-color: rgba(100, 250, 100, 0.5);
 }
 .visual .xaxis .lbl {
   position: absolute;
@@ -78,33 +93,9 @@
   text-align: center;
   vertical-align: middle;
 }
-.visual .yaxis {
-  position: absolute;
-  border-top: 1px solid rgba(200, 200, 200, 0.4);
-  font-size: 0.8em;
-  transform: rotate(90deg);
-  left: 30px;
-  top: 0px;
-  width: 299px;
-  height: 30px;
-  -webkit-transform: rotate(90deg);
-  transform-origin: 0% 0%;
-  -webkit-transform-origin: 0% 0%;
-  top: 0px;
-  z-index: 5;
-}
-.visual .yaxis.over {
+.visual .xaxis.over {
   box-shadow: inset 0 0 5px green;
-  background-color: rgba(100, 250, 100, 0.5);
-}
-.visual .yaxis .lbl {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  text-align: center;
-  vertical-align: middle;
+  background-color: rgba(100, 250, 100, 0.3);
 }
 .visual-map {
   position: absolute;

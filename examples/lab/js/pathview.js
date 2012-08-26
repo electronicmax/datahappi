@@ -27,28 +27,23 @@ define(
 			render:function() {
 				var this_ = this;
 				var last_values = _(flatten(
-					this.pathables.try_path(this.path)
+					( this.pathables.try_path(this.path) || [] )
 						.map(function(pathable_path) {
-							console.log('pathable path is ', pathable_path, ' retuerning ', _(pathable_path).last());
 							return _(pathable_path).last();
 						}))).uniq();
 				var next_steps = _.uniq(_.flatten(last_values.map(function(value) {
 					return value.keys ? value.keys() : []; 
 				})));
-				console.log(" NEXT STEPS >>>>>>>>>>>>>>>>>>>>>>>>>>>", next_steps);
 				var previous_steps = this.path.get_steps().models.map(function(step_model) {
 					return step_model.get("property");
 				});
-
 				this.$el.html(this.template({
 					previous_steps:previous_steps,
 					next_steps:next_steps
 				}));
-
 				this.$el.find(".next-step-select").change(function() {
 					this_.path_extend().render();
 				});
-
 				this.$el.find(".delete").click(function() { this_.path_remove(); });
 
 				/* 
@@ -65,7 +60,7 @@ define(
 				*/
 
 				// put a pointer from the DOM back to us so that the shuffler
-				// can find us out
+				// can find us out				
 				this.$el.data("view", this);
 				return this;
 			},

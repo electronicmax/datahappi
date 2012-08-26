@@ -33,28 +33,37 @@
 	svg.plot {
 		position:absolute;
 		top:0px;
+		left:0px;
 		right:0px;
-		width:@visual-width - @visual-y-width;
 		height:@visual-height - @visual-x-height;
+		rect {
+			fill:rgba(20,100,20,0.4);
+		}
 	}
+	&.over {
+		border:2px solid rgba(50,255,50,0.8);
+		// box-shadow : inset 0 0 5px green;
+		// background-color:rgba(100,250,100,0.3);
+	}				
 	.droparea {
 		position:absolute;
 		border-top:1px solid rgba(200,200,200,0.4);
-		&.over {
-			box-shadow : inset 0 0 5px green;
-			background-color:rgba(100,250,100,0.5);
-		}
 		.lbl {
 			.fullsize;
 			text-align:center;
 			vertical-align:middle;
 		}
 		font-size:0.8em;
+		&.over {
+			box-shadow : inset 0 0 5px green;
+			background-color:rgba(100,250,100,0.3);
+		}					
 	}
 	.xaxis {
 		.droparea;
 		left:0px; bottom:0px; right:0px; height:@visual-x-height;
 	}
+	/*
 	.yaxis {
 		.droparea;
 		transform: rotate(90deg);
@@ -65,7 +74,7 @@
 		top:0px;
 		z-index:5;
 		.lbl {	}			
-	}
+	}*/
 }
 
 @visual-width:350px;
