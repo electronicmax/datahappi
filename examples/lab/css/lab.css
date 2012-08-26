@@ -11,8 +11,8 @@
 }
 .label {
   color: #555;
-  background-color: rgba(240, 240, 240, 0.6);
-  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+  background-color: rgba(250, 250, 255, 0.3);
+  font-weight: normal;
 }
 .sameas-over {
   border: 1px solid orange !important;
@@ -286,8 +286,8 @@ body .pathable-view .proplabel:hover {
 }
 body .pathable-view .values,
 body .pathable-view .props {
-  margin: 0px;
-  padding: 0px 0px 0px 18px;
+  margin: 0px 0px 5px 0px;
+  padding: 0px 0px 0px 22px;
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;

@@ -72,10 +72,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
 				this.options.plotter = new this.options.plotter_class({el:plot[0]});
 				this.options.plotter.on('all', function(brushtype, pathable_combo) {
-					this_.options.views.trigger(brushtype, pathable_combo.pathable);
+					this_.options.views.trigger(brushtype, pathable_combo.pathables);
 				}, this);
-			}
-			
+			}			
 			var data =	this.options.engine.generate_data(
 				this.options.views.map(function(x) { return x.options.model; }),
 				defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []

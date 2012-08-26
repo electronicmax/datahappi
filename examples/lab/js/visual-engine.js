@@ -1,7 +1,7 @@
 define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 	
 	/* ========= utilities ============= */
-	var defined = utils.DEFINED, flatten = utils.flatten, to_numeric = utils.to_numeric;
+	var defined = utils.DEFINED, flatten = utils.flatten, to_numeric = utils.to_numeric, uniq = _.uniq;
 	var percentage_of_values_of_type = 0.85;
 	var to_raw_value = function(v) { return v.valueOf(); };	
 	var get_values = function(pathables)  { return pathables.map(function(pth) { return pth.get_last_value(); }); };
@@ -10,9 +10,6 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 		return pathables.map(function(pth) {
 			return pth.get_last_value().map(function(vv) { return to_numeric(vv); });
 		});
-	};
-	var pathables_join = function(p1, p2) {
-		
 	};
 	var has_numeric_vals = function(pathables) {
 		var vals = get_values_flat(pathables);
@@ -55,9 +52,30 @@ define(['examples/lab/js/pathables', 'js/utils'], function(pathables, utils) {
 			}));
 			return _(val_triples)
 				.sortBy(function(x) { return x[2]; })
-				.map(function(x) { return { series_pathable:x[0], series_val:x[1], numeric: x[2] };});
+				.map(function(x) { return { series_pathables:[x[0]], series_val:x[1], numeric: x[2] };});
 		}
 	};
+
+	var BarHist = {
+		// GBE1 groups by item; requires numeric
+		test:function(data, series) {
+			// data is _numeric_
+			return !has_numeric_vals(data) && _.isUndefined(series);
+		},
+		generate_data:function(pathables, noseries) {
+			var vals = get_values_flat(pathables), uniqs = uniq(vals);
+
+			return uniqs.map(function(val) {
+				// count how many per each val
+				var matches = pathables.filter(function(p) { return p.get_last_value().indexOf(val) >= 0; });
+				return {
+					series_pathables: matches,
+					series_val: val,
+					numeric: matches.length,
+				}	
+			});			
+		}
+	};	
 
 	/*
 	

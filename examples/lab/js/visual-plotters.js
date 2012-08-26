@@ -18,12 +18,16 @@ define(['js/utils'], function(utils) {
 				.data(data) ///// , function(d) { return d.series_d; })
 				.enter()
 				.append('rect')
-				.attr('data-pathable', function(d) { return d.series_pathable.id; })
+				.attr('data-pathable', function(d) { return d.series_pathables[0].id; })
 				.attr('data-val', function(d) { return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??'; })
 				.on('mouseover', function(d) {
-					this_.trigger('brush', {pathable: d.series_pathable, value: d.series_val });
+					console.log(" << BRUSH pathables ", d, d.series_pathables);
+					this_.trigger('brush', { pathables: d.series_pathables, value: d.series_val });
 				})
-				.on('mouseout', function(d) { this_.trigger('unbrush', {pathable: d.series_pathable, value: d.series_val }); });
+				.on('mouseout', function(d) {
+					console.log(" UNBRUSH >> pathables ", d.series_pathables);
+					this_.trigger('unbrush', { pathables: d.series_pathables, value: d.series_val });
+				});
 			
 			// update selection
 			svg_p

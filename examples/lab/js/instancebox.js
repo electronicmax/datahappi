@@ -30,7 +30,7 @@ define(
 				this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 				// dragging the box
 				this.$el.draggable({
-					cancel:".items, .properties", 
+					cancel:".items, .propitems", 
 					drag:function(evt,ui) { }, 
 				});
 				this.views_collection.map(function(v) {	this_._render_view(v);	});

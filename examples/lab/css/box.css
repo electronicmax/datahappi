@@ -110,7 +110,6 @@
 .greybox .properties {
   position: absolute;
   z-index: 3;
-  background-color: #fff;
   left: 12px;
   right: 12px;
   bottom: 0px;
@@ -165,10 +164,11 @@
 }
 .greybox .properties .propitems li.path .steps select {
   background-color: white;
+  vertical-align: middle !important;
   font-size: 8pt !important;
   line-height: 12px !important;
   height: 16px !important;
-  width: 90px !important;
+  width: 120px !important;
   border: 1px solid rgba(255, 255, 255, 0.7) !important;
 }
 .greybox .properties .propitems li.path .steps select:hover {
