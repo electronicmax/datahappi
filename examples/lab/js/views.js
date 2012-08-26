@@ -60,7 +60,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.data('model', function() { return this_.options.model; });
 			this.$el.attr("data-uri", this.options.model.id);
 			this.$el.draggable({
-				handle:this.$el.find('div.labels'),
+				cancel:'.values',
 				revert:"invalid",
 				helper:"clone",
 				appendTo:'body'

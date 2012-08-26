@@ -1,5 +1,6 @@
 @boxminwidth : 240px;
 @boxwidth : 340px;
+@boxheight : 360px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
@@ -13,7 +14,7 @@
 	min-width:@boxminwidth;
 	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
-	height:300px;
+	height:@boxheight;
 	max-height:500px;
 	overflow-x:hidden;
 	overflow-y:hidden;
@@ -82,7 +83,7 @@
 	}
 	.items {
 		position:absolute;
-		top:16px; left:12px; right:28px; bottom:48px;
+		top:8px; left:12px; right:28px; bottom:68px;
 		padding:0px 25px 0px 0px;
 		border-bottom:1px solid rgba(180,180,180,0.6);
 		overflow-x:hidden;
@@ -93,7 +94,7 @@
 		position:absolute;		
 		z-index:3;
 		background-color:#fff;
-		left:12px; right:12px; bottom:0px; height:46px;
+		left:12px; right:12px; bottom:0px; height:68px;
 		overflow:auto;
 		vertical-align:top;		
 		/*				
@@ -109,13 +110,14 @@
 		width:200px;
 		*/
 		.propitems {
-			margin:0px; padding:0px;  width: 100%;
+			display:inline-block;
+			margin:0px !important; padding:0px !important;
 			list-style-type:none !important;
 			// paths
 			li.path {
 				border-bottom:1px solid #eee;
-				margin:3px 0px 3px 0px !important;
-				padding:3px 3px 3px 3px !important;
+				margin:0px !important;
+				padding:0px !important;
 				background-color:#fff;
 				padding:0px; 
 				position:relative;
