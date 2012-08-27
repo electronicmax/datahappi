@@ -93,18 +93,13 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				over:function(event, ui) {
 					console.log('adding class over', this_.$el);
 					this_.$el.addClass("over");
-					// old_y_label = $(this).find('lbl').html();
-					//$(this).find('.lbl').html('display values'); 
 				},
 				out:function(event, ui) {
-						this_.$el.removeClass("over");
-					//$(this).find('.lbl').html(old_y_label);
+					this_.$el.removeClass("over");
 				},
 				drop: function( event, ui ) {
-					var view = ui.draggable.data("view");
-					var views = view.views_collection;
+					var views = ui.draggable.data("views")();
 					this_.$el.removeClass("over");
-					// $(this).find('.lbl').html('selected ' + views.length);
 					this_.setData( views );
 				}
 			});			
@@ -120,11 +115,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					$(this).find('.lbl').html(old_x_label);					
 				},
 				drop: function( event, ui ) {
-					var view = ui.draggable.data("view");
-					var laststep = view.pathables.paths.at(0).get_last_step();
+					var view = ui.draggable.data("views");
 					$(this).removeClass("over");
-					$(this).find('.lbl').html('grouped by '+ laststep.valueOf());
-					this_.setSeries(view.view_collection);					
+					this_.setSeries(views);					
 				}				
 			});
 			return this;

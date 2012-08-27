@@ -40,27 +40,44 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 			var dude_types = _.uniq(flatten(visible_dudes.map(function(x) {
 				return x.model.get('type') || [];
 			}))).concat(['__misc__']);
-			
+
+			var make_view_accessor = function(subcollection_$el) {
+				return function() {
+					var views = $.makeArray(
+						subcollection_$el.find('.items').children().map(function(x) { return $(this).data('view'); })
+					);
+					var vc = new box.ViewCollection();
+					vc.add(views);
+					return vc;
+				};										
+			};
+
 			// subcollection enter selection
 			dude_types.map(function(type) {
 				if (type == '__misc__') {
 					if (get_subcollection_for_type('__misc__').length == 0) {
-						$(_(this_.category_template).template({label:'other'}))
+						var subc_view = $(_(this_.category_template).template({label:'other'}))
 							.attr('class-uri', '__misc__')
-							//.attr('id','subcollection-__misc__')
 							.find('.items').attr('id','subcollection-items-__misc__').end()					
-							.find('.lbl a').attr('href','#subcollection-items-__misc__').end()
+							.find('.lbl a')
+								.attr('data-parent', '#inventory-things')
+								.attr('href','#subcollection-items-__misc__')
+								.end()
 							.appendTo(this_.$el);
+						subc_view.data('views', make_view_accessor(subc_view));
 					}
 					return;
 				}
 				if (get_subcollection_for_type(type.id).length == 0) {
-					$(_(this_.category_template).template({label:type.get_label()}))
+					var subc_view = $(_(this_.category_template).template({label:type.get_label()}))
 						.attr('class-uri', type.id)
-						//.attr('id','subcollection-'+type.id)
 						.find('.items').attr('id',"subcollection-items-"+hash(type.id)).end()					
-						.find('.lbl a').attr('data-parent', '#inventory-things').attr('href','#subcollection-items-'+hash(type.id)).end()
+						.find('.lbl a')
+							.attr('data-parent', '#inventory-things')					
+							.attr('href','#subcollection-items-'+hash(type.id))
+							.end()
 						.appendTo(this_.$el);
+					subc_view.data('views', make_view_accessor(subc_view));
 				}
 			});
 			

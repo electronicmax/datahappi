@@ -87,6 +87,7 @@ define([], function() {
 	});
 	return {
 		BoxView : BoxView,
+		ViewCollection:ViewCollection,
 		clone_view : clone_view
 	};
 });

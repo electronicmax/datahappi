@@ -64,7 +64,7 @@ define(
 				});
 				// add a toolbar.
 				this.$el.append($(toolbar_template));
-				this.$el.data('view', this);
+				this.$el.data('views', function() { return this_.views_collection; });
 				// add a property box
 
 				this.propbox = this._make_property_box();

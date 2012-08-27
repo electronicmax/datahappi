@@ -47,8 +47,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					$(this).find('.lbl').html('drop here');
 				},
 				drop: function( event, ui ) {
-					var view = ui.draggable.data("view");
-					var views = view.views_collection;
+					var views = ui.draggable.data("views")();
 					var dropzone_i = this_.$el.find('.dropzone').index($(this));
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('' + views.length + 'items');
