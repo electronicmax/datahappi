@@ -12,6 +12,8 @@ define([
 	'js/googlecal/CalendarCollection',
 	'js/googlecal/auth'
 ], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth) {
+
+	var defined = util.DEFINED;
 	
 		var Main = Backbone.View.extend({
 			events: {
@@ -45,16 +47,22 @@ define([
 				workspace
 					.append(tb.render().el)
 					.droppable({
-						accept:'.item,.pathable-view,.dereferenced-model',
+						accept:'.item,.pathable-view,.dereferenced-model,.subcollection',
 						tolerance:"touch",
 						over:function(event, ui) {},
 						out:function(event, ui) {},				
 						drop: function( event, ui ) {
 							var target_box = new ibox.InstanceBox();
-							var model = ui.draggable.data("model")().clone();
-							target_box.add(new views.PathableView({model:model}));
-							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());
+							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());							
 							this_.$el.find(".workspace").append(target_box.render().el);
+							if (defined(ui.draggable.data('model'))) {
+								var model = ui.draggable.data("model")().clone();
+								target_box.add(new views.PathableView({model:model}));
+							} else if (defined(ui.draggable.data('views'))) {
+								target_box.add(ui.draggable.data('views')().map(function(view) {
+									return new views.PathableView({model:view.options.model})
+								}));
+							}
 							return false;
 						}
 					});

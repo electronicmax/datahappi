@@ -1,4 +1,4 @@
-define(['examples/lab/js/views','js/utils'],function(views,utils) {
+define(['examples/lab/js/views','examples/lab/js/box','js/utils'],function(views,box,utils) {
 	var flatten = utils.flatten, defined = utils.DEFINED, deferred = utils.deferred, when = utils.when, hash = utils.hash;
 	var InventoryView = Backbone.View.extend({
 		className:'inventory',
@@ -41,7 +41,7 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 				return x.model.get('type') || [];
 			}))).concat(['__misc__']);
 
-			var make_view_accessor = function(subcollection_$el) {
+			var make_view_getter = function(subcollection_$el) {
 				return function() {
 					var views = $.makeArray(
 						subcollection_$el.find('.items').children().map(function(x) { return $(this).data('view'); })
@@ -64,7 +64,12 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 								.attr('href','#subcollection-items-__misc__')
 								.end()
 							.appendTo(this_.$el);
-						subc_view.data('views', make_view_accessor(subc_view));
+						subc_view.data('views', make_view_getter(subc_view));
+						subc_view.draggable({
+							revert:"invalid",
+							helper:"clone",
+							appendTo:'body'
+						});						
 					}
 					return;
 				}
@@ -77,7 +82,12 @@ define(['examples/lab/js/views','js/utils'],function(views,utils) {
 							.attr('href','#subcollection-items-'+hash(type.id))
 							.end()
 						.appendTo(this_.$el);
-					subc_view.data('views', make_view_accessor(subc_view));
+					subc_view.data('views', make_view_getter(subc_view));
+					subc_view.draggable({
+						revert:"invalid",
+						helper:"clone",
+						appendTo:'body'
+					});					
 				}
 			});
 			
