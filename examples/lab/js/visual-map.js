@@ -6,7 +6,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		apiKey:	'285675b50972436798d67ce55ab7ddde',
 		className:'visual-map',
 		tagName:'div',
-		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div>',
+		template:'<div class="titlebar">Map</div><div class="map_container"><div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div></div>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},
