@@ -1,6 +1,6 @@
 @boxminwidth : 240px;
 @boxwidth : 340px;
-@boxheight : 360px;
+//@boxheight : 360px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
@@ -14,7 +14,7 @@
 	min-width:@boxminwidth;
 	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
-	height:@boxheight;
+//	height:@boxheight;
 	max-height:500px;
 	overflow-x:hidden;
 	overflow-y:hidden;
@@ -28,6 +28,7 @@
 		//font-size:1.2em;
         float: right;
         margin: 3px;
+        cursor: pointer;
 	}       
 	.uplt, .uprt, .btlt, .btrt {
 		width:10px; height:10px;
@@ -95,9 +96,10 @@
 	}
 	/* properties */
 	.properties {
-		position:absolute;		
+		position: relative;	
 		z-index:3;
-		left:12px; right:12px; bottom:0px; height:68px;
+//		left:12px; right:12px; bottom:0px; height:68px;
+        height: 68px;
 		overflow:auto;
 		vertical-align:top;		
 		/*				

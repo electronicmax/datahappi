@@ -6,7 +6,6 @@
   width: 340px;
   min-width: 240px;
   padding: 12px 20px 12px 12px;
-  height: 360px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -24,6 +23,7 @@
   display: block;
   float: right;
   margin: 3px;
+  cursor: pointer;
 }
 .greybox .uplt,
 .greybox .uprt,
@@ -102,11 +102,8 @@
   height: 290px;
 }
 .greybox .properties {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  left: 12px;
-  right: 12px;
-  bottom: 0px;
   height: 68px;
   overflow: auto;
   vertical-align: top;
