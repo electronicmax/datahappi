@@ -32,7 +32,7 @@ define(
 				if (this.$el.html().length === 0) {
 					this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 					// dragging the box
-					this.$el.draggable({ cancel:".items, .propitems", drag:function(evt,ui) { }	});
+					this.$el.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	});
 					this.views_collection
 						.on('brush', function(model) {
 							model = _(model).isArray() ? model : [model];
@@ -78,7 +78,6 @@ define(
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				return this;
 			},
-
 			_make_micro_hist:function() {
 				var this_ = this;
 				var hist = new histogram.HistView({
@@ -93,7 +92,6 @@ define(
 				if (!_(itemviews).isArray()) { itemviews = [itemviews]; }
 				var this_ = this;				
 				itemviews.map(function(itemview) {
-					console.log('itemview > ', itemview);
 					var pathable = itemview.options.model; 
 					// this is a sneaky which consolidates the pathables of views that are
 					// added to the same box, so if one gets dereferenced then they all do.
@@ -111,8 +109,9 @@ define(
 						this_._dereference_by_property($(evt.target).attr('data-prop'));
 					});					
 				});
-				console.log('adding item views ', itemviews);
-				this.views_collection.add(itemviews);
+				// let's do this silently and then trigger manually
+				this.views_collection.add(itemviews, {silent:true});
+				this.views_collection.trigger('add', itemviews);
 				this.render();
 			},
 			remove:function(itemview) {

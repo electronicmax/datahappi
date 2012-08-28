@@ -158,9 +158,9 @@
 	}
 	// mini histogram sparkline
 	.sparkhist { 
-		zindex:-10;
+		z-index:1000;
 		position:absolute;
-   		top:100%;	right:5px; width:20px;
+   		top:100%;	right:5px; width:40px;
 		height:10px;
 		margin-top:-20px;
 		// border-left:1px solid #eee;
@@ -178,11 +178,10 @@
 			line-height:1.5em;
 		}
 		rect {
-			stroke:white; 
-			fill:rgba(0,200,255,0.5);
+			fill:white;
+			stroke:rgba(0,200,255,0.5);			  			
 			&.brush {
-				fill:white;
-				stroke:rgba(0,200,255,0.5);			  
+				fill:rgba(0,200,255,0.5);
 			}
 			&.unbrush {}		  
 		}

@@ -11,8 +11,9 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
 		render:function() {
+			console.log('hist.render >> ');
 			var data = this._get_counts(this.options.views);
-			var barwidth = 5;
+			var barwidth = 4;
 			var height = 20;
 			var this_ = this;
 
@@ -28,18 +29,27 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 				.data(data, function(d) { return d[0]; })
 				.enter()
 				.append('rect')
-				.on('mouseover', function(d) { this_._brush_value(d[0]); })
-				.on('mouseout', function(d) { this_._unbrush_value(d[0]); });
+				.on('mouseover', function(d) {
+					// console.log('enter > ', d); 
+					d3.select(this).attr('class', 'brush');
+					this_._brush_value(d[0]);					
+				})
+				.on('mouseout', function(d) {
+					// this_._unbrush_value(d[0]);
+					d3.select(this).attr('class', '');
+					this_._unbrush_value(d[0]);										
+				});			
 
 			// update
 			d3.select(this.el).selectAll('rect')
 				.data(data, function(d) { return d[0]; })			
 				.attr('y', function(d,i) { return height - yscale(d[1]); })
-				.attr('x', function(d,i) { return i*barwidth; })
+				.attr('x', function(d,i) { return i*(barwidth + 3); })
 				.attr('height', function(d) { return yscale(d[1]); })
 				.attr('width', barwidth)
 				.attr('data-val', function(d) { return d[0]; });
-
+			
+			
 			// exit
 			d3.select(this.el).selectAll('rect')
 				.data(data, function(d) { return d[0]; })			
@@ -64,22 +74,10 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			}).map(function(x) { return x.options.model; }));
 		},
 		_brush_value:function(raw_value) {
-			this.options.views.trigger('brush', this._find_pathables_with_raw_value(raw_value));			
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				if ($t.attr('data-val') == raw_value) {
-					$t.attr('class', 'brush');
-				} else {
-					$t.attr('class', 'unbrush');
-				}
-			});
+			this.options.views.trigger('brush', this._find_pathables_with_raw_value(raw_value));
 		},
 		_unbrush_value:function(raw_value) {
 			this.options.views.trigger('unbrush', this._find_pathables_with_raw_value(raw_value));						
-			this.$el.find('rect').each(function() {
-				var $t = $(this);
-				$t.attr('class', '');
-			});
 		},		
 		_get_counts:function(views){ 
 			var pathables = views.map(function(x) { return x.options.model ; });
