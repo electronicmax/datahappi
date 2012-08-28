@@ -1,0 +1,2622 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/cuisinenet/menus.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu1">
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Light lentil soup cooked with aromatic spices - served with baby naan bread</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Daal Shorba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lightly fried shredded chicken cooked with cornflour, garlic, egg and spices</item_detail>
+            <item_price>2.25</item_price>
+            <rdfs:label>Murg Shorba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken marinated with cheese, cream, yogurt and spices baked on charcoals</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Tikka Malai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken marinated in peanuts, tamarind and curry leaves cooked in a clay oven</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Mungphalli Ke Chole</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Gram flour coated chicken roasted with garlic and spices and garnished with egg</item_detail>
+            <item_price>4.15</item_price>
+            <rdfs:label>Chicken Reshmi Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Boneless chicken stir fried with special chat masala powder and coriander</item_detail>
+            <item_price>3.95</item_price>
+            <rdfs:label>Chicken Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Spiced up minced lamb stuffed inside chicken breast, barbecued in a clay oven</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Potli Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken marinated with yogurt, spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.10</item_price>
+            <rdfs:label>Chicken Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb marinated with yogurt, spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.10</item_price>
+            <rdfs:label>Lamb Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lean duck marinated with traditional spices and yogurt, baked in a clay oven</item_detail>
+            <item_price>5.75</item_price>
+            <rdfs:label>Batak Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb chops marinated in yogurt and selected spices, then barbecued in a clay oven</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Tandoori Lamb Chops</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Slices of lamb marinated in yogurt, ginger, garlic and spices cooked in a clay oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Lamb Piccata</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Triangular pastry stuffed with blend of minced lamb and mild spices</item_detail>
+            <item_price>3.25</item_price>
+            <rdfs:label>Lamb Samosa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Minced meat cooked with selected spices and herbs, baked in a tandoori oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Seekh Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Combination of Shami Kebab, Sheekh Kebab, Onion Bhaji, Chicken and Lamb Tikka</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Mixed Kebab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Salmon marinated in herbs and spices, baked in a clay oven - served with salad</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Tandoori Salmon Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Mackerel marinated in yogurt and selected spices, barbecued in a tandoori oven</item_detail>
+            <item_price>4.25</item_price>
+            <rdfs:label>Tandoori Mackerel</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns stir fried with special chat masala powder and coriander</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Jhinga Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns marinated in yogurt, fresh coriander and mustard, baked in an oven</item_detail>
+            <item_price>5.95</item_price>
+            <rdfs:label>Bhatti Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Prawns marinated with garlic, peppercorns and lime juice, deep fried with corn flour</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Garlic Fried Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Prawns cooked in a medium spice sauce, served on a deep fried pancake</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Bhoona Prawn Puri</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Crabmeat sautéed with spices, coriander, coated with breadcrumbs and deep fried</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Crab Kalimiri</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lightly spiced pan fried potato cake served with tamarind sauce on a bed of chickpeas</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Tawa Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Mushrooms marinated in yoghurt, gram flour and spices grilled in a clay oven</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Tandoori Khumb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cubes of cottage cheese cooked in clay oven with peppers, tomato and onion</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Pannier Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Triangular pastry stuffed with blend of fresh vegetables and mild spices</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Vegetable Samosa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chick peas cooked with a blend of spices, tamrind, green chillies and coriander</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Chana Chat</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Onion roundlets in a light batter with herbs and traditional spices, deep fried</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Onion Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Deep fried mashed mushroom and spinach cake</item_detail>
+            <item_price>3.75</item_price>
+            <rdfs:label>Mushroom Saag Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Potato balls with ginger, brie and roasted cashew nuts - served with tamarind sauce</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Aloo Cheese Tikki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender boneless chicken cooked with coconut in a creamy, mild spiced sauce</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Korma (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fairly hot chicken curry with ginger and garlic - a traditional South Indian dish</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A favourite dish from the Punjab, cooked in a spicy masala sauce with a hint of garlic</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Jalandhari Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender fillets of chicken cooked with tomatoes and onions in our own blended sauce</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Chicken Rogan Josh</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lean duck cooked with capsicum, selected herbs and spices in a home made sauce</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Batak Kurchan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pieces of tender duck lightly cooked in a tandoori oven, stir fried with plum sauce, tamarind and roasted spices to give a spicy sweet and sour taste</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Tamarind Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lean duck cooked with ginger, garlic and fresh green chillies</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Batak Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender lamb cooked in a special mild and creamy sauce with subtle spices</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Korma</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb fried with tomatoes and onions, cooked in our special blended curry sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Rogan Josh</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb cooked in a fairly hot curry sauce with ginger and garlic</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb cooked in a spicy masala sauce with a hint of garlic. Speciality of Punjab</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Jalandhari Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pieces of prime beef cooked with ginger, garlic and fresh green chillies</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Beef Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Beef marinated with yoghurt and selected spices cooked in a steamy sealed pot</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Dum Ka Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cooked in a medium sauce with traditional spices, topped with creamy coconut sauce</item_detail>
+            <item_price>9.55</item_price>
+            <rdfs:label>Beef Nijami</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Crunchy sea bass fillets on spinach and mushrooms</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Masala Sea Bass</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cooked with cashew nuts, coconut milk, mustard and corander in a mild sauce</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Coriander Monkfish</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A dry distinctive combination of king prawns, tomatoes, onions and spices</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Jinga Bhuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns cooked with fresh tomatoes, capsicum and onions in chilli sauce</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Jhinga Salan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Diced king prawns prepared with selected herbs, spices and spinach</item_detail>
+            <item_price>10.55</item_price>
+            <rdfs:label>Jhinga Dhandas</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender tiger prawns cooked with garlic and ginger - a fairly hot traditional dish</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Prawn Madras</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A sweet and sour hot chicken curry cooked with lentils</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Chicken Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A sweet and sour hot lamb curry cooked with lentils</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Lamb Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A sweet and sour hot king prawn curry cooked with lentils</item_detail>
+            <item_price>11.75</item_price>
+            <rdfs:label>Jhinga Dhansak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A spiced dish prepared in an enriched, thick sauce for a sweet and sour taste</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Chicken Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>A spiced dish prepared in an enriched, thick sauce for a sweet and sour taste</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Lamb Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawn dish spiced and prepared in a thick sauce for a sweet and sour taste</item_detail>
+            <item_price>11.75</item_price>
+            <rdfs:label>Jhinga Pathia</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Succulent pieces of marinated chicken cooked in a tandoori oven</item_detail>
+            <item_price>7.25</item_price>
+            <rdfs:label>Tandoori Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender pieces of boneless chicken marinated, cooked in a tandoori oven</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Chicken Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender pieces of boneless lamb marinated, cooked in a tandoori oven</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Lamb Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken skewered with onion, tomato, capsicum and baked in a tandoori oven</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Chicken Shaslik</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb skewered with onion, tomato, capsicum and baked in a tandoori oven</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Lamb Shaslik</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Filleted salmon marinated in herbs and spices, grilled in a tandoori oven</item_detail>
+            <item_price>9.25</item_price>
+            <rdfs:label>Tandoori Salmon Tikka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns marinated with yoghurt, ginger and carom and baked in a clay oven</item_detail>
+            <item_price>10.95</item_price>
+            <rdfs:label>Jhinga Ajwaini</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Broccoli, Potato, capsicum, tomato and onions barbecued in a clay oven</item_detail>
+            <item_price>6.95</item_price>
+            <rdfs:label>Baked Sabzi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Marinated chicken barbecued, then cooked in a masala sauce with almond powder</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Chicken Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Duck marinated, baked in a clay pot, prepared in a masala sauce with almond powder</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Batak Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender lamb marinated, barbecued, cooked in a masala sauce with almond powder</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Lamb Tikka Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Grilled king prawns with almond powder, cooked in a masala sauce</item_detail>
+            <item_price>10.95</item_price>
+            <rdfs:label>Bhatti Jhinga Massala (Mild)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken tossed in the karai, cooked with onions, ginger, garlic and capsicum</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb tossed in the karai, cooked with onions, ginger, garlic and capsicum</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Duck cooked in the karai with ginger, garlic, capsicum and onions</item_detail>
+            <item_price>10.25</item_price>
+            <rdfs:label>Duck Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Beef tossed in the karai, cooked with onion, ginger, garlic and capsicum</item_detail>
+            <item_price>9.45</item_price>
+            <rdfs:label>Beef Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns, ginger, garlic, onions and capsicum cooked in the karai</item_detail>
+            <item_price>10.30</item_price>
+            <rdfs:label>Jhinga Karai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Seasonal vegetables cooked with basmati rice with selected biriani spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Vegetable Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken, basmati rice, cardamom, cinnamon, bay leaf, roasted cashew nuts and saffron cooked together at low heat, garnished with egg</item_detail>
+            <item_price>9.75</item_price>
+            <rdfs:label>Chicken Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb, basmati rice, cardamom, cinnamon, bay leaf, roasted cashew nuts and saffron cooked together at low heat, garnished with egg</item_detail>
+            <item_price>9.75</item_price>
+            <rdfs:label>Lamb Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tandoori chicken cooked with basmati rice, cardamom, dry chillies and apricots</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Bhatti Chicken Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Combination of chicken, lamb and prawn cooked with rice in a home made sauce</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Coriander Special Biriani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Corn and cottage cheese cooked with onions, tomato and spices</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Pannier Aur Makai Bhurjee</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Spinach cooked with sliced button mushrooms</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Saag Mushrooms</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Eggplant, tomato, curry leaves and selected herbs and spices cooked with ground peanuts and sesame seeds</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Eggplant and Tomato Curry</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Ground spinach and garlic cooked with capsicum, with selected herbs and spices</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Saag Lasooni</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Smoked eggplant mashed, cooked with selected herbs and spices, topped with cream</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Baigan Bharta</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cumin and spinach-infused cottage cheese dumplings stuffed with mushrooms and raisins, served in tomato gravy</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Rattan Manjusha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Potato and cottage cheese mixed with cashew nuts, selected herbs and spices. Served in a creamy, medium spicy sauce</item_detail>
+            <item_price>6.25</item_price>
+            <rdfs:label>Malai Kofta</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken cooked with green chillies, coriander and selected herbs and spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Coriander Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken cooked with butter, cashew nuts, tangy tomato and selected spices</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Butter Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken cooked with green chillies and capsicum in spicy gravy</item_detail>
+            <item_price>7.60</item_price>
+            <rdfs:label>Chicken Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken tikka cooked with green chillies and capsicum in spicy gravy</item_detail>
+            <item_price>7.60</item_price>
+            <rdfs:label>Chicken-Tikka Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tandoori Chicken cooked in hot spicy sauce and topped with chillies and garlic</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Chicken Lal Mirch</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cooked in a medium sauce with traditional spices, topped with creamy coconut sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Nijami</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender chicken cooked in a special spicy cream sauce with almonds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Chicken Pasanda</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender lamb cooked in a special spicy cream sauce with almonds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Lamb Pasanda</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb with coconut, star anise, red chilli and black peppercorn in a medium hot sauce</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Lamb Chettinad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Cooked with dried apricots in a spicy masala sauce. Topped with crisp straw potatoes</item_detail>
+            <item_price>8.15</item_price>
+            <rdfs:label>Sally Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>King prawns skewed in a tandoori oven and cooked in spicy hot jalfrezey sauce</item_detail>
+            <item_price>10.75</item_price>
+            <rdfs:label>Bhatti Prawn Jalfrezey</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Boneless chicken cooked in hot spicy chilli sauce and roasted with fresh garlic</item_detail>
+            <item_price>7.75</item_price>
+            <rdfs:label>Garlic Chilli Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken barbecued in a tandoori oven and cooked with a blend of chillies, garlic, tamarind, tomato and mustard seeds to give a sweet and sour flavour</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Tamarind Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Whole, dry roasted spices, ground to a fine paste to make a delicious preparation</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Chicken Xacutti</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken breasts marinated with selected spices, grilled in a tandoori oven and cooked with a medium spicy sauce with jalapenos. Garnished with crispy fried onions</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Chicken Nawabi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken marinated in selected herbs and spices, cooked in a mango based fruit sauce</item_detail>
+            <item_price>7.95</item_price>
+            <rdfs:label>Mango Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken breasts stuffed with minced lamb and peas, grilled in a tandoori oven. Served on a bed of stir fried rice and topped with a spicy sweet sauce for a unique taste</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Chicken Chameli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Succulent lean duck cooked with ginger, selected herbs and spices</item_detail>
+            <item_price>9.95</item_price>
+            <rdfs:label>Adraki Batak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Slow cooked lamb shank on the bone with a blend of aromatic spices</item_detail>
+            <item_price>9.25</item_price>
+            <rdfs:label>Dum Ki Nalli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Succulent lamb cooked with yogurt, onions and tomato with a hint of fennel seeds</item_detail>
+            <item_price>8.25</item_price>
+            <rdfs:label>Kashmiri Lamb</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tender pieces Lamb sautéed with traditional herbs and spices, cooked with crushed black pepper</item_detail>
+            <item_price>8.45</item_price>
+            <rdfs:label>Ghost Kalimirch</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lamb dish cooked with spinach, onions and spices for its unique taste</item_detail>
+            <item_price>8.55</item_price>
+            <rdfs:label>Palak Ghost</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tandoori king prawns cooked with diced peppers in a rich tangy sauce</item_detail>
+            <item_price>10.50</item_price>
+            <rdfs:label>Tamarind Jhinga</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Tiger prawns cooked with mustard seeds, onions, garlic, cumin seeds and lemon juice</item_detail>
+            <item_price>8.95</item_price>
+            <rdfs:label>Mustard Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fried Seabass fillets tempered with aromatic spices, cooked with fenugreek in a special house sauce</item_detail>
+            <item_price>9.15</item_price>
+            <rdfs:label>Methi Machli</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Hot spicy potato</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Bombay Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Potato and spinach</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Saag Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Potato and cauliflower</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Aloo Gobi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Lentils and garlic</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Tadka Dal</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Sautéed potato in cumin and fresh coriander</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Zeera Aloo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Spinach</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Saag Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Okra</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Bhindi Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Aubergine</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Brinjal Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Potato and chickpeas</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Aloo Chana</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Mushrooms</item_detail>
+            <item_price>2.95</item_price>
+            <rdfs:label>Mushroom Bhaji</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.95</item_price>
+            <rdfs:label>Mixed Vegetable Curry</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.95</item_price>
+            <rdfs:label>Chana Massala</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.15</item_price>
+            <rdfs:label>Pilau Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.95</item_price>
+            <rdfs:label>Plain Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.50</item_price>
+            <rdfs:label>Mushroom Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.10</item_price>
+            <rdfs:label>Vegetable Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.10</item_price>
+            <rdfs:label>Tomato Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.75</item_price>
+            <rdfs:label>Plain Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.10</item_price>
+            <rdfs:label>Keema Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.10</item_price>
+            <rdfs:label>Peshwari Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.95</item_price>
+            <rdfs:label>Garlic Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.95</item_price>
+            <rdfs:label>Garlic &#38; Chilli Naan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.95</item_price>
+            <rdfs:label>Chapatti</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.95</item_price>
+            <rdfs:label>Cucumber Raitha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.95</item_price>
+            <rdfs:label>Mint Raitha</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.45</item_price>
+            <rdfs:label>Dhai (Yoghurt)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.95</item_price>
+            <rdfs:label>Green Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.65</item_price>
+            <rdfs:label>Massala Popodum and chutneys</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.65</item_price>
+            <rdfs:label>Plain Popodum and chutneys</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>0.45</item_price>
+            <rdfs:label>Lime Pickle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Whole leg of lamb marinated for several hours in elected herbs and spices and roasted - served with rice</item_detail>
+            <item_price>44.95</item_price>
+            <rdfs:label>KURGEE LAMB - 24 hours notice required</rdfs:label>
+        </menu_item>
+        <rdfs:label>Coriander Lounge</rdfs:label>
+    </Menu>
+
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu2">
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Maguro (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Ebi (Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Tako (Octopus)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Hamachi (Yellow Tails)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Saba (Mackerel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Amaebi (Sweet Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Ika (Squid)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Unagi (Eel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Hotate (Scallop)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Tobiko (Fish Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Nigiri - Ikura (Salmon Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Inari (Tofu)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Oshinko (Pickle Radish)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Tamago (Egg)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Nigiri - Gyu (Medium-Rare Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri - Tori katus (Pork Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Nigiri -  Tori katus (Chicken Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Crispy roll, Prawn, Crabs, Avocado, Cucumbers and Mayonnaise)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Maki - Zen Special</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 Pieces) Seaweed roll filled with Fresh Raw Salmon)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Salmon &#38; Salad)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Maki - Sake Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Maki - Tekka (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawn, Egg, Avocado, Crab, Cucumber &#38; Pickle)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Futo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Salmon, Tuna, Prawn &#38; Salad)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Rainbow</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Inside-out seaweed roll filled with Egg, Prawn, Avocado, Crab, Cucumber and Mayonnaise with Tobiko)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Maki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(King Prawn Tempura)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Dragon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Tempura Soft Shall Crab)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Maki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawn)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Crab Meat)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Cani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Crab meat &#38; Salad)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Maki - Cani Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Grilled eel)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Maki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Ton Katsu (Pork Cutlet)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.90</item_price>
+            <rdfs:label>Maki - Tori Katsu (Chicken Cutlet</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Duck)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Maki - Kamo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(BBQ Beef)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Gyu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Scallop)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Maki - Hotata</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Mixed Seafood)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Maki - Mori Awase</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sweet tofu &#38; Avocado)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Maki - Inari &#38; Avocado</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Cucumber)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Kappa</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Avocado</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sweet Tofu)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Inari</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pickled Plum)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Oshinko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pickled Plum)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Umeshiso</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Egg)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Maki - Tamago</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Filled with Avocado, Crab Stick, Prawn, Cucumber and Mayonnaise with Tobiko)</item_detail>
+            <item_price>4.00</item_price>
+            <rdfs:label>Temaki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Salmon)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Sake</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Tuna)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Tekka</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Tempura Soft Shell Crab)</item_detail>
+            <item_price>4.00</item_price>
+            <rdfs:label>Temaki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(King Prawn Tempura)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Ebi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawn)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Crab Meat)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Temaki - Cani</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Grilled Eel)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Salmon Roe)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Ikura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Flying Fish Roe)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Temaki - Tobiko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pickle Radish)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Temaki - Oshinko</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Mixed Combination of Salmon, Tuna, Yellow Tail, Octopus &#38; Sweet Shrimps)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Sashimi - Mori Awase</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>7.90</item_price>
+            <rdfs:label>Sashimi - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Tuna)</item_detail>
+            <item_price>8.90</item_price>
+            <rdfs:label>Sashimi - Maguro</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Yellow Tail)</item_detail>
+            <item_price>9.90</item_price>
+            <rdfs:label>Sashimi - Hamachi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Octopus)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Tako</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Squid)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Ika</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sweet Shrimps)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Amaebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Oyster)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sashimi - Nama Kaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Medium-Rare Beef)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Gyu Tatak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Scallop)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Sashimi - Hotate</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Egg fried rice with mixed seafood)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Steam rice served with char-grilled eel)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Unagi Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Steam rice served with roasted duck)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried king prawn, ginger &#38; spring onion with egg fried rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried chicken in spicy peanut sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Tori Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried beef in black bean sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Gyu Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried pork in hot bean sauce with egg fried rice)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ton Chanhan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Steam rice served with stir fried mixed vegetables &#38; tofu)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Yasai Gohan</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried mixed seafood and vegetables with curry sauce)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Seafood Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried king prawns and vegetables with curry sauce)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried beef and vegetables with curry sauce)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Beef Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Deep fried chicken breadcrumbs and vegetables with curry sauce)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Katsu Tori Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Deep fried pork cutlet breadcrumbs and vegetables with curry sauce)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Katsu Ton Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir fried mixed vegetables with curry sauce)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Kare</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Beef slices with onion and eggs on top of steamed rice)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Gyudon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pork cutlet with onion and egg on top of steam rice)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Katsudon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken and egg on top of steamed rice)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Oyakodon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Char-gtrill chicken on top of steamed rice)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Teriyakido</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Char-grilled eel on top of egg fried rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Unagidon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawns, squid, chicken, roast duck, vegetables with sauce on top of steamed rice)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Chukadon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with prawns, scallops, squid, crabticks and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with prawns, scallops, squid, crabticks and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Zen Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with roasted duck and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with roasted duck and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Kamo Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with slices of grilled pork and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Cha Shu Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with slices of grilled pork and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Cha Shu Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with braised pork spare ribs and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Spare Ribs Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with braised pork spare ribs and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Spare Ribs Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with breadcrumbs breast of chicken and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with breadcrumbs breast of chicken and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with mixed vegetables and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Topped with mixed vegetables and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with seafood, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with seafood, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with prawns, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with prawns, egg and vegetables)</item_detail>
+            <item_price>9.50</item_price>
+            <rdfs:label>Ebi Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with chicken, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with chicken, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Tori Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with beef, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Gyu Yaki Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with beef, egg and vegetables)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Gyu Yaki Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with egg, mixed vegetable and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Soba</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pan fried noodles with egg, mixed vegetable and tofu)</item_detail>
+            <item_price>6.50</item_price>
+            <rdfs:label>Yasai Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Stir Fried Beef, Chicken and Seafood)</item_detail>
+            <item_price>17.90</item_price>
+            <rdfs:label>Zen Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Marinated Deep fried Breadcrumb Chicken)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>Karaage Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Grilled Sirloin Steak sliced)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Gyu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Grilled Salmon Steak)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Sake Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Roasted Duck)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Kamo Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Shell on, Sweet &#38; Spicy Chilli Sauce)</item_detail>
+            <item_price>19.50</item_price>
+            <rdfs:label>Spicy King Prawn</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Char-Grilled Eel)</item_detail>
+            <item_price>17.50</item_price>
+            <rdfs:label>Unagi Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Deep Fried Tempura Mixed Vegetables)</item_detail>
+            <item_price>13.90</item_price>
+            <rdfs:label>Yasai Tempura Bento</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Tofu &#38; Seaweed)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Miso Soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Steam Green Soya Bean)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Edamame</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Japanese Friend Chicken)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Tori Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Yakitori Soft Shell Crab)</item_detail>
+            <item_price>7.50</item_price>
+            <rdfs:label>Cani Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Peppercorn Squid)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Ika Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sesami Chicken Wings)</item_detail>
+            <item_price>3.50</item_price>
+            <rdfs:label>Tori Teba Kosho</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Peppercorn King Prawns)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ebi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Served with Tempura Sauce)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Agedashi Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>BBQ Ribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.90</item_price>
+            <rdfs:label>Satay Chicken Skewers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Vegetables mini Rolls)</item_detail>
+            <item_price>2.90</item_price>
+            <rdfs:label>Yasai Harumaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken Dumplings)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Soup with Chicken Dumplings)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Gyoza in Soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Vegetables Dumplings)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>yasai Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Soup with Vegetables Dumplings)</item_detail>
+            <item_price>5.50</item_price>
+            <rdfs:label>Yasai Gyoza (Soup)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Steam Pak Choi with Oyster Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Fried Japanese Mushroom with Brocco</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Stir Fried Garlic with Beansprouts</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.90</item_price>
+            <rdfs:label>Stir Fried Mixed Vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Tofu In Hot Bean Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Tofu in Black Bean Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Steamed Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.50</item_price>
+            <rdfs:label>Plain Fried Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.50</item_price>
+            <rdfs:label>Soup with Udon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Plain Fried Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.90</item_price>
+            <rdfs:label>Soup with Ramen</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Fries</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.90</item_price>
+            <rdfs:label>Zen Mixed Seafood</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.50</item_price>
+            <rdfs:label>Japanese Green Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawn)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ebi Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Flying Fish Roe)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Tobiko Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Medium-Rare Beef)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Gyu Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken Cutlet)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Tori Salad</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(King Prawn, Scallops and Squid)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>Seafood Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(King Prawn)</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Ebi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Soft Shell Crab)</item_detail>
+            <item_price>8.90</item_price>
+            <rdfs:label>Cani Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Squid)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ika Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Mixed vegetables)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Yasi Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sweet Potato)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Satumaimo Tempura</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawns, Chicken, Beef, Lamb &#38; Mixed Vegetable - 2 Skewers Each)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Mixed Combination Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Prawns with Shell on)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ebi Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Scallops)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Hotate Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Squid)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Ika Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Yakitori Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Beef)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Gyu Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Lamb)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Lamu Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pork cutlet)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Ton Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Mixed Vegetables)</item_detail>
+            <item_price>4.50</item_price>
+            <rdfs:label>Yasi Yakimono</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken Cutlet, Pork Cutlet, King Prawn, Squid &#38; Potato Croquettes)</item_detail>
+            <item_price>19.90</item_price>
+            <rdfs:label>Katsu Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Chicken Cutlet)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Pork Cutlet)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ton Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Salmon)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sake Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Scallops)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Hotate Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Soft Shell Crab)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Cani Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(King Prawns)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Ebi Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Lamb)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Lumu Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Sirloin Beef)</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Gyu Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Squid)</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Ika Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(Potato Croquettes)</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Korokke Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(14 pieces)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>A) Deluxe Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(18 pieces)</item_detail>
+            <item_price>22.90</item_price>
+            <rdfs:label>B) Salmon Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(26 pieces)</item_detail>
+            <item_price>29.90</item_price>
+            <rdfs:label>C)  ZEN Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(36 pieces)</item_detail>
+            <item_price>34.90</item_price>
+            <rdfs:label>D) Sashimi &#38; Sushi Combinatio</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(18 pieces)</item_detail>
+            <item_price>14.90</item_price>
+            <rdfs:label>E) Vegetarian Combination</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>24.90</item_price>
+            <rdfs:label>Set Meal A</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>29.90</item_price>
+            <rdfs:label>Set Meal B</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>19.90</item_price>
+            <rdfs:label>Vegetarian Set Meal</rdfs:label>
+        </menu_item>
+        <rdfs:label>Zen Southampton</rdfs:label>
+    </Menu>
+
+    <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu3">
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.70</item_price>
+            <rdfs:label>Sushi Nigiri - Sake (Salmon)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.00</item_price>
+            <rdfs:label>Sushi Nigiri - Maguro (Tuna)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.20</item_price>
+            <rdfs:label>Sushi Nigiri - Ebi (Prawn)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.80</item_price>
+            <rdfs:label>Sushi Nigiri - Hamachi (Yellow Tail)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.80</item_price>
+            <rdfs:label>Sushi Nigiri - Unagi (Eel)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.80</item_price>
+            <rdfs:label>Sushi Nigiri - Tobiko (Flying Fish Roe)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.00</item_price>
+            <rdfs:label>Sushi Nigiri - Tamago (Omelette) V</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Nigiri - Inari (Tofu)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Sushi Spicy Gunkan - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.20</item_price>
+            <rdfs:label>Sushi Spicy Gunkan - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Temaki - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.70</item_price>
+            <rdfs:label>Sushi Temaki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.90</item_price>
+            <rdfs:label>Sushi Temaki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.50</item_price>
+            <rdfs:label>Sushi Temaki - Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sashimi - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>8.40</item_price>
+            <rdfs:label>Sashimi - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>9.00</item_price>
+            <rdfs:label>Sashimi - Hamachi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(16 pieces) 2 pieces each of salmon, ebi and tobiko nigiri, 4 pieces old town dragon roll, 6 pieces tuna maki</item_detail>
+            <item_price>12.90</item_price>
+            <rdfs:label>Old Town Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(14 pieces) 2 pieces each of salmon, tuna and ebi nigiri and 4 pieces each of California and inari and avocado maki</item_detail>
+            <item_price>10.90</item_price>
+            <rdfs:label>Sushi Combination - Chef Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(12 pieces) 2 pieces each of tamago and inari nigiri and 4 pieces each of inari and avocado maki, 6 pieces of cucumber maki</item_detail>
+            <item_price>7.20</item_price>
+            <rdfs:label>Sushi Combination - Vegetarian Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of battered chicken with cucumber and dressing of avocado with honey mustard sauce</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Old Town Tori Katsu Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of battered chicken with cucumber and avocado</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Tori Katsu Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of shredded lettuce and roasted duck</item_detail>
+            <item_price>5.70</item_price>
+            <rdfs:label>Duck Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of cucumber and avocado with dressing of salmon and tuna</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sushi Maki - Rainbow Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of cucumber and battered prawns with dressing of avocado</item_detail>
+            <item_price>6.90</item_price>
+            <rdfs:label>Sushi Maki - Old Town Dragon Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of cucumber and battered prawns with tobiko dressing</item_detail>
+            <item_price>6.20</item_price>
+            <rdfs:label>Sushi Maki - Dragon Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of cucmber, avocado, prawns and crabstick with tobiko dressing</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Sushi Maki - California</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>California roll wrapped in pancake and deeply fried</item_detail>
+            <item_price>6.20</item_price>
+            <rdfs:label>Sushi Maki - California Pancake Roll</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of soft shell crab and cucumber</item_detail>
+            <item_price>8.00</item_price>
+            <rdfs:label>Sushi Maki - Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of shredded cucumber and barbequed eel</item_detail>
+            <item_price>7.90</item_price>
+            <rdfs:label>Sushi Maki - Unagi</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of prawns, crabstick, cucumber, avocado and pickles</item_detail>
+            <item_price>5.40</item_price>
+            <rdfs:label>Sushi Maki - Futomaki</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of tofu, cucumber and avocado</item_detail>
+            <item_price>3.30</item_price>
+            <rdfs:label>V Sushi Maki - Inari and Avocado (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 pieces) Fillings of fresh salmon</item_detail>
+            <item_price>3.10</item_price>
+            <rdfs:label>Sushi Maki - Sake</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 pieces) Fillings of fresh tuna</item_detail>
+            <item_price>3.30</item_price>
+            <rdfs:label>Sushi Maki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 pieces) Fillings of cucumber and mayonnaise</item_detail>
+            <item_price>2.40</item_price>
+            <rdfs:label>Sushi Maki - Cucumber</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of tobiko, avocado &#38; deep fried salmon skin</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Sushi Maki - Crispy Salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of salmon with spicy sauce</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Spicy Sushi Maki - Salmon</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of tuna with spicy sauce</item_detail>
+            <item_price>3.40</item_price>
+            <rdfs:label>Spicy Sushi Maki - Tuna</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Fillings of tobiko, avocado &#38; deep fried salmon skin</item_detail>
+            <item_price>5.10</item_price>
+            <rdfs:label>Spicy Sushi Maki - Crispy salmon Skin</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.00</item_price>
+            <rdfs:label>Steamed Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.50</item_price>
+            <rdfs:label>Egg Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.20</item_price>
+            <rdfs:label>Chicken Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.20</item_price>
+            <rdfs:label>Roasted Pork Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.00</item_price>
+            <rdfs:label>King Prawns Fried Rice</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>3.00</item_price>
+            <rdfs:label>Plain Fried Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.40</item_price>
+            <rdfs:label>Chicken Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.40</item_price>
+            <rdfs:label>Roasted Pork Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Roasted Duck Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawn Noodles</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Roasted pork with gravy</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried sliced pork in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Pork in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried diced pork with soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>5.20</item_price>
+            <rdfs:label>Ma Po Tofu Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.20</item_price>
+            <rdfs:label>Kung Po Porrk</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Chicken curry with potatoes, onions and carrots</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Curry Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Crispy chicken in Japanese yakitori sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir frie chicken with spicy sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Spicy Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried sliced chicken in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Chicken in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried diced chicken with soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>5.30</item_price>
+            <rdfs:label>Ma  Po Tofu Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried prawns with spicy sauce</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Spicy Prawn</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pan fried prawns in soya sauce</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Pan fried prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried prawns with fine beans</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawns with fine beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried prawns in black pepper sauce with onions, green and red peppers</item_detail>
+            <item_price>5.90</item_price>
+            <rdfs:label>Prawns in Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried sliced beef with shredded coconut</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Rendang beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried sliced beef in black pepper sauce with onions and green and red peppers</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Beef in black pepper sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried diced beef with soft bean curd, green and red peppers in Szechuan ssauce</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Ma Po Tofu beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried seasonal vegetables</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Mixed vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stir fried fine beans with garlic</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Fine Beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Stewed potatoes with onions and carrots</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Curry Potatoes</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Soft bean curd, green and red peppers in Szechuan sauce</item_detail>
+            <item_price>4.30</item_price>
+            <rdfs:label>Ma Po Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pan fried eggs with shredded roasted pork</item_detail>
+            <item_price>4.70</item_price>
+            <rdfs:label>Fu Young - Roasted pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pan fried eggs with king prawns</item_detail>
+            <item_price>5.00</item_price>
+            <rdfs:label>Fu Young - King prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>Pan fried eggs with shredded onions</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Fu Young - Onions (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>6 pieces)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Chicken Wings in Honey Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>6 pieces)</item_detail>
+            <item_price>3.90</item_price>
+            <rdfs:label>Salt &#38; Pepper Chicken Wings</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 pieces) Japanese fried chicken</item_detail>
+            <item_price>4.90</item_price>
+            <rdfs:label>Tori Karage</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(6 pieces) Japanese chicken dumplings</item_detail>
+            <item_price>3.80</item_price>
+            <rdfs:label>Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(4 skewers))</item_detail>
+            <item_price>4.70</item_price>
+            <rdfs:label>Satay Chicken Skewers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(4 pieces)</item_detail>
+            <item_price>4.20</item_price>
+            <rdfs:label>Barbeque Spareribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>8.50</item_price>
+            <rdfs:label>Deep Fried Soft Shell Crab</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(8 pieces)</item_detail>
+            <item_price>1.90</item_price>
+            <rdfs:label>Vegetable Springrolls (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(3 pieces) Bread crumbed vegetable</item_detail>
+            <item_price>3.20</item_price>
+            <rdfs:label>Yasai Croquette (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.40</item_price>
+            <rdfs:label>Edamame (V)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.20</item_price>
+            <rdfs:label>Prawn Crackers</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(4 pieces) Contents of pork</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Siu Mai</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Chicken Bun</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(2 pieces)</item_detail>
+            <item_price>1.70</item_price>
+            <rdfs:label>Roasted Pork Bun</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>1.70</item_price>
+            <rdfs:label>Chips</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.80</item_price>
+            <rdfs:label>Noodle Soup - Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.80</item_price>
+            <rdfs:label>Noodle Soup - Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Noodle Soup - Roasted Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.70</item_price>
+            <rdfs:label>Noodle Soup - Gyoza</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>2.30</item_price>
+            <rdfs:label>Miso soup</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Roasted Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Tori Katsu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Curry Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Lunch Box - Roasted Duck</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Lunch Box - Roasted Duck &#38; Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(3 skewers)</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Satay Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Chicken with Black Pepper Sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>(4)</item_detail>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - BBQ spareribs</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Pork with Black Pepper Sauace</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Rendang Beef</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Beef in black pepper sauce</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Pan fried Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Prawns with fine Beans</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.60</item_price>
+            <rdfs:label>Lunch Box - Spicy Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.30</item_price>
+            <rdfs:label>Lunch Box - (V) Ma Po Tofu</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.10</item_price>
+            <rdfs:label>Lunch Box - Ma Po Tofu (Beef)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>4.60</item_price>
+            <rdfs:label>Lunch Box - Ma Po Tofu (Pork)</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>8.90</item_price>
+            <rdfs:label>Unagi Don</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.00</item_price>
+            <rdfs:label>Mee Goreng</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Nasi Goreng</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.50</item_price>
+            <rdfs:label>Nasi Lemak</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.50</item_price>
+            <rdfs:label>Oily Noodle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.50</item_price>
+            <rdfs:label>Ho Fun Flat Noodle</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Chicken with Chinese mushrooms</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Sambal Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.00</item_price>
+            <rdfs:label>Kai Lan Chinese Greens</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Choi Sum Chinese Greens</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.00</item_price>
+            <rdfs:label>Sambal Belacan Kang Kung</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.50</item_price>
+            <rdfs:label>Crackling Pork</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Quarter Grilled Salted Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>8.50</item_price>
+            <rdfs:label>Stir Fried Spicy Clams</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>6.50</item_price>
+            <rdfs:label>Pork with Preserved Vegetables</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Rendang Chicken</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Kung Po Prawns Malaysian Style</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.50</item_price>
+            <rdfs:label>Kung Po Chicken Malaysian Style</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_price>5.90</item_price>
+            <rdfs:label>Salt &#38; Pepper Prawns</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.</item_detail>
+            <item_price>12.80</item_price>
+            <rdfs:label>Old Town Set Combo</rdfs:label>
+        </menu_item>
+        <menu_item rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>
+            <item_detail>PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.</item_detail>
+            <item_price>15.00</item_price>
+            <rdfs:label>Old Town Starters &#38; Sushi Combinations</rdfs:label>
+        </menu_item>
+        <rdfs:label>Old Town Kitchen</rdfs:label>
+    </Menu>
+</rdf:RDF>
