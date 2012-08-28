@@ -28,7 +28,7 @@ define(['js/rdf/name-resolver','js/ops/rule-diffs', 'js/utils'], function(nameRe
 					});
 					return result;
 				}
-			},
+			}/*,
 			{
 				id:'geocode',
 				domain:[],
@@ -44,7 +44,7 @@ define(['js/rdf/name-resolver','js/ops/rule-diffs', 'js/utils'], function(nameRe
 					});
 					return;
 				}
-			}
+			}*/
 		]
 	};
 });

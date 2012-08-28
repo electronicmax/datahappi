@@ -37,24 +37,20 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
 				var rules = chainer.get_triggers(changed_props);
-				// console.log(" apply rules -- triggers ", rules.map(function(x) { return x.id; }));
-				// try each the rule
 				return rules.map(function(r) {
-//					try {
-						var result = r.fn(this_);
-						return result;
-//					} catch(e) {
-//						console.error(e);
-//					}
+					var result = r.fn(this_);
+					return result;
 				}).filter(function(x) { return !_(x).isUndefined() && x.getDiffs().length > 0; })
 					.map(function(diffset) {
-						// console.log('applying diffsets ', diffset);
 						return diffset.applyDiffs();
 					});
 			};
 			this.on("change", function(z,k) {
+				if (_.isUndefined(k) || _.isUndefined(k.changes) || _(k.changes).keys().length === 0) {
+					return; // we don't have any known changes; just terminate.
+				}
 				
-				apply_rules((!_.isUndefined(k) && !_.isUndefined(k.changes) && _(k.changes).keys()) || this_.attributes);
+				apply_rules(_(k.changes).keys());
 			});
 			// first apply to all thingies
 			apply_rules(this.keys());
