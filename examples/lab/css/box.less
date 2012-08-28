@@ -19,13 +19,15 @@
 	overflow-x:hidden;
 	overflow-y:hidden;
 	&.over { padding:20px;  }
-	&:hover .box-delete { display:block; }
+//	&:hover .box-delete { display:block; }
 	.box-delete {
 		z-index:10;
-		display:none;
-		position:absolute;
-		top:7px; right:10px;
-		font-size:1.2em;
+		display:block;
+		//position:absolute;
+		//top:7px; right:10px;
+		//font-size:1.2em;
+        float: right;
+        margin: 3px;
 	}       
 	.uplt, .uprt, .btlt, .btrt {
 		width:10px; height:10px;
@@ -82,13 +84,14 @@
 		}
 	}
 	.items {
-		position:absolute;
-		top:8px; left:12px; right:28px; bottom:68px;
+		//position:absolute;
+		//top:8px; left:12px; right:28px; bottom:68px;
 		//padding:0px 25px 0px 0px;
 		border-bottom:1px solid rgba(180,180,180,0.6);
 		overflow-x:hidden;
 		overflow-y:auto;
         width: 100%;
+        height: 290px;
 	}
 	/* properties */
 	.properties {
@@ -191,6 +194,9 @@
 
 .greybox {
    .box;
+   padding: 0px 0px 0px 0px;
+   border: 1px solid #E0E0E0;
+   border-radius: 5px 5px 0px 0px;
 }        
 .simple {
     font-size:8pt;
@@ -199,7 +205,10 @@
 }
 
 .titlebar {
-    cursor: pointer;
+    cursor: move;
+//    border-radius: 5px 5px 0px 0px;
+    padding: 5px;
+    background-color: #e0e0e0;
 }
 
 .box_container {

@@ -256,8 +256,6 @@ body .pathable-view {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0);
   padding: 5px;
-  width: 300px;
-  margin-right: 15px;
 }
 body .pathable-view .sameas-handle {
   padding: 0px 6px 0px 0px;

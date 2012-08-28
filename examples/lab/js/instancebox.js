@@ -8,7 +8,8 @@ define(
 		'js/utils'
 	],
 	function(box, propbox, pathables, view, histogram, utils) {
-		var template = '<div class="box-delete icon-cancel"></div><div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar">Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
+		//var template = '<div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
+		var template = '<div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
 		var defined = utils.DEFINED;
 		var InstanceBox = box.BoxView.extend({
