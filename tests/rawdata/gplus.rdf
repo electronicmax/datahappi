@@ -1,0 +1,34 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/gplus.n3-->
+
+
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:chi="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#Friend">
+        <label>Google+ Friend</label>
+    </rdf:Description>
+
+    <chi:Friend rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#gpf1">
+        <label>Earlene Millett</label>
+    </chi:Friend>
+
+    <chi:Friend rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#gpf2">
+        <label>Dollie Baltzell</label>
+    </chi:Friend>
+
+    <chi:Friend rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#gpf3">
+        <label>Mallory Standard</label>
+    </chi:Friend>
+
+    <chi:Friend rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#gpf4">
+        <label>Penelope Barks</label>
+    </chi:Friend>
+
+    <chi:Friend rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#gpf5">
+        <label>Clare Occhipinti</label>
+    </chi:Friend>
+</rdf:RDF>

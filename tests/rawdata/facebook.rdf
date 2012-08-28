@@ -1,0 +1,50 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/facebook.n3-->
+
+
+<rdf:RDF xmlns="http://hip.cat/ont#"
+    xmlns:myd="http://hip.cat/mydata#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://hip.cat/mydata#Person">
+        <rdfs:label>Person</rdfs:label>
+    </rdf:Description>
+
+    <myd:Person rdf:about="http://hip.cat/mydata#alice">
+        <age>21</age>
+        <friends rdf:resource="http://hip.cat/mydata#charlie"/>
+        <home rdf:resource="http://hip.cat/mydata#aliceaddress"/>
+        <phone>075372982938</phone>
+        <rdfs:label>Alice Smith</rdfs:label>
+    </myd:Person>
+
+    <rdf:Description rdf:about="http://hip.cat/mydata#aliceaddress">
+        <address>29 Oxford St, Southampton SO16 7VJ</address>
+        <lat>31.466114</lat>
+        <long>34.484749</long>
+    </rdf:Description>
+
+    <myd:Person rdf:about="http://hip.cat/mydata#bob">
+        <age>29</age>
+        <home rdf:resource="http://hip.cat/mydata#bobaddress"/>
+        <phone>617-992-8822</phone>
+        <rdfs:label>Bob Jones</rdfs:label>
+    </myd:Person>
+
+    <rdf:Description rdf:about="http://hip.cat/mydata#bobaddress">
+        <address>10 Downing Street, Westminster SW1A 2AA</address>
+        <lat>51.5033</lat>
+        <long>0.127640</long>
+    </rdf:Description>
+
+    <myd:Person rdf:about="http://hip.cat/mydata#charlie">
+        <age>32</age>
+        <friends rdf:resource="http://hip.cat/mydata#alice"/>
+        <friends rdf:resource="http://hip.cat/mydata#bob"/>
+        <phone>074827382981</phone>
+        <street_address>32 University Road, Southampton SO17 1BJ</street_address>
+        <rdfs:label>Charlie Hancock</rdfs:label>
+    </myd:Person>
+</rdf:RDF>

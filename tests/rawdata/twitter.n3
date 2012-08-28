@@ -1,0 +1,32 @@
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:Contact rdfs:label "Twitter Contact" .
+
+:c1 a :Contact ;
+    rdfs:label """Darren Sconyers""" ;
+    :twitter "@dsconyers" .
+
+:c2 a :Contact ;
+    rdfs:label """Max Trafton""" ;
+    :twitter "@the_trafton" .
+
+:c3 a :Contact ;
+    rdfs:label """Kelly Maust""" ;
+    :twitter "@maust1982" .
+
+:c4 a :Contact ;
+    rdfs:label """Clinton Mcmath""" ;
+    :twitter "@clintclintclint" .
+
+:c5 a :Contact ;
+    rdfs:label """Allan Parikh""" ;
+    :twitter "@a_parikh" .
+
+
+
+
+

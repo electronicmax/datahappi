@@ -1,0 +1,35 @@
+@prefix : <http://hip.cat/ont#> .
+@prefix myd: <http://hip.cat/mydata#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+myd:Person rdfs:label "Person" .
+
+myd:alice     a myd:Person;
+     :age "21";
+     :friends myd:charlie;
+     :home myd:aliceaddress;
+     :phone "075372982938";
+     rdfs:label "Alice Smith" .
+
+myd:aliceaddress     :address "29 Oxford St, Southampton SO16 7VJ";
+     :lat "31.466114";
+     :long "34.484749" .
+
+myd:bob     a myd:Person;
+     :age "29";
+     :home myd:bobaddress;
+     :phone "617-992-8822";
+     rdfs:label "Bob Jones" .
+
+myd:bobaddress     :address "10 Downing Street, Westminster SW1A 2AA";
+     :lat "51.5033";
+     :long "0.127640" .
+
+myd:charlie     a myd:Person;
+     :age "32";
+     :friends myd:alice,
+            myd:bob;
+     :phone "074827382981";
+     :street_address "32 University Road, Southampton SO17 1BJ";
+     rdfs:label "Charlie Hancock" .
+

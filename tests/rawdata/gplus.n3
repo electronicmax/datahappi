@@ -1,0 +1,27 @@
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-gplus#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:Friend rdfs:label "Google+ Friend" .
+
+:gpf1 a :Friend ;
+    rdfs:label """Earlene Millett""" .
+
+:gpf2 a :Friend ;
+    rdfs:label """Dollie Baltzell""" .
+
+:gpf3 a :Friend ;
+    rdfs:label """Mallory Standard""" .
+
+:gpf4 a :Friend ;
+    rdfs:label """Penelope Barks""" .
+
+:gpf5 a :Friend ;
+    rdfs:label """Clare Occhipinti""" .
+
+
+
+
+
