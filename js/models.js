@@ -36,6 +36,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			if (chainer === undefined) {chainer = new rh.RuleHelper({ruleset:options && options.inference_ruleset});	}
 			var this_ = this;			
 			var apply_rules = function(changed_props) {
+				// console.log("applying rules ", this_.id, " >> ", changed_props);
+				// try { throw new Error('stack'); } catch(e) { console.error(e); }
 				var rules = chainer.get_triggers(changed_props);
 				return rules.map(function(r) {
 					var result = r.fn(this_);
@@ -48,10 +50,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.on("change", function(z,k) {
 				if (_.isUndefined(k) || _.isUndefined(k.changes) || _(k.changes).keys().length === 0) {
 					return; // we don't have any known changes; just terminate.
-				}				
+				}
+				// console.log("change on ", this_.id, z, _(k.changes).keys(), 'applying rules!');
 				apply_rules(_(k.changes).keys());
 			});
 			// first apply to all thingies
+			// console.log("FIRST APPLY RULE ", this_.id);
 			apply_rules(this.keys());
 			return this;
 		},
@@ -117,14 +121,14 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		_make_changelist : function(props) {
 			// creates strange dictionary property to conform to Backbone
 			var changelist = {};
-			_(props).keys().map(function(k) { changelist[k] = true; });
+			_(props).map(function(k) { changelist[k] = true; });
 			return { changes: changelist, source: this };
 		},
 		_trigger_change:function(changed_props) {
 			var this_ = this;
 			var changelist = this._make_changelist(changed_props);
 			if (changed_props.length > 0) {
-				this.trigger('change', this, { changes : changelist });
+				this.trigger('change', this, changelist );
 				changed_props.map(function(k) {
 					this_.trigger('change:' + k, this, changelist);
 				});
@@ -141,7 +145,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.set(sets);
 			return this;
 		},
-		setEntailed:function(props,rule,replace) {
+		setEntailed:function(props,rule,replace,options) {
 			var this_ = this;
 			// if replace then we're just performing a regular set
 			if (replace) {
@@ -164,7 +168,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				this_.entailed[p] = this_.entailed[p] || {};
 				this_.entailed[p][rule.id] = v;
 			});
-			this._trigger_change(_(changed).keys());
+			if (!options || !options.silent) { this._trigger_change(_(changed).keys()); }
 			return this;
 		},
 		setSameAs:function(m) {

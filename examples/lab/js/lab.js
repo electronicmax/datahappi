@@ -83,6 +83,7 @@ define([
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
 			$.when(
 				// add moar sources here
+				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peep.rdf'].join('/'), "Test dude")
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','weather.rdf'].join('/'), "Weather Data"),
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','facebook.rdf'].join('/'), "Facebook Friends"),
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','twitter.rdf'].join('/'), "Twitter Contacts"),
