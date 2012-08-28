@@ -1,6 +1,6 @@
 @boxminwidth : 240px;
 @boxwidth : 340px;
-//@boxheight : 360px;
+@boxheight : 250px;
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
@@ -14,7 +14,7 @@
 	min-width:@boxminwidth;
 	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
-//	height:@boxheight;
+	height:@boxheight;
 	max-height:500px;
 	overflow-x:hidden;
 	overflow-y:hidden;
@@ -85,35 +85,21 @@
 		}
 	}
 	.items {
-		//position:absolute;
-		//top:8px; left:12px; right:28px; bottom:68px;
-		//padding:0px 25px 0px 0px;
-		border-bottom:1px solid rgba(180,180,180,0.6);
+		position:absolute;
+		// width: 100%;		
+		top:0px; left:0px; right:0px; bottom:68px;
 		overflow-x:hidden;
 		overflow-y:auto;
-        width: 100%;
-        height: 290px;
 	}
 	/* properties */
 	.properties {
-		position: relative;	
+		position: absolute;	
 		z-index:3;
-//		left:12px; right:12px; bottom:0px; height:68px;
-        height: 68px;
+		left:0px; right:0px; height:68px; bottom:0px;
 		overflow:auto;
-		vertical-align:top;		
-		/*				
-		border-top:1px solid #eee;
-		border-bottom:1px solid #eee;
-		border-right:1px solid #eee;
-		border-left:1px solid rgba(255,255,255,0.8);
-		padding:0px 2px 0px 7px;
-		border-radius:5px;
-		left:100%;
-		top:14px;
-		bottom:14px; 
-		width:200px;
-		*/
+		vertical-align:top;
+		// border-top:1px solid rgba(200,200,200,0.11);
+		background-color:rgba(200,200,200,0.11);
 		.propitems {
 			display:inline-block;
 			margin:0px !important; padding:0px !important;
@@ -123,7 +109,6 @@
 				border-bottom:1px solid #eee;
 				margin:0px !important;
 				padding:0px !important;
-				background-color:#fff;
 				padding:0px; 
 				position:relative;
 				.steps {

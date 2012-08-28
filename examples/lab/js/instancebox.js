@@ -33,7 +33,10 @@ define(
 				if (this.$el.html().length === 0) {
 					this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 					// dragging the box
-					this.$el.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	});
+					this.$el
+						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
+						.resizable({});					
+			
 					this.views_collection
 						.on('brush', function(model) {
 							model = _(model).isArray() ? model : [model];
