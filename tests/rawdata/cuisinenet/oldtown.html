@@ -1,0 +1,832 @@
+
+<html>
+<head>
+<title>menuitems</title>
+<base target="rbottom">
+<style TYPE="text/css">
+<!--
+	A:link {color:"#0000CC";}
+	A:visited {color:"#CC00CC";}
+	A:hover {color:"red";}
+	-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="0" marginheight="0" marginwidth="0" scroll="yes">
+
+<font size="2" face="Arial, Helvetica, sans-serif">
+
+<script language="JavaScript"><!--
+// If Setmeal Selected
+function O1(ID, MenuItemGroupID, name, RadioButton, CheckBox, MenuItemGlobalDisplayOrder, MenuItemGroupDisplayOrder, SetMealCode)
+{
+	var StoredData = "" + ID
+	var space = '        '
+	// IDExtras is the ID number stored with every radio button and choice box padded to 8 wide
+	var IDExtras = ID
+	if (IDExtras.length < 8)
+	{
+		IDExtras += space.substring(0,8 - IDExtras.length)
+	}
+	if (MenuItemGlobalDisplayOrder.length < 3)
+	{
+		MenuItemGlobalDisplayOrder += space.substring(0, 3 - MenuItemGlobalDisplayOrder.length)
+	}
+	if (MenuItemGroupDisplayOrder.length < 3)
+	{
+		MenuItemGroupDisplayOrder += space.substring(0, 3 -MenuItemGroupDisplayOrder.length)
+	}
+	if (StoredData.length < 8)
+	{
+		StoredData += space.substring(0,8 - StoredData.length)
+	}
+	if (MenuItemGroupID.length < 8)
+	{
+		MenuItemGroupID += space.substring(0,8 - MenuItemGroupID.length)
+	}
+	StoredData += MenuItemGroupID
+	StoredData += MenuItemGroupDisplayOrder
+	StoredData += MenuItemGlobalDisplayOrder
+	// If a Radio Button was present then check that it has been selected
+	if (RadioButton != '') 
+	{
+		SelectedRadioButton = RadioButtonStatus(RadioButton)
+		if (SelectedRadioButton =='')
+		{
+			alert('Please choose one of the options for this dish - to your right. \n Then click on the dish name')
+			return
+		}
+		name = name +  '^' + SelectedRadioButton
+		StoredData = StoredData + RadioButtonData(RadioButton) + IDExtras
+	}
+	// If a Checkbox is present then add on the selected values
+	if (CheckBox)
+	{
+		if (ValidateCheckBoxChoices(ID) == false)
+		{
+			return
+		}
+		name = name + '^' + CheckBoxValues(ID)
+		StoredData = StoredData + CheckBoxData(ID)
+	}
+	// Now scan through looking for other elements of the SetMeal using SetMealCode
+	// Scan looking for SetMealCode then remember the found ItemID
+	// Validate the ItemID and add to the order if OK
+	// If the found item was a Check Box continue by looking for a Radio Button for
+	// the same ItemID or for the next item that has a different ItemID
+	// Have to send the start position for the search as well
+	var LastItemType = ''
+	var LastItemID = 0
+	var FoundIDcode = ''
+	var LastSearchStart = 0
+	var find_inData = 0
+	var loopOnData = true
+	var RadioButtonToCheck = ''
+	while (loopOnData)
+	{
+		FoundIDcode = SetMealFindCheckBoxOrRadioButton(LastItemID,LastItemType,SetMealCode, LastSearchStart)
+		if (FoundIDcode != '')
+		{
+			LastItemType = FoundIDcode.charAt(0)
+			find_inData = FoundIDcode.indexOf('_')
+			LastSearchStart = FoundIDcode.substring(find_inData + 1)
+			LastItemID = FoundIDcode.substring(1, find_inData)
+			IDExtras = LastItemID
+			if (IDExtras.length < 8)
+			{
+				IDExtras += space.substring(0,8 - IDExtras.length)
+			}
+			// Now validate the found radio button or checkboxes
+			if (LastItemType == 'R') 
+			{
+				RadioButtonToCheck = 'R' + LastItemID + '_' + SetMealCode
+				SelectedRadioButton = RadioButtonStatusByName(RadioButtonToCheck)
+				if (SelectedRadioButton == '')
+				{
+					alert('Please choose from ALL of the options for this dish - to your right. \n Then click on the dish name')
+					return
+				}
+				name = name +  '^' + SelectedRadioButton
+				StoredData = StoredData + RadioButtonDataByName(RadioButtonToCheck) + IDExtras
+			}
+			if (LastItemType == 'C') 
+			{
+				if (ValidateCheckBoxChoices(LastItemID) == false)
+				{
+					return
+				}
+				if (CheckBoxValues(LastItemID) != '')
+				{
+					name = name + '^' + CheckBoxValues(LastItemID)
+					StoredData = StoredData + CheckBoxData(LastItemID)
+				}
+			}
+		}
+		else
+		{
+			loopOnData = false
+		}
+	}
+	order(ID, name, StoredData)
+}
+// If Non Setmeal Selected
+function O2(ID, MenuItemGroupID, name, RadioButton, CheckBox, MenuItemGlobalDisplayOrder, MenuItemGroupDisplayOrder)
+{
+	var StoredData = "" + ID
+	var space = '        '
+	var IDExtras = ID
+	if (IDExtras.length < 8)
+	{
+		IDExtras += space.substring(0,8 - IDExtras.length)
+	}
+	if (MenuItemGlobalDisplayOrder.length < 3)
+	{
+		MenuItemGlobalDisplayOrder += space.substring(0, 3 - MenuItemGlobalDisplayOrder.length)
+	}
+	if (MenuItemGroupDisplayOrder.length < 3)
+	{
+		MenuItemGroupDisplayOrder += space.substring(0, 3 -MenuItemGroupDisplayOrder.length)
+	}
+	if (StoredData.length < 8)
+	{
+		StoredData += space.substring(0,8 - StoredData.length)
+	}
+	if (MenuItemGroupID.length < 8)
+	{
+		MenuItemGroupID += space.substring(0,8 - MenuItemGroupID.length)
+	}
+	StoredData += MenuItemGroupID
+	StoredData += MenuItemGroupDisplayOrder
+	StoredData += MenuItemGlobalDisplayOrder
+	// If a Radio Button was present then check that it has been selected
+	if (RadioButton != '') 
+	{
+		SelectedRadioButton = RadioButtonStatus(RadioButton)
+		if (SelectedRadioButton =='')
+		{
+			alert('Please choose one of the options for this dish - to your right. \n Then click on the dish name')
+			return
+		}
+		name = name +  '^' + SelectedRadioButton
+		StoredData = StoredData + RadioButtonData(RadioButton) + IDExtras
+	}
+	// If a Checkbox is present then add on the selected values
+	if (CheckBox)
+	{
+		if (ValidateCheckBoxChoices(ID) == false)
+		{
+			return
+		}
+		name = name + '^' + CheckBoxValues(ID)
+		StoredData = StoredData + CheckBoxData(ID)
+	}
+	order(ID, name, StoredData)
+}
+function order(ID, name, StoredData)
+{
+	// trim the name
+	var nl = 700
+ 	var l = name.length
+	if (l > nl)
+	{
+  		name=name.substring(0,nl)
+	}
+	parent.rbottom.additem(name, StoredData)
+}
+function RadioButtonStatus(R)
+{
+	// The passed parameter R points to a Radio Button Object
+	var RadioButtonValue=''
+	var NumRadioButtons = R.length
+	for (i = 0; i < NumRadioButtons; i++)
+	{
+		if (R[i].checked == true)
+		{
+		    RadioButtonValue = R[i].value
+			i = NumRadioButtons
+		}
+	} 
+	return RadioButtonValue
+}
+function RadioButtonStatusByName(R)
+{
+	// The passed parameter R is the name of a Radio Button
+	var len = document.TopOrderForm.elements.length	
+	var i = 0
+	for (i = 0; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (compareStrings(n,R))
+		{
+			if (obj.checked == true)
+			{
+				return obj.value
+			}
+		}     
+	}
+	return ''
+}
+function RadioButtonData(R)
+{
+	var RadioButtonValue=''
+	var NumRadioButtons = R.length
+	for (i = 0; i < NumRadioButtons; i++)
+	{
+		if (R[i].checked == true)
+		{
+		    RadioButtonValue = 'R' + i
+			i = NumRadioButtons
+		}
+	} 
+	var space = '   '
+	if (RadioButtonValue.length < 3)
+	{
+		RadioButtonValue += space.substring(0,3 - RadioButtonValue.length)
+	}
+	return RadioButtonValue
+}
+function RadioButtonDataByName(R)
+{
+	// The passed parameter R points to a Radio Button Name
+	var RadioButtonValue=''
+	var len = document.TopOrderForm.elements.length	
+	var i2 = 0
+	var i = 0
+	for (i = 0; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (compareStrings(n,R))
+		{	
+			if (obj.checked == true)
+			{
+			    RadioButtonValue = 'R' + i2
+				i = 99999
+			}
+			i2++
+		}     
+	}
+	var space = '   '
+	if (RadioButtonValue.length < 3)
+	{
+		RadioButtonValue += space.substring(0,3 - RadioButtonValue.length)
+	}
+	return RadioButtonValue
+}
+// SetMeals search for a checkbox or Radio Button with the supplied #code
+// And if so return the ID and the type by putting R or C in front of the returned ID
+// Then an _ and the value of i at the time the search worked
+// eg: R1234 would mean that ID 1234 has a Radio Button that is part of the SetMeal
+// The LastItemID is the last ID found
+// The LastTypeFound is R or C
+// The SetMealCode is the #code
+// The LastSearchStart is the value of i when the search last stopped
+function SetMealFindCheckBoxOrRadioButton(LastItemID,LastTypeFound,SetMealCode, LastSearchStart)
+{	
+	var ChosenOptions=''
+	var i = 0
+	var ID = 0
+	var type = ''
+	var lasti = 0
+	len = document.TopOrderForm.elements.length	
+	for (i = LastSearchStart; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (n.indexOf('#') >= 0 )
+		{
+			// start of a #code found
+			if (compareStrings(n.substring(n.indexOf('#')), SetMealCode))
+			{
+				ID = n.substring(1,n.indexOf('_'))
+				type = n.charAt(0)
+				if (type != LastTypeFound || ID != LastItemID)
+				{
+					lasti = i
+					i = 99999
+				}
+				else
+				{
+					ID = 0
+				}
+			}
+		}     
+	}
+	if (ID != 0)
+	{
+		return type + ID + '_' + lasti
+	}
+	return ''
+}
+// Compare 2 strings, if equal return true
+function compareStrings(s1, s2)
+{
+	var i = 0
+	if (s1.length != s2.length)
+	{
+		return false
+	}
+	var len = s1.length
+	for (i = 0; i < len; i++)
+	{
+		if (s1.charAt(i) != s2.charAt(i))
+		{
+			return false
+		}
+	}
+	return true
+}
+// Check to see if a CheckBox has been selected
+// And if so return a string of selected item values separated by commas
+// Look in the extras array to see how many check boxes are required for the ItemNum
+function CheckBoxValues(ItemNum)
+{	
+	var ChosenOptions=''
+	len = document.TopOrderForm.elements.length	
+	for (i = 0; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (compareStrings(n.substring(0, n.indexOf('_')), 'C' + ItemNum))
+		{
+			if (obj.checked == true)
+			{
+				ChosenOptions += obj.value + '^'
+			}
+		}     
+	}
+	// Remove the trailing ^ ,
+	if (ChosenOptions.length > 1)
+	{
+		ChosenOptions = ChosenOptions.substring(0,ChosenOptions.length-1)
+	}
+	return ChosenOptions
+}
+function ValidateCheckBoxChoices(ItemNum)
+{	
+	ValidCheckBoxChoices = true
+	var nCheckChoices2
+	var HowMany = 0
+	len = document.TopOrderForm.elements.length	
+	for (i = 0; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (compareStrings(n.substring(0,n.indexOf('_')), 'C' + ItemNum))
+		{
+			ni2 = 	n.indexOf('-')
+			ni3 = 	n.indexOf('#')
+			if ( ni2 > 0)
+			{
+				if (ni3 > 0)
+				{
+					nCheckChoices2 = n.substring(ni2 + 1, ni3)
+				}
+				else
+				{
+					nCheckChoices2 = n.substring(ni2 + 1)
+				}
+			}			
+			if (obj.checked == true)
+			{
+				HowMany++
+			}
+		}     
+	}
+	if (HowMany != nCheckChoices2 && nCheckChoices2 != 0)
+	{
+		alert('Please check ' + nCheckChoices2 + ' Options for this dish - to your right. \n Then click on the dish name')
+		ValidCheckBoxChoices = false
+	}
+	return ValidCheckBoxChoices
+}
+// Check to see if a CheckBox has been selected
+// And if so return a string of fixed length data (3 wide) Cxx where xx = a number
+function CheckBoxData(ItemNum)
+{	
+	var space = '        '
+	var IDExtras = ItemNum
+	if (IDExtras.length < 8)
+	{
+		IDExtras += space.substring(0,8 - IDExtras.length)
+	}
+	var ChosenOptions=''
+	var temp = ''
+	len = document.TopOrderForm.elements.length	
+	for (i = 0; i < len; i++)
+	{
+		obj = document.TopOrderForm.elements[i]
+		n = obj.name
+		if (compareStrings(n.substring(0,n.indexOf('_')), 'C' + ItemNum))
+		{
+		if (obj.checked==true)
+			{
+				ni = n.indexOf('_')
+				ni2 = 	n.indexOf('-')
+				if ( ni2 > 0)
+				{
+					temp = n.substring(ni + 1, ni2)
+				}
+				else
+				{
+					temp = n.substring(ni + 1, n.length)
+				}
+				if (temp.length < 2)
+				{
+					temp += ' '
+				}
+				ChosenOptions += 'C' + temp + IDExtras
+			}
+		}     
+	}
+	return ChosenOptions
+}
+// --></script>
+
+<script language="JavaScript"><!--
+// Open a new window with info
+function DisplayInfoWindow(URL, WIndowName, sizes) 
+{ 
+	thiswindow=window.open(URL, WIndowName, sizes);
+	var dummy=thiswindow.name;
+	thiswindow.focus();
+}
+// --></script>
+<table width="100%" border="0" align="center" bgcolor="#FFCC99">
+<tr align="center">
+<td height="55">
+<!---------- display restaurant Name and Address ------------>
+	<font size="3"><b>Old Town Kitchen</b> </font> - 121 East Street Southampton Hampshire SO14 3HD
+<table width="100%" border="0" cellpadding="0" bgcolor="#FFCC33" cellspacing="0"><tr><td>
+<table width="100%" border="0" cellspacing="1" cellpadding="0"><tr bgcolor="#FFFFCC">
+<td height="3" colspan="7"><b>
+<font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+ Takeaway Opening Hours
+&nbsp;(Last Takeaway Orders&nbsp;30&nbsp;mins before closing time)
+</font></b></td></tr>
+<tr bgcolor="#FFFFCC"><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Sun</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Mon</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Tue</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Wed</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Thu</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Fri</font></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif" size="1">Sat</font></td></tr><tr bgcolor="#FFFFCC"><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">Closed<br></font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td><td align="center" width="10%"><font face="Arial, Helvetica, sans-serif"><b><font size="1">11:00<br>22:00</font></b></td></tr></table></td></tr></table><font size="1" face="Arial, Helvetica, sans-serif"></font>
+<font size="1" face="Arial, Helvetica, sans-serif"><br>
+      <FONT COLOR="#ff0000"><font size=2>PLEASE NOTE: LUNCH BOX SELECTIONS ARE ONLY AVAILABLE BETWEEN 11:00 and 18:00<br>Free Delivery within 3 miles on orders over £15 (Minimum delivery order £10 plus delivery charge of £1)</font color></font>
+</td></tr>
+
+<tr><td><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>TAKEAWAY - Please click on the menu items to choose your Takeaway Meal</b></font></td></tr>
+</table><form action="../toplist.dummy" method="get" name="TopOrderForm">
+<p> <font face="Arial" color="#FF0080"><strong><a name="TakeawaySushi">Sushi</a></strong></font><br><strong><font face="Arial" color="#FF0000"><a name="TakeawaySushi+Nigiri">Sushi Nigiri</a></font></strong>
+ <font color="#0000FF"><br>
+(3 pieces) Seafood or Vegetables on a bed of rice  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146962' ,'14156', 'Sushi Nigiri - Sake (Salmon) [Starter]','', false, '0', '1')" target="_self"><big>Sushi Nigiri - Sake (Salmon)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146963' ,'14156', 'Sushi Nigiri - Maguro (Tuna) [Starter]','', false, '1', '1')" target="_self"><big>Sushi Nigiri - Maguro (Tuna)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146964' ,'14156', 'Sushi Nigiri - Ebi (Prawn) [Starter]','', false, '2', '1')" target="_self"><big>Sushi Nigiri - Ebi (Prawn)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146965' ,'14156', 'Sushi Nigiri - Hamachi (Yellow Tail) [Starter]','', false, '3', '1')" target="_self"><big>Sushi Nigiri - Hamachi (Yellow Tail)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146966' ,'14156', 'Sushi Nigiri - Unagi (Eel) [Starter]','', false, '4', '1')" target="_self"><big>Sushi Nigiri - Unagi (Eel)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146967' ,'14156', 'Sushi Nigiri - Tobiko (Flying Fish Roe) [Starter]','', false, '5', '1')" target="_self"><big>Sushi Nigiri - Tobiko (Flying Fish Roe)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146968' ,'14156', 'Sushi Nigiri - Tamago (Omelette) V [Starter]','', false, '6', '1')" target="_self"><big>Sushi Nigiri - Tamago (Omelette) V</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146969' ,'14156', 'Sushi Nigiri - Inari (Tofu) [Starter]','', false, '7', '1')" target="_self"><big>Sushi Nigiri - Inari (Tofu)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.40</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySushi+Spicy+Gunkan">Sushi Spicy Gunkan</a></font></strong>
+ <font color="#0000FF"><br>
+(3 pieces) Fillings on a bed of rice clad in seaweed with spicy sauce  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146970' ,'14157', 'Sushi Spicy Gunkan - Salmon','', false, '8', '2')" target="_self"><big>Sushi Spicy Gunkan - Salmon</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146971' ,'14157', 'Sushi Spicy Gunkan - Tuna','', false, '9', '2')" target="_self"><big>Sushi Spicy Gunkan - Tuna</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146972' ,'14157', 'Crispy Salmon Skin','', false, '10', '2')" target="_self"><big>Crispy Salmon Skin</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.50</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySushi+Temaki">Sushi Temaki</a></font></strong>
+ <font color="#0000FF"><br>
+(1 piece) Hand rolled to cone shape  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146973' ,'14158', 'Sushi Temaki - Salmon','', false, '11', '3')" target="_self"><big>Sushi Temaki - Salmon</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146974' ,'14158', 'Sushi Temaki - Tuna','', false, '12', '3')" target="_self"><big>Sushi Temaki - Tuna</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146975' ,'14158', 'Sushi Temaki - California','', false, '13', '3')" target="_self"><big>Sushi Temaki - California</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146976' ,'14158', 'Sushi Temaki - Crispy Salmon Skin','', false, '14', '3')" target="_self"><big>Sushi Temaki - Crispy Salmon Skin</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.50</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySashimi">Sashimi</a></font></strong>
+ <font color="#0000FF"><br>
+(8 pieces) Sliced raw fish  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146977' ,'14159', 'Sashimi - Salmon','', false, '15', '4')" target="_self"><big>Sashimi - Salmon</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146978' ,'14159', 'Sashimi - Tuna','', false, '16', '4')" target="_self"><big>Sashimi - Tuna</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£8.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146979' ,'14159', 'Sashimi - Hamachi','', false, '17', '4')" target="_self"><big>Sashimi - Hamachi</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£9.00</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySushi+Combination">Sushi Combination</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146980' ,'14160', 'Old Town Combo','', false, '18', '5')" target="_self"><big>Old Town Combo</big></a>&nbsp;(16 pieces) 2 pieces each of salmon, ebi and tobiko nigiri, 4 pieces old town dragon roll, 6 pieces tuna maki<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£12.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146981' ,'14160', 'Sushi Combination - Chef Combo','', false, '19', '5')" target="_self"><big>Sushi Combination - Chef Combo</big></a>&nbsp;(14 pieces) 2 pieces each of salmon, tuna and ebi nigiri and 4 pieces each of California and inari and avocado maki<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£10.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146982' ,'14160', 'Sushi Combination - Vegetarian Combo','', false, '20', '5')" target="_self"><big>Sushi Combination - Vegetarian Combo</big></a>&nbsp;(12 pieces) 2 pieces each of tamago and inari nigiri and 4 pieces each of inari and avocado maki, 6 pieces of cucumber maki<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£7.20</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayCooked+Meat+Sushi">Cooked Meat Sushi</a></font></strong>
+ <font color="#0000FF"><br>
+(8 pieces)  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146984' ,'14161', 'Old Town Tori Katsu Roll','', false, '21', '6')" target="_self"><big>Old Town Tori Katsu Roll</big></a>&nbsp;Fillings of battered chicken with cucumber and dressing of avocado with honey mustard sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146983' ,'14161', 'Tori Katsu Roll','', false, '22', '6')" target="_self"><big>Tori Katsu Roll</big></a>&nbsp;Fillings of battered chicken with cucumber and avocado<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146985' ,'14161', 'Duck Roll','', false, '23', '6')" target="_self"><big>Duck Roll</big></a>&nbsp;Fillings of shredded lettuce and roasted duck<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.70</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySushi+Maki">Sushi Maki</a></font></strong>
+ <font color="#0000FF"><br>
+(8 pieces unless stated) Fillings in rice clad with seaweed  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146987' ,'14162', 'Sushi Maki - Rainbow Roll','', false, '24', '7')" target="_self"><big>Sushi Maki - Rainbow Roll</big></a>&nbsp;Fillings of cucumber and avocado with dressing of salmon and tuna<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146988' ,'14162', 'Sushi Maki - Old Town Dragon Roll','', false, '25', '7')" target="_self"><big>Sushi Maki - Old Town Dragon Roll</big></a>&nbsp;Fillings of cucumber and battered prawns with dressing of avocado<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146989' ,'14162', 'Sushi Maki - Dragon Roll','', false, '26', '7')" target="_self"><big>Sushi Maki - Dragon Roll</big></a>&nbsp;Fillings of cucumber and battered prawns with tobiko dressing<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146990' ,'14162', 'Sushi Maki - California','', false, '27', '7')" target="_self"><big>Sushi Maki - California</big></a>&nbsp;Fillings of cucmber, avocado, prawns and crabstick with tobiko dressing<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146991' ,'14162', 'Sushi Maki - California Pancake Roll','', false, '28', '7')" target="_self"><big>Sushi Maki - California Pancake Roll</big></a>&nbsp;California roll wrapped in pancake and deeply fried<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146992' ,'14162', 'Sushi Maki - Soft Shell Crab','', false, '29', '7')" target="_self"><big>Sushi Maki - Soft Shell Crab</big></a>&nbsp;Fillings of soft shell crab and cucumber<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£8.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146993' ,'14162', 'Sushi Maki - Unagi','', false, '30', '7')" target="_self"><big>Sushi Maki - Unagi</big></a>&nbsp;Fillings of shredded cucumber and barbequed eel<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£7.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146994' ,'14162', 'Sushi Maki - Futomaki','', false, '31', '7')" target="_self"><big>Sushi Maki - Futomaki</big></a>&nbsp;Fillings of prawns, crabstick, cucumber, avocado and pickles<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146995' ,'14162', 'V Sushi Maki - Inari and Avocado (V)','', false, '32', '7')" target="_self"><big>V Sushi Maki - Inari and Avocado (V)</big></a>&nbsp;Fillings of tofu, cucumber and avocado<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146996' ,'14162', 'Sushi Maki - Sake','', false, '33', '7')" target="_self"><big>Sushi Maki - Sake</big></a>&nbsp;(6 pieces) Fillings of fresh salmon<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.10</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146997' ,'14162', 'Sushi Maki - Tuna','', false, '34', '7')" target="_self"><big>Sushi Maki - Tuna</big></a>&nbsp;(6 pieces) Fillings of fresh tuna<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146986' ,'14162', 'Sushi Maki - Cucumber','', false, '35', '7')" target="_self"><big>Sushi Maki - Cucumber</big></a>&nbsp;(6 pieces) Fillings of cucumber and mayonnaise<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146998' ,'14162', 'Sushi Maki - Crispy Salmon Skin','', false, '36', '7')" target="_self"><big>Sushi Maki - Crispy Salmon Skin</big></a>&nbsp;Fillings of tobiko, avocado & deep fried salmon skin<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.90</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySpicy+Sushi+Maki">Spicy Sushi Maki</a></font></strong>
+ <font color="#0000FF"><br>
+(6 pieces)  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('146999' ,'14163', 'Spicy Sushi Maki - Salmon','', false, '37', '8')" target="_self"><big>Spicy Sushi Maki - Salmon</big></a>&nbsp;Fillings of salmon with spicy sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147000' ,'14163', 'Spicy Sushi Maki - Tuna','', false, '38', '8')" target="_self"><big>Spicy Sushi Maki - Tuna</big></a>&nbsp;Fillings of tuna with spicy sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147001' ,'14163', 'Spicy Sushi Maki - Crispy salmon Skin','', false, '39', '8')" target="_self"><big>Spicy Sushi Maki - Crispy salmon Skin</big></a>&nbsp;Fillings of tobiko, avocado & deep fried salmon skin<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.10</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayRice+and+Noodles">Rice and Noodles</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147002' ,'14164', 'Steamed Rice','', false, '40', '9')" target="_self"><big>Steamed Rice</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147003' ,'14164', 'Egg Fried Rice','', false, '41', '9')" target="_self"><big>Egg Fried Rice</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147004' ,'14164', 'Chicken Fried Rice','', false, '42', '9')" target="_self"><big>Chicken Fried Rice</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147005' ,'14164', 'Roasted Pork Fried Rice','', false, '43', '9')" target="_self"><big>Roasted Pork Fried Rice</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147006' ,'14164', 'King Prawns Fried Rice','', false, '44', '9')" target="_self"><big>King Prawns Fried Rice</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147007' ,'14164', 'Plain Fried Noodles','', false, '45', '9')" target="_self"><big>Plain Fried Noodles</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147008' ,'14164', 'Chicken Noodles','', false, '46', '9')" target="_self"><big>Chicken Noodles</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147009' ,'14164', 'Roasted Pork Noodles','', false, '47', '9')" target="_self"><big>Roasted Pork Noodles</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147010' ,'14164', 'Roasted Duck Noodles','', false, '48', '9')" target="_self"><big>Roasted Duck Noodles</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147011' ,'14164', 'Prawn Noodles','', false, '49', '9')" target="_self"><big>Prawn Noodles</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+</table><p> <font face="Arial" color="#FF0080"><strong><a name="TakeawayMalaysian+Style+Homemade+Dishes">Malaysian Style Homemade Dishes</a></strong></font><br><strong><font face="Arial" color="#FF0000"><a name="TakeawayPork+Selections">Pork Selections</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147015' ,'14165', 'Roasted Pork','', false, '50', '10')" target="_self"><big>Roasted Pork</big></a>&nbsp;Roasted pork with gravy<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147012' ,'14165', 'Pork in Black Pepper Sauce','', false, '51', '10')" target="_self"><big>Pork in Black Pepper Sauce</big></a>&nbsp;Stir fried sliced pork in black pepper sauce with onions, green and red peppers<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147013' ,'14165', 'Ma Po Tofu Pork','', false, '52', '10')" target="_self"><big>Ma Po Tofu Pork</big></a>&nbsp;Stir fried diced pork with soft bean curd, green and red peppers in Szechuan sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147014' ,'14165', 'Kung Po Porrk','', false, '53', '10')" target="_self"><big>Kung Po Porrk</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.20</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayChicken+Dishes">Chicken Dishes</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147019' ,'14166', 'Curry Chicken','', false, '54', '11')" target="_self"><big>Curry Chicken</big></a>&nbsp;Chicken curry with potatoes, onions and carrots<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147020' ,'14166', 'Tori Katsu','', false, '55', '11')" target="_self"><big>Tori Katsu</big></a>&nbsp;Crispy chicken in Japanese yakitori sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147016' ,'14166', 'Spicy Chicken','', false, '56', '11')" target="_self"><big>Spicy Chicken</big></a>&nbsp;Stir frie chicken with spicy sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147017' ,'14166', 'Chicken in Black Pepper Sauce','', false, '57', '11')" target="_self"><big>Chicken in Black Pepper Sauce</big></a>&nbsp;Stir fried sliced chicken in black pepper sauce with onions, green and red peppers<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147018' ,'14166', 'Ma  Po Tofu Chicken','', false, '58', '11')" target="_self"><big>Ma  Po Tofu Chicken</big></a>&nbsp;Stir fried diced chicken with soft bean curd, green and red peppers in Szechuan sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.30</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayPrawn+Dishes">Prawn Dishes</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147021' ,'14167', 'Spicy Prawn','', false, '59', '12')" target="_self"><big>Spicy Prawn</big></a>&nbsp;Stir fried prawns with spicy sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147024' ,'14167', 'Pan fried prawns','', false, '60', '12')" target="_self"><big>Pan fried prawns</big></a>&nbsp;Pan fried prawns in soya sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147022' ,'14167', 'Prawns with fine beans','', false, '61', '12')" target="_self"><big>Prawns with fine beans</big></a>&nbsp;Stir fried prawns with fine beans<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147023' ,'14167', 'Prawns in Black Pepper Sauce','', false, '62', '12')" target="_self"><big>Prawns in Black Pepper Sauce</big></a>&nbsp;Stir fried prawns in black pepper sauce with onions, green and red peppers<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayBeef+Dishes">Beef Dishes</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147026' ,'14168', 'Rendang beef','', false, '63', '13')" target="_self"><big>Rendang beef</big></a>&nbsp;Stir fried sliced beef with shredded coconut<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147027' ,'14168', 'Beef in black pepper sauce','', false, '64', '13')" target="_self"><big>Beef in black pepper sauce</big></a>&nbsp;Stir fried sliced beef in black pepper sauce with onions and green and red peppers<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147025' ,'14168', 'Ma Po Tofu beef','', false, '65', '13')" target="_self"><big>Ma Po Tofu beef</big></a>&nbsp;Stir fried diced beef with soft bean curd, green and red peppers in Szechuan ssauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayVegetarian+Dishes">Vegetarian Dishes</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147029' ,'14169', 'Mixed vegetables','', false, '66', '14')" target="_self"><big>Mixed vegetables</big></a>&nbsp;Stir fried seasonal vegetables<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147030' ,'14169', 'Fine Beans','', false, '67', '14')" target="_self"><big>Fine Beans</big></a>&nbsp;Stir fried fine beans with garlic<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147031' ,'14169', 'Curry Potatoes','', false, '68', '14')" target="_self"><big>Curry Potatoes</big></a>&nbsp;Stewed potatoes with onions and carrots<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147028' ,'14169', 'Ma Po Tofu','', false, '69', '14')" target="_self"><big>Ma Po Tofu</big></a>&nbsp;Soft bean curd, green and red peppers in Szechuan sauce<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.30</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayOmelette+Selections+%28Fu+Young%29">Omelette Selections (Fu Young)</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147032' ,'14170', 'Fu Young - Roasted pork','', false, '70', '15')" target="_self"><big>Fu Young - Roasted pork</big></a>&nbsp;Pan fried eggs with shredded roasted pork<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147033' ,'14170', 'Fu Young - King prawns','', false, '71', '15')" target="_self"><big>Fu Young - King prawns</big></a>&nbsp;Pan fried eggs with king prawns<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147034' ,'14170', 'Fu Young - Onions (V)','', false, '72', '15')" target="_self"><big>Fu Young - Onions (V)</big></a>&nbsp;Pan fried eggs with shredded onions<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.20</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayAppetizers">Appetizers</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147048' ,'14171', 'Chicken Wings in Honey Sauce','', false, '73', '16')" target="_self"><big>Chicken Wings in Honey Sauce</big></a>&nbsp;6 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147049' ,'14171', 'Salt & Pepper Chicken Wings','', false, '74', '16')" target="_self"><big>Salt & Pepper Chicken Wings</big></a>&nbsp;6 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147038' ,'14171', 'Tori Karage','', false, '75', '16')" target="_self"><big>Tori Karage</big></a>&nbsp;(6 pieces) Japanese fried chicken<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147039' ,'14171', 'Gyoza','', false, '76', '16')" target="_self"><big>Gyoza</big></a>&nbsp;(6 pieces) Japanese chicken dumplings<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147040' ,'14171', 'Satay Chicken Skewers','', false, '77', '16')" target="_self"><big>Satay Chicken Skewers</big></a>&nbsp;(4 skewers))<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147041' ,'14171', 'Barbeque Spareribs','', false, '78', '16')" target="_self"><big>Barbeque Spareribs</big></a>&nbsp;(4 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147042' ,'14171', 'Deep Fried Soft Shell Crab','', false, '79', '16')" target="_self"><big>Deep Fried Soft Shell Crab</big></a>&nbsp;(2 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£8.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147043' ,'14171', 'Vegetable Springrolls (V)','', false, '80', '16')" target="_self"><big>Vegetable Springrolls (V)</big></a>&nbsp;(8 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147044' ,'14171', 'Yasai Croquette (V)','', false, '81', '16')" target="_self"><big>Yasai Croquette (V)</big></a>&nbsp;(3 pieces) Bread crumbed vegetable<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£3.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147045' ,'14171', 'Edamame (V)','', false, '82', '16')" target="_self"><big>Edamame (V)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.40</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147046' ,'14171', 'Prawn Crackers','', false, '83', '16')" target="_self"><big>Prawn Crackers</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.20</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147035' ,'14171', 'Siu Mai','', false, '84', '16')" target="_self"><big>Siu Mai</big></a>&nbsp;(4 pieces) Contents of pork<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147036' ,'14171', 'Chicken Bun','', false, '85', '16')" target="_self"><big>Chicken Bun</big></a>&nbsp;(2 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147037' ,'14171', 'Roasted Pork Bun','', false, '86', '16')" target="_self"><big>Roasted Pork Bun</big></a>&nbsp;(2 pieces)<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147047' ,'14171', 'Chips','', false, '87', '16')" target="_self"><big>Chips</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£1.70</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayNoodle+Soup">Noodle Soup</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147050' ,'14172', 'Noodle Soup - Chicken','', false, '88', '17')" target="_self"><big>Noodle Soup - Chicken</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147051' ,'14172', 'Noodle Soup - Roasted Pork','', false, '89', '17')" target="_self"><big>Noodle Soup - Roasted Pork</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147052' ,'14172', 'Noodle Soup - Roasted Duck','', false, '90', '17')" target="_self"><big>Noodle Soup - Roasted Duck</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147053' ,'14172', 'Noodle Soup - Gyoza','', false, '91', '17')" target="_self"><big>Noodle Soup - Gyoza</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.70</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147054' ,'14172', 'Miso soup','', false, '92', '17')" target="_self"><big>Miso soup</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£2.30</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayLunch+Box+Selection">Lunch Box Selection</a></font></strong>
+ <font color="#0000FF"><br>
+Available from 11:00 to 18:00 ONLY<br>
+ALL LUNCH BOX SELECTIONS COME WITH STEAMED RICE<br>OR CHOOSE FROM SELECTION FOR ADDITIONAL CHARGE  </font></p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147056', '14173', 'Lunch Box - Roasted Pork',document.TopOrderForm.R147056, false, '93', '18', 0)" target="_self"><big>Lunch Box - Roasted Pork</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147056" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147056" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147056" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147069', '14173', 'Lunch Box - Tori Katsu',document.TopOrderForm.R147069, false, '94', '18', 0)" target="_self"><big>Lunch Box - Tori Katsu</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147069" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147069" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147069" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147070', '14173', 'Lunch Box - Curry Chicken',document.TopOrderForm.R147070, false, '95', '18', 0)" target="_self"><big>Lunch Box - Curry Chicken</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147070" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147070" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147070" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147068', '14173', 'Lunch Box - Roasted Duck',document.TopOrderForm.R147068, false, '96', '18', 0)" target="_self"><big>Lunch Box - Roasted Duck</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147068" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147068" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147068" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147057', '14173', 'Lunch Box - Roasted Duck & Pork',document.TopOrderForm.R147057, false, '97', '18', 0)" target="_self"><big>Lunch Box - Roasted Duck & Pork</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147057" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147057" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147057" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147055', '14173', 'Lunch Box - Satay Chicken',document.TopOrderForm.R147055, false, '98', '18', 0)" target="_self"><big>Lunch Box - Satay Chicken</big></a>&nbsp;(3 skewers)<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147055" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147055" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147055" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147058', '14173', 'Lunch Box - Chicken with Black Pepper Sauce',document.TopOrderForm.R147058, false, '99', '18', 0)" target="_self"><big>Lunch Box - Chicken with Black Pepper Sauce</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147058" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147058" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147058" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147059', '14173', 'Lunch Box - BBQ spareribs',document.TopOrderForm.R147059, false, '100', '18', 0)" target="_self"><big>Lunch Box - BBQ spareribs</big></a>&nbsp;(4)<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147059" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147059" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147059" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147060', '14173', 'Lunch Box - Pork with Black Pepper Sauace',document.TopOrderForm.R147060, false, '101', '18', 0)" target="_self"><big>Lunch Box - Pork with Black Pepper Sauace</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147060" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147060" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147060" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147067', '14173', 'Lunch Box - Rendang Beef',document.TopOrderForm.R147067, false, '102', '18', 0)" target="_self"><big>Lunch Box - Rendang Beef</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147067" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147067" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147067" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.10</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147071', '14173', 'Lunch Box - Beef in black pepper sauce',document.TopOrderForm.R147071, false, '103', '18', 0)" target="_self"><big>Lunch Box - Beef in black pepper sauce</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147071" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147071" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147071" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.10</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147061', '14173', 'Lunch Box - Pan fried Prawns',document.TopOrderForm.R147061, false, '104', '18', 0)" target="_self"><big>Lunch Box - Pan fried Prawns</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147061" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147061" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147061" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147062', '14173', 'Lunch Box - Prawns with fine Beans',document.TopOrderForm.R147062, false, '105', '18', 0)" target="_self"><big>Lunch Box - Prawns with fine Beans</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147062" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147062" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147062" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147063', '14173', 'Lunch Box - Spicy Prawns',document.TopOrderForm.R147063, false, '106', '18', 0)" target="_self"><big>Lunch Box - Spicy Prawns</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147063" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147063" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147063" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.60</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147064', '14173', 'Lunch Box - (V) Ma Po Tofu',document.TopOrderForm.R147064, false, '107', '18', 0)" target="_self"><big>Lunch Box - (V) Ma Po Tofu</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147064" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147064" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147064" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.30</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147065', '14173', 'Lunch Box - Ma Po Tofu (Beef)',document.TopOrderForm.R147065, false, '108', '18', 0)" target="_self"><big>Lunch Box - Ma Po Tofu (Beef)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147065" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147065" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147065" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.10</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147066', '14173', 'Lunch Box - Ma Po Tofu (Pork)',document.TopOrderForm.R147066, false, '109', '18', 0)" target="_self"><big>Lunch Box - Ma Po Tofu (Pork)</big></a>&nbsp;<br></font></td><td valign="top" width="45%"><p><font size="1" face="Arial">
+	<input TYPE="radio" VALUE="Egg-fried Rice" NAME="R147066" >Egg-fried Rice - £0.10<br><input TYPE="radio" VALUE="Spicy Fried Rice" NAME="R147066" >Spicy Fried Rice - £0.20<br><input TYPE="radio" VALUE="Stir Fried Noodles" NAME="R147066" >Stir Fried Noodles - £0.20<br>
+</font></p><p></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£4.60</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayChefs+Recommendations">Chefs Recommendations</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147072' ,'14174', 'Unagi Don','', false, '110', '19')" target="_self"><big>Unagi Don</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£8.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147073' ,'14174', 'Mee Goreng','', false, '111', '19')" target="_self"><big>Mee Goreng</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147074' ,'14174', 'Nasi Goreng','', false, '112', '19')" target="_self"><big>Nasi Goreng</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147075' ,'14174', 'Nasi Lemak','', false, '113', '19')" target="_self"><big>Nasi Lemak</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147076' ,'14174', 'Oily Noodle','', false, '114', '19')" target="_self"><big>Oily Noodle</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147077' ,'14174', 'Ho Fun Flat Noodle','', false, '115', '19')" target="_self"><big>Ho Fun Flat Noodle</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147078' ,'14174', 'Chicken with Chinese mushrooms','', false, '116', '19')" target="_self"><big>Chicken with Chinese mushrooms</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147079' ,'14174', 'Sambal Prawns','', false, '117', '19')" target="_self"><big>Sambal Prawns</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147080' ,'14174', 'Kai Lan Chinese Greens','', false, '118', '19')" target="_self"><big>Kai Lan Chinese Greens</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147081' ,'14174', 'Choi Sum Chinese Greens','', false, '119', '19')" target="_self"><big>Choi Sum Chinese Greens</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147082' ,'14174', 'Sambal Belacan Kang Kung','', false, '120', '19')" target="_self"><big>Sambal Belacan Kang Kung</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.00</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147083' ,'14174', 'Crackling Pork','', false, '121', '19')" target="_self"><big>Crackling Pork</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.50</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayFriday+and+Sunday+ONLY">Friday and Sunday ONLY</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147084' ,'14175', 'Quarter Grilled Salted Chicken','', false, '122', '20')" target="_self"><big>Quarter Grilled Salted Chicken</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawaySaturday+and+Sunday+ONLY">Saturday and Sunday ONLY</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147085' ,'14176', 'Stir Fried Spicy Clams','', false, '123', '21')" target="_self"><big>Stir Fried Spicy Clams</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£8.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147086' ,'14176', 'Pork with Preserved Vegetables','', false, '124', '21')" target="_self"><big>Pork with Preserved Vegetables</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£6.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147087' ,'14176', 'Rendang Chicken','', false, '125', '21')" target="_self"><big>Rendang Chicken</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147088' ,'14176', 'Kung Po Prawns Malaysian Style','', false, '126', '21')" target="_self"><big>Kung Po Prawns Malaysian Style</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147089' ,'14176', 'Kung Po Chicken Malaysian Style','', false, '127', '21')" target="_self"><big>Kung Po Chicken Malaysian Style</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.50</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147090' ,'14176', 'Salt & Pepper Prawns','', false, '128', '21')" target="_self"><big>Salt & Pepper Prawns</big></a>&nbsp;<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£5.90</font></td></tr>
+</table><p><strong><font face="Arial" color="#FF0000"><a name="TakeawayOld+Town+Set+Meals">Old Town Set Meals</a></font></strong>
+</p>
+<table border="0" width="100%"><tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147091' ,'14177', 'Old Town Set Combo','', false, '129', '22')" target="_self"><big>Old Town Set Combo</big></a>&nbsp;PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.<br>
+2 pieces each of salmon, tuna and ebi nigiri and 4 pieces of old town dragon roll<br>2 pieces each of satay chicken skewers and BBQ spare ribs<br>Choice of 2 main dishes (give your choice when restaurant calls you) with mixed vegetables and egg fried rice<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£12.80</font></td></tr>
+<tr><td valign="top" width="50%"><font size="1" face="Arial">
+<a href="javascript:O2('147092' ,'14177', 'Old Town Starters & Sushi Combinations','', false, '130', '22')" target="_self"><big>Old Town Starters & Sushi Combinations</big></a>&nbsp;PRICE IS PER PERSON, CLICK ITEM TWICE MINIMUM ORDER 2.<br>
+4 Pieces of each of the following:<br>
+Sastay chicken, spare Ribs, Gyoza, Old Town Dragon Roll, Old town Tori Roll, California Maki, Inari & Avocado Maki, Ssake Nigiri, Tuna Nigiri, Ebi Nigiri<br></font></td><td valign="top" width="45%"></td><td valign="top" width="5%" align="right"><font size="1" face="Arial">£15.00</font></td></tr>
+</table><p>  
+</p>
+</form>
+</font>
+
+</body>
+</html>
