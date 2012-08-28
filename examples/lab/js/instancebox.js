@@ -45,7 +45,7 @@ define(
 					// set up to receive droppables
 					this.$el.droppable({
 						greedy:true, // magical for allowing nesting of droppables
-						accept:'.item,.pathable-view,.dereferenced-model,.subcollection',
+						accept:'.item,.pathable-view,.dereferenced-model,.subcollection,.greybox',
 						tolerance:"touch",
 						over:function(event, ui) {
 							$(this).addClass("over");
