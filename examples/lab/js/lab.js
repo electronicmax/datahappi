@@ -84,7 +84,8 @@ define([
 			$.when(
 				// add moar sources here
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/')),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','restaurants.rdf'].join('/'), "Restaurants"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','restaurants-tripadvisor.rdf'].join('/'), "Tripadvisor Restaurants"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','businesses-yelp.rdf'].join('/'), "Yelp Business Listing"),
 				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','menus.rdf'].join('/'), "Menus")
 			).then(
 				function() {
