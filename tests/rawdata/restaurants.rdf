@@ -1,6 +1,6 @@
 
 <!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
-<!--     using base file:///Users/das05r/code/chi2012-study-data/restaurants.n3-->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/restaurants.n3-->
 
 
 <rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#"
@@ -10,7 +10,6 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r1">
-    	<rdf:type rdf:resource="#Restaurant"/>
         <hygiene_rating>4</hygiene_rating>
         <in_town>Southampton</in_town>
         <menu_link rdf:resource="http://www.cuisinenetguide.co.uk/cgi-bin/Rest_OnlineOrder_FrameControl_V3.0.asp?RestId=11834&#38;MenuSetName=To+Dine+at+Restaurant&#38;TransType=ViewMenu&#38;HowMany=5&#38;RestaurantName=zen&#38;Town=&#38;County=0&#38;Cuisine=0&#38;OnlineSystems=True&#38;SearchType=Restaurants&#38;StartPoint=1"/>
@@ -93,6 +92,7 @@
         <in_town>Southampton</in_town>
         <menu_link rdf:resource="http://www.oldtownkitchen.co.uk/images/town_takeaway_2011.pdf"/>
         <restaurant_type>Japanese</restaurant_type>
+        <restaurant_type>Sushi</restaurant_type>
         <restaurant_type>Takeaway</restaurant_type>
         <tripadvisor_score>3.1</tripadvisor_score>
         <yelp_rating>2.9</yelp_rating>
