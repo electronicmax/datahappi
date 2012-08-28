@@ -1,2 +1,2 @@
 Names from: http://www.kleimo.com/random/name.cfm
-Postcodes from: http://www.doogal.co.uk/PostcodeGenerator.php
+Postcodes, addresses, lat/long from: http://www.doogal.co.uk/PostcodeGenerator.php

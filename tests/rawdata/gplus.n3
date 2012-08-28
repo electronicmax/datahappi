@@ -7,21 +7,22 @@
 :Friend rdfs:label "Google+ Friend" .
 
 :gpf1 a :Friend ;
+    :postcode """LS99 2BL""";
     rdfs:label """Earlene Millett""" .
 
 :gpf2 a :Friend ;
+    :postcode """ME7 3SG""";
     rdfs:label """Dollie Baltzell""" .
 
 :gpf3 a :Friend ;
+    :postcode """DE99 3GG""";
     rdfs:label """Mallory Standard""" .
 
 :gpf4 a :Friend ;
+    :postcode """B80 7DG""";
     rdfs:label """Penelope Barks""" .
 
 :gpf5 a :Friend ;
+    :postcode """IV7 8AN""";
     rdfs:label """Clare Occhipinti""" .
-
-
-
-
 

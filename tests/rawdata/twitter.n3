@@ -7,22 +7,32 @@
 :Contact rdfs:label "Twitter Contact" .
 
 :c1 a :Contact ;
+    geo:lat "52.477307";
+    geo:long "-1.972836";
     rdfs:label """Darren Sconyers""" ;
     :twitter "@dsconyers" .
 
 :c2 a :Contact ;
+    geo:lat "52.0243";
+    geo:long "-0.810346";
     rdfs:label """Max Trafton""" ;
     :twitter "@the_trafton" .
 
 :c3 a :Contact ;
+    geo:lat "52.176508";
+    geo:long "-2.234022";
     rdfs:label """Kelly Maust""" ;
     :twitter "@maust1982" .
 
 :c4 a :Contact ;
+    geo:lat "53.750418";
+    geo:long "-2.506948";
     rdfs:label """Clinton Mcmath""" ;
     :twitter "@clintclintclint" .
 
 :c5 a :Contact ;
+    geo:lat "51.442334";
+    geo:long "0.300353";
     rdfs:label """Allan Parikh""" ;
     :twitter "@a_parikh" .
 

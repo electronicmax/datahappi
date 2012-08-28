@@ -4,6 +4,7 @@
 
 
 <rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
@@ -14,25 +15,35 @@
     <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c1">
         <twitter>@dsconyers</twitter>
         <rdfs:label>Darren Sconyers</rdfs:label>
+        <geo:lat>52.477307</geo:lat>
+        <geo:long>-1.972836</geo:long>
     </Contact>
 
     <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c2">
         <twitter>@the_trafton</twitter>
         <rdfs:label>Max Trafton</rdfs:label>
+        <geo:lat>52.0243</geo:lat>
+        <geo:long>-0.810346</geo:long>
     </Contact>
 
     <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c3">
         <twitter>@maust1982</twitter>
         <rdfs:label>Kelly Maust</rdfs:label>
+        <geo:lat>52.176508</geo:lat>
+        <geo:long>-2.234022</geo:long>
     </Contact>
 
     <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c4">
         <twitter>@clintclintclint</twitter>
         <rdfs:label>Clinton Mcmath</rdfs:label>
+        <geo:lat>53.750418</geo:lat>
+        <geo:long>-2.506948</geo:long>
     </Contact>
 
     <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c5">
         <twitter>@a_parikh</twitter>
         <rdfs:label>Allan Parikh</rdfs:label>
+        <geo:lat>51.442334</geo:lat>
+        <geo:long>0.300353</geo:long>
     </Contact>
 </rdf:RDF>
