@@ -26,7 +26,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			var this_ = this;
 			this.$el.html(this.template);
 			this.$el.draggable({
-				handle:this.$el.find('.dropzones'),
+				handle:this.$el.find('.dropzones').add(this.$el.find('.titlebar')),
 				drag:function(evt,ui) { this_.trigger('drag', ui.offset); }
 			});
 			this.$el.css('top', 50 + 100*Math.random());
