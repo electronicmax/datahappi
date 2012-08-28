@@ -1,0 +1,50 @@
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:Business rdfs:label "Business" .
+
+:yelp1 rdfs:label "Zen";
+    rdf:type :Business;
+    :yelp_type "Restaurant";
+    :yelp_rating "4.1" ;
+    :price_band "$$$$" .
+    
+:yelp2 rdfs:label "Trago Lounge";
+    rdf:type :Business;
+    :yelp_type "Coffee Shop/Bar";
+    :yelp_rating "4.5" ;
+    :price_band "$$" .
+
+:yelp3 rdfs:label "Ceno";
+    rdf:type :Business;
+    :yelp_type "Restaurant";
+    :yelp_rating "3.9" ;
+    :price_band "$$$" .
+
+:yelp4 rdfs:label "Chilworth Arms";
+    rdf:type :Business;
+    :yelp_type "Restaurant";
+    :yelp_rating "4.7" ;
+    :price_band "$$$$" .
+    
+:yelp5 rdfs:label "White Star Tavern";
+    rdf:type :Business;
+    :yelp_type "Restaurant";
+    :yelp_rating "4.2" ;
+    :price_band "$$$$" .
+    
+:yelp6 rdfs:label "Coriander Lounge";
+    rdf:type :Business;
+    :yelp_type "Resturant";
+    :yelp_rating "4.1" ;
+    :price_band "$$$" .
+    
+:yelp7 rdfs:label "Old Town Kitchen";
+    rdf:type :Business;
+    :yelp_type "Restaurant";
+    :yelp_rating "3.5" ;
+    :price_band "$$" .
+    

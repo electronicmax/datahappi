@@ -11,8 +11,6 @@
     geo:lon "-1.403589";
     :in_town "Southampton";
     :tripadvisor_score "4.5";
-    :hygiene_rating "4";
-    :yelp_rating "4.1" ;
     foaf:homepage <http://zensouthampton.com> ;
     :menu_link <http://www.cuisinenetguide.co.uk/cgi-bin/Rest_OnlineOrder_FrameControl_V3.0.asp?RestId=11834&MenuSetName=To+Dine+at+Restaurant&TransType=ViewMenu&HowMany=5&RestaurantName=zen&Town=&County=0&Cuisine=0&OnlineSystems=True&SearchType=Restaurants&StartPoint=1> .
     
@@ -23,8 +21,6 @@
     geo:lon "-1.391058";
     :in_town "Southampton";
     :tripadvisor_score "4.2";
-    :hygiene_rating "5";
-    :yelp_rating "4.6" ;
     foaf:homepage <http://www.thelounges.co.uk/trago-lounge/> ;
     :menu_link <http://www.thelounges.co.uk/wp-content/uploads/2012/07/LO_Menu-food-v10.pdf> .
     
@@ -35,8 +31,6 @@
     geo:lon "-1.392431";
     :in_town "Southampton";
     :tripadvisor_score "3.5";
-    :hygiene_rating "4";
-    :yelp_rating "4.1" ;
     foaf:homepage <http://www.cenorestaurant.com> ;
     :menu_link <http://www.cenorestaurant.com/menu/1/#starters%2Fmains> .
     
@@ -47,8 +41,6 @@
     geo:lon "-1.416807";
     :in_town "Chilworth";
     :tripadvisor_score "3.9";
-    :hygiene_rating "5";
-    :yelp_rating "5" ;
     foaf:homepage <http://www.chilwortharms.co.uk> ;
     :menu_link <http://www.chilwortharms.co.uk/eat_drink_with_us/food_menu/> .
     
@@ -59,8 +51,6 @@
     geo:lon "-1.397839";
     :in_town "Southampton";
     :tripadvisor_score "4.0";
-    :hygiene_rating "4";
-    :yelp_rating "3.8" ;
     foaf:homepage <http://www.whitestartavern.co.uk> ;
     :menu_link <http://www.whitestartavern.co.uk/home/restaurant-bar/sample-dinner.php> .
     
@@ -71,8 +61,6 @@
     geo:lon "-1.403933";
     :in_town "Southampton";
     :tripadvisor_score "3.4";
-    :hygiene_rating "3";
-    :yelp_rating "4.2" ;
     foaf:homepage <http://www.corianderlounge.com> ;
     :menu_link <http://www.corianderlounge.com/coriander_lounge_menu.pdf> .
     
@@ -85,8 +73,6 @@
     geo:lon "-1.403546";
     :in_town "Southampton";
     :tripadvisor_score "3.1";
-    :hygiene_rating "3";
-    :yelp_rating "2.9" ;
     foaf:homepage <http://www.oldtownkitchen.co.uk> ;
     :menu_link <http://www.oldtownkitchen.co.uk/images/town_takeaway_2011.pdf> .
     

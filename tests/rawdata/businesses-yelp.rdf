@@ -1,0 +1,62 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/businesses-yelp.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Business">
+        <rdfs:label>Business</rdfs:label>
+    </rdf:Description>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp1">
+        <price_band>$$$$</price_band>
+        <yelp_rating>4.1</yelp_rating>
+        <yelp_type>Restaurant</yelp_type>
+        <rdfs:label>Zen</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp2">
+        <price_band>$$</price_band>
+        <yelp_rating>4.5</yelp_rating>
+        <yelp_type>Coffee Shop/Bar</yelp_type>
+        <rdfs:label>Trago Lounge</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp3">
+        <price_band>$$$</price_band>
+        <yelp_rating>3.9</yelp_rating>
+        <yelp_type>Restaurant</yelp_type>
+        <rdfs:label>Ceno</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp4">
+        <price_band>$$$$</price_band>
+        <yelp_rating>4.7</yelp_rating>
+        <yelp_type>Restaurant</yelp_type>
+        <rdfs:label>Chilworth Arms</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp5">
+        <price_band>$$$$</price_band>
+        <yelp_rating>4.2</yelp_rating>
+        <yelp_type>Restaurant</yelp_type>
+        <rdfs:label>White Star Tavern</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp6">
+        <price_band>$$$</price_band>
+        <yelp_rating>4.1</yelp_rating>
+        <yelp_type>Resturant</yelp_type>
+        <rdfs:label>Coriander Lounge</rdfs:label>
+    </Business>
+
+    <Business rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#yelp7">
+        <price_band>$$</price_band>
+        <yelp_rating>3.5</yelp_rating>
+        <yelp_type>Restaurant</yelp_type>
+        <rdfs:label>Old Town Kitchen</rdfs:label>
+    </Business>
+</rdf:RDF>
