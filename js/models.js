@@ -48,8 +48,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.on("change", function(z,k) {
 				if (_.isUndefined(k) || _.isUndefined(k.changes) || _(k.changes).keys().length === 0) {
 					return; // we don't have any known changes; just terminate.
-				}
-				
+				}				
 				apply_rules(_(k.changes).keys());
 			});
 			// first apply to all thingies

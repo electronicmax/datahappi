@@ -40,7 +40,7 @@ define(['js/source','js/utils', 'js/rdf/name-resolver'],
 					console.log("JSON >> ", json);
 					var json_ms = _(json).keys().map(function(k) {
 						var m = this_._get_model(k);
-						m.set(_({_id:k, source:[this_]}).extend(this_._convert_values(json[k])));
+						m.set(_({_id:k, source:[this_]}).extend(this_._convert_values(json[k])), {silent:true});
 						// register its names with named entity resolver
 						nameresolver.register_model(m);						
 						return m;
