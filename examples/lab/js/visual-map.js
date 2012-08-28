@@ -51,7 +51,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					var dropzone_i = this_.$el.find('.dropzone').index($(this));
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('' + views.length + 'items');
-					this_.setDropzoneBox(view, dropzone_i);
+					this_.setDropzoneBox(ui.draggable.data("view"), dropzone_i);
 				}
 			});						
 			return this;

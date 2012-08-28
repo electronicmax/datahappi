@@ -67,15 +67,15 @@ define(
 					});
 					// add a toolbar.
 					this.$el.append($(toolbar_template));
+					// for support signalling back for things destined for us when we get dropped on something
+					this.$el.data('view', this);
+					// this is the avenue by which collections get shared with visuals and with the workspace
 					this.$el.data('views', function() { return this_.views_collection; });
 					// add a property box
 					this.propbox = this._make_property_box();
-					// this.pathbox = this._make_path_box();
 					this.hist = this._make_micro_hist();
 				}
-
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
-
 				return this;
 			},
 

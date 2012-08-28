@@ -115,9 +115,8 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					$(this).find('.lbl').html(old_x_label);					
 				},
 				drop: function( event, ui ) {
-					var view = ui.draggable.data("views");
-					$(this).removeClass("over");
-					this_.setSeries(views);					
+					$(this).removeClass("over");					
+					this_.setSeries( ui.draggable.data("views")() );	
 				}				
 			});
 			return this;
