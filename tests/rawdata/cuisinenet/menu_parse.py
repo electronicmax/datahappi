@@ -53,6 +53,10 @@ print """@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:MenuItem rdfs:label "Menu Item" .
+:Menu rdfs:label "Restaurant Menu" .
+
 """
 
 for src in sources:

@@ -9,6 +9,14 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Coffee_Shop">
+        <rdfs:label>Coffee Shop</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Restaurant">
+        <rdfs:label>Restaurant</rdfs:label>
+    </rdf:Description>
+
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#r1">
         <in_town>Southampton</in_town>
         <menu_link rdf:resource="http://www.cuisinenetguide.co.uk/cgi-bin/Rest_OnlineOrder_FrameControl_V3.0.asp?RestId=11834&#38;MenuSetName=To+Dine+at+Restaurant&#38;TransType=ViewMenu&#38;HowMany=5&#38;RestaurantName=zen&#38;Town=&#38;County=0&#38;Cuisine=0&#38;OnlineSystems=True&#38;SearchType=Restaurants&#38;StartPoint=1"/>

@@ -7,6 +7,14 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#Menu">
+        <rdfs:label>Restaurant Menu</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem">
+        <rdfs:label>Menu Item</rdfs:label>
+    </rdf:Description>
+
     <Menu rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#menu1">
         <menu_item rdf:parseType="Resource">
             <rdf:type rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data#MenuItem"/>

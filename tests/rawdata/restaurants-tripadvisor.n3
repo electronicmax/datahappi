@@ -4,6 +4,9 @@
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
+:Restaurant rdfs:label "Restaurant" .
+:Coffee_Shop rdfs:label "Coffee Shop" .
+
 :r1 rdfs:label "Zen Southampton";
     rdf:type :Restaurant;
     :restaurant_type "Japanese";

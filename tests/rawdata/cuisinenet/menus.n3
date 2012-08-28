@@ -5,6 +5,10 @@
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
+:MenuItem rdfs:label "Menu Item" .
+:Menu rdfs:label "Restaurant Menu" .
+
+
 :menu1
     :menu_item [ rdf:type :MenuItem ; rdfs:label """Daal Shorba""" ; :item_price """2.95"""  ; :item_detail """Light lentil soup cooked with aromatic spices - served with baby naan bread""" ] ;
     :menu_item [ rdf:type :MenuItem ; rdfs:label """Murg Shorba""" ; :item_price """2.25"""  ; :item_detail """Lightly fried shredded chicken cooked with cornflour, garlic, egg and spices""" ] ;
