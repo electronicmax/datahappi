@@ -2,7 +2,7 @@
 ALL : restaurants-tripadvisor.rdf businesses-yelp.rdf menus.rdf facebook.rdf twitter.rdf gplus.rdf
 
 clean:
-	rm restaurants-tripadvisor.rdf menus.rdf businesses-yelp.rdf
+	rm restaurants-tripadvisor.rdf menus.rdf businesses-yelp.rdf facebook.rdf twitter.rdf gplus.rdf
 
 menus.rdf:
 	cd cuisinenet ; $(MAKE) $(MFLAGS) && cp menus.rdf ..
