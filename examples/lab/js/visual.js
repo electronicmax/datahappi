@@ -7,7 +7,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 	var Visual = VisualBase.extend({
 		className:'visual',
 		tagName:'div',
-		template:'<div class="titlebar">Plot<div class="delete icon-cancel"></div></div><div style="position:relative;height: 100%;width: 100%;"><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg></div>',
+		template:'<div class="titlebar">Plot<div class="delete icon-cancel"></div></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},
@@ -120,7 +120,11 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				}				
 			});
 			// omg resizing!
-			this.$el.resizable();
+			this.$el.resizable({ resize: function() {
+				console.log('updating plot');
+				this_._update_plot();
+			} });
+			this.$el.data('view', this);
 			return this;
 		}
 	});
