@@ -18,9 +18,20 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			3:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-red.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)})
 		},
 		initialize:function() {
+			var this_ = this;
 			this.options = _.extend(this.defaults, this.options);
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
+			this.on('brush', function(entity) {
+					_(this_.dropzone_boxes).values().map(function(dzb) {
+						if (defined(dzb)) {	dzb.views_collection.trigger('brush', entity); }
+					});
+				})
+				.on('unbrush', function(entity) {
+					_(this_.dropzone_boxes).values().map(function(dzb) {
+						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush', entity);}							
+					});
+				});
 		},
 		render:function() {
 			var this_ = this;
@@ -132,7 +143,9 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					var position = new L.LatLng(geoval.geo.lat,geoval.geo.long);					
 					if (!defined(markers[vi])) {
 						markers[vi] = (new L.Marker(position, {icon:this_.marker_icons[i]}));
-						markers[vi].addTo(this_.map);
+						markers[vi].addTo(this_.map)
+							.on('mouseover', function() { this_.trigger('brush', geoval.model); })
+							.on('mouseout', function() { this_.trigger('unbrush', geoval.model); });
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
 					} else {
 						markers[vi].setLatLng(position);
