@@ -172,11 +172,10 @@
   z-index: 1000;
   position: absolute;
   top: 100%;
-  right: 5px;
+  right: 25px;
   width: 40px;
-  height: 10px;
-  margin-top: -20px;
-  height: 100px;
+  margin-top: -24px;
+  height: 22px;
   text-align: right;
 }
 .greybox .sparkhist div.bars-horizontal {
