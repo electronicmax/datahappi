@@ -1,3 +1,8 @@
+.titlebar {
+  cursor: move;
+  padding: 5px;
+  background-color: rgba(200, 200, 200, 0.11);
+}
 .greybox {
   z-index: 5;
   position: absolute;
@@ -7,7 +12,6 @@
   min-width: 240px;
   padding: 12px 20px 12px 12px;
   height: 250px;
-  max-height: 500px;
   overflow-x: hidden;
   overflow-y: hidden;
   /* properties */
@@ -25,11 +29,6 @@
   float: right;
   margin: 3px;
   cursor: pointer;
-}
-.greybox .titlebar {
-  cursor: move;
-  padding: 5px;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .uplt,
 .greybox .uprt,

@@ -6,6 +6,12 @@
 @propertybordercolor: #aef;
 @nicegrey : rgba(200,200,200,0.11);
 
+.titlebar {
+	cursor: move;
+	padding: 5px;
+	background-color: @nicegrey;
+}
+
 .box(@bordercolor: #4af) {
 	z-index:5;
 	position:absolute;
@@ -16,7 +22,6 @@
 	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
 	height:@boxheight;
-	max-height:500px;
 	overflow-x:hidden;
 	overflow-y:hidden;
 	&.over { padding:20px;  }
@@ -30,11 +35,6 @@
         float: right;
         margin: 3px;
         cursor: pointer;
-	}
-	.titlebar {
-		cursor: move;
-		padding: 5px;
-		background-color: @nicegrey;
 	}
 	
 	.uplt, .uprt, .btlt, .btrt {
