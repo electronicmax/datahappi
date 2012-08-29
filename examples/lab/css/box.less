@@ -4,6 +4,7 @@
 @propswidth : 300px;
 @propsheight : 130px;
 @propertybordercolor: #aef;
+@nicegrey : rgba(200,200,200,0.11);
 
 .box(@bordercolor: #4af) {
 	z-index:5;
@@ -29,7 +30,13 @@
         float: right;
         margin: 3px;
         cursor: pointer;
-	}       
+	}
+	.titlebar {
+		cursor: move;
+		padding: 5px;
+		background-color: @nicegrey;
+	}
+	
 	.uplt, .uprt, .btlt, .btrt {
 		width:10px; height:10px;
 	}
@@ -95,25 +102,28 @@
 	.properties {
 		position: absolute;	
 		z-index:3;
-		left:0px; right:0px; height:68px; bottom:0px;
-		overflow:auto;
+		left:0px; right:0px; height:58px; bottom:0px;
+		padding-top:3px;
+		overflow:none;
 		vertical-align:top;
 		// border-top:1px solid rgba(200,200,200,0.11);
 		background-color:rgba(200,200,200,0.11);
 		.propitems {
+			height:100%;
+			width:100%;
 			display:inline-block;
 			margin:0px !important; padding:0px !important;
 			list-style-type:none !important;
 			// paths
 			li.path {
-				border-bottom:1px solid #eee;
+				// border-bottom:1px solid #eee;
 				margin:0px !important;
 				padding:0px !important;
 				padding:0px; 
 				position:relative;
 				.steps {
 					padding:0px 0px 1px 15px;
-					font-size:9pt !important;
+					font-size:8pt !important;
 					vertical-align:middle !important;
 					* {
 						margin:0px; padding:0px; border:none;
@@ -121,22 +131,17 @@
 					.delete {
 						z-index:10; margin:0px; padding:0px;
 						position:absolute;
-						top:5px; left:1px;
+						top:3px; left:1px;
 					}		  
 					select {
-						background-color:white;
+						background-color:white !important;
+						border: 1px solid rgba(0,0,0,0.22) !important;
+						color:black !important;
 						vertical-align:middle !important;
-						font-size:8pt !important;			  
+						font-size:7pt !important;			  
 						line-height:12px !important;
-						height:16px !important;
+						height:14px !important;
 						width:120px !important;
-						border:1px solid rgba(255,255,255,0.7) !important;						
-						&:hover {
-							border:1px solid rgba(255,240,255,0.4) !important;
-						}
-						&:focus {
-							border:1px solid rgba(240,240,255,0.4) !important;
-						}
 					}
 				}
 			}
@@ -189,13 +194,6 @@
     font-size:8pt;
     padding:4px;
     width:20px;
-}
-
-.titlebar {
-    cursor: move;
-//    border-radius: 5px 5px 0px 0px;
-    padding: 5px;
-    background-color: #e0e0e0;
 }
 
 .box_container {

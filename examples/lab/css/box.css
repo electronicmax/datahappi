@@ -26,6 +26,11 @@
   margin: 3px;
   cursor: pointer;
 }
+.greybox .titlebar {
+  cursor: move;
+  padding: 5px;
+  background-color: rgba(200, 200, 200, 0.11);
+}
 .greybox .uplt,
 .greybox .uprt,
 .greybox .btlt,
@@ -109,20 +114,22 @@
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 68px;
+  height: 58px;
   bottom: 0px;
-  overflow: auto;
+  padding-top: 3px;
+  overflow: none;
   vertical-align: top;
   background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
   display: inline-block;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
 }
 .greybox .properties .propitems li.path {
-  border-bottom: 1px solid #eee;
   margin: 0px !important;
   padding: 0px !important;
   padding: 0px;
@@ -130,7 +137,7 @@
 }
 .greybox .properties .propitems li.path .steps {
   padding: 0px 0px 1px 15px;
-  font-size: 9pt !important;
+  font-size: 8pt !important;
   vertical-align: middle !important;
 }
 .greybox .properties .propitems li.path .steps * {
@@ -143,23 +150,18 @@
   margin: 0px;
   padding: 0px;
   position: absolute;
-  top: 5px;
+  top: 3px;
   left: 1px;
 }
 .greybox .properties .propitems li.path .steps select {
-  background-color: white;
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
   vertical-align: middle !important;
-  font-size: 8pt !important;
+  font-size: 7pt !important;
   line-height: 12px !important;
-  height: 16px !important;
+  height: 14px !important;
   width: 120px !important;
-  border: 1px solid rgba(255, 255, 255, 0.7) !important;
-}
-.greybox .properties .propitems li.path .steps select:hover {
-  border: 1px solid rgba(255, 240, 255, 0.4) !important;
-}
-.greybox .properties .propitems li.path .steps select:focus {
-  border: 1px solid rgba(240, 240, 255, 0.4) !important;
 }
 .greybox .properties .new-path-btn {
   position: absolute;
@@ -199,11 +201,6 @@
   font-size: 8pt;
   padding: 4px;
   width: 20px;
-}
-.titlebar {
-  cursor: move;
-  padding: 5px;
-  background-color: #e0e0e0;
 }
 .box_container {
   height: 100%;

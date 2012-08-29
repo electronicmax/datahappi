@@ -58,20 +58,24 @@ define(
 				$("<div class='new-path-btn icon-list-add'></div>")
 					.click(function(){ this_.add_path().render(); })
 					.appendTo(this.$el);
+
+				var b = 58 + 14*(this.views_collection.length);
+				this.$el.height(b);
+				this.$el.parent().find('.items').css('bottom', b);
 				
 				return this;
 			},
 			add_path:function(path) {
 				/* Adds a new path and UI element to add steps to the path.
 				 * @path: Optional; the path added to the pathables set and the UI, by default has no existing steps. */
-				console.log("Priority before add: ",this.options.pathables.paths.map(function(path) {
-					return path.get_steps();
-				}));
+				// console.log("Priority before add: ",this.options.pathables.paths.map(function(path) {
+				// 	return path.get_steps();
+				// }));
 				path = path || new pathables.Path();
 				this.options.pathables.add_path(path);
-				console.log("Priority after add: ",this.options.pathables.paths.map(function(path) {
-					return path.get_steps();
-				}));
+				// console.log("Priority after add: ",this.options.pathables.paths.map(function(path) {
+				// 	return path.get_steps();
+				// }));
 				return this;
 			},
 			get_paths:function() {
