@@ -1,3 +1,223 @@
+.titlebar {
+  cursor: move;
+  padding: 5px;
+  background-color: rgba(200, 200, 200, 0.11);
+  height: 30px;
+}
+.box-box-shadow {
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+}
+.greybox {
+  z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  position: absolute;
+  top: 10px;
+  -webkit-transition: padding 0.5s ease-in-out;
+  width: 340px;
+  min-width: 240px;
+  padding: 12px 20px 12px 12px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* properties */
+
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px 5px 0px 0px;
+}
+.greybox.over {
+  padding: 5px;
+}
+.greybox .box-delete {
+  z-index: 10;
+  display: block;
+  float: right;
+  margin: 3px;
+  cursor: pointer;
+}
+.greybox .uplt,
+.greybox .uprt,
+.greybox .btlt,
+.greybox .btrt {
+  width: 10px;
+  height: 10px;
+}
+.greybox .uplt {
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .uprt {
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .btlt {
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .btrt {
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.greybox input:hover,
+.greybox input:focus {
+  color: black;
+}
+.greybox .microtoolbox {
+  display: none;
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 14px;
+}
+.greybox .microtoolbox span:hover {
+  color: black;
+}
+.greybox .items {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.greybox .properties {
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+  height: 58px;
+  bottom: 0px;
+  padding-top: 3px;
+  overflow: none;
+  vertical-align: top;
+  background-color: rgba(200, 200, 200, 0.11);
+}
+.greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px !important;
+  padding: 0px !important;
+  list-style-type: none !important;
+}
+.greybox .properties .propitems li.path {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding: 0px;
+  position: relative;
+}
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 15px;
+  font-size: 8pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .propitems li.path .steps .delete {
+  z-index: 10;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+}
+.greybox .properties .propitems li.path .steps select {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
+  vertical-align: middle !important;
+  font-size: 7pt !important;
+  line-height: 12px !important;
+  height: 14px !important;
+  width: 120px !important;
+}
+.greybox .properties .new-path-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.greybox .sparkhist {
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  width: 40px;
+  margin-top: -24px;
+  height: 22px;
+  text-align: right;
+}
+.greybox .sparkhist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.greybox .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.greybox .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
+}
+.simple {
+  font-size: 8pt;
+  padding: 4px;
+  width: 20px;
+}
+.box_container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.map_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .fullsize {
   position: absolute;
   top: 0px;
@@ -10,6 +230,10 @@
   position: absolute;
   width: 350px;
   height: 300px;
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgba(250, 250, 250, 0.81);
 }
 .visual .delete,
 .visual-map .delete {
@@ -25,7 +249,7 @@
 .visual {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(0, 180, 0, 0.2);
+  border: 1px solid rgba(190, 180, 0, 0.2);
   /*
 	.yaxis {
 		.droparea;
@@ -101,19 +325,21 @@
   background-color: rgba(100, 250, 100, 0.3);
 }
 .visual-map {
-  position: absolute;
+  position: absolute !important;
   width: 350px;
   height: 300px;
   padding: 0px;
   margin: 0px;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
 }
 .visual-map .map-zone {
   opacity: 0.95;
   position: absolute !important;
   padding: 0px;
   margin: 0px;
-  top: 0px;
-  left: 50px;
+  top: 30px;
+  left: 18px;
   right: 0px;
   bottom: 0px;
 }
@@ -121,9 +347,9 @@
   padding: 0px;
   margin: 0px;
   position: absolute;
-  top: 0px;
+  top: 30px;
   left: 0px;
-  width: 50px;
+  width: 18px;
   bottom: 0px;
 }
 .visual-map .dropzones .dropzone {

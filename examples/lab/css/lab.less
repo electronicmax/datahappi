@@ -3,11 +3,15 @@
 @import "fontello/fontello.css";
 @import "fontello/fontello-codes.css";
 
-@import "box.css";
-@import "visual.css";
+@import "box.less";
+@import "visual.less";
 
 @slider-width : 300px;
 @slider-peek: 8px;
+
+* {
+	box-sizing:border-box;
+}
 
 div {
 	-webkit-touch-callout: none;
@@ -19,7 +23,7 @@ div {
 }
 
 .btn {
-	padding: 4px 8px !important;
+	//  	padding: 4px 8px !important;
 }
 
 .label {
@@ -167,6 +171,11 @@ body {
 			height:38px;
 			background:rgba(200,200,200,0.11);
 			padding: 10px 0 0 5px;
+			.btn {
+				width:30px; height:20px;
+				padding:0px !important;
+				text-align:center !important;
+			}
 		}		
     }
     .slidepanel {

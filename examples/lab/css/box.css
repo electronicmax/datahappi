@@ -2,9 +2,17 @@
   cursor: move;
   padding: 5px;
   background-color: rgba(200, 200, 200, 0.11);
+  height: 30px;
+}
+.box-box-shadow {
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
 }
 .greybox {
   z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
   position: absolute;
   top: 10px;
   -webkit-transition: padding 0.5s ease-in-out;
@@ -21,7 +29,7 @@
   border-radius: 5px 5px 0px 0px;
 }
 .greybox.over {
-  padding: 20px;
+  padding: 5px;
 }
 .greybox .box-delete {
   z-index: 10;

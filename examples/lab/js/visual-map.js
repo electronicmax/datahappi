@@ -6,7 +6,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		apiKey:	'285675b50972436798d67ce55ab7ddde',
 		className:'visual-map',
 		tagName:'div',
-		template:'<div class="titlebar">Map</div><div class="map_container"><div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div></div>',
+		template:'<div class="titlebar">Map</div><div class="delete icon-cancel"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},
@@ -64,7 +64,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					$(this).find('.lbl').html('' + views.length + 'items');
 					this_.setDropzoneBox(ui.draggable.data("view"), dropzone_i);
 				}
-			});						
+			});
+			this.$el.resizable({resize:function() { this_.map.invalidateSize(false); }});
 			return this;
 		},
 		_make_popup_text:function(pathable,val) {

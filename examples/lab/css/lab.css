@@ -1,11 +1,1095 @@
 @import "fontello/fontello.css";
 
 @import "fontello/fontello-codes.css";
-
-@import "box.css";
-
-@import "visual.css";
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
+.titlebar {
+  cursor: move;
+  padding: 5px;
+  background-color: rgba(200, 200, 200, 0.11);
+  height: 30px;
+}
+.box-box-shadow {
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+}
+.greybox {
+  z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  position: absolute;
+  top: 10px;
+  -webkit-transition: padding 0.5s ease-in-out;
+  width: 340px;
+  min-width: 240px;
+  padding: 12px 20px 12px 12px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* properties */
+
+  z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  position: absolute;
+  top: 10px;
+  -webkit-transition: padding 0.5s ease-in-out;
+  width: 340px;
+  min-width: 240px;
+  padding: 12px 20px 12px 12px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* properties */
+
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px 5px 0px 0px;
+}
+.greybox.over {
+  padding: 5px;
+}
+.greybox .box-delete {
+  z-index: 10;
+  display: block;
+  float: right;
+  margin: 3px;
+  cursor: pointer;
+}
+.greybox .uplt,
+.greybox .uprt,
+.greybox .btlt,
+.greybox .btrt {
+  width: 10px;
+  height: 10px;
+}
+.greybox .uplt {
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .uprt {
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .btlt {
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .btrt {
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.greybox input:hover,
+.greybox input:focus {
+  color: black;
+}
+.greybox .microtoolbox {
+  display: none;
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 14px;
+}
+.greybox .microtoolbox span:hover {
+  color: black;
+}
+.greybox .items {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.greybox .properties {
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+  height: 58px;
+  bottom: 0px;
+  padding-top: 3px;
+  overflow: none;
+  vertical-align: top;
+  background-color: rgba(200, 200, 200, 0.11);
+}
+.greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px !important;
+  padding: 0px !important;
+  list-style-type: none !important;
+}
+.greybox .properties .propitems li.path {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding: 0px;
+  position: relative;
+}
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 15px;
+  font-size: 8pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .propitems li.path .steps .delete {
+  z-index: 10;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+}
+.greybox .properties .propitems li.path .steps select {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
+  vertical-align: middle !important;
+  font-size: 7pt !important;
+  line-height: 12px !important;
+  height: 14px !important;
+  width: 120px !important;
+}
+.greybox .properties .new-path-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.greybox .sparkhist {
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  width: 40px;
+  margin-top: -24px;
+  height: 22px;
+  text-align: right;
+}
+.greybox .sparkhist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.greybox .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.greybox .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
+}
+.greybox.over {
+  padding: 5px;
+}
+.greybox .box-delete {
+  z-index: 10;
+  display: block;
+  float: right;
+  margin: 3px;
+  cursor: pointer;
+}
+.greybox .uplt,
+.greybox .uprt,
+.greybox .btlt,
+.greybox .btrt {
+  width: 10px;
+  height: 10px;
+}
+.greybox .uplt {
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .uprt {
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .btlt {
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .btrt {
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.greybox input:hover,
+.greybox input:focus {
+  color: black;
+}
+.greybox .microtoolbox {
+  display: none;
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 14px;
+}
+.greybox .microtoolbox span:hover {
+  color: black;
+}
+.greybox .items {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.greybox .properties {
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+  height: 58px;
+  bottom: 0px;
+  padding-top: 3px;
+  overflow: none;
+  vertical-align: top;
+  background-color: rgba(200, 200, 200, 0.11);
+}
+.greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px !important;
+  padding: 0px !important;
+  list-style-type: none !important;
+}
+.greybox .properties .propitems li.path {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding: 0px;
+  position: relative;
+}
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 15px;
+  font-size: 8pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .propitems li.path .steps .delete {
+  z-index: 10;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+}
+.greybox .properties .propitems li.path .steps select {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
+  vertical-align: middle !important;
+  font-size: 7pt !important;
+  line-height: 12px !important;
+  height: 14px !important;
+  width: 120px !important;
+}
+.greybox .properties .new-path-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.greybox .sparkhist {
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  width: 40px;
+  margin-top: -24px;
+  height: 22px;
+  text-align: right;
+}
+.greybox .sparkhist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.greybox .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.greybox .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
+}
+.simple {
+  font-size: 8pt;
+  padding: 4px;
+  width: 20px;
+}
+.box_container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.map_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.titlebar {
+  cursor: move;
+  padding: 5px;
+  background-color: rgba(200, 200, 200, 0.11);
+  height: 30px;
+}
+.box-box-shadow {
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+}
+.greybox {
+  z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  position: absolute;
+  top: 10px;
+  -webkit-transition: padding 0.5s ease-in-out;
+  width: 340px;
+  min-width: 240px;
+  padding: 12px 20px 12px 12px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* properties */
+
+  z-index: 5;
+  background-color: rgba(250, 250, 250, 0.81);
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  position: absolute;
+  top: 10px;
+  -webkit-transition: padding 0.5s ease-in-out;
+  width: 340px;
+  min-width: 240px;
+  padding: 12px 20px 12px 12px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* properties */
+
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px 5px 0px 0px;
+}
+.greybox.over {
+  padding: 5px;
+}
+.greybox .box-delete {
+  z-index: 10;
+  display: block;
+  float: right;
+  margin: 3px;
+  cursor: pointer;
+}
+.greybox .uplt,
+.greybox .uprt,
+.greybox .btlt,
+.greybox .btrt {
+  width: 10px;
+  height: 10px;
+}
+.greybox .uplt {
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .uprt {
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .btlt {
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .btrt {
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.greybox input:hover,
+.greybox input:focus {
+  color: black;
+}
+.greybox .microtoolbox {
+  display: none;
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 14px;
+}
+.greybox .microtoolbox span:hover {
+  color: black;
+}
+.greybox .items {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.greybox .properties {
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+  height: 58px;
+  bottom: 0px;
+  padding-top: 3px;
+  overflow: none;
+  vertical-align: top;
+  background-color: rgba(200, 200, 200, 0.11);
+}
+.greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px !important;
+  padding: 0px !important;
+  list-style-type: none !important;
+}
+.greybox .properties .propitems li.path {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding: 0px;
+  position: relative;
+}
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 15px;
+  font-size: 8pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .propitems li.path .steps .delete {
+  z-index: 10;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+}
+.greybox .properties .propitems li.path .steps select {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
+  vertical-align: middle !important;
+  font-size: 7pt !important;
+  line-height: 12px !important;
+  height: 14px !important;
+  width: 120px !important;
+}
+.greybox .properties .new-path-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.greybox .sparkhist {
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  width: 40px;
+  margin-top: -24px;
+  height: 22px;
+  text-align: right;
+}
+.greybox .sparkhist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.greybox .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.greybox .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
+}
+.greybox.over {
+  padding: 5px;
+}
+.greybox .box-delete {
+  z-index: 10;
+  display: block;
+  float: right;
+  margin: 3px;
+  cursor: pointer;
+}
+.greybox .uplt,
+.greybox .uprt,
+.greybox .btlt,
+.greybox .btrt {
+  width: 10px;
+  height: 10px;
+}
+.greybox .uplt {
+  border-left: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.greybox .uprt {
+  border-right: 1px solid #44aaff;
+  border-top: 1px solid #44aaff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.greybox .btlt {
+  border-bottom: 1px solid #44aaff;
+  border-left: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.greybox .btrt {
+  border-bottom: 1px solid #44aaff;
+  border-right: 1px solid #44aaff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.greybox input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.greybox input:hover,
+.greybox input:focus {
+  color: black;
+}
+.greybox .microtoolbox {
+  display: none;
+  color: rgba(0, 0, 50, 0.6);
+  text-align: right;
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  font-size: 14px;
+}
+.greybox .microtoolbox span:hover {
+  color: black;
+}
+.greybox .items {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.greybox .properties {
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+  height: 58px;
+  bottom: 0px;
+  padding-top: 3px;
+  overflow: none;
+  vertical-align: top;
+  background-color: rgba(200, 200, 200, 0.11);
+}
+.greybox .properties .propitems {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px !important;
+  padding: 0px !important;
+  list-style-type: none !important;
+}
+.greybox .properties .propitems li.path {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding: 0px;
+  position: relative;
+}
+.greybox .properties .propitems li.path .steps {
+  padding: 0px 0px 1px 15px;
+  font-size: 8pt !important;
+  vertical-align: middle !important;
+}
+.greybox .properties .propitems li.path .steps * {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.greybox .properties .propitems li.path .steps .delete {
+  z-index: 10;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+}
+.greybox .properties .propitems li.path .steps select {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  color: black !important;
+  vertical-align: middle !important;
+  font-size: 7pt !important;
+  line-height: 12px !important;
+  height: 14px !important;
+  width: 120px !important;
+}
+.greybox .properties .new-path-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.greybox .sparkhist {
+  z-index: 1000;
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  width: 40px;
+  margin-top: -24px;
+  height: 22px;
+  text-align: right;
+}
+.greybox .sparkhist div.bars-horizontal {
+  overflow: hidden;
+  font: 8px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  height: 12px;
+  color: white;
+  line-height: 1.5em;
+}
+.greybox .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.greybox .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
+}
+.simple {
+  font-size: 8pt;
+  padding: 4px;
+  width: 20px;
+}
+.box_container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.map_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.fullsize {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual,
+.visual-map {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgba(250, 250, 250, 0.81);
+}
+.visual .delete,
+.visual-map .delete {
+  z-index: 1000;
+  color: black;
+  position: absolute;
+  top: 2px;
+  margin: 0px;
+  padding: 0px;
+  right: 8px;
+  font-size: 1.7em;
+}
+.visual {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(190, 180, 0, 0.2);
+  /*
+	.yaxis {
+		.droparea;
+		transform: rotate(90deg);
+		left:30px; top:0px; width:@visual-height - 1; height:@visual-x-height;			
+		-webkit-transform: rotate(90deg);
+		transform-origin:0% 0%;
+		-webkit-transform-origin:0% 0%;
+		top:0px;
+		z-index:5;
+		.lbl {	}			
+	}*/
+
+}
+.visual.over {
+  border: 2px solid rgba(50, 255, 50, 0.8);
+}
+.visual .corner_thingy {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 100;
+}
+.visual svg.plot {
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual svg.plot rect {
+  fill: rgba(20, 100, 20, 0.4);
+}
+.visual .droparea {
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+}
+.visual .droparea .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .droparea.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.3);
+}
+.visual .xaxis {
+  display: none;
+  position: absolute;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  font-size: 0.8em;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 30px;
+}
+.visual .xaxis .lbl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.visual .xaxis.over {
+  box-shadow: inset 0 0 5px green;
+  background-color: rgba(100, 250, 100, 0.3);
+}
+.visual-map {
+  position: absolute !important;
+  width: 350px;
+  height: 300px;
+  padding: 0px;
+  margin: 0px;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+  -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
+  box-shadow: 1px 1px 10px 1px #f0e8f0;
+}
+.visual-map .map-zone {
+  opacity: 0.95;
+  position: absolute !important;
+  padding: 0px;
+  margin: 0px;
+  top: 30px;
+  left: 18px;
+  right: 0px;
+  bottom: 0px;
+}
+.visual-map .dropzones {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  width: 18px;
+  bottom: 0px;
+}
+.visual-map .dropzones .dropzone {
+  -webkit-transition: all 1s ease-in-out;
+  display: inline-block;
+  width: 100%;
+  height: 25%;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}
+.visual-map .dropzones .dropzone .lbl {
+  -webkit-transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  -webkit-transform-origin: 0% 0%;
+  font-size: 0.8em;
+}
+.visual-map .dropzones .dropzone.over {
+  padding: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  background-color: rgba(200, 200, 200, 0.1);
+}
+.visual-map .leaflet-control-attribution {
+  display: none !important;
+}
+.dropzone-0 {
+  background-color: rgba(0, 0, 255, 0.050000000000000044);
+}
+.dropzone-0.dropzone {
+  border-left: 1px solid #0000ff !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(0, 0, 255, 0.09999999999999998);
+}
+.dropzone-0 .uplt {
+  border-left: 1px solid #0000ff !important;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .uprt {
+  border-right: 1px solid #0000ff;
+  border-top: 1px solid #0000ff !important;
+}
+.dropzone-0 .btlt {
+  border-bottom: 1px solid #0000ff !important;
+  border-left: 1px solid #0000ff !important;
+}
+.dropzone-0 .btrt {
+  border-bottom: 1px solid #0000ff !important;
+  border-right: 1px solid #0000ff !important;
+}
+.dropzone-1 {
+  background-color: rgba(255, 165, 0, 0.050000000000000044);
+}
+.dropzone-1.dropzone {
+  border-left: 1px solid #ffa500 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(255, 165, 0, 0.09999999999999998);
+}
+.dropzone-1 .uplt {
+  border-left: 1px solid #ffa500 !important;
+  border-top: 1px solid #ffa500 !important;
+}
+.dropzone-1 .uprt {
+  border-right: 1px solid #ffa500;
+  border-top: 1px solid #ffa500 !important;
+}
+.dropzone-1 .btlt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-left: 1px solid #ffa500 !important;
+}
+.dropzone-1 .btrt {
+  border-bottom: 1px solid #ffa500 !important;
+  border-right: 1px solid #ffa500 !important;
+}
+.dropzone-2 {
+  background-color: rgba(0, 128, 0, 0.050000000000000044);
+}
+.dropzone-2.dropzone {
+  border-left: 1px solid #008000 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(0, 128, 0, 0.09999999999999998);
+}
+.dropzone-2 .uplt {
+  border-left: 1px solid #008000 !important;
+  border-top: 1px solid #008000 !important;
+}
+.dropzone-2 .uprt {
+  border-right: 1px solid #008000;
+  border-top: 1px solid #008000 !important;
+}
+.dropzone-2 .btlt {
+  border-bottom: 1px solid #008000 !important;
+  border-left: 1px solid #008000 !important;
+}
+.dropzone-2 .btrt {
+  border-bottom: 1px solid #008000 !important;
+  border-right: 1px solid #008000 !important;
+}
+.dropzone-3 {
+  background-color: rgba(255, 0, 0, 0.050000000000000044);
+}
+.dropzone-3.dropzone {
+  border-left: 1px solid #ff0000 !important;
+  border-top: 1px solid rgba(200, 200, 200, 0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+  background-color: rgba(255, 0, 0, 0.09999999999999998);
+}
+.dropzone-3 .uplt {
+  border-left: 1px solid #ff0000 !important;
+  border-top: 1px solid #ff0000 !important;
+}
+.dropzone-3 .uprt {
+  border-right: 1px solid #ff0000;
+  border-top: 1px solid #ff0000 !important;
+}
+.dropzone-3 .btlt {
+  border-bottom: 1px solid #ff0000 !important;
+  border-left: 1px solid #ff0000 !important;
+}
+.dropzone-3 .btrt {
+  border-bottom: 1px solid #ff0000 !important;
+  border-right: 1px solid #ff0000 !important;
+}
+* {
+  box-sizing: border-box;
+}
 div {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -13,9 +1097,6 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-.btn {
-  padding: 4px 8px !important;
 }
 .label {
   color: #555;
@@ -198,6 +1279,12 @@ body .workspace .toolbar {
   height: 38px;
   background: rgba(200, 200, 200, 0.11);
   padding: 10px 0 0 5px;
+}
+body .workspace .toolbar .btn {
+  width: 30px;
+  height: 20px;
+  padding: 0px !important;
+  text-align: center !important;
 }
 body .slidepanel {
   padding: 6px 5px 3px 0px;

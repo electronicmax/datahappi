@@ -5,27 +5,35 @@
 @propsheight : 130px;
 @propertybordercolor: #aef;
 @nicegrey : rgba(200,200,200,0.11);
+@titlebar-height:30px;
 
 .titlebar {
 	cursor: move;
 	padding: 5px;
 	background-color: @nicegrey;
+	height:@titlebar-height;
+}
+
+.box-box-shadow {
+	-webkit-box-shadow:1px 1px 10px 1px #f0e8f0;
+	box-shadow:1px 1px 10px 1px #f0e8f0;
 }
 
 .box(@bordercolor: #4af) {
 	z-index:5;
+	background-color:rgba(250,250,250,0.81);
+	.box-box-shadow;
 	position:absolute;
 	top:10px;
 	-webkit-transition: padding 0.5s ease-in-out;
 	width:@boxwidth;
 	min-width:@boxminwidth;
-	// border-right:1px solid @propertybordercolor;      
 	padding:12px 20px 12px 12px;
 	height:@boxheight;
 	overflow-x:hidden;
 	overflow-y:hidden;
-	&.over { padding:20px;  }
-//	&:hover .box-delete { display:block; }
+	&.over { padding:5px;  }
+	//	&:hover .box-delete { display:block; }
 	.box-delete {
 		z-index:10;
 		display:block;
