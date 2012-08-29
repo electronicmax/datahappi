@@ -119,6 +119,8 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					this_.setSeries( ui.draggable.data("views")() );	
 				}				
 			});
+			// omg resizing!
+			this.$el.resizable();
 			return this;
 		}
 	});
