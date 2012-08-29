@@ -7,7 +7,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 	var Visual = VisualBase.extend({
 		className:'visual',
 		tagName:'div',
-		template:'<div class="delete icon-cancel"></div><div class="uplt"></div><div class="uprt"></div><div class="btlt"></div><div class="btrt"></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
+		template:'<div class="titlebar">Plot<div class="delete icon-cancel"></div></div><div style="position:relative;height: 100%;width: 100%;"><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg></div>',
 		events : {
 			'click .delete' : '_cb_delete'
 		},
