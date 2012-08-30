@@ -1,7 +1,7 @@
 define(['js/models', 'js/utils'], function(models, utils) {
 
 	var defined = utils.DEFINED;
-	
+	var zones = [0,1,2,3];	
 	var MapVisual = Backbone.View.extend({
 		apiKey:	'285675b50972436798d67ce55ab7ddde',
 		className:'visual-map',
@@ -23,11 +23,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
 			this.brushed = [];
-			this.on('brush', function(entity) {
-					_(this_.dropzone_boxes).values().map(function(dzb) {
-						if (defined(dzb)) {	dzb.views_collection.trigger('brush_visual', entity); }
-					});
-				})
+			this.on('brush', function(entity) {})
 				.on('unbrush', function(entity) {
 					_(this_.dropzone_boxes).values().map(function(dzb) {
 						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush_visual', entity);}							
@@ -93,7 +89,6 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		update:function() {
 			console.log('update() :: brushables ', this.brushed.length);
 			var this_ = this;
-			var zones = [0,1,2,3];
 			
 			// only works upon attachment
 			if (_(this.map).isUndefined() && $('body').find(this.$el[0]).length)  {			
@@ -147,9 +142,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					new L.LatLng(Math.min(point.lat, minll.lat),Math.min(point.lng, minll.lng)),
 					new L.LatLng(Math.max(point.lat, maxll.lat),Math.max(point.lng, maxll.lng))
 				);									
-			};
-
-			
+			};			
 			var geovaltoLatLng = function(geoval) {
 				return new L.LatLng(geoval.geo.lat,geoval.geo.long);
 			};
@@ -170,8 +163,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					if (!defined(markers[vi])) {
 						markers[vi] = (new L.Marker(position, {icon:this_.marker_icons[i]}));
 						markers[vi].addTo(this_.map)
-							.on('mouseover', function() { this_.trigger('brush', geoval.model); })
-							.on('mouseout', function() { this_.trigger('unbrush', geoval.model); });
+							.on('mouseover', function() { this_._trigger_brush_event('brush_visual', geoval.model); })
+							.on('mouseout', function() { this_._trigger_brush_event('unbrush_visual', geoval.model);  });
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
 					} else {
 						markers[vi].setLatLng(position);
@@ -189,7 +182,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				geovaltoLatLng(get_geo_values(this.brushed)[0]) :
 				last_position;
 			
-			if (!within_bounds(focus_point, this.map.getBounds())) {
+			if (defined(focus_point) && !within_bounds(focus_point, this.map.getBounds())) {
 				this.map.fitBounds(enlargeBounds(focus_point, this.map.getBounds()));
 			}
 			return this;
@@ -197,42 +190,59 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		_get_class_for_dropzone:function(i) {
 			return 'dropzone-'+i;
 		},
-		_brush_pathable:function(pathable) {
-			console.log('updating map brushed based upon pathables to be ', pathable.model.id);
-			this.brushed.push(pathable);
-			this.update();
-		},
-		_unbrush_pathable:function(pathable) {
-			console.log('unbrushing based upon pathables to be ', pathable.model.id);			
-			this.brushed = _(this.brushed).without(pathable);
-			this.update();
-		},
 		setDropzoneBox:function(box, dropzone_i) {
 			var this_ = this, dropzone_class = this._get_class_for_dropzone(dropzone_i);
 			if (defined(this.dropzone_boxes[dropzone_i])) {
+				console.log('unsubscribing for ', dropzone_i);
 				var oldbox = this.dropzone_boxes[dropzone_i];
 				oldbox.$el.removeClass(dropzone_class);
 				oldbox.pathables.off(null, null, this);
 				oldbox.off(null,null,this);
 				delete this.dropzone_boxes[dropzone_i];
-				this_.update();							
 			}
 			if (defined(box)) {
 				this.dropzone_boxes[dropzone_i] = box;
 				box.on('delete', function() {
 					this_.setDropzoneBox(undefined, dropzone_i);
 				}, this);
-				box.pathables.on('add remove', function(eventType) { this_.update(); }, this);
 				box.pathables
-					.on('brush_pathable', function(pathable) { this_._brush_pathable(pathable); })
-					.on('unbrush_pathable', function(pathable) { this_._unbrush_pathable(pathable); });
+					.on('add remove', function(eventType) {
+						console.log('add remove update ');
+						this_.update();
+					}, this)
+					.on('brush_pathable', function(pathable) {
+						console.log('brush update ');
+						this_._brush_pathable(pathable);
+					}, this)
+					.on('unbrush_pathable', function(pathable) {
+						console.log('unbrush update ');
+						this_._unbrush_pathable(pathable);
+					}, this);
 				box.$el.addClass(dropzone_class);
-				this_.update();							
 			}
+			this_.update();							
 		},
 		_cb_delete:function() {
+			var this_ = this;
+			zones.map(function(x) { this_.setDropzoneBox(null,x); });
 			this.trigger('delete');
 			this.$el.remove();
+		},
+		_brush_pathable:function(pathable) {
+			// incoming brush from the view -> 
+			this.brushed.push(pathable);
+			this.update();
+		},
+		_unbrush_pathable:function(pathable) {
+			// incoming unbrush from the view
+			this.brushed = _(this.brushed).without(pathable);
+			this.update();
+		},
+		_trigger_brush_event:function(eventType, entity) {
+			var this_ = this;
+			_(this.dropzone_boxes).values().map(function(dzb) {
+				if (defined(dzb)) {	dzb.views_collection.trigger(eventType, entity); }
+			});			
 		}
 	});
 

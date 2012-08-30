@@ -23,16 +23,17 @@ define(['js/utils'], function(utils) {
 					return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??';
 				})
 				.on('mouseover', function(d) {
-					this_.trigger('brush', { pathables: d.series_pathables, value: d.series_val });
+					d.series_pathables.map(function(pathable) {	pathable.trigger('brush_visual', pathable); });
 				})
 				.on('mouseout', function(d) {
-					this_.trigger('unbrush', { pathables: d.series_pathables, value: d.series_val });
+					d.series_pathables.map(function(pathable) {	pathable.trigger('unbrush_visual', pathable); });
 				});
 			
 			// update selection
 			svg_p
 				.selectAll('rect')
 				.data(data)
+				.attr('class', function(d) { return d.brush ? 'brush' : ''; })
 				.attr('y', function(d,i) { return height - yscale(d.numeric); })
 				.attr('x', function(d,i) { return i*(barwidth); })
 				.attr('height', function(d) { return yscale(d.numeric); })

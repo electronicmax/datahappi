@@ -32,6 +32,12 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				this.options.series.on('all', function() { this_._update_plot(); }, this);
 			}
 		},
+		_handle_brush_pathable:function(pathable) {
+			this.brush = pathable;
+		},
+		_handle_unbrush_pathable:function() {
+			delete this.brush;
+		},
 		setData:function(s) {
 			console.log('setting views  ', s);
 			if (this.options.views) {
@@ -40,7 +46,11 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			var this_ = this;
 			this.options.views = s;
 			if (defined(this.options.views)) {
-				this.options.views.on('all', function(eventType) { this_._update_plot(); }, this);
+				this.options.views.on('all', function(eventType, pathable) {
+					if (eventType == 'brush_pathable') { this_._handle_brush_pathable(pathable);	}
+					if (eventType == 'unbrush_pathable') { this_._handle_unbrush_pathable(pathable);	} 					
+					this_._update_plot();
+				}, this);
 			}
 			this_._update_plot();
 		},
@@ -71,11 +81,14 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			var models = this.options.views.map(function(view) { return view.options.model; });
 			var engine = this.options.engines.filter(function(engine) { return engine.test(models) });
 			if (engine.length > 0) {
-				console.log("Using engine ", engine[0].id);
 				var data = engine[0].generate_data(
 					this.options.views.map(function(x) { return x.options.model; }),
 					defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
 				);
+				if (defined(this_.brush)) {
+					console.log('defined brush ', this_.brush);
+					data.filter(function(datum) { return datum.model == this_.brush }).map(function(X) { X.brush = true; });
+				}
 				console.log(" data >> ", data);
 				this.options.plotter.render(data);
 			} else {
