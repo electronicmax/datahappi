@@ -10,7 +10,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			if (this.options.model) { this.options.model.off(null, null, this);	}
 			m.on('all',function(eventName, x) {
 				this_.render();
-				this_.trigger(eventName, x);
+				// this_.trigger(eventName, x);
 			}, this);
 			this.options.model = m;			
 		},
@@ -41,6 +41,8 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		template:pathableview_templ,
 		className:'pathable-view',
 		events:{
+			'mouseenter' : '_trigger_brush',
+			'mouseleave' : '_trigger_unbrush',			
 			'click .delete' : '_cb_delete',
 			'click .proplabel' : '_prop_select'
 		},
@@ -123,6 +125,12 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			// determines the properties of a particular value --
 			if (v instanceof Backbone.Model) { return v.keys(); }
 			return [];
+		},
+		_trigger_brush:function() {
+			this.options.model.trigger('brush_pathable', this.options.model);
+		},
+		_trigger_unbrush:function() {
+			this.options.model.trigger('unbrush_pathable', this.options.model);
 		},
 		_add_sameas_behaviour:function() {
 			// make _el_ droppable -- with a clear warning

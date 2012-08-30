@@ -38,11 +38,11 @@ define(
 						.resizable({});					
 			
 					this.views_collection
-						.on('brush', function(model) {
+						.on('brush_visual', function(model) {
 							model = _(model).isArray() ? model : [model];
 							this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
 						})
-						.on('unbrush', function(model) {
+						.on('unbrush_visual', function(model) {
 							model = _(model).isArray() ? model : [model];						
 							this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
 						});

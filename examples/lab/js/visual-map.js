@@ -22,14 +22,15 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.options = _.extend(this.defaults, this.options);
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
+			this.brushed = [];
 			this.on('brush', function(entity) {
 					_(this_.dropzone_boxes).values().map(function(dzb) {
-						if (defined(dzb)) {	dzb.views_collection.trigger('brush', entity); }
+						if (defined(dzb)) {	dzb.views_collection.trigger('brush_visual', entity); }
 					});
 				})
 				.on('unbrush', function(entity) {
 					_(this_.dropzone_boxes).values().map(function(dzb) {
-						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush', entity);}							
+						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush_visual', entity);}							
 					});
 				});
 		},
@@ -90,6 +91,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			return;
 		},
 		update:function() {
+			console.log('update() :: brushables ', this.brushed.length);
 			var this_ = this;
 			var zones = [0,1,2,3];
 			
@@ -105,24 +107,17 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					}).addTo(this.map);
 			}
 
-			if (_(this.map).isUndefined()) {
-				console.log('map is undefined :( '); return;
-			}
+			if (_(this.map).isUndefined()) { console.log('map is undefined :( '); return;}
 
 			var remove_markers = function(markers) {
 				if (markers.length == 0) { return; }
-				console.log('removing markers', markers.map(function(x) { return x; }));				
 				_(markers).each(function(marker, kk) {
 					if (defined(marker)) {
-						console.log("MARKER TO REMOVE ", marker);
-						window.marker = marker;
-						window.map = this_.map;
 						this_.map.removeLayer(marker);							
 						delete markers[kk];
 					}				
 				});
 			};
-
 			var get_geo_values = function(pathables) {
 				return utils.flatten(pathables.map(
 					function(pathable) {
@@ -132,8 +127,36 @@ define(['js/models', 'js/utils'], function(models, utils) {
 						}).filter(defined);
 					}));
 			};
+
+			var updateLatLng = function(op) {
+				return function(old, position) {
+					if (old === undefined) return position;
+					return new L.LatLng( op(old.lat, position.lat), op(old.lng, position.lng) );
+				};
+			},
+			updateMaxLatLng = updateLatLng(Math.max),
+			updateMinLatLng = updateLatLng(Math.min);
+			var within_bounds = function(point, boundingbox) {
+				var minll = boundingbox.getSouthWest(), maxll = boundingbox.getNorthEast();
+				return point.lat >= minll.lat && point.lat <= maxll.lat &&
+					point.lng >= minll.lng && point.lng <= maxll.lng;
+			};
+			var enlargeBounds = function(point,boundingbox) {
+				var minll = boundingbox.getSouthWest(), maxll = boundingbox.getNorthEast();
+				return new L.LatLngBounds(
+					new L.LatLng(Math.min(point.lat, minll.lat),Math.min(point.lng, minll.lng)),
+					new L.LatLng(Math.max(point.lat, maxll.lat),Math.max(point.lng, maxll.lng))
+				);									
+			};
+
 			
-			var last_position;			
+			var geovaltoLatLng = function(geoval) {
+				return new L.LatLng(geoval.geo.lat,geoval.geo.long);
+			};
+
+			var reset_view = false;
+			var last_position;
+			var minLatLng, maxLatLng;
 			// make some markers for each of the dropzone_boxes!
 			zones.map(function(i) {
 				var box = defined(this_.dropzone_boxes[i]) ? this_.dropzone_boxes[i].pathables : [];
@@ -141,7 +164,9 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				var markers = this_.markers_by_box[i];
 				var geovalues = get_geo_values(box);
 				_(geovalues).each(function(geoval, vi) {
-					var position = new L.LatLng(geoval.geo.lat,geoval.geo.long);					
+					var position = geovaltoLatLng(geoval);
+					minLatLng = updateMinLatLng(minLatLng, position);
+					maxLatLng = updateMaxLatLng(maxLatLng, position);
 					if (!defined(markers[vi])) {
 						markers[vi] = (new L.Marker(position, {icon:this_.marker_icons[i]}));
 						markers[vi].addTo(this_.map)
@@ -151,20 +176,36 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					} else {
 						markers[vi].setLatLng(position);
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
-						markers[vi].update();
 					}
+					markers[vi].setOpacity(this_.brushed.length == 0 || this_.brushed.indexOf(geoval.model) >= 0 ? 1.0 : 0.3);
+					markers[vi].update();
 					last_position = position;
 				});
 				// exit selection
 				remove_markers(markers.slice(geovalues.length));
 				this_.markers_by_box[i] = markers.slice(0,geovalues.length);
 			});
-
-			if (!_(last_position).isUndefined()) { this.map.panTo(last_position); }
+			var focus_point = this.brushed.length > 0 && get_geo_values(this.brushed).length ?
+				geovaltoLatLng(get_geo_values(this.brushed)[0]) :
+				last_position;
+			
+			if (!within_bounds(focus_point, this.map.getBounds())) {
+				this.map.fitBounds(enlargeBounds(focus_point, this.map.getBounds()));
+			}
 			return this;
 		},
 		_get_class_for_dropzone:function(i) {
 			return 'dropzone-'+i;
+		},
+		_brush_pathable:function(pathable) {
+			console.log('updating map brushed based upon pathables to be ', pathable.model.id);
+			this.brushed.push(pathable);
+			this.update();
+		},
+		_unbrush_pathable:function(pathable) {
+			console.log('unbrushing based upon pathables to be ', pathable.model.id);			
+			this.brushed = _(this.brushed).without(pathable);
+			this.update();
 		},
 		setDropzoneBox:function(box, dropzone_i) {
 			var this_ = this, dropzone_class = this._get_class_for_dropzone(dropzone_i);
@@ -181,7 +222,10 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				box.on('delete', function() {
 					this_.setDropzoneBox(undefined, dropzone_i);
 				}, this);
-				box.pathables.on('all', function(eventType) { this_.update(); }, this);
+				box.pathables.on('add remove', function(eventType) { this_.update(); }, this);
+				box.pathables
+					.on('brush_pathable', function(pathable) { this_._brush_pathable(pathable); })
+					.on('unbrush_pathable', function(pathable) { this_._unbrush_pathable(pathable); });
 				box.$el.addClass(dropzone_class);
 				this_.update();							
 			}
