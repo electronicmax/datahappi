@@ -5,19 +5,26 @@
 @propsheight : 130px;
 @propertybordercolor: #aef;
 @nicegrey : rgba(200,200,200,0.11);
-@titlebar-height:30px;
+@titlebar-height:23px;
 
 .titlebar {
 	cursor: move;
-	padding: 5px;
+	padding: 2px 3px 2px 5px;
 	background-color: @nicegrey;
 	height:@titlebar-height;
+    font-size:0.9em;
 }
 
 .box-box-shadow {
 	-webkit-box-shadow:1px 1px 10px 1px #f0e8f0;
 	box-shadow:1px 1px 10px 1px #f0e8f0;
 }
+.standard-delete-box {
+    z-index:10;
+	position:absolute;
+	top:3px; right:2px;
+    cursor: pointer;
+}                    
 
 .box(@bordercolor: #4af) {
 	z-index:5;
@@ -35,14 +42,7 @@
 	&.over { padding:5px;  }
 	//	&:hover .box-delete { display:block; }
 	.box-delete {
-		z-index:10;
-		display:block;
-		//position:absolute;
-		//top:7px; right:10px;
-		//font-size:1.2em;
-        float: right;
-        margin: 3px;
-        cursor: pointer;
+        .standard-delete-box;
 	}
 	
 	.uplt, .uprt, .btlt, .btrt {

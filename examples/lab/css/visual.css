@@ -1,12 +1,20 @@
 .titlebar {
   cursor: move;
-  padding: 5px;
+  padding: 2px 3px 2px 5px;
   background-color: rgba(200, 200, 200, 0.11);
-  height: 30px;
+  height: 23px;
+  font-size: 0.9em;
 }
 .box-box-shadow {
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
+}
+.standard-delete-box {
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
 }
 .greybox {
   z-index: 5;
@@ -33,9 +41,9 @@
 }
 .greybox .box-delete {
   z-index: 10;
-  display: block;
-  float: right;
-  margin: 3px;
+  position: absolute;
+  top: 3px;
+  right: 2px;
   cursor: pointer;
 }
 .greybox .uplt,
@@ -237,14 +245,11 @@
 }
 .visual .delete,
 .visual-map .delete {
-  z-index: 1000;
-  color: black;
+  z-index: 10;
   position: absolute;
-  top: 2px;
-  margin: 0px;
-  padding: 0px;
-  right: 8px;
-  font-size: 1.7em;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
 }
 .visual {
   position: relative;
@@ -275,7 +280,7 @@
 }
 .visual svg.plot {
   position: absolute;
-  top: 30px;
+  top: 23px;
   left: 0px;
   right: 0px;
   bottom: 0px;
@@ -338,7 +343,7 @@
   position: absolute !important;
   padding: 0px;
   margin: 0px;
-  top: 30px;
+  top: 23px;
   left: 18px;
   right: 0px;
   bottom: 0px;
@@ -347,7 +352,7 @@
   padding: 0px;
   margin: 0px;
   position: absolute;
-  top: 30px;
+  top: 23px;
   left: 0px;
   width: 18px;
   bottom: 0px;
