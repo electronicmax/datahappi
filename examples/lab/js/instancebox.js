@@ -64,7 +64,7 @@ define(
 								this_.add(new view.PathableView({model:model}));
 							} else if (defined(ui.draggable.data('views'))) {
 								this_.add(ui.draggable.data('views')().map(function(vv) {
-									return new view.PathableView({model:vv.options.model})
+									return new view.PathableView({model:vv.options.model.clone()})
 								}));
 							}
 						}
