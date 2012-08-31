@@ -940,6 +940,15 @@
 .visual svg.plot rect.brush {
   fill: rgba(20, 100, 20, 0.8);
 }
+.visual svg.plot text.barlabel {
+  fill: rgba(120, 120, 120, 0.4);
+}
+.visual svg.plot text.valuedisplay {
+  font-size: 16pt;
+}
+.visual svg.plot text.value-label {
+  font-size: 10pt;
+}
 .visual .droparea {
   position: absolute;
   border-top: 1px solid rgba(200, 200, 200, 0.4);

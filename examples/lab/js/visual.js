@@ -38,10 +38,10 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		},
 		_handle_unbrush_pathable:function() { delete this.brush;	},
 		setData:function(s) {
+			var this_ = this;			
 			if (this.options.views) {
 				this.options.views.off(null, null, this);
 			}
-			var this_ = this;
 			this.options.views = s;
 			if (defined(this.options.views)) {
 				this.options.views.on('all', function(eventType, pathable) {
@@ -62,10 +62,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			var plot = d3.select(this.el).select('svg.plot');
 			
 			if (!(defined(this.options.views))) {
-				plot.selectAll('text').data([1]).enter()
-					.append('text')
-					.attr('x', 30).attr('y',50)				
-					.text('drag some data in my zones');				
+				if (defined(this.options.plotter)) {
+					this.options.plotter.render([]);
+				}
 				return;
 			}
 			d3.selectAll('text').remove();
@@ -78,7 +77,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 						if (['brush_visuals', 'unbrush_visuals'].indexOf(event) < 0) { return; }
 						var evt = event.slice(0,event.length - 1);
 						// TRIGGER off of the view colleciton, where we'll be listening for it later.
-						pathables.map(function(p) {	this_.options.views.trigger(evt,p);	});
+						pathables.map(function(p) {
+							this_.options.views.trigger(evt,p);
+						});
 					}, this);
 			}
 			var models = this.options.views.map(function(view) { return view.options.model; });
@@ -121,6 +122,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				drop: function( event, ui ) {
 					if (defined(ui.draggable.data('view'))) {
 						ui.draggable.data('view').on('delete', function() {
+							console.log('got a destruct event on associated box >>>>>>>>>>>>>>>>>> ');
 							this_.setData(undefined);
 						});
 					}
