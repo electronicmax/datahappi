@@ -123,6 +123,7 @@
   bottom: 68px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 15px;
 }
 .greybox .properties {
   position: absolute;

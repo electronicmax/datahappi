@@ -1,4 +1,4 @@
-define(['examples/lab/js/views','examples/lab/js/box','js/utils'],function(views,box,utils) {
+define(['examples/lab/js/views','examples/lab/js/view-collection','examples/lab/js/box','js/utils'],function(views,view_collection,box,utils) {
 	var flatten = utils.flatten, defined = utils.DEFINED, deferred = utils.deferred, when = utils.when, hash = utils.hash;
 	var InventoryView = Backbone.View.extend({
 		className:'inventory',
@@ -46,7 +46,7 @@ define(['examples/lab/js/views','examples/lab/js/box','js/utils'],function(views
 					var views = $.makeArray(
 						subcollection_$el.find('.items').children().map(function(x) { return $(this).data('view'); })
 					);
-					var vc = new box.ViewCollection();
+					var vc = new view_collection.ViewCollection();
 					vc.add(views);
 					return vc;
 				};										

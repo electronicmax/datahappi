@@ -11,7 +11,6 @@ define(['examples/lab/js/visual','js/utils'],function(visual,utils) {
 			return this.options.views.map(function(x) {	return x.options.model;	});
 		},
 		render:function() {
-			console.log('hist.render >> ');
 			var data = this._get_counts(this.options.views);
 			var barwidth = 4;
 			var height = 20;

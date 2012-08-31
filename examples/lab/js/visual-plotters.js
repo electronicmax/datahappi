@@ -22,12 +22,8 @@ define(['js/utils'], function(utils) {
 				.attr('data-val', function(d) {
 					return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??';
 				})
-				.on('mouseover', function(d) {
-					d.series_pathables.map(function(pathable) {	pathable.trigger('brush_visual', pathable); });
-				})
-				.on('mouseout', function(d) {
-					d.series_pathables.map(function(pathable) {	pathable.trigger('unbrush_visual', pathable); });
-				});
+				.on('mouseover', function(d) { this_.trigger('brush_visuals', d.series_pathables); })
+				.on('mouseout', function(d) { this_.trigger('unbrush_visuals', d.series_pathables); });
 			
 			// update selection
 			svg_p
@@ -37,7 +33,7 @@ define(['js/utils'], function(utils) {
 				.attr('y', function(d,i) { return height - yscale(d.numeric); })
 				.attr('x', function(d,i) { return i*(barwidth); })
 				.attr('height', function(d) { return yscale(d.numeric); })
-				.attr('width', barwidth);
+				.attr('width', barwidth > 6 ? barwidth - 4 : barwidth);
 
 			// exit selection
 			svg_p

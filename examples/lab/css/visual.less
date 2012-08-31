@@ -39,7 +39,12 @@
 	svg.plot {
 		position:absolute;
 		top:@titlebar-height; left:0px; right:0px; bottom:0px;
-		rect {	fill:rgba(20,100,20,0.4);	}
+		rect {
+			fill:rgba(20,100,20,0.3);
+			&.brush {
+				fill:rgba(20,100,20,0.8);
+			}
+		}
 	}
 	.droparea {
 		position:absolute;

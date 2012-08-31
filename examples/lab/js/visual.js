@@ -33,13 +33,11 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			}
 		},
 		_handle_brush_pathable:function(pathable) {
+			if (defined(pathable)) { console.log(" BRUSH PATHABLE ", pathable); };
 			this.brush = pathable;
 		},
-		_handle_unbrush_pathable:function() {
-			delete this.brush;
-		},
+		_handle_unbrush_pathable:function() { delete this.brush;	},
 		setData:function(s) {
-			console.log('setting views  ', s);
 			if (this.options.views) {
 				this.options.views.off(null, null, this);
 			}
@@ -71,12 +69,17 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				return;
 			}
 			d3.selectAll('text').remove();
+
 			
 			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
 				this.options.plotter = new this.options.plotter_class({el:plot[0]});
-				this.options.plotter.on('all', function(brushtype, pathable_combo) {
-					this_.options.views.trigger(brushtype, pathable_combo.pathables);
-				}, this);
+				this.options.plotter
+					.on('all', function(event, pathables) {
+						if (['brush_visuals', 'unbrush_visuals'].indexOf(event) < 0) { return; }
+						var evt = event.slice(0,event.length - 1);
+						// TRIGGER off of the view colleciton, where we'll be listening for it later.
+						pathables.map(function(p) {	this_.options.views.trigger(evt,p);	});
+					}, this);
 			}
 			var models = this.options.views.map(function(view) { return view.options.model; });
 			var engine = this.options.engines.filter(function(engine) { return engine.test(models) });
@@ -87,9 +90,14 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				);
 				if (defined(this_.brush)) {
 					console.log('defined brush ', this_.brush);
-					data.filter(function(datum) { return datum.model == this_.brush }).map(function(X) { X.brush = true; });
+					data.filter(function(datum) {
+						console.log('datum ', datum);
+						return datum.series_pathables.indexOf(this_.brush) >= 0;
+					}).map(function(X) {
+						console.log('setting brush of ', X, ' to true');
+						X.brush = true;
+					});
 				}
-				console.log(" data >> ", data);
 				this.options.plotter.render(data);
 			} else {
 				assert(false, "Could not find suitable engine ");
@@ -111,6 +119,11 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					this_.$el.removeClass("over");
 				},
 				drop: function( event, ui ) {
+					if (defined(ui.draggable.data('view'))) {
+						ui.draggable.data('view').on('delete', function() {
+							this_.setData(undefined);
+						});
+					}
 					var views = ui.draggable.data("views")();
 					this_.$el.removeClass("over");
 					this_.setData( views );

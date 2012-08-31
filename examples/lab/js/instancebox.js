@@ -36,7 +36,7 @@ define(
 					this.$el
 						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
 						.resizable({});					
-			
+
 					this.views_collection
 						.on('brush_visual', function(model) {
 							model = _(model).isArray() ? model : [model];

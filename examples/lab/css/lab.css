@@ -151,6 +151,7 @@
   bottom: 68px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 15px;
 }
 .greybox .properties {
   position: absolute;
@@ -331,6 +332,7 @@
   bottom: 68px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 15px;
 }
 .greybox .properties {
   position: absolute;
@@ -583,6 +585,7 @@
   bottom: 68px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 15px;
 }
 .greybox .properties {
   position: absolute;
@@ -763,6 +766,7 @@
   bottom: 68px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 15px;
 }
 .greybox .properties {
   position: absolute;
@@ -931,7 +935,10 @@
   bottom: 0px;
 }
 .visual svg.plot rect {
-  fill: rgba(20, 100, 20, 0.4);
+  fill: rgba(20, 100, 20, 0.3);
+}
+.visual svg.plot rect.brush {
+  fill: rgba(20, 100, 20, 0.8);
 }
 .visual .droparea {
   position: absolute;

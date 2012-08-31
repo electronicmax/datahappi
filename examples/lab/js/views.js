@@ -10,7 +10,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			if (this.options.model) { this.options.model.off(null, null, this);	}
 			m.on('all',function(eventName, x) {
 				this_.render();
-				// this_.trigger(eventName, x);
+				this_.trigger(eventName, x);
 			}, this);
 			this.options.model = m;			
 		},
