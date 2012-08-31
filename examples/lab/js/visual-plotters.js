@@ -10,7 +10,7 @@ define(['js/utils'], function(utils) {
 				spacing = 2,
 				barwidth = ( this.$el.width() / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
-				yscale = d3.scale.linear().domain([0,max_val]).range([0,height]);
+				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - 20]);
 
 			// enter selection
 			svg_p
@@ -22,8 +22,36 @@ define(['js/utils'], function(utils) {
 				.attr('data-val', function(d) {
 					return d.series_val.id || d.series_val.valueOf && d.series_val.valueOf() || '??';
 				})
-				.on('mouseover', function(d) { this_.trigger('brush_visuals', d.series_pathables); })
-				.on('mouseout', function(d) { this_.trigger('unbrush_visuals', d.series_pathables); });
+				.on('mouseover', function(d) {
+					this_.trigger('brush_visuals', d.series_pathables);
+					d3.select(this).attr('class', 'brush');					
+				})
+				.on('mouseout', function(d) {
+					this_.trigger('unbrush_visuals', d.series_pathables);
+					d3.select(this).attr('class', 'brush');										
+				});
+
+			if (barwidth > 10) {
+				svg_p
+					.selectAll('text.label')
+					.data(data)
+					.enter()
+					.append('text')
+					.attr('class','label');
+
+			} else {
+				svg_p
+					.selectAll('text.label')
+					.data(data)
+					.remove();				
+			}
+
+			svg_p
+				.selectAll('text.label')
+				.data(data)
+				.attr('x', function(d, i) { return i*barwidth; })
+				.attr('y', function(d) { return height - yscale(d.numeric) - 5; })
+				.text(function(d) { return ''+d.numeric; });			
 			
 			// update selection
 			svg_p
