@@ -62,7 +62,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.data('model', function() { return this_.options.model; });
 			this.$el.attr("data-uri", this.options.model.id);
 			this.$el.draggable({
-				cancel:'.values',
+				cancel:'.values, .reorder-handle',
 				revert:"invalid",
 				helper:"clone",
 				appendTo:'body'
@@ -135,38 +135,14 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		_add_sameas_behaviour:function() {
 			// make _el_ droppable -- with a clear warning
 			var this_ = this;
-			var highlight = function($el) { $el.addClass('sameas-over'); };
-			var unlight = function($el) { $el.removeClass('sameas-over'); };
+			// var highlight = function($el) { $el.addClass('sameas-over'); };
+			// var unlight = function($el) { $el.removeClass('sameas-over'); };
 			
-			this.$el.find('.sameas-handle')
-			//				.add(this.$el.find('.values').children())
-				.droppable({
+			this.$el.droppable({
 					greedy:true, // magical nesting of droppables
 					accept:'.item,.pathable-view,.dereferenced-model',
 					tolerance:"pointer",
-					over:function(event, ui) {
-						var thismodel = this_.options.model;
-						var thatmodel = ui.draggable.data("model")();
-						if (thismodel.id !== thatmodel.id) {
-							highlight($(ui.draggable));
-							// highlight($(event.target));							
-							highlight(this_.$el);
-							highlight($(this));
-						} else {
-							unlight(this_.$el);
-							// unlight($(event.target));
-							unlight($(this));
-							unlight($(ui.draggable)); 
-						}
-					},
-					out:function(event, ui) {
-						unlight($(event.target));						
-						unlight($(ui.draggable));
-						unlight(this_.$el);
-						unlight($(this));						
-					},
 					drop: function( event, ui ) {
-						console.log('drop ', event, ui);
 						var thismodel = this_.options.model.model;
 						var thatmodel = ui.draggable.data("model")().model;
 						if (thismodel.id !== thatmodel.id) {
@@ -206,3 +182,34 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		ThingListItemView : ThingListItemView
 	};
 });
+
+
+/** 
+  >> trash zone 
+  over:function(event, ui) {
+
+  var thismodel = this_.options.model;
+  var thatmodel = ui.draggable.data("model")();
+  if (thismodel.id !== thatmodel.id) {
+  highlight($(ui.draggable));
+  // highlight($(event.target));							
+  highlight(this_.$el);
+  highlight($(this));
+  } else {
+  unlight(this_.$el);
+  // unlight($(event.target));
+  unlight($(this));
+  unlight($(ui.draggable)); 
+  }
+
+  },
+  out:function(event, ui) {
+
+  unlight($(event.target));						
+  unlight($(ui.draggable));
+  unlight(this_.$el);
+  unlight($(this));
+
+  },
+
+**/

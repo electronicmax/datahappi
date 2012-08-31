@@ -33,6 +33,7 @@ div {
 	// text-shadow: 0 -1px 0 rgba(255,255,255,0.1);
 }
 
+/* temporarily disabled 
 .sameas-over {
 	border:1px solid orange !important;
     .sameas-handle {
@@ -40,6 +41,7 @@ div {
        color:orange;
     }              
 }
+*/
 
 .ui-draggable-dragging { z-index:10000; }
 			
@@ -232,9 +234,11 @@ body {
 		position:relative;
 		border: 1px solid rgba(255,255,255,0);
 		padding:5px;
-		//width:300px;
-		//margin-right:15px;
-        .sameas-handle { padding: 0px 6px 0px 0px; font-size:1.2em;    }              		
+        .reorder-handle {
+			padding: 0px 6px 0px 0px;
+			font-size:1.2em;
+			cursor:ns-resize;
+		}		
 		.name {
 			padding:0px 0px 6px 3px;
 		}

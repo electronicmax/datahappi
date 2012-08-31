@@ -35,8 +35,10 @@ define(
 					// dragging the box
 					this.$el
 						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
-						.resizable({});					
-
+						.resizable({});
+					
+					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
+					
 					this.views_collection
 						.on('brush_visual', function(model) {
 							model = _(model).isArray() ? model : [model];
@@ -95,7 +97,7 @@ define(
 				// warning: this method shadows parent
 				if (!_(itemviews).isArray()) { itemviews = [itemviews]; }
 				var this_ = this;				
-				itemviews.map(function(itemview) {
+				itemviews = itemviews.filter(function(itemview) {
 					var pathable = itemview.options.model; 
 					// this is a sneaky which consolidates the pathables of views that are
 					// added to the same box, so if one gets dereferenced then they all do.
@@ -103,20 +105,23 @@ define(
 						// warn: we already have a pathable there so eeks
 						console.log('already have a pathable for him ', this_.pathables.get(pathable.id));
 						itemview.setModel(this_.pathables.get(pathable.id));
+						return undefined;
 					} else {
 						this_.pathables.add(pathable);
 					}
 					itemview.on('delete', function() {
 						itemview.$el.fadeOut('fast', function() { this_.remove(itemview); });
 					});
-					itemview.on('property-click', function(evt, ui) {
+					return itemview.on('property-click', function(evt, ui) {
 						this_._dereference_by_property($(evt.target).attr('data-prop'));
 					});					
 				});
-				// let's do this silently and then trigger manually
-				this.views_collection.add(itemviews, {silent:true});
-				this.views_collection.trigger('add', itemviews);
-				this.render();
+				if (itemviews.length > 0) {
+					// let's do this silently and then trigger manually
+					this.views_collection.add(itemviews, {silent:true});
+					this.views_collection.trigger('add', itemviews);
+					this.render();
+				}
 			},
 			remove:function(itemview) {
 				var m = itemview.options.model;

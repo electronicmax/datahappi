@@ -1398,9 +1398,19 @@ body .pathable-view {
   border: 1px solid rgba(255, 255, 255, 0);
   padding: 5px;
 }
-body .pathable-view .sameas-handle {
+body .pathable-view .reorder-handle {
   padding: 0px 6px 0px 0px;
   font-size: 1.2em;
+  cursor: ns-resize;
+}
+body .pathable-view .sameas-handle {
+  color: orange;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: none;
+  position: absolute;
+  left: 8px;
+  bottom: 12px;
 }
 body .pathable-view .name {
   padding: 0px 0px 6px 3px;
@@ -1414,6 +1424,9 @@ body .pathable-view .delete {
   z-index: 1000;
   padding: none;
   font-size: 1.0em;
+  display: block;
+}
+body .pathable-view.over .sameas-handle {
   display: block;
 }
 body .pathable-view:hover {
