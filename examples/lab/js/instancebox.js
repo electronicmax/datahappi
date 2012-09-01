@@ -11,7 +11,7 @@ define(
 		//var template = '<div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
 		var template = '<div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
-		var defined = utils.DEFINED;
+		var defined = utils.DEFINED, dict = utils.TO_OBJ;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
@@ -61,14 +61,10 @@ define(
 						},
 						drop: function( event, ui ) {
 							$(this).removeClass("over");
-							if (defined(ui.draggable.data('model'))) {
-								var model = ui.draggable.data("model")().clone();
-								this_.add(new view.PathableView({model:model}));
-							} else if (defined(ui.draggable.data('views'))) {
-								this_.add(ui.draggable.data('views')().map(function(vv) {
-									return new view.PathableView({model:vv.options.model.clone()})
-								}));
-							}
+							this_._handle_dropped_models(
+								defined(ui.draggable.data('model')) ?
+									[ ui.draggable.data("model")().clone() ] :
+									ui.draggable.data('views')().map(function(vv) { return vv.options.model.clone(); }));							
 						}
 					});
 					// add a toolbar.
@@ -83,6 +79,21 @@ define(
 				}
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				return this;
+			},
+			_handle_dropped_models:function(pathables) {
+				// first merge in like models
+				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
+				pathables = pathables.filter(function(p) {
+					equivalent_model = labels_to_models[p.model.get_label()];
+					if (defined(equivalent_model)) { console.log("DEBUG STRING HIT ", p.model.get_label()); }
+					if (defined(equivalent_model) && equivalent_model.id !== p.model.id) {
+						console.log("GOT A HIT ", equivalent_model.id, p.model.id);
+						equivalent_model.setSameAs(p.model);
+						return false; // don't include because that would dupe
+					}
+					return true;
+				});
+				if (pathables.length) {  this.add(pathables.map(function(m) { return new view.PathableView({model:m});}));	}
 			},
 			_make_micro_hist:function() {
 				var this_ = this;
