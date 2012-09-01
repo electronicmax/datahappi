@@ -197,20 +197,21 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			if (this.sameas.indexOf(m) >= 0) {
 				this.sameas = _(this.sameas).without(m);
 				m.unsetSameAs(this);
-				m.off('all', null, this);
+				m.off(null, null, this);
 				this.trigger('change:sameas');
 			}
 			return this;
 		},
-		clearSameAs:function(m) {
+		clearSameAs:function() {
 			// unsets m to be the sameAs us, which destructively
 			// modifies us
 			var this_ = this;
-			this.sameas.map(function(m) {
-				m.unsetSameAs(this_);
-				m.off('all', null, this);
+			var oldsameas = this.sameas.concat([]);
+			this.sameas = [];			
+			oldsameas.map(function(m) {
+				m.clearSameAs();
+				m.off(null, null, this);
 			});
-			this.sameas = [];
 			this.trigger('change:sameas');
 			return this;
 		},				

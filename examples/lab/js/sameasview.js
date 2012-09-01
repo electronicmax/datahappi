@@ -5,11 +5,10 @@ define(['js/utils'],  function(utils) {
 		idAttribute:"_id",
 		initialize:function(attrs) {
 			this.setModels(attrs.models);
+			this.set({ _id: (new Date()).valueOf() });
 		},
 		setModels:function(models) {
 			models = _(models).sortBy(function(x) { return x.id; });
-			this.set({ _id: models.map(function(x) { return x.id; }).join('-') || '-no models-'});
-			console.log('relation ::: set models, ', this.id);			
 			this.set({models:models});
 			this.trigger('change');
 		}
@@ -34,7 +33,9 @@ define(['js/utils'],  function(utils) {
 			equivs.append(this.options.relation.get("models").map(function(x) {  return _(t).template({m:x}); }).join(" &#8646; "));
 			return this;
 		},
-		_cb_delete:function() { this.trigger('delete'); }
+		_cb_delete:function() {
+			this.trigger('delete');
+		}
 	});	
 	
 	var SameAsView = Backbone.View.extend({
@@ -56,6 +57,7 @@ define(['js/utils'],  function(utils) {
 		},
 		_handle_remove:function(relation) {
 			var this_ = this;
+			console.log('handle remove > ', relation.id, this.views[relation.id]);
 			if (this_.views[relation.id]) {
 				this_.views[relation.id].remove();
 				delete this_.views[relation.id];
@@ -64,7 +66,32 @@ define(['js/utils'],  function(utils) {
 		add_to_watch:function(m) {
 			var this_ = this;
 			m.on('change:sameas', function() {
-				// existing selection
+				// existing relations
+
+				var new_equiv_models = _(m.sameas.concat([m])).uniq();
+
+				//				console.log('chang sameas ', new_equiv_models);
+
+				var cur_r = this_.relations.filter(function(rr) {
+					return _(new_equiv_models).intersection(rr.get('models')).length >= 0;
+				});
+
+				// enter selection
+				if (cur_r.length === 0 && m.sameas.length > 0) {
+					this_.relations.add(new SameAsRelation({ models: new_equiv_models }));
+				}
+
+				// update
+				cur_r.map(function(r) {
+					r.setModels(new_equiv_models);
+				});
+
+				// exit selection
+				if (cur_r.length > 0 && m.sameas.length === 0) {
+					cur_r.map(function(r) { this_.relations.remove(r); });
+				} 				
+
+				/*
 				var r = this_.relations.filter(function(rr) {
 					return _(m.sameas).union(rr.get('models')).length < m.sameas.length + rr.get('models').length;
 				});
@@ -77,13 +104,12 @@ define(['js/utils'],  function(utils) {
 				} else {
 					r.map(function(rr) { rr.setModels(_(m.sameas.concat([m])).uniq()); });
 				}
+				*/
 			}, this);
 		},
 		_delete_relation:function(relation) {
-			relation.get('models').map(function(m) {
-				m.clearSameAs();
-			});
-			this.relations.remove(relation); // triggers 
+			this.relations.remove(relation); // triggers
+			relation.get('models').map(function(m) { m.clearSameAs(); });
 		},
 		render:function() {
 			var this_ = this;
