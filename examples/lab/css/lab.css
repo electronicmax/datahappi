@@ -22,7 +22,7 @@
 }
 .greybox {
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -39,7 +39,7 @@
   /* properties */
 
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -456,7 +456,7 @@
 }
 .greybox {
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -473,7 +473,7 @@
   /* properties */
 
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -1157,13 +1157,15 @@ div {
   background-color: rgba(250, 250, 255, 0.3);
   font-weight: normal;
 }
+/* temporarily disabled 
 .sameas-over {
-  border: 1px solid orange !important;
+	border:1px solid orange !important;
+    .sameas-handle {
+       border:none !important;
+       color:orange;
+    }              
 }
-.sameas-over .sameas-handle {
-  border: none !important;
-  color: orange;
-}
+*/
 .ui-draggable-dragging {
   z-index: 10000;
 }
@@ -1403,15 +1405,6 @@ body .pathable-view .reorder-handle {
   font-size: 1.2em;
   cursor: ns-resize;
 }
-body .pathable-view .sameas-handle {
-  color: orange;
-  font-size: 1.2em;
-  font-weight: bold;
-  display: none;
-  position: absolute;
-  left: 8px;
-  bottom: 12px;
-}
 body .pathable-view .name {
   padding: 0px 0px 6px 3px;
 }
@@ -1424,9 +1417,6 @@ body .pathable-view .delete {
   z-index: 1000;
   padding: none;
   font-size: 1.0em;
-  display: block;
-}
-body .pathable-view.over .sameas-handle {
   display: block;
 }
 body .pathable-view:hover {
@@ -1450,7 +1440,7 @@ body .pathable-view .proplabel:hover {
 }
 body .pathable-view .values,
 body .pathable-view .props {
-  margin: 0px 0px 5px 0px;
+  margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 22px;
   max-height: 200px;
   overflow-x: hidden;

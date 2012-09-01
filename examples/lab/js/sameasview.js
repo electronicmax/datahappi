@@ -8,9 +8,7 @@ define(['js/utils'],  function(utils) {
 		},
 		setModels:function(models) {
 			models = _(models).sortBy(function(x) { return x.id; });
-			this.set({
-				_id: models.map(function(x) { return x.id; }).join('-') || '-no models-'
-			});
+			this.set({ _id: models.map(function(x) { return x.id; }).join('-') || '-no models-'});
 			console.log('relation ::: set models, ', this.id);			
 			this.set({models:models});
 			this.trigger('change');
@@ -45,21 +43,24 @@ define(['js/utils'],  function(utils) {
 			this.views = {};
 			this.relations = new SameAsCollection();
 			this.relations
-				.on('add', function(relation) {
-					this_.views[relation.id] = new SameAsRelationView({relation:relation});
-					this_.$el.find('.relations').append(this_.views[relation.id].render().el);
-					this_.views[relation.id].on('delete', function() {
-						this_._delete_relation(relation);
-					});
-				})
-				.on('remove', function(relation) {
-					// does the nasty work of updating views etc
-					if (this_.views[relation.id]) {
-						this_.views[relation.id].remove();
-						delete this_.views[relation.id];
-					}
-				});
+				.on('add', function(relation) {	this_._handle_add(relation);	})
+				.on('remove', function(relation) { this_._handle_remove(relation); });
 		},
+		_handle_add:function(relation) {
+			var this_ = this;
+			this_.views[relation.id] = new SameAsRelationView({relation:relation});
+			this_.$el.find('.relations').append(this_.views[relation.id].render().el);
+			this_.views[relation.id].on('delete', function() {
+				this_._delete_relation(relation);
+			});
+		},
+		_handle_remove:function(relation) {
+			var this_ = this;
+			if (this_.views[relation.id]) {
+				this_.views[relation.id].remove();
+				delete this_.views[relation.id];
+			}			
+		},		
 		add_to_watch:function(m) {
 			var this_ = this;
 			m.on('change:sameas', function() {
@@ -83,6 +84,13 @@ define(['js/utils'],  function(utils) {
 				m.clearSameAs();
 			});
 			this.relations.remove(relation); // triggers 
+		},
+		render:function() {
+			var this_ = this;
+			this.$el.data('view', this);
+			this.relations.map(function(x) { this_._handle_add(x); });
+			// TODO : discover all of the relations we have in our 
+			return this;
 		}
 	});
 

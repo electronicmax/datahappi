@@ -146,10 +146,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 						var thismodel = this_.options.model.model;
 						var thatmodel = ui.draggable.data("model")().model;
 						if (thismodel.id !== thatmodel.id) {
-							unlight($(event.target));						
-							unlight($(ui.draggable));
-							unlight(this_.$el);
-							unlight($(this));													
+							// unlight($(event.target));						
+							// unlight($(ui.draggable));
+							// unlight(this_.$el);
+							// unlight($(this));													
 							thismodel.setSameAs(thatmodel);
 						}
 					}

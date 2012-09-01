@@ -87,7 +87,7 @@ define(['js/source','examples/lab/js/views','js/ui/tableview','examples/lab/js/s
 		render:function() {
 			var this_ = this;
 			var sv = new SourcesView({el: this.$el.find('.sources'), collection:this.sources, sidebar: this}).render(); 
-			var sameas_view = new sameas.SameAsView({el:this.$el.find('.sameas-view')[0] });
+			var sameas_view = (new sameas.SameAsView({el:this.$el.find('.sameas-view')[0] })).render();
 			// we need to watch any new models created by the sources,
 			// and tell our sameas watcher.
 			var watch_model = function(m) {
