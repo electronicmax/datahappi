@@ -59,10 +59,10 @@ define(
 					.click(function(){ this_.add_path().render(); })
 					.appendTo(this.$el);
 
-				var b = 58 + 14*(this.views_collection.length);
+				var b = 22 + 22*(Math.max(0,this.views_collection.length - 1));
+				console.log('setting height of property box to be ', b);
 				this.$el.height(b);
 				this.$el.parent().find('.items').css('bottom', b);
-				
 				return this;
 			},
 			add_path:function(path) {
