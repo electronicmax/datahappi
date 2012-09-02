@@ -46,6 +46,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			'click .delete' : '_cb_delete',
 			'click .proplabel' : '_prop_select'
 		},
+		clone:function() {
+			var options = _({}).extend(this.options);
+			return new PathableView( _(options).extend({model:this.options.model.clone()})  );
+		},
 		render:function() {
 			var this_ = this;
 			var m = this.options.model;

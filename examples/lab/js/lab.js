@@ -52,9 +52,8 @@ define([
 						over:function(event, ui) {},
 						out:function(event, ui) {},				
 						drop: function( event, ui ) {
-							var target_box = new ibox.InstanceBox();
+							var target_box = this_._make_new_instance_box();
 							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());							
-							this_.$el.find(".workspace").append(target_box.render().el);
 							if (defined(ui.draggable.data('model'))) {
 								var model = ui.draggable.data("model")().clone();
 								target_box.add(new views.PathableView({model:model}));
@@ -67,6 +66,13 @@ define([
 						}
 					});
 				return this;
+			},
+			_make_new_instance_box:function() {
+				var this_ = this;
+				var box = new ibox.InstanceBox();
+				box.on('clone',function() {	this_.$el.find(".workspace").append(box.clone().render().el); });
+				this.$el.find(".workspace").append(box.render().el);				
+				return box;
 			},
 			_workspace_clicked:function() {
 				var this_ = this;

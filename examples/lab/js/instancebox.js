@@ -8,14 +8,15 @@ define(
 		'js/utils'
 	],
 	function(box, propbox, pathables, view, histogram, utils) {
-		var template = '<div class="titlebar"><input class="title" type="text" value="instances"/><div class="box-delete icon-cancel"></div><svg class="sparkhist"></svg><i class="icon-share"></i></div><div class="items"></div><div class="properties"></div>';
+		var template = '<div class="titlebar"><input class="title" type="text" value="instances"/><div class="box-delete icon-cancel"></div><svg class="sparkhist"></svg><i class="icon-share clone-box"></i></div><div class="items"></div><div class="properties"></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div>';
 		var defined = utils.DEFINED, dict = utils.TO_OBJ, flatten = utils.flatten, assert = utils.assert;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props',
-				'click .box-delete' : '_cb_delete'
+				'click .box-delete' : '_cb_delete',
+				'click .clone-box' : '_cb_clone'
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
@@ -24,6 +25,11 @@ define(
 				this.pathables = new pathables.Pathables();
 				this.pathables.on('add remove change', function() { this_.render(); });
 				this._watch_sameas(this.pathables);
+			},
+			clone:function() {
+				var new_instancebox = new InstanceBox();
+				new_instancebox.add( this.views_collection.map(function(x) { return x.clone(); }) );
+				return new_instancebox;
 			},
 			render:function() {
 				// this stuff should go into render
@@ -208,6 +214,9 @@ define(
 				var this_ = this;
 				this.trigger('delete');
 				this.$el.fadeOut(function() { this_.$el.remove(); });
+			},
+			_cb_clone:function() {
+				this.trigger('clone');
 			}
 		});
 
