@@ -8,13 +8,42 @@
 @titlebar-height:23px;
 
 .titlebar {
+	position:relative;
 	cursor: move;
 	padding: 2px 3px 2px 5px;
 	background-color: @nicegrey;
 	height:@titlebar-height;
     font-size:0.9em;
+	input {
+		font-family:"District", "Droid Sans", "Lucida Sans";
+		color:rgba(0,0,50,0.6);
+		text-align:left;
+		position:absolute;
+		left:3px; bottom:0px;
+		margin:0px; padding:0px; 
+		background:rgba(255,255,255,0);
+		font-size:10pt;
+		border:none !important;
+		box-shadow:none !important;		
+		&:hover, &:focus { color:black;	}
+		cursor:text;
+		-webkit-appearance:none !important;
+		&:focus {
+			box-shadow:none !important;
+			outline:0 !important;
+			-webkit-outline:0 !important;
+			outline-color: transparent !important;
+			outline-style: none !important;
+		}
+	}	
+	.icon-share {
+		position:absolute;
+		right:20px;
+		top: 3px;
+		cursor:pointer;
+	}
+	.box-delete { .standard-delete-box;  }
 }
-
 .box-box-shadow {
 	-webkit-box-shadow:1px 1px 10px 1px #f0e8f0;
 	box-shadow:1px 1px 10px 1px #f0e8f0;
@@ -24,11 +53,9 @@
 	position:absolute;
 	top:3px; right:2px;
     cursor: pointer;
-}                    
-
+}
 .box(@bordercolor: #4af) {
 	z-index:5;
-	// background-color:rgba(250,250,250,0.81);
 	background-color:white;
 	.box-box-shadow;
 	position:absolute;
@@ -41,52 +68,6 @@
 	overflow-x:hidden;
 	overflow-y:hidden;
 	&.over { padding:5px;  }
-	//	&:hover .box-delete { display:block; }
-	.box-delete {
-        .standard-delete-box;
-	}
-	
-	.uplt, .uprt, .btlt, .btrt {
-		width:10px; height:10px;
-	}
-	.uplt {
-		border-left:1px solid @bordercolor;
-		border-top:1px solid @bordercolor;
-		position:absolute;
-		top:0; left:0;
-	}
-	.uprt {
-		border-right:1px solid @bordercolor;
-		border-top:1px solid @bordercolor;
-		position:absolute;
-		top:0; right:0;
-	} 
-	.btlt {
-		border-bottom:1px solid @bordercolor;
-		border-left:1px solid @bordercolor;
-		position:absolute;
-		bottom:0; left:0;
-	} 
-	.btrt {
-		border-bottom:1px solid @bordercolor;
-		border-right:1px solid @bordercolor;
-		position:absolute;
-		bottom:0; right:0;
-	}
-	input {
-		font-family:"District", "Droid Sans", "Lucida Sans";
-		color:rgba(0,0,50,0.6);
-		text-align:left;
-		position:absolute;
-		left:0px; bottom:-20px;
-		margin:0px; padding:0px; 
-		background:rgba(255,255,255,0);
-		font-size:10pt;
-		border:none !important;
-		-webkit-box-shadow:none;
-		box-shadow:none;
-		&:hover, &:focus { color:black;	}
-	}
 	.microtoolbox {
 		display:none;
 		color:rgba(0,0,50,0.6);

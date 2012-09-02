@@ -1,9 +1,50 @@
 .titlebar {
+  position: relative;
   cursor: move;
   padding: 2px 3px 2px 5px;
   background-color: rgba(200, 200, 200, 0.11);
   height: 23px;
   font-size: 0.9em;
+}
+.titlebar input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  text-align: left;
+  position: absolute;
+  left: 3px;
+  bottom: 0px;
+  margin: 0px;
+  padding: 0px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 10pt;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: text;
+  -webkit-appearance: none !important;
+}
+.titlebar input:hover,
+.titlebar input:focus {
+  color: black;
+}
+.titlebar input:focus {
+  box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-outline: 0 !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+}
+.titlebar .icon-share {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  cursor: pointer;
+}
+.titlebar .box-delete {
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
 }
 .box-box-shadow {
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -38,67 +79,6 @@
 }
 .greybox.over {
   padding: 5px;
-}
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
 }
 .greybox .microtoolbox {
   display: none;

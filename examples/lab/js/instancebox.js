@@ -8,8 +8,7 @@ define(
 		'js/utils'
 	],
 	function(box, propbox, pathables, view, histogram, utils) {
-		//var template = '<div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
-		var template = '<div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
+		var template = '<div class="titlebar"><input class="title" type="text" value="instances"/><div class="box-delete icon-cancel"></div><i class="icon-share"></i></div><div class="box_container"><div class="items"></div><div class="properties"></div></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
 		var defined = utils.DEFINED, dict = utils.TO_OBJ, flatten = utils.flatten, assert = utils.assert;
 		var InstanceBox = box.BoxView.extend({
@@ -35,7 +34,7 @@ define(
 					this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 					// dragging the box
 					this.$el
-						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
+						.draggable({ cancel:"input, .items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
 						.resizable({});					
 					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });					
 					this.views_collection
