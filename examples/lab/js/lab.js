@@ -70,7 +70,12 @@ define([
 			_make_new_instance_box:function() {
 				var this_ = this;
 				var box = new ibox.InstanceBox();
-				box.on('clone',function() {	this_.$el.find(".workspace").append(box.clone().render().el); });
+				box.on('clone',function() {
+					var boxclone = this_._make_new_instance_box();
+					box.clone(boxclone);
+					this_.$el.find(".workspace").append(boxclone.render().el);
+					boxclone.setTopLeft(box.$el.position().top, box.$el.position().left + box.$el.width() + 20);
+				});
 				this.$el.find(".workspace").append(box.render().el);				
 				return box;
 			},

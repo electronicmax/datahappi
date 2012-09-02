@@ -26,10 +26,14 @@ define(
 				this.pathables.on('add remove change', function() { this_.render(); });
 				this._watch_sameas(this.pathables);
 			},
-			clone:function() {
-				var new_instancebox = new InstanceBox();
+			clone:function(target_box) {
+				var new_instancebox = target_box || new InstanceBox();
 				new_instancebox.add( this.views_collection.map(function(x) { return x.clone(); }) );
+				new_instancebox.setTitle(this.$el.find('.title').val());
 				return new_instancebox;
+			},
+			setTitle:function(s) {
+				this.$el.find('.title').val(s);
 			},
 			render:function() {
 				// this stuff should go into render
@@ -216,6 +220,7 @@ define(
 				this.$el.fadeOut(function() { this_.$el.remove(); });
 			},
 			_cb_clone:function() {
+				console.log('clone trigger yo ');
 				this.trigger('clone');
 			}
 		});
