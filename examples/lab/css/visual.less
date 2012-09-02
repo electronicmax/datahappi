@@ -41,9 +41,7 @@
 		top:@titlebar-height; left:0px; right:0px; bottom:0px;
 		rect {
 			fill:rgba(20,100,20,0.3);
-			&.brush {
-				fill:rgba(20,100,20,0.8);
-			}
+			&.brush {	fill:rgba(20,100,20,0.8);	}
 		}
 		text.barlabel { fill: rgba(120, 120, 120, 0.4);  }
 		text.valuedisplay { font-size:16pt;	}
@@ -125,10 +123,6 @@
     }               
 }
 
-.dropzone-0 { .dropzone-i(blue); }
-.dropzone-1 { .dropzone-i(orange); }
-.dropzone-2 { .dropzone-i(green); }
-.dropzone-3 { .dropzone-i(red); }
 
 .dropzone-i(@color) {
 	&.dropzone {
@@ -138,21 +132,14 @@
 		background-color:fadeout(@color,90%);
 	}
 	background-color:fadeout(@color,95%);
-	.uplt {
-		border-left:1px solid @color !important;
-		border-top:1px solid @color !important;
-	}
-	.uprt {
-		border-right:1px solid @color;
-		border-top:1px solid @color !important;
-
-	} 
-	.btlt {
-		border-bottom:1px solid @color !important;
-		border-left:1px solid @color !important;
-	} 
-	.btrt {
-		border-bottom:1px solid @color !important;
-		border-right:1px solid @color !important;
-	}	
+	.brush { background-color: fadeout(@color,95%) !important;}
+	.titlebar input {
+		background-color:fadeout(lighten(@color,20%),80%);
+	}		
 }
+
+
+.dropzone-0 { .dropzone-i(blue); }
+.dropzone-1 { .dropzone-i(orange); }
+.dropzone-2 { .dropzone-i(green); }
+.dropzone-3 { .dropzone-i(red); }
