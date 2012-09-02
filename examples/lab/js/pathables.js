@@ -132,7 +132,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
-				console.log('values >> ', values);
 			}
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
@@ -232,12 +231,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var paths = this.paths.models;
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
-				// console.log('trying path for ', m.id, ' - ', path.get('path_priority'), ' --- ', path.get('steps').map(function(x) { return x.get('property'); }));
 				var result = m.try_path(path);
-				if (defined(result)) {
-					// console.log('SETTING path for ', m.id, ' - ', path.get('steps').map(function(x) { return x.get('property'); }));
-					return m.set_path(path);
-				} 
+				if (defined(result)) {	return m.set_path(path);	} 
 			}
 			// no paths met us, let's just reset 
 			return m.reset_path();			

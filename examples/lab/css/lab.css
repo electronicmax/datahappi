@@ -1282,6 +1282,7 @@ body .slidepanel .sameas-view {
   padding: 10px 4px 0px 20px;
   text-align: right;
   border-right: 1px solid orange;
+  overflow-y: auto;
 }
 body .slidepanel .sameas-view .sameas-relation {
   padding: 0px 24px 2px 2px;
@@ -1395,20 +1396,20 @@ body .flip-horizontal {
   /*IE*/
 
 }
-body .pathable-view {
+.pathable-view {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0);
   padding: 5px;
 }
-body .pathable-view .reorder-handle {
+.pathable-view .reorder-handle {
   padding: 0px 6px 0px 0px;
   font-size: 1.2em;
   cursor: ns-resize;
 }
-body .pathable-view .name {
+.pathable-view .name {
   padding: 0px 0px 6px 3px;
 }
-body .pathable-view .delete {
+.pathable-view .delete {
   position: absolute;
   top: 2px;
   right: 1px;
@@ -1419,13 +1420,13 @@ body .pathable-view .delete {
   font-size: 1.0em;
   display: block;
 }
-body .pathable-view:hover {
+.pathable-view:hover {
   border: 1px solid rgba(200, 200, 200, 0.5);
 }
-body .pathable-view:hover .delete {
+.pathable-view:hover .delete {
   display: block;
 }
-body .pathable-view .proplabel {
+.pathable-view .proplabel {
   margin: 0px;
   display: inline-block;
   font-size: 0.7em;
@@ -1435,17 +1436,22 @@ body .pathable-view .proplabel {
   vertical-align: middle;
   line-height: 5px;
 }
-body .pathable-view .proplabel:hover {
+.pathable-view .proplabel:hover {
   color: #000;
 }
-body .pathable-view .values,
-body .pathable-view .props {
+.pathable-view .values,
+.pathable-view .props {
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 22px;
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
 }
-body .pathable-view.brush {
+.pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);
+}
+.pathable-view.ui-draggable-dragging {
+  -webkit-transform: rotate(3deg);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  width: 340px;
 }

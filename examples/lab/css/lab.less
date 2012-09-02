@@ -135,6 +135,7 @@ body {
 			padding:10px 4px 0px 20px;
 			text-align:right;
 			border-right:1px solid orange;
+			overflow-y:auto;
 			.sameas-relation {
 				padding:0px 24px 2px 2px;
 				margin:0px 0px 8px 0px;
@@ -229,47 +230,54 @@ body {
     }
 	// hide 'x' for the things in the source list 
 	
-	// compound pathable views
-	.pathable-view {
-		position:relative;
-		border: 1px solid rgba(255,255,255,0);
-		padding:5px;
-        .reorder-handle {
-			padding: 0px 6px 0px 0px;
-			font-size:1.2em;
-			cursor:ns-resize;
-		}		
-		.name {
-			padding:0px 0px 6px 3px;
-		}
-		.delete {
-			position:absolute; top:2px;  right:1px; margin:0px; padding:0px;
-			z-index:1000; 
-			padding:none;
-			font-size:1.0em;
-			display:block;
-		}
-		&:hover {
-			border:1px solid rgba(200,200,200,0.5);
-			.delete { display: block; }
-		}
-		.proplabel {
-			margin:0px;
-			display:inline-block; font-size:0.7em; color: #aaa; padding:0px 0px 0px 5px;
-			height:0.5em;
-			vertical-align:middle;
-			line-height:5px;
-			&:hover { color:#000; }
-		}
-		.values, .props {
-			margin:0px 0px 0px 0px; padding:0px 0px 0px 22px;
-			max-height:200px;
-			overflow-x:hidden;
-			overflow-y:auto;
-		}
-		&.brush {
-			background-color:rgba(0,200,255,0.1);
-		}
-	}	
+
 }
-	
+
+// compound pathable views
+.pathable-view {
+	position:relative;
+	border: 1px solid rgba(255,255,255,0);
+	padding:5px;
+    .reorder-handle {
+		padding: 0px 6px 0px 0px;
+		font-size:1.2em;
+		cursor:ns-resize;
+	}		
+	.name {
+		padding:0px 0px 6px 3px;
+	}
+	.delete {
+		position:absolute; top:2px;  right:1px; margin:0px; padding:0px;
+		z-index:1000; 
+		padding:none;
+		font-size:1.0em;
+		display:block;
+	}
+	&:hover {
+		border:1px solid rgba(200,200,200,0.5);
+		.delete { display: block; }
+	}
+	.proplabel {
+		margin:0px;
+		display:inline-block; font-size:0.7em; color: #aaa; padding:0px 0px 0px 5px;
+		height:0.5em;
+		vertical-align:middle;
+		line-height:5px;
+		&:hover { color:#000; }
+	}
+	.values, .props {
+		margin:0px 0px 0px 0px; padding:0px 0px 0px 22px;
+		max-height:200px;
+		overflow-x:hidden;
+		overflow-y:auto;
+	}
+	&.brush {
+		background-color:rgba(0,200,255,0.1);
+	}
+	&.ui-draggable-dragging {
+		-webkit-transform: rotate(3deg);	
+		border:1px solid rgba(200,200,200,0.5);		
+		width:@boxwidth;
+	}
+}	
+
