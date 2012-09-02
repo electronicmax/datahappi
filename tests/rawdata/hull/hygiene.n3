@@ -1,0 +1,26 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-null#> .
+
+:Restaurant rdfs:label "Food Hygiene Ratings from FSA" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Portside Bistro" ;
+    :rating "4".
+
+:r2 a :Restaurant ;
+    rdfs:label "Brimbles Bistro" ;
+    :rating "3".
+
+:r3 a :Restaurant ;
+    rdfs:label "Raj Pavilion" ;
+    :rating "5".
+
+:r4 a :Restaurant ;
+    rdfs:label "Cinnamon Indian Restaurant" ;
+    :rating "2".
+
+:r5 a :Restaurant ;
+    rdfs:label "Taman Ria Tropicana" ;
+    :rating "4".
+
+

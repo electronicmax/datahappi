@@ -1,0 +1,58 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-hull#> .
+
+:Restaurant rdfs:label "Restaurants from TripAdvisor" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Port-Side Bistro" ;
+    :address "16 Princes Dock Street, Kingston-upon-Hull, England";
+    :telephone "01482 213202";
+    :cuisine "European" ;
+    :cuisine "English" ;
+    :cuisine "Italian" ;
+    :cuisine "Mediterranean" ;
+    :score "5" ;
+    :ranking "1" .
+
+:r2 a :Restaurant ;
+    rdfs:label "Brimble's Bistro" ;
+    :address "74 Princes Avenue, Kingston-upon-Hull HU5 3QJ, England";
+    :telephone "01482 348282";
+    :cuisine "British" ;
+    :score "4.5" ;
+    :ranking "2" .
+
+:r3 a :Restaurant ;
+    rdfs:label "Raj Pavilion" ;
+    :address "56a-58 Beverley Rd, Kingston-upon-Hull HU3 1YE, England";
+    :telephone "01482 581939";
+    :cuisine "Indian" ;
+    :cuisine "Pakistani" ;
+    :score "4.5" ;
+    :ranking "3" .
+
+:r4 a :Restaurant ;
+    rdfs:label "Cinnamon" ;
+    :address "17 Anlaby Road, Kingston-upon-Hull, England";
+    :telephone "01482 323113";
+    :cuisine "Bangladeshi" ;
+    :cuisine "Indian" ;
+    :cuisine "Pakistani" ;
+    :score "4.5" ;
+    :ranking "4" .
+
+:r5 a :Restaurant ;
+    rdfs:label "Taman Ria Tropicana" ;
+    :address "45-47 Princes Avenue, Kingston-upon-Hull HU5 3RX, England";
+    :telephone "01482 345640";
+    :cuisine "Malaysian" ;
+    :score "5" ;
+    :ranking "5" .
+
+:r6 a :Restaurant ;
+    rdfs:label "Millers Tea Room & Farm Shop" ;
+    :address "Raywell Lodge Park, Riplington Park, Raywell, Kingston-upon-Hull, England";
+    :cuisine "English" ;
+    :score "5" ;
+    :ranking "6" .
+
