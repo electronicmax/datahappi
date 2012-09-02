@@ -232,10 +232,20 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.brushed = _(this.brushed).without(pathable);
 			this.update();
 		},
-		_trigger_brush_event:function(eventType, entity) {
+		_trigger_brush_event:function(eventType, pathable) {
 			var this_ = this;
 			_(this.dropzone_boxes).values().map(function(dzb) {
-				if (defined(dzb)) {	dzb.views_collection.trigger(eventType, entity); }
+				if (defined(dzb)) {
+					// support for deep brushing
+					dzb.views_collection
+						.filter(function(view) {
+							return view.options.model == pathable;
+						}).map(function(view) {
+							var model = view.options.model.model;
+							console.log('triggering ', eventType, ' on model ', model, model.id);
+							model.trigger(eventType);
+						});
+				}
 			});			
 		}
 	});

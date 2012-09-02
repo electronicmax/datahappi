@@ -46,16 +46,11 @@ define(
 					this.$el
 						.draggable({ cancel:"input, .sparkhist, .items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
 						.resizable({});					
-					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });					
-					this.views_collection
-						.on('brush_visual', function(model) {
-							model = _(model).isArray() ? model : [model];
-							this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
-						})
-						.on('unbrush_visual', function(model) {
-							model = _(model).isArray() ? model : [model];						
-							this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
-						});
+					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
+
+					// support for deep brushing					
+					this.views_collection.map(function(view) { this_._add_brushing_listeners(view);	});
+					
 					// set up to receive droppables
 					this.$el.droppable({
 						greedy:true, // magical for allowing nesting of droppables
@@ -87,6 +82,19 @@ define(
 				}
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				return this;
+			},
+			_add_brushing_listeners:function(view) {
+				var model = view.options.model.model;
+				var this_ = this;
+				model
+					.on('brush_visual', function() {
+						model = _(model).isArray() ? model : [model];
+						this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
+					}, this_)
+					.on('unbrush_visual', function() {
+						model = _(model).isArray() ? model : [model];						
+						this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
+					}, this_);							
 			},
 			_handle_dropped_models:function(pathables) {
 				// first merge in like models
@@ -157,6 +165,7 @@ define(
 				});
 				if (itemviews.length > 0) {
 					// let's do this silently and then trigger manually
+					itemviews.map(function(v) { this_._add_brushing_listeners(v); });
 					this.views_collection.add(itemviews, {silent:true});
 					this.views_collection.trigger('add', itemviews);
 					this.render();
@@ -171,6 +180,8 @@ define(
 				var lvc = this.views_collection.length;
 				this.views_collection.remove(itemview);
 				itemview.$el.remove();
+				// unsubscribe deep
+				itemview.options.model.model.off(null, null, this);
 				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			_dereference_by_property:function(propertyname) {
@@ -194,7 +205,7 @@ define(
 				}
 			},
 			_find_views:function(models) {
-				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model) >= 0; });
+				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model.model) >= 0; });
 			},			
 			_make_property_box:function() {
 				// add a property box.
