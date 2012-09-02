@@ -11,7 +11,7 @@ define(
 		//var template = '<div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
 		var template = '<div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
-		var defined = utils.DEFINED, dict = utils.TO_OBJ;
+		var defined = utils.DEFINED, dict = utils.TO_OBJ, flatten = utils.flatten, assert = utils.assert;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
@@ -24,6 +24,7 @@ define(
 				var this_ = this;
 				this.pathables = new pathables.Pathables();
 				this.pathables.on('add remove change', function() { this_.render(); });
+				this._watch_sameas(this.pathables);
 			},
 			render:function() {
 				// this stuff should go into render
@@ -35,10 +36,8 @@ define(
 					// dragging the box
 					this.$el
 						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
-						.resizable({});
-					
-					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
-					
+						.resizable({});					
+					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });					
 					this.views_collection
 						.on('brush_visual', function(model) {
 							model = _(model).isArray() ? model : [model];
@@ -84,10 +83,8 @@ define(
 				// first merge in like models
 				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
 				pathables = pathables.filter(function(p) {
-					equivalent_model = labels_to_models[p.model.get_label()];
-					if (defined(equivalent_model)) { console.log("DEBUG STRING HIT ", p.model.get_label()); }
+					var equivalent_model = labels_to_models[p.model.get_label()];
 					if (defined(equivalent_model) && equivalent_model.id !== p.model.id) {
-						console.log("GOT A HIT ", equivalent_model.id, p.model.id);
 						equivalent_model.setSameAs(p.model);
 						return false; // don't include because that would dupe
 					}
@@ -104,6 +101,28 @@ define(
 				hist.render();
 				return hist;
 			},
+			_watch_sameas:function() {
+				var this_ = this;
+				var register_sameas = function(p) { p.model.on('change:sameas', function() { this_._change_sameas(p); }, this); };
+				this.pathables.on('add',register_sameas).on('remove', function(p) { p.model.off(null, null, this); });
+				this.pathables.map(register_sameas);				
+			},
+
+			// this is cleverwork that makes sure we don't get dupes in a list
+			_change_sameas:function(p) {
+				console.log('_change_sameas', this._find_all_views_sameas_models());
+				while (this._find_all_views_sameas_models().filter(function(x) { return x == p.model; }).length > 1) {
+					// find one and remove it!
+					var views_with_pathable = this._get_first_view_with_pathable(p);
+					assert(views_with_pathable.length > 0, "error.");
+					this.remove(views_with_pathable[views_with_pathable.length - 1]);
+				}
+			},
+			_get_first_view_with_pathable:function(p) {	return this.views_collection.filter(function(v) { return v.options.model == p; });	},
+			_find_all_views_sameas_models:function() {
+				// computes the sameas equivalence graph
+				return utils.flatten(this.views_collection.map(function(v) { return v.options.model.model.sameas.concat(v.options.model.model); }));
+			},			
 			add:function(itemviews) {
 				// warning: this method shadows parent
 				if (!_(itemviews).isArray()) { itemviews = [itemviews]; }

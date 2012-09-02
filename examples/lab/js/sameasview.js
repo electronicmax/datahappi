@@ -57,7 +57,7 @@ define(['js/utils'],  function(utils) {
 		},
 		_handle_remove:function(relation) {
 			var this_ = this;
-			console.log('handle remove > ', relation.id, this.views[relation.id]);
+			// console.log('handle remove > ', relation.id, this.views[relation.id]);
 			if (this_.views[relation.id]) {
 				this_.views[relation.id].remove();
 				delete this_.views[relation.id];
@@ -66,18 +66,18 @@ define(['js/utils'],  function(utils) {
 		add_to_watch:function(m) {
 			var this_ = this;
 			m.on('change:sameas', function() {
-				console.log(">> got a change sameas on ", m.id);
+				// console.log(">> got a change sameas on ", m.id);
 				// existing relations
 
 				var new_equiv_models = _(m.sameas.concat([m])).uniq();
 				var cur_r = this_.relations.filter(function(rr) {
 					return _(new_equiv_models).intersection(rr.get('models')).length > 0;
 				});
-				console.log("sameasview() :: relevant relations ", cur_r);				
+				// console.log("sameasview() :: relevant relations ", cur_r);				
 
 				// enter selection
 				if (cur_r.length === 0 && m.sameas.length > 0) {
-					console.log("sameasview() :: entering a new relation ", new_equiv_models);
+					// console.log("sameasview() :: entering a new relation ", new_equiv_models);
 					this_.relations.add(new SameAsRelation({ models: new_equiv_models }));
 				}
 
