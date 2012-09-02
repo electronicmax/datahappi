@@ -1,0 +1,34 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#> .
+
+:Restaurant rdfs:label "Restaurants from Yelp" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Black Sheep Bistro" ;
+    :ambience "Romantic" ;
+    :ambience "Classy" ;
+    :ambience "Trendy" ;
+    :ambience "Touristy" ;
+    :ambience "Casual" ;
+    :score "5★".
+
+:r2 a :Restaurant ;
+    rdfs:label "Charcoals" ;
+    :ambience "Casual" ;
+    :score "4★".
+
+:r3 a :Restaurant ;
+    rdfs:label "Number 16 Restaurant" ;
+    :ambience "Casual" ;
+    :score "5★".
+
+:r4 a :Restaurant ;
+    rdfs:label "Fanny Trollopes Cafe" ;
+    :ambience "Casual" ;
+    :score "4.5★".
+
+:r5 a :Restaurant ;
+    rdfs:label "Two Fat Ladies At The Buttery" ;
+    :ambience "Dressy" ;
+    :score "4.5★".
+
