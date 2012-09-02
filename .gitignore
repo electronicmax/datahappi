@@ -13,3 +13,4 @@ Thumbs.db
 _made
 node_modules
 *.pyc
+.*.swp
