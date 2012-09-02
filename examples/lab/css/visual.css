@@ -38,11 +38,12 @@
   outline-color: transparent !important;
   outline-style: none !important;
 }
-.titlebar .icon-share {
+.titlebar .clone-box {
   position: absolute;
   right: 20px;
   top: 3px;
   cursor: pointer;
+  opacity: 0.6;
 }
 .titlebar .box-delete {
   z-index: 10;

@@ -23,12 +23,6 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
 			this.brushed = [];
-			this.on('brush', function(entity) {})
-				.on('unbrush', function(entity) {
-					_(this_.dropzone_boxes).values().map(function(dzb) {
-						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush_visual', entity);}							
-					});
-				});
 		},
 		render:function() {
 			var this_ = this;
