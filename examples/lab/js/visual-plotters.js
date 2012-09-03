@@ -4,6 +4,7 @@ define(['js/utils'], function(utils) {
 		
 		render:function(data) {
 			// this.$el is bound to svg
+			console.log('SBP.render() :: ', data);
 			var this_ = this,
 				svg_p = d3.select(this.$el[0]),
 				height = this.$el.height(),
@@ -26,12 +27,12 @@ define(['js/utils'], function(utils) {
 				.on('mouseover', function(d) {
 					this_._value = d;
 					this_.trigger('brush_visual', d.series_pathables);
-					d3.select(this).attr('class', 'brush');					
+					d3.select(this).attr('class', 'brush');
 				})
 				.on('mouseout', function(d) {
 					delete this_._value;
 					this_.trigger('unbrush_visual', d.series_pathables);
-					d3.select(this).attr('class', 'brush');										
+					d3.select(this).attr('class', 'brush');
 				});
 
 			if (barwidth > 10) {

@@ -34,7 +34,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		_handle_brush_pathable:function(pathable) {
 			this.brush = pathable;
 		},
-		_handle_unbrush_pathable:function() { delete this.brush;	},
+		_handle_unbrush_pathable:function() {
+			delete this.brush;
+		},
 		setData:function(s) {
 			var this_ = this;			
 			if (this.options.models) {
@@ -44,7 +46,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			if (defined(this.options.models)) {
 				this.options.models.on_model('all', function(pathable, eventType) {
 					if (eventType == 'brush_visual') { this_._handle_brush_pathable(pathable);	}
-					if (eventType == 'unbrush_visual') { this_._handle_unbrush_pathable(pathable);	} 					
+					if (eventType == 'unbrush_visual') { this_._handle_unbrush_pathable();	} 					
 					this_._update_plot();
 				}, this);
 			}
@@ -84,10 +86,11 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
 				);
 				if (defined(this_.brush)) {
-					data.filter(function(datum) {
-						return datum.series_pathables.indexOf(this_.brush) >= 0;
-					}).map(function(X) { X.brush = true; });
+					data.map(function(datum) {
+						datum.brush = (datum.series_pathables.indexOf(this_.brush) >= 0); 
+					});
 				}
+				console.log('render data ', data);
 				this.options.plotter.render(data);
 			} else {
 				assert(false, "Could not find suitable engine ");
