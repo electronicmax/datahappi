@@ -33,7 +33,6 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			}
 		},
 		_handle_brush_pathable:function(pathable) {
-			if (defined(pathable)) { console.log(" BRUSH PATHABLE ", pathable); };
 			this.brush = pathable;
 		},
 		_handle_unbrush_pathable:function() { delete this.brush;	},
@@ -67,19 +66,12 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				}
 				return;
 			}
-			d3.selectAll('text').remove();
-
-			
+			d3.selectAll('text').remove();			
 			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
 				this.options.plotter = new this.options.plotter_class({el:plot[0]});
-				this.options.plotter
-					.on('all', function(event, pathables) {
-						if (['brush_visuals', 'unbrush_visuals'].indexOf(event) < 0) { return; }
-						var evt = event.slice(0,event.length - 1);
-						// TRIGGER off of the view colleciton, where we'll be listening for it later.
-						pathables.map(function(p) {
-							this_.options.views.trigger(evt,p);
-						});
+				this.options.plotter.on('all', function(event_name, pathables) {
+						if (['brush_visual', 'unbrush_visual'].indexOf(event) < 0) { return; }
+						pathables.map(function(p) {	p.model.trigger(event_name); });
 					}, this);
 			}
 			var models = this.options.views.map(function(view) { return view.options.model; });
@@ -90,14 +82,9 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
 				);
 				if (defined(this_.brush)) {
-					console.log('defined brush ', this_.brush);
 					data.filter(function(datum) {
-						console.log('datum ', datum);
 						return datum.series_pathables.indexOf(this_.brush) >= 0;
-					}).map(function(X) {
-						console.log('setting brush of ', X, ' to true');
-						X.brush = true;
-					});
+					}).map(function(X) { X.brush = true; });
 				}
 				this.options.plotter.render(data);
 			} else {

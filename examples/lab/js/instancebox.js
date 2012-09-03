@@ -24,7 +24,24 @@ define(
 				var this_ = this;
 				this.pathables = new pathables.Pathables();
 				this.pathables.on('add remove change', function() { this_.render(); });
-				this._watch_sameas(this.pathables);
+				this.pathables
+					.on_model('brush_visual', function(pathable) {
+						pathable = _(pathable).isArray() ? pathable : [pathable];
+						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
+							return v.$el.addClass('brush');
+						});
+					}, this_)
+					.on_model('unbrush_visual', function(pathable) {
+						console.log("instancebox >> ON PATHABLE unbrush_visual", pathable);
+						pathable = _(pathable).isArray() ? pathable : [pathable];						
+						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
+							// 
+							return v.$el.removeClass('brush');
+						});
+					}, this_)
+					.on_model('change:sameas', function(p) {
+						this_._change_sameas(p);						
+					});				
 			},
 			clone:function(target_box) {
 				var new_instancebox = target_box || new InstanceBox();
@@ -83,19 +100,6 @@ define(
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				return this;
 			},
-			_add_brushing_listeners:function(view) {
-				var model = view.options.model.model;
-				var this_ = this;
-				model
-					.on('brush_visual', function() {
-						model = _(model).isArray() ? model : [model];
-						this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
-					}, this_)
-					.on('unbrush_visual', function() {
-						model = _(model).isArray() ? model : [model];						
-						this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
-					}, this_);							
-			},
 			_handle_dropped_models:function(pathables) {
 				// first merge in like models
 				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
@@ -118,13 +122,6 @@ define(
 				hist.render();
 				return hist;
 			},
-			_watch_sameas:function() {
-				var this_ = this;
-				var register_sameas = function(p) { p.model.on('change:sameas', function() { this_._change_sameas(p); }, this); };
-				this.pathables.on('add',register_sameas).on('remove', function(p) { p.model.off(null, null, this); });
-				this.pathables.map(register_sameas);				
-			},
-
 			// this is cleverwork that makes sure we don't get dupes in a list
 			_change_sameas:function(p) {
 				console.log('_change_sameas', this._find_all_views_sameas_models());
@@ -165,7 +162,6 @@ define(
 				});
 				if (itemviews.length > 0) {
 					// let's do this silently and then trigger manually
-					itemviews.map(function(v) { this_._add_brushing_listeners(v); });
 					this.views_collection.add(itemviews, {silent:true});
 					this.views_collection.trigger('add', itemviews);
 					this.render();
@@ -180,8 +176,6 @@ define(
 				var lvc = this.views_collection.length;
 				this.views_collection.remove(itemview);
 				itemview.$el.remove();
-				// unsubscribe deep
-				itemview.options.model.model.off(null, null, this);
 				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			_dereference_by_property:function(propertyname) {
@@ -204,7 +198,7 @@ define(
 					this_.pathables.add_path(solo);
 				}
 			},
-			_find_views:function(models) {
+			_find_views_of_model:function(models) {
 				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model.model) >= 0; });
 			},			
 			_make_property_box:function() {

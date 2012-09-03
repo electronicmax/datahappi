@@ -108,6 +108,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				});
 			};
 			var get_geo_values = function(pathables) {
+				console.log('get geo values ', pathables);
 				return utils.flatten(pathables.map(
 					function(pathable) {
 						return pathable.get_last_value().map(function(val) {
@@ -149,6 +150,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				var box = defined(this_.dropzone_boxes[i]) ? this_.dropzone_boxes[i].pathables : [];
 				this_.markers_by_box[i] = defined(this_.markers_by_box[i]) ? this_.markers_by_box[i] : [];
 				var markers = this_.markers_by_box[i];
+				console.log("calling get_geo_values on ", i, box);
 				var geovalues = get_geo_values(box);
 				_(geovalues).each(function(geoval, vi) {
 					var position = geovaltoLatLng(geoval);
@@ -204,11 +206,11 @@ define(['js/models', 'js/utils'], function(models, utils) {
 						console.log('add remove update ');
 						this_.update();
 					}, this)
-					.on('brush_pathable', function(pathable) {
+					.on_model('brush_visual', function(pathable) {
 						console.log('brush update ');
 						this_._brush_pathable(pathable);
 					}, this)
-					.on('unbrush_pathable', function(pathable) {
+					.on_model('unbrush_visual', function(pathable) {
 						console.log('unbrush update ');
 						this_._unbrush_pathable(pathable);
 					}, this);

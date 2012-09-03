@@ -25,12 +25,12 @@ define(['js/utils'], function(utils) {
 				})
 				.on('mouseover', function(d) {
 					this_._value = d;
-					this_.trigger('brush_visuals', d.series_pathables);
+					this_.trigger('brush_visual', d.series_pathables);
 					d3.select(this).attr('class', 'brush');					
 				})
 				.on('mouseout', function(d) {
 					delete this_._value;
-					this_.trigger('unbrush_visuals', d.series_pathables);
+					this_.trigger('unbrush_visual', d.series_pathables);
 					d3.select(this).attr('class', 'brush');										
 				});
 

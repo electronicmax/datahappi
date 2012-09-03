@@ -6,6 +6,13 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	
 	var defined = utils.DEFINED;
 	var assert = utils.assert;
+	var	model_subscribe = function(pathable, event, callback, whom) {
+		pathable.model.on(event,function(_implicit_args_) {
+			callback.apply(null, [pathable].concat($.makeArray(arguments)));
+		},whom);
+	};
+	var	model_unsubscribe = function(pathable, whom) {	pathable.model.off(null,null,whom);};
+	
 	
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
@@ -214,15 +221,32 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			this.bind("add remove", function(pathable) { this_._apply_paths(pathable);	});			
 			this.paths.bind("all", function(eventType, pathable) {
 				this_.map(function(pathable) { return this_._apply_paths(pathable); });
-			});			
+			});
+			this.model_subscriptions = [];
 		},
 		add:function(models) {
+			var this_ = this;
 			if (!_.isArray(models)) { models = [models]; }
-			models = models.map(function(m) { 
+			var pathables = models.map(function(m) { 
 				if (!(m instanceof Pathable)) { return new Pathable({model:m}); }
 				return m;
 			});
-			return Backbone.Collection.prototype.add.apply(this,[models]);
+			pathables.map(function(pathable) {
+				this_.model_subscriptions.map(function(sub) {
+					model_subscribe(pathable, sub.event, sub.callback, sub.whom);
+				});
+			});
+			return Backbone.Collection.prototype.add.apply(this,[pathables]);
+		},
+		remove:function(models) {
+			var this_ = this;
+			if (!_.isArray(models)) { models = [models]; }
+			models.map(function(pathable) {
+				this_.model_subscriptions.map(function(sub) {
+					model_unsubscribe(pathable, sub.whom);
+				});
+			});			
+			return Backbone.Collection.prototype.remove.apply(this,[models]);
 		},
 		_apply_paths:function(m) {
 			// starts m from scratch and tries to dereference it using each path
@@ -241,7 +265,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var result = this.map(function(pathable) {
 				return pathable.try_path(path);
 			}).filter(defined);
-			if (result.length > 0) { return result } 
+			if (result.length > 0) { return result };
 		},
 		// @path : path to add
 		// @position: optional - will insert at position if specified, append otherwise
@@ -260,6 +284,11 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			paths.map(function(path) {
 				this_.add_path(path);
 			});
+		},
+		on_model:function(eventType, callback, whom) {
+			this.model_subscriptions.push({ event : eventType, callback : callback, whom: whom });
+			this.map(function(pathable) { model_subscribe(pathable, eventType, callback, whom); });
+			return this; 
 		}
 	});
 

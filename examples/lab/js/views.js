@@ -131,10 +131,10 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			return [];
 		},
 		_trigger_brush:function() {
-			this.options.model.trigger('brush_pathable', this.options.model);
+			this.options.model.model.trigger('brush_visual');
 		},
 		_trigger_unbrush:function() {
-			this.options.model.trigger('unbrush_pathable', this.options.model);
+			this.options.model.model.trigger('unbrush_visual');
 		},
 		_add_sameas_behaviour:function() {
 			// make _el_ droppable -- with a clear warning
