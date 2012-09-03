@@ -289,7 +289,15 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			this.model_subscriptions.push({ event : eventType, callback : callback, whom: whom });
 			this.map(function(pathable) { model_subscribe(pathable, eventType, callback, whom); });
 			return this; 
-		}
+		},
+		off_model:function(eventType, whom) {
+			var target = model_subscriptions.filter(function(ms) {
+				return (eventType == null || ms.event == eventType) && (whom == ms.whom);
+			});
+			this.model_subscriptions = _(this.model_subscriptions).difference(target);			
+			this.map(function(pathable) { model_unsubscribe(pathable, eventType, null, whom); });
+			return this; 
+		}		
 	});
 
 	return {
