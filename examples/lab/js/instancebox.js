@@ -8,15 +8,15 @@ define(
 		'js/utils'
 	],
 	function(box, propbox, pathables, view, histogram, utils) {
-		//var template = '<div class="uplt corner"></div><div class="uprt corner"></div><div class="btlt corner"></div><div class="btrt corner"></div><div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
-		var template = '<div class="titlebar"><div class="box-delete icon-cancel"></div>Instances</div><div class="box_container"><div class="items"></div><input type="text" value="<%= label %>"></input><div class="properties"></div></div>';
-		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div><svg class="sparkhist"></svg>';
-		var defined = utils.DEFINED;
+		var template = '<div class="titlebar"><input class="title" type="text" value="instances"/><div class="box-delete icon-cancel"></div><svg class="sparkhist"></svg><i class="icon-share clone-box"></i></div><div class="items"></div><div class="properties"></div>';
+		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div>';
+		var defined = utils.DEFINED, dict = utils.TO_OBJ, flatten = utils.flatten, assert = utils.assert;
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
 				'click .toggle_props' : 'toggle_props',
-				'click .box-delete' : '_cb_delete'
+				'click .box-delete' : '_cb_delete',
+				'click .clone-box' : '_cb_clone'
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
@@ -24,6 +24,33 @@ define(
 				var this_ = this;
 				this.pathables = new pathables.Pathables();
 				this.pathables.on('add remove change', function() { this_.render(); });
+				this.pathables
+					.on_model('brush_visual', function(pathable) {
+						pathable = _(pathable).isArray() ? pathable : [pathable];
+						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
+							return v.$el.addClass('brush');
+						});
+					}, this_)
+					.on_model('unbrush_visual', function(pathable) {
+						console.log("instancebox >> ON PATHABLE unbrush_visual", pathable);
+						pathable = _(pathable).isArray() ? pathable : [pathable];						
+						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
+							// 
+							return v.$el.removeClass('brush');
+						});
+					}, this_)
+					.on_model('change:sameas', function(p) {
+						this_._change_sameas(p);						
+					});				
+			},
+			clone:function(target_box) {
+				var new_instancebox = target_box || new InstanceBox();
+				new_instancebox.add( this.views_collection.map(function(x) { return x.clone(); }) );
+				new_instancebox.setTitle(this.$el.find('.title').val());
+				return new_instancebox;
+			},
+			setTitle:function(s) {
+				this.$el.find('.title').val(s);
 			},
 			render:function() {
 				// this stuff should go into render
@@ -34,18 +61,13 @@ define(
 					this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 					// dragging the box
 					this.$el
-						.draggable({ cancel:".items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
+						.draggable({ cancel:"input, .sparkhist, .items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
 						.resizable({});					
+					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
 
-					this.views_collection
-						.on('brush_visual', function(model) {
-							model = _(model).isArray() ? model : [model];
-							this_._find_views(model).map(function(v) { return v.$el.addClass('brush'); });
-						})
-						.on('unbrush_visual', function(model) {
-							model = _(model).isArray() ? model : [model];						
-							this_._find_views(model).map(function(v) { return v.$el.removeClass('brush'); });
-						});
+					// support for deep brushing					
+					this.views_collection.map(function(view) { this_._add_brushing_listeners(view);	});
+					
 					// set up to receive droppables
 					this.$el.droppable({
 						greedy:true, // magical for allowing nesting of droppables
@@ -59,14 +81,10 @@ define(
 						},
 						drop: function( event, ui ) {
 							$(this).removeClass("over");
-							if (defined(ui.draggable.data('model'))) {
-								var model = ui.draggable.data("model")().clone();
-								this_.add(new view.PathableView({model:model}));
-							} else if (defined(ui.draggable.data('views'))) {
-								this_.add(ui.draggable.data('views')().map(function(vv) {
-									return new view.PathableView({model:vv.options.model})
-								}));
-							}
+							this_._handle_dropped_models(
+								defined(ui.draggable.data('model')) ?
+									[ ui.draggable.data("model")().clone() ] :
+									ui.draggable.data('views')().map(function(vv) { return vv.options.model.clone(); }));							
 						}
 					});
 					// add a toolbar.
@@ -82,6 +100,19 @@ define(
 				this.views_collection.map(function(v) {	this_._render_view(v);	});
 				return this;
 			},
+			_handle_dropped_models:function(pathables) {
+				// first merge in like models
+				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
+				pathables = pathables.filter(function(p) {
+					var equivalent_model = labels_to_models[p.model.get_label()];
+					if (defined(equivalent_model) && equivalent_model.id !== p.model.id) {
+						equivalent_model.setSameAs(p.model);
+						return false; // don't include because that would dupe
+					}
+					return true;
+				});
+				if (pathables.length) {  this.add(pathables.map(function(m) { return new view.PathableView({model:m});}));	}
+			},
 			_make_micro_hist:function() {
 				var this_ = this;
 				var hist = new histogram.HistView({
@@ -91,11 +122,26 @@ define(
 				hist.render();
 				return hist;
 			},
+			// this is cleverwork that makes sure we don't get dupes in a list
+			_change_sameas:function(p) {
+				console.log('_change_sameas', this._find_all_views_sameas_models());
+				while (this._find_all_views_sameas_models().filter(function(x) { return x == p.model; }).length > 1) {
+					// find one and remove it!
+					var views_with_pathable = this._get_first_view_with_pathable(p);
+					assert(views_with_pathable.length > 0, "error.");
+					this.remove(views_with_pathable[views_with_pathable.length - 1]);
+				}
+			},
+			_get_first_view_with_pathable:function(p) {	return this.views_collection.filter(function(v) { return v.options.model == p; });	},
+			_find_all_views_sameas_models:function() {
+				// computes the sameas equivalence graph
+				return utils.flatten(this.views_collection.map(function(v) { return v.options.model.model.sameas.concat(v.options.model.model); }));
+			},			
 			add:function(itemviews) {
 				// warning: this method shadows parent
 				if (!_(itemviews).isArray()) { itemviews = [itemviews]; }
 				var this_ = this;				
-				itemviews.map(function(itemview) {
+				itemviews = itemviews.filter(function(itemview) {
 					var pathable = itemview.options.model; 
 					// this is a sneaky which consolidates the pathables of views that are
 					// added to the same box, so if one gets dereferenced then they all do.
@@ -103,20 +149,23 @@ define(
 						// warn: we already have a pathable there so eeks
 						console.log('already have a pathable for him ', this_.pathables.get(pathable.id));
 						itemview.setModel(this_.pathables.get(pathable.id));
+						return undefined;
 					} else {
 						this_.pathables.add(pathable);
 					}
 					itemview.on('delete', function() {
 						itemview.$el.fadeOut('fast', function() { this_.remove(itemview); });
 					});
-					itemview.on('property-click', function(evt, ui) {
+					return itemview.on('property-click', function(evt, ui) {
 						this_._dereference_by_property($(evt.target).attr('data-prop'));
 					});					
 				});
-				// let's do this silently and then trigger manually
-				this.views_collection.add(itemviews, {silent:true});
-				this.views_collection.trigger('add', itemviews);
-				this.render();
+				if (itemviews.length > 0) {
+					// let's do this silently and then trigger manually
+					this.views_collection.add(itemviews, {silent:true});
+					this.views_collection.trigger('add', itemviews);
+					this.render();
+				}
 			},
 			remove:function(itemview) {
 				var m = itemview.options.model;
@@ -149,8 +198,8 @@ define(
 					this_.pathables.add_path(solo);
 				}
 			},
-			_find_views:function(models) {
-				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model) >= 0; });
+			_find_views_of_model:function(models) {
+				return this.views_collection.filter(function(v) { return models.indexOf(v.options.model.model) >= 0; });
 			},			
 			_make_property_box:function() {
 				// add a property box.
@@ -174,6 +223,10 @@ define(
 				var this_ = this;
 				this.trigger('delete');
 				this.$el.fadeOut(function() { this_.$el.remove(); });
+			},
+			_cb_clone:function() {
+				console.log('clone trigger yo ');
+				this.trigger('clone');
 			}
 		});
 

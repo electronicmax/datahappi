@@ -1,9 +1,73 @@
 .titlebar {
+  position: relative;
   cursor: move;
   padding: 2px 3px 2px 5px;
-  background-color: rgba(200, 200, 200, 0.11);
+  background-color: rgba(200, 200, 200, 0.2);
   height: 23px;
   font-size: 0.9em;
+}
+.titlebar input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  text-align: left;
+  position: absolute;
+  left: 3px;
+  bottom: 0px !important;
+  width: 110px;
+  margin: 0px;
+  padding: 4px !important;
+  font-size: 11pt;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: text;
+  -webkit-appearance: none !important;
+}
+.titlebar input:hover,
+.titlebar input:focus {
+  color: black;
+}
+.titlebar input:focus {
+  box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-outline: 0 !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+}
+.titlebar .clone-box {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.titlebar .box-delete {
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
+}
+.titlebar .sparkhist {
+  cursor: default;
+  z-index: 1000;
+  position: absolute;
+  top: 3px;
+  right: 35px;
+  height: 15px;
+  text-align: right;
+  width: 30px;
+}
+.titlebar .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.titlebar .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
 }
 .box-box-shadow {
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -18,7 +82,7 @@
 }
 .greybox {
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   position: absolute;
@@ -39,67 +103,6 @@
 .greybox.over {
   padding: 5px;
 }
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
-}
 .greybox .microtoolbox {
   display: none;
   color: rgba(0, 0, 50, 0.6);
@@ -117,30 +120,31 @@
 }
 .greybox .items {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 0px;
   right: 0px;
-  bottom: 68px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 15px;
 }
 .greybox .properties {
+  background-color: rgba(200, 200, 200, 0.2) !important;
   position: absolute;
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 58px;
   bottom: 0px;
   padding-top: 3px;
   overflow: none;
   vertical-align: top;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
@@ -181,36 +185,8 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
-}
-.greybox .sparkhist {
-  z-index: 1000;
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  width: 40px;
-  margin-top: -24px;
-  height: 22px;
-  text-align: right;
-}
-.greybox .sparkhist div.bars-horizontal {
-  overflow: hidden;
-  font: 8px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  height: 12px;
-  color: white;
-  line-height: 1.5em;
-}
-.greybox .sparkhist rect {
-  fill: white;
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .sparkhist rect.brush {
-  fill: rgba(0, 200, 255, 0.5);
 }
 .simple {
   font-size: 8pt;
@@ -221,9 +197,4 @@
   height: 100%;
   width: 100%;
   position: relative;
-}
-.map_container {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }

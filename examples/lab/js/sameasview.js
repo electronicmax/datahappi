@@ -5,13 +5,10 @@ define(['js/utils'],  function(utils) {
 		idAttribute:"_id",
 		initialize:function(attrs) {
 			this.setModels(attrs.models);
+			this.set({ _id: (new Date()).valueOf() });
 		},
 		setModels:function(models) {
 			models = _(models).sortBy(function(x) { return x.id; });
-			this.set({
-				_id: models.map(function(x) { return x.id; }).join('-') || '-no models-'
-			});
-			console.log('relation ::: set models, ', this.id);			
 			this.set({models:models});
 			this.trigger('change');
 		}
@@ -36,7 +33,9 @@ define(['js/utils'],  function(utils) {
 			equivs.append(this.options.relation.get("models").map(function(x) {  return _(t).template({m:x}); }).join(" &#8646; "));
 			return this;
 		},
-		_cb_delete:function() { this.trigger('delete'); }
+		_cb_delete:function() {
+			this.trigger('delete');
+		}
 	});	
 	
 	var SameAsView = Backbone.View.extend({
@@ -45,25 +44,52 @@ define(['js/utils'],  function(utils) {
 			this.views = {};
 			this.relations = new SameAsCollection();
 			this.relations
-				.on('add', function(relation) {
-					this_.views[relation.id] = new SameAsRelationView({relation:relation});
-					this_.$el.find('.relations').append(this_.views[relation.id].render().el);
-					this_.views[relation.id].on('delete', function() {
-						this_._delete_relation(relation);
-					});
-				})
-				.on('remove', function(relation) {
-					// does the nasty work of updating views etc
-					if (this_.views[relation.id]) {
-						this_.views[relation.id].remove();
-						delete this_.views[relation.id];
-					}
-				});
+				.on('add', function(relation) {	this_._handle_add(relation);	})
+				.on('remove', function(relation) { this_._handle_remove(relation); });
 		},
+		_handle_add:function(relation) {
+			var this_ = this;
+			this_.views[relation.id] = new SameAsRelationView({relation:relation});
+			this_.$el.find('.relations').append(this_.views[relation.id].render().el);
+			this_.views[relation.id].on('delete', function() {
+				this_._delete_relation(relation);
+			});
+		},
+		_handle_remove:function(relation) {
+			var this_ = this;
+			// console.log('handle remove > ', relation.id, this.views[relation.id]);
+			if (this_.views[relation.id]) {
+				this_.views[relation.id].remove();
+				delete this_.views[relation.id];
+			}			
+		},		
 		add_to_watch:function(m) {
 			var this_ = this;
 			m.on('change:sameas', function() {
-				// existing selection
+				// console.log(">> got a change sameas on ", m.id);
+				// existing relations
+
+				var new_equiv_models = _(m.sameas.concat([m])).uniq();
+				var cur_r = this_.relations.filter(function(rr) {
+					return _(new_equiv_models).intersection(rr.get('models')).length > 0;
+				});
+				// console.log("sameasview() :: relevant relations ", cur_r);				
+
+				// enter selection
+				if (cur_r.length === 0 && m.sameas.length > 0) {
+					// console.log("sameasview() :: entering a new relation ", new_equiv_models);
+					this_.relations.add(new SameAsRelation({ models: new_equiv_models }));
+				}
+
+				// update
+				cur_r.map(function(r) {	r.setModels(new_equiv_models);		});
+
+				// exit selection
+				if (cur_r.length > 0 && m.sameas.length === 0) {
+					cur_r.map(function(r) { this_.relations.remove(r); });
+				} 				
+
+				/*
 				var r = this_.relations.filter(function(rr) {
 					return _(m.sameas).union(rr.get('models')).length < m.sameas.length + rr.get('models').length;
 				});
@@ -76,13 +102,19 @@ define(['js/utils'],  function(utils) {
 				} else {
 					r.map(function(rr) { rr.setModels(_(m.sameas.concat([m])).uniq()); });
 				}
+				*/
 			}, this);
 		},
 		_delete_relation:function(relation) {
-			relation.get('models').map(function(m) {
-				m.clearSameAs();
-			});
-			this.relations.remove(relation); // triggers 
+			this.relations.remove(relation); // triggers
+			relation.get('models').map(function(m) { m.clearSameAs(); });
+		},
+		render:function() {
+			var this_ = this;
+			this.$el.data('view', this);
+			this.relations.map(function(x) { this_._handle_add(x); });
+			// TODO : discover all of the relations we have in our 
+			return this;
 		}
 	});
 

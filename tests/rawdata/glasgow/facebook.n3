@@ -1,0 +1,49 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#> .
+
+:Person rdfs:label "Friends from facebook" .
+
+:p1 a :Person ;
+    rdfs:label "Katrina Copeland" ;
+    :address "55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK"; 
+    geo:lat "55.744584";
+    geo:long "-4.201433";
+    :postcode "G75 9HJ".
+
+:p2 a :Person ;
+    rdfs:label "Blanche Standley" ;
+    :address "Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK";
+    geo:lat "56.060101";
+    geo:long "-4.647279";
+    :postcode "G83 8RH".
+
+:p3 a :Person ;
+    rdfs:label "Kayla Fussell" ;
+    :address "15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK";
+    geo:lat "55.852388";
+    geo:long "-4.342088";
+    :postcode "G52 2PF".
+
+:p4 a :Person ;
+    rdfs:label "Jacob Boucher" ;
+    :address "7 Scotland St, Glasgow, Glasgow City G5 8NL, UK";
+    geo:lat "55.849473";
+    geo:long "-4.26692";
+    :postcode "G5 8NL".
+
+:p5 a :Person ;
+    rdfs:label "Johnny Izzo" ;
+    :address "Essex Ln, Glasgow, Glasgow City G14, UK";
+    geo:lat "55.878777";
+    geo:long "-4.333508";
+    :postcode "G14 9LX".
+
+:p6 a :Person ;
+    rdfs:label "Madeline Legg" ;
+    :address "5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK";
+    geo:lat "55.95191";
+    geo:long "-3.983658";
+    :postcode "G70 6AA".
+
+

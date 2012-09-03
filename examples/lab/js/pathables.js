@@ -6,6 +6,13 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 	
 	var defined = utils.DEFINED;
 	var assert = utils.assert;
+	var	model_subscribe = function(pathable, event, callback, whom) {
+		pathable.model.on(event,function(_implicit_args_) {
+			callback.apply(null, [pathable].concat($.makeArray(arguments)));
+		},whom);
+	};
+	var	model_unsubscribe = function(pathable, whom) {	pathable.model.off(null,null,whom);};
+	
 	
 	// pathsteps -- start with path step: single unit of dereference
 	var Step = Backbone.Model.extend({
@@ -132,7 +139,6 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 					if (step.test(v)) { return step.apply(v); }
 				}).filter(defined));
 				values.push(cur_val);
-				console.log('values >> ', values);
 			}
 			return cur_val.length > 0 && values.length == steps.length + 1 ? values : undefined;
 		},
@@ -215,15 +221,32 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			this.bind("add remove", function(pathable) { this_._apply_paths(pathable);	});			
 			this.paths.bind("all", function(eventType, pathable) {
 				this_.map(function(pathable) { return this_._apply_paths(pathable); });
-			});			
+			});
+			this.model_subscriptions = [];
 		},
 		add:function(models) {
+			var this_ = this;
 			if (!_.isArray(models)) { models = [models]; }
-			models = models.map(function(m) { 
+			var pathables = models.map(function(m) { 
 				if (!(m instanceof Pathable)) { return new Pathable({model:m}); }
 				return m;
 			});
-			return Backbone.Collection.prototype.add.apply(this,[models]);
+			pathables.map(function(pathable) {
+				this_.model_subscriptions.map(function(sub) {
+					model_subscribe(pathable, sub.event, sub.callback, sub.whom);
+				});
+			});
+			return Backbone.Collection.prototype.add.apply(this,[pathables]);
+		},
+		remove:function(models) {
+			var this_ = this;
+			if (!_.isArray(models)) { models = [models]; }
+			models.map(function(pathable) {
+				this_.model_subscriptions.map(function(sub) {
+					model_unsubscribe(pathable, sub.whom);
+				});
+			});			
+			return Backbone.Collection.prototype.remove.apply(this,[models]);
 		},
 		_apply_paths:function(m) {
 			// starts m from scratch and tries to dereference it using each path
@@ -232,12 +255,8 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var paths = this.paths.models;
 			for (var p_i = 0; p_i < paths.length; p_i++) {
 				var path = paths[p_i];
-				// console.log('trying path for ', m.id, ' - ', path.get('path_priority'), ' --- ', path.get('steps').map(function(x) { return x.get('property'); }));
 				var result = m.try_path(path);
-				if (defined(result)) {
-					// console.log('SETTING path for ', m.id, ' - ', path.get('steps').map(function(x) { return x.get('property'); }));
-					return m.set_path(path);
-				} 
+				if (defined(result)) {	return m.set_path(path);	} 
 			}
 			// no paths met us, let's just reset 
 			return m.reset_path();			
@@ -246,7 +265,7 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var result = this.map(function(pathable) {
 				return pathable.try_path(path);
 			}).filter(defined);
-			if (result.length > 0) { return result } 
+			if (result.length > 0) { return result };
 		},
 		// @path : path to add
 		// @position: optional - will insert at position if specified, append otherwise
@@ -265,7 +284,20 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			paths.map(function(path) {
 				this_.add_path(path);
 			});
-		}
+		},
+		on_model:function(eventType, callback, whom) {
+			this.model_subscriptions.push({ event : eventType, callback : callback, whom: whom });
+			this.map(function(pathable) { model_subscribe(pathable, eventType, callback, whom); });
+			return this; 
+		},
+		off_model:function(eventType, whom) {
+			var target = model_subscriptions.filter(function(ms) {
+				return (eventType == null || ms.event == eventType) && (whom == ms.whom);
+			});
+			this.model_subscriptions = _(this.model_subscriptions).difference(target);			
+			this.map(function(pathable) { model_unsubscribe(pathable, eventType, null, whom); });
+			return this; 
+		}		
 	});
 
 	return {

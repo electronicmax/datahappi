@@ -3,11 +3,80 @@
 @import "fontello/fontello-codes.css";
 /*@import "../../../js/ui/font-propertybox/fontello.css";*/
 .titlebar {
+  position: relative;
   cursor: move;
   padding: 2px 3px 2px 5px;
-  background-color: rgba(200, 200, 200, 0.11);
+  background-color: rgba(200, 200, 200, 0.2);
   height: 23px;
   font-size: 0.9em;
+}
+.titlebar input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  text-align: left;
+  position: absolute;
+  left: 3px;
+  bottom: 0px !important;
+  width: 110px;
+  margin: 0px;
+  padding: 4px !important;
+  font-size: 11pt;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: text;
+  -webkit-appearance: none !important;
+}
+.titlebar input:hover,
+.titlebar input:focus {
+  color: black;
+}
+.titlebar input:focus {
+  box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-outline: 0 !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+}
+.titlebar .clone-box {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.titlebar .box-delete {
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
+}
+.titlebar .sparkhist {
+  cursor: default;
+  z-index: 1000;
+  position: absolute;
+  top: 3px;
+  right: 35px;
+  height: 15px;
+  text-align: right;
+  width: 30px;
+}
+.titlebar .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.titlebar .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
 }
 .box-box-shadow {
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -22,7 +91,7 @@
 }
 .greybox {
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -39,7 +108,7 @@
   /* properties */
 
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -62,72 +131,6 @@
 .greybox.over {
   padding: 5px;
 }
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
-}
 .greybox .microtoolbox {
   display: none;
   color: rgba(0, 0, 50, 0.6);
@@ -145,30 +148,31 @@
 }
 .greybox .items {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 0px;
   right: 0px;
-  bottom: 68px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 15px;
 }
 .greybox .properties {
+  background-color: rgba(200, 200, 200, 0.2) !important;
   position: absolute;
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 58px;
   bottom: 0px;
   padding-top: 3px;
   overflow: none;
   vertical-align: top;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
@@ -209,106 +213,12 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
-}
-.greybox .sparkhist {
-  z-index: 1000;
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  width: 40px;
-  margin-top: -24px;
-  height: 22px;
-  text-align: right;
-}
-.greybox .sparkhist div.bars-horizontal {
-  overflow: hidden;
-  font: 8px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  height: 12px;
-  color: white;
-  line-height: 1.5em;
-}
-.greybox .sparkhist rect {
-  fill: white;
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .sparkhist rect.brush {
-  fill: rgba(0, 200, 255, 0.5);
 }
 .greybox.over {
   padding: 5px;
 }
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
-}
 .greybox .microtoolbox {
   display: none;
   color: rgba(0, 0, 50, 0.6);
@@ -326,30 +236,31 @@
 }
 .greybox .items {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 0px;
   right: 0px;
-  bottom: 68px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 15px;
 }
 .greybox .properties {
+  background-color: rgba(200, 200, 200, 0.2) !important;
   position: absolute;
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 58px;
   bottom: 0px;
   padding-top: 3px;
   overflow: none;
   vertical-align: top;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
@@ -390,36 +301,8 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
-}
-.greybox .sparkhist {
-  z-index: 1000;
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  width: 40px;
-  margin-top: -24px;
-  height: 22px;
-  text-align: right;
-}
-.greybox .sparkhist div.bars-horizontal {
-  overflow: hidden;
-  font: 8px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  height: 12px;
-  color: white;
-  line-height: 1.5em;
-}
-.greybox .sparkhist rect {
-  fill: white;
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .sparkhist rect.brush {
-  fill: rgba(0, 200, 255, 0.5);
 }
 .simple {
   font-size: 8pt;
@@ -430,18 +313,82 @@
   height: 100%;
   width: 100%;
   position: relative;
-}
-.map_container {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 .titlebar {
+  position: relative;
   cursor: move;
   padding: 2px 3px 2px 5px;
-  background-color: rgba(200, 200, 200, 0.11);
+  background-color: rgba(200, 200, 200, 0.2);
   height: 23px;
   font-size: 0.9em;
+}
+.titlebar input {
+  font-family: "District", "Droid Sans", "Lucida Sans";
+  color: rgba(0, 0, 50, 0.6);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  text-align: left;
+  position: absolute;
+  left: 3px;
+  bottom: 0px !important;
+  width: 110px;
+  margin: 0px;
+  padding: 4px !important;
+  font-size: 11pt;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: text;
+  -webkit-appearance: none !important;
+}
+.titlebar input:hover,
+.titlebar input:focus {
+  color: black;
+}
+.titlebar input:focus {
+  box-shadow: none !important;
+  outline: 0 !important;
+  -webkit-outline: 0 !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+}
+.titlebar .clone-box {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.titlebar .box-delete {
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  cursor: pointer;
+}
+.titlebar .sparkhist {
+  cursor: default;
+  z-index: 1000;
+  position: absolute;
+  top: 3px;
+  right: 35px;
+  height: 15px;
+  text-align: right;
+  width: 30px;
+}
+.titlebar .sparkhist rect {
+  fill: white;
+  stroke: rgba(0, 200, 255, 0.5);
+}
+.titlebar .sparkhist rect.brush {
+  fill: rgba(0, 200, 255, 0.5);
 }
 .box-box-shadow {
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -456,7 +403,7 @@
 }
 .greybox {
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -473,7 +420,7 @@
   /* properties */
 
   z-index: 5;
-  background-color: rgba(250, 250, 250, 0.81);
+  background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
   box-shadow: 1px 1px 10px 1px #f0e8f0;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -496,72 +443,6 @@
 .greybox.over {
   padding: 5px;
 }
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
-}
 .greybox .microtoolbox {
   display: none;
   color: rgba(0, 0, 50, 0.6);
@@ -579,30 +460,31 @@
 }
 .greybox .items {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 0px;
   right: 0px;
-  bottom: 68px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 15px;
 }
 .greybox .properties {
+  background-color: rgba(200, 200, 200, 0.2) !important;
   position: absolute;
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 58px;
   bottom: 0px;
   padding-top: 3px;
   overflow: none;
   vertical-align: top;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
@@ -643,106 +525,12 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
-}
-.greybox .sparkhist {
-  z-index: 1000;
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  width: 40px;
-  margin-top: -24px;
-  height: 22px;
-  text-align: right;
-}
-.greybox .sparkhist div.bars-horizontal {
-  overflow: hidden;
-  font: 8px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  height: 12px;
-  color: white;
-  line-height: 1.5em;
-}
-.greybox .sparkhist rect {
-  fill: white;
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .sparkhist rect.brush {
-  fill: rgba(0, 200, 255, 0.5);
 }
 .greybox.over {
   padding: 5px;
 }
-.greybox .box-delete {
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-  z-index: 10;
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  cursor: pointer;
-}
-.greybox .uplt,
-.greybox .uprt,
-.greybox .btlt,
-.greybox .btrt {
-  width: 10px;
-  height: 10px;
-}
-.greybox .uplt {
-  border-left: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.greybox .uprt {
-  border-right: 1px solid #44aaff;
-  border-top: 1px solid #44aaff;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.greybox .btlt {
-  border-bottom: 1px solid #44aaff;
-  border-left: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.greybox .btrt {
-  border-bottom: 1px solid #44aaff;
-  border-right: 1px solid #44aaff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.greybox input {
-  font-family: "District", "Droid Sans", "Lucida Sans";
-  color: rgba(0, 0, 50, 0.6);
-  text-align: left;
-  position: absolute;
-  left: 0px;
-  bottom: -20px;
-  margin: 0px;
-  padding: 0px;
-  background: rgba(255, 255, 255, 0);
-  font-size: 10pt;
-  border: none !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.greybox input:hover,
-.greybox input:focus {
-  color: black;
-}
 .greybox .microtoolbox {
   display: none;
   color: rgba(0, 0, 50, 0.6);
@@ -760,30 +548,31 @@
 }
 .greybox .items {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 0px;
   right: 0px;
-  bottom: 68px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 15px;
 }
 .greybox .properties {
+  background-color: rgba(200, 200, 200, 0.2) !important;
   position: absolute;
   z-index: 3;
   left: 0px;
   right: 0px;
-  height: 58px;
   bottom: 0px;
   padding-top: 3px;
   overflow: none;
   vertical-align: top;
-  background-color: rgba(200, 200, 200, 0.11);
 }
 .greybox .properties .propitems {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: 0px !important;
   padding: 0px !important;
   list-style-type: none !important;
@@ -824,36 +613,8 @@
 }
 .greybox .properties .new-path-btn {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
-}
-.greybox .sparkhist {
-  z-index: 1000;
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  width: 40px;
-  margin-top: -24px;
-  height: 22px;
-  text-align: right;
-}
-.greybox .sparkhist div.bars-horizontal {
-  overflow: hidden;
-  font: 8px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  height: 12px;
-  color: white;
-  line-height: 1.5em;
-}
-.greybox .sparkhist rect {
-  fill: white;
-  stroke: rgba(0, 200, 255, 0.5);
-}
-.greybox .sparkhist rect.brush {
-  fill: rgba(0, 200, 255, 0.5);
 }
 .simple {
   font-size: 8pt;
@@ -864,11 +625,6 @@
   height: 100%;
   width: 100%;
   position: relative;
-}
-.map_container {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 .fullsize {
   position: absolute;
@@ -939,6 +695,15 @@
 }
 .visual svg.plot rect.brush {
   fill: rgba(20, 100, 20, 0.8);
+}
+.visual svg.plot text.barlabel {
+  fill: rgba(120, 120, 120, 0.4);
+}
+.visual svg.plot text.valuedisplay {
+  font-size: 16pt;
+}
+.visual svg.plot text.value-label {
+  font-size: 10pt;
 }
 .visual .droparea {
   position: absolute;
@@ -1041,21 +806,11 @@
   border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   background-color: rgba(0, 0, 255, 0.09999999999999998);
 }
-.dropzone-0 .uplt {
-  border-left: 1px solid #0000ff !important;
-  border-top: 1px solid #0000ff !important;
+.dropzone-0 .brush {
+  background-color: rgba(0, 0, 255, 0.050000000000000044) !important;
 }
-.dropzone-0 .uprt {
-  border-right: 1px solid #0000ff;
-  border-top: 1px solid #0000ff !important;
-}
-.dropzone-0 .btlt {
-  border-bottom: 1px solid #0000ff !important;
-  border-left: 1px solid #0000ff !important;
-}
-.dropzone-0 .btrt {
-  border-bottom: 1px solid #0000ff !important;
-  border-right: 1px solid #0000ff !important;
+.dropzone-0 .titlebar input {
+  background-color: rgba(102, 102, 255, 0.19999999999999996);
 }
 .dropzone-1 {
   background-color: rgba(255, 165, 0, 0.050000000000000044);
@@ -1066,21 +821,11 @@
   border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   background-color: rgba(255, 165, 0, 0.09999999999999998);
 }
-.dropzone-1 .uplt {
-  border-left: 1px solid #ffa500 !important;
-  border-top: 1px solid #ffa500 !important;
+.dropzone-1 .brush {
+  background-color: rgba(255, 165, 0, 0.050000000000000044) !important;
 }
-.dropzone-1 .uprt {
-  border-right: 1px solid #ffa500;
-  border-top: 1px solid #ffa500 !important;
-}
-.dropzone-1 .btlt {
-  border-bottom: 1px solid #ffa500 !important;
-  border-left: 1px solid #ffa500 !important;
-}
-.dropzone-1 .btrt {
-  border-bottom: 1px solid #ffa500 !important;
-  border-right: 1px solid #ffa500 !important;
+.dropzone-1 .titlebar input {
+  background-color: rgba(255, 201, 102, 0.19999999999999996);
 }
 .dropzone-2 {
   background-color: rgba(0, 128, 0, 0.050000000000000044);
@@ -1091,21 +836,11 @@
   border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   background-color: rgba(0, 128, 0, 0.09999999999999998);
 }
-.dropzone-2 .uplt {
-  border-left: 1px solid #008000 !important;
-  border-top: 1px solid #008000 !important;
+.dropzone-2 .brush {
+  background-color: rgba(0, 128, 0, 0.050000000000000044) !important;
 }
-.dropzone-2 .uprt {
-  border-right: 1px solid #008000;
-  border-top: 1px solid #008000 !important;
-}
-.dropzone-2 .btlt {
-  border-bottom: 1px solid #008000 !important;
-  border-left: 1px solid #008000 !important;
-}
-.dropzone-2 .btrt {
-  border-bottom: 1px solid #008000 !important;
-  border-right: 1px solid #008000 !important;
+.dropzone-2 .titlebar input {
+  background-color: rgba(0, 230, 0, 0.19999999999999996);
 }
 .dropzone-3 {
   background-color: rgba(255, 0, 0, 0.050000000000000044);
@@ -1116,21 +851,11 @@
   border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   background-color: rgba(255, 0, 0, 0.09999999999999998);
 }
-.dropzone-3 .uplt {
-  border-left: 1px solid #ff0000 !important;
-  border-top: 1px solid #ff0000 !important;
+.dropzone-3 .brush {
+  background-color: rgba(255, 0, 0, 0.050000000000000044) !important;
 }
-.dropzone-3 .uprt {
-  border-right: 1px solid #ff0000;
-  border-top: 1px solid #ff0000 !important;
-}
-.dropzone-3 .btlt {
-  border-bottom: 1px solid #ff0000 !important;
-  border-left: 1px solid #ff0000 !important;
-}
-.dropzone-3 .btrt {
-  border-bottom: 1px solid #ff0000 !important;
-  border-right: 1px solid #ff0000 !important;
+.dropzone-3 .titlebar input {
+  background-color: rgba(255, 102, 102, 0.19999999999999996);
 }
 * {
   box-sizing: border-box;
@@ -1147,13 +872,6 @@ div {
   color: #555;
   background-color: rgba(250, 250, 255, 0.3);
   font-weight: normal;
-}
-.sameas-over {
-  border: 1px solid orange !important;
-}
-.sameas-over .sameas-handle {
-  border: none !important;
-  color: orange;
 }
 .ui-draggable-dragging {
   z-index: 10000;
@@ -1271,6 +989,7 @@ body .slidepanel .sameas-view {
   padding: 10px 4px 0px 20px;
   text-align: right;
   border-right: 1px solid orange;
+  overflow-y: auto;
 }
 body .slidepanel .sameas-view .sameas-relation {
   padding: 0px 24px 2px 2px;
@@ -1384,19 +1103,20 @@ body .flip-horizontal {
   /*IE*/
 
 }
-body .pathable-view {
+.pathable-view {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0);
   padding: 5px;
 }
-body .pathable-view .sameas-handle {
+.pathable-view .reorder-handle {
   padding: 0px 6px 0px 0px;
   font-size: 1.2em;
+  cursor: ns-resize;
 }
-body .pathable-view .name {
+.pathable-view .name {
   padding: 0px 0px 6px 3px;
 }
-body .pathable-view .delete {
+.pathable-view .delete {
   position: absolute;
   top: 2px;
   right: 1px;
@@ -1407,13 +1127,13 @@ body .pathable-view .delete {
   font-size: 1.0em;
   display: block;
 }
-body .pathable-view:hover {
+.pathable-view:hover {
   border: 1px solid rgba(200, 200, 200, 0.5);
 }
-body .pathable-view:hover .delete {
+.pathable-view:hover .delete {
   display: block;
 }
-body .pathable-view .proplabel {
+.pathable-view .proplabel {
   margin: 0px;
   display: inline-block;
   font-size: 0.7em;
@@ -1423,17 +1143,22 @@ body .pathable-view .proplabel {
   vertical-align: middle;
   line-height: 5px;
 }
-body .pathable-view .proplabel:hover {
+.pathable-view .proplabel:hover {
   color: #000;
 }
-body .pathable-view .values,
-body .pathable-view .props {
-  margin: 0px 0px 5px 0px;
+.pathable-view .values,
+.pathable-view .props {
+  margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 22px;
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
 }
-body .pathable-view.brush {
+.pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);
+}
+.pathable-view.ui-draggable-dragging {
+  -webkit-transform: rotate(3deg);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  width: 340px;
 }

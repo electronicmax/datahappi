@@ -23,12 +23,6 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
 			this.brushed = [];
-			this.on('brush', function(entity) {})
-				.on('unbrush', function(entity) {
-					_(this_.dropzone_boxes).values().map(function(dzb) {
-						if (defined(dzb)) {	dzb.views_collection.trigger('unbrush_visual', entity);}							
-					});
-				});
 		},
 		render:function() {
 			var this_ = this;
@@ -114,6 +108,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				});
 			};
 			var get_geo_values = function(pathables) {
+				console.log('get geo values ', pathables);
 				return utils.flatten(pathables.map(
 					function(pathable) {
 						return pathable.get_last_value().map(function(val) {
@@ -155,6 +150,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				var box = defined(this_.dropzone_boxes[i]) ? this_.dropzone_boxes[i].pathables : [];
 				this_.markers_by_box[i] = defined(this_.markers_by_box[i]) ? this_.markers_by_box[i] : [];
 				var markers = this_.markers_by_box[i];
+				console.log("calling get_geo_values on ", i, box);
 				var geovalues = get_geo_values(box);
 				_(geovalues).each(function(geoval, vi) {
 					var position = geovaltoLatLng(geoval);
@@ -210,11 +206,11 @@ define(['js/models', 'js/utils'], function(models, utils) {
 						console.log('add remove update ');
 						this_.update();
 					}, this)
-					.on('brush_pathable', function(pathable) {
+					.on_model('brush_visual', function(pathable) {
 						console.log('brush update ');
 						this_._brush_pathable(pathable);
 					}, this)
-					.on('unbrush_pathable', function(pathable) {
+					.on_model('unbrush_visual', function(pathable) {
 						console.log('unbrush update ');
 						this_._unbrush_pathable(pathable);
 					}, this);
@@ -238,10 +234,20 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.brushed = _(this.brushed).without(pathable);
 			this.update();
 		},
-		_trigger_brush_event:function(eventType, entity) {
+		_trigger_brush_event:function(eventType, pathable) {
 			var this_ = this;
 			_(this.dropzone_boxes).values().map(function(dzb) {
-				if (defined(dzb)) {	dzb.views_collection.trigger(eventType, entity); }
+				if (defined(dzb)) {
+					// support for deep brushing
+					dzb.views_collection
+						.filter(function(view) {
+							return view.options.model == pathable;
+						}).map(function(view) {
+							var model = view.options.model.model;
+							console.log('triggering ', eventType, ' on model ', model, model.id);
+							model.trigger(eventType);
+						});
+				}
 			});			
 		}
 	});

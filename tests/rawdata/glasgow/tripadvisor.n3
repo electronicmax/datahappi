@@ -1,0 +1,55 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#> .
+
+:Restaurant rdfs:label "Restaurants from TripAdvisor" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Black Sheep Bistro" ;
+    :address "10 Clarendon street, St George's Cross, Glasgow, Scotland" ;
+    :telephone "01413331435" ;
+    :cuisine "Scottish" ;
+    :score "4.5" ;
+    :ranking "1" .
+
+:r2 a :Restaurant ;
+    rdfs:label "Charcoals" ;
+    :address "26a Renfield Street, Glasgow G2 1LU, Scotland" ;
+    :telephone "01412219251" ;
+    :cuisine "Indian" ;
+    :score "4.5" ;
+    :ranking "2" .
+
+:r3 a :Restaurant ;
+    rdfs:label "Number 16" ;
+    :address "16 Byres Road, Glasgow G11 5JY, Scotland" ;
+    :telephone "+44 141 3392544" ;
+    :cuisine "Casual Dining" ;
+    :score "4.5" ;
+    :ranking "3" .
+
+:r4 a :Restaurant ;
+    rdfs:label "Fanny Trollope's" ;
+    :address "1066 Argyle Street, Glasgow G3 8LY, Scotland" ;
+    :telephone "+44 (0)141 564 6464" ;
+    :cuisine "Scottish" ;
+    :score "4.5" ;
+    :ranking "4" .
+
+:r5 a :Restaurant ;
+    rdfs:label "Two Fat Ladies at the Buttery" ;
+    :address "652-654 Argyle Street, Glasgow, Scotland" ;
+    :cuisine "Seafood" ;
+    :cuisine "European" ;
+    :cuisine "British" ;
+    :score "4.5" ;
+    :ranking "5" .
+
+:r6 a :Restaurant ;
+    rdfs:label "Sapori D'Italia" ;
+    :address "1102 Cathcart Road, Glasgow G42 9EG , Scotland" ;
+    :telephone "0141 636 0444" ;
+    :cuisine "Italian" ;
+    :score "5" ;
+    :ranking "6" .
+
+

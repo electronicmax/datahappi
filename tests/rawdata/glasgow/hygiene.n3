@@ -1,0 +1,31 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#> .
+
+:Restaurant rdfs:label "Food Hygiene Ratings from FSA" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Black Sheep Bistro" ;
+    :rating "PASS".
+
+:r2 a :Restaurant ;
+    rdfs:label "Charcoals" ;
+    :rating "PASS".
+
+:r3 a :Restaurant ;
+    rdfs:label "Number 16 Restaurant" ;
+    :rating "PASS".
+
+:r4 a :Restaurant ;
+    rdfs:label "Fanny Trollops" ;
+    :rating "PASS".
+
+:r5 a :Restaurant ;
+    rdfs:label "Two Fat Ladies At The Buttery" ;
+    :rating "PASS".
+
+:r6 a :Restaurant ;
+    rdfs:label "Sapori D'Italia" ;
+    :rating "AWAITING INSPECTION" .
+
+
+
