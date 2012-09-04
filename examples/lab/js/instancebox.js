@@ -61,7 +61,13 @@ define(
 					this.$el.html(_(template).template({label:this.options.label || 'stuff'}));
 					// dragging the box
 					this.$el
-						.draggable({ cancel:"input, .sparkhist, .items, .propitems, .sparkhist", drag:function(evt,ui) { }	})
+						.draggable({
+							cancel:"input, .sparkhist, .items, .propitems, .sparkhist",
+							start:function(evt, ui) {
+								this_.$el.data('drag_start_position', _($(this).position()).clone());
+							},
+							drag:function(evt,ui) { }							
+						})
 						.resizable({});					
 					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
 

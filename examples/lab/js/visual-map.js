@@ -18,7 +18,6 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			3:new L.Icon({iconUrl:'../../lib/leaflet/images/marker-red.png', iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),popupAnchor: new L.Point(1, -34),shadowSize: new L.Point(41, 41)})
 		},
 		initialize:function() {
-			var this_ = this;
 			this.options = _.extend(this.defaults, this.options);
 			this.dropzone_boxes = {};
 			this.markers_by_box = {};
@@ -54,6 +53,9 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					$(this).removeClass("over");
 					$(this).find('.lbl').html('' + views.length + 'items');
 					this_.setDropzoneBox(ui.draggable.data("view"), dropzone_i);
+					// reset position
+					var start_pos = ui.draggable.data("drag_start_position");
+					ui.draggable.data("view").setTopLeft(start_pos.top, start_pos.left, true);
 				}
 			});
 			this.$el.resizable({resize:function() { this_.map.invalidateSize(false); }});
@@ -81,9 +83,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			return;
 		},
 		update:function() {
-			console.log('update() :: brushables ', this.brushed.length);
-			var this_ = this;
-			
+			var this_ = this;			
 			// only works upon attachment
 			if (_(this.map).isUndefined() && $('body').find(this.$el[0]).length)  {			
 				// make the google map
@@ -102,13 +102,13 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				if (markers.length == 0) { return; }
 				_(markers).each(function(marker, kk) {
 					if (defined(marker)) {
+						console.log('removing marker ', marker, kk);
 						this_.map.removeLayer(marker);							
 						delete markers[kk];
 					}				
 				});
 			};
 			var get_geo_values = function(pathables) {
-				console.log('get geo values ', pathables);
 				return utils.flatten(pathables.map(
 					function(pathable) {
 						return pathable.get_last_value().map(function(val) {
@@ -141,16 +141,12 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			var geovaltoLatLng = function(geoval) {
 				return new L.LatLng(geoval.geo.lat,geoval.geo.long);
 			};
-
-			var reset_view = false;
 			var last_position;
 			var minLatLng, maxLatLng;
 			// make some markers for each of the dropzone_boxes!
 			zones.map(function(i) {
 				var box = defined(this_.dropzone_boxes[i]) ? this_.dropzone_boxes[i].pathables : [];
-				this_.markers_by_box[i] = defined(this_.markers_by_box[i]) ? this_.markers_by_box[i] : [];
-				var markers = this_.markers_by_box[i];
-				console.log("calling get_geo_values on ", i, box);
+				var markers = this_.markers_by_box[i] ? this_.markers_by_box[i] : [];
 				var geovalues = get_geo_values(box);
 				_(geovalues).each(function(geoval, vi) {
 					var position = geovaltoLatLng(geoval);
@@ -159,19 +155,30 @@ define(['js/models', 'js/utils'], function(models, utils) {
 					if (!defined(markers[vi])) {
 						markers[vi] = (new L.Marker(position, {icon:this_.marker_icons[i]}));
 						markers[vi].addTo(this_.map)
-							.on('mouseover', function() { this_._trigger_brush_event('brush_visual', geoval.model); })
-							.on('mouseout', function() { this_._trigger_brush_event('unbrush_visual', geoval.model);  });
+							.on('mouseover', function() {
+								var gv = this.geoval;
+								this_._trigger_brush_event('brush_visual', gv.model);
+							})
+							.on('mouseout', function() {
+								var gv = this.geoval;
+								this_._trigger_brush_event('unbrush_visual', gv.model);
+							});
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
+						markers[vi].geoval = geoval;
 					} else {
 						markers[vi].setLatLng(position);
 						markers[vi].bindPopup(this_._make_popup_text(geoval.model, geoval.val));
+						markers[vi].geoval = geoval;						
 					}
 					markers[vi].setOpacity(this_.brushed.length == 0 || this_.brushed.indexOf(geoval.model) >= 0 ? 1.0 : 0.3);
 					markers[vi].update();
 					last_position = position;
 				});
 				// exit selection
-				remove_markers(markers.slice(geovalues.length));
+				if (markers.slice(geovalues.length).length > 0) {
+					console.log('for zone ', i, 'setting markers' , markers.slice(geovalues.length).length);
+					remove_markers(markers.slice(geovalues.length));
+				}
 				this_.markers_by_box[i] = markers.slice(0,geovalues.length);
 			});
 			var focus_point = this.brushed.length > 0 && get_geo_values(this.brushed).length ?
@@ -186,36 +193,49 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		_get_class_for_dropzone:function(i) {
 			return 'dropzone-'+i;
 		},
+		_setDropzoneBox:function(box, dropzone_i) {
+			var dropzone_class = this._get_class_for_dropzone(dropzone_i);			
+			var this_ = this;
+			box.on('delete', function() {
+				this_.setDropzoneBox(undefined, dropzone_i);
+			}, this);
+			box.pathables
+				.on('add remove', function(eventType) {
+					console.log('add remove update ');
+					this_.update();
+				}, this)
+				.on_model('brush_visual', function(pathable) {
+					this_._brush_pathable(pathable);
+				}, this)
+				.on_model('unbrush_visual', function(pathable) {
+					this_._unbrush_pathable(pathable);
+				}, this);
+			box.$el.addClass(dropzone_class);
+		},
+		_unsetDropzoneBox:function(oldbox, dropzone_i) {
+			var dropzone_class = this._get_class_for_dropzone(dropzone_i);
+			console.log("UNSETDROPZONEBOX ", oldbox, dropzone_i, dropzone_class);
+			oldbox.$el.removeClass(dropzone_class);
+			oldbox.pathables.off(null, null, this);
+			oldbox.off(null,null,this);
+		},
 		setDropzoneBox:function(box, dropzone_i) {
-			var this_ = this, dropzone_class = this._get_class_for_dropzone(dropzone_i);
+			console.log('setDropzoneBox ', box, dropzone_i);
+			var this_ = this;
 			if (defined(this.dropzone_boxes[dropzone_i])) {
-				console.log('unsubscribing for ', dropzone_i);
-				var oldbox = this.dropzone_boxes[dropzone_i];
-				oldbox.$el.removeClass(dropzone_class);
-				oldbox.pathables.off(null, null, this);
-				oldbox.off(null,null,this);
+				this._unsetDropzoneBox(this.dropzone_boxes[dropzone_i], dropzone_i);
 				delete this.dropzone_boxes[dropzone_i];
 			}
-			if (defined(box)) {
-				this.dropzone_boxes[dropzone_i] = box;
-				box.on('delete', function() {
-					this_.setDropzoneBox(undefined, dropzone_i);
-				}, this);
-				box.pathables
-					.on('add remove', function(eventType) {
-						console.log('add remove update ');
-						this_.update();
-					}, this)
-					.on_model('brush_visual', function(pathable) {
-						console.log('brush update ');
-						this_._brush_pathable(pathable);
-					}, this)
-					.on_model('unbrush_visual', function(pathable) {
-						console.log('unbrush update ');
-						this_._unbrush_pathable(pathable);
-					}, this);
-				box.$el.addClass(dropzone_class);
-			}
+			_(this.dropzone_boxes).keys()
+				.map(function(key_i) {
+					var dzbox = this_.dropzone_boxes[key_i];
+					if (dzbox == box) {
+						this_._unsetDropzoneBox(dzbox, key_i);
+						delete this_.dropzone_boxes[key_i];						
+					}
+				});			
+			this.dropzone_boxes[dropzone_i] = box;			
+			if (defined(box)) {	this._setDropzoneBox(box, dropzone_i);	}
 			this_.update();							
 		},
 		_cb_delete:function() {
@@ -235,20 +255,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.update();
 		},
 		_trigger_brush_event:function(eventType, pathable) {
-			var this_ = this;
-			_(this.dropzone_boxes).values().map(function(dzb) {
-				if (defined(dzb)) {
-					// support for deep brushing
-					dzb.views_collection
-						.filter(function(view) {
-							return view.options.model == pathable;
-						}).map(function(view) {
-							var model = view.options.model.model;
-							console.log('triggering ', eventType, ' on model ', model, model.id);
-							model.trigger(eventType);
-						});
-				}
-			});			
+			pathable.model.trigger(eventType);
 		}
 	});
 

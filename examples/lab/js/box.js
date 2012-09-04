@@ -15,8 +15,12 @@ define(['examples/lab/js/view-collection'], function(view_collection) {
 			this.options = _({}).extend(this.defaults, options);
 			this.views_collection = new view_collection.ViewCollection();
 		},
-		setTopLeft:function(top,left) {
-			this.$el.css("top",top).css("left",left);
+		setTopLeft:function(top,left,animate) {
+			if (!animate) {
+				this.$el.css("top",top).css("left",left);
+			}
+			this.$el.animate({top:top, left:left});
+			return this;
 		},
 		render:function() {
 			return this;
