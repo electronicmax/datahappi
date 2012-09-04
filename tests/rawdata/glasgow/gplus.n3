@@ -1,0 +1,48 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#> .
+
+:Person rdfs:label "Contacts From Google+" .
+
+:p1 a :Person ;
+    rdfs:label "Stephen Mandel" ;
+    geo:lat "55.751912";
+    geo:long "-4.170947";
+    :likes_food "Scottish".
+
+:p2 a :Person ;
+    rdfs:label "Ada Wendell" ;
+    geo:lat "55.94047";
+    geo:long "-4.319571";
+    :likes_food "Italian".
+
+:p3 a :Person ;
+    rdfs:label "Tony Kester" ;
+    geo:lat "55.828334";
+    geo:long "-4.360553";
+    :likes_food "Indian".
+
+:p4 a :Person ;
+    rdfs:label "Aaron Fajardo" ;
+    geo:lat "55.927531";
+    geo:long "-4.464653";
+    :likes_food "Indian".
+
+:p5 a :Person ;
+    rdfs:label "Carlos Macedo" ;
+    geo:lat "56.043486";
+    geo:long "-4.379846";
+    :likes_food "Scottish".
+
+:p6 a :Person ;
+    rdfs:label "Jacob Porterfield" ;
+    geo:lat "55.896088";
+    geo:long "-4.356526";
+    :likes_food "Italian".
+
+
+
+
+
+
+

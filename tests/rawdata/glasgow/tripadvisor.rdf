@@ -1,0 +1,68 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/glasgow/tripadvisor.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant">
+        <rdfs:label>Restaurants from TripAdvisor</rdfs:label>
+    </rdf:Description>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r1">
+        <address>10 Clarendon street, St George's Cross, Glasgow, Scotland</address>
+        <cuisine>Scottish</cuisine>
+        <ranking>1</ranking>
+        <score>4.5</score>
+        <telephone>01413331435</telephone>
+        <rdfs:label>Black Sheep Bistro</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r2">
+        <address>26a Renfield Street, Glasgow G2 1LU, Scotland</address>
+        <cuisine>Indian</cuisine>
+        <ranking>2</ranking>
+        <score>4.5</score>
+        <telephone>01412219251</telephone>
+        <rdfs:label>Charcoals</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r3">
+        <address>16 Byres Road, Glasgow G11 5JY, Scotland</address>
+        <cuisine>Casual Dining</cuisine>
+        <ranking>3</ranking>
+        <score>4.5</score>
+        <telephone>+44 141 3392544</telephone>
+        <rdfs:label>Number 16</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r4">
+        <address>1066 Argyle Street, Glasgow G3 8LY, Scotland</address>
+        <cuisine>Scottish</cuisine>
+        <ranking>4</ranking>
+        <score>4.5</score>
+        <telephone>+44 (0)141 564 6464</telephone>
+        <rdfs:label>Fanny Trollope's</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r5">
+        <address>652-654 Argyle Street, Glasgow, Scotland</address>
+        <cuisine>British</cuisine>
+        <cuisine>European</cuisine>
+        <cuisine>Seafood</cuisine>
+        <ranking>5</ranking>
+        <score>4.5</score>
+        <rdfs:label>Two Fat Ladies at the Buttery</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r6">
+        <address>1102 Cathcart Road, Glasgow G42 9EG , Scotland</address>
+        <cuisine>Italian</cuisine>
+        <ranking>6</ranking>
+        <score>5</score>
+        <telephone>0141 636 0444</telephone>
+        <rdfs:label>Sapori D'Italia</rdfs:label>
+    </Restaurant>
+</rdf:RDF>

@@ -1,0 +1,49 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/cambridge/yelp.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant">
+        <rdfs:label>Restaurants from Yelp</rdfs:label>
+    </rdf:Description>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r1">
+        <ambience>Casual</ambience>
+        <score>4.5★</score>
+        <rdfs:label>Alimentum</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r2">
+        <ambience>Casual</ambience>
+        <score>4.5★</score>
+        <rdfs:label>The Cambridge Chop House</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r3">
+        <ambience>Casual</ambience>
+        <score>3.5★</score>
+        <rdfs:label>Al Casbah</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r4">
+        <ambience>Dressy</ambience>
+        <score>4.5★</score>
+        <rdfs:label>Midsummer House</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r5">
+        <ambience>Casual</ambience>
+        <score>4.5★</score>
+        <rdfs:label>Nandos Chickenland</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r6">
+        <ambience>Casual</ambience>
+        <score>4★</score>
+        <rdfs:label>Gardenia Take Away</rdfs:label>
+    </Restaurant>
+</rdf:RDF>

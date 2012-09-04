@@ -1,0 +1,43 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/glasgow/hygiene.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant">
+        <rdfs:label>Food Hygiene Ratings from FSA</rdfs:label>
+    </rdf:Description>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r1">
+        <rating>PASS</rating>
+        <rdfs:label>Black Sheep Bistro</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r2">
+        <rating>PASS</rating>
+        <rdfs:label>Charcoals</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r3">
+        <rating>PASS</rating>
+        <rdfs:label>Number 16 Restaurant</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r4">
+        <rating>PASS</rating>
+        <rdfs:label>Fanny Trollops</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r5">
+        <rating>PASS</rating>
+        <rdfs:label>Two Fat Ladies At The Buttery</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#r6">
+        <rating>AWAITING INSPECTION</rating>
+        <rdfs:label>Sapori D'Italia</rdfs:label>
+    </Restaurant>
+</rdf:RDF>

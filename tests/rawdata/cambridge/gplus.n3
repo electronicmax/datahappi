@@ -1,0 +1,45 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#> .
+
+:Person rdfs:label "Contacts From Google+" .
+
+:p1 a :Person ;
+    rdfs:label "Juan Dunleavy" ;
+    geo:lat "52.244925";
+    geo:long "0.283328";
+    :likes_food "British".
+
+:p2 a :Person ;
+    rdfs:label "Daniel Gardner" ;
+    geo:lat "52.06916";
+    geo:long "0.170298";
+    :likes_food "British".
+
+:p3 a :Person ;
+    rdfs:label "Paul Pine" ;
+    geo:lat "52.215453";
+    geo:long "0.112763";
+    :likes_food "Portuguese".
+
+:p4 a :Person ;
+    rdfs:label "Ralph Vera" ;
+    geo:lat "52.22849";
+    geo:long "0.136796";
+    :likes_food "British";
+    :likes_food "Portguese".
+
+:p5 a :Person ;
+    rdfs:label "Donald Carlton" ;
+    geo:lat "52.211974";
+    geo:long "0.171603";
+    :likes_food "Greek".
+
+:p6 a :Person ;
+    rdfs:label "David Kellerman" ;
+    geo:lat "52.088386";
+    geo:long "0.41037";
+    :likes_food "Greek".
+
+
+
