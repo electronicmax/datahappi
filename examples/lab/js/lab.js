@@ -88,6 +88,10 @@ define([
 		// // ---		
 		(function() {
 			// prepopulate all the things!
+
+            // TODO set the elsewhere
+            var data_loc = "cambridge"; // or glasgow
+
 			var basepath = window.__basepath__;
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
@@ -95,13 +99,13 @@ define([
 			$.when(
 				// add moar sources here
 				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'), "Test People")
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','facebook.rdf'].join('/'), "Facebook Friends"),
-				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','weather.rdf'].join('/'), "Weather Data"),
-				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','twitter.rdf'].join('/'), "Twitter Contacts"),
-				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','gplus.rdf'].join('/'), "Google+ Friends"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','restaurants-tripadvisor.rdf'].join('/'), "Tripadvisor Restaurants"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','businesses-yelp.rdf'].join('/'), "Yelp Business Listing"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','menus.rdf'].join('/'), "Menus")
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'facebook.rdf'].join('/'), "Facebook Friends"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'twitter.rdf'].join('/'), "Twitter Contacts"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'gplus.rdf'].join('/'), "Google+ Friends"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'tripadvisor.rdf'].join('/'), "Tripadvisor Restaurants"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'yelp.rdf'].join('/'), "Yelp Business Listing"),
+				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'hygiene.rdf'].join('/'), "Hygiene Ratings")
+//				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','menus.rdf'].join('/'), "Menus")
 			).then(
 				function() {
 					var srcs = _.toArray(arguments);

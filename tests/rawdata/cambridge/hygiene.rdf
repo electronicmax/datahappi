@@ -1,0 +1,43 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/cambridge/hygiene.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant">
+        <rdfs:label>Food Hygiene Ratings from FSA</rdfs:label>
+    </rdf:Description>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r1">
+        <rating>4</rating>
+        <rdfs:label>Alimentum</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r2">
+        <rating>5</rating>
+        <rdfs:label>The Cambridge Chop House</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r3">
+        <rating>3</rating>
+        <rdfs:label>Al Casbah</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r4">
+        <rating>5</rating>
+        <rdfs:label>Midsummer House Restaurant</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r5">
+        <rating>5</rating>
+        <rdfs:label>Nando's Restaurant</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#r6">
+        <rating>4</rating>
+        <rdfs:label>Gardenia Restaurant</rdfs:label>
+    </Restaurant>
+</rdf:RDF>

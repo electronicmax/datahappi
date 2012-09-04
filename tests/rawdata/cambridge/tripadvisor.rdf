@@ -1,0 +1,68 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/cambridge/tripadvisor.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant">
+        <rdfs:label>Restaurants from TripAdvisor</rdfs:label>
+    </rdf:Description>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r1">
+        <address>152-154 Hills Road, Cambridge CB2 8PB, England</address>
+        <cuisine>British</cuisine>
+        <cuisine>European</cuisine>
+        <ranking>14</ranking>
+        <score>4</score>
+        <telephone>(01223) 413000</telephone>
+        <rdfs:label>Alimentum</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r2">
+        <address>1 Kings Parade, Cambridge CB2 1SJ, England</address>
+        <cuisine>British</cuisine>
+        <ranking>26</ranking>
+        <score>4</score>
+        <telephone>01223 359506</telephone>
+        <rdfs:label>The Cambridge Chop House</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r3">
+        <address>62 Mill Road, Cambridge CB1 2AS, England</address>
+        <ranking>244</ranking>
+        <score>3</score>
+        <telephone>01223 561666</telephone>
+        <rdfs:label>Al Casbah</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r4">
+        <address>Midsummer Common, Cambridge CB4 1HA, England</address>
+        <cuisine>British</cuisine>
+        <ranking>8</ranking>
+        <score>4</score>
+        <telephone>+44 (0)1223 369299</telephone>
+        <rdfs:label>Midsummer House</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r5">
+        <address>33, St. Andrews Street,, Cambridge, England (Formerly The Dome)</address>
+        <cuisine>Portuguese</cuisine>
+        <ranking>121</ranking>
+        <score>3.5</score>
+        <telephone>01223 313818</telephone>
+        <rdfs:label>Nandos</rdfs:label>
+    </Restaurant>
+
+    <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#r6">
+        <address>2 Rose Crescent, Cambridge CB2 3LL, England</address>
+        <cuisine>Greek</cuisine>
+        <cuisine>Vegetarian</cuisine>
+        <ranking>183</ranking>
+        <score>3.5</score>
+        <telephone>01223-356 354</telephone>
+        <rdfs:label>The Gardenia</rdfs:label>
+    </Restaurant>
+</rdf:RDF>

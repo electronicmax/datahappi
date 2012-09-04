@@ -1,0 +1,30 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#> .
+
+:Restaurant rdfs:label "Food Hygiene Ratings from FSA" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Alimentum" ;
+    :rating "4".
+
+:r2 a :Restaurant ;
+    rdfs:label "The Cambridge Chop House" ;
+    :rating "5".
+
+:r3 a :Restaurant ;
+    rdfs:label "Al Casbah" ;
+    :rating "3".
+
+:r4 a :Restaurant ;
+    rdfs:label "Midsummer House Restaurant" ;
+    :rating "5".
+
+:r5 a :Restaurant ;
+    rdfs:label "Nando's Restaurant" ;
+    :rating "5".
+
+:r6 a :Restaurant ;
+    rdfs:label "Gardenia Restaurant" ;
+    :rating "4".
+
+

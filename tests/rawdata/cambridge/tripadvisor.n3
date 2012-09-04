@@ -1,0 +1,54 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#> .
+
+:Restaurant rdfs:label "Restaurants from TripAdvisor" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Alimentum" ;
+    :address "152-154 Hills Road, Cambridge CB2 8PB, England";
+    :telephone "(01223) 413000";
+    :cuisine "European" ;
+    :cuisine "British" ;
+    :score "4" ;
+    :ranking "14" .
+
+:r2 a :Restaurant ;
+    rdfs:label "The Cambridge Chop House" ;
+    :address "1 Kings Parade, Cambridge CB2 1SJ, England";
+    :telephone "01223 359506";
+    :cuisine "British" ;
+    :score "4" ;
+    :ranking "26" .
+
+:r3 a :Restaurant ;
+    rdfs:label "Al Casbah" ;
+    :address "62 Mill Road, Cambridge CB1 2AS, England";
+    :telephone "01223 561666";
+    :score "3" ;
+    :ranking "244" .
+
+:r4 a :Restaurant ;
+    rdfs:label "Midsummer House" ;
+    :address "Midsummer Common, Cambridge CB4 1HA, England";
+    :telephone "+44 (0)1223 369299";
+    :score "4" ;
+    :cuisine "British" ;
+    :ranking "8" .
+
+:r5 a :Restaurant ;
+    rdfs:label "Nandos" ;
+    :address "33, St. Andrews Street,, Cambridge, England (Formerly The Dome)";
+    :telephone "01223 313818";
+    :cuisine "Portuguese" ;
+    :score "3.5" ;
+    :ranking "121" .
+
+:r6 a :Restaurant ;
+    rdfs:label "The Gardenia" ;
+    :address "2 Rose Crescent, Cambridge CB2 3LL, England";
+    :telephone "01223-356 354";
+    :cuisine "Greek" ;
+    :cuisine "Vegetarian" ;
+    :score "3.5" ;
+    :ranking "183" .
+

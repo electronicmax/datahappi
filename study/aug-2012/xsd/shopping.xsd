@@ -1,0 +1,3027 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.7-b01-. --><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is hudson-jaxws-2.1.x-nightly-push-257. --><xsd:schema xmlns:sdc="urn:types.partner.api.shopping.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.0" targetNamespace="urn:types.partner.api.shopping.com">
+
+
+    <xsd:element name="EchoRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="echoMessage" type="xsd:string" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="EchoResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="sdc:BaseResponseType">
+                    <xsd:sequence>
+                        <xsd:element name="echoResponse" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GeneralSearchRequest" type="sdc:GeneralSearchRequestType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The main element of a GeneralSearch request.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:element name="GetSDCTimestampRequest">
+        <xsd:complexType>
+
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetSDCTimestampResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="sdc:BaseResponseType">
+                    <xsd:sequence>
+                        <xsd:element name="timestamp" type="xsd:dateTime" />
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GeneralSearchResponse" type="sdc:GeneralSearchResponseType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The main element of a search response.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="BaseResponseType">
+        <xsd:sequence>
+            <xsd:element name="serverDetail" type="sdc:ServerDetailType" minOccurs="0" />
+            <xsd:element name="exceptions" type="sdc:ExceptionListType" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ServerDetailType">
+        <xsd:sequence>
+            <xsd:element name="apiEnv" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Indicates which API environment this response came
+                        from (e.g. 'production' or 'sandbox')
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="apiVersion" type="xsd:string" minOccurs="0" />
+            <xsd:element name="buildNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="buildTimestamp" type="xsd:string" minOccurs="0" />
+            <xsd:element name="requestId" type="xsd:string" minOccurs="0" />
+            <xsd:element name="timestamp" type="xsd:dateTime" minOccurs="0" />
+            <xsd:element name="responseTime" type="xsd:duration" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GeneralSearchRequestType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The GeneralSearch request type containing all options
+                available when constructing a GeneralSearch request,
+                used to get categories, products, and offers matching
+                provided search criteria.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="tracking" type="sdc:TrackingInfoType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains information related to API usage and
+                        click tracking.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Filter criteria must be provided in every
+                        request. You can filter by product ID or a
+                        combination of keywords and category ID.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:element name="productFilter" type="sdc:ProductFilterType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The ProductFilter element used for searching
+                            by product ID.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="offerFilter" type="sdc:OfferFilterType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The OfferFilter element used for searching
+                            by offer ID.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="navigationFilter" type="sdc:NavigationFilterType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The NavigationFilter element used for
+                            searching by keyword or category ID (or
+                            both).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="sort" type="sdc:GeneralSearchSortType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains all options for sorting GeneralSearch
+                        results.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="options" type="sdc:GeneralSearchOptionsType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains a number of general options related to
+                        the GeneralSearch method.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="searchHints" type="sdc:searchHintsType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains a number of different parameters to aid
+                        the Shopping.com search engine in making
+                        relevance decisions.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TrackingInfoType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains information related to API usage and click
+                tracking.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="trackingId" minOccurs="1" maxOccurs="1" type="xsd:long">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        SDC generated ID used for revenue tracking at
+                        the campaign (placement) level. Previously known
+                        as a "linkin ID".
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="subTrackingId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        User generated ID used to further break down
+                        traffic sources beyond SDC campaign level
+                        tracking.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="visitorUserAgent" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The browser user-agent of the visitor to which
+                        this data is being presented.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="visitorIPAddress" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The IP Address of the visitor to which this data
+                        is being presented.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductFilterType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The ProductFilter element used for searching by product
+                ID.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="productId" type="xsd:long" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The product ID for which to return store offers.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The product Name for which to return store offers.
+                        </xsd:documentation>
+                    </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NavigationFilterType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The NavigationFilter element used for searching by
+                category ID. Can also include optional keyword and
+                attribute filters.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="categoryId" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The category for which to return store offers. Currently, a
+                        leaf-level category ID must be provided for this type of
+                        search to succeed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A list of keywords and/or attribute elements
+                        possibly mixed together, in the order they were
+                        entered by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:element name="keyword" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            A search keyword entered by the user.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="attributeValue" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            An attribute element representing an attribute
+                            refinement made by the user.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="showAllValuesForAttr" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        In general, not all applicable values of an attribute are
+                        returned by the search engine. Instead, the top N most
+                        relevant are presented. This element can be used to retrieve
+                        all applicable values for one particular attribute.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="minPrice" type="xsd:decimal" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An optional filter that allows to limit the
+                        results to a minimum price
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="maxPrice" type="xsd:decimal" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An optional filter that allows to limit the
+                        results to a maximum price
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="GeneralSearchSortType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains all options for sorting GeneralSearch results.
+                As a GeneralSearch by keyword may return different
+                results depending on the keyword, you may have to
+                provide multiple sorting options.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="itemsSortType" type="sdc:ItemsSortEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Use this attribute for sorting the items (products and / or offers)
+                        directly under each category. Defaults to ordering by relevance.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="itemsSortOrder" type="sdc:SortOrderEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort items under category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productOffersSortType" type="sdc:ProductOffersSortEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Use this attribute for sorting the offers under each product.
+                        Defaults to ordering by relevance.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productOffersSortOrder" type="sdc:SortOrderEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort offers under product.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productSortType" type="sdc:ProductSortEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The attribute by which you would like to sort
+                        results in a product-only (productized)
+                        category. E.g. price, product rating, etc.
+                        Defaults to an ordering by popularity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showTopProducts" type="sdc:TopProductsEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The attribute by which you would like to sort
+                        results in a product-only (productized)
+                        category. E.g. price, product rating, etc.
+                        Defaults to an ordering by popularity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productSortOrder" type="sdc:SortOrderEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort items in a
+                        product-only (productized) category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offerSortType" type="sdc:OfferSortEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The attribute by which you would like to sort
+                        items in a offer-only (non-productized)
+                        category. E.g. price, store rating, etc.
+                        Defaults to an ordering which maximizes yield
+                        (relevance * bid).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offerSortOrder" type="sdc:SortOrderEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort items in a
+                        offer-only (non-productized) category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="hybridSortType" type="sdc:HybridSortEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The attribute by which you would like to sort
+                        results from a mixed products and offers
+                        (soft-productized) category. E.g. price,
+                        popularity, etc. Defaults to an ordering by
+                        popularity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="hybridSortOrder" type="sdc:SortOrderEnumType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort results
+                        from a mixed products and offers
+                        (soft-productized) category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showSmartBuy" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Whether to include the 'Smart Buy' offer at the
+                        top of the results in a offer-only
+                        (non-productized) category. (Will be returned
+                        below any 'Featured' offers if enabled.)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numFeatured" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The number of 'Featured' offers to return. Only
+                        used for results from a offer-only
+                        (non-productized) category with a offerSortType
+                        of 'featured-store'.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productReviewsSortType" type="sdc:ProductReviewsSortEnumType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The attribute by which you would like to sort
+                        product reviews. E.g. review date, product
+                        rating, etc. Defaults to an ordering by review
+                        date.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productReviewsSortOrder" type="sdc:SortOrderEnumType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The direction you would like to sort product
+                        reviews.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GeneralSearchOptionsType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains a number of general options related to the
+                GeneralSearch method.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="numCategories" type="xsd:positiveInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of categories you would like
+                        returned in a multiple category result. A
+                        default value can be set up for your account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numItems" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of items (items can be
+                        offers, products, or a mix of both) you would
+                        like returned per category. Also controls the
+                        number of offers returned when the result
+                        contains a single product. A default value can
+                        be set up for your account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numOffersPerProduct" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of store offers you would
+                        like returned per product when using the
+                        showProductOffers flag. A default value can be
+                        set up for your account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numReviewsPerProduct" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of reviews you would like
+                        returned per product when using the
+                        showProductReviews flag. Only used if
+                        'showProductReviews' is enabled. A default value
+                        can be set up for your account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numAttributes" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of attributes you would like
+                        returned. A default value can be set up for your
+                        account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numAttributesWithValues" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of attributes you would like
+                        returned along w/ the values for those
+                        attributes. For instance, you may request 10
+                        attributes, but values for only 5 of those
+                        attributes. Will default to the number of
+                        attributes you've requested.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numValuesPerAttribute" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The maximum number of values you would like
+                        returned per attribute. A default value can be
+                        set up for your account.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pageNumber" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The page number of the result set you would like
+                        returned.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productReviewsPageNumber" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The page number of product reviews you would
+                        like returned. Only used if 'showProductReviews'
+                        is enabled, and applies to all products if
+                        multiple products are present in the response.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="postalCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The postal code entered by the user, used to
+                        calculate tax and shipping costs.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="doKeywordNormalization" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether keyword normalization
+                        (spell checking, stemming, etc.) should be
+                        performed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="doSkipping" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether "skipping" should be
+                        enabled. Skipping is the process by which the
+                        search engine narrows the result set to a
+                        specific category or product due to the
+                        relevance of that category or product being much
+                        higher than the alternatives.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="groupItemsByCategory" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether items (products/offers)
+                        should be grouped by category when the search
+                        term is found in multiple categories. The
+                        default behavior in such a case is to present
+                        all items together in one long list, and allow
+                        filtering by category through the use of
+                        attributes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showSoftProducts" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether 'Soft Products' should
+                        be returned. Soft Products are those which were
+                        added to the SDC product catalog by a machine
+                        process which defines products by grouping
+                        together related store offers. If disabled,
+                        store offers will be returned in place of the
+                        soft products.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showProductOffers" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether store offers should be
+                        returned with every product.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showProductsWithoutOffers" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether products without offers
+                        (e.g. pre-sale or obsolete products) should be
+                        included in search results.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showAllMatchingCategories" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating whether all matching categories
+                        should be returned in the results. Normally,
+                        only a limited number of matching categories are
+                        returned (based on relevance), or the system
+                        'skips' to the most relevant category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showOffersOnly" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if product information should be
+                        excluded from results.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showOnSaleOnly" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag to show sale items only
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showFreeShippingOnly" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag to show free shipping items only
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showProductSpecs" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if product specifications should
+                        be returned for each product in the response.
+                        This may significantly increase response times
+                        when multiple products are present (which may be
+                        the case for any keyword or category search.)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showProductReviews" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if product reviews should be
+                        returned for each product in the response. This
+                        may significantly increase response times when
+                        multiple products are present (which may be the
+                        case for any keyword or category search.)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showFeaturedOffersOnly" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if the result should include
+                        only featured offers. When true, all other
+                        offers and products will be excluded from the
+                        result.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showSmartBuyOfferOnly" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if the result should include
+                        only the smart-buy offer. When true, all other
+                        offers and products will be excluded from the
+                        result.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="doSpellCheck" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Enable spell-checking of the search terms.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="showOnlyCategories" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Same as numItems=0
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="debug" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag used to enable debug information in the
+                        response. Use is restricted to requests from
+                        within SDC.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GeneralSearchResponseType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The search result type containing all elements of a
+                search result document.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:BaseResponseType">
+                <xsd:sequence>
+                    <xsd:element name="clientTracking" type="sdc:TrackingElementType" minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Information relating to the client side
+                                tracking mechanism.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="searchHistory" type="sdc:SearchHistoryType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Information needed to create breadcrumb
+                                trails.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="categories" type="sdc:CategoryListType" minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Contains the matching SDC catalog
+                                information, beginning with categories,
+                                and optionally containing products,
+                                offers, etc as appropriate.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="relatedTerms" type="sdc:RelatedTermsType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Contains a list of search terms related
+                                to the query.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="indexInfo" type="sdc:IndexInfoType" maxOccurs="1" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Information about the state of the
+                                search engine index at the time of the
+                                search.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="TrackingElementType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Information regarding the client side tracking
+                mechanism. An example implementation of this mechanism
+                would look something like:
+
+                <a href="{//ClientTracking/hrefURL}">
+                    <img src="{//ClientTracking/sourceURL}" title="{//ClientTracking/titleText}" alt="{//ClientTracking/altText}" />
+                </a>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:ImageType">
+                <xsd:sequence>
+                    <xsd:element name="hrefURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Destination to which the tracking image
+                                should link.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="titleText" type="xsd:string" maxOccurs="1" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Title of the tracking image.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="altText" type="xsd:string" maxOccurs="1" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Alternate text for the tracking image.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+
+
+                <xsd:attribute name="type" type="sdc:TrackingElementEnumType" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Type of the tracking image, with possible values of "pixel"
+                            or "logo".
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ImageType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Base type describing an image.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="sourceURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>URL of the image.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="height" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Height of the image.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="width" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Width of the image.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="SearchHistoryType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Information to enable construction of breadcrumbs.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="categorySelection" type="sdc:CategorySelectionType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Elements for constructing the category selection
+                        breadcrumb. Most of the time there will be three
+                        categorySelection elements: the top
+                        (grandparent) level category, mid (parent) level
+                        category, and leaf (child) level category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+
+            <xsd:choice maxOccurs="1" minOccurs="0">
+                <xsd:element name="productSelection" type="sdc:ProductSelectionType" maxOccurs="unbounded" minOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Elements for constructing the product
+                            selection breadcrumb.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="offerSelection" type="sdc:OfferSelectionType" maxOccurs="unbounded" minOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Elements for constructing the offer
+                            selection breadcrumb.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="dynamicNavigationHistory" type="sdc:DynamicNavigationHistoryType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Elements for constructing the 'Dynamic
+                            Navigation' breadcrumb. Dynamic Navigation
+                            is the process of combining keyword searches
+                            and the selection of relevant 'attributes'
+                            to narrow a given set of results.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CategorySelectionType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Base set of information describing a selected category
+                from the SDC catalog.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the category for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL which links to the category page on the SDC site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this category.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="DynamicNavigationHistoryType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A list of keywords and/or attribute elements possibly
+                mixed together, in the order they were entered by the
+                user.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice maxOccurs="unbounded" minOccurs="1">
+            <xsd:element name="keywordSearch" type="sdc:KeywordSearchType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A keyword search element representing a keyword
+                        entered by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeSelection" type="sdc:AttributeSelectionType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An attribute element representing an attribute refinement
+                        made by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="anyAttribute" type="sdc:AnyAttributeType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A collection of attribute elements representing the choice of several attributes requested by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="AnyAttributeType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A group of attributes requested by the user as an OR clause
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="attributeSelection" type="sdc:AttributeSelectionType" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An attribute element representing an attribute refinement
+                        made by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeSelectionType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Base set of information regarding an attribute in the
+                SDC catalog. Like categories, attributes allow further
+                refinement of a set of results, but are dynamic, and not
+                part of the category tree. Examples of attributes
+                are 'color' or 'size'.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeValueURL" type="xsd:anyURI" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL linking to the page on the SDC site which
+                        would result from selecting this attribute value
+                        along with any other previously selected
+                        filtering criteria.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeSelGroupName" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute group for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this attribute.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropped" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates whether the attribute value originally
+                    entered by the user was dropped by the search
+                    engine.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+
+    </xsd:complexType>
+
+    <xsd:complexType name="CategoryListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains SDC catalog information matching the query
+                parameters.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="category" type="sdc:CategoryType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of matching categories, each of which may
+                        optionally contain their own lists of products, offers,
+                        refinement attributes, etc.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="intActualCategoryCount" type="xsd:nonNegativeInteger" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The count of categories actually present in this result set,
+                    even when all the results are grouped into one category node.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="matchedCategoryCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of categories which matched the given query
+                    parameters.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedCategoryCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of categories actually present in this result set,
+                    which may be different from the matchedCategoryCount due to
+                    paging, relevance thresholds, etc.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+    </xsd:complexType>
+
+    <xsd:complexType name="CategoryType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The actual matching category element, which makes up the
+                list of all matching categories for the given query.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the category for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the category for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryURL" type="xsd:anyURI" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL which links to the category page on the
+                        SDC site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="items" type="sdc:ItemListType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of items (products or offers) which
+                        match the given query parameters within this
+                        category. Used only in GeneralSearch responses.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributes" type="sdc:AttributeListType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of matching attributes which can be
+                        used to furtner refine the item result set
+                        within this category. Used only in GeneralSearch
+                        responses.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="contentType" type="sdc:CategoryContentEnumType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Indicates the type of items you should expect in
+                        this category (i.e. products, offers, or a mix
+                        of both.)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categories" type="sdc:CategoryListType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of child categories - currently only
+                        used for the CategoryTree request.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this category.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="ItemListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of items (products or offers) which match the
+                given query parameters within this category.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of matching products or offers (or a
+                        mix of both) within this category. Order will be
+                        determined by parameters provided in the
+                        request, or a default order which maximizes
+                        relevance and revenue.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:element name="product" type="sdc:ProductType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            A matching product element.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="offer" type="sdc:OfferType">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            A matching store offer element.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute name="matchedItemCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of items (products or offers) which
+                    matched the query parameters.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedItemCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of items actually present in this result
+                    set, which may be different from the
+                    matchedItemCount due to paging, relevance
+                    thresholds, etc.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="pageNumber" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates which page of items has been returned.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The product element, which may be part of the list of
+                all matching items within the current category.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the product for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the product for creating url purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalDisplayName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the product for display internal application purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="shortDescription" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A description of the product limited to ???
+                        characters.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="fullDescription" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        May contain the full version of the truncated
+                        shortDescription element, or a different
+                        description entirely.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mpns" type="sdc:MpnListType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Collection of the Manufacturer Part Numbers for matching purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="upcs" type="sdc:UpcListType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Collection of 12-digit Universal Product Codes or the 13-digit EANs for matching purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="images" type="sdc:ItemImageListType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of product image elements of different
+                        sizes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="rating" type="sdc:RatingInfoType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Information about the rating of the product
+                        according to Epinions and other sources.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="minPrice" type="sdc:PriceType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The lowest price at which the product is offered
+                        in the SDC catalog.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="maxPrice" type="sdc:PriceType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The highest price at which the product is
+                        offered in the SDC catalog.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productOffersURL" type="xsd:anyURI" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A link to the page containing the list of offers
+                        for this product on the SDC site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productSpecsURL" type="xsd:anyURI" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A link to the page containing the specifications
+                        for this product on the SDC site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offers" type="sdc:OfferListType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of store offer elements for this
+                        product.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="specifications" type="sdc:ProductSpecificationsType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The complete specifications for this product.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reviews" type="sdc:ProductReviewsListType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The review element containing all detailed
+                        review information for this product.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryId" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The ID of the category to which this product
+                        belongs. Will only be provided when such
+                        information is not already clear by the response
+                        structure.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the category for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryInternalName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the category for url purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numStores" type="xsd:positiveInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The number of stores.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:long" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The unique SDC ID for this product (not the MPN or UPC).
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="OfferListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of matching offers for a product. Order will be
+                determined by parameters provided in the request, or a
+                default order which maximizes relevance and revenue.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="offer" type="sdc:OfferType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An matching store offer element.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="matchedOfferCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of offers which matched the given query
+                    parameters.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedOfferCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of offers actually present in this result
+                    set, which may be different from the
+                    matchedOfferCount due to paging, relevance
+                    thresholds, etc.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="pageNumber" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates which page of offers has been returned.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="OfferType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A store offer, matching either an SDC product ID or
+                category.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of this store offer for display
+                        purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The description of this store offer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="manufacturer" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The manufacturer of this store offer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="imageList" type="sdc:ItemImageListType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of offer image elements of different
+                        sizes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="stockStatus" type="sdc:StockStatusEnumType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The stock status of this offer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="storeNotes" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An optional set of notes provided by the store
+                        describing the items condition, stock status,
+                        sale status, etc.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="basePrice" type="sdc:PriceType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The price of the offer before tax and shipping.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="tax" type="sdc:PriceType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The tax charge for this offer, based on the
+                        supplied postal code.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="shippingCost" type="sdc:PriceType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The shipping charge for this offer, based on the
+                        supplied postal code (or flat shipping cost).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="totalPrice" type="sdc:PriceType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The total offer price including tax and shipping
+                        (if available).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="originalPrice" type="sdc:PriceType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The original offer price in case of a sale
+                        (if available).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offerURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The URL for this offer, which links to the offer
+                        on the stores site, after being tracked by SDCs
+                        servers. DO NOT MODIFY.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="store" type="sdc:StoreType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The element representing the store providing
+                        this offer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cpc" type="xsd:decimal" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The total cost to the store for a valid user
+                        click to this offer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryId" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The ID of the category to which this offer
+                        belongs. Will only be provided when such
+                        information is not already clear by the response
+                        structure.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productId" type="xsd:long" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The ID of the product to which this offer
+                        belongs. Will only be provided when such
+                        information is not already clear by the response
+                        structure.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sku" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The unique identifier of this offer on the
+                        merchant site, in case the merchant provides
+                        this information.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mpn" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The Manufacturer Part Number for matching purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="upc" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The 12-digit Universal Product Code for matching purposes
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="couponCode" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Coupon code for the offer (if available).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="couponCodeDesc" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Coupon code description providing any store details (if available)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    A unique SDC ID for this offer.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="used" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether this offers is new or used.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="featured" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether this offer is 'featured',
+                    meaning its order in the listing due to the
+                    merchants bid.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="smartBuy" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether this offer is considered the
+                    'Smart Buy' by Shopping.com rules.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="ItemImageListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of item (product or offer) image elements of
+                different sizes.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="image" type="sdc:ItemImageType" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An item image element. Every item (product or offer) will
+                        have at least one 100x100 image, although that image may be
+                        a blank or 'no image' image.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ItemImageType">
+        <xsd:annotation>
+            <xsd:documentation>
+                An item image element. Every item (product or offer)
+                will have at least one 100x100 image, although that
+                image may be a blank or 'no image' image.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:ImageType">
+                <xsd:attribute name="available" type="xsd:boolean" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Indicates whether this image size is actually available, or
+                            if SDC will serve a blank or 'no image' image.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="PriceType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Base price type extending from a simple decimal type.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+                <xsd:attribute name="currency" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            String indicating currency, conforming to
+                            ISO 4217 currency codes (e.g. USD).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="checkSite" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Indication of whether the price is available
+                            or 'known', or if the user needs to 'Check
+                            the site' for further pricing information.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="StoreType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The element representing the store giving this offer.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of this store for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="logo" type="sdc:StoreLogoType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Element providing the store logo.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="phoneNumber" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Element providing the store phone number.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ratingInfo" type="sdc:RatingInfoType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Information about the rating of this store
+                        according to Epinions.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="countryFlag" type="sdc:CountryFlagType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Element indicating the country in which this
+                        store is based, including a flag image.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="epiId" type="xsd:long" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The unique Epinion ID for this store.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The unique SDC ID for this store.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="trusted" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether this store is considered a
+                    'Trusted Store' by Shopping.com rules.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="authorizedReseller" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether this store is an 'authorized
+                    reseller' of this item.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+    </xsd:complexType>
+
+    <xsd:complexType name="StoreLogoType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Element providing the store logo.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:ImageType">
+                <xsd:attribute name="available" type="xsd:boolean" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Indicates whether the store logo is
+                            guaranteed to be available on the SDC image
+                            server. Store logos with 'available' set to
+                            false may actually still be present on the
+                            SDC image server, but only those with
+                            'available' set to true are confirmed. URLs
+                            of store logos which do not actually exist
+                            on the image server will return a blank
+                            image.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RatingInfoType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Information about the rating of the item (product or
+                store) according to Epinions and other sources.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="reviewCount" type="xsd:nonNegativeInteger" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The count of reviews for this item. If 0, then
+                        the rest of the elements in this structure will
+                        not appear.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="rating" type="xsd:decimal" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The actual rating (between 0 and 5) for this
+                        item.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ratingImage" type="sdc:ImageType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An SDC image representing the rating for this item.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="reviewURL" type="xsd:anyURI" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The URL linking to an Epinions page providing more
+                        detail about the rating of this item, including full
+                        review content.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of matching attributes which can be used to
+                furtner refine the item result set within this category.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="attribute" type="sdc:AttributeType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A matching attribute element which can be used to further
+                        refine the item result set within this category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="matchedAttributeCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of attributes which matched the query parameters.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedAttributeCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of attributes actually present in this result set,
+                    which may be different from the matchedAttributeCount due
+                    result set size limits, relevance thresholds, etc.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeType">
+        <xsd:annotation>
+            <xsd:documentation>
+                An attribute element which can be used to further refine
+                the item result set within this category.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeURL" type="xsd:anyURI" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL linking to the page on the SDC site which displays
+                        all values for this attribute applicable to the current
+                        result set.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeValues" type="sdc:AttributeValueListType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of values for this attribute which are found in
+                        the result set.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this attribute.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeValueListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of values for this attribute which are found in
+                the result set.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="attributeValue" type="sdc:AttributeValueType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An attribute value element which can be used to furtner
+                        refine the item result set within this category.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="matchedValueCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of values for this attribute which are found in
+                    the result set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedValueCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of values for this attribute actually present in
+                    this result set, which may be different from the
+                    matchedValueCount due to query parameters or result set size
+                    limits.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttributeValueType">
+        <xsd:annotation>
+            <xsd:documentation>
+                An attribute value element which can be used to further
+                refine the item result set within this category.
+                Examples of attributes are 'color' or 'size', while
+                examples of attribute values are 'red' or '2'.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute value for display
+                        purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalName" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the attribute value for display
+                        purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeValueURL" type="xsd:anyURI" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL linking to the page on the SDC site which
+                        would result from selecting this attribute value
+                        along with any other currently selected
+                        filtering criteria.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The unique SDC ID for this attribute value. This ID
+                    will need to be sent as part of the query when a
+                    user selects this attribute for refinement of the
+                    result set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="matchingItemsCount" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of items in the result set to which this
+                    attribute value applies.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="RelatedTermsType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A collection of one or more search terms related to this
+                result set.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="term" type="xsd:string" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A single search term related to this result set.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="UpcListType">
+        <xsd:annotation>
+            <xsd:documentation>
+            	Collection of 12-digit Universal Product Codes or the 13-digit EANs for matching purposes.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="upc" type="xsd:string" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                       12-digit Universal Product Code or the 13-digit EAN for matching purposes
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MpnListType">
+        <xsd:annotation>
+            <xsd:documentation>
+            	The Manufacturer Part Number list for matching purposes.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="mpn" type="xsd:string" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                       The Manufacturer Part Number for matching purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="SortOrderEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort orderings.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="asc" />
+            <xsd:enumeration value="desc" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OfferSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for a list of offers
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="store-name" />
+            <xsd:enumeration value="store-rating" />
+            <xsd:enumeration value="price" />
+            <xsd:enumeration value="relevance" />
+            <xsd:enumeration value="featured-store" />
+            <xsd:enumeration value="rotate" />
+            <xsd:enumeration value="yield" />
+            <xsd:enumeration value="bid" />
+            <xsd:enumeration value="yield2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ProductSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for a list of products
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="relevance" />
+            <xsd:enumeration value="product-rating" />
+            <xsd:enumeration value="price" />
+            <xsd:enumeration value="publisher-revenue" />
+            <xsd:enumeration value="sdc-revenue" />
+            <xsd:enumeration value="yield" />
+            <xsd:enumeration value="bid" />
+            <xsd:enumeration value="yield2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="HybridSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for a hybrid list of products and offers
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="relevance" />
+            <xsd:enumeration value="price" />
+            <xsd:enumeration value="yield" />
+            <xsd:enumeration value="bid" />
+            <xsd:enumeration value="yield2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ItemsSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for the items under each category - offers or products
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="relevance" />
+            <xsd:enumeration value="price" />
+            <xsd:enumeration value="store-name" />
+            <xsd:enumeration value="store-rating" />
+            <xsd:enumeration value="product-rating" />
+            <xsd:enumeration value="featured-store" />
+            <xsd:enumeration value="publisher-revenue" />
+            <xsd:enumeration value="sdc-revenue" />
+            <xsd:enumeration value="yield" />
+            <xsd:enumeration value="rotate" />
+            <xsd:enumeration value="bid" />
+            <xsd:enumeration value="yield2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TopProductsEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of top products by revenue
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="publisher" />
+            <xsd:enumeration value="sdc" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ProductOffersSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for the list of offers under each product
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="relevance" />
+            <xsd:enumeration value="price" />
+            <xsd:enumeration value="store-name" />
+            <xsd:enumeration value="store-rating" />
+            <xsd:enumeration value="featured-store" />
+            <xsd:enumeration value="yield" />
+            <xsd:enumeration value="rotate" />
+            <xsd:enumeration value="bid" />
+            <xsd:enumeration value="yield2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TrackingElementEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of the possible values of the client side
+                tracking element type.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="pixel" />
+            <xsd:enumeration value="logo" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:simpleType name="StockStatusEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of the possible values of the stock status
+                of an offer.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="unknown" />
+            <xsd:enumeration value="in-stock" />
+            <xsd:enumeration value="out-of-stock" />
+            <xsd:enumeration value="pre-order" />
+            <xsd:enumeration value="back-order" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="IdentityHeaderType">
+        <xsd:sequence>
+            <xsd:element name="apiKey" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="IndexInfoType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains information about the state of the search
+                engine index at the time of the search.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="numLiveMerchants" type="xsd:positiveInteger" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The number of live merchants in the search
+                        engine index at the time of the request.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numProducts" type="xsd:positiveInteger" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The number of products in the search engine
+                        index at the time of the request.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CategoryContentEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of the category types, which indicates the
+                type of items you should expect in this category
+                (products = productized, offers = non-productized,
+                hybrid = soft-productized, categories = parent level
+                category.)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="products" />
+            <xsd:enumeration value="offers" />
+            <xsd:enumeration value="hybrid" />
+            <xsd:enumeration value="categories" />
+            <xsd:enumeration value="unknown" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="KeywordSearchType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Information regarding a keyword originally entered by
+                the user, and the resulting keyword actually used for
+                the search.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="originalKeyword" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The original keyword entered by the user.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="resultKeyword" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The resulting keyword after any normalization
+                        steps, in the form actually used by the search
+                        engine.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="modified" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates whether the keyword originally entered by
+                    the user was changed in any way (spell checked,
+                    tokenized, etc.)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropped" type="xsd:boolean" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates whether the keyword originally entered by
+                    the user was dropped by the search engine
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="CountryFlagType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Country flag image element, providing an image of the
+                countrys flag, as well as the ISO 3166 country code.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:ImageType">
+                <xsd:sequence>
+                    <xsd:element name="countryCode" type="xsd:string" maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                String indicating the ISO 3166 country
+                                codes (e.g. US).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ExceptionListType">
+        <xsd:sequence>
+            <xsd:element name="exception" type="sdc:ExceptionType" maxOccurs="unbounded" minOccurs="1">
+            </xsd:element>
+        </xsd:sequence>
+
+        <xsd:attribute name="exceptionCount" type="xsd:positiveInteger">
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="ExceptionType">
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:int" maxOccurs="1" minOccurs="1" />
+            <xsd:element name="message" type="xsd:string" maxOccurs="1" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="type" type="sdc:ExceptionEnumType" use="required" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="ExceptionEnumType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="warning" />
+            <xsd:enumeration value="error" />
+            <xsd:enumeration value="internal" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:element name="GenericResponse" type="sdc:BaseResponseType" />
+
+    <xsd:complexType name="ProductSelectionType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Set of information describing a selected product from
+                the SDC catalog.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the product for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productURL" type="xsd:anyURI" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL which links to the products page on the
+                        SDC site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:long" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this product.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropped" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether the selected product was
+                    dropped (invalid, not found, etc.)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:element name="CategoryTreeRequest" type="sdc:CategoryTreeRequestType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The main element of a CategoryTree request.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="CategoryTreeRequestType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The CategoryTree request type containing all options
+                available when constructing a CategoryTree request,
+                used to get the hierarchy of categories relative to a
+                specified category ID (or the entire tree.)
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="tracking" type="sdc:TrackingInfoType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains information related to API usage and
+                        click tracking.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryFilter" type="sdc:CategoryFilterType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The categoryFilter element used for limiting the
+                        category tree response to a subset of the entire
+                        tree. If this element is not defined, the API
+                        will use categoryId '0', meaning the returned
+                        tree will start from the root.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="options" type="sdc:CategoryTreeOptionsType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Contains a number of general options related to
+                        the CategoryTree method.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="CategoryFilterType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The CategoryFilter element used for limiting the
+                category tree response to a subset of the entire tree.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="categoryId" type="xsd:nonNegativeInteger" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The category ID to which the category tree response
+                        should be limited. Must be a valid SDC category
+                        ID, or '0' for the entire tree.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CategoryTreeOptionsType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains a number of general options related to the
+                CategoryTree method.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="showAllDescendants" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Flag indicating if all descendants of the
+                        specified category should be returned. Normally,
+                        only the immediate children are returned.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CategoryTreeResponseType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The category tree result type containing all
+                elements of a category tree document.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="sdc:BaseResponseType">
+                <xsd:sequence>
+                    <xsd:element name="clientTracking" type="sdc:TrackingElementType" maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Information relating to the client side
+                                tracking mechanism.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="browseHistory" type="sdc:BrowseHistoryType" maxOccurs="1" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Information needed to create breadcrumb
+                                trails.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="category" type="sdc:CategoryType" maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                The category element providing
+                                information for the requested category,
+                                as well as the list of child categories
+                                (if any.)
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="CategoryTreeResponse" type="sdc:CategoryTreeResponseType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The main element of a category tree response.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="BrowseHistoryType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Information to enable construction of breadcrumbs.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="categorySelection" type="sdc:CategorySelectionType" maxOccurs="unbounded" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Elements for constructing the category selection
+                        breadcrumb.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductSpecificationsType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The complete specifications for a product.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="featureGroup" type="sdc:FeatureGroupType" maxOccurs="unbounded" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A grouped list of features for a product.
+                        Multiple feature groups make up the complete
+                        product specifications.
+
+
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FeatureGroupType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A grouped list of features for a product. Multiple
+                feature groups make up the complete product
+                specifications.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of this group of product features.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="feature" type="sdc:FeatureType" maxOccurs="unbounded" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        An individual product feature which comprises a
+                        product specifications feature group.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FeatureType">
+        <xsd:annotation>
+            <xsd:documentation>
+                An individual product feature which comprises a product
+                specifications feature group.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of this product feature. E.g.
+                        "Broadcast Format Supported".
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The (optional) description of this product
+                        feature.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="value" type="xsd:string" maxOccurs="unbounded" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The actual value(s) of this product feature. A
+                        feature may have multiple values. E.g. "1080p",
+                        "1080i", etc.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ProductReviewsSortEnumType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration of sort types for product reviews.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="review-date" />
+            <xsd:enumeration value="product-rating" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ProductReviewsListType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The list of reviews for a product. If at least 1 review
+                has been written, the first element will contain the
+                averages of all ratings from the individual review
+                elements.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="averageRating" type="sdc:RatingDetailType" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The element consisting of the averages of all
+                        individual review ratings.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="consumerReview" type="sdc:IndividualReviewType" maxOccurs="unbounded" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The element containing the details of the
+                        individual consumer review.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="writeReviewURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A link back to Epinions where the user can write
+                        their own review.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="matchedReviewCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of individual reviews for this product.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="returnedReviewCount" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The count of individual reviews actually present in
+                    this result set (for this product), which may be
+                    different from the matchedReviewCount due to paging.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="pageNumber" type="xsd:nonNegativeInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indicates which page of reviews has been returned.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="IndividualReviewType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The element containing the details of the individual
+                consumer review.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="authorID" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The ID of the review author (generally an
+                        Epinions ID).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="postDate" type="xsd:dateTime" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The date this review was posted.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="rating" type="sdc:RatingDetailType" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The element consisting of the overall and
+                        individual feature ratings in this review.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="summary" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The '1 line' summary for this review. I.e. the
+                        review title.
+
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pros" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The summary of the list of pros in the review
+                        for this entity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cons" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The summary of the list of cons in the review
+                        for this entity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="bottomLine" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The overall summary of the review.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reviewContent" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The actual review content which comprises the
+                        bulk of the review. May be truncated, in which
+                        case a link should be provided to the complete
+                        review, using the 'fullReviewURL' element.
+
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="fullReviewURL" type="xsd:anyURI" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A link back to the full review content on
+                        Shopping.com or Epinions.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RatingDetailType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Element containing a rating broken down into individual
+                features (e.g. 'Battery Life', 'Ease of Use' or
+                'Customer Service').
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="overallRating" type="xsd:decimal" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The overall rating for this entity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="featureRating" type="sdc:FeatureRatingType" maxOccurs="unbounded" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The list of individual feature ratings for this
+                        entity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FeatureRatingType">
+        <xsd:annotation>
+            <xsd:documentation>
+                An individual feature rating for this entity.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of this feature being rated.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="value" type="xsd:decimal" maxOccurs="1" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The rating value for this feature.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="searchHintsType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Contains a number of different parameters to aid the
+                Shopping.com search engine in making relevance
+                decisions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="relatedTerm" type="xsd:string" maxOccurs="unbounded" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A term (word or phrase) related to the search.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="alternateTerm" type="xsd:string" maxOccurs="unbounded" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A term (word or phrase) which could be used as
+                        an alternative to the provided keyword.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="categoryTrail" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A breadcrumb trail consisting of a hyphen ('-')
+                        separated list of the partners category IDs.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="itemName" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of a single item to which this query
+                        relates.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="itemPrice" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The price of a single item to which this query
+                        relates.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="userScore" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A value between 0 and 1 indicating the
+                        probability of the consumer purchasing an item
+                        on which they click.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+
+                        <xsd:maxInclusive value="1" />
+                        <xsd:minInclusive value="0" />
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OfferFilterType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The OfferFilter element used for searching by offer ID.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="offerId" type="xsd:string" maxOccurs="unbounded" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The offer ID for which to return offer details.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OfferSelectionType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Set of information describing a selected offer from the
+                SDC catalog.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name of the offer for display purposes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offerURL" type="xsd:anyURI" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        A URL which links to the offer page on the SDC
+                        site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique SDC ID for this offer.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropped" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Indication of whether the selected offer was dropped
+                    (invalid, not found, etc.)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+</xsd:schema>
