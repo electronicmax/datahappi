@@ -90,6 +90,7 @@
   cursor: pointer;
 }
 .greybox {
+  overflow: hidden !important;
   z-index: 5;
   background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
@@ -402,6 +403,7 @@
   cursor: pointer;
 }
 .greybox {
+  overflow: hidden !important;
   z-index: 5;
   background-color: white;
   -webkit-box-shadow: 1px 1px 10px 1px #f0e8f0;
