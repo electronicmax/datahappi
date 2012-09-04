@@ -1,9 +1,12 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#> .
 
 :Restaurant rdfs:label "Restaurants from Yelp" .
 
 :r1 a :Restaurant ;
+    geo:lat "55.873577";
+    geo:long "-4.268532";
     rdfs:label "Black Sheep Bistro" ;
     :ambience "Romantic" ;
     :ambience "Classy" ;
@@ -13,22 +16,35 @@
     :score "5★".
 
 :r2 a :Restaurant ;
+    geo:lat "55.861802,";
+    geo:long "-4.256365";
     rdfs:label "Charcoals" ;
     :ambience "Casual" ;
     :score "4★".
 
 :r3 a :Restaurant ;
+    geo:lat "55.871085";
+    geo:long "-4.29868";
     rdfs:label "Number 16 Restaurant" ;
     :ambience "Casual" ;
     :score "5★".
 
 :r4 a :Restaurant ;
+    geo:lat "55.865029";
+    geo:long "-4.28308";
     rdfs:label "Fanny Trollopes Cafe" ;
     :ambience "Casual" ;
     :score "4.5★".
 
 :r5 a :Restaurant ;
+    geo:lat "55.862741";
+    geo:long "-4.27145";
     rdfs:label "Two Fat Ladies At The Buttery" ;
     :ambience "Dressy" ;
     :score "4.5★".
+
+:r6 a :Restaurant ;
+    geo:lat "55.826504";
+    geo:long "-4.257374";
+    rdfs:label "Sapori D'Italia".
 

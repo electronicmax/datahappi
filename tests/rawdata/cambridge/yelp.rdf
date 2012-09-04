@@ -4,6 +4,7 @@
 
 
 <rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
@@ -15,35 +16,47 @@
         <ambience>Casual</ambience>
         <score>4.5★</score>
         <rdfs:label>Alimentum</rdfs:label>
+        <geo:lat>52.189483</geo:lat>
+        <geo:long>0.135913</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r2">
         <ambience>Casual</ambience>
         <score>4.5★</score>
         <rdfs:label>The Cambridge Chop House</rdfs:label>
+        <geo:lat>52.204556</geo:lat>
+        <geo:long>0.117717</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r3">
         <ambience>Casual</ambience>
         <score>3.5★</score>
         <rdfs:label>Al Casbah</rdfs:label>
+        <geo:lat>52.200716</geo:lat>
+        <geo:long>0.135806</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r4">
         <ambience>Dressy</ambience>
         <score>4.5★</score>
         <rdfs:label>Midsummer House</rdfs:label>
+        <geo:lat>52.212498</geo:lat>
+        <geo:long>0.128574</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r5">
         <ambience>Casual</ambience>
         <score>4.5★</score>
         <rdfs:label>Nandos Chickenland</rdfs:label>
+        <geo:lat>52.203635</geo:lat>
+        <geo:long>0.122952</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r6">
         <ambience>Casual</ambience>
         <score>4★</score>
         <rdfs:label>Gardenia Take Away</rdfs:label>
+        <geo:lat>52.206279</geo:lat>
+        <geo:long>0.118693</geo:long>
     </Restaurant>
 </rdf:RDF>
