@@ -11,7 +11,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			callback.apply(null, [pathable].concat($.makeArray(arguments)));
 		},whom);
 	};
-	var	model_unsubscribe = function(pathable, whom) {	pathable.model.off(null,null,whom);};
+	var	model_unsubscribe = function(pathable, event, whom) {
+		pathable.model.off(event,null,whom);
+	};
 	
 	
 	// pathsteps -- start with path step: single unit of dereference
@@ -232,7 +234,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				return m;
 			});
 			pathables.map(function(pathable) {
+				console.log("ADD >> subscribing ", pathable.id, ' to ', this_.model_subscriptions.length);
 				this_.model_subscriptions.map(function(sub) {
+					console.log('subscribing to ', sub.event, sub.callback, sub.whom);
 					model_subscribe(pathable, sub.event, sub.callback, sub.whom);
 				});
 			});
@@ -242,10 +246,15 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 			var this_ = this;
 			if (!_.isArray(models)) { models = [models]; }
 			models.map(function(pathable) {
-				this_.model_subscriptions.map(function(sub) {
-					model_unsubscribe(pathable, sub.whom);
+					this_.model_subscriptions.map(function(sub) {				
+						if (defined(sub.whom)) {
+							console.log('pathable.remove() :: unsubscribing from ', pathable.id, ' for ', sub.whom);
+							model_unsubscribe(pathable, sub.event, sub.whom);
+						} else {
+							console.log('pathable.remove() :: WHOM IS UNDEFINED removing ', pathable.id, pathable.event);
+						}
+					});
 				});
-			});			
 			return Backbone.Collection.prototype.remove.apply(this,[models]);
 		},
 		_apply_paths:function(m) {
@@ -295,8 +304,12 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				return (eventType == null || ms.event == eventType) && (whom == ms.whom);
 			});
 			this.model_subscriptions = _(this.model_subscriptions).difference(target);			
-			this.map(function(pathable) { model_unsubscribe(pathable, eventType, null, whom); });
-			return this; 
+			this.map(function(pathable) {
+				target.map(function(sub) {
+					model_unsubscribe(pathable, sub.eventType, sub.whom);
+				});
+			});
+			return this;
 		}		
 	});
 

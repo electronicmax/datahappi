@@ -145,7 +145,7 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 			this.$el.droppable({
 					greedy:true, // magical nesting of droppables
 					accept:'.item,.pathable-view,.dereferenced-model',
-					tolerance:"pointer",
+					// tolerance:"pointer",
 					drop: function( event, ui ) {
 						var thismodel = this_.options.model.model;
 						var thatmodel = ui.draggable.data("model")().model;

@@ -26,16 +26,16 @@ define(
 				this.pathables.on('add remove change', function() { this_.render(); });
 				this.pathables
 					.on_model('brush_visual', function(pathable) {
+						console.log("instancebox >> ON PATHABLE brush_visual", pathable.id);						
 						pathable = _(pathable).isArray() ? pathable : [pathable];
 						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
 							return v.$el.addClass('brush');
 						});
 					}, this_)
 					.on_model('unbrush_visual', function(pathable) {
-						console.log("instancebox >> ON PATHABLE unbrush_visual", pathable);
+						console.log("instancebox >> ON PATHABLE unbrush_visual", pathable.id);
 						pathable = _(pathable).isArray() ? pathable : [pathable];						
 						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
-							// 
 							return v.$el.removeClass('brush');
 						});
 					}, this_)
