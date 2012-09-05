@@ -1,0 +1,51 @@
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+:Uni rdfs:label "Universities from UCAS" .
+
+:u1 a :Uni ;
+    rdfs:label "Loughborough University";
+    :num_undergrads "11510";
+    :male_female_ratio "61/39";
+    geo:lat "52.769643";
+    geo:long "-1.23064".
+
+:u2 a :Uni ;
+    rdfs:label "Durham University";
+    :num_undergrads "11553";
+    :male_female_ratio "48/52";
+    geo:lat "54.762274";
+    geo:long "-1.577568".
+
+:u3 a :Uni ;
+    rdfs:label "University of Exeter";
+    :num_undergrads "12711";
+    :male_female_ratio "46/54";
+    geo:lat "50.736863";
+    geo:long "-3.536267".
+
+:u4 a :Uni ;
+    rdfs:label "The University of Edinburgh";
+    :num_undergrads "17565";
+    :male_female_ratio "44/56";
+    geo:lat "55.945355";
+    geo:long "-3.188353".
+
+:u5 a :Uni ;
+    rdfs:label "The University of Birmingham";
+    :num_undergrads "18067";
+    :male_female_ratio "44/56";
+    geo:lat "52.45329";
+    geo:long "-1.931019".
+
+:u6 a :Uni ;
+    rdfs:label "University of Bath";
+    :num_undergrads "7956";
+    :male_female_ratio "56/44";
+    geo:lat "51.380299";
+    geo:long "-2.327428".
+
+
+

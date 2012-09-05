@@ -1,0 +1,55 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-sportsscience/unistats.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni">
+        <rdfs:label>Universities from Unistats</rdfs:label>
+    </rdf:Description>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u1">
+        <average_ucas>380</average_ucas>
+        <job_percent>76</job_percent>
+        <students_satisfied>88</students_satisfied>
+        <rdfs:label>Loughborough University</rdfs:label>
+    </Uni>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u2">
+        <average_ucas>480</average_ucas>
+        <job_percent>82</job_percent>
+        <students_satisfied>90</students_satisfied>
+        <rdfs:label>Durham University</rdfs:label>
+    </Uni>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u3">
+        <average_ucas>420</average_ucas>
+        <job_percent>75</job_percent>
+        <students_satisfied>90</students_satisfied>
+        <rdfs:label>University of Exeter</rdfs:label>
+    </Uni>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u4">
+        <average_ucas>430</average_ucas>
+        <job_percent>77</job_percent>
+        <students_satisfied>85</students_satisfied>
+        <rdfs:label>University of Edinburgh</rdfs:label>
+    </Uni>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u5">
+        <average_ucas>410</average_ucas>
+        <job_percent>81</job_percent>
+        <students_satisfied>85</students_satisfied>
+        <rdfs:label>University of Birmingham</rdfs:label>
+    </Uni>
+
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u6">
+        <average_ucas>460</average_ucas>
+        <job_percent>85</job_percent>
+        <students_satisfied>91</students_satisfied>
+        <rdfs:label>University of Bath</rdfs:label>
+    </Uni>
+</rdf:RDF>

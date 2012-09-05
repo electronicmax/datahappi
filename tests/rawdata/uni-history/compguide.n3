@@ -1,0 +1,123 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#> .
+
+:University rdfs:label "Universities from thecompleteuniversityguide" .
+
+:u1 a :University ;
+    rdfs:label "Cambridge" ;
+     :entry_standards "593";
+     :research_assessment "2.98";
+     :student_satisfaction "4.2";
+     :graduate_prospects "84.4";
+     :good_honours "87.4";
+     :student_staff_ratio "11.8";
+     :acdemic_services_spend "2165";
+     :facilities_spend "700";
+     :degree_completion "99%";
+     :green_score "31.5";
+     :league_table_ranking "1";
+     :overall_score "1000";
+     :minimum_fee "9000";
+     :average_fee "9000";
+     :maximum_fee "9000";
+     :average_cost_to_student "8034".
+     
+     
+:u2 a :University ;
+    rdfs:label "London_School_of_Economics_and_Political_Science" ;
+     :entry_standards "526";
+     :research_assessment "2.96";
+     :student_satisfaction "4.0";
+     :graduate_prospects "87.8";
+     :good_honours "80.9";
+     :student_staff_ratio "11.8";
+     :acdemic_services_spend "2076";
+     :facilities_spend "448";
+     :degree_completion "97%";
+     :green_score "40.5";
+     :league_table_ranking "2";
+     :overall_score "996";
+     :minimum_fee "8500";
+     :average_fee "8500";
+     :maximum_fee "8500";
+     :average_cost_to_student "7529".
+     
+          
+:u3 a :University ;
+    rdfs:label "Durham_University" ;
+     :entry_standards "501";
+     :research_assessment "2.72";
+     :student_satisfaction "4.1";
+     :graduate_prospects "78.5";
+     :good_honours "81.8";
+     :student_staff_ratio "15.3";
+     :acdemic_services_spend "1297";
+     :facilities_spend "889";
+     :degree_completion "96%";
+     :green_score "35.5";
+     :league_table_ranking "5";
+     :overall_score "912";
+     :minimum_fee "9000";
+     :average_fee "9000";
+     :maximum_fee "9000";
+     :average_cost_to_student "8250".
+     
+          
+:u4 a :University ;
+    rdfs:label "Oxford" ;
+     :entry_standards "572";
+     :research_assessment "2.96";
+     :student_satisfaction "4.2";
+     :graduate_prospects "79.8";
+     :good_honours "90.9";
+     :student_staff_ratio "11.1";
+     :acdemic_services_spend "2831";
+     :facilities_spend "308";
+     :degree_completion "98%";
+     :green_score "26.5";
+     :league_table_ranking "3";
+     :overall_score "995";
+     :minimum_fee "9000";
+     :average_fee "9000";
+     :maximum_fee "9000";
+     :average_cost_to_student "7549".
+     
+          
+:u5 a :University ;
+    rdfs:label "University_of_St_Andrews" ;
+     :entry_standards "515";
+     :research_assessment "2.72";
+     :student_satisfaction "4.2";
+     :graduate_prospects "74.1";
+     :good_honours "82.9";
+     :student_staff_ratio "13.6";
+     :acdemic_services_spend "1582";
+     :facilities_spend "419";
+     :degree_completion "97%";
+     :green_score "34.5";
+     :league_table_ranking "6";
+     :overall_score "855";
+     :minimum_fee "9000";
+     :average_fee "9000";
+     :maximum_fee "9000".
+     
+          
+:u6 a :University ;
+    rdfs:label "University_College_London" ;
+     :entry_standards "495";
+     :research_assessment "2.84";
+     :student_satisfaction "4.0";
+     :graduate_prospects "79.9";
+     :good_honours "81";
+     :student_staff_ratio "10.1";
+     :acdemic_services_spend "1772";
+     :facilities_spend "273";
+     :degree_completion "94";
+     :green_score "32.5";
+     :league_table_ranking "8";
+     :overall_score "847";
+     :minimum_fee "9000";
+     :average_fee "9000";
+     :maximum_fee "9000";
+     :average_cost_to_student "8255".
+

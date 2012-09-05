@@ -1,0 +1,132 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-history/compguide.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University">
+        <rdfs:label>Universities from thecompleteuniversityguide</rdfs:label>
+    </rdf:Description>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u1">
+        <acdemic_services_spend>2165</acdemic_services_spend>
+        <average_cost_to_student>8034</average_cost_to_student>
+        <average_fee>9000</average_fee>
+        <degree_completion>99%</degree_completion>
+        <entry_standards>593</entry_standards>
+        <facilities_spend>700</facilities_spend>
+        <good_honours>87.4</good_honours>
+        <graduate_prospects>84.4</graduate_prospects>
+        <green_score>31.5</green_score>
+        <league_table_ranking>1</league_table_ranking>
+        <maximum_fee>9000</maximum_fee>
+        <minimum_fee>9000</minimum_fee>
+        <overall_score>1000</overall_score>
+        <research_assessment>2.98</research_assessment>
+        <student_satisfaction>4.2</student_satisfaction>
+        <student_staff_ratio>11.8</student_staff_ratio>
+        <rdfs:label>Cambridge</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u2">
+        <acdemic_services_spend>2076</acdemic_services_spend>
+        <average_cost_to_student>7529</average_cost_to_student>
+        <average_fee>8500</average_fee>
+        <degree_completion>97%</degree_completion>
+        <entry_standards>526</entry_standards>
+        <facilities_spend>448</facilities_spend>
+        <good_honours>80.9</good_honours>
+        <graduate_prospects>87.8</graduate_prospects>
+        <green_score>40.5</green_score>
+        <league_table_ranking>2</league_table_ranking>
+        <maximum_fee>8500</maximum_fee>
+        <minimum_fee>8500</minimum_fee>
+        <overall_score>996</overall_score>
+        <research_assessment>2.96</research_assessment>
+        <student_satisfaction>4.0</student_satisfaction>
+        <student_staff_ratio>11.8</student_staff_ratio>
+        <rdfs:label>London_School_of_Economics_and_Political_Science</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u3">
+        <acdemic_services_spend>1297</acdemic_services_spend>
+        <average_cost_to_student>8250</average_cost_to_student>
+        <average_fee>9000</average_fee>
+        <degree_completion>96%</degree_completion>
+        <entry_standards>501</entry_standards>
+        <facilities_spend>889</facilities_spend>
+        <good_honours>81.8</good_honours>
+        <graduate_prospects>78.5</graduate_prospects>
+        <green_score>35.5</green_score>
+        <league_table_ranking>5</league_table_ranking>
+        <maximum_fee>9000</maximum_fee>
+        <minimum_fee>9000</minimum_fee>
+        <overall_score>912</overall_score>
+        <research_assessment>2.72</research_assessment>
+        <student_satisfaction>4.1</student_satisfaction>
+        <student_staff_ratio>15.3</student_staff_ratio>
+        <rdfs:label>Durham_University</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u4">
+        <acdemic_services_spend>2831</acdemic_services_spend>
+        <average_cost_to_student>7549</average_cost_to_student>
+        <average_fee>9000</average_fee>
+        <degree_completion>98%</degree_completion>
+        <entry_standards>572</entry_standards>
+        <facilities_spend>308</facilities_spend>
+        <good_honours>90.9</good_honours>
+        <graduate_prospects>79.8</graduate_prospects>
+        <green_score>26.5</green_score>
+        <league_table_ranking>3</league_table_ranking>
+        <maximum_fee>9000</maximum_fee>
+        <minimum_fee>9000</minimum_fee>
+        <overall_score>995</overall_score>
+        <research_assessment>2.96</research_assessment>
+        <student_satisfaction>4.2</student_satisfaction>
+        <student_staff_ratio>11.1</student_staff_ratio>
+        <rdfs:label>Oxford</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u5">
+        <acdemic_services_spend>1582</acdemic_services_spend>
+        <average_fee>9000</average_fee>
+        <degree_completion>97%</degree_completion>
+        <entry_standards>515</entry_standards>
+        <facilities_spend>419</facilities_spend>
+        <good_honours>82.9</good_honours>
+        <graduate_prospects>74.1</graduate_prospects>
+        <green_score>34.5</green_score>
+        <league_table_ranking>6</league_table_ranking>
+        <maximum_fee>9000</maximum_fee>
+        <minimum_fee>9000</minimum_fee>
+        <overall_score>855</overall_score>
+        <research_assessment>2.72</research_assessment>
+        <student_satisfaction>4.2</student_satisfaction>
+        <student_staff_ratio>13.6</student_staff_ratio>
+        <rdfs:label>University_of_St_Andrews</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u6">
+        <acdemic_services_spend>1772</acdemic_services_spend>
+        <average_cost_to_student>8255</average_cost_to_student>
+        <average_fee>9000</average_fee>
+        <degree_completion>94</degree_completion>
+        <entry_standards>495</entry_standards>
+        <facilities_spend>273</facilities_spend>
+        <good_honours>81</good_honours>
+        <graduate_prospects>79.9</graduate_prospects>
+        <green_score>32.5</green_score>
+        <league_table_ranking>8</league_table_ranking>
+        <maximum_fee>9000</maximum_fee>
+        <minimum_fee>9000</minimum_fee>
+        <overall_score>847</overall_score>
+        <research_assessment>2.84</research_assessment>
+        <student_satisfaction>4.0</student_satisfaction>
+        <student_staff_ratio>10.1</student_staff_ratio>
+        <rdfs:label>University_College_London</rdfs:label>
+    </University>
+</rdf:RDF>

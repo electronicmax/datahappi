@@ -1,0 +1,67 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#> .
+
+:University rdfs:label "Universities from times - times higher education" .
+
+:u1 a :University ;
+    rdfs:label "Cambridge" ;
+ 	:overall_score "92.4%";
+ 	:teaching "90.5%";
+ 	:international_outlook "85.3%";
+ 	:industry_income "55.5%";
+ 	:research "94.2%";
+ 	:citations "97.3%";
+ 	:world_ranking "6".
+ 	
+ 	
+:u2 a :University ;
+    rdfs:label "London_School_of_Economics_and_Political_Science" ;
+ 	 :overall_score "66%";
+ 	:teaching "66.4%";
+ 	:international_outlook "96%";
+ 	:industry_income "41.1%";
+ 	:research "75.4%";
+ 	:citations "50.6%";
+ 	:world_ranking "47".
+ 	 	
+:u3 a :University ;
+    rdfs:label "Durham_University" ;
+	:overall_score "56.4%";
+ 	:teaching "32.5%";
+ 	:international_outlook "75.8%";
+ 	:industry_income "30.5%";
+ 	:research "37.9%";
+ 	:citations "96.2%";
+ 	:world_ranking "83".
+ 	 	
+:u4 a :University ;
+    rdfs:label "Oxford" ;
+ 	:overall_score "93.6%";
+ 	:teaching "89.5%";
+ 	:international_outlook "91.9%";
+ 	:industry_income "62.1%";
+ 	:research "96.6%";
+ 	:citations "97.9%";
+ 	:world_ranking "4".
+ 	
+ 	 	
+:u5 a :University ;
+    rdfs:label "University_of_St_Andrews" ;
+ 	:overall_score "55.7%";
+ 	:teaching "37.1%";
+ 	:international_outlook "89.1%";
+ 	:industry_income "34.1%";
+ 	:research "40.2%";
+ 	:citations "83%";
+ 	:world_ranking "85".
+ 	
+ 	 	
+:u6 a :University ;
+    rdfs:label "University_College_London" ;
+ 	:overall_score "83.2%";
+ 	:teaching "77.8%";
+ 	:international_outlook "91.8%";
+ 	:industry_income "41.4%";
+ 	:research "84.3%";
+ 	:citations "89%";
+ 	:world_ranking "17".

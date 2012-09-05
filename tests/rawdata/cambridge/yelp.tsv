@@ -1,7 +1,7 @@
-type	Longitude	ambience	score	Latitude	Name/Label
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.117717	Casual	4.5 stars	52.204556	The Cambridge Chop House	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.135806	Casual	3.5 stars	52.200716	Al Casbah	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.135913	Casual	4.5 stars	52.189483	Alimentum	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.118693	Casual	4 stars	52.206279	Gardenia Take Away	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.128574	Dressy	4.5 stars	52.212498	Midsummer House	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	0.122952	Casual	4.5 stars	52.203635	Nandos Chickenland	
+Name/Label	Longitude	Latitude	score	ambience	type
+The Cambridge Chop House	0.117717	52.204556	4.5 stars	Casual	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	
+Al Casbah	0.135806	52.200716	3.5 stars	Casual	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	
+Alimentum	0.135913	52.189483	4.5 stars	Casual	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	
+Gardenia Take Away	0.118693	52.206279	4 stars	Casual	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	
+Midsummer House	0.128574	52.212498	4.5 stars	Dressy	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	
+Nandos Chickenland	0.122952	52.203635	4.5 stars	Casual	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant	

@@ -1,0 +1,44 @@
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+:Uni rdfs:label "Universities from Unistats" .
+
+:u1 a :Uni ;
+    rdfs:label "Loughborough University";
+    :average_ucas "380";
+    :job_percent "76";
+    :students_satisfied "88".
+
+:u2 a :Uni ;
+    rdfs:label "Durham University";
+    :average_ucas "480";
+    :job_percent "82";
+    :students_satisfied "90".
+
+:u3 a :Uni ;
+    rdfs:label "University of Exeter";
+    :average_ucas "420";
+    :job_percent "75";
+    :students_satisfied "90".
+
+:u4 a :Uni ;
+    rdfs:label "University of Edinburgh";
+    :average_ucas "430";
+    :job_percent "77";
+    :students_satisfied "85".
+
+:u5 a :Uni ;
+    rdfs:label "University of Birmingham";
+    :average_ucas "410";
+    :job_percent "81";
+    :students_satisfied "85".
+
+:u6 a :Uni ;
+    rdfs:label "University of Bath";
+    :average_ucas "460";
+    :job_percent "85";
+    :students_satisfied "91".
+
+

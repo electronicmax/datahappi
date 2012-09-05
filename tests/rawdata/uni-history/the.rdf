@@ -1,0 +1,79 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-history/the.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University">
+        <rdfs:label>Universities from times - times higher education</rdfs:label>
+    </rdf:Description>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u1">
+        <citations>97.3%</citations>
+        <industry_income>55.5%</industry_income>
+        <international_outlook>85.3%</international_outlook>
+        <overall_score>92.4%</overall_score>
+        <research>94.2%</research>
+        <teaching>90.5%</teaching>
+        <world_ranking>6</world_ranking>
+        <rdfs:label>Cambridge</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u2">
+        <citations>50.6%</citations>
+        <industry_income>41.1%</industry_income>
+        <international_outlook>96%</international_outlook>
+        <overall_score>66%</overall_score>
+        <research>75.4%</research>
+        <teaching>66.4%</teaching>
+        <world_ranking>47</world_ranking>
+        <rdfs:label>London_School_of_Economics_and_Political_Science</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u3">
+        <citations>96.2%</citations>
+        <industry_income>30.5%</industry_income>
+        <international_outlook>75.8%</international_outlook>
+        <overall_score>56.4%</overall_score>
+        <research>37.9%</research>
+        <teaching>32.5%</teaching>
+        <world_ranking>83</world_ranking>
+        <rdfs:label>Durham_University</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u4">
+        <citations>97.9%</citations>
+        <industry_income>62.1%</industry_income>
+        <international_outlook>91.9%</international_outlook>
+        <overall_score>93.6%</overall_score>
+        <research>96.6%</research>
+        <teaching>89.5%</teaching>
+        <world_ranking>4</world_ranking>
+        <rdfs:label>Oxford</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u5">
+        <citations>83%</citations>
+        <industry_income>34.1%</industry_income>
+        <international_outlook>89.1%</international_outlook>
+        <overall_score>55.7%</overall_score>
+        <research>40.2%</research>
+        <teaching>37.1%</teaching>
+        <world_ranking>85</world_ranking>
+        <rdfs:label>University_of_St_Andrews</rdfs:label>
+    </University>
+
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u6">
+        <citations>89%</citations>
+        <industry_income>41.4%</industry_income>
+        <international_outlook>91.8%</international_outlook>
+        <overall_score>83.2%</overall_score>
+        <research>84.3%</research>
+        <teaching>77.8%</teaching>
+        <world_ranking>17</world_ranking>
+        <rdfs:label>University_College_London</rdfs:label>
+    </University>
+</rdf:RDF>

@@ -1,8 +1,8 @@
 
-ALL : hygiene.rdf tripadvisor.rdf yelp.rdf facebook.rdf twitter.rdf gplus.rdf hygiene.tsv tripadvisor.tsv yelp.tsv facebook.tsv twitter.tsv gplus.tsv
+ALL : hygiene.rdf tripadvisor.rdf yelp.rdf facebook.rdf gplus.rdf hygiene.tsv tripadvisor.tsv yelp.tsv facebook.tsv gplus.tsv
 
 clean:
-	rm hygiene.rdf tripadvisor.rdf yelp.rdf facebook.rdf twitter.rdf gplus.rdf hygiene.tsv tripadvisor.tsv yelp.tsv facebook.tsv twitter.tsv gplus.tsv
+	rm hygiene.rdf tripadvisor.rdf yelp.rdf facebook.rdf gplus.rdf hygiene.tsv tripadvisor.tsv yelp.tsv facebook.tsv gplus.tsv
 
 hygiene.rdf:
 	cwm --n3 hygiene.n3 --rdf > hygiene.rdf
@@ -15,9 +15,6 @@ yelp.rdf:
 
 facebook.rdf:
 	cwm --n3 facebook.n3 --rdf > facebook.rdf
-
-twitter.rdf:
-	cwm --n3 twitter.n3 --rdf > twitter.rdf
 
 gplus.rdf:
 	cwm --n3 gplus.n3 --rdf > gplus.rdf
@@ -33,9 +30,6 @@ yelp.tsv:
 
 facebook.tsv:
 	python ../rdf2tsv.py facebook.n3 > facebook.tsv
-
-twitter.tsv:
-	python ../rdf2tsv.py twitter.n3 > twitter.tsv
 
 gplus.tsv:
 	python ../rdf2tsv.py gplus.n3 > gplus.tsv

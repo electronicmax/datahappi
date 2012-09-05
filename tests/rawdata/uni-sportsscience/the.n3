@@ -1,0 +1,62 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#> .
+
+:University rdfs:label "Universities from thecompleteuniversityguide" .
+
+:u1 a :University ;
+    rdfs:label "Loughborough Univeristy" ;
+ 	:teaching "27.9%";
+ 	:international_outlook "66.7%";
+ 	:industry_income "39.4%";
+ 	:research "25.7%";
+ 	:citations "9.2%";
+ 	:world_ranking "351-400".
+ 	
+ :u2 a :University ;
+    rdfs:label "Durham_University" ;
+ 	:overall_score "56.4%";
+ 	:teaching "32.5%";
+ 	:international_outlook "75.8%";
+ 	:industry_income "30.5%";
+ 	:research "37.9%";
+ 	:citations "96.2%";
+ 	:world_ranking "83".
+ 	
+:u3 a :University ;
+    rdfs:label "Exeter" ;
+ 	:overall_score "46.1%";
+ 	:teaching "31.3%";
+ 	:international_outlook "73.4%";
+ 	:industry_income "35.4%";
+ 	:research "33.3%";
+ 	:citations "67.8%";
+ 	:world_ranking "156".
+ 	
+:u4 a :University ;
+    rdfs:label "The University of Edinburgh" ;
+ 	:overall_score "72%";
+ 	:teaching "63%";
+ 	:international_outlook "79.8%";
+ 	:industry_income "41.3%";
+ 	:research "61.4%";
+ 	:citations "92.3%";
+ 	:world_ranking "36".	
+ 	 	
+:u5 a :University ;
+    rdfs:label "University of Birmingham" ;
+ 	:teaching "42.6%";
+ 	:international_outlook "70.3%";
+ 	:industry_income "36%";
+ 	:research "42.6%";
+ 	:citations "50.6%";
+ 	:world_ranking "148".
+ 	 	
+:u6 a :University ;
+    rdfs:label "Univeristy of Bath" ;
+ 	:teaching "25.2%";
+ 	:international_outlook "80.6%";
+ 	:industry_income "38.9%";
+ 	:research "23.2%";
+ 	:citations "39.9%";
+ 	:world_ranking "251-275".
+

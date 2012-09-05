@@ -1,0 +1,118 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#> .
+
+:University rdfs:label "Universities from thecompleteuniversityguide" .
+
+:u1 a :University ;
+    rdfs:label "Loughborough University" ;
+ 	:entry_standards "391";
+ 	:research_assessment "2.62";
+ 	:student_satisfaction "4.1";
+ 	:graduate_prospects "72.1";
+ 	:good_honours "70.1";
+ 	:student_staff_ratio "16.7";
+ 	:acdemic_services_spend "1072";
+ 	:facilities_spend "542";
+ 	:degree_completion "93%";
+ 	:green_score "38.5";
+ 	:league_table_ranking "14";
+ 	:overall_score "803";
+ 	:minimum_fee "9000";
+ 	:average_fee "9000";
+ 	:maximum_fee "9000";
+ 	:average_cost_to_student "8308".
+ 	
+ :u2 a :University ;
+    rdfs:label "Durham_University" ;
+ 	:entry_standards "501";
+ 	:research_assessment "2.72";
+ 	:student_satisfaction "4.1";
+ 	:graduate_prospects "78.5";
+ 	:good_honours "81.8";
+ 	:student_staff_ratio "15.3";
+ 	:acdemic_services_spend "1297";
+ 	:facilities_spend "889";
+ 	:degree_completion "96%";
+ 	:green_score "35.5";
+ 	:league_table_ranking "5";
+ 	:overall_score "912";
+ 	:minimum_fee "9000";
+ 	:average_fee "9000";
+ 	:maximum_fee "9000";
+ 	:average_cost_to_student "8250".
+ 	
+:u3 a :University ;
+    rdfs:label "Exeter" ;
+ 	:entry_standards "456";
+ 	:research_assessment "2.62";
+ 	:student_satisfaction "4.1";
+ 	:graduate_prospects "82.8";
+ 	:good_honours "18.5";
+ 	:student_staff_ratio "1241";
+ 	:acdemic_services_spend "1241";
+ 	:facilities_spend "511";
+ 	:degree_completion "96%";
+ 	:green_score "45.5";
+ 	:league_table_ranking "13";
+ 	:overall_score "809";
+ 	:minimum_fee "4500";
+ 	:average_fee "9000";
+ 	:maximum_fee "9000";
+ 	:average_cost_to_student "8214".
+ 	
+:u4 a :University ;
+    rdfs:label "The University of Edinburgh" ;
+ 	:entry_standards "470";
+ 	:research_assessment "2.75";
+ 	:student_satisfaction "3.8";
+ 	:graduate_prospects "74.5";
+ 	:good_honours "82.8";
+ 	:student_staff_ratio "13.9";
+ 	:acdemic_services_spend "1383";
+ 	:facilities_spend "466";
+ 	:degree_completion "92%";
+ 	:green_score "40.5";
+ 	:league_table_ranking "16";
+ 	:overall_score "801";
+ 	:minimum_fee "9000";
+ 	:average_fee "9000";
+ 	:maximum_fee "9000".	
+ 	 	
+:u5 a :University ;
+    rdfs:label "University of Birmingham" ;
+ 	:entry_standards "433";
+ 	:research_assessment "2.64";
+ 	:student_satisfaction "3.9";
+ 	:graduate_prospects "74.0";
+ 	:good_honours "76.1";
+ 	:student_staff_ratio "15.5";
+ 	:acdemic_services_spend "1485";
+ 	:facilities_spend "456";
+ 	:degree_completion "94%";
+ 	:green_score "32.5";
+ 	:league_table_ranking "23";
+ 	:overall_score "769";
+ 	:minimum_fee "9000";
+ 	:average_fee "9000";
+ 	:maximum_fee "9000";
+ 	:average_cost_to_student "8277".
+ 	
+ 	 	
+:u6 a :University ;
+    rdfs:label "University of Bath" ;
+ 	:entry_standards "457";
+ 	:research_assessment "2.71";
+ 	:student_satisfaction "4.1";
+ 	:graduate_prospects "79.1";
+ 	:good_honours "81.1";
+ 	:student_staff_ratio "17.1";
+ 	:acdemic_services_spend "1174";
+ 	:facilities_spend "431";
+ 	:degree_completion "96%";
+ 	:green_score "37.5";
+ 	:league_table_ranking "10";
+ 	:overall_score "824";
+ 	:minimum_fee "5750";
+ 	:average_fee "8857";
+ 	:maximum_fee "9000";
+ 	:average_cost_to_student "8112".
