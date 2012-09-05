@@ -10,10 +10,12 @@ define([
 	'examples/lab/js/visual-map',	
 	'js/utils',
 	'js/googlecal/CalendarCollection',
-	'js/googlecal/auth'
-], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth) {
+	'js/googlecal/auth',
+	'tests/rawdata/datasets'
+], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth, datasets) {
 
 	var defined = util.DEFINED;
+	var when = util.when;
 	
 		var Main = Backbone.View.extend({
 			events: {
@@ -90,29 +92,21 @@ define([
 			// prepopulate all the things!
 
             // TODO set the elsewhere
-            var data_loc = "cambridge"; // or glasgow
-
+            var dataset_name = util.getParameterByName('dataset') || 'test'; // "cambridge" or "glasgow"
 			var basepath = window.__basepath__;
+			console.log('loading dataset ', dataset_name, ' ', datasets[dataset_name].length);
+			var dataset = datasets[dataset_name];
 			util.assert(basepath, "__basepath__ not set");
 			$(".definitions_url").val("http://"+document.location.host+[basepath,'tests','rooms-and-buildings.rdf'].join('/'));
 			$(".url").val("http://"+document.location.host+ [basepath,'tests','events-diary.rdf'].join('/'));
-			$.when(
-				// add moar sources here
-				// pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','peeps.rdf'].join('/'), "Test People")
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'facebook.rdf'].join('/'), "Facebook Friends"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'twitter.rdf'].join('/'), "Twitter Contacts"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'gplus.rdf'].join('/'), "Google+ Friends"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'tripadvisor.rdf'].join('/'), "Tripadvisor Restaurants"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'yelp.rdf'].join('/'), "Yelp Business Listing"),
-				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata',data_loc,'hygiene.rdf'].join('/'), "Hygiene Ratings")
-//				pathables.get_from_source("http://"+document.location.host+ [basepath,'tests','rawdata','menus.rdf'].join('/'), "Menus")
-			).then(
-				function() {
-					var srcs = _.toArray(arguments);
-					window.__srcs__ = srcs;
-					var wview = new Main({el : $('body'), data_sources: srcs}).render();
-					wview.sidebar.slideOut('very fast');
-				});
+			when(dataset.map(function(x) {
+				return pathables.get_from_source('http://'+basepath+'/'+x.path, x.name);
+			})).then(function() {
+				var srcs = _.toArray(arguments);
+				window.__srcs__ = srcs;
+				var wview = new Main({el : $('body'), data_sources: srcs}).render();
+				wview.sidebar.slideOut('very fast');
+			});
 		})();		
 	});
 

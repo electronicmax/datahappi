@@ -76,7 +76,7 @@
 			basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
   		    basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 			console.log('setting baseurl to ', document.location.pathname, '-', basepath);
-		    window.__basepath__ = basepath;	
+		    window.__basepath__ = basepath;
 			require.config({ baseUrl:  basepath });
 			require(['examples/lab/js/lab'],function() {});
 		});    
