@@ -106,6 +106,7 @@ define(
 			},
 			_handle_dropped_models:function(pathables) {
 				// first merge in like models
+				var this_ = this;
 				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
 				pathables = pathables.filter(function(p) {
 					var equivalent_model = labels_to_models[p.model.get_label()];
@@ -115,7 +116,9 @@ define(
 					}
 					return true;
 				});
-				if (pathables.length) {  this.add(pathables.map(function(m) { return new view.PathableView({model:m});}));	}
+				if (pathables.length) { this.add(pathables.map(function(m) { return new view.PathableView({model:m});}));	}
+				// debug debug
+				pathables.map(function(p) { this_._change_sameas(p); });
 			},
 			_make_micro_hist:function() {
 				var this_ = this;

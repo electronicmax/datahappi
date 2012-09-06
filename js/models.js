@@ -178,11 +178,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// sets m to be the sameAs us, which destructively
 			// modifies us
 			var this_ = this;
-			if (this.sameas.indexOf(m) < 0) {
-				this.sameas.map(function(sa) {
-					m.setSameAs(sa);
-				});
+			if (m !== this && this.sameas.indexOf(m) < 0) {
 				this.sameas.push(m);
+				this.sameas.map(function(sa) { m.setSameAs(sa); });
 				m.setSameAs(this);
 				m.on('all', function(eventType,m,options) {
 					if (_(options).isUndefined() || _(options.reflected_from_sameas).isUndefined()) {
