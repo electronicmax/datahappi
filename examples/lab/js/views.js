@@ -1,6 +1,6 @@
 define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pathableview.html'], function(models,pathables,utils, pathableview_templ) {
 	var defined = utils.DEFINED;
-
+	var PROP_BLACKLIST  = ["source", "_id", "type"];
 	var CommonView = Backbone.View.extend({
 		initialize:function() {
 			this.setModel(this.options.model);
@@ -127,7 +127,11 @@ define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/
 		_prop_select:function(p) {	this.trigger('property-click', p);	},
 		_props_of:function(v) {
 			// determines the properties of a particular value --
-			if (v instanceof Backbone.Model) { return v.keys(); }
+			if (v instanceof Backbone.Model) {
+				return v.keys().filter(function(prop) {
+					return PROP_BLACKLIST.indexOf(prop) < 0;
+				});
+			}
 			return [];
 		},
 		_trigger_brush:function() {
