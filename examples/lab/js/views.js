@@ -1,6 +1,6 @@
 define(['js/models', 'examples/lab/js/pathables','js/utils', 'text!examples/lab/templates/pathableview.html'], function(models,pathables,utils, pathableview_templ) {
 	var defined = utils.DEFINED;
-	var PROP_BLACKLIST  = ["source", "_id", "type"];
+	var PROP_BLACKLIST  = ["source", "_id", "type", 'label'];
 	var CommonView = Backbone.View.extend({
 		initialize:function() {
 			this.setModel(this.options.model);
