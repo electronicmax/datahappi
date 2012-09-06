@@ -259,10 +259,10 @@
   bottom: 0px;
 }
 .visual svg.plot rect {
-  fill: rgba(20, 100, 20, 0.3);
+  fill: rgba(20, 100, 200, 0.30000000000000004);
 }
 .visual svg.plot rect.brush {
-  fill: rgba(20, 100, 20, 0.8);
+  fill: #1464c8;
 }
 .visual svg.plot text.barlabel {
   fill: rgba(120, 120, 120, 0.4);
@@ -422,4 +422,7 @@
 }
 .dropzone-3 .titlebar input {
   background-color: rgba(255, 102, 102, 0.19999999999999996);
+}
+.plotting {
+  background-color: rgba(20, 100, 200, 0.25);
 }

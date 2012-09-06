@@ -37,18 +37,28 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		_handle_unbrush_pathable:function() {
 			delete this.brush;
 		},
-		setData:function(s) {
-			var this_ = this;			
-			if (this.options.models) {
+		setData:function(view) {
+			var this_ = this;
+			if (defined(this.options.view)) {
 				this.options.models.off_model(null, this);
+				this.options.models.off(null, null, this);
+				this.options.view.$el.removeClass('plotting');
+				this.options.view.off(null, null, this);
 			}
-			this.options.models = s;
-			if (defined(this.options.models)) {
+			this.options.view = view;
+			this.options.models = defined(view) ? view.pathables : undefined;
+			if (defined(view)) {
+				view.$el.addClass('plotting');
 				this.options.models.on_model('all', function(pathable, eventType) {
 					if (eventType == 'brush_visual') { this_._handle_brush_pathable(pathable);	}
 					if (eventType == 'unbrush_visual') { this_._handle_unbrush_pathable();	} 					
 					this_._update_plot();
 				}, this);
+				this.options.models.on('add remove', function() { this_._update_plot(); });
+				view.on('delete', function() {
+					console.log('got a destruct event on associated box >>>>>>>>>>>>>>>>>> ');
+					this_.setData(undefined);
+				});				
 			}
 			this_._update_plot();
 		},
@@ -60,11 +70,8 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		_update_plot:function() {
 			var this_ = this;
 			var plot = d3.select(this.el).select('svg.plot');
-			
 			if (!(defined(this.options.models))) {
-				if (defined(this.options.plotter)) {
-					this.options.plotter.render([]);
-				}
+				if (defined(this.options.plotter)) {this.options.plotter.render([]);}
 				return;
 			}
 			d3.selectAll('text').remove();			
@@ -113,32 +120,14 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 				},
 				drop: function( event, ui ) {
 					var view = ui.draggable.data('view');
-					view.on('delete', function() {
-						console.log('got a destruct event on associated box >>>>>>>>>>>>>>>>>> ');
-						this_.setData(undefined);
-					});
 					this_.$el.removeClass("over");
-					this_.setData( view.pathables );
+					this_.setData( view );
+
+					// position in back 
+					var start_pos = ui.draggable.data("drag_start_position");
+					ui.draggable.data("view").setTopLeft(start_pos.top, start_pos.left, true);					
 				}
 			});
-			
-			// this.$el.find('.xaxis').droppable({
-			// 	greedy:true, accept:'.greybox',	tolerance:"touch",
-			// 	over:function(event, ui) {
-			// 		$(this).addClass("over");
-			// 		old_x_label = $(this).find('label').html();
-			// 		$(this).find('.lbl').html('set as series');
-			// 	},
-			// 	out:function(event, ui) {
-			// 		$(this).removeClass("over");
-			// 		$(this).find('.lbl').html(old_x_label);					
-			// 	},
-			// 	drop: function( event, ui ) {
-			// 		$(this).removeClass("over");					
-			// 		this_.setSeries( ui.draggable.data("views")() );	
-			// 	}				
-			// });
-			
 			// omg resizing!
 			this.$el.resizable({ resize: function() {
 				console.log('updating plot');

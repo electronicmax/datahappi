@@ -5,6 +5,7 @@
 @visual-x-height:30px;
 @visual-border-color : rgba(190,180,0,0.2);
 @map-border-color : rgba(180,180,0,0.2);
+@plotting-color: rgb(20,100,200);
 
 @import "box.less";
 	
@@ -40,8 +41,8 @@
 		position:absolute;
 		top:@titlebar-height; left:0px; right:0px; bottom:0px;
 		rect {
-			fill:rgba(20,100,20,0.3);
-			&.brush {	fill:rgba(20,100,20,0.8);	}
+			fill:fadeout(@plotting-color,70%);
+			&.brush { fill:@plotting-color; }
 		}
 		text.barlabel { fill: rgba(120, 120, 120, 0.4);  }
 		text.valuedisplay { font-size:16pt;	}
@@ -143,3 +144,7 @@
 .dropzone-1 { .dropzone-i(orange); }
 .dropzone-2 { .dropzone-i(green); }
 .dropzone-3 { .dropzone-i(red); }
+
+.plotting {
+	background-color:fadeout(@plotting-color,75%);
+}
