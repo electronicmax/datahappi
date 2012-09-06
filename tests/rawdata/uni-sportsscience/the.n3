@@ -1,10 +1,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#> .
 
-:University rdfs:label "Universities from thecompleteuniversityguide" .
+:University rdfs:label "Universities from Times Higher Educaiton" .
 
 :u1 a :University ;
-    rdfs:label "Loughborough Univeristy" ;
+    rdfs:label "Loughborough University" ;
  	:teaching "27.9%";
  	:international_outlook "66.7%";
  	:industry_income "39.4%";
@@ -13,7 +13,7 @@
  	:world_ranking "351-400".
  	
  :u2 a :University ;
-    rdfs:label "Durham_University" ;
+    rdfs:label "Durham University" ;
  	:overall_score "56.4%";
  	:teaching "32.5%";
  	:international_outlook "75.8%";
@@ -52,7 +52,7 @@
  	:world_ranking "148".
  	 	
 :u6 a :University ;
-    rdfs:label "Univeristy of Bath" ;
+    rdfs:label "University of Bath" ;
  	:teaching "25.2%";
  	:international_outlook "80.6%";
  	:industry_income "38.9%";

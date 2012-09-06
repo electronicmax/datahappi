@@ -1,7 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#> .
 
-:University rdfs:label "Universities from thecompleteuniversityguide" .
+:University rdfs:label "Universities from The Complete University Guide" .
 
 :u1 a :University ;
     rdfs:label "Loughborough University" ;

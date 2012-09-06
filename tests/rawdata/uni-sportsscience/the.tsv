@@ -1,7 +1,7 @@
-international_outlook	Name/Label	research	world_ranking	citations	teaching	industry_income	type	overall_score
-73.4%	Exeter	33.3%	156	67.8%	31.3%	35.4%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	46.1%	
-75.8%	Durham_University	37.9%	83	96.2%	32.5%	30.5%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	56.4%	
-66.7%	Loughborough Univeristy	25.7%	351-400	9.2%	27.9%	39.4%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University		
-80.6%	Univeristy of Bath	23.2%	251-275	39.9%	25.2%	38.9%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University		
-70.3%	University of Birmingham	42.6%	148	50.6%	42.6%	36%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University		
-79.8%	The University of Edinburgh	61.4%	36	92.3%	63%	41.3%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	72%	
+international_outlook	type	industry_income	world_ranking	citations	teaching	research	Name/Label	overall_score
+79.8%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	41.3%	36	92.3%	63%	61.4%	The University of Edinburgh	72%	
+70.3%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	36%	148	50.6%	42.6%	42.6%	University of Birmingham		
+80.6%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	38.9%	251-275	39.9%	25.2%	23.2%	University of Bath		
+66.7%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	39.4%	351-400	9.2%	27.9%	25.7%	Loughborough University		
+75.8%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	30.5%	83	96.2%	32.5%	37.9%	Durham University	56.4%	
+73.4%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	35.4%	156	67.8%	31.3%	33.3%	Exeter	46.1%	

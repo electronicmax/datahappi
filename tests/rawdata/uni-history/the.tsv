@@ -1,7 +1,7 @@
-international_outlook	type	research	world_ranking	citations	teaching	industry_income	Name/Label	overall_score
-91.9%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	96.6%	4	97.9%	89.5%	62.1%	Oxford	93.6%	
-89.1%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	40.2%	85	83%	37.1%	34.1%	University_of_St_Andrews	55.7%	
-91.8%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	84.3%	17	89%	77.8%	41.4%	University_College_London	83.2%	
-85.3%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	94.2%	6	97.3%	90.5%	55.5%	Cambridge	92.4%	
-96%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	75.4%	47	50.6%	66.4%	41.1%	London_School_of_Economics_and_Political_Science	66%	
-75.8%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	37.9%	83	96.2%	32.5%	30.5%	Durham_University	56.4%	
+international_outlook	Name/Label	research	world_ranking	citations	teaching	industry_income	type	overall_score
+91.9%	Oxford	96.6%	4	97.9%	89.5%	62.1%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	93.6%	
+89.1%	University of St Andrews	40.2%	85	83%	37.1%	34.1%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	55.7%	
+91.8%	University College London	84.3%	17	89%	77.8%	41.4%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	83.2%	
+85.3%	Cambridge	94.2%	6	97.3%	90.5%	55.5%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	92.4%	
+96%	London School of Economics and Political Science	75.4%	47	50.6%	66.4%	41.1%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	66%	
+75.8%	Durham University	37.9%	83	96.2%	32.5%	30.5%	http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University	56.4%	

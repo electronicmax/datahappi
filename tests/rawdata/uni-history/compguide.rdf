@@ -3,15 +3,15 @@
 <!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-history/compguide.n3-->
 
 
-<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#"
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University">
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University">
         <rdfs:label>Universities from The Complete University Guide</rdfs:label>
     </rdf:Description>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u1">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u1">
         <acdemic_services_spend>2165</acdemic_services_spend>
         <average_cost_to_student>8034</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -31,7 +31,7 @@
         <rdfs:label>Cambridge</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u2">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u2">
         <acdemic_services_spend>2076</acdemic_services_spend>
         <average_cost_to_student>7529</average_cost_to_student>
         <average_fee>8500</average_fee>
@@ -48,10 +48,10 @@
         <research_assessment>2.96</research_assessment>
         <student_satisfaction>4.0</student_satisfaction>
         <student_staff_ratio>11.8</student_staff_ratio>
-        <rdfs:label>London_School_of_Economics_and_Political_Science</rdfs:label>
+        <rdfs:label>London School of Economics and Political Science</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u3">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u3">
         <acdemic_services_spend>1297</acdemic_services_spend>
         <average_cost_to_student>8250</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -68,10 +68,10 @@
         <research_assessment>2.72</research_assessment>
         <student_satisfaction>4.1</student_satisfaction>
         <student_staff_ratio>15.3</student_staff_ratio>
-        <rdfs:label>Durham_University</rdfs:label>
+        <rdfs:label>Durham University</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u4">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u4">
         <acdemic_services_spend>2831</acdemic_services_spend>
         <average_cost_to_student>7549</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -91,7 +91,7 @@
         <rdfs:label>Oxford</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u5">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u5">
         <acdemic_services_spend>1582</acdemic_services_spend>
         <average_fee>9000</average_fee>
         <degree_completion>97%</degree_completion>
@@ -107,10 +107,10 @@
         <research_assessment>2.72</research_assessment>
         <student_satisfaction>4.2</student_satisfaction>
         <student_staff_ratio>13.6</student_staff_ratio>
-        <rdfs:label>University_of_St_Andrews</rdfs:label>
+        <rdfs:label>University of St Andrews</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u6">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u6">
         <acdemic_services_spend>1772</acdemic_services_spend>
         <average_cost_to_student>8255</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -127,6 +127,6 @@
         <research_assessment>2.84</research_assessment>
         <student_satisfaction>4.0</student_satisfaction>
         <student_staff_ratio>10.1</student_staff_ratio>
-        <rdfs:label>University_College_London</rdfs:label>
+        <rdfs:label>University College London</rdfs:label>
     </University>
 </rdf:RDF>

@@ -3,16 +3,16 @@
 <!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-sportsscience/ucas.n3-->
 
 
-<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#"
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#"
     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni">
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni">
         <rdfs:label>Universities from UCAS</rdfs:label>
     </rdf:Description>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u1">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u1">
         <male_female_ratio>61/39</male_female_ratio>
         <num_undergrads>11510</num_undergrads>
         <rdfs:label>Loughborough University</rdfs:label>
@@ -20,7 +20,7 @@
         <geo:long>-1.23064</geo:long>
     </Uni>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u2">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u2">
         <male_female_ratio>48/52</male_female_ratio>
         <num_undergrads>11553</num_undergrads>
         <rdfs:label>Durham University</rdfs:label>
@@ -28,7 +28,7 @@
         <geo:long>-1.577568</geo:long>
     </Uni>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u3">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u3">
         <male_female_ratio>46/54</male_female_ratio>
         <num_undergrads>12711</num_undergrads>
         <rdfs:label>University of Exeter</rdfs:label>
@@ -36,7 +36,7 @@
         <geo:long>-3.536267</geo:long>
     </Uni>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u4">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u4">
         <male_female_ratio>44/56</male_female_ratio>
         <num_undergrads>17565</num_undergrads>
         <rdfs:label>The University of Edinburgh</rdfs:label>
@@ -44,7 +44,7 @@
         <geo:long>-3.188353</geo:long>
     </Uni>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u5">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u5">
         <male_female_ratio>44/56</male_female_ratio>
         <num_undergrads>18067</num_undergrads>
         <rdfs:label>The University of Birmingham</rdfs:label>
@@ -52,7 +52,7 @@
         <geo:long>-1.931019</geo:long>
     </Uni>
 
-    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#u6">
+    <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u6">
         <male_female_ratio>56/44</male_female_ratio>
         <num_undergrads>7956</num_undergrads>
         <rdfs:label>University of Bath</rdfs:label>

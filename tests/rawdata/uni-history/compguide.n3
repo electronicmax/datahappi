@@ -1,7 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#> .
 
-:University rdfs:label "Universities from thecompleteuniversityguide" .
+:University rdfs:label "Universities from The Complete University Guide" .
 
 :u1 a :University ;
     rdfs:label "Cambridge" ;
@@ -24,7 +24,7 @@
      
      
 :u2 a :University ;
-    rdfs:label "London_School_of_Economics_and_Political_Science" ;
+    rdfs:label "London School of Economics and Political Science" ;
      :entry_standards "526";
      :research_assessment "2.96";
      :student_satisfaction "4.0";
@@ -44,7 +44,7 @@
      
           
 :u3 a :University ;
-    rdfs:label "Durham_University" ;
+    rdfs:label "Durham University" ;
      :entry_standards "501";
      :research_assessment "2.72";
      :student_satisfaction "4.1";
@@ -84,7 +84,7 @@
      
           
 :u5 a :University ;
-    rdfs:label "University_of_St_Andrews" ;
+    rdfs:label "University of St Andrews" ;
      :entry_standards "515";
      :research_assessment "2.72";
      :student_satisfaction "4.2";
@@ -103,7 +103,7 @@
      
           
 :u6 a :University ;
-    rdfs:label "University_College_London" ;
+    rdfs:label "University College London" ;
      :entry_standards "495";
      :research_assessment "2.84";
      :student_satisfaction "4.0";

@@ -3,15 +3,15 @@
 <!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/uni-sportsscience/compguide.n3-->
 
 
-<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#"
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University">
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University">
         <rdfs:label>Universities from The Complete University Guide</rdfs:label>
     </rdf:Description>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u1">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u1">
         <acdemic_services_spend>1072</acdemic_services_spend>
         <average_cost_to_student>8308</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -31,7 +31,7 @@
         <rdfs:label>Loughborough University</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u2">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u2">
         <acdemic_services_spend>1297</acdemic_services_spend>
         <average_cost_to_student>8250</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -51,7 +51,7 @@
         <rdfs:label>Durham_University</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u3">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u3">
         <acdemic_services_spend>1241</acdemic_services_spend>
         <average_cost_to_student>8214</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -71,7 +71,7 @@
         <rdfs:label>Exeter</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u4">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u4">
         <acdemic_services_spend>1383</acdemic_services_spend>
         <average_fee>9000</average_fee>
         <degree_completion>92%</degree_completion>
@@ -90,7 +90,7 @@
         <rdfs:label>The University of Edinburgh</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u5">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u5">
         <acdemic_services_spend>1485</acdemic_services_spend>
         <average_cost_to_student>8277</average_cost_to_student>
         <average_fee>9000</average_fee>
@@ -110,7 +110,7 @@
         <rdfs:label>University of Birmingham</rdfs:label>
     </University>
 
-    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u6">
+    <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u6">
         <acdemic_services_spend>1174</acdemic_services_spend>
         <average_cost_to_student>8112</average_cost_to_student>
         <average_fee>8857</average_fee>

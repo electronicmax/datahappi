@@ -8,7 +8,7 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
     <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#University">
-        <rdfs:label>Universities from times - times higher education</rdfs:label>
+        <rdfs:label>Universities from Times Higher Education</rdfs:label>
     </rdf:Description>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u1">
@@ -30,7 +30,7 @@
         <research>75.4%</research>
         <teaching>66.4%</teaching>
         <world_ranking>47</world_ranking>
-        <rdfs:label>London_School_of_Economics_and_Political_Science</rdfs:label>
+        <rdfs:label>London School of Economics and Political Science</rdfs:label>
     </University>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u3">
@@ -41,7 +41,7 @@
         <research>37.9%</research>
         <teaching>32.5%</teaching>
         <world_ranking>83</world_ranking>
-        <rdfs:label>Durham_University</rdfs:label>
+        <rdfs:label>Durham University</rdfs:label>
     </University>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u4">
@@ -63,7 +63,7 @@
         <research>40.2%</research>
         <teaching>37.1%</teaching>
         <world_ranking>85</world_ranking>
-        <rdfs:label>University_of_St_Andrews</rdfs:label>
+        <rdfs:label>University of St Andrews</rdfs:label>
     </University>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u6">
@@ -74,6 +74,6 @@
         <research>84.3%</research>
         <teaching>77.8%</teaching>
         <world_ranking>17</world_ranking>
-        <rdfs:label>University_College_London</rdfs:label>
+        <rdfs:label>University College London</rdfs:label>
     </University>
 </rdf:RDF>

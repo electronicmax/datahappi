@@ -1,7 +1,7 @@
 Name/Label	Longitude	male_female_ratio	num_undergrads	Latitude	type
-University of Bath	-2.327428	56/44	7956	51.380299	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
-The University of Edinburgh	-3.188353	44/56	17565	55.945355	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
-The University of Birmingham	-1.931019	44/56	18067	52.45329	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
-Durham University	-1.577568	48/52	11553	54.762274	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
-University of Exeter	-3.536267	46/54	12711	50.736863	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
-Loughborough University	-1.23064	61/39	11510	52.769643	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#Uni	
+Durham University	-1.577568	48/52	11553	54.762274	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	
+University of Exeter	-3.536267	46/54	12711	50.736863	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	
+Loughborough University	-1.23064	61/39	11510	52.769643	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	
+University of Bath	-2.327428	56/44	7956	51.380299	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	
+The University of Edinburgh	-3.188353	44/56	17565	55.945355	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	
+The University of Birmingham	-1.931019	44/56	18067	52.45329	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#Uni	

@@ -1,7 +1,7 @@
-green_score	facilities_spend	average_fee	good_honours	student_staff_ratio	entry_standards	type	overall_score	maximum_fee	minimum_fee	degree_completion	acdemic_services_spend	research_assessment	student_satisfaction	average_cost_to_student	Name/Label	league_table_ranking	graduate_prospects
-45.5	511	9000	18.5	1241	456	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	809	9000	4500	96%	1241	2.62	4.1	8214	Exeter	13	82.8	
-35.5	889	9000	81.8	15.3	501	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	912	9000	9000	96%	1297	2.72	4.1	8250	Durham_University	5	78.5	
-38.5	542	9000	70.1	16.7	391	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	803	9000	9000	93%	1072	2.62	4.1	8308	Loughborough University	14	72.1	
-37.5	431	8857	81.1	17.1	457	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	824	9000	5750	96%	1174	2.71	4.1	8112	University of Bath	10	79.1	
-32.5	456	9000	76.1	15.5	433	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	769	9000	9000	94%	1485	2.64	3.9	8277	University of Birmingham	23	74.0	
-40.5	466	9000	82.8	13.9	470	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University	801	9000	9000	92%	1383	2.75	3.8		The University of Edinburgh	16	74.5	
+green_score	facilities_spend	average_fee	good_honours	student_staff_ratio	acdemic_services_spend	entry_standards	type	overall_score	maximum_fee	degree_completion	minimum_fee	research_assessment	student_satisfaction	average_cost_to_student	Name/Label	league_table_ranking	graduate_prospects
+35.5	889	9000	81.8	15.3	1297	501	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	912	9000	96%	9000	2.72	4.1	8250	Durham_University	5	78.5	
+45.5	511	9000	18.5	1241	1241	456	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	809	9000	96%	4500	2.62	4.1	8214	Exeter	13	82.8	
+38.5	542	9000	70.1	16.7	1072	391	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	803	9000	93%	9000	2.62	4.1	8308	Loughborough University	14	72.1	
+37.5	431	8857	81.1	17.1	1174	457	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	824	9000	96%	5750	2.71	4.1	8112	University of Bath	10	79.1	
+40.5	466	9000	82.8	13.9	1383	470	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	801	9000	92%	9000	2.75	3.8		The University of Edinburgh	16	74.5	
+32.5	456	9000	76.1	15.5	1485	433	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#University	769	9000	94%	9000	2.64	3.9	8277	University of Birmingham	23	74.0	
