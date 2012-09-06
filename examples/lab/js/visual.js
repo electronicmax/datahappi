@@ -18,8 +18,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			engine_class: engines.BarValues
 		},
 		initialize:function() {
-			this.options = _(this.defaults).extend(this.options);
-			if (this.options.models) { this.setData(this.options.models); }
+			this.options = _({}).chain().extend(this.defaults).extend(this.options).value();
 		},
 		setSeries:function(s) {
 			var this_ = this;
@@ -39,22 +38,22 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		},
 		setData:function(view) {
 			var this_ = this;
-			if (defined(this.options.view)) {
-				this.options.models.off_model(null, this);
-				this.options.models.off(null, null, this);
-				this.options.view.$el.removeClass('plotting');
-				this.options.view.off(null, null, this);
+			var oldview = this.options.view
+			if (defined(oldview)) {
+				oldview.pathables.off_model(null, this);
+				oldview.pathables.off(null, null, this);
+				oldview.$el.removeClass('plotting');
+				oldview.off(null, null, this);
 			}
 			this.options.view = view;
-			this.options.models = defined(view) ? view.pathables : undefined;
 			if (defined(view)) {
 				view.$el.addClass('plotting');
-				this.options.models.on_model('all', function(pathable, eventType) {
+				view.pathables.on_model('all', function(pathable, eventType) {
 					if (eventType == 'brush_visual') { this_._handle_brush_pathable(pathable);	}
 					if (eventType == 'unbrush_visual') { this_._handle_unbrush_pathable();	} 					
 					this_._update_plot();
 				}, this);
-				this.options.models.on('add remove', function() { this_._update_plot(); });
+				view.pathables.on('add remove', function() { this_._update_plot(); });
 				view.on('delete', function() {
 					console.log('got a destruct event on associated box >>>>>>>>>>>>>>>>>> ');
 					this_.setData(undefined);
@@ -65,44 +64,28 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		_cb_delete:function() {
 			var this_ = this;
 			this.setData(undefined);
+			if (defined(this.options.plotter)) { this.options.plotter.off(null, null, this);}
 			this.$el.fadeOut(function() { this_.$el.remove(); });
+			this.$el.remove();
 		},
 		_update_plot:function() {
 			var this_ = this;
-			var plot = d3.select(this.el).select('svg.plot');
-			if (!(defined(this.options.models))) {
-				if (defined(this.options.plotter)) {this.options.plotter.render([]);}
+			if (!defined(this.options.plotter)) { return ; }
+			if (!(defined(this.options.view))) {
+				this.options.plotter.render([]);
 				return;
-			}
-			d3.selectAll('text').remove();			
-			if (!defined(this.options.plotter) && defined(this.options.plotter_class)) {
-				this.options.plotter = new this.options.plotter_class({el:plot[0]});
-				this.options.plotter.on('all',
-										function(event_name, pathables) {
-											console.log('plotter ', event_name, pathables);
-											if (['brush_visual', 'unbrush_visual'].indexOf(event_name) < 0) { return; }
-											console.log('pathables > ', pathables);
-											pathables.map(function(p) {	p.model.trigger(event_name); });
-										}, this);
-			}
-			var models = this.options.models;
+			}			
+			var models = this.options.view.pathables;
 			var engine = this.options.engines.filter(function(engine) { return engine.test(models) });
 			if (engine.length > 0) {
-				var data = engine[0].generate_data(
-					this.options.models,
-					defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
-				);
+				var data = engine[0].generate_data(models); // , defined(this.options.series) ? this.options.series.map(function(x) { return x.options.model; }) : []
 				if (defined(this_.brush)) {
-					data.map(function(datum) {
-						datum.brush = (datum.series_pathables.indexOf(this_.brush) >= 0); 
-					});
+					data.map(function(datum) {	datum.brush = (datum.series_pathables.indexOf(this_.brush) >= 0); 	});
 				}
-				console.log('render data ', data);
 				this.options.plotter.render(data);
 			} else {
 				assert(false, "Could not find suitable engine ");
-			}			
-
+			}
 		},
 		render:function() {
 			var this_ = this;
@@ -128,12 +111,17 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 					ui.draggable.data("view").setTopLeft(start_pos.top, start_pos.left, true);					
 				}
 			});
-			// omg resizing!
-			this.$el.resizable({ resize: function() {
-				console.log('updating plot');
-				this_._update_plot();
-			} });
+			this.$el.resizable({ resize: function() { this_._update_plot(); 	} });
 			this.$el.data('view', this);
+			if (defined(this.options.plotter)) { this.options.plotter.off(null, null, this); }
+			var plot = d3.selectAll(this.$el.find('svg.plot'));			
+			this.options.plotter = new this.options.plotter_class({el:plot[0]});
+			this.options.plotter.on('all',
+									function(event_name, pathables) {
+										if (['brush_visual', 'unbrush_visual'].indexOf(event_name) < 0) { return; }
+										pathables.map(function(p) {	p.model.trigger(event_name); });
+									}, this);
+			
 			return this;
 		}
 	});

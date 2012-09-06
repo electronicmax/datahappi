@@ -229,7 +229,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			_(this.dropzone_boxes).keys()
 				.map(function(key_i) {
 					var dzbox = this_.dropzone_boxes[key_i];
-					if (dzbox == box) {
+					if (defined(dzbox) && dzbox == box) {
 						this_._unsetDropzoneBox(dzbox, key_i);
 						delete this_.dropzone_boxes[key_i];						
 					}

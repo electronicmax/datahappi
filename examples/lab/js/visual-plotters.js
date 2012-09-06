@@ -1,10 +1,14 @@
 define(['js/utils'], function(utils) {
 	
 	var SeriesBarPlotter = Backbone.View.extend({
+
+		initialize:function() {
+			console.log("NEW PLOTTER BEING SET UP >>>>>>>>>>>> ");
+		},
 		
 		render:function(data) {
 			// this.$el is bound to svg
-			console.log('SBP.render() :: ', data);
+
 			var this_ = this,
 				svg_p = d3.select(this.$el[0]),
 				height = this.$el.height(),
@@ -13,6 +17,8 @@ define(['js/utils'], function(utils) {
 				barwidth = ( width / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
 				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - 20]);
+
+			console.log('SBP.render() :: ', data, height, width);			
 
 			// enter selection
 			svg_p
