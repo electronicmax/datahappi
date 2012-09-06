@@ -98,7 +98,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				flatten(this.sameas.map(function(x) {
 					return x.entailedKeys().concat(x.attrKeys());
 				}))
-			);
+			).filter(function(x) { return x !== '_id'; });
 		},
 		map:function(f) {
 			var this_ = this;

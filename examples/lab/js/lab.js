@@ -14,6 +14,7 @@ define([
 	'tests/rawdata/datasets'
 ], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth, datasets) {
 
+	var AUTO_HIDE_SIDEBAR = false;
 	var defined = util.DEFINED;
 	var when = util.when;
 	
@@ -83,7 +84,9 @@ define([
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
-				this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
+				if (AUTO_HIDE_SIDEBAR) {
+					this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
+				}
 			}
 		});
 		
