@@ -1124,12 +1124,17 @@ body .flip-horizontal {
   padding: 5px;
 }
 .pathable-view .reorder-handle {
+  display: inline-block;
   padding: 0px 6px 0px 0px;
   font-size: 1.2em;
   cursor: ns-resize;
+  float: left;
 }
 .pathable-view .name {
-  padding: 0px 0px 6px 3px;
+  display: inline-block;
+  width: 80%;
+  padding: 0px 0px 4px 3px;
+  line-height: 15px;
 }
 .pathable-view .delete {
   position: absolute;
