@@ -225,10 +225,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return this.sameas.indexOf(m) >= 0;
 		},
 		get_label:function() {
-			if (this.sameas.length == 0) {
-				return this._get_label();
-			}
+			if (this.sameas.length == 0) { return this._get_label(); }
 			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort().join(' / '); 
+		},
+		get_labels:function() {
+			if (this.sameas.length == 0) { return [this._get_label()]; }
+			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort();
 		},
 		_get_label:function() {
 			var m = this.toJSON();

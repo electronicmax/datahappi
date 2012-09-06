@@ -107,7 +107,11 @@ define(
 			_handle_dropped_models:function(pathables) {
 				// first merge in like models
 				var this_ = this;
-				var labels_to_models = dict(this.pathables.map(function(x) { return [ x.model.get_label(), x.model ]; }));
+				var labels_to_models = dict(flatten(this.pathables.map(function(pathable) {
+					return pathable.model.get_labels().map(function(label) {
+						return [label , pathable.model];
+					});
+				})));
 				pathables = pathables.filter(function(p) {
 					var equivalent_model = labels_to_models[p.model.get_label()];
 					if (defined(equivalent_model) && equivalent_model.id !== p.model.id) {
