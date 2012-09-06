@@ -1146,7 +1146,7 @@ body .flip-horizontal {
   padding: 0px 0px 0px 5px;
   height: 0.5em;
   vertical-align: middle;
-  line-height: 5px;
+  line-height: 3px;
 }
 .pathable-view .proplabel:hover {
   color: #000;
@@ -1158,6 +1158,7 @@ body .flip-horizontal {
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
+  line-height: 14px !important;
 }
 .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);

@@ -11,6 +11,9 @@ define(
 		var template = '<div class="titlebar"><input class="title" type="text" value="instances"/><div class="box-delete icon-cancel"></div><svg class="sparkhist"></svg><i class="icon-share clone-box"></i></div><div class="items"></div><div class="properties"></div>';
 		var toolbar_template = '<div class="microtoolbox"><span class="toggle_paths"></span><span class="toggle_props icon-logout"></span></div>';
 		var defined = utils.DEFINED, dict = utils.TO_OBJ, flatten = utils.flatten, assert = utils.assert;
+		var sameas_models_of_pathable = function(p) {
+			return [p.model].concat(p.model.sameas);
+		};
 		var InstanceBox = box.BoxView.extend({
 			className:'greybox',
 			events: {
@@ -26,22 +29,20 @@ define(
 				this.pathables.on('add remove change', function() { this_.render(); });
 				this.pathables
 					.on_model('brush_visual', function(pathable) {
-						console.log("instancebox >> ON PATHABLE brush_visual", pathable.id);						
+						// console.log("instancebox >> ON PATHABLE brush_visual", pathable.id);						
 						pathable = _(pathable).isArray() ? pathable : [pathable];
 						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
 							return v.$el.addClass('brush');
 						});
 					}, this_)
 					.on_model('unbrush_visual', function(pathable) {
-						console.log("instancebox >> ON PATHABLE unbrush_visual", pathable.id);
+						// console.log("instancebox >> ON PATHABLE unbrush_visual", pathable.id);
 						pathable = _(pathable).isArray() ? pathable : [pathable];						
 						this_._find_views_of_model(pathable.map(function(x) { return x.model; })).map(function(v) {
 							return v.$el.removeClass('brush');
 						});
 					}, this_)
-					.on_model('change:sameas', function(p) {
-						this_._change_sameas(p);						
-					});				
+					.on_model('change:sameas', function(p) { this_._change_sameas(p); });				
 			},
 			clone:function(target_box) {
 				var new_instancebox = target_box || new InstanceBox();
@@ -71,9 +72,6 @@ define(
 						.resizable({});					
 					this.$el.find('.items').sortable({	handle:'.reorder-handle', items:'div.pathable-view' });
 
-					// support for deep brushing					
-					this.views_collection.map(function(view) { this_._add_brushing_listeners(view);	});
-					
 					// set up to receive droppables
 					this.$el.droppable({
 						greedy:true, // magical for allowing nesting of droppables
@@ -130,15 +128,20 @@ define(
 			},
 			// this is cleverwork that makes sure we don't get dupes in a list
 			_change_sameas:function(p) {
-				console.log('_change_sameas', this._find_all_views_sameas_models());
+				// console.log('_change_sameas', this._find_all_views_sameas_models());
 				while (this._find_all_views_sameas_models().filter(function(x) { return x == p.model; }).length > 1) {
 					// find one and remove it!
-					var views_with_pathable = this._get_first_view_with_pathable(p);
+					var views_with_pathable = this._get_views_sameas_pathable(p);
 					assert(views_with_pathable.length > 0, "error.");
 					this.remove(views_with_pathable[views_with_pathable.length - 1]);
 				}
 			},
-			_get_first_view_with_pathable:function(p) {	return this.views_collection.filter(function(v) { return v.options.model == p; });	},
+			_get_views_sameas_pathable:function(p) {
+				var pmodel = p.model;
+				return this.views_collection.filter(function(v) {
+					return sameas_models_of_pathable(v.options.model).indexOf( pmodel ) >= 0;
+				});
+			},
 			_find_all_views_sameas_models:function() {
 				// computes the sameas equivalence graph
 				return utils.flatten(this.views_collection.map(function(v) { return v.options.model.model.sameas.concat(v.options.model.model); }));
@@ -182,7 +185,7 @@ define(
 				var lvc = this.views_collection.length;
 				this.views_collection.remove(itemview);
 				itemview.$el.remove();
-				console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
+				// console.log("instancebox :: REMOVE ITEM : before - ", lvc, ' after - ', this.views_collection.length);
 			},
 			_dereference_by_property:function(propertyname) {
 				// TODO -- check the extension logic to see if it does this:
@@ -195,7 +198,7 @@ define(
 				this_.pathables.paths.map(function(path) {
 					var pc = path.clone().add_step(step);
 					var result = this_.pathables.try_path(pc);
-					console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
+					// console.log(' try path ', pc.get('steps').models.valueOf().join(','), this_.pathables.try_path(pc));
 					if (defined(result)) { path.add_step(step); }
 				});
 				// now try it just solo
@@ -231,7 +234,7 @@ define(
 				this.$el.fadeOut(function() { this_.$el.remove(); });
 			},
 			_cb_clone:function() {
-				console.log('clone trigger yo ');
+				// console.log('clone trigger yo ');
 				this.trigger('clone');
 			}
 		});

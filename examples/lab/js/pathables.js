@@ -172,12 +172,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 		},
 		add:function(path_array) {
 			Backbone.Collection.prototype.add.apply(this,arguments);
-			var this_ = this;
-			
+			var this_ = this;			
 			// If path_array is a single element, turn it into a single-element array
-			if (!_.isArray(path_array)) {
-				path_array = [path_array];
-			}			
+			if (!_.isArray(path_array)) { path_array = [path_array]; }
 			_(path_array).each(function(path, i) {
 				if (_.isUndefined(path.get('path_priority'))) {
 					path.set({path_priority:this_.length + i});
@@ -234,9 +231,9 @@ define(['js/source','js/models', 'js/utils'], function(source,models,utils) {
 				return m;
 			});
 			pathables.map(function(pathable) {
-				console.log("ADD >> subscribing ", pathable.id, ' to ', this_.model_subscriptions.length);
+				// console.log("ADD >> subscribing ", pathable.id, ' to ', this_.model_subscriptions.length);
 				this_.model_subscriptions.map(function(sub) {
-					console.log('subscribing to ', sub.event, sub.callback, sub.whom);
+					// console.log('subscribing to ', sub.event, sub.callback, sub.whom);
 					model_subscribe(pathable, sub.event, sub.callback, sub.whom);
 				});
 			});
