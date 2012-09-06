@@ -123,6 +123,7 @@ body {
 			border-right:1px solid orange;
 			overflow-y:auto;
 			.sameas-relation {
+				position:relative;
 				padding:0px 24px 2px 2px;
 				margin:0px 0px 8px 0px;
 				border-radius:2px;
@@ -135,10 +136,13 @@ body {
 					color:rgba(50,50,50,0.50);
 					&.hover { color:black; }
 				}
-				div {
+				.label {
 					display:inline-block;
-					padding-left:5px; padding-right:5px;
+					white-space: normal !important;
+					padding-left:2px; padding-right:7px;
 				}
+				.equivs { width:100%;  vertical-align:middle; 	}
+				.symbol { font-size:0.9em; margin:-1px;}
 				&:hover {
 					background-color:rgba(255,255,255,0.95);
 				}

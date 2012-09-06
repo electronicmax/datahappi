@@ -30,7 +30,7 @@ define(['js/utils'],  function(utils) {
 			this.$el.html(this.template);
 			var equivs = this.$el.find('.equivs');			
 			var t  = "<div class='label'><%= m._get_label() %></div>";
-			equivs.append(this.options.relation.get("models").map(function(x) {  return _(t).template({m:x}); }).join(" &#8646; "));
+			equivs.append(this.options.relation.get("models").map(function(x) {  return _(t).template({m:x}); }).join("<span class='symbol'>&#8646;</span> "));
 			return this;
 		},
 		_cb_delete:function() {
