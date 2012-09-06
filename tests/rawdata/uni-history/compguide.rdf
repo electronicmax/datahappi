@@ -8,7 +8,7 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
     <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#University">
-        <rdfs:label>Universities from thecompleteuniversityguide</rdfs:label>
+        <rdfs:label>Universities from The Complete University Guide</rdfs:label>
     </rdf:Description>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#u1">
