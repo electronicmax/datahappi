@@ -925,6 +925,7 @@ body .item.ui-draggable-dragging {
   border: 1px solid rgba(200, 200, 200, 0.3) !important;
 }
 body .slidepanel .sources {
+  display: none;
   width: 100%;
   height: 100px;
 }
@@ -946,12 +947,11 @@ body .slidepanel .things {
   padding: 0px;
   background-color: white;
   position: absolute;
-  top: 100px;
-  bottom: 144px;
+  top: 0px;
+  bottom: 190px;
   left: 0px;
   right: 0px;
   border-right: 1px solid #eee;
-  border-top: 1px solid #eee;
 }
 body .slidepanel .things input {
   width: 100%;
@@ -990,7 +990,7 @@ body .slidepanel .sameas-view {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  height: 133px;
+  height: 180px;
   padding: 10px 4px 0px 20px;
   text-align: right;
   border-right: 1px solid orange;
