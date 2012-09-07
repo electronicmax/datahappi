@@ -14,6 +14,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
 		initialize:function(src_json, options) {
+			var this_ = this;
 			this.entailed = {};
 			this.sameas = [];
 			if (!_(src_json).isUndefined()) {
@@ -21,6 +22,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				this.attributes = this._all_values_to_arrays(src_json);
 			}
 			this.set_up_inference(options);
+			// enable debug event spy > 
+			// this.on('all', function(eventType, p1, p2) { console.log('[', this_.id, '] >> ', eventType, p1, p2); });
 			return this;
 		},
 		clone:function() {
@@ -95,7 +98,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				flatten(this.sameas.map(function(x) {
 					return x.entailedKeys().concat(x.attrKeys());
 				}))
-			);
+			).filter(function(x) { return x !== '_id'; });
 		},
 		map:function(f) {
 			var this_ = this;
@@ -175,11 +178,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			// sets m to be the sameAs us, which destructively
 			// modifies us
 			var this_ = this;
-			if (this.sameas.indexOf(m) < 0) {
-				this.sameas.map(function(sa) {
-					m.setSameAs(sa);
-				});
+			if (m !== this && this.sameas.indexOf(m) < 0) {
 				this.sameas.push(m);
+				this.sameas.map(function(sa) { m.setSameAs(sa); });
 				m.setSameAs(this);
 				m.on('all', function(eventType,m,options) {
 					if (_(options).isUndefined() || _(options.reflected_from_sameas).isUndefined()) {
@@ -193,14 +194,17 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		unsetSameAs:function(m) {
 			// unsets m to be the sameAs us, which destructively
 			// modifies us
-			var this_ = this;
-			if (this.sameas.indexOf(m) >= 0) {
-				this.sameas = _(this.sameas).without(m);
-				m.unsetSameAs(this);
-				m.off(null, null, this);
-				this.trigger('change:sameas');
-			}
-			return this;
+			throw new Error("don't use me ");
+
+			// var this_ = this;
+			// if (this.sameas.indexOf(m) >= 0) {
+			// 	this.sameas = _(this.sameas).without(m);
+			// 	m.unsetSameAs(this);
+			// 	console.log("UNBINDING ", m.id, ' from ', this.id);
+			// 	m.off(null, null, this);
+			// 	this.trigger('change:sameas');
+			// }
+			// return this;
 		},
 		clearSameAs:function() {
 			// unsets m to be the sameAs us, which destructively
@@ -209,8 +213,9 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			var oldsameas = this.sameas.concat([]);
 			this.sameas = [];			
 			oldsameas.map(function(m) {
+				// console.log('!!!!!!!!!!!!! disconnecting ', m.id, ' -> from -> ', this_.id, ' with context ', this_  );
+				m.off(null, null, this_);
 				m.clearSameAs();
-				m.off(null, null, this);
 			});
 			this.trigger('change:sameas');
 			return this;
@@ -220,10 +225,12 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return this.sameas.indexOf(m) >= 0;
 		},
 		get_label:function() {
-			if (this.sameas.length == 0) {
-				return this._get_label();
-			}
+			if (this.sameas.length == 0) { return this._get_label(); }
 			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort().join(' / '); 
+		},
+		get_labels:function() {
+			if (this.sameas.length == 0) { return [this._get_label()]; }
+			return _(this.sameas.concat([this]).map(function(m) { return m._get_label(); })).uniq().sort();
 		},
 		_get_label:function() {
 			var m = this.toJSON();

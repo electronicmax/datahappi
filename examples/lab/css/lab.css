@@ -925,6 +925,7 @@ body .item.ui-draggable-dragging {
   border: 1px solid rgba(200, 200, 200, 0.3) !important;
 }
 body .slidepanel .sources {
+  display: none;
   width: 100%;
   height: 100px;
 }
@@ -946,12 +947,11 @@ body .slidepanel .things {
   padding: 0px;
   background-color: white;
   position: absolute;
-  top: 100px;
-  bottom: 144px;
+  top: 0px;
+  bottom: 190px;
   left: 0px;
   right: 0px;
   border-right: 1px solid #eee;
-  border-top: 1px solid #eee;
 }
 body .slidepanel .things input {
   width: 100%;
@@ -990,13 +990,14 @@ body .slidepanel .sameas-view {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  height: 133px;
+  height: 180px;
   padding: 10px 4px 0px 20px;
   text-align: right;
   border-right: 1px solid orange;
   overflow-y: auto;
 }
 body .slidepanel .sameas-view .sameas-relation {
+  position: relative;
   padding: 0px 24px 2px 2px;
   margin: 0px 0px 8px 0px;
   border-radius: 2px;
@@ -1012,10 +1013,19 @@ body .slidepanel .sameas-view .sameas-relation .delete {
 body .slidepanel .sameas-view .sameas-relation .delete.hover {
   color: black;
 }
-body .slidepanel .sameas-view .sameas-relation div {
+body .slidepanel .sameas-view .sameas-relation .label {
   display: inline-block;
-  padding-left: 5px;
-  padding-right: 5px;
+  white-space: normal !important;
+  padding-left: 2px;
+  padding-right: 7px;
+}
+body .slidepanel .sameas-view .sameas-relation .equivs {
+  width: 100%;
+  vertical-align: middle;
+}
+body .slidepanel .sameas-view .sameas-relation .symbol {
+  font-size: 0.9em;
+  margin: -1px;
 }
 body .slidepanel .sameas-view .sameas-relation:hover {
   background-color: rgba(255, 255, 255, 0.95);
@@ -1114,12 +1124,17 @@ body .flip-horizontal {
   padding: 5px;
 }
 .pathable-view .reorder-handle {
+  display: inline-block;
   padding: 0px 6px 0px 0px;
   font-size: 1.2em;
   cursor: ns-resize;
+  float: left;
 }
 .pathable-view .name {
-  padding: 0px 0px 6px 3px;
+  display: inline-block;
+  width: 80%;
+  padding: 0px 0px 4px 3px;
+  line-height: 15px;
 }
 .pathable-view .delete {
   position: absolute;
@@ -1146,7 +1161,7 @@ body .flip-horizontal {
   padding: 0px 0px 0px 5px;
   height: 0.5em;
   vertical-align: middle;
-  line-height: 5px;
+  line-height: 3px;
 }
 .pathable-view .proplabel:hover {
   color: #000;
@@ -1158,6 +1173,7 @@ body .flip-horizontal {
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
+  line-height: 14px !important;
 }
 .pathable-view.brush {
   background-color: rgba(0, 200, 255, 0.1);

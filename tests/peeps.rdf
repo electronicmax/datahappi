@@ -1,39 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cat="http://hip.cat/ont#"  xml:base="http://hip.cat/mydata">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cat="http://hip.cat/ont#" xmlns="http://hip.cat/ont#"  xml:base="http://hip.cat/ont#" >
+  <rdf:Description rdf:about="#Address_Book">
+	<rdfs:label>Address Book Contacts</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="#alice">
-	<rdfs:label>Alice</rdfs:label>
-	<rdf:type rdf:resource="#Person"/>
+	<rdfs:label>Max Trafton</rdfs:label>
+	<rdf:type rdf:resource="#Address_Book"/>
 	<cat:home>
 	  <rdf:Description rdf:about="#aliceaddress">
 		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
-		<cat:lat>31.466114</cat:lat>
-		<cat:long>34.484749</cat:long>
+		<cat:lat>52.9833</cat:lat>
+		<cat:long>0.080</cat:long>
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>075372982938</cat:phone>
 	<cat:age>21</cat:age>
-	<cat:friends rdf:resource="#charlie"/>	
+	<cat:friends rdf:resource="#charlie"/>
+	<cat:friends rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c4"/>
   </rdf:Description>  
   <rdf:Description rdf:about="#bob">
-	<rdf:type rdf:resource="#Person"/>	
+	<rdf:type rdf:resource="#Address_Book"/>	
 	<rdfs:label>Bob</rdfs:label>
 	<cat:home>
 	  <rdf:Description rdf:about="#bobaddress">
 		<cat:address>10 Downing Street, Westminster SW1A 2AA</cat:address>
 		<cat:lat>51.5033</cat:lat>
-		<cat:long>0.127640</cat:long>
+		<cat:long>-0.05640</cat:long>
 	  </rdf:Description>
 	</cat:home>
 	<cat:phone>617-992-8822</cat:phone>
+	<cat:friends rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c1"/>				
 	<cat:age>29</cat:age>	
   </rdf:Description>
   <rdf:Description rdf:about="#charlie">
-	<rdf:type rdf:resource="#Person"/>
-	<rdfs:label>Charlie</rdfs:label>
+	<rdf:type rdf:resource="#Address_Book"/>
+	<rdfs:label>Kelly</rdfs:label>
 	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
 	<cat:phone>074827382981</cat:phone>
 	<cat:age>32</cat:age>
+	<cat:friends rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c4"/>	
 	<cat:friends rdf:resource="#bob"/>
 	<cat:friends rdf:resource="#alice"/>
-  </rdf:Description>  
+	<cat:lat>52.11</cat:lat>
+	<cat:long>0.127640</cat:long>
+  </rdf:Description>
+  
+    <rdf:Description rdf:about="#Contact">
+        <rdfs:label>Twitter Contact</rdfs:label>
+    </rdf:Description>
+
+    <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c1">
+        <twitter>@dsconyers</twitter>
+        <rdfs:label>Darren Sconyers</rdfs:label>
+        <geo:lat>52.477307</geo:lat>
+        <geo:long>-1.972836</geo:long>
+    </Contact>
+
+    <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c2">
+        <twitter>@the_trafton</twitter>
+        <rdfs:label>Max Trafton</rdfs:label>
+        <geo:lat>52.0243</geo:lat>
+        <geo:long>-0.810346</geo:long>
+    </Contact>
+
+    <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c3">
+        <twitter>@maust1982</twitter>
+        <rdfs:label>Kelly Maust</rdfs:label>
+        <geo:lat>52.176508</geo:lat>
+        <geo:long>-2.234022</geo:long>
+    </Contact>
+
+    <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c4">
+        <twitter>@clintclintclint</twitter>
+        <rdfs:label>Clinton Mcmath</rdfs:label>
+        <geo:lat>53.750418</geo:lat>
+        <geo:long>-2.506948</geo:long>
+    </Contact>
+
+    <Contact rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c5">
+        <twitter>@a_parikh</twitter>
+        <rdfs:label>Allan Parikh</rdfs:label>
+        <geo:lat>51.442334</geo:lat>
+        <geo:long>0.300353</geo:long>
+    </Contact>
+
 </rdf:RDF>

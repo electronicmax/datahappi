@@ -14,6 +14,7 @@ define([
 	'tests/rawdata/datasets'
 ], function(models,pathables, sidebar, box, ibox, views, toolbar, visual, visualmap, util, cc, auth, datasets) {
 
+	var AUTO_HIDE_SIDEBAR = false;
 	var defined = util.DEFINED;
 	var when = util.when;
 	
@@ -58,10 +59,10 @@ define([
 							target_box.setTopLeft(ui.helper.position().top, ui.helper.position().left - this_.sidebar.$el.width());							
 							if (defined(ui.draggable.data('model'))) {
 								var model = ui.draggable.data("model")().clone();
-								target_box.add(new views.PathableView({model:model}));
+								target_box.add(new views.PathableView({model:model.clone()}));
 							} else if (defined(ui.draggable.data('views'))) {
 								target_box.add(ui.draggable.data('views')().map(function(view) {
-									return new views.PathableView({model:view.options.model})
+									return new views.PathableView({model:view.options.model.clone()})
 								}));
 							}
 							return false;
@@ -83,7 +84,9 @@ define([
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
-				this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
+				if (AUTO_HIDE_SIDEBAR) {
+					this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
+				}
 			}
 		});
 		
