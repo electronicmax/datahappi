@@ -8,42 +8,42 @@
 :u1 a :Uni ;
     rdfs:label "Loughborough University";
     :num_undergrads "11510";
-    :male_female_ratio "61/39";
+    :male_female_ratio "0.61";
     geo:lat "52.769643";
     geo:long "-1.23064".
 
 :u2 a :Uni ;
     rdfs:label "Durham University";
     :num_undergrads "11553";
-    :male_female_ratio "48/52";
+    :male_female_ratio "0.48";
     geo:lat "54.762274";
     geo:long "-1.577568".
 
 :u3 a :Uni ;
     rdfs:label "University of Exeter";
     :num_undergrads "12711";
-    :male_female_ratio "46/54";
+    :male_female_ratio "0.46";
     geo:lat "50.736863";
     geo:long "-3.536267".
 
 :u4 a :Uni ;
     rdfs:label "The University of Edinburgh";
     :num_undergrads "17565";
-    :male_female_ratio "44/56";
+    :male_female_ratio "0.44";
     geo:lat "55.945355";
     geo:long "-3.188353".
 
 :u5 a :Uni ;
     rdfs:label "The University of Birmingham";
     :num_undergrads "18067";
-    :male_female_ratio "44/56";
+    :male_female_ratio "0.44";
     geo:lat "52.45329";
     geo:long "-1.931019".
 
 :u6 a :Uni ;
     rdfs:label "University of Bath";
     :num_undergrads "7956";
-    :male_female_ratio "56/44";
+    :male_female_ratio "0.56";
     geo:lat "51.380299";
     geo:long "-2.327428".
 

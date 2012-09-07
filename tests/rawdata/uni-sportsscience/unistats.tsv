@@ -1,7 +1,7 @@
-average_ucas	Name/Label	students_satisfied	type	job_percent
-420	University of Exeter	90	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	75	
-480	Durham University	90	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	82	
-380	Loughborough University	88	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	76	
-460	University of Bath	91	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	85	
-410	University of Birmingham	85	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	81	
-430	University of Edinburgh	85	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	77	
+average_ucas	job_percent	students_satisfied	Name/Label	type
+420	75	90	University of Exeter	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
+480	82	90	Durham University	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
+380	76	88	Loughborough University	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
+460	85	91	University of Bath	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
+410	81	85	University of Birmingham	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
+430	77	85	University of Edinburgh	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	
