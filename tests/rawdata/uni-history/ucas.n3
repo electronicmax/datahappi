@@ -13,7 +13,7 @@
     geo:long "0.110378".
 
 :u2 a :Uni ;
-    rdfs:label "London School of Economics and Political Science (University of London)";
+    rdfs:label "London School of Economics";
     :num_undergrads "4199";
     :male_female_ratio "52/48";
     geo:lat "51.520026";

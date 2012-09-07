@@ -24,7 +24,7 @@
      
      
 :u2 a :University ;
-    rdfs:label "London School of Economics and Political Science" ;
+    rdfs:label "London School of Economics" ;
      :entry_standards "526";
      :research_assessment "2.96";
      :student_satisfaction "4.0";

@@ -15,7 +15,7 @@
  	
  	
 :u2 a :University ;
-    rdfs:label "London School of Economics and Political Science" ;
+    rdfs:label "London School of Economics" ;
  	 :overall_score "66%";
  	:teaching "66.4%";
  	:international_outlook "96%";

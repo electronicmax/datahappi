@@ -23,7 +23,7 @@
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u2">
         <male_female_ratio>52/48</male_female_ratio>
         <num_undergrads>4199</num_undergrads>
-        <rdfs:label>London School of Economics and Political Science (University of London)</rdfs:label>
+        <rdfs:label>London School of Economics</rdfs:label>
         <geo:lat>51.520026</geo:lat>
         <geo:long>-0.12321</geo:long>
     </Uni>

@@ -12,7 +12,7 @@
     :students_satisfied "94".
 
 :u2 a :Uni ;
-    rdfs:label "London School of Economics & Political Science";
+    rdfs:label "London School of Economics";
     :average_ucas "500";
     :job_percent "90";
     :students_satisfied "84".

@@ -22,7 +22,7 @@
         <average_ucas>500</average_ucas>
         <job_percent>90</job_percent>
         <students_satisfied>84</students_satisfied>
-        <rdfs:label>London School of Economics &#38; Political Science</rdfs:label>
+        <rdfs:label>London School of Economics</rdfs:label>
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#u3">
@@ -50,6 +50,6 @@
         <average_ucas>470</average_ucas>
         <job_percent>85</job_percent>
         <students_satisfied>88</students_satisfied>
-        <rdfs:label>University College London</rdfs:label>
+        <rdfs:label>Unversity College London</rdfs:label>
     </Uni>
 </rdf:RDF>

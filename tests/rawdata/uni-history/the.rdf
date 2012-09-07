@@ -30,7 +30,7 @@
         <research>75.4%</research>
         <teaching>66.4%</teaching>
         <world_ranking>47</world_ranking>
-        <rdfs:label>London School of Economics and Political Science</rdfs:label>
+        <rdfs:label>London School of Economics</rdfs:label>
     </University>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-the#u3">

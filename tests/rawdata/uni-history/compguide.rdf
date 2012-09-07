@@ -48,7 +48,7 @@
         <research_assessment>2.96</research_assessment>
         <student_satisfaction>4.0</student_satisfaction>
         <student_staff_ratio>11.8</student_staff_ratio>
-        <rdfs:label>London School of Economics and Political Science</rdfs:label>
+        <rdfs:label>London School of Economics</rdfs:label>
     </University>
 
     <University rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-compguide#u3">
