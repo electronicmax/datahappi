@@ -1,7 +1,7 @@
-average_ucas	job_percent	students_satisfied	type	Name/Label
-480	82	90	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	Durham University	
-500	90	84	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	London School of Economics	
-540	86	94	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	University of Cambridge	
-470	85	88	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	Unversity College London	
-480	65	63	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	University of St Andrews	
-530	76	93	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	Oxford University	
+average_ucas	type	students_satisfied	Name/Label	job_percent
+480	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	90	Durham University	82	
+500	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	84	London School of Economics	90	
+540	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	94	University of Cambridge	86	
+470	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	88	Unversity College London	85	
+480	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	63	University of St Andrews	65	
+530	http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-unistats#Uni	93	Oxford University	76	

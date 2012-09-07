@@ -13,7 +13,7 @@
     </rdf:Description>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u1">
-        <male_female_ratio>53/47</male_female_ratio>
+        <male_female_ratio>0.53</male_female_ratio>
         <num_undergrads>12083</num_undergrads>
         <rdfs:label>University of Cambridge</rdfs:label>
         <geo:lat>52.208133</geo:lat>
@@ -21,7 +21,7 @@
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u2">
-        <male_female_ratio>52/48</male_female_ratio>
+        <male_female_ratio>0.52</male_female_ratio>
         <num_undergrads>4199</num_undergrads>
         <rdfs:label>London School of Economics</rdfs:label>
         <geo:lat>51.520026</geo:lat>
@@ -29,7 +29,7 @@
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u3">
-        <male_female_ratio>48/52</male_female_ratio>
+        <male_female_ratio>0.48</male_female_ratio>
         <num_undergrads>11553</num_undergrads>
         <rdfs:label>Durham University</rdfs:label>
         <geo:lat>54.762274</geo:lat>
@@ -37,7 +37,7 @@
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u4">
-        <male_female_ratio>54/46</male_female_ratio>
+        <male_female_ratio>0.54</male_female_ratio>
         <num_undergrads>10925</num_undergrads>
         <rdfs:label>Oxford University</rdfs:label>
         <geo:lat>51.754134</geo:lat>
@@ -45,7 +45,7 @@
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u5">
-        <male_female_ratio>42/58</male_female_ratio>
+        <male_female_ratio>0.42</male_female_ratio>
         <num_undergrads>6025</num_undergrads>
         <rdfs:label>University of St Andrews</rdfs:label>
         <geo:lat>56.34083</geo:lat>
@@ -53,7 +53,7 @@
     </Uni>
 
     <Uni rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-ucas#u6">
-        <male_female_ratio>48/52</male_female_ratio>
+        <male_female_ratio>0.48</male_female_ratio>
         <num_undergrads>13612</num_undergrads>
         <rdfs:label>University College London (University of London)</rdfs:label>
         <geo:lat>51.52578</geo:lat>
