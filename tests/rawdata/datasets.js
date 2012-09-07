@@ -33,7 +33,7 @@ define([],
 				'test':[
 					{path:['tests','peeps.rdf'].join('/'), name:"peeples"},
 					{path:['tests','rawdata', 'menus.rdf'].join('/'), name:"menus"},
-					{path:['tests','rawdata', 'twitter.rdf'].join('/'), name:"twitter"}
+					// {path:['tests','rawdata', 'twitter.rdf'].join('/'), name:"twitter"}
 				]
 			};
 	   });
