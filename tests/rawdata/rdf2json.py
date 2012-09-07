@@ -58,4 +58,4 @@ for subj in data:
         continue # this is just a label, so ignore
     data_out[subj] = data[subj]
 
-print json.dumps(data_out).encode("utf-8")
+print u"window.friends = "+json.dumps(data_out).encode("utf-8")+u";"
