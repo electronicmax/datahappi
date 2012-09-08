@@ -26,6 +26,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#r2">
         <ambience>Casual</ambience>
+        <price_range>££</price_range>
         <score>4★</score>
         <rdfs:label>Charcoals</rdfs:label>
         <geo:lat>55.861802,</geo:lat>
@@ -34,6 +35,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#r3">
         <ambience>Casual</ambience>
+        <price_range>££</price_range>
         <score>5★</score>
         <rdfs:label>Number 16 Restaurant</rdfs:label>
         <geo:lat>55.871085</geo:lat>
@@ -42,6 +44,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#r4">
         <ambience>Casual</ambience>
+        <price_range>£££</price_range>
         <score>4.5★</score>
         <rdfs:label>Fanny Trollopes Cafe</rdfs:label>
         <geo:lat>55.865029</geo:lat>
@@ -50,6 +53,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#r5">
         <ambience>Dressy</ambience>
+        <price_range>££££</price_range>
         <score>4.5★</score>
         <rdfs:label>Two Fat Ladies At The Buttery</rdfs:label>
         <geo:lat>55.862741</geo:lat>

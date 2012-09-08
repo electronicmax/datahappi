@@ -1,7 +1,7 @@
-Name/Label	Longitude	likes	address	Latitude	type	postcode
-Katrina Copeland	-4.201433	Indian	55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK	55.744584	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G75 9HJ	
-Blanche Standley	-4.647279	Indian	Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK	56.060101	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G83 8RH	
-Kayla Fussell	-4.342088	Indian, Italian	15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK	55.852388	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G52 2PF	
-Jacob Boucher	-4.26692	Italian	7 Scotland St, Glasgow, Glasgow City G5 8NL, UK	55.849473	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G5 8NL	
-Johnny Izzo	-4.333508	Scottish	Essex Ln, Glasgow, Glasgow City G14, UK	55.878777	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G14 9LX	
-Madeline Legg	-3.983658	Scottish	5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK	55.95191	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	G70 6AA	
+type	Longitude	likes	address	Latitude	Name/Label	postcode
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-4.201433	Indian	55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK	55.744584	Katrina Copeland	G75 9HJ	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-4.647279	Indian	Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK	56.060101	Blanche Standley	G83 8RH	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-4.342088	Italian, Indian	15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK	55.852388	Kayla Fussell	G52 2PF	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-4.26692	Italian	7 Scotland St, Glasgow, Glasgow City G5 8NL, UK	55.849473	Jacob Boucher	G5 8NL	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-4.333508	Scottish	Essex Ln, Glasgow, Glasgow City G14, UK	55.878777	Johnny Izzo	G14 9LX	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#Person	-3.983658	Scottish	5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK	55.95191	Madeline Legg	G70 6AA	

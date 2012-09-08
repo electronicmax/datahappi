@@ -1,7 +1,7 @@
-type	Longitude	Latitude	score	ambience	Name/Label
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.28308	55.865029	4.5 stars	Casual	Fanny Trollopes Cafe	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.27145	55.862741	4.5 stars	Dressy	Two Fat Ladies At The Buttery	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.257374	55.826504			Sapori D'Italia	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.268532	55.873577	5 stars	Romantic, Classy, Trendy, Touristy, Casual	Black Sheep Bistro	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.256365	55.861802,	4 stars	Casual	Charcoals	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	-4.29868	55.871085	5 stars	Casual	Number 16 Restaurant	
+Name/Label	Longitude	ambience	score	Latitude	price_range	type
+Fanny Trollopes Cafe	-4.28308	Casual	4.5 stars	55.865029	£££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Two Fat Ladies At The Buttery	-4.27145	Dressy	4.5 stars	55.862741	££££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Sapori D'Italia	-4.257374			55.826504		http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Black Sheep Bistro	-4.268532	Touristy, Classy, Romantic, Casual, Trendy	5 stars	55.873577		http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Charcoals	-4.256365	Casual	4 stars	55.861802,	££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Number 16 Restaurant	-4.29868	Casual	5 stars	55.871085	££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	

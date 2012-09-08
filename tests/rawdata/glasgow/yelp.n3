@@ -20,6 +20,7 @@
     geo:long "-4.256365";
     rdfs:label "Charcoals" ;
     :ambience "Casual" ;
+    :price_range "££";
     :score "4★".
 
 :r3 a :Restaurant ;
@@ -27,6 +28,7 @@
     geo:long "-4.29868";
     rdfs:label "Number 16 Restaurant" ;
     :ambience "Casual" ;
+    :price_range "££";
     :score "5★".
 
 :r4 a :Restaurant ;
@@ -34,6 +36,7 @@
     geo:long "-4.28308";
     rdfs:label "Fanny Trollopes Cafe" ;
     :ambience "Casual" ;
+    :price_range "£££";
     :score "4.5★".
 
 :r5 a :Restaurant ;
@@ -41,6 +44,7 @@
     geo:long "-4.27145";
     rdfs:label "Two Fat Ladies At The Buttery" ;
     :ambience "Dressy" ;
+    :price_range "££££";
     :score "4.5★".
 
 :r6 a :Restaurant ;
