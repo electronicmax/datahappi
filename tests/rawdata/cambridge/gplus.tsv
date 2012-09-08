@@ -1,7 +1,7 @@
-Latitude	likes_food	Name/Label	Longitude	type
-52.088386	Greek	David Kellerman	0.41037	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
-52.22849	Portguese, British	Ralph Vera	0.136796	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
-52.211974	Greek	Donald Carlton	0.171603	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
-52.06916	British	Daniel Gardner	0.170298	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
-52.215453	Portuguese	Paul Pine	0.112763	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
-52.244925	British	Juan Dunleavy	0.283328	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+Latitude	type	Name/Label	Longitude	likes_food
+52.088386	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	David Kellerman	0.41037	Greek	
+52.22849	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	Ralph Vera	0.136796	British, Portguese	
+52.211974	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	Donald Carlton	0.171603	Greek	
+52.06916	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	Daniel Gardner	0.170298	British	
+52.215453	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	Paul Pine	0.112763	Portuguese	
+52.244925	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	Juan Dunleavy	0.283328	British	

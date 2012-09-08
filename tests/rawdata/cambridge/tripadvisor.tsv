@@ -1,7 +1,7 @@
 ranking	cuisine	Name/Label	telephone	score	address	type
-183	Vegetarian, Greek	The Gardenia	01223-356 354	3.5	2 Rose Crescent, Cambridge CB2 3LL, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
+183	Greek, Vegetarian	The Gardenia	01223-356 354	3.5	2 Rose Crescent, Cambridge CB2 3LL, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
 8	British	Midsummer House	+44 (0)1223 369299	4	Midsummer Common, Cambridge CB4 1HA, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
 121	Portuguese	Nandos	01223 313818	3.5	33, St. Andrews Street,, Cambridge, England (Formerly The Dome)	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
 26	British	The Cambridge Chop House	01223 359506	4	1 Kings Parade, Cambridge CB2 1SJ, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
 244		Al Casbah	01223 561666	3	62 Mill Road, Cambridge CB1 2AS, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
-14	British, European	Alimentum	(01223) 413000	4	152-154 Hills Road, Cambridge CB2 8PB, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	
+14	European, British	Alimentum	(01223) 413000	4	152-154 Hills Road, Cambridge CB2 8PB, England	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#Restaurant	

@@ -14,6 +14,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r1">
         <ambience>Casual</ambience>
+        <price_range>£££</price_range>
         <score>4.5★</score>
         <rdfs:label>Alimentum</rdfs:label>
         <geo:lat>52.189483</geo:lat>
@@ -22,6 +23,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r2">
         <ambience>Casual</ambience>
+        <price_range>£££</price_range>
         <score>4.5★</score>
         <rdfs:label>The Cambridge Chop House</rdfs:label>
         <geo:lat>52.204556</geo:lat>
@@ -30,6 +32,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r3">
         <ambience>Casual</ambience>
+        <price_range>£££</price_range>
         <score>3.5★</score>
         <rdfs:label>Al Casbah</rdfs:label>
         <geo:lat>52.200716</geo:lat>
@@ -38,6 +41,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r4">
         <ambience>Dressy</ambience>
+        <price_range>££££</price_range>
         <score>4.5★</score>
         <rdfs:label>Midsummer House</rdfs:label>
         <geo:lat>52.212498</geo:lat>
@@ -46,6 +50,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r5">
         <ambience>Casual</ambience>
+        <price_range>££</price_range>
         <score>4.5★</score>
         <rdfs:label>Nandos Chickenland</rdfs:label>
         <geo:lat>52.203635</geo:lat>
@@ -54,6 +59,7 @@
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r6">
         <ambience>Casual</ambience>
+        <price_range>£</price_range>
         <score>4★</score>
         <rdfs:label>Gardenia Take Away</rdfs:label>
         <geo:lat>52.206279</geo:lat>
