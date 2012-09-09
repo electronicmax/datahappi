@@ -13,44 +13,56 @@
     </rdf:Description>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p1">
+        <address rdf:parseType="Resource">
+            <geo:lat>55.751912</geo:lat>
+            <geo:long>-4.170947</geo:long>
+        </address>
         <likes_food>Scottish</likes_food>
         <rdfs:label>Stephen Mandel</rdfs:label>
-        <geo:lat>55.751912</geo:lat>
-        <geo:long>-4.170947</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p2">
+        <address rdf:parseType="Resource">
+            <geo:lat>55.94047</geo:lat>
+            <geo:long>-4.319571</geo:long>
+        </address>
         <likes_food>Italian</likes_food>
         <rdfs:label>Ada Wendell</rdfs:label>
-        <geo:lat>55.94047</geo:lat>
-        <geo:long>-4.319571</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p3">
+        <address rdf:parseType="Resource">
+            <geo:lat>55.828334</geo:lat>
+            <geo:long>-4.360553</geo:long>
+        </address>
         <likes_food>Indian</likes_food>
         <rdfs:label>Tony Kester</rdfs:label>
-        <geo:lat>55.828334</geo:lat>
-        <geo:long>-4.360553</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p4">
+        <address rdf:parseType="Resource">
+            <geo:lat>55.927531</geo:lat>
+            <geo:long>-4.464653</geo:long>
+        </address>
         <likes_food>Indian</likes_food>
         <rdfs:label>Aaron Fajardo</rdfs:label>
-        <geo:lat>55.927531</geo:lat>
-        <geo:long>-4.464653</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p5">
+        <address rdf:parseType="Resource">
+            <geo:lat>56.043486</geo:lat>
+            <geo:long>-4.379846</geo:long>
+        </address>
         <likes_food>Scottish</likes_food>
         <rdfs:label>Carlos Macedo</rdfs:label>
-        <geo:lat>56.043486</geo:lat>
-        <geo:long>-4.379846</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#p6">
+        <address rdf:parseType="Resource">
+            <geo:lat>55.896088</geo:lat>
+            <geo:long>-4.356526</geo:long>
+        </address>
         <likes_food>Italian</likes_food>
         <rdfs:label>Jacob Porterfield</rdfs:label>
-        <geo:lat>55.896088</geo:lat>
-        <geo:long>-4.356526</geo:long>
     </Person>
 </rdf:RDF>
