@@ -1,14 +1,22 @@
 define(['js/utils'], function(utils) {
+
+	var flatten = utils.flatten;
+	var defined = utils.DEFINED;
+	
+	var max_path_length = function(pathables) {
+		return _.max( pathables.map(function(x) { return x.path.get('steps').length; }));
+	};
+	var to_str = function(v) {
+		if (v.model && v.model.get_label) { return v.model.get_label(); }
+		if (v.get_label) { return v.get_label(); }
+		return v.toString();		
+	};
 	
 	var SeriesBarPlotter = Backbone.View.extend({
-
-		initialize:function() {
-			console.log("NEW PLOTTER BEING SET UP >>>>>>>>>>>> ");
-		},
+		initialize:function() {},
 		
 		render:function(data) {
 			// this.$el is bound to svg
-
 			var this_ = this,
 				svg_p = d3.select(this.$el[0]),
 				height = this.$el.height(),
@@ -16,9 +24,8 @@ define(['js/utils'], function(utils) {
 				spacing = 2,
 				barwidth = ( width / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
-				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - 20]);
+				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - 40]);
 
-			console.log('SBP.render() :: ', data, height, width);			
 
 			// enter selection
 			svg_p
@@ -90,12 +97,21 @@ define(['js/utils'], function(utils) {
 				.attr('class', 'valuedisplay')
 				.attr('x', 10)
 				.attr('y', 20);
-			
+
 			svg_p
 				.selectAll('text.valuedisplay')
 				.data([0])
-				.text(function(d) { return this_._value ? this_._value.numeric : '';  });
+				.text(function(d) {
+					///// now print the values
+					if (!defined(this_._value)) { return ''; }
+					if (defined(this_._value.series_pathables) && max_path_length(this_._value.series_pathables) > 0) {
+						// put the value her
+						return to_str(this_._value.series_val); 
+					}
+					return this_._value.series_pathables.map(function(x) { return x.model.get_label(); }).join(", ");
+				});
 			
+
 			svg_p
 				.selectAll('text.value-label')
 			    .data([0])
@@ -108,8 +124,14 @@ define(['js/utils'], function(utils) {
 			svg_p
 				.selectAll('text.value-label')
 				.data([0])
-				.text(function(d) { return this_._value && this_._value.series_pathables.length ? this_._value.series_pathables[0].model.get_label() : '';  });
-			
+				.text(function(d) {
+					///// now print the source pathables
+					if (!defined(this_._value)) { return ''; }
+					if (defined(this_._value.series_pathables) && max_path_length(this_._value.series_pathables) > 0) {
+						// put the value her
+						return this_._value.series_pathables.map(function(x) { return x.model.get_label(); }).join(", ");
+					}
+				});
 			return this;
 		}
 	});
