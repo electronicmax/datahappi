@@ -6,51 +6,49 @@
 
 :p1 a :Person ;
     rdfs:label "Katrina Copeland" ;
-    :address "55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK"; 
-    geo:lat "55.744584";
-    geo:long "-4.201433";
-    :likes "Indian";
-    :postcode "G75 9HJ".
+    :home [  geo:lat "55.744584";  geo:long "-4.201433"; rdfs:label "55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK"; :postcode "G75 9HJ" ]; 
+    :likes "Indian" .
 
 :p2 a :Person ;
     rdfs:label "Blanche Standley" ;
-    :address "Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK";
+    :home [ rdfs:label "Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK";
     geo:lat "56.060101";
     geo:long "-4.647279";
-    :likes "Indian";
-    :postcode "G83 8RH".
+    :postcode "G83 8RH"];    
+    :likes "Indian" .
 
 :p3 a :Person ;
     rdfs:label "Kayla Fussell" ;
-    :address "15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK";
+    :home [ rdfs:label "15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK";
     geo:lat "55.852388";
     geo:long "-4.342088";
+    ];    
     :likes "Italian";
     :likes "Indian";
     :postcode "G52 2PF".
 
 :p4 a :Person ;
     rdfs:label "Jacob Boucher" ;
-    :address "7 Scotland St, Glasgow, Glasgow City G5 8NL, UK";
+    :home [ rdfs:label "7 Scotland St, Glasgow, Glasgow City G5 8NL, UK";
     geo:lat "55.849473";
     geo:long "-4.26692";
-    :likes "Italian";
-    :postcode "G5 8NL".
+    :postcode "G5 8NL"];      
+    :likes "Italian" .
+
 
 :p5 a :Person ;
     rdfs:label "Johnny Izzo" ;
-    :address "Essex Ln, Glasgow, Glasgow City G14, UK";
+    :home [ rdfs:label "Essex Ln, Glasgow, Glasgow City G14, UK";
     geo:lat "55.878777";
     geo:long "-4.333508";
-    :likes "Scottish";
-    :postcode "G14 9LX".
+    :postcode "G14 9LX";    
+    ]; 
+    :likes "Scottish" .
 
 :p6 a :Person ;
     rdfs:label "Madeline Legg" ;
-    :address "5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK";
-    geo:lat "55.95191";
-    geo:long "-3.983658";
-    :likes "Scottish";
-    :postcode "G70 6AA".
+    :home [ rdfs:label "5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK"; geo:lat "55.95191"; geo:long "-3.983658";  :postcode "G70 6AA"];
+    :likes "Scottish". 
+
 
 

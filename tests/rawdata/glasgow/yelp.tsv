@@ -1,13 +1,13 @@
-type	Longitude	ambience	score	address	Latitude	price_range	Name/Label
-	-4.257374				55.826504		1102 Cathcart Road  Glasgow G42 9EG	
-	-4.27145				55.862741		652 Argyle Street Glasgow	
-	-4.28308				55.865029		1066 Argyle Street  City Centre, Glasgow G3 8LY	
-	-4.256365				55.861802,		26A Renfield Street  Glasgow, G2 1LU	
-	-4.268532				55.873577		10 Clarendon St; St George's Cross; Glasgow G20 7QD	
-	-4.29868				55.871085		16 Byres Road  Glasgow, UK G11 5JY	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant		Casual	4.5 stars	ub1bL31C14		£££	Fanny Trollopes Cafe	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant		Dressy	4.5 stars	ub1bL38C14		££££	Two Fat Ladies At The Buttery	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant				ub1bL45C14			Sapori D'Italia	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant		Touristy, Romantic, Classy, Trendy, Casual	5 stars	ub1bL7C14			Black Sheep Bistro	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant		Casual	4 stars	ub1bL17C14		££	Charcoals	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant		Casual	5 stars	ub1bL24C14		££	Number 16 Restaurant	
+Name/Label	Longitude	ambience	score	address	Latitude	price_range	type
+652 Argyle Street Glasgow	-4.27145				55.862741			
+1066 Argyle Street  City Centre, Glasgow G3 8LY	-4.28308				55.865029			
+26A Renfield Street  Glasgow, G2 1LU	-4.256365				55.861802,			
+10 Clarendon St; St George's Cross; Glasgow G20 7QD	-4.268532				55.873577			
+1102 Cathcart Road  Glasgow G42 9EG	-4.257374				55.826504			
+Fanny Trollopes Cafe		Casual	4.5 stars	ub1bL31C14		£££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Two Fat Ladies At The Buttery		Dressy	4.5 stars	ub1bL38C14		££££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Sapori D'Italia				ub1bL45C14			http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+16 Byres Road  Glasgow, UK G11 5JY	-4.29868				55.871085			
+Black Sheep Bistro		Romantic, Classy, Casual, Trendy, Touristy	5 stars	ub1bL7C14			http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Charcoals		Casual	4 stars	ub1bL17C14		££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	
+Number 16 Restaurant		Casual	5 stars	ub1bL24C14		££	http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-glasgow#Restaurant	

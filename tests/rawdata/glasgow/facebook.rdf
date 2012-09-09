@@ -13,57 +13,69 @@
     </rdf:Description>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p1">
-        <address>55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK</address>
+        <home rdf:parseType="Resource">
+            <postcode>G75 9HJ</postcode>
+            <rdfs:label>55 Pine Crescent, East Kilbride, Glasgow, South Lanarkshire G75 9HJ, UK</rdfs:label>
+            <geo:lat>55.744584</geo:lat>
+            <geo:long>-4.201433</geo:long>
+        </home>
         <likes>Indian</likes>
-        <postcode>G75 9HJ</postcode>
         <rdfs:label>Katrina Copeland</rdfs:label>
-        <geo:lat>55.744584</geo:lat>
-        <geo:long>-4.201433</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p2">
-        <address>Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK</address>
+        <home rdf:parseType="Resource">
+            <postcode>G83 8RH</postcode>
+            <rdfs:label>Loch Lomond and the Trossachs National Park, A82, Alexandria, Argyll and Bute G83, UK</rdfs:label>
+            <geo:lat>56.060101</geo:lat>
+            <geo:long>-4.647279</geo:long>
+        </home>
         <likes>Indian</likes>
-        <postcode>G83 8RH</postcode>
         <rdfs:label>Blanche Standley</rdfs:label>
-        <geo:lat>56.060101</geo:lat>
-        <geo:long>-4.647279</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p3">
-        <address>15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK</address>
+        <home rdf:parseType="Resource">
+            <rdfs:label>15 Queensland Gardens, Glasgow, Glasgow City G52 2PE, UK</rdfs:label>
+            <geo:lat>55.852388</geo:lat>
+            <geo:long>-4.342088</geo:long>
+        </home>
         <likes>Indian</likes>
         <likes>Italian</likes>
         <postcode>G52 2PF</postcode>
         <rdfs:label>Kayla Fussell</rdfs:label>
-        <geo:lat>55.852388</geo:lat>
-        <geo:long>-4.342088</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p4">
-        <address>7 Scotland St, Glasgow, Glasgow City G5 8NL, UK</address>
+        <home rdf:parseType="Resource">
+            <postcode>G5 8NL</postcode>
+            <rdfs:label>7 Scotland St, Glasgow, Glasgow City G5 8NL, UK</rdfs:label>
+            <geo:lat>55.849473</geo:lat>
+            <geo:long>-4.26692</geo:long>
+        </home>
         <likes>Italian</likes>
-        <postcode>G5 8NL</postcode>
         <rdfs:label>Jacob Boucher</rdfs:label>
-        <geo:lat>55.849473</geo:lat>
-        <geo:long>-4.26692</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p5">
-        <address>Essex Ln, Glasgow, Glasgow City G14, UK</address>
+        <home rdf:parseType="Resource">
+            <postcode>G14 9LX</postcode>
+            <rdfs:label>Essex Ln, Glasgow, Glasgow City G14, UK</rdfs:label>
+            <geo:lat>55.878777</geo:lat>
+            <geo:long>-4.333508</geo:long>
+        </home>
         <likes>Scottish</likes>
-        <postcode>G14 9LX</postcode>
         <rdfs:label>Johnny Izzo</rdfs:label>
-        <geo:lat>55.878777</geo:lat>
-        <geo:long>-4.333508</geo:long>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-glasgow#p6">
-        <address>5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK</address>
+        <home rdf:parseType="Resource">
+            <postcode>G70 6AA</postcode>
+            <rdfs:label>5 S Muirhead Rd, Cumbernauld, North Lanarkshire G67, UK</rdfs:label>
+            <geo:lat>55.95191</geo:lat>
+            <geo:long>-3.983658</geo:long>
+        </home>
         <likes>Scottish</likes>
-        <postcode>G70 6AA</postcode>
         <rdfs:label>Madeline Legg</rdfs:label>
-        <geo:lat>55.95191</geo:lat>
-        <geo:long>-3.983658</geo:long>
     </Person>
 </rdf:RDF>
