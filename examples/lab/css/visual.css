@@ -225,9 +225,10 @@
   cursor: pointer;
 }
 .visual {
+  color: #14c8ff;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(190, 180, 0, 0.2);
+  border: 1px solid #14c8ff;
   /*
 	.yaxis {
 		.droparea;
@@ -243,7 +244,7 @@
 
 }
 .visual.over {
-  border: 2px solid rgba(50, 255, 50, 0.8);
+  border: 2px solid #14c8ff;
 }
 .visual .corner_thingy {
   width: 50px;
@@ -251,26 +252,35 @@
   position: absolute;
   z-index: 100;
 }
-.visual svg.plot {
+.visual .titlebar {
+  background-color: rgba(20, 200, 255, 0.020000000000000018);
+  border-bottom: 1px solid #14c8ff;
+}
+.visual div.plotdiv {
   position: absolute;
   top: 23px;
   left: 0px;
   right: 0px;
   bottom: 0px;
+  background-color: rgba(20, 200, 255, 0.020000000000000018);
 }
-.visual svg.plot rect {
-  fill: rgba(20, 100, 200, 0.30000000000000004);
+.visual div.plotdiv svg.plot {
+  width: 100%;
+  height: 100%;
 }
-.visual svg.plot rect.brush {
-  fill: #1464c8;
+.visual div.plotdiv svg.plot rect {
+  fill: rgba(20, 200, 255, 0.09999999999999998);
 }
-.visual svg.plot text.barlabel {
+.visual div.plotdiv svg.plot rect.brush {
+  fill: #14c8ff;
+}
+.visual div.plotdiv svg.plot text.barlabel {
   fill: rgba(120, 120, 120, 0.4);
 }
-.visual svg.plot text.valuedisplay {
+.visual div.plotdiv svg.plot text.valuedisplay {
   font-size: 16pt;
 }
-.visual svg.plot text.value-label {
+.visual div.plotdiv svg.plot text.value-label {
   font-size: 10pt;
 }
 .visual .droparea {
@@ -424,5 +434,5 @@
   background-color: rgba(255, 102, 102, 0.19999999999999996);
 }
 .plotting {
-  background-color: rgba(20, 100, 200, 0.25);
+  background-color: rgba(20, 200, 255, 0.09999999999999998);
 }

@@ -5,7 +5,7 @@
 @visual-x-height:30px;
 @visual-border-color : rgba(190,180,0,0.2);
 @map-border-color : rgba(180,180,0,0.2);
-@plotting-color: rgb(20,100,200);
+@plotting-color: rgb(20,200,255);
 
 @import "box.less";
 	
@@ -26,27 +26,36 @@
 	}
 }
 .visual {
+	color:@plotting-color;
 	position:relative;
 	overflow:hidden;
-	border:1px solid @visual-border-color;
+	border:1px solid @plotting-color; // @visual-border-color;
 	&.over {
-		border:2px solid rgba(50,255,50,0.8);
+		border:2px solid @plotting-color; // rgba(50,255,50,0.8);
 	}				
 	.corner_thingy {
 		width:50px; height:50px;
 		position:absolute;			
 		z-index:100;			
 	}
-	svg.plot {
+	.titlebar {
+		background-color:fadeout(@plotting-color,98%);
+		border-bottom:1px solid @plotting-color;
+	}
+	div.plotdiv {
 		position:absolute;
 		top:@titlebar-height; left:0px; right:0px; bottom:0px;
-		rect {
-			fill:fadeout(@plotting-color,70%);
-			&.brush { fill:@plotting-color; }
+		background-color:fadeout(@plotting-color,98%);				
+		svg.plot {
+			width:100%; height:100%;
+			rect {
+				fill:fadeout(@plotting-color,90%);
+				&.brush { fill:@plotting-color; }
+			}
+			text.barlabel { fill: rgba(120, 120, 120, 0.4);  }
+			text.valuedisplay { font-size:16pt;	}
+			text.value-label {	font-size:10pt;	}		
 		}
-		text.barlabel { fill: rgba(120, 120, 120, 0.4);  }
-		text.valuedisplay { font-size:16pt;	}
-		text.value-label {	font-size:10pt;	}		
 	}
 	.droparea {
 		position:absolute;
@@ -146,5 +155,5 @@
 .dropzone-3 { .dropzone-i(red); }
 
 .plotting {
-	background-color:fadeout(@plotting-color,75%);
+	background-color:fadeout(@plotting-color,90%);
 }

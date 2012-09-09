@@ -20,12 +20,26 @@ define(['js/utils'], function(utils) {
 			var this_ = this,
 				svg_p = d3.select(this.$el[0]),
 				height = this.$el.height(),
+				bottom_margin = 10,
+  				top_margin=40,
+  			    side_margins=10,
 				width = this.$el.width(),
 				spacing = 2,
-				barwidth = ( width / data.length ),
+				barwidth = ( (width - 2*side_margins) / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
-				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - 40]);
+				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - top_margin - bottom_margin]);
 
+			// baseline
+			svg_p
+				.selectAll('line.baseline')
+				.data([0])
+				.attr('x1', 0)
+				.attr('y1', height - bottom_margin)
+				.attr('x2', width)
+				.attr('y2', height - bottom_margin)
+				.enter()
+				.append('line')
+				.attr('class', 'baseline');			
 
 			// enter selection
 			svg_p
@@ -66,8 +80,8 @@ define(['js/utils'], function(utils) {
 			svg_p
 				.selectAll('text.barlabel')
 				.data(data)
-				.attr('x', function(d, i) { return i*barwidth; })
-				.attr('y', function(d) { return height - yscale(d.numeric) - 5; })
+				.attr('x', function(d, i) { return side_margins + i*barwidth + 2; })
+				.attr('y', function(d) { return height - yscale(d.numeric) - 8 - bottom_margin; })
 				.text(function(d) { return ''+d.numeric; })
 				.exit()
 				.remove();
@@ -77,8 +91,8 @@ define(['js/utils'], function(utils) {
 				.selectAll('rect')
 				.data(data)
 				.attr('class', function(d) { return d.brush ? 'brush' : ''; })
-				.attr('y', function(d,i) { return height - yscale(d.numeric); })
-				.attr('x', function(d,i) { return i*(barwidth); })
+				.attr('y', function(d,i) { return (height - bottom_margin) - yscale(d.numeric); })
+				.attr('x', function(d,i) { return side_margins + i*(barwidth); })
 				.attr('height', function(d) { return yscale(d.numeric); })
 				.attr('width', barwidth > 6 ? barwidth - 4 : barwidth);
 
@@ -96,7 +110,7 @@ define(['js/utils'], function(utils) {
 				.append('text')
 				.attr('class', 'valuedisplay')
 				.attr('x', 10)
-				.attr('y', 20);
+				.attr('y', 24);
 
 			svg_p
 				.selectAll('text.valuedisplay')
@@ -119,7 +133,7 @@ define(['js/utils'], function(utils) {
 				.append('text')
 				.attr('class', 'value-label')
 				.attr('x', 10)
-				.attr('y', 40);
+				.attr('y', 44);
 			
 			svg_p
 				.selectAll('text.value-label')
