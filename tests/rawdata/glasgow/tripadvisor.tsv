@@ -1,7 +1,7 @@
-cuisine	ranking	Name/Label	telephone	score	address	type
-Scottish	1	Black Sheep Bistro	01413331435	4.5	10 Clarendon street, St George's Cross, Glasgow, Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
-Indian	2	Charcoals	01412219251	4.5	26a Renfield Street, Glasgow G2 1LU, Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
-Casual Dining	3	Number 16	+44 141 3392544	4.5	16 Byres Road, Glasgow G11 5JY, Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
-Scottish	4	Fanny Trollope's	+44 (0)141 564 6464	4.5	1066 Argyle Street, Glasgow G3 8LY, Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
-European, British, Seafood	5	Two Fat Ladies at the Buttery		4.5	652-654 Argyle Street, Glasgow, Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
-Italian	6	Sapori D'Italia	0141 636 0444	5	1102 Cathcart Road, Glasgow G42 9EG , Scotland	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	
+ranking	cuisine	type	telephone	score	address	Name/Label
+1	Scottish	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	01413331435	4.5	10 Clarendon street, St George's Cross, Glasgow, Scotland	Black Sheep Bistro	
+2	Indian	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	01412219251	4.5	26a Renfield Street, Glasgow G2 1LU, Scotland	Charcoals	
+3	Casual Dining	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	+44 141 3392544	4.5	16 Byres Road, Glasgow G11 5JY, Scotland	Number 16	
+4	Scottish	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	+44 (0)141 564 6464	4.5	1066 Argyle Street, Glasgow G3 8LY, Scotland	Fanny Trollope's	
+5	European, British, Seafood	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant		4.5	652-654 Argyle Street, Glasgow, Scotland	Two Fat Ladies at the Buttery	
+6	Italian	http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#Restaurant	0141 636 0444	5	1102 Cathcart Road, Glasgow G42 9EG , Scotland	Sapori D'Italia	

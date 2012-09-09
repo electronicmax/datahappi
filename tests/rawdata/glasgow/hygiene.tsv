@@ -1,7 +1,7 @@
-rating	Name/Label	type
-AWAITING INSPECTION	Sapori D'Italia	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
-PASS	Fanny Trollops	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
-PASS	Two Fat Ladies At The Buttery	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
-PASS	Charcoals	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
-PASS	Number 16 Restaurant	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
-PASS	Black Sheep Bistro	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	
+Name/Label	type	rating
+Sapori D'Italia	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	AWAITING INSPECTION	
+Fanny Trollops	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	PASS	
+Two Fat Ladies At The Buttery	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	PASS	
+Charcoals	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	PASS	
+Number 16 Restaurant	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	PASS	
+Black Sheep Bistro	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-glasgow#Restaurant	PASS	

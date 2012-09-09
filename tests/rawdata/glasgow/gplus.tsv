@@ -1,7 +1,7 @@
-Latitude	likes_food	Name/Label	Longitude	type
-55.927531	Indian	Aaron Fajardo	-4.464653	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
-56.043486	Scottish	Carlos Macedo	-4.379846	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
-55.896088	Italian	Jacob Porterfield	-4.356526	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
-55.751912	Scottish	Stephen Mandel	-4.170947	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
-55.94047	Italian	Ada Wendell	-4.319571	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
-55.828334	Indian	Tony Kester	-4.360553	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	
+Latitude	type	Name/Label	Longitude	likes_food
+55.927531	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Aaron Fajardo	-4.464653	Indian	
+56.043486	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Carlos Macedo	-4.379846	Scottish	
+55.896088	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Jacob Porterfield	-4.356526	Italian	
+55.751912	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Stephen Mandel	-4.170947	Scottish	
+55.94047	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Ada Wendell	-4.319571	Italian	
+55.828334	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-glasgow#Person	Tony Kester	-4.360553	Indian	

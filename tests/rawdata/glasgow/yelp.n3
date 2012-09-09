@@ -5,8 +5,7 @@
 :Restaurant rdfs:label "Restaurants from Yelp" .
 
 :r1 a :Restaurant ;
-    geo:lat "55.873577";
-    geo:long "-4.268532";
+    :address [  geo:lat "55.873577";  geo:long "-4.268532";  rdfs:label "10 Clarendon St; St George's Cross; Glasgow G20 7QD" ];
     rdfs:label "Black Sheep Bistro" ;
     :ambience "Romantic" ;
     :ambience "Classy" ;
@@ -16,39 +15,34 @@
     :score "5★".
 
 :r2 a :Restaurant ;
-    geo:lat "55.861802,";
-    geo:long "-4.256365";
+    :address [ geo:lat "55.861802,";  geo:long "-4.256365"; rdfs:label "26A Renfield Street  Glasgow, G2 1LU" ];
     rdfs:label "Charcoals" ;
     :ambience "Casual" ;
     :price_range "££";
     :score "4★".
 
 :r3 a :Restaurant ;
-    geo:lat "55.871085";
-    geo:long "-4.29868";
+    :address [ geo:lat "55.871085";  geo:long "-4.29868"; rdfs:label "16 Byres Road  Glasgow, UK G11 5JY" ];
     rdfs:label "Number 16 Restaurant" ;
     :ambience "Casual" ;
     :price_range "££";
     :score "5★".
 
 :r4 a :Restaurant ;
-    geo:lat "55.865029";
-    geo:long "-4.28308";
+    :address [  geo:lat "55.865029"; geo:long "-4.28308"; rdfs:label "1066 Argyle Street  City Centre, Glasgow G3 8LY" ];
     rdfs:label "Fanny Trollopes Cafe" ;
     :ambience "Casual" ;
     :price_range "£££";
     :score "4.5★".
 
 :r5 a :Restaurant ;
-    geo:lat "55.862741";
-    geo:long "-4.27145";
+    :address [  geo:lat "55.862741";  geo:long "-4.27145"; rdfs:label "652 Argyle Street Glasgow" ] ;
     rdfs:label "Two Fat Ladies At The Buttery" ;
     :ambience "Dressy" ;
     :price_range "££££";
     :score "4.5★".
 
 :r6 a :Restaurant ;
-    geo:lat "55.826504";
-    geo:long "-4.257374";
+    :address [ geo:lat "55.826504";  geo:long "-4.257374"; rdfs:label "1102 Cathcart Road  Glasgow G42 9EG" ] ; 
     rdfs:label "Sapori D'Italia".
 
