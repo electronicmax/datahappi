@@ -6,14 +6,13 @@
   <rdf:Description rdf:about="#alice">
 	<rdfs:label>Max Trafton</rdfs:label>
 	<rdf:type rdf:resource="#Address_Book"/>
-	<cat:home>
+	<cat:address>
 	  <rdf:Description rdf:about="#aliceaddress">
-		<rdfs:label>Max's apartment</rdfs:label>		
-		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
+		<rdfs:label>10 Downing Street, Westminster SW1A 2AA</rdfs:label>		
 		<cat:lat>52.9833</cat:lat>
 		<cat:long>0.080</cat:long>
 	  </rdf:Description>
-	</cat:home>
+	</cat:address>
 	<cat:phone>075372982938</cat:phone>
 	<cat:age>21</cat:age>
 	<cat:friends rdf:resource="#charlie"/>
@@ -22,14 +21,13 @@
   <rdf:Description rdf:about="#bob">
 	<rdf:type rdf:resource="#Address_Book"/>	
 	<rdfs:label>Bob</rdfs:label>
-	<cat:home>
+	<cat:address>
 	  <rdf:Description rdf:about="#bobaddress">
-		<rdfs:label>Bob's Home Address</rdfs:label>		
-		<cat:address>10 Downing Street, Westminster SW1A 2AA</cat:address>
 		<cat:lat>51.5033</cat:lat>
 		<cat:long>-0.05640</cat:long>
+		<rdfs:label>1 Avenue Rd, Southampton SO17 1EJ</rdfs:label>				
 	  </rdf:Description>
-	</cat:home>
+	</cat:address>
 	<cat:phone>617-992-8822</cat:phone>
 	<cat:friends rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c1"/>				
 	<cat:age>29</cat:age>	
@@ -37,14 +35,18 @@
   <rdf:Description rdf:about="#charlie">
 	<rdf:type rdf:resource="#Address_Book"/>
 	<rdfs:label>Kelly</rdfs:label>
-	<cat:street_address>32 University Road, Southampton SO17 1BJ</cat:street_address>
+	<cat:home_addr>
+	  <rdf:Description rdf:about="#kelly">
+		<cat:lat>52.11</cat:lat>
+		<cat:long>0.127640</cat:long>
+		<rdfs:label>29 Oxford St, Southampton SO16 7VJ</rdfs:label>
+	  </rdf:Description>
+	</cat:home_addr>
 	<cat:phone>074827382981</cat:phone>
 	<cat:age>32</cat:age>
 	<cat:friends rdf:resource="http://webbox.ecs.soton.ac.uk/ontology/chi2012-data-twitter#c4"/>	
 	<cat:friends rdf:resource="#bob"/>
 	<cat:friends rdf:resource="#alice"/>
-	<cat:lat>52.11</cat:lat>
-	<cat:long>0.127640</cat:long>
   </rdf:Description>
   
     <rdf:Description rdf:about="#Contact">
