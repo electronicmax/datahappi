@@ -6,39 +6,33 @@
 
 :p1 a :Person ;
     rdfs:label "Juan Dunleavy" ;
-    geo:lat "52.244925";
-    geo:long "0.283328";
+    :home_address [ geo:lat "52.244925";  geo:long "0.283328"; rdfs:label "Juan's Home Address"];
     :likes_food "British".
 
 :p2 a :Person ;
     rdfs:label "Daniel Gardner" ;
-    geo:lat "52.06916";
-    geo:long "0.170298";
+    :home_address [ geo:lat "52.06916"; geo:long "0.170298"; rdfs:label "Daniel's Home Address" ];    
     :likes_food "British".
 
 :p3 a :Person ;
     rdfs:label "Paul Pine" ;
-    geo:lat "52.215453";
-    geo:long "0.112763";
+    :home_address [ geo:lat "52.215453"; geo:long "0.112763"; rdfs:label "Paul's Home"];
     :likes_food "Portuguese".
 
 :p4 a :Person ;
     rdfs:label "Ralph Vera" ;
-    geo:lat "52.22849";
-    geo:long "0.136796";
+    :home_address [ geo:lat "52.22849";  geo:long "0.136796"; rdfs:label "Ralph's Home" ];
     :likes_food "British";
     :likes_food "Portguese".
 
 :p5 a :Person ;
     rdfs:label "Donald Carlton" ;
-    geo:lat "52.211974";
-    geo:long "0.171603";
+    :home_address [ geo:lat "52.211974"; geo:long "0.171603"; rdfs:label "Donald's home" ];
     :likes_food "Greek".
 
 :p6 a :Person ;
     rdfs:label "David Kellerman" ;
-    geo:lat "52.088386";
-    geo:long "0.41037";
+    :home_address [ geo:lat "52.088386"; geo:long "0.41037"; rdfs:label "David's home" ];
     :likes_food "Greek".
 
 

@@ -1,13 +1,13 @@
-type	Longitude	Latitude	score	address	ambience	price_range	Name/Label
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			4.5 stars	ub1bL7C14	Casual	£££	Alimentum	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			4.5 stars	ub1bL14C14	Casual	£££	The Cambridge Chop House	
-	0.128574	52.212498					Midsummer Common, Cambridge CB4 1HA	
-	0.117717	52.204556					1 King's Parade  Cambridge, CB2 1SJ	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			4 stars	ub1bL42C14	Casual	£	Gardenia Take Away	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			4.5 stars	ub1bL28C14	Dressy	££££	Midsummer House	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			4.5 stars	ub1bL35C14	Casual	££	Nandos Chickenland	
-	0.135913	52.189483					152-154 Hills Road  Cambridge CB2 8PB	
-	0.135806	52.200716					62 Mill Road  Cambridge CB1 2AS	
-	0.118693	52.206279					2 Rose Crescent  City Centre, Cambridge CB2 3LL	
-	0.122952	52.203635					33-34 Saint Andrew's Street  Cambridge, CB2 3AR	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant			3.5 stars	ub1bL21C14	Casual	£££	Al Casbah	
+type	Longitude	ambience	score	address	Latitude	price_range	Name/Label
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Casual	4.5 stars	ub1bL7C14		£££	Alimentum	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Casual	4.5 stars	ub1bL14C14		£££	The Cambridge Chop House	
+	0.128574				52.212498		Midsummer Common, Cambridge CB4 1HA	
+	0.117717				52.204556		1 King's Parade  Cambridge, CB2 1SJ	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Casual	4 stars	ub1bL42C14		£	Gardenia Take Away	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Dressy	4.5 stars	ub1bL28C14		££££	Midsummer House	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Casual	4.5 stars	ub1bL35C14		££	Nandos Chickenland	
+	0.135913				52.189483		152-154 Hills Road  Cambridge CB2 8PB	
+	0.135806				52.200716		62 Mill Road  Cambridge CB1 2AS	
+	0.118693				52.206279		2 Rose Crescent  City Centre, Cambridge CB2 3LL	
+	0.122952				52.203635		33-34 Saint Andrew's Street  Cambridge, CB2 3AR	
+http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#Restaurant		Casual	3.5 stars	ub1bL21C14		£££	Al Casbah	
