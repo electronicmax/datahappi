@@ -1,6 +1,6 @@
 
 <!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
-<!--     using base file:///Users/das05r/code/datahappi/tests/rawdata/cambridge/yelp.n3-->
+<!--     using base file:///home/electronic/github-vm/datahappi/tests/rawdata/cambridge/yelp.n3-->
 
 
 <rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#"
@@ -13,56 +13,74 @@
     </rdf:Description>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r1">
+        <address rdf:parseType="Resource">
+            <rdfs:label>152-154 Hills Road  Cambridge CB2 8PB</rdfs:label>
+            <geo:lat>52.189483</geo:lat>
+            <geo:long>0.135913</geo:long>
+        </address>
         <ambience>Casual</ambience>
         <price_range>£££</price_range>
         <score>4.5★</score>
         <rdfs:label>Alimentum</rdfs:label>
-        <geo:lat>52.189483</geo:lat>
-        <geo:long>0.135913</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r2">
+        <address rdf:parseType="Resource">
+            <rdfs:label>1 King's Parade  Cambridge, CB2 1SJ</rdfs:label>
+            <geo:lat>52.204556</geo:lat>
+            <geo:long>0.117717</geo:long>
+        </address>
         <ambience>Casual</ambience>
         <price_range>£££</price_range>
         <score>4.5★</score>
         <rdfs:label>The Cambridge Chop House</rdfs:label>
-        <geo:lat>52.204556</geo:lat>
-        <geo:long>0.117717</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r3">
+        <address rdf:parseType="Resource">
+            <rdfs:label>62 Mill Road  Cambridge CB1 2AS</rdfs:label>
+            <geo:lat>52.200716</geo:lat>
+            <geo:long>0.135806</geo:long>
+        </address>
         <ambience>Casual</ambience>
         <price_range>£££</price_range>
         <score>3.5★</score>
         <rdfs:label>Al Casbah</rdfs:label>
-        <geo:lat>52.200716</geo:lat>
-        <geo:long>0.135806</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r4">
+        <address rdf:parseType="Resource">
+            <rdfs:label>Midsummer Common, Cambridge CB4 1HA</rdfs:label>
+            <geo:lat>52.212498</geo:lat>
+            <geo:long>0.128574</geo:long>
+        </address>
         <ambience>Dressy</ambience>
         <price_range>££££</price_range>
         <score>4.5★</score>
         <rdfs:label>Midsummer House</rdfs:label>
-        <geo:lat>52.212498</geo:lat>
-        <geo:long>0.128574</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r5">
+        <address rdf:parseType="Resource">
+            <rdfs:label>33-34 Saint Andrew's Street  Cambridge, CB2 3AR</rdfs:label>
+            <geo:lat>52.203635</geo:lat>
+            <geo:long>0.122952</geo:long>
+        </address>
         <ambience>Casual</ambience>
         <price_range>££</price_range>
         <score>4.5★</score>
         <rdfs:label>Nandos Chickenland</rdfs:label>
-        <geo:lat>52.203635</geo:lat>
-        <geo:long>0.122952</geo:long>
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#r6">
+        <address rdf:parseType="Resource">
+            <rdfs:label>2 Rose Crescent  City Centre, Cambridge CB2 3LL</rdfs:label>
+            <geo:lat>52.206279</geo:lat>
+            <geo:long>0.118693</geo:long>
+        </address>
         <ambience>Casual</ambience>
         <price_range>£</price_range>
         <score>4★</score>
         <rdfs:label>Gardenia Take Away</rdfs:label>
-        <geo:lat>52.206279</geo:lat>
-        <geo:long>0.118693</geo:long>
     </Restaurant>
 </rdf:RDF>

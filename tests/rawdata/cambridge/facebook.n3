@@ -6,52 +6,42 @@
 
 :p1 a :Person ;
     rdfs:label "Howard Denison" ;
-    :address "Bradley Rd, Newmarket, Cambridgeshire CB8, UK" ;
+    :home [ rdfs:label "Bradley Rd, Newmarket, Cambridgeshire CB8, UK" ;
     geo:lat "52.170325";
     geo:long "0.478928";
-    :likes "Greek";
-    :postcode "CB8 9JB".
+    :postcode "CB8 9JB"];
+    :likes "Greek" .
+
 
 :p2 a :Person ;
     rdfs:label "Judith Krug" ;
-    :address "54A High St, Trumpington, Cambridge, Cambridgeshire CB2 9LS, UK" ;
-    geo:lat "52.173901";
-    geo:long "0.112256";
+    :home [ rdfs:label "54A High St, Trumpington, Cambridge, Cambridgeshire CB2 9LS, UK";    geo:lat "52.173901";   geo:long "0.112256";  :postcode "CB2 9LS"];
     :likes "Greek";
-    :likes "British";
-    :postcode "CB2 9LS".
+    :likes "British".
+
 
 :p3 a :Person ;
     rdfs:label "Maggie Amato" ;
-    :address "Nornea Ln, Ely, Cambridgeshire CB7, UK" ;
-    geo:lat "52.38221";
-    geo:long "0.315642";
-    :likes "British";
-    :postcode "CB7 9FN".
+    :home [ rdfs:label "Nornea Ln, Ely, Cambridgeshire CB7, UK" ; geo:lat "52.38221"; geo:long "0.315642";:postcode "CB7 9FN"]    ;
+    :likes "British".
+
 
 :p4 a :Person ;
-    rdfs:label "Richard Goshorn" ;
-    :address "3 Dowding Way, Cambridge, Cambridgeshire CB4 3RG, UK" ;
-    geo:lat "52.225211";
-    geo:long "0.115656";
-    :likes "British";
-    :postcode "CB4 3RG".
+    rdfs:label "Richard Goshorn";
+    :home [ rdfs:label "3 Dowding Way, Cambridge, Cambridgeshire CB4 3RG, UK" ;  geo:lat "52.225211";  geo:long "0.115656";:postcode "CB4 3RG" ];
+    :likes "British". 
 
 :p5 a :Person ;
     rdfs:label "Tony Lombardi" ;
-    :address "Blackmoor Head Yard, Cambridge CB2, UK" ;
-    geo:lat "52.209126";
-    geo:long "0.118581";
-    :likes "Portuguese";
-    :postcode "CB2 1FR".
+    :home [ rdfs:label "Blackmoor Head Yard, Cambridge CB2, UK"; geo:lat "52.209126"; geo:long "0.118581";:postcode "CB2 1FR"];  
+    :likes "Portuguese".
+
 
 :p6 a :Person ;
     rdfs:label "Bruce Totten" ;
-    :address "5 Pampisford Rd, Abington, Cambridge, Cambridgeshire CB21 6AQ, UK" ;
-    geo:lat "52.11055";
-    geo:long "0.235269";
+    :home [ rdfs:label "5 Pampisford Rd, Abington, Cambridge, Cambridgeshire CB21 6AQ, UK"; geo:lat "52.11055";  geo:long "0.235269";    :postcode "CB21 6AQ"];
     :likes "Portuguese";
-    :likes "British";
-    :postcode "CB21 6AQ".
+    :likes "British".
+
 
 
