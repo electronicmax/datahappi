@@ -18,11 +18,10 @@ define([
 	var defined = util.DEFINED;
 	var when = util.when;
 	
-		var Main = Backbone.View.extend({
+		var Workspace = Backbone.View.extend({
 			events: {
 				'click .workspace ':'_workspace_clicked'
-			},
-			
+			},			
 			initialize:function() {	},
 			render:function() {
 				var this_ = this, workspace = this.$el.find('.workspace');
@@ -33,20 +32,20 @@ define([
 					}))
 					.on('new_group', function() { this_._new_group(); })
 					.render()
-					.slideOut();
-				
+					.slideOut();				
 				var tb = (new toolbar.Toolbar())
 					.on('new_visual', function() {
 						var v = (new visual.Visual());
 						workspace.append(v.render().el);
+						this_._handle_raise(v);						
 						v._update_plot();
 					})
 					.on('new_map',function() {
 						var map = (new visualmap.MapVisual());
 						workspace.append(map.render().el);
+						this_._handle_raise(map);
 						map.update();
-					});
-				
+					});				
 				workspace
 					.append(tb.render().el)
 					.droppable({
@@ -76,17 +75,33 @@ define([
 				box.on('clone',function() {
 					var boxclone = this_._make_new_instance_box();
 					box.clone(boxclone);
-					this_.$el.find(".workspace").append(boxclone.render().el);
+					// this_.$el.find(".workspace").append(boxclone.render().el);
 					boxclone.setTopLeft(box.$el.position().top, box.$el.position().left + box.$el.width() + 20);
 				});
-				this.$el.find(".workspace").append(box.render().el);				
+				this.$el.find(".workspace").append(box.render().el);
+				this._handle_raise(box);
 				return box;
+			},
+			_handle_raise:function(b) {
+				var this_ = this;
+				b.on('raise', function() {
+					b.$el.css('z-index', this_._get_max_z_index() + 1);
+				});
+				b.trigger('raise');
 			},
 			_workspace_clicked:function() {
 				var this_ = this;
 				if (AUTO_HIDE_SIDEBAR) {
 					this.$el.find(".workspace").click(function(){ this_.sidebar.slideAway();  });
 				}
+			},
+			_get_max_z_index:function() {
+				var get_z_index = function(el) {
+					var cz = $(el).css('z-index');
+					if (_.isUndefined(cz) || _.isNaN(parseInt(cz))) { return 0; }
+					return parseInt(cz);					
+				};
+				return _.max($.makeArray(this.$el.find('.workspace').children().map(function() { return get_z_index(this); })));
 			}
 		});
 		
@@ -107,7 +122,7 @@ define([
 			})).then(function() {
 				var srcs = _.toArray(arguments);
 				window.__srcs__ = srcs;
-				var wview = new Main({el : $('body'), data_sources: srcs}).render();
+				var wview = new Workspace({el : $('body'), data_sources: srcs}).render();
 				wview.sidebar.slideOut('very fast');
 			});
 		})();		

@@ -19,7 +19,8 @@ define(
 			events: {
 				'click .toggle_props' : 'toggle_props',
 				'click .box-delete' : '_cb_delete',
-				'click .clone-box' : '_cb_clone'
+				'click .clone-box' : '_cb_clone',
+				'click .titlebar' : '_cb_raise'
 			},
 			initialize:function(options) {
 				box.BoxView.prototype.initialize.apply(this,arguments);
@@ -240,10 +241,9 @@ define(
 				this.trigger('delete');
 				this.$el.fadeOut(function() { this_.$el.remove(); });
 			},
-			_cb_clone:function() {
-				// console.log('clone trigger yo ');
-				this.trigger('clone');
-			}
+			_cb_clone:function() { this.trigger('clone'); },
+			_cb_raise:function(){ this.trigger('raise');}
+			
 		});
 
 		return { InstanceBox:InstanceBox };

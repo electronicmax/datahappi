@@ -8,7 +8,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		tagName:'div',
 		template:'<div class="titlebar">Map</div><div class="delete icon-cancel"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div>',
 		events : {
-			'click .delete' : '_cb_delete'
+			'click .delete' : '_cb_delete',
+			'click .titlebar' : '_cb_raise'
 		},
 		defaults : { center:[51.505, -0.09], zoom:13 },
 		marker_icons : {
@@ -256,7 +257,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		},
 		_trigger_brush_event:function(eventType, pathable) {
 			pathable.model.trigger(eventType);
-		}
+		},
+		_cb_raise:function() { this.trigger('raise'); }
 	});
 
 	return { MapVisual: MapVisual };

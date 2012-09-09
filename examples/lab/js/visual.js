@@ -9,7 +9,8 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 		tagName:'div',
 		template:'<div class="titlebar">Plot<div class="delete icon-cancel"></div></div><div class="xaxis"><span class="lbl"><i>(drag here to set series)</i></span></div><svg class="plot"></svg>',
 		events : {
-			'click .delete' : '_cb_delete'
+			'click .delete' : '_cb_delete',
+			'click .titlebar' : '_cb_raise'
 		},
 		defaults : {
 			engines : _(engines).values(),
@@ -123,7 +124,8 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 									}, this);
 			
 			return this;
-		}
+		},
+		_cb_raise:function(){ this.trigger('raise');}
 	});
 	return {
 		Visual: Visual,

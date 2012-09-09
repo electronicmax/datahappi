@@ -8,6 +8,7 @@
 	<rdf:type rdf:resource="#Address_Book"/>
 	<cat:home>
 	  <rdf:Description rdf:about="#aliceaddress">
+		<rdfs:label>Max's apartment</rdfs:label>		
 		<cat:address>29 Oxford St, Southampton SO16 7VJ</cat:address>
 		<cat:lat>52.9833</cat:lat>
 		<cat:long>0.080</cat:long>
@@ -23,6 +24,7 @@
 	<rdfs:label>Bob</rdfs:label>
 	<cat:home>
 	  <rdf:Description rdf:about="#bobaddress">
+		<rdfs:label>Bob's Home Address</rdfs:label>		
 		<cat:address>10 Downing Street, Westminster SW1A 2AA</cat:address>
 		<cat:lat>51.5033</cat:lat>
 		<cat:long>-0.05640</cat:long>
