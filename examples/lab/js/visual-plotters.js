@@ -7,6 +7,7 @@ define(['js/utils'], function(utils) {
 		return _.max( pathables.map(function(x) { return x.path.get('steps').length; }));
 	};
 	var to_str = function(v) {
+		if (_.isNumber(v)) { return v.toFixed(2); }		
 		if (v.model && v.model.get_label) { return v.model.get_label(); }
 		if (v.get_label) { return v.get_label(); }
 		return v.toString();		
@@ -27,7 +28,8 @@ define(['js/utils'], function(utils) {
 				spacing = 2,
 				barwidth = ( (width - 2*side_margins) / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
-				yscale = d3.scale.linear().domain([0,max_val]).range([0,height - top_margin - bottom_margin]);
+				min_val = d3.min(data.map(function(d) { return d.numeric; })),
+				yscale = d3.scale.linear().domain([min_val,max_val]).range([0,height - top_margin - bottom_margin]);
 
 			// baseline
 			svg_p
@@ -82,7 +84,7 @@ define(['js/utils'], function(utils) {
 				.data(data)
 				.attr('x', function(d, i) { return side_margins + i*barwidth + 2; })
 				.attr('y', function(d) { return height - yscale(d.numeric) - 8 - bottom_margin; })
-				.text(function(d) { return ''+d.numeric; })
+				.text(function(d) { return to_str(d.numeric); })
 				.exit()
 				.remove();
 			
@@ -119,7 +121,6 @@ define(['js/utils'], function(utils) {
 					///// now print the values
 					if (!defined(this_._value)) { return ''; }
 					if (defined(this_._value.series_pathables) && max_path_length(this_._value.series_pathables) > 0) {
-						// put the value her
 						return to_str(this_._value.series_val); 
 					}
 					return this_._value.series_pathables.map(function(x) { return x.model.get_label(); }).join(", ");

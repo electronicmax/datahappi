@@ -61,6 +61,7 @@
 		position:absolute;
 		border-top:1px solid rgba(200,200,200,0.4);
 		.lbl {
+			display:none;
 			.fullsize;
 			text-align:center;
 			vertical-align:middle;
@@ -93,12 +94,18 @@
 
 @visual-width:350px;
 @visual-height:300px;
-@map-dropzone-width:18px;
+@map-dropzone-width:22px;
 .visual-map {
 	position:absolute !important;
 	width:@visual-width;
 	height:@visual-height;
 	padding:0px; margin:0px;
+	.titlebar {
+		color:grey;
+		background-color:fadeout(grey,98%);		
+		border-bottom:1px solid grey;
+	}
+	// border:1px solid grey;
 	.box-box-shadow;
 	.map-zone {
 		opacity:0.95;
@@ -110,11 +117,12 @@
 		padding:0px; margin:0px;		
 		position:absolute;
 		top:@titlebar-height; left:0px; width:@map-dropzone-width; bottom:0px;
+		
 		.dropzone {
-			-webkit-transition: all 1s ease-in-out;
+			// -webkit-transition: all 1s ease-in-out;
 			display:inline-block;
 			width: 100%; height:25%;
-			border:1px solid rgba(200,200,200,0.3);
+			vertical-align:top;
 			.lbl {
 				-webkit-transform: rotate(90deg);
 				transform-origin:0% 0%;
@@ -137,8 +145,8 @@
 .dropzone-i(@color) {
 	&.dropzone {
 		border-left:1px solid @color !important;
-		border-top:1px solid rgba(200,200,200,0.4);
-		border-bottom:1px solid rgba(200,200,200,0.4);
+		// border-top:1px solid rgba(200,200,200,0.4);
+		// border-bottom:1px solid rgba(200,200,200,0.4);
 		background-color:fadeout(@color,90%);
 	}
 	background-color:fadeout(@color,95%);

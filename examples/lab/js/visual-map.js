@@ -34,7 +34,7 @@ define(['js/models', 'js/utils'], function(models, utils) {
 			this.$el.css('top', 50 + 100*Math.random());
 			this.$el.css('left', 50 + 100*Math.random());
 			this.$el.data('view', this);
-			var dropzone = "<div class='dropzone'><div class='lbl'>drop here</div></div>";
+			var dropzone = "<div class='dropzone'></div>";
 			[0,1,2,3].map(function(i) {
 				$(dropzone).addClass('dropzone-'+i).appendTo(this_.$el.find('.dropzones'));
 			});
@@ -42,17 +42,17 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				greedy:true,  accept:'.greybox', tolerance:"pointer",
 				over:function(event, ui) {
 					$(this).addClass("over");
-					$(this).find('.lbl').html('ok!'); 
+					//$(this).find('.lbl').html('ok!'); 
 				},
 				out:function(event, ui) {
 					$(this).removeClass("over");
-					$(this).find('.lbl').html('drop here');
+					// $(this).find('.lbl').html('drop here');
 				},
 				drop: function( event, ui ) {
 					var views = ui.draggable.data("views")();
 					var dropzone_i = this_.$el.find('.dropzone').index($(this));
 					$(this).removeClass("over");
-					$(this).find('.lbl').html('' + views.length + 'items');
+					// $(this).find('.lbl').html('' + views.length + 'items');
 					this_.setDropzoneBox(ui.draggable.data("view"), dropzone_i);
 					// reset position
 					var start_pos = ui.draggable.data("drag_start_position");
