@@ -1,13 +1,13 @@
-type	Longitude	likes	Latitude	home	Name/Label	postcode
-	0.115656		52.225211		3 Dowding Way, Cambridge, Cambridgeshire CB4 3RG, UK	CB4 3RG	
-	0.112256		52.173901		54A High St, Trumpington, Cambridge, Cambridgeshire CB2 9LS, UK	CB2 9LS	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		Greek, British		ub1bL17C11	Judith Krug		
-	0.118581		52.209126		Blackmoor Head Yard, Cambridge CB2, UK	CB2 1FR	
-	0.478928		52.170325		Bradley Rd, Newmarket, Cambridgeshire CB8, UK	CB8 9JB	
-	0.235269		52.11055		5 Pampisford Rd, Abington, Cambridge, Cambridgeshire CB21 6AQ, UK	CB21 6AQ	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		British		ub1bL24C11	Maggie Amato		
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		Greek		ub1bL8C11	Howard Denison		
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		Portuguese, British		ub1bL41C11	Bruce Totten		
-	0.315642		52.38221		Nornea Ln, Ely, Cambridgeshire CB7, UK	CB7 9FN	
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		British		ub1bL30C11	Richard Goshorn		
-http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person		Portuguese		ub1bL35C11	Tony Lombardi		
+Name/Label	Longitude	postcode	Latitude	home	type	likes
+3 Dowding Way, Cambridge, Cambridgeshire CB4 3RG, UK	0.115656	CB4 3RG	52.225211				
+54A High St, Trumpington, Cambridge, Cambridgeshire CB2 9LS, UK	0.112256	CB2 9LS	52.173901				
+Judith Krug				ub1bL17C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	Greek, British	
+Blackmoor Head Yard, Cambridge CB2, UK	0.118581	CB2 1FR	52.209126				
+Bradley Rd, Newmarket, Cambridgeshire CB8, UK	0.478928	CB8 9JB	52.170325				
+5 Pampisford Rd, Abington, Cambridge, Cambridgeshire CB21 6AQ, UK	0.235269	CB21 6AQ	52.11055				
+Maggie Amato				ub1bL24C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	British	
+Howard Denison				ub1bL8C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	Greek	
+Bruce Totten				ub1bL41C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	Portuguese, British	
+Nornea Ln, Ely, Cambridgeshire CB7, UK	0.315642	CB7 9FN	52.38221				
+Richard Goshorn				ub1bL30C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	British	
+Tony Lombardi				ub1bL35C11	http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person	Portuguese	

@@ -1,13 +1,13 @@
-likes_food	home_address	type	Longitude	Latitude	Name/Label
-			0.41037	52.088386	David's home	
-			0.136796	52.22849	Ralph's Home	
-			0.170298	52.06916	Daniel's Home Address	
-Greek	ub1bL34C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			David Kellerman	
-Portguese, British	ub1bL23C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			Ralph Vera	
-Greek	ub1bL29C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			Donald Carlton	
-British	ub1bL13C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			Daniel Gardner	
-Portuguese	ub1bL18C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			Paul Pine	
-			0.171603	52.211974	Donald's home	
-British	ub1bL8C19	http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person			Juan Dunleavy	
-			0.112763	52.215453	Paul's Home	
-			0.283328	52.244925	Juan's Home Address	
+likes_food	home_address	Name/Label	Longitude	Latitude	type
+		David's home	0.41037	52.088386		
+		Ralph's Home	0.136796	52.22849		
+		Daniel's Home Address	0.170298	52.06916		
+Greek	ub1bL34C19	David Kellerman			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+British, Portguese	ub1bL23C19	Ralph Vera			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+Greek	ub1bL29C19	Donald Carlton			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+British	ub1bL13C19	Daniel Gardner			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+Portuguese	ub1bL18C19	Paul Pine			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+		Donald's home	0.171603	52.211974		
+British	ub1bL8C19	Juan Dunleavy			http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person	
+		Paul's Home	0.112763	52.215453		
+		Juan's Home Address	0.283328	52.244925		

@@ -4,6 +4,7 @@
 
 
 <rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
@@ -12,7 +13,11 @@
     </rdf:Description>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r1">
-        <address>10 Clarendon street, St George's Cross, Glasgow, Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>10 Clarendon St; St George's Cross; Glasgow G20 7QD</rdfs:label>
+            <geo:lat>55.873577</geo:lat>
+            <geo:long>-4.268532</geo:long>
+        </address>
         <cuisine>Scottish</cuisine>
         <ranking>1</ranking>
         <score>4.5</score>
@@ -21,7 +26,11 @@
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r2">
-        <address>26a Renfield Street, Glasgow G2 1LU, Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>26A Renfield Street  Glasgow, G2 1LU</rdfs:label>
+            <geo:lat>55.861802,</geo:lat>
+            <geo:long>-4.256365</geo:long>
+        </address>
         <cuisine>Indian</cuisine>
         <ranking>2</ranking>
         <score>4.5</score>
@@ -30,7 +39,11 @@
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r3">
-        <address>16 Byres Road, Glasgow G11 5JY, Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>16 Byres Road  Glasgow, UK G11 5JY</rdfs:label>
+            <geo:lat>55.871085</geo:lat>
+            <geo:long>-4.29868</geo:long>
+        </address>
         <cuisine>Casual Dining</cuisine>
         <ranking>3</ranking>
         <score>4.5</score>
@@ -39,7 +52,11 @@
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r4">
-        <address>1066 Argyle Street, Glasgow G3 8LY, Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>1066 Argyle Street  City Centre, Glasgow G3 8LY</rdfs:label>
+            <geo:lat>55.865029</geo:lat>
+            <geo:long>-4.28308</geo:long>
+        </address>
         <cuisine>Scottish</cuisine>
         <ranking>4</ranking>
         <score>4.5</score>
@@ -48,7 +65,11 @@
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r5">
-        <address>652-654 Argyle Street, Glasgow, Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>652 Argyle Street Glasgow</rdfs:label>
+            <geo:lat>55.862741</geo:lat>
+            <geo:long>-4.27145</geo:long>
+        </address>
         <cuisine>British</cuisine>
         <cuisine>European</cuisine>
         <cuisine>Seafood</cuisine>
@@ -58,7 +79,11 @@
     </Restaurant>
 
     <Restaurant rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-glasgow#r6">
-        <address>1102 Cathcart Road, Glasgow G42 9EG , Scotland</address>
+        <address rdf:parseType="Resource">
+            <rdfs:label>1102 Cathcart Road  Glasgow G42 9EG</rdfs:label>
+            <geo:lat>55.826504</geo:lat>
+            <geo:long>-4.257374</geo:long>
+        </address>
         <cuisine>Italian</cuisine>
         <ranking>6</ranking>
         <score>5</score>
