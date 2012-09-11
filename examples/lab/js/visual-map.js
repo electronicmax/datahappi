@@ -187,8 +187,16 @@ define(['js/models', 'js/utils'], function(models, utils) {
 				last_position;
 			
 			if (defined(focus_point) && !within_bounds(focus_point, this.map.getBounds())) {
-				this.map.fitBounds(enlargeBounds(focus_point, this.map.getBounds()));
+				// this.map.fitBounds(enlargeBounds(focus_point, this.map.getBounds()));
+				// this.map.fitBounds(new L.LatLngBounds(minLatLng, maxLatLng));
+				var bz = this.map.getBoundsZoom( new L.LatLngBounds(minLatLng, maxLatLng) );
+				console.log("BOUNDS ZOOM ", bz);
+				console.log('pan to ', (maxLatLng.lat + minLatLng.lat) / 2.0, (maxLatLng.lng + minLatLng.lng) / 2.0);
+				this.map.panTo( new L.LatLng( (maxLatLng.lat + minLatLng.lat) / 2.0, (maxLatLng.lng + minLatLng.lng) / 2.0) );
+				this.map.setZoom(bz);
+				// this.map.panInsideBounds(new L.LatLngBounds(minLatLng, maxLatLng));
 			}
+			
 			return this;
 		},
 		_get_class_for_dropzone:function(i) {
