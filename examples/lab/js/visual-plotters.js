@@ -28,7 +28,7 @@ define(['js/utils'], function(utils) {
 				spacing = 2,
 				barwidth = ( (width - 2*side_margins) / data.length ),
 				max_val = d3.max(data.map(function(d) { return d.numeric; })),
-				min_val = d3.min(data.map(function(d) { return d.numeric; })),
+				min_val = d3.min(data.map(function(d) { return d.numeric; }).concat([0])),
 				yscale = d3.scale.linear().domain([min_val,max_val]).range([0,height - top_margin - bottom_margin]);
 
 			// baseline
