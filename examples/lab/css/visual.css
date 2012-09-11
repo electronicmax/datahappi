@@ -380,7 +380,7 @@
   display: none !important;
 }
 .dropzone-0 {
-  background-color: #b3b3ff;
+  background-color: #f5f5ff;
 }
 .dropzone-0.dropzone {
   border-left: 1px solid #0000ff !important;
@@ -393,7 +393,7 @@
   background-color: rgba(102, 102, 255, 0.19999999999999996);
 }
 .dropzone-1 {
-  background-color: #ffe4b3;
+  background-color: #fffbf5;
 }
 .dropzone-1.dropzone {
   border-left: 1px solid #ffa500 !important;
@@ -406,7 +406,7 @@
   background-color: rgba(255, 201, 102, 0.19999999999999996);
 }
 .dropzone-2 {
-  background-color: #33ff33;
+  background-color: #76ff76;
 }
 .dropzone-2.dropzone {
   border-left: 1px solid #008000 !important;
@@ -419,7 +419,7 @@
   background-color: rgba(0, 230, 0, 0.19999999999999996);
 }
 .dropzone-3 {
-  background-color: #ffb3b3;
+  background-color: #fff5f5;
 }
 .dropzone-3.dropzone {
   border-left: 1px solid #ff0000 !important;
