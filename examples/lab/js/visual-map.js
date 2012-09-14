@@ -9,7 +9,8 @@ define(['js/models', 'js/utils'], function(models, utils) {
 		template:'<div class="titlebar">Map</div><div class="delete icon-cancel"></div><div class="dropzones"></div><div class="map-zone"></div><div class="warnings"></div>',
 		events : {
 			'click .delete' : '_cb_delete',
-			'click .titlebar' : '_cb_raise'
+			'click .titlebar' : '_cb_raise',
+			'click' : '_cb_raise'			
 		},
 		defaults : { center:[51.505, -0.09], zoom:13 },
 		marker_icons : {

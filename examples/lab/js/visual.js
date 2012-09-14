@@ -95,7 +95,7 @@ define(['examples/lab/js/visual-engine','examples/lab/js/visual-plotters',	'js/u
 			this.$el.html(this.template);
 			this.$el.draggable({ drag:function(evt,ui) { this_.trigger('drag', ui.offset); }});			
 			this.$el.find('.plot').droppable({
-				greedy:true,  accept:'.greybox', tolerance:"touch",
+				greedy:true,  accept:'.greybox', tolerance:"pointer",
 				over:function(event, ui) {
 					console.log('adding class over', this_.$el);
 					this_.$el.addClass("over");
