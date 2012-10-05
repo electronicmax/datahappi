@@ -1,3 +1,4 @@
+if (typeof define !== 'function') { var define = require('amdefine')(module) }
 define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 
 	// Maxels support:

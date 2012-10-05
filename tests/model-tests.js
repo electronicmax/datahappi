@@ -1,7 +1,18 @@
-define(['js/models','js/utils'],function(m,utils,pathables) {
+define(['js/models','js/utils','js/sync',],function(m,utils,sync) {
 	var assert = utils.assert;
 	var l = function() { console.log.apply(console,arguments); };
 	tests = [
+		function() {
+			console.log('hi');
+			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/max", name : "Max Van Kleek", dob: "13-april-1990" });
+			m1.graph = 'facebook';
+			m1.save();
+			window.m1 = m1;
+
+			m1 = new m.Maxel({_id: "http://id.facebook.com/user/james", name : "james acres", dob: "13-april-1995" });
+			m1.save();			
+		}
+		/*
 		function() {
 			console.log('hi');
 			var m1 = new m.Maxel({_id: "http://id.facebook.com/user/203920392", name : "Max Van Kleek", dob: "13-april-1990" });
@@ -9,9 +20,9 @@ define(['js/models','js/utils'],function(m,utils,pathables) {
 			window.m1 = m1;
 			console.log(" m1 > ", m1.get('name'));
 			window.m2 = m2;
-			m1.setSameAs(m2);
-			
+			m1.setSameAs(m2);			
 		}
+		*/
 		/*
 		function() {
 			l('hello');
