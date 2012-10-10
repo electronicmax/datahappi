@@ -1,7 +1,7 @@
 create table nodebox_objs(
       writeid serial primary key,
       uri varchar(2048) NOT NULL,
-      type varchar(255),
+      type varchar(2048),
       graph varchar(2048) DEFAULT '/',
       version integer DEFAULT 0
 );
@@ -11,7 +11,7 @@ create table nodebox_props (
     property varchar(2048) NOT NULL,    
     value_index int DEFAULT 0,
     literal_value text,
-    literal_type varchar(255) DEFAULT '',     
+    literal_type varchar(2048) DEFAULT '',     
     object_ref varchar(2048),
     object_ref_version integer DEFAULT 0,
     PRIMARY KEY (properties_of, property, value_index)
