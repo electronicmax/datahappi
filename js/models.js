@@ -11,13 +11,42 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	
 	var defined = util.DEFINED, dict = util.TO_OBJ, flatten = util.flatten;
 	var chainer;
-	
+	var graphs = new Backbone.Collection();
+	var get_graph = function(id) {
+		if (graphs.get(id)) { return graphs.get(id); }
+		var g = new Graph({id:id});
+		graphs.add(g);
+		return g;
+	};
+	// graph is a placeholder for 'where we came from'. should have an id. is not persisted, just a placeholder
+	var Graph = Backbone.Model.extend({
+		idAttribute:"_id",		
+		initialize:function(options) {
+			this.objects = new Backbone.Collection();
+		},
+		create:function(id) {
+			console.log('creating in graph ['+this.id+'] >> ', id);
+			var m = new Maxel({_id:id});
+			this.add(m);
+			return m;
+		},
+		add:function(m) {
+			this.objects.add(m);
+		},
+		get_or_create:function(uri){
+			var now = this.objects.get(uri) ;
+			return now ? now : this.create(uri);
+		}
+	});
+	var DEFAULT_GRAPH = get_graph('');	
 	var Maxel = Backbone.Model.extend({
 		idAttribute:"_id",
 		initialize:function(src_json, options) {
 			var this_ = this;
 			this.entailed = {};
 			this.sameas = [];
+			this.graph = (options && options.graph) || DEFAULT_GRAPH;
+			this.graph.add(this);
 			if (!_(src_json).isUndefined()) {
 				this.original_json = _.clone(src_json);
 				this.attributes = this._all_values_to_arrays(src_json);
@@ -260,5 +289,8 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	Maxel.prototype.s = Maxel.prototype.set;
 	return {
 		Maxel : Maxel,
+		Graph : Graph,
+		get_graph:get_graph,
+		DEFAULT_GRAPH:DEFAULT_GRAPH
 	};	
 });
