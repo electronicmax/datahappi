@@ -1,8 +1,14 @@
-if (typeof define !== 'function') { var define = require('amdefine')(module) }
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	    Backbone = require('backbone'),
+        $ = require('jquery'),
+        _ = require('underscore');
+}
+
 define([],function() {
 	return {
 		deferred:function() { return new $.Deferred(); },
-		whend:function(deferred_array) { return $.when.apply($,deferred_array); },		
+		whend:function(deferred_array) { return $.when.apply($,deferred_array); },
 		t:function(template,v) { return _(template).template(v); },
 		assert:function(t,s) { if (!t) { throw new Error(s); }},
 		TO_OBJ: function(pairs) { var o = {};	pairs.map(function(pair) { o[pair[0]] = pair[1]; }); return o; },

@@ -20,10 +20,18 @@ create table nodebox_props (
 insert into nodebox_objs (uri, type) VALUES ('http://hip.cat/emax', 'person');
 insert into nodebox_objs (uri, type, version) VALUES ('http://hip.cat/emax', 'person', 1);
 insert into nodebox_objs (uri, type, version) VALUES ('http://hip.cat/emax', 'person', 2);
-insert into nodebox_props (properties_of, property, literal_value, literal_type) values (1, 'name', 'max', 'string'); 
+insert into nodebox_props (properties_of, property, literal_value, literal_type) values (3, 'blub', 'rocks', 'string');
+insert into nodebox_props (properties_of, property, literal_value, literal_type) values (3, 'boop', 'bops', 'string');
+insert into nodebox_props (properties_of, property, literal_value, literal_type) values (3, 'emo', 'melkins', 'string'); 
+insert into nodebox_props (properties_of, property, literal_value, literal_type) values (4, 'boop', 'kjerk', 'string'); 
+
 select * from nodebox_objs FULL OUTER JOIN nodebox_props ON nodebox_objs.writeid = nodebox_props.properties_of;
 
 select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version; 
+
+select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest_writes where notebox_props.writeid == latest_writes.writeid; 
+
+select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri where uri=$1) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version; 
 
 create table IF NOT EXISTS things ( id serial, uri varchar(255) NOT NULL, type varchar(255), graph varchar(255), version integer DEFAULT 0, data text );
 

@@ -3,14 +3,15 @@ var pg = require('pg'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    utils = require('../js/utils.js');
+    u = require('../js/utils.js');
 
 var OBJ_TABLE = "create table if not exists nodebox_objs( " +
-      "writeid integer primary key, " + 
+      "writeid serial primary key, " + 
       "uri varchar(2048) NOT NULL, " + 
-      "type varchar(255), " + 
+      "type varchar(2048), " + 
       "graph varchar(2048) DEFAULT '/', " +
-      "version integer DEFAULT 0 " + 
+      "version integer DEFAULT 0," +
+	  "deleted boolean DEFAULT false" +
 "); ";
 
 var PROPS_TABLE = "create table if not exists nodebox_props ( " +
@@ -24,15 +25,19 @@ var PROPS_TABLE = "create table if not exists nodebox_props ( " +
     " PRIMARY KEY (properties_of, property, value_index) " + 
 " ); ";
 
+var READ_JOIN = "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;";
 
-var deferred = utils.deferred; 
+var READ_JOIN_URI = "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs where uri=$1 group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;";
+
 var get_model = function(data) { return new Backbone.Model(data); };
 var Store = Backbone.Model.extend({
 	defaults : { db_url:process.env.WEBBOX_DB || "tcp://nodebox:nodebox@localhost/nodebox" },
-	connect: function() {
+	connect: function(options) {
 		var this_ = this;
-		var d = deferred();
-		pg.connect(conString, function(err, client) {
+		var d = u.deferred();
+		options = _(this.defaults).chain().clone().extend(options ? options : {}).value();
+		pg.connect(options.db_url, function(err, client) {
+			console.log('connected to ', options.db_url);
 			this_.trigger('connected', client);
 			this_._connection = client;
 			d.resolve(this_);
@@ -42,15 +47,27 @@ var Store = Backbone.Model.extend({
 	},
 	create_tables:function() {
 		var this_ = this;
+		var dfds = [ u.deferred(), u.deferred() ];
 		if (this._connection){
-			return  [OBJ_TABLE, PROPS_TABLE].map(function(table) { return this_._connection.query(table); })
+			_([OBJ_TABLE, PROPS_TABLE]).map(function(table,i) {
+				console.log('creating table ', table);
+				var d = dfds[i];
+				this_._connection.query(table, function(error, rows) {
+					if (error === null) {	return d.resolve();} 
+					return d.reject();
+				});
+			});
 		}
+		return u.when(dfds);
 	},
 	read:function(uri) {
-		var d = deferred();
+		var d = u.deferred();		
 		this._connection.query(
-			"SELECT * from things where uri is $1 ORDER by version DESC LIMIT 1;", [uri],
-			function(err, result) {	d.resolve( result.rows.length ? get_model(result.rows[0]) : undefined );});
+			READ_JOIN_URI, [uri],
+			function(err, result) {
+				console.log("result rows ", err, result);
+				d.resolve( result.rows.length ? get_model(result.rows[0]) : undefined );
+			});
 		return d;
 	},
 	compute_diffs:function(version_1, version_2) {
@@ -66,19 +83,16 @@ var Store = Backbone.Model.extend({
 				});
 			});
 
-		utils.when(ds).then(function(values) {
-			
-		});
+		u.when(ds).then(function(values) {});
 		
-		this._connection.query(, [uri, version_1],
-			function(err, result) {
-				ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
-			});
-		this._connection.query(, [uri, version_1],
-			function(err, result) {
-				ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
-			});
-		
+		// this._connection.query(, [uri, version_1],
+		// 	function(err, result) {
+		// 		ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
+		// 	});
+		// this._connection.query(, [uri, version_1],
+		// 	function(err, result) {
+		// 		ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
+		// 	});		
 		
 	},
 	write:function(model) {
@@ -106,6 +120,4 @@ var Store = Backbone.Model.extend({
 	}	
 });
 
-exports = {
-	Store:Store
-};
+exports.Store = Store;
