@@ -3,7 +3,7 @@
    first cut at specification implementation
 **/
 define(['js/utils'], function(u) {
-	var url = 'http://'+document.location.host + ":8215/";
+	var url = 'http://'+document.location.host + ":8215";
 	var oldsync = Backbone.sync;
 	var conv = function(v) {
 		if ( v instanceof Backbone.Model ) { return { "@id" : v.id }; }
@@ -16,7 +16,7 @@ define(['js/utils'], function(u) {
 			return [k, [conv(v)]];
 		}));
 		obj['@id'] = model.id;
-		obj['@prev_ver'] = model.version || 0;
+		obj['@previous_version'] = model.version || 0;
 		delete obj._id;
 		return obj;
 	};
@@ -43,12 +43,15 @@ define(['js/utils'], function(u) {
 		return u.zip(pairs);
 	};	
 	var put = function(model, pass_in_opts) {
-		console.log('put ', model);
 		var d = new $.Deferred();
 		var stripped = serialize_model(model);
+		var put_url = [
+			url,
+			'?graph=' + model.graph.id
+		].join('/');								   
 		options = {
 			type:'PUT',
-			url:url,
+			url:put_url,
 			data:JSON.stringify([stripped]),
 			contentType:'application/json',
 			processData:false
