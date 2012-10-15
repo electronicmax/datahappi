@@ -1,3 +1,10 @@
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+}
+
 define(['js/utils'], function(util) {
 	var uniq = _.uniq;
 	var DiffSet = function(rule, model) {

@@ -1,3 +1,10 @@
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+}
+
 define(['js/rdf/name-resolver','js/ops/rule-diffs', 'js/utils'], function(nameResolver, diffs, utils) {
 	return {
 		operators: [

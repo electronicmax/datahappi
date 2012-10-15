@@ -1,3 +1,10 @@
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+}
+
 define([],
     function() {
 		var properties_to_check = [
@@ -7,7 +14,7 @@ define([],
 			"summary",                        
 		];
 		//DEBUG: change 'window.' to 'var'
-		window.name_to_model = {};
+		var name_to_model = {};
 		var model_to_names = {};
 		var add_name = function(model,name) {
 			name = name.toLowerCase().trim(); // Only deal with lowercase, so matching is not case-sensitive.

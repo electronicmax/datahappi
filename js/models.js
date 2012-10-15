@@ -1,4 +1,10 @@
-if (typeof define !== 'function') { var define = require('amdefine')(module) }
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+}
+
 define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 
 	// Maxels support:
@@ -14,24 +20,23 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 	var graphs = new Backbone.Collection();
 	var get_graph = function(id) {
 		if (graphs.get(id)) { return graphs.get(id); }
-		var g = new Graph({id:id});
+		var g = new Graph({_id:id});
 		graphs.add(g);
 		return g;
 	};
 	// graph is a placeholder for 'where we came from'. should have an id. is not persisted, just a placeholder
 	var Graph = Backbone.Model.extend({
 		idAttribute:"_id",		
-		initialize:function(options) {
+		initialize:function(json, options) {
 			this.objects = new Backbone.Collection();
 		},
 		create:function(id) {
 			console.log('creating in graph ['+this.id+'] >> ', id);
-			var m = new Maxel({_id:id});
-			this.add(m);
-			return m;
+			return this.add(new Maxel({_id:id}, { graph: this }));
 		},
 		add:function(m) {
 			this.objects.add(m);
+			return m;
 		},
 		get_or_create:function(uri){
 			var now = this.objects.get(uri) ;
@@ -45,8 +50,11 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			var this_ = this;
 			this.entailed = {};
 			this.sameas = [];
+			
 			this.graph = (options && options.graph) || DEFAULT_GRAPH;
 			this.graph.add(this);
+			this.version = 0;
+			
 			if (!_(src_json).isUndefined()) {
 				this.original_json = _.clone(src_json);
 				this.attributes = this._all_values_to_arrays(src_json);
@@ -54,6 +62,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.set_up_inference(options);
 			// enable debug event spy > 
 			// this.on('all', function(eventType, p1, p2) { console.log('[', this_.id, '] >> ', eventType, p1, p2); });
+
 			return this;
 		},
 		clone:function() {

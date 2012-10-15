@@ -3,33 +3,13 @@ var pg = require('pg'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    u = require('../js/utils.js');
-
-var OBJ_TABLE = "create table if not exists nodebox_objs( " +
-      "writeid serial primary key, " + 
-      "uri varchar(2048) NOT NULL, " + 
-      "type varchar(2048), " + 
-      "graph varchar(2048) DEFAULT '/', " +
-      "version integer DEFAULT 0," +
-	  "deleted boolean DEFAULT false" +
-"); ";
-
-var PROPS_TABLE = "create table if not exists nodebox_props ( " +
-    "properties_of integer REFERENCES nodebox_objs (writeid) NOT NULL, " +
-    "property varchar(2048) NOT NULL, " + 
-    " value_index int DEFAULT 0, " + 
-    " literal_value text, " + 
-    " literal_type varchar(255) DEFAULT '', " + 
-    " object_ref varchar(2048), " + 
-    " object_ref_version integer DEFAULT 0," + 
-    " PRIMARY KEY (properties_of, property, value_index) " + 
-" ); ";
-
-var READ_JOIN = "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;";
-
-var READ_JOIN_URI = "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs where uri=$1 group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;";
+    sql = require('./store-sql.js'),
+    m = require('../js/models.js'),
+    u = require('../js/utils.js'),
+    log = require('nlogger').logger(module);
 
 var get_model = function(data) { return new Backbone.Model(data); };
+
 var Store = Backbone.Model.extend({
 	defaults : { db_url:process.env.WEBBOX_DB || "tcp://nodebox:nodebox@localhost/nodebox" },
 	connect: function(options) {
@@ -37,7 +17,7 @@ var Store = Backbone.Model.extend({
 		var d = u.deferred();
 		options = _(this.defaults).chain().clone().extend(options ? options : {}).value();
 		pg.connect(options.db_url, function(err, client) {
-			console.log('connected to ', options.db_url);
+			log.info('connected to ', options.db_url);
 			this_.trigger('connected', client);
 			this_._connection = client;
 			d.resolve(this_);
@@ -47,10 +27,10 @@ var Store = Backbone.Model.extend({
 	},
 	create_tables:function() {
 		var this_ = this;
-		var dfds = [ u.deferred(), u.deferred() ];
+		var dfds = [u.deferred(), u.deferred()];
 		if (this._connection){
-			_([OBJ_TABLE, PROPS_TABLE]).map(function(table,i) {
-				console.log('creating table ', table);
+			_([sql.CREATE.OBJ_TABLE, sql.CREATE.PROPS_TABLE]).map(function(table,i) {
+				log.info('creating table ', table);
 				var d = dfds[i];
 				this_._connection.query(table, function(error, rows) {
 					if (error === null) {	return d.resolve();} 
@@ -60,15 +40,135 @@ var Store = Backbone.Model.extend({
 		}
 		return u.when(dfds);
 	},
-	read:function(uri) {
-		var d = u.deferred();		
+	_merge_in:function(model, new_json) {
+		// now diff things in ---------
+		var enter_keys = _(_(new_json).keys()).difference(model.keys()).map(function(k) {
+			model.set(k,new_json[k])
+		});
+		var same_keys = _(_(new_json).keys()).intersection(model.keys()).map(function(k) {
+			model.set(k,new_json[k])
+		});
+		var exit_keys = _(model.keys()).difference(_(new_json).keys()).map(function(k) {
+			model.unset(k);
+		});
+		return model;
+	},
+	read:function(model) {
+		var this_ = this;
+		var d = u.deferred();
+v		this.raw_read(model.id, model.graph)
+			.then(function(json) {
+				console.log(' json >> ', json);
+				d.resolve(json !== undefined ? this_._merge_in(model, json) : undefined);
+			})
+			.fail(function(err) { d.reject(err, model); });
+		return d;
+	},
+	raw_read:function(uri, graph) {
+		var d = u.deferred();
+		if (!u.defined(graph)) { graph = m.DEFAULT_GRAPH; }
+		var unpack_row = function(l) {
+			var converters = ({
+				"number": function(v) { return [v.property, v.value_index, parseInt(v.literal_value)]; },
+				"string": function(v) { return [v.property, v.value_index, v.literal_value]; },
+				"date_long": function(v) { return [v.property, v.value_index, new Date(parseInt(v.literal_value))]; }
+			});
+			if (l.literal_type && converters[l.literal_type]) {
+				return converters[l.literal_type](l);
+			}
+			if (l.object_ref) {
+				return [ v.property, v.value_index, graph.get_or_create(l.object_ref) ];
+			}
+		};
+		var assemble = function(rows) {
+			if (rows.length === 0) { return undefined; }
+			var obj = {};
+			rows.map(function(r) {
+				var k = r[0], vidx = r[1], val = r[2];
+				if (!obj[k]) { obj[k] = []; }
+				obj[k][vidx] = val;
+			});
+			return obj;
+		};		
 		this._connection.query(
-			READ_JOIN_URI, [uri],
+			sql.READ.SELECT_URI, [uri, graph.uri],
 			function(err, result) {
-				console.log("result rows ", err, result);
-				d.resolve( result.rows.length ? get_model(result.rows[0]) : undefined );
+				var unpacked = result.rows.map(function(r) { return unpack_row(r); })
+				log.debug('unpacked obj ', unpacked);
+				var obj = assemble(unpacked);
+				log.debug('raw_read() :: read obj ', obj);
+				d.resolve(obj);
 			});
 		return d;
+	},
+	_low_level_write:function(model, deleted) {
+		// first we have to write the object write
+		var to_row = function(property_of, property, val, index) {
+			var rowd = u.deferred();
+			var callback = 	function(err, response) {
+				if (u.defined(err)) { return rowd.reject(err); }  rowd.resolve();
+			};
+			if (val instanceof m.Maxel) {
+				this_.connection.query(sql.WRITE.PROPERTY_OBJECT, [property_of, property, index, val.id], callback);
+			} else {
+				// literal TODO make more complete
+				var ltype = 'string';
+				if (_.isDate(val)) { ltype = "date"; }
+				if (typeof(val) == 'number') { ltype = 'number'; }
+				var lval = val.valueOf().toString();
+				this_.connection.query(sql.WRITE.PROPERTY_LITERAL,[property_of, property, index, ltype, lval], callback);
+			}
+			return rowd;
+		};		
+		this_._connection.query('BEGIN', function(err,result) {
+			this_.connection.query(
+				sql.WRITE.OBJECT,
+				[model.id, model.graph.id, model.version, deleted === true],
+				function(err, result) {
+					if (!u.defined(err) && result.rows.length > 0) {
+						var writeid = result.rows[0].writeid;
+						var dfds = model.keys().map(function(k) {
+							var vals = model.get(k);
+							return _(vals).map(function(v, i) {  return to_row(writeid, k, v, i);  });
+						});
+						u.when(dfds).then(function() {
+							this_._connection.query('COMMIT;', function(err2, result) {
+								if (!u.defined(err2)) {  return d.resolve();   }
+								d.reject('fail at final commit, err2');
+							});
+						}).fail(function(err) { d.reject('fail at statement', err); });
+					} else {
+						console.log('error committing object write', err);
+						this_._connection.query('ROLLBACK;', function(err2,result) {  d.reject(err);   });
+					}
+				});
+		});
+		return d.promise();
+	},
+	write:function(model) {
+		var d = u.deferred();
+		this.read(model.id).then(function(m) {
+			if (m === undefined || m.version == model.version) {
+				console.log(' can actually save -- ');
+				// then we can actually save
+				this_._low_level_write(model);				
+			} else {
+				d.reject({
+					type:"Obsolete",
+					object:model,
+					updated_object:m,
+					message:"The version of this model is obsolete on the server; please merge before writing"
+				});
+			}
+		});
+		// need to update our copy ---
+		return d;
+	},	
+	test:function() {
+		this._connection.query("SELECT NOW() as when", function(err, result) {
+			log.debug("Row count: %d",result.rows.length);  // 1
+			log.debug("Current year: %d", result.rows[0].when.getYear());
+		});
 	},
 	compute_diffs:function(version_1, version_2) {
 		var query = "SELECT * from things where URI is $1 AND version=$2 ORDER by version DESC LIMIT 1;"
@@ -82,7 +182,6 @@ var Store = Backbone.Model.extend({
 					ds[ith].resolve( result.rows.length ? result.rows[0] : undefined );
 				});
 			});
-
 		u.when(ds).then(function(values) {});
 		
 		// this._connection.query(, [uri, version_1],
@@ -94,29 +193,6 @@ var Store = Backbone.Model.extend({
 		// 		ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
 		// 	});		
 		
-	},
-	write:function(model) {
-		this.read(model.id).then(function(m) {
-			if (m === undefined || model.__version__ == model.__version__) {
-				// then we can actually save
-				
-			} else {
-				throw {
-					type:"Obsolete",
-					object:model,
-					updated_object:m,
-					message:"The version of this model is obsolete on the server; please merge before writing"
-				};
-			}
-		});
-		// need to update our copy ---
-		return false;
-	},	
-	test:function() {
-		this._connection.query("SELECT NOW() as when", function(err, result) {
-			console.log("Row count: %d",result.rows.length);  // 1
-			console.log("Current year: %d", result.rows[0].when.getYear());
-		});
 	}	
 });
 

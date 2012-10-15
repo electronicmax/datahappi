@@ -1,8 +1,14 @@
+if (typeof define !== 'function') {
+	var define = require('amdefine')(module),
+	Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+}
+
 define(['js/ops/forward-ops'], function(ops) {
 	var IncrementalRuleHelper = function(options) {
 		this.ruleset = options.ruleset || ops.operators;
 		console.log("setting ruleset ", this.ruleset);
-		
 	};
 	IncrementalRuleHelper.prototype = {
 		set_ruleset:function(ruleset) {
