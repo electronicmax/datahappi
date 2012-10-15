@@ -11,9 +11,10 @@ s.connect().then(function() {
 		console.log('tables exist, ready to go ');
 		var model = m.DEFAULT_GRAPH.get_or_create('http://hip.cat/emax-'+(new Date().valueOf()));
 		log.debug(' got model ' +  model.id + ' graph >> ', model.graph.id);
-		s.read(model);
-		model.set('loves', m.DEFAULT_GRAPH.get_or_create('http://hip.cat/mark'));
-		s.write(model);				  
+		model.set('loves', m.DEFAULT_GRAPH.get_or_create('http://hip.cat/melkins'));
+		s.write(model).then(function() {
+			console.log("WON!");
+		}).fail(function(err) { console.log("FAIL", err); });
 	});
 });
 

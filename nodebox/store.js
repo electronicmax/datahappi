@@ -3,9 +3,9 @@ var pg = require('pg'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    sql = require('./store-sql.js'),
-    m = require('../js/models.js'),
-    u = require('../js/utils.js'),
+    sql = require('nodebox/store-sql.js'),
+    m = require('js/models.js'),
+    u = require('js/utils.js'),
     log = require('nlogger').logger(module);
 
 var get_model = function(data) { return new Backbone.Model(data); };
@@ -21,7 +21,6 @@ var Store = Backbone.Model.extend({
 			this_.trigger('connected', client);
 			this_._connection = client;
 			d.resolve(this_);
-			this_.test();
 		});
 		return d;
 	},
@@ -56,7 +55,7 @@ var Store = Backbone.Model.extend({
 	read:function(model) {
 		var this_ = this;
 		var d = u.deferred();
-v		this.raw_read(model.id, model.graph)
+		this.raw_read(model.id, model.graph)
 			.then(function(json) {
 				console.log(' json >> ', json);
 				d.resolve(json !== undefined ? this_._merge_in(model, json) : undefined);
@@ -77,7 +76,7 @@ v		this.raw_read(model.id, model.graph)
 				return converters[l.literal_type](l);
 			}
 			if (l.object_ref) {
-				return [ v.property, v.value_index, graph.get_or_create(l.object_ref) ];
+				return [ l.property, l.value_index, graph.get_or_create(l.object_ref) ];
 			}
 		};
 		var assemble = function(rows) {
@@ -103,26 +102,27 @@ v		this.raw_read(model.id, model.graph)
 	},
 	_low_level_write:function(model, deleted) {
 		// first we have to write the object write
+		var this_ = this;
+		var d = u.deferred();
 		var to_row = function(property_of, property, val, index) {
 			var rowd = u.deferred();
 			var callback = 	function(err, response) {
 				if (u.defined(err)) { return rowd.reject(err); }  rowd.resolve();
 			};
 			if (val instanceof m.Maxel) {
-				this_.connection.query(sql.WRITE.PROPERTY_OBJECT, [property_of, property, index, val.id], callback);
+				this_._connection.query(sql.WRITE.PROPERTY_OBJECT, [property_of, property, index, val.id], callback);
 			} else {
 				// literal TODO make more complete
 				var ltype = 'string';
 				if (_.isDate(val)) { ltype = "date"; }
 				if (typeof(val) == 'number') { ltype = 'number'; }
 				var lval = val.valueOf().toString();
-				this_.connection.query(sql.WRITE.PROPERTY_LITERAL,[property_of, property, index, ltype, lval], callback);
+				this_._connection.query(sql.WRITE.PROPERTY_LITERAL,[property_of, property, index, ltype, lval], callback);
 			}
 			return rowd;
 		};		
 		this_._connection.query('BEGIN', function(err,result) {
-			this_.connection.query(
-				sql.WRITE.OBJECT,
+			this_._connection.query(sql.WRITE.OBJECT,
 				[model.id, model.graph.id, model.version, deleted === true],
 				function(err, result) {
 					if (!u.defined(err) && result.rows.length > 0) {
@@ -133,7 +133,8 @@ v		this.raw_read(model.id, model.graph)
 						});
 						u.when(dfds).then(function() {
 							this_._connection.query('COMMIT;', function(err2, result) {
-								if (!u.defined(err2)) {  return d.resolve();   }
+								console.log("commit ran, ", err2);
+								if (!u.defined(err2)) { return d.resolve();   }
 								d.reject('fail at final commit, err2');
 							});
 						}).fail(function(err) { d.reject('fail at statement', err); });
@@ -147,11 +148,14 @@ v		this.raw_read(model.id, model.graph)
 	},
 	write:function(model) {
 		var d = u.deferred();
+		var this_ = this;
 		this.read(model.id).then(function(m) {
 			if (m === undefined || m.version == model.version) {
 				console.log(' can actually save -- ');
 				// then we can actually save
-				this_._low_level_write(model);				
+				this_._low_level_write(model)
+					.then(function() { d.resolve(model); })
+					.fail(function() { d.reject.apply(d,arguments); });
 			} else {
 				d.reject({
 					type:"Obsolete",
@@ -164,19 +168,19 @@ v		this.raw_read(model.id, model.graph)
 		// need to update our copy ---
 		return d;
 	},	
-	test:function() {
-		this._connection.query("SELECT NOW() as when", function(err, result) {
-			log.debug("Row count: %d",result.rows.length);  // 1
-			log.debug("Current year: %d", result.rows[0].when.getYear());
-		});
-	},
-	compute_diffs:function(version_1, version_2) {
+	// test:function() {
+	// 	this._connection.query("SELECT NOW() as when", function(err, result) {
+	// 		log.debug("Row count: %d",result.rows.length);  // 1
+	// 		log.debug("Current year: %d", result.rows[0].when.getYear());
+	// 	});
+	// },
+	compute_diffs:function(uri, version_1, version_2) {
 		var query = "SELECT * from things where URI is $1 AND version=$2 ORDER by version DESC LIMIT 1;"
-		var ds = [ deferred(), deferred() ];
-		var D = deferred();
+		var ds = [ u.deferred(), u.deferred() ];
+		var D = u.deferred();
 		var this_ = this;
-		jQ.each([version_1, version_2]).each(
-			function(ith) {
+		_([version_1, version_2]).map(
+			function(v, ith) {
 				var version = this.valueOf();
 				this_._connection.query(query, [uri, version], function(err, result) {
 					ds[ith].resolve( result.rows.length ? result.rows[0] : undefined );
