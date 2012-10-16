@@ -52,7 +52,6 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			this.sameas = [];
 			
 			this.graph = (options && options.graph) || DEFAULT_GRAPH;
-			this.graph.add(this);
 			this.version = 0;
 			
 			if (!_(src_json).isUndefined()) {

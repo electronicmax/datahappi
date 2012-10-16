@@ -52,15 +52,16 @@ var Store = Backbone.Model.extend({
 		});
 		return model;
 	},
-	read:function(model) {
+	read:function(mod) {
+		if (typeof(mod) == 'string') {	mod = m.DEFAULT_GRAPH.get_or_create(mod);	};
+		console.log('asking about ', mod.id, mod.graph.id);
 		var this_ = this;
 		var d = u.deferred();
-		this.raw_read(model.id, model.graph)
+		this.raw_read(mod.id, mod.graph)
 			.then(function(json) {
-				console.log(' json >> ', json);
-				d.resolve(json !== undefined ? this_._merge_in(model, json) : undefined);
+				d.resolve(json !== undefined ? this_._merge_in(mod, json) : undefined);
 			})
-			.fail(function(err) { d.reject(err, model); });
+			.fail(function(err) { d.reject(err, mod); });
 		return d;
 	},
 	raw_read:function(uri, graph) {
@@ -88,10 +89,12 @@ var Store = Backbone.Model.extend({
 				obj[k][vidx] = val;
 			});
 			return obj;
-		};		
+		};
+		console.log('uri >> ', uri, ' graph >> ', graph.id, sql.READ.SELECT_URI);		
 		this._connection.query(
-			sql.READ.SELECT_URI, [uri, graph.uri],
+			sql.READ.SELECT_URI, [uri, graph.id],
 			function(err, result) {
+				console.log('result.rows', err || result.rows);
 				var unpacked = result.rows.map(function(r) { return unpack_row(r); })
 				log.debug('unpacked obj ', unpacked);
 				var obj = assemble(unpacked);
