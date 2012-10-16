@@ -200,7 +200,24 @@ var Store = Backbone.Model.extend({
 		// 		ds[0].resolve( result.rows.length ? result.rows[0] : undefined );
 		// 	});		
 		
-	}	
+	},
+	list_objects:function(graph, include_deleted) {
+		var d = u.deferred();
+		var command = sql.READ.GET_UNDELETED_OBJS_IN_GRAPH;
+		if (graph && !include_deleted) {
+			command = sql.READ.GET_OBJS_IN_GRAPH;
+		} else if (!graph && include_deleted) {
+			command = sql.READ.GET_ALL_OBJS;
+		} else if (!graph && !include_deleted) {
+			command = sql.READ.GET_ALL_UNDELETED_OBJS;
+		}
+		this._connection.query(command, graph ? [graph] : [],
+							   function(err, result) {
+								   if (err) { return d.fail(err); }
+								   d.resolve(result.rows.map(function(x) { return x.uri; }));
+							   });
+		return d;
+	}
 });
 
 exports.Store = Store;
