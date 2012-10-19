@@ -29,14 +29,13 @@ exports.test_read = function(uri) {
 };
 
 exports.write_tons = function(num_objects, num_properties) {
-	var objs = [];
-	var dfds = [];
+	var objs = [], dfds = [];
 	for (var o = 0; o < num_objects; o++) {
 		var uri = 'test-object-'+(new Date().valueOf());
 		var model = m.DEFAULT_GRAPH.get_or_create(uri);
 		var np = num_properties; // Math.round(100*Math.random());
 		for (var p = 0; p < np; p++) {
-			model.set( 'property-'+Math.random(), Math.random() );
+			model.attributes[ 'property-'+p ] = Math.random();
 		}
 		objs.push(model);
 		dfds.push( u.deferred() );
@@ -59,7 +58,7 @@ if (require.main === module) {
 		//s.read('hamburgers').then(function(m) { console.log('m ', m && m.keys() && m.keys().map(function(x) { return [x, m.get(x), m.get(x)[0].id ]; })); });
 		s.create_tables().then(function() {
 			console.log('tables exist, ready to go ');
-			exports.write_tons(1000, 30);
+			exports.write_tons(100, 100);
 		});				
 	});
 }  else {

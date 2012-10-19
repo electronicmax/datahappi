@@ -1,12 +1,12 @@
 
 var pg = require('pg'),
-    Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    sql = require('nodebox/store-sql.js'),
-    m = require('js/models.js'),
-    u = require('js/utils.js'),
-    log = require('nlogger').logger(module);
+	Backbone = require('backbone'),
+	$ = require('jquery'),
+	_ = require('underscore'),
+	sql = require('nodebox/store-sql.js'),
+	m = require('js/models.js'),
+	u = require('js/utils.js'),
+	log = require('nlogger').logger(module);
 
 var get_model = function(data) { return new Backbone.Model(data); };
 
@@ -42,10 +42,10 @@ var Store = Backbone.Model.extend({
 	_merge_in:function(model, new_json) {
 		// now diff things in ---------
 		var enter_keys = _(_(new_json).keys()).difference(model.keys()).map(function(k) {
-			model.set(k,new_json[k])
+			model.set(k,new_json[k]);
 		});
 		var same_keys = _(_(new_json).keys()).intersection(model.keys()).map(function(k) {
-			model.set(k,new_json[k])
+			model.set(k,new_json[k]);
 		});
 		var exit_keys = _(model.keys()).difference(_(new_json).keys()).map(function(k) {
 			model.unset(k);
@@ -53,7 +53,7 @@ var Store = Backbone.Model.extend({
 		return model;
 	},
 	read:function(mod) {
-		if (typeof(mod) == 'string') {	mod = m.DEFAULT_GRAPH.get_or_create(mod);	};
+		if (typeof(mod) == 'string') {	mod = m.DEFAULT_GRAPH.get_or_create(mod);	}
 		console.log('asking about ', mod.id, mod.graph.id);
 		var this_ = this;
 		var d = u.deferred();
@@ -69,9 +69,9 @@ var Store = Backbone.Model.extend({
 		if (!u.defined(graph)) { graph = m.DEFAULT_GRAPH; }
 		var unpack_row = function(l) {
 			var converters = ({
-				"number": function(v) { return [v.property, v.value_index, parseInt(v.literal_value)]; },
+				"number": function(v) { return [v.property, v.value_index, parseInt(v.literal_value, 10)]; },
 				"string": function(v) { return [v.property, v.value_index, v.literal_value]; },
-				"date_long": function(v) { return [v.property, v.value_index, new Date(parseInt(v.literal_value))]; }
+				"date_long": function(v) { return [v.property, v.value_index, new Date(parseInt(v.literal_value, 10))]; }
 			});
 			if (l.literal_type && converters[l.literal_type]) {
 				return converters[l.literal_type](l);
@@ -171,12 +171,12 @@ var Store = Backbone.Model.extend({
 		// need to update our copy ---
 		return d;
 	},	
-	// test:function() {
-	// 	this._connection.query("SELECT NOW() as when", function(err, result) {
-	// 		log.debug("Row count: %d",result.rows.length);  // 1
-	// 		log.debug("Current year: %d", result.rows[0].when.getYear());
-	// 	});
-	// },
+	test:function() {
+		this._connection.query("SELECT NOW() as when", function(err, result) {
+			log.debug("Row count: %d",result.rows.length);  // 1
+			log.debug("Current year: %d", result.rows[0].when.getYear());
+		});
+	},
 	compute_diffs:function(uri, version_1, version_2) {
 		var query = "SELECT * from things where URI is $1 AND version=$2 ORDER by version DESC LIMIT 1;"
 		var ds = [ u.deferred(), u.deferred() ];

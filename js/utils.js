@@ -33,6 +33,12 @@ define([],function() {
 		indexOf_us_zipcode:function(s) {
 			// TODO::
 		},
+		range:function(l,h) {
+			var a = [];
+			if (_.isUndefined(h)) { h = l; l = 0; }
+			for (var i = l; l < h; l++) { a.push(i); }
+			return i;
+		},
 		to_numeric:function(v) {
 			if (_(v).isNumber()) { return v ; }
 			if (typeof(v) == 'string') { return parseFloat(v, 10); }
