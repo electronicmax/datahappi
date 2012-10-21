@@ -1,5 +1,6 @@
 
 var http = require('http'),
+	Backbone = require('backbone'),
     store = require('nodebox/store'),
     serials = require('nodebox/serialise'),
     models = require('js/models.js'),
@@ -20,11 +21,18 @@ var Server = Backbone.Model.extend({
 	},
 	initialize:function() {
 		var this_ = this;
-		http.createServer(function() { return this_._dispatchRequest.apply(this_, arguments); }).listen(this.attributes.port);
-		log.info("Server has started on " + this.attributes.port);			
+		log.info(" STARTING ON PORT : ", this.attributes.port );
+		this._get_store().then(function(s) {
+			s.create_tables().then(function(x) {
+				log.info('tables created or verified - ready to go ');
+				http.createServer(function() {
+					return this_._dispatchRequest.apply(this_, arguments);
+				}).listen(this_.attributes.port);				
+			});
+		});
 	},
 	_get_store : function() {
-		var d = u.deferred(), s = new ns.Store();
+		var d = u.deferred(), s = new store.Store();
 		s.connect().then(function() { d.resolve(s); });
 		return d;
 	},			
@@ -63,13 +71,19 @@ var Server = Backbone.Model.extend({
 	_get : function(request, response) {
 		var this_ = this;
 		this._get_store().then(function(store) {
+			
 			var query = url.parse(request.url).query,
 				uri = decodeURIComponent(query.id),
 				graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
-				s = serials.serialize(graph.get_or_create(uri));
-			response.writeHead(200, {"Content-Type": "text/json"});
-			response.write(JSON.stringify(s));
-			response.end();
+			    model = graph.create(uri);
+			
+			store.read(model).then(function() {
+				s = serials.serialize(model);
+				response.writeHead(200, {"Content-Type": "text/json"});
+				response.write(JSON.stringify(s));
+				response.end();
+			});
+			
 		}).fail(function() { this_.err_response(response, 500, "cant connect to database"); });
 	},
 	_put:  function(request, response) {
@@ -109,7 +123,4 @@ var Server = Backbone.Model.extend({
 });
 
 
-if (require.main === module) {
-	log.info("Starting nodebox ");
-	(new Server())
-}
+if (require.main === module) { (new Server()); }

@@ -38,6 +38,9 @@ var Store = Backbone.Model.extend({
 		return u.when(dfds);
 	},
 	_merge_in:function(model, new_json) {
+		model.clear();
+		model.set(new_json);
+		/*
 		// now diff things in ---------
 		var enter_keys = _(_(new_json).keys()).difference(model.keys()).map(function(k) {
 			model.set(k,new_json[k]);
@@ -48,6 +51,7 @@ var Store = Backbone.Model.extend({
 		var exit_keys = _(model.keys()).difference(_(new_json).keys()).map(function(k) {
 			model.unset(k);
 		});
+		*/
 		return model;
 	},
 	read:function(mod) {
