@@ -90,15 +90,17 @@ var Server = Backbone.Model.extend({
 		var this_ = this;
 		this._get_store().then(function(store) {
 			this_.get_large_body(request).then(function(body) {
+				console.log(' got body >> ', body, typeof(body));
 				var query = url.parse(request.url).query,
 					graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
 					D = u.deferred();
 				try {
 					var dataload = JSON.parse(body);
-					if (!$.isArray(dataload)) {	return this_.err_response(response, 409, "json set must be an array of models"); }
+					if (!_.isArray(dataload)) {	return this_.err_response(response, 409, "json set must be an array of models"); }
 					var load_ds = u.range(dataload.length).map(function() { return u.deferred(); });
 					_(dataload).map(function(mjson, i) {
 						try {
+							console.log('writing ', mjson, typeof(mjson));
 							var um = serials.deserialize(mjson, graph);
 							store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); });
 						} catch(eunpack) {	log.warn('Error with received json:', mjson._id, eunpack.details, mjson );	}
@@ -108,7 +110,7 @@ var Server = Backbone.Model.extend({
 
 				D.then(function(writeids) {
 					response.writeHead(200, {"Content-Type": "text/json"});
-					response.write(JSON.strinigfy(writeids));  
+					response.write(JSON.stringify(writeids));  
 					response.end();
 				}).fail(function(err) {
 					this_.err_response(response, err.code, err.details);
