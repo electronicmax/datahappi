@@ -7,6 +7,7 @@ var http = require('http'),
     _ = require('underscore'),
     url = require("url"),
 	u = require('js/utils.js'),
+    querystr = require('querystring'),
 	log = require('nlogger').logger(module);
 
 
@@ -70,14 +71,15 @@ var Server = Backbone.Model.extend({
 	},
 	_get : function(request, response) {
 		var this_ = this;
-		this._get_store().then(function(store) {
-			
-			var query = url.parse(request.url).query,
+		this._get_store().then(function(store) {			
+			var query = querystr.parse(url.parse(request.url).query),
 				uri = decodeURIComponent(query.id),
 				graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
 			    model = graph.create(uri);
-			
-			store.read(model).then(function() {
+
+			console.log('being asked to read ', model.id, model.graph.id);
+			store.read(model).then(function(x) {
+				console.log('read it ! ', model.attributes);
 				s = serials.serialize(model);
 				response.writeHead(200, {"Content-Type": "text/json"});
 				response.write(JSON.stringify(s));
@@ -91,7 +93,7 @@ var Server = Backbone.Model.extend({
 		this._get_store().then(function(store) {
 			this_.get_large_body(request).then(function(body) {
 				console.log(' got body >> ', body, typeof(body));
-				var query = url.parse(request.url).query,
+				var query = querystr.parse(url.parse(request.url).query),
 					graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
 					D = u.deferred();
 				try {

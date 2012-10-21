@@ -1,4 +1,4 @@
-
+0
 var ns = require('nodebox/store'),
     m = require('js/models'),
     u = require('js/utils'),
@@ -19,15 +19,14 @@ exports.test_write = function(uri) {
 	model.set('likes', m.DEFAULT_GRAPH.get_or_create('http://hip.cat/melkins'));
 	s.write(model).then(function() { console.log('written '); }).fail(function(err) { console.log("FAIL", err); });
 };
-exports.test_read = function(uri) {
-	var mod = m.DEFAULT_GRAPH.get_or_create(uri);
-	console.log('mod ', mod.id, mod.graph);
-	s.read(mod).then(function() {
-		console.log("WON!");
+exports.test_read = function(uri, graphid) {
+	var mod = graphid ? m.get_graph(graphid).get_or_create(uri) : m.DEFAULT_GRAPH.get_or_create(uri);
+	console.log('mod ', mod.id, mod.graph.id);
+	s.read(mod).then(function(xx) {
+		console.log("result ", xx);
 		console.log(mod.keys(), mod.keys().map(function(x) { return [x,mod.get(x), mod.get(x).id]; }));
 	}).fail(function(err) { console.log("FAIL", err); });
 };
-
 exports.write_tons = function(num_objects, num_properties) {
 	var objs = [], dfds = [];
 	for (var o = 0; o < num_objects; o++) {

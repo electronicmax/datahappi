@@ -92,7 +92,7 @@ var Store = Backbone.Model.extend({
 			});
 			return obj;
 		};
-		console.log('uri >> ', uri, ' graph >> ', graph.id, sql.READ.SELECT_URI);		
+		console.log('uri >> ', uri, ' graph >> ', graph.id);		
 		this._connection.query(
 			sql.READ.SELECT_URI, [uri, graph.id],
 			function(err, result) {
@@ -127,6 +127,7 @@ var Store = Backbone.Model.extend({
 			return rowd;
 		};		
 		this_._connection.query('BEGIN', function(err,result) {
+			console.log(' WRITING ZE  OBJECT ', model.graph.id );
 			this_._connection.query(sql.WRITE.OBJECT,
 				[model.id, model.graph.id, model.version, deleted === true],
 				function(err, result) {
@@ -153,8 +154,9 @@ var Store = Backbone.Model.extend({
 	write:function(model) {
 		var d = u.deferred();
 		var this_ = this;
-		this.read(model.id).then(function(m) {
-			if (m === undefined || m.version == model.version) {
+		console.log('write being called with model ', model.id, model.graph.id);
+		this.read(model).then(function(_m) {
+			if (_m === undefined || _m.version == model.version) {
 				console.log(' can actually save -- ');
 				// then we can actually save
 				this_._low_level_write(model)
@@ -164,7 +166,7 @@ var Store = Backbone.Model.extend({
 				d.reject({
 					type:"Obsolete",
 					object:model,
-					updated_object:m,
+					updated_object:_m,
 					message:"The version of this model is obsolete on the server; please merge before writing"
 				});
 			}
