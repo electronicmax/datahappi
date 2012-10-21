@@ -69,22 +69,33 @@ var Server = Backbone.Model.extend({
 		response.write("Dunno how to handle " + request.method);
 		response.end();
 	},
+	_get_objs : function(response, graph_url) {
+		
+	},		
 	_get : function(request, response) {
 		var this_ = this;
+		
 		this._get_store().then(function(store) {			
-			var query = querystr.parse(url.parse(request.url).query),
+			var requrl = url.parse(request.url),
+			    command = requrl.pathname.split('/')[1],
+			    query = querystr.parse(requrl.query || ''),
 				uri = decodeURIComponent(query.id),
-				graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
-			    model = graph.create(uri);
+				graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH;
 
-			console.log('being asked to read ', model.id, model.graph.id);
-			store.read(model).then(function(x) {
-				console.log('read it ! ', model.attributes);
-				s = serials.serialize(model);
-				response.writeHead(200, {"Content-Type": "text/json"});
-				response.write(JSON.stringify(s));
-				response.end();
-			});
+			console.log('command . ', command);
+			if (command == 'get') {
+			    model = graph.create(uri);
+				console.log('being asked to read ', model.id, model.graph.id);
+				store.read(model).then(function(x) {
+					console.log('read it ! ', model.attributes);
+					s = serials.serialize(model);
+					response.writeHead(200, {"Content-Type": "text/json"});
+					response.write(JSON.stringify(s));
+					response.end();
+				});
+				return;
+			}
+			return this_.err_response(response, 404, "command not found : " + command);
 			
 		}).fail(function() { this_.err_response(response, 500, "cant connect to database"); });
 	},

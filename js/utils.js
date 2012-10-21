@@ -47,6 +47,19 @@ define([],function() {
 		when:function(x) {
 			return $.when.apply($,x);
 		},
+		when_steps:function(fns, fail_fast) {
+			// executes a bunch of functions that return deferreds in sequence
+			var me = arguments.callee;
+			var d = new $.Deferred();
+			if (fns.length == 1) { return fns[0]().then(d.resolve).fail(d.reject);	}
+			fns[0]().then(function() {
+				me(fns.slice(1));
+			}).fail(function() {
+				if (fail_fast === true) { return; }
+				me(fn.slice(1));
+			});
+			return d;
+		},
 		hash:function(s) {
 			var hash = 0;
 			if (s.length == 0) return hash;
