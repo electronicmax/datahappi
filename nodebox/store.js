@@ -8,8 +8,6 @@ var pg = require('pg'),
 	u = require('js/utils.js'),
 	log = require('nlogger').logger(module);
 
-var get_model = function(data) { return new Backbone.Model(data); };
-
 var Store = Backbone.Model.extend({
 	defaults : { db_url:process.env.WEBBOX_DB || "tcp://nodebox:nodebox@localhost/nodebox" },
 	connect: function(options) {
@@ -136,9 +134,8 @@ var Store = Backbone.Model.extend({
 						});
 						u.when(dfds).then(function() {
 							this_._connection.query('COMMIT;', function(err2, result) {
-								console.log("commit ran, ", err2);
-								if (!u.defined(err2)) { return d.resolve();   }
-								d.reject('fail at final commit, err2');
+								if (!u.defined(err2)) { return d.resolve(writeid);  }
+								d.reject('fail at final commit', err2);
 							});
 						}).fail(function(err) { d.reject('fail at statement', err); });
 					} else {
@@ -157,7 +154,7 @@ var Store = Backbone.Model.extend({
 				console.log(' can actually save -- ');
 				// then we can actually save
 				this_._low_level_write(model)
-					.then(function() { d.resolve(model); })
+					.then(function(write_id) { d.resolve(write_id); })
 					.fail(function() { d.reject.apply(d,arguments); });
 			} else {
 				d.reject({

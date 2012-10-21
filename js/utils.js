@@ -37,7 +37,7 @@ define([],function() {
 			var a = [];
 			if (_.isUndefined(h)) { h = l; l = 0; }
 			for (var i = l; l < h; l++) { a.push(i); }
-			return i;
+			return a;
 		},
 		to_numeric:function(v) {
 			if (_(v).isNumber()) { return v ; }
