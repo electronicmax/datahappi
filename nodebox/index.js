@@ -10,12 +10,11 @@ var http = require('http'),
     querystr = require('querystring'),
 	log = require('nlogger').logger(module);
 
-
 var Server = Backbone.Model.extend({
 	handlers : {
 		'GET': '_get',
 		'PUT': '_put',
-		'OPTIONS': '_options',
+		'OPTIONS': '_options'
 	},
 	defaults: {
 		port : 8888
@@ -69,32 +68,45 @@ var Server = Backbone.Model.extend({
 		response.write("Dunno how to handle " + request.method);
 		response.end();
 	},
-	_get_objs : function(response, graph_url) {
-		
-	},		
+	_list_objs : function(s, response, graph_url) {
+		s.list_undeleted_objs_in_graph(graph_url).then(function(x) {
+			console.log(' x is ', x);			
+			s = JSON.stringify(x);
+			response.writeHead(200, {"Content-Type": "text/json"});
+			response.write(JSON.stringify(s));
+			response.end();
+		});
+	},
+	_list_graphs : function(s, response) {
+		s.list_graphs().then(function(x) {
+			response.writeHead(200, {"Content-Type": "text/json"});
+			console.log(' x is ', x);
+			response.write(JSON.stringify(x));
+			response.end();
+		});
+	},	
+	_get_single_obj : function(s, response, model) {
+		s.read(model).then(function(x) {
+			s = serials.serialize(x);
+			response.writeHead(200, {"Content-Type": "text/json"});
+			response.write(JSON.stringify(s));
+			response.end();
+		});
+	},
 	_get : function(request, response) {
-		var this_ = this;
-		
+		var this_ = this;		
 		this._get_store().then(function(store) {			
 			var requrl = url.parse(request.url),
 			    command = requrl.pathname.split('/')[1],
 			    query = querystr.parse(requrl.query || ''),
 				uri = decodeURIComponent(query.id),
 				graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH;
-
-			console.log('command . ', command);
-			if (command == 'get') {
-			    model = graph.create(uri);
-				console.log('being asked to read ', model.id, model.graph.id);
-				store.read(model).then(function(x) {
-					console.log('read it ! ', model.attributes);
-					s = serials.serialize(model);
-					response.writeHead(200, {"Content-Type": "text/json"});
-					response.write(JSON.stringify(s));
-					response.end();
-				});
-				return;
-			}
+			
+			switch (command) {
+				case 'get' : return this_._get_single_obj(store, response, graph.create(uri));
+				case 'list' : return this_._list_objs(store, response, graph);
+				case 'graphs' : return this_._list_graphs(store, response);				
+			}			
 			return this_.err_response(response, 404, "command not found : " + command);
 			
 		}).fail(function() { this_.err_response(response, 500, "cant connect to database"); });

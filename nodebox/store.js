@@ -25,7 +25,7 @@ var Store = Backbone.Model.extend({
 	create_tables:function() {
 		var this_ = this;
 		var dfds = [u.deferred(), u.deferred()];
-		if (this._connection){
+		if (this._connection ){
 			_([sql.CREATE.OBJ_TABLE, sql.CREATE.PROPS_TABLE]).map(function(table,i) {
 				log.info('creating table ', table);
 				var d = dfds[i];
@@ -54,9 +54,25 @@ var Store = Backbone.Model.extend({
 		*/
 		return model;
 	},
+	list_undeleted_objs_in_graph:function(graph_uri) {
+		var d = u.deferred();		
+		if (graph_uri instanceof Backbone.Model) { graph_uri = graph_uri.id; }
+		this._connection.query(sql.READ.GET_UNDELETED_OBJS_IN_GRAPH, [graph_uri], function(err,results) {
+			if (err) { return d.reject(err); }
+			d.resolve( results.rows.map(function(r) { return r.uri }) );
+		});
+		return d;
+	},
+	list_graphs:function() {
+		var d = u.deferred();
+		this._connection.query(sql.READ.GET_GRAPHS, function(err,results) {
+			if (err) { return d.reject(err); }
+			d.resolve( results.rows.map(function(r) { return r.graph }) );
+		});
+		return d;
+	},
 	read:function(mod) {
 		if (typeof(mod) == 'string') {	mod = m.DEFAULT_GRAPH.get_or_create(mod);	}
-		console.log('asking about ', mod.id, mod.graph.id);
 		var this_ = this;
 		var d = u.deferred();
 		this.raw_read(mod.id, mod.graph)
@@ -127,7 +143,6 @@ var Store = Backbone.Model.extend({
 			return rowd;
 		};		
 		this_._connection.query('BEGIN', function(err,result) {
-			console.log(' WRITING ZE  OBJECT ', model.graph.id );
 			this_._connection.query(sql.WRITE.OBJECT,
 				[model.id, model.graph.id, model.version, deleted === true],
 				function(err, result) {

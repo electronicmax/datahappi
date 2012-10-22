@@ -23,12 +23,12 @@ exports.CREATE = {
 
 exports.READ = {
    SELECT_ALL : "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;",
-//   SELECT_URI : "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(version) as highest_version from nodebox_objs where uri=$1 and graph=$2 group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.version=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;"
   SELECT_URI : "select * from nodebox_props, (select nodebox_objs.writeid, nodebox_objs.uri from nodebox_objs, (select uri,max(writeid) as highest_version from nodebox_objs where uri=$1 and graph=$2 group by uri) as maxver where nodebox_objs.uri=maxver.uri AND nodebox_objs.writeid=maxver.highest_version) as latest where nodebox_props.properties_of=latest.writeid;",
   GET_OBJS_IN_GRAPH : "select writeid,nodebox_objs.uri,deleted from nodebox_objs, (select max(writeid),uri from nodebox_objs where graph=$1 group by uri) as wi where writeid=wi.max;",
   GET_UNDELETED_OBJS_IN_GRAPH : "select writeid,nodebox_objs.uri,deleted from nodebox_objs, (select max(writeid),uri from nodebox_objs where graph=$1 group by uri) as wi where writeid=wi.max and deleted=false;",
   GET_ALL_UNDELETED_OBJS : "select writeid,nodebox_objs.uri,deleted from nodebox_objs, (select max(writeid),uri from nodebox_objs group by uri) as wi where writeid=wi.max and deleted=false;",
-  GET_ALL_OBJS : "select writeid,nodebox_objs.uri,deleted from nodebox_objs, (select max(writeid),uri from nodebox_objs group by uri) as wi where writeid=wi.max;"
+  GET_ALL_OBJS : "select writeid,nodebox_objs.uri,deleted from nodebox_objs, (select max(writeid),uri from nodebox_objs group by uri) as wi where writeid=wi.max;",
+  GET_GRAPHS : "select distinct graph from nodebox_objs where deleted=false;"	
 };
 
 exports.WRITE = {
