@@ -141,15 +141,11 @@ var Store = Backbone.Model.extend({
 			});
 			return obj;
 		};
-		console.log('uri >> ', uri, ' graph >> ', graph.id);		
 		this._connection.query(
 			sql.READ.SELECT_URI, [uri, graph.id],
 			function(err, result) {
-				console.log('result.rows', err || result.rows);
 				var unpacked = result.rows.map(function(r) { return unpack_row(r); })
-				log.debug('unpacked obj ', unpacked);
 				var obj = assemble(unpacked);
-				log.debug('raw_read() :: read obj ', obj);
 				d.resolve(obj);
 			});
 		return d;
@@ -205,7 +201,6 @@ var Store = Backbone.Model.extend({
 		console.log('write being called with model ', model.id, model.graph.id);
 		this.read(model).then(function(_m) {
 			if (_m === undefined || _m.version == model.version) {
-				console.log(' can actually save -- ');
 				// then we can actually save
 				this_._low_level_write(model)
 					.then(function(write_id) { d.resolve(write_id); })

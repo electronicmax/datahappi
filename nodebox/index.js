@@ -5,6 +5,7 @@ var http = require('http'),
     serials = require('nodebox/serialise'),
     models = require('js/models.js'),
     _ = require('underscore'),
+    $ = require('jquery'),
     url = require("url"),
 	u = require('js/utils.js'),
     io = require('socket.io'),
@@ -52,7 +53,7 @@ var Server = Backbone.Model.extend({
 	_get_store : function() {
 		var d = u.deferred(), s = new store.Store();
 		s.connect().then(function() { d.resolve(s); });
-		return d;
+		return d.promise();
 	},			
 	add_cors : function(response) {
 		response.setHeader('Access-Control-Allow-Origin', '*');
@@ -69,9 +70,7 @@ var Server = Backbone.Model.extend({
 		var d = u.deferred();
 		var body = [];
 		request.on('data', function (data) { body.push(data.toString()); });
-		request.on('end', function () {
-			d.resolve(body.join(''));
-		});			
+		request.on('end', function () { d.resolve(body.join(''))	});			
 		return d.promise();
 	},
 	// handlers
@@ -132,37 +131,35 @@ var Server = Backbone.Model.extend({
 	},
 	_put:  function(request, response) {
 		var this_ = this;
-		console.log('__PUT -- GETTINg STORE ');			
-		this._get_store().then(function(store) {
-			console.log('PUT -- GOT STORE ');			
-			this_.get_large_body(request).then(function(body) {
-				console.log(' got body >> ', body, typeof(body));
-				var query = querystr.parse(url.parse(request.url).query),
-					graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
-					D = u.deferred();
-				try {
-					var dataload = JSON.parse(body);
-					if (!_.isArray(dataload)) {	return this_.err_response(response, 409, "json set must be an array of models"); }
-					var load_ds = u.range(dataload.length).map(function() { return u.deferred(); });
-					_(dataload).map(function(mjson, i) {
-						try {
-							console.log('writing ', mjson, typeof(mjson));
-							var um = serials.deserialize(mjson, graph);
-							store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); })
-								.fail(function(error) { load_ds[i].reject({id: um.id, error:error }); });
-						} catch(eunpack) {	log.warn('Error with received json:', mjson._id, eunpack.details, mjson );	}
-					});
-					u.when(load_ds).then(function(writeids) { D.resolve(writeids); });
-				}catch(e) { return this_.err_response(response, 409, "error unpacking json"); }
-
-				D.then(function(writeids) {
-					response.writeHead(200, {"Content-Type": "text/json"});
-					response.write(JSON.stringify(writeids));  
-					response.end();
-				}).fail(function(err) {
-					this_.err_response(response, err.code, err.details);
+		var body_d = this.get_large_body(request);
+		var store_d = this._get_store();
+		console.log('__PUT -- GETTING STORE ');			
+		$.when(body_d,store_d).then(function(body, store) {
+			console.log(' got body >> ', body, typeof(body));
+			var query = querystr.parse(url.parse(request.url).query),
+			graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
+			D = u.deferred();
+			try {
+				var dataload = JSON.parse(body);
+				if (!_.isArray(dataload)) {	return this_.err_response(response, 409, "json set must be an array of models"); }
+				var load_ds = u.range(dataload.length).map(function() { return u.deferred(); });
+				_(dataload).map(function(mjson, i) {
+					try {
+						console.log('writing ', mjson, typeof(mjson));
+						var um = serials.deserialize(mjson, graph);
+						store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); })
+							.fail(function(error) { load_ds[i].reject({id: um.id, error:error }); });
+					} catch(eunpack) {	log.warn('Error with received json:', mjson._id, eunpack.details, mjson );	}
 				});
-				
+				u.when(load_ds).then(function(writeids) { D.resolve(writeids); });
+			}catch(e) { return this_.err_response(response, 409, "error unpacking json"); }
+
+			D.then(function(writeids) {
+				response.writeHead(200, {"Content-Type": "text/json"});
+				response.write(JSON.stringify(writeids));  
+				response.end();
+			}).fail(function(err) {
+				this_.err_response(response, err.code, err.details);
 			});
 		}).fail(function() { this_.err_response(response, 500, "can't connect to database"); });			
 	},

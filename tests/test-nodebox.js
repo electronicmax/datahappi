@@ -9,7 +9,7 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 		sock.on('new-object-write', function(data) {
 			data = JSON.parse(data);
 			console.log("socket :: GOT DATA > ", data, typeof(data));
-			$('#lastwritten').html(data.id + '- ('+data.graph+')');
+			$('#lastwritten').prepend('<li>['+data.version+'] - ' + data.id  + ' - ('+data.graph+')</li>');
 		});
 		sock.on('allo', function(data) {
 			console.log(' someones being friendly ', data);
