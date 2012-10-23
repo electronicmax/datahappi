@@ -6,8 +6,10 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 		console.log('connecting to ', 'http://'+document.location.host+":"+8888);
 		var sock = io.connect('http://'+document.location.host+":"+8888);
 		sock.on('connect', function() { console.log('connected '); });
-		sock.on('update', function(data) {
-			console.log("socket :: GOT DATA > ", data);
+		sock.on('new-object-write', function(data) {
+			data = JSON.parse(data);
+			console.log("socket :: GOT DATA > ", data, typeof(data));
+			$('#lastwritten').html(data.id + '- ('+data.graph+')');
 		});
 		sock.on('allo', function(data) {
 			console.log(' someones being friendly ', data);

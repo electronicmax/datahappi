@@ -26,7 +26,7 @@ exports.CREATE = {
   NOTIFY_TRIGGER : "CREATE FUNCTION notify_trigger() RETURNS trigger AS $$ \n" +
      " DECLARE\n"+
      " BEGIN\n" +
-     " PERFORM pg_notify('change_' || TG_TABLE_NAME, TG_TABLE_NAME || ',id,' || NEW.writeid || NEW.uri || NEW.graph );\n" +
+     " PERFORM pg_notify('change_' || TG_TABLE_NAME, NEW.writeid || ',' || NEW.uri || ',' || NEW.graph );\n" +
      " RETURN new;\n" +
 	 " END;\n"+
      "$$ LANGUAGE plpgsql;",

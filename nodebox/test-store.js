@@ -17,6 +17,7 @@ exports.test_write = function(uri) {
 	var model = m.DEFAULT_GRAPH.get_or_create(uri);
 	log.debug(' got model ' +  model.id + ' graph >> ', model.graph.id);
 	model.set('likes', m.DEFAULT_GRAPH.get_or_create('http://hip.cat/melkins'));
+	model.set('hates', m.DEFAULT_GRAPH.get_or_create('http://hip.cat/pizza'));	
 	s.write(model).then(function() { console.log('written '); }).fail(function(err) { console.log("FAIL", err); });
 };
 exports.test_read = function(uri, graphid) {

@@ -31,8 +31,7 @@ var Store = Backbone.Model.extend({
 		console.log("connnnnnnnnnnnnnected");
 		client.query('LISTEN "change_nodebox_objs"');
 		client.on('notification', function(data) {
-			console.log('NOTIFICATION ', data);
-			this_.trigger('notify', data);
+			this_.trigger('new-object-write', data.payload);
 		});
 		return this;
 	},

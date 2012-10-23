@@ -34,16 +34,19 @@ var Server = Backbone.Model.extend({
 		});
 	},
 	_set_up_socketio:function(httpserver, stor) {
+
 		var ios = io.listen(httpserver).on('connection', function(socket) {
 			// console.log('got a connection ', socket, socket.id);
 			// hang on to it!
 		});
+		ios.set('transports',['websocket']);
+			
 		// now ask our store to tell us about connections
 		// setInterval(function() { ios.sockets.emit("allo", { data: 123 }); }, 1000);
 		var this_ = this;
-		stor.start_trigger_listener().on('notify', function(x) {
-			console.log(" GOT CHANGE ", x);
-			ios.sockets.emit('update', x);
+		stor.start_trigger_listener().on('new-object-write', function(x) {
+			var fields = x.split(','), version = parseInt(fields[0],10), id = fields[1], graph=fields[2];
+			ios.sockets.emit('new-object-write', JSON.stringify({ version: version, id : id, graph: graph }));
 		});
 	},
 	_get_store : function() {
@@ -110,7 +113,8 @@ var Server = Backbone.Model.extend({
 	},
 	_get : function(request, response) {
 		var this_ = this;		
-		this._get_store().then(function(store) {			
+		this._get_store().then(function(store) {
+			console.log('GOT STORE ');
 			var requrl = url.parse(request.url),
 			    command = requrl.pathname.split('/')[1],
 			    query = querystr.parse(requrl.query || ''),
@@ -128,7 +132,9 @@ var Server = Backbone.Model.extend({
 	},
 	_put:  function(request, response) {
 		var this_ = this;
+		console.log('__PUT -- GETTINg STORE ');			
 		this._get_store().then(function(store) {
+			console.log('PUT -- GOT STORE ');			
 			this_.get_large_body(request).then(function(body) {
 				console.log(' got body >> ', body, typeof(body));
 				var query = querystr.parse(url.parse(request.url).query),
@@ -142,7 +148,8 @@ var Server = Backbone.Model.extend({
 						try {
 							console.log('writing ', mjson, typeof(mjson));
 							var um = serials.deserialize(mjson, graph);
-							store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); });
+							store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); })
+								.fail(function(error) { load_ds[i].reject({id: um.id, error:error }); });
 						} catch(eunpack) {	log.warn('Error with received json:', mjson._id, eunpack.details, mjson );	}
 					});
 					u.when(load_ds).then(function(writeids) { D.resolve(writeids); });
