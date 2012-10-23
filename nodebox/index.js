@@ -7,6 +7,7 @@ var http = require('http'),
     _ = require('underscore'),
     url = require("url"),
 	u = require('js/utils.js'),
+    io = require('socket.io'),
     querystr = require('querystring'),
 	log = require('nlogger').logger(module);
 
@@ -25,10 +26,24 @@ var Server = Backbone.Model.extend({
 		this._get_store().then(function(s) {
 			s.create_tables().then(function(x) {
 				log.info('tables created or verified - ready to go ');
-				http.createServer(function() {
+				var server = http.createServer(function() {
 					return this_._dispatchRequest.apply(this_, arguments);
-				}).listen(this_.attributes.port);				
+				}).listen(this_.attributes.port);
+				this_._set_up_socketio(server,s);
 			});
+		});
+	},
+	_set_up_socketio:function(httpserver, stor) {
+		var ios = io.listen(httpserver).on('connection', function(socket) {
+			// console.log('got a connection ', socket, socket.id);
+			// hang on to it!
+		});
+		// now ask our store to tell us about connections
+		// setInterval(function() { ios.sockets.emit("allo", { data: 123 }); }, 1000);
+		var this_ = this;
+		stor.start_trigger_listener().on('notify', function(x) {
+			console.log(" GOT CHANGE ", x);
+			ios.sockets.emit('update', x);
 		});
 	},
 	_get_store : function() {

@@ -1,5 +1,7 @@
 
 // ============ table creation ===================
+exports.GET_TABLES_NAMED = "select * from information_schema.tables where table_name=$1;";
+
 exports.CREATE = {
   OBJ_TABLE : "create table if not exists nodebox_objs( " +
    "writeid serial primary key, " + 
@@ -18,7 +20,17 @@ exports.CREATE = {
     " object_ref varchar(2048), " + 
     " object_ref_version integer DEFAULT 0," + 
     " PRIMARY KEY (properties_of, property, value_index) " + 
-  " ); "
+  " ); ",
+  // DROP_NOTIFY_TRIGGER : "DROP FUNCTION IF EXISTS notify_trigger();",
+  // DROP_TRIGGER : "DROP TRIGGER IF EXISTS nodebox_obj_table_trigger on nodebox_objs;",	
+  NOTIFY_TRIGGER : "CREATE FUNCTION notify_trigger() RETURNS trigger AS $$ \n" +
+     " DECLARE\n"+
+     " BEGIN\n" +
+     " PERFORM pg_notify('change_' || TG_TABLE_NAME, TG_TABLE_NAME || ',id,' || NEW.writeid || NEW.uri || NEW.graph );\n" +
+     " RETURN new;\n" +
+	 " END;\n"+
+     "$$ LANGUAGE plpgsql;",
+  TRIGGER : "CREATE TRIGGER nodebox_obj_table_trigger AFTER INSERT ON nodebox_objs FOR EACH ROW EXECUTE PROCEDURE notify_trigger();"
 };
 
 exports.READ = {

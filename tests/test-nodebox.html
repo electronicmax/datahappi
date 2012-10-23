@@ -10,18 +10,22 @@
   <script src="../lib/require.js"></script>
   <script type="text/javascript">
     // because we're not in the same place as the rest of our html files,
-    // we have git to manually tell require how to resovle things 
+    // we have git to manually tell require how to resovle things
     $(document).ready(function() {
-       // demo specific initialistation here
-       var path = document.location.pathname;
-       var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
-       basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-       // console.log('setting baseurl to ', document.location.pathname, '-', basepath);
-       require.config({ baseUrl:  basepath });
-       require(['tests/test-nodebox'],function(x) { console.log(" TESTS > "); _(window).extend(x); x.run(); });
-       // ---------------------------------------------
-       // relative requirejs
-    });    
+		$.getScript("http://"+document.location.host+":8888/socket.io/socket.io.js",
+  	      function() {
+           console.log('socket io loaded');
+             // demo specific initialistation here
+            var path = document.location.pathname;
+            var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+            basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+            // console.log('setting baseurl to ', document.location.pathname, '-', basepath);
+            require.config({ baseUrl:  basepath });
+            require(['tests/test-nodebox'],function(x) { console.log(" TESTS > "); _(window).extend(x); x.run(); });
+           // ---------------------------------------------
+           // relative requirejs
+ 	   });
+    });
     </script>
   <script src="../lib/codemirror2/codemirror.js"></script>
   <link href="../lib/codemirror2/codemirror.css" rel="stylesheet">  

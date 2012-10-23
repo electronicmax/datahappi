@@ -2,6 +2,17 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 	var assert = u.assert;
 	window.models = m;	
 	var l = function() { console.log.apply(console,arguments); };
+	var socket_listener = function() {
+		console.log('connecting to ', 'http://'+document.location.host+":"+8888);
+		var sock = io.connect('http://'+document.location.host+":"+8888);
+		sock.on('connect', function() { console.log('connected '); });
+		sock.on('update', function(data) {
+			console.log("socket :: GOT DATA > ", data);
+		});
+		sock.on('allo', function(data) {
+			console.log(' someones being friendly ', data);
+		})
+	};
 	tests = [
 		function() {
 			var d = u.deferred();
@@ -42,7 +53,13 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 				});				
 			});
 			return d;
-		}				
+		},
+		function() {
+			var d = u.deferred();
+			socket_listener();
+			d.resolve();
+			return d.promise();			
+		}
 	];
 	return {
 		run : function() {

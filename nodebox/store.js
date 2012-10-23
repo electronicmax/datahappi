@@ -22,20 +22,54 @@ var Store = Backbone.Model.extend({
 		});
 		return d;
 	},
+	start_trigger_listener:function() {
+		var connstr = this.attributes.db_url;
+		console.log('connstr ', connstr);
+		var client = new pg.Client(connstr);
+		var this_ = this;		
+		client.connect();
+		console.log("connnnnnnnnnnnnnected");
+		client.query('LISTEN "change_nodebox_objs"');
+		client.on('notification', function(data) {
+			console.log('NOTIFICATION ', data);
+			this_.trigger('notify', data);
+		});
+		return this;
+	},
 	create_tables:function() {
 		var this_ = this;
-		var dfds = [u.deferred(), u.deferred()];
+		var commands = [sql.CREATE.OBJ_TABLE, sql.CREATE.PROPS_TABLE, sql.CREATE.NOTIFY_TRIGGER, sql.CREATE.TRIGGER];
+		var D = u.deferred();
+		var check_tables = u.deferred();
+		var dfds = u.range(commands.length).map(function() { return u.deferred(); });		
 		if (this._connection ){
-			_([sql.CREATE.OBJ_TABLE, sql.CREATE.PROPS_TABLE]).map(function(table,i) {
-				log.info('creating table ', table);
-				var d = dfds[i];
-				this_._connection.query(table, function(error, rows) {
-					if (error === null) {	return d.resolve();} 
-					return d.reject();
-				});
+			this_._connection.query(sql.GET_TABLES_NAMED, ['nodebox_objs'],	function(err, results) {
+				if (err) {
+					console.log("ERROR couldn't check for tables ", err);
+					return check_tables.reject(err); 
+				}
+				if (results.rows.length === 0) {
+					check_tables.resolve(false);					
+					console.log('tables dont exist. making them'); 
+					_(commands).map(function(table,i) {
+						log.info('running SQL ', table);
+						var d = dfds[i];
+						this_._connection.query(table, function(error, rows) {							
+							if (error === null) { return d.resolve(); }
+							console.log("error! ", error);
+							return d.reject();
+						});
+					});
+				} else {
+					check_tables.resolve(true);
+				}
 			});
 		}
-		return u.when(dfds);
+		check_tables.then(function(tables_exist) {
+			if (tables_exist) { return D.resolve(); }
+			u.when(dfds).then(D.resolve).fail(D.reject);
+		});
+		return D.promise();
 	},
 	_merge_in:function(model, new_json) {
 		model.clear();
