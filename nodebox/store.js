@@ -110,6 +110,7 @@ var Store = Backbone.Model.extend({
 		var d = u.deferred();
 		this.raw_read(mod.id, mod.graph)
 			.then(function(json) {
+				console.log(' read json ', json);
 				d.resolve(json !== undefined ? this_._merge_in(mod, json) : undefined);
 			})
 			.fail(function(err) { d.reject(err, mod); });
@@ -122,7 +123,7 @@ var Store = Backbone.Model.extend({
 			var converters = ({
 				"number": function(v) { return [v.property, v.value_index, parseInt(v.literal_value, 10)]; },
 				"string": function(v) { return [v.property, v.value_index, v.literal_value]; },
-				"date_long": function(v) { return [v.property, v.value_index, new Date(parseInt(v.literal_value, 10))]; }
+				"date": function(v) { return [v.property, v.value_index, new Date(parseInt(v.literal_value, 10))]; }
 			});
 			if (l.literal_type && converters[l.literal_type]) {
 				return converters[l.literal_type](l);
@@ -132,6 +133,7 @@ var Store = Backbone.Model.extend({
 			}
 		};
 		var assemble = function(rows) {
+			console.log('assmble > ', rows);
 			if (rows.length === 0) { return undefined; }
 			var obj = {};
 			rows.map(function(r) {
@@ -144,6 +146,7 @@ var Store = Backbone.Model.extend({
 		this._connection.query(
 			sql.READ.SELECT_URI, [uri, graph.id],
 			function(err, result) {
+				if (err) { console.log("error > ", err); return d.reject(err); }
 				var unpacked = result.rows.map(function(r) { return unpack_row(r); })
 				var obj = assemble(unpacked);
 				d.resolve(obj);

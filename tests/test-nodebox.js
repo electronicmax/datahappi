@@ -21,7 +21,7 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 		 	var m1 = new m.Maxel({
 		 		_id: "http://id.facebook.com/user/max-" + new Date().valueOf(),
 		 		name : "Max the Hacker",
-		 		dob: "13-april-1990"
+		 		dob: new Date(1990, 04, 13)
 		 	});
 		 	m1.graph = m.get_graph('facebook');
 			m1.save().then(function() {
