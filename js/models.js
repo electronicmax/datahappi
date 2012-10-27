@@ -30,17 +30,17 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		initialize:function(json, options) {
 			this.objects = new Backbone.Collection();
 		},
-		create:function(id) {
-			console.log('creating in graph ['+this.id+'] >> ', id);
-			return this.add(new Maxel({_id:id}, { graph: this }));
+		create:function(id, options) {
+			// console.log('creating in graph ['+this.id+'] >> ', id);
+			return this.add(new Maxel({_id:id}, _({ graph: this }).extend(options || {})));
 		},
 		add:function(m) {
 			this.objects.add(m);
 			return m;
 		},
-		get_or_create:function(uri){
+		get_or_create:function(uri, create_options){
 			var now = this.objects.get(uri) ;
-			return now ? now : this.create(uri);
+			return now ? now : this.create(uri, create_options);
 		}
 	});
 	var DEFAULT_GRAPH = get_graph('');	
@@ -73,6 +73,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return c;
 		},
 		set_up_inference:function(options) {
+			if (options && options.disable_chaining == true) { return; }
 			// if (!(options && options.enable_incremental_inference)) { return ; }
 			if (chainer === undefined) {chainer = new rh.RuleHelper({ruleset:options && options.inference_ruleset});	}
 			var this_ = this;			

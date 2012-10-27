@@ -8,6 +8,9 @@ var pg = require('pg'),
 	u = require('js/utils.js'),
 	log = require('nlogger').logger(module);
 
+var CREATE_OPTIONS = { disable_chaining: true };
+
+
 var Store = Backbone.Model.extend({
 	defaults : { db_url:process.env.WEBBOX_DB || "tcp://nodebox:nodebox@localhost/nodebox" },
 	connect: function(options) {
@@ -15,7 +18,7 @@ var Store = Backbone.Model.extend({
 		var d = u.deferred();
 		options = _(this.defaults).chain().clone().extend(options ? options : {}).value();
 		pg.connect(options.db_url, function(err, client) {
-			log.info('connected to ', options.db_url);
+			// log.info('connected to ', options.db_url);
 			this_.trigger('connected', client);
 			this_._connection = client;
 			d.resolve(this_);
@@ -24,11 +27,9 @@ var Store = Backbone.Model.extend({
 	},
 	start_trigger_listener:function() {
 		var connstr = this.attributes.db_url;
-		console.log('connstr ', connstr);
 		var client = new pg.Client(connstr);
 		var this_ = this;		
 		client.connect();
-		console.log("connnnnnnnnnnnnnected");
 		client.query('LISTEN "change_nodebox_objs"');
 		client.on('notification', function(data) {
 			this_.trigger('new-object-write', data.payload);
@@ -128,11 +129,11 @@ var Store = Backbone.Model.extend({
 				return converters[l.literal_type](l);
 			}
 			if (l.object_ref) {
-				return [ l.property, l.value_index, graph.get_or_create(l.object_ref) ];
+				return [ l.property, l.value_index, graph.get_or_create(l.object_ref, CREATE_OPTIONS) ];
 			}			
 		};
 		var assemble = function(rows) {
-			console.log('assmble > ', rows);
+			// console.log('assmble > ', rows);
 			if (rows.length === 0) { return undefined; }
 			var obj = {};
 			rows.map(function(r) {
@@ -163,7 +164,7 @@ var Store = Backbone.Model.extend({
 				rowd.resolve();
 			};
 			if (val instanceof models.Maxel) {
-				console.log(' val is a model, so writing property object ');
+				// console.log(' val is a model, so writing property object ');
 				this_._connection.query(sql.WRITE.PROPERTY_OBJECT, [property_of, property, index, val.id], callback);
 			} else {
 				// literal TODO make more complete
@@ -175,7 +176,7 @@ var Store = Backbone.Model.extend({
 			}
 			return rowd;
 		};
-		console.log('model >>>>>> comments', model.id, model.attributes); 
+		// console.log('model >>>>>> comments', model.id, model.attributes); 
 		this_._connection.query('BEGIN', function(err,result) {
 			this_._connection.query(sql.WRITE.OBJECT,
 				[model.id, model.graph.id, model.version, deleted === true],
@@ -203,7 +204,7 @@ var Store = Backbone.Model.extend({
 	write:function(model) {
 		var d = u.deferred();
 		var this_ = this;
-		console.log('write being called with model ', model.id, model.graph.id);
+		// console.log('write being called with model ', model.id, model.graph.id);
 		this.read(model).then(function(_m) {
 			if (_m === undefined || _m.version == model.version) {
 				// then we can actually save

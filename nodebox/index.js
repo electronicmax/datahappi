@@ -87,7 +87,7 @@ var Server = Backbone.Model.extend({
 	},
 	_list_objs : function(s, response, graph_url) {
 		s.list_undeleted_objs_in_graph(graph_url).then(function(x) {
-			console.log(' x is ', x);			
+			// console.log(' x is ', x);			
 			s = JSON.stringify(x);
 			response.writeHead(200, {"Content-Type": "text/json"});
 			response.write(JSON.stringify(s));
@@ -97,15 +97,15 @@ var Server = Backbone.Model.extend({
 	_list_graphs : function(s, response) {
 		s.list_graphs().then(function(x) {
 			response.writeHead(200, {"Content-Type": "text/json"});
-			console.log(' x is ', x);
+			// console.log(' x is ', x);
 			response.write(JSON.stringify(x));
 			response.end();
 		});
 	},	
 	_get_single_obj : function(s, response, model) {
-		console.log('get single object ', model.id);
+		// console.log('get single object ', model.id);
 		s.read(model).then(function(x) {
-			console.log(" x >> ", x);
+			// console.log(" x >> ", x);
 			if (!u.defined(x)) {
 				s = "{}";
 			} else {
@@ -123,7 +123,7 @@ var Server = Backbone.Model.extend({
 	_get : function(request, response) {
 		var this_ = this;		
 		this._get_store().then(function(store) {
-			console.log('GOT STORE ');
+			// console.log('GOT STORE ');
 			var requrl = url.parse(request.url),
 			    command = requrl.pathname.split('/')[1],
 			    query = querystr.parse(requrl.query || ''),
@@ -144,9 +144,9 @@ var Server = Backbone.Model.extend({
 		var this_ = this;
 		var body_d = this.get_large_body(request);
 		var store_d = this._get_store();
-		console.log('__PUT -- GETTING STORE ');			
+		// console.log('__PUT -- GETTING STORE ');			
 		$.when(body_d,store_d).then(function(body, store) {
-			console.log(' got body >> ', body, typeof(body));
+			// console.log(' got body >> ', body, typeof(body));
 			var query = querystr.parse(url.parse(request.url).query),
 			graph = query.g && models.get_graph(decodeURIComponent(query.g)) || models.DEFAULT_GRAPH,
 			D = u.deferred();
@@ -157,7 +157,7 @@ var Server = Backbone.Model.extend({
 				_(dataload).map(function(mjson, i) {
 					try {
 						var um = serials.deserialize(mjson, graph);
-						console.log('writing ', mjson, typeof(mjson), um.id, _(um.attributes).keys().length);						
+						// console.log('writing ', mjson, typeof(mjson), um.id, _(um.attributes).keys().length);						
 						store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); })
 							.fail(function(error) { load_ds[i].reject({id: um.id, error:error }); });
 					} catch(eunpack) {
