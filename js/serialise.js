@@ -10,12 +10,17 @@ define(['js/models', 'js/utils'], function(models, u) {
 	var BasicModel = models.Maxel;
 
 	// core serialisation / deserialisation
-	var deserialize = function(skeleton, graph) {
+	var deserialize = function(skeleton, graph, model) {
 		var _des = arguments.callee;
-		if (!u.defined(skeleton._id)) { throw new Error({ error: 'unpacking skeleton', details: 'model must have an _id attr' });	}
-		var model = new BasicModel({_id: skeleton._id}); // graph.get_or_create <- we don't want to affect our global state
+		console.log('skeleton' , skeleton, ' id ', skeleton.id, skeleton instanceof Backbone.Model );
+		if (!u.defined(skeleton._id)) {
+			throw new Error({ error: 'unpacking skeleton', details: 'model must have an _id attr' });
+		}
+		if (!u.defined(model)) {
+			model = new BasicModel({_id: skeleton._id}); // graph.get_or_create <- we don't want to affect our global state
+			model.graph = graph;
+		}
 		model.version = skeleton._version;
-		model.graph = graph;
 		delete skeleton._id;
 		delete skeleton._graph;
 		delete skeleton._version;
