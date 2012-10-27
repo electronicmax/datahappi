@@ -37,7 +37,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	};
 
 	var do_obj = function(graph, v) {
-		var mm = get_model(graph, v.id);
+		var mm = get_model(graph, v.id || ('object-'+(new Date()).valueOf()));
 		delete v.id;
 		fetch_model(graph,mm).then(function(mm) {
 			console.log("fetch done >>>> ", mm.id);
@@ -51,12 +51,15 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	var _transform = function(graph, obj) {
 		// console.log("_transform ", obj);
 		var do_prim = function(v, k) {
-			if (v.id) {	return do_obj(graph, v); }
+			if (!_.isArray(v) && typeof(v) == 'object') {	return do_obj(graph, v); }
 			if (k.indexOf('_time') >= 0) {  return new Date(v); }
 			return v;
 		};
 		return u.zip(_(obj).map(function(v,k) {
 			if (v === null) { return [k,  undefined]; }
+			if (_.isArray(v)) {
+				return [k, v.map(function(vx) { return do_prim(vx, k); })];
+			}
 			if (v.data) {
 				return [k, v.data.map(function(vx) { return do_prim(vx, k); })];
 			}			
@@ -66,32 +69,37 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	
 	var modes = {
 		messages: {
-			button:$('#news'),
+			button:$('#feed'),
 			path:'/me/feed',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) {
-					return do_obj(graph, item);
-				});
-			}
+				return resp.data.map(function(item) { return do_obj(graph, item);	});
+			}			
 		},
-		news : {
-			button:$('#messages'),
+		inbox : {
+			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) {
-					return do_obj(graph,item);
-				});
+				return resp.data.map(function(item) {	return do_obj(graph,item);	});
 			}
 		},		
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) {
-					return do_obj(graph, item);
-				});
+				return resp.data.map(function(item) { return do_obj(graph, item);	});
+			}
+		},
+		me : {
+			button:$('#me'),
+			path:'/me',
+			to_models:function(graph, resp) {
+				var me = do_obj(graph, resp);
+				window.me = me;
+				console.log(me);
+				return me;
 			}
 		}		
+		
 	};
 
 	var initialize= function() {
