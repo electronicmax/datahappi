@@ -2,7 +2,7 @@
 var http = require('http'),
 	Backbone = require('backbone'),
     store = require('nodebox/store'),
-    serials = require('nodebox/serialise'),
+    serials = require('js/serialise'),
     models = require('js/models.js'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -103,10 +103,20 @@ var Server = Backbone.Model.extend({
 		});
 	},	
 	_get_single_obj : function(s, response, model) {
+		console.log('get single object ', model.id);
 		s.read(model).then(function(x) {
-			s = serials.serialize(x);
+			console.log(" x >> ", x);
+			if (!u.defined(x)) {
+				s = "{}";
+			} else {
+				s = serials.serialize(x);
+			}
 			response.writeHead(200, {"Content-Type": "text/json"});
 			response.write(JSON.stringify(s));
+			response.end();
+		}).fail(function(err) {
+			response.writeHead(500, {"Content-Type": "text/plain"});
+			response.write(err.toString());
 			response.end();
 		});
 	},
@@ -124,7 +134,8 @@ var Server = Backbone.Model.extend({
 				case 'get' : return this_._get_single_obj(store, response, graph.create(uri));
 				case 'list' : return this_._list_objs(store, response, graph);
 				case 'graphs' : return this_._list_graphs(store, response);				
-			}			
+			}
+			
 			return this_.err_response(response, 404, "command not found : " + command);
 			
 		}).fail(function() { this_.err_response(response, 500, "cant connect to database"); });
@@ -145,11 +156,13 @@ var Server = Backbone.Model.extend({
 				var load_ds = u.range(dataload.length).map(function() { return u.deferred(); });
 				_(dataload).map(function(mjson, i) {
 					try {
-						console.log('writing ', mjson, typeof(mjson));
 						var um = serials.deserialize(mjson, graph);
+						console.log('writing ', mjson, typeof(mjson), um.id, _(um.attributes).keys().length);						
 						store.write(um).then(function(writeid) { load_ds[i].resolve({id: um.id, version:writeid}); })
 							.fail(function(error) { load_ds[i].reject({id: um.id, error:error }); });
-					} catch(eunpack) {	log.warn('Error with received json:', mjson._id, eunpack.details, mjson );	}
+					} catch(eunpack) {
+						log.warn('Error with received json:', eunpack, mjson._id, eunpack.details, mjson );
+					}
 				});
 				u.when(load_ds).then(function(writeids) { D.resolve(writeids); });
 			}catch(e) { return this_.err_response(response, 409, "error unpacking json"); }

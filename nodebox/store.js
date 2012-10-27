@@ -4,7 +4,7 @@ var pg = require('pg'),
 	$ = require('jquery'),
 	_ = require('underscore'),
 	sql = require('nodebox/store-sql.js'),
-	m = require('js/models.js'),
+	models = require('js/models.js'),
 	u = require('js/utils.js'),
 	log = require('nlogger').logger(module);
 
@@ -105,20 +105,19 @@ var Store = Backbone.Model.extend({
 		return d;
 	},
 	read:function(mod) {
-		if (typeof(mod) == 'string') {	mod = m.DEFAULT_GRAPH.get_or_create(mod);	}
+		if (typeof(mod) == 'string') {	mod = models.DEFAULT_GRAPH.get_or_create(mod);	}
 		var this_ = this;
 		var d = u.deferred();
 		this.raw_read(mod.id, mod.graph)
 			.then(function(json) {
-				console.log(' read json ', json);
-				d.resolve(json !== undefined ? this_._merge_in(mod, json) : undefined);
-			})
-			.fail(function(err) { d.reject(err, mod); });
+				// json will be undefined if we don't ahve the object
+				return d.resolve(json !== undefined ? this_._merge_in(mod, json) : undefined);
+			}).fail(function(err) { d.reject(err, mod); });
 		return d;
 	},
 	raw_read:function(uri, graph) {
 		var d = u.deferred();
-		if (!u.defined(graph)) { graph = m.DEFAULT_GRAPH; }
+		if (!u.defined(graph)) { graph = models.DEFAULT_GRAPH; }
 		var unpack_row = function(l) {
 			var converters = ({
 				"number": function(v) { return [v.property, v.value_index, parseInt(v.literal_value, 10)]; },
@@ -130,7 +129,7 @@ var Store = Backbone.Model.extend({
 			}
 			if (l.object_ref) {
 				return [ l.property, l.value_index, graph.get_or_create(l.object_ref) ];
-			}
+			}			
 		};
 		var assemble = function(rows) {
 			console.log('assmble > ', rows);
@@ -160,9 +159,11 @@ var Store = Backbone.Model.extend({
 		var to_row = function(property_of, property, val, index) {
 			var rowd = u.deferred();
 			var callback = 	function(err, response) {
-				if (u.defined(err)) { return rowd.reject(err); }  rowd.resolve();
+				if (u.defined(err)) { return rowd.reject(err); }
+				rowd.resolve();
 			};
-			if (val instanceof m.Maxel) {
+			if (val instanceof models.Maxel) {
+				console.log(' val is a model, so writing property object ');
 				this_._connection.query(sql.WRITE.PROPERTY_OBJECT, [property_of, property, index, val.id], callback);
 			} else {
 				// literal TODO make more complete
@@ -173,14 +174,15 @@ var Store = Backbone.Model.extend({
 				this_._connection.query(sql.WRITE.PROPERTY_LITERAL,[property_of, property, index, ltype, lval], callback);
 			}
 			return rowd;
-		};		
+		};
+		console.log('model >>>>>> comments', model.id, model.attributes); 
 		this_._connection.query('BEGIN', function(err,result) {
 			this_._connection.query(sql.WRITE.OBJECT,
 				[model.id, model.graph.id, model.version, deleted === true],
 				function(err, result) {
 					if (!u.defined(err) && result.rows.length > 0) {
 						var writeid = result.rows[0].writeid;
-						var dfds = model.keys().map(function(k) {
+						var dfds = _(model.attributes).keys().map(function(k) {
 							var vals = model.get(k);
 							return _(vals).map(function(v, i) {  return to_row(writeid, k, v, i);  });
 						});

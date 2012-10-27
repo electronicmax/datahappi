@@ -10,10 +10,10 @@
 	  <div class="row">
 		<div class="span4"><h3>nodebox fb archiver</h3></div>
 		<div class="span8">
-		  <div id="#messages" class="btn"><i class="icon-folder-close"></i> inbox</div>
-		  <div id="#walls" class="btn"><i class="icon-list-alt"></i> wall posts (feed)</div>
-		  <div id="#walls" class="btn"><i class="icon-list-alt"></i> news feed (feed)</div>		  
-		  <div id="#friends" class="btn"><i class="icon-user"></i> friends</div>
+		  <div id="messages" class="btn" disabled='true'><i class="icon-folder-close"></i> inbox</div>
+		  <div id="walls" class="btn" disabled='true'><i class="icon-list-alt"></i> wall posts (feed)</div>
+		  <div id="news" class="btn" disabled='true'><i class="icon-list-alt"></i> news feed (feed)</div>		  
+		  <div id="friends" class="btn" disabled='true'><i class="icon-user"></i> friends</div>
 		</div>
 	  </div>
 	</div>
@@ -34,7 +34,8 @@
        basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
        console.log('setting baseurl to ', document.location.pathname, '-', basepath);
        require.config({ baseUrl:  basepath });	  
-       require(['plugins/fb'], function(x) { console.log('loaded fb'); });	  
+       require(['plugins/fb'], function(x) { console.log('loaded fb'); });
+	   require(['js/models'], function(models) { window.models = models; });
 	  };
 	  // Load the SDK Asynchronously
 	  (function(d){
