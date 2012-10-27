@@ -42,6 +42,8 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		fetch_model(graph,mm).then(function(mm) {
 			console.log("fetch done >>>> ", mm.id);
 			mm.set(_transform(graph, v));
+			console.log('calling save >>> ', mm.id);
+			mm.save();
 		});
 		return mm;
 	};
