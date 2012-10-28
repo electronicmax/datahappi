@@ -1,8 +1,5 @@
 define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) {
-	console.log('fb js loading!');
 	var c = new Backbone.Collection();
-	window._c = c;
-
 	var get_model = function(graph, id) {
 		if (!c.get(id)) {
 			var m = graph.create(id);
@@ -10,13 +7,14 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		}
 		return c.get(id);
 	};
-
+	// debug only -----------------------------------------------------|
 	window.save = function() {
 		c.models.map(function(thing) {
 			console.log('saving this thing > ', thing);
 			thing.save();
 		});
 	};
+	// -------------------------------------------------------------
 
 	var fetch_model = function(graph,id) {
 		var m = get_model(graph,id);
@@ -89,6 +87,20 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 				return resp.data.map(function(item) { return do_obj(graph, item);	});
 			}
 		},
+		friends : {
+			button:$('#friends'),
+			path:'/me/friends',
+			to_models:function(graph, resp) {
+				return resp.data.map(function(item) { return do_obj(graph, item);	});
+			}
+		},
+		statuses: {
+			button:$('#statuses'),
+			path:'/me/statuses',
+			to_models:function(graph, resp) {
+				return resp.data.map(function(item) { return do_obj(graph, item);	});
+			}
+		},		
 		me : {
 			button:$('#me'),
 			path:'/me',
