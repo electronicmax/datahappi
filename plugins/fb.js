@@ -29,6 +29,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	};
 
 	var do_obj = function(graph, v) {
+		var d = u.deferred();
 		var mm = get_model(graph, v.id || ('object-'+(new Date()).valueOf()));
 		delete v.id;
 		fetch_model(graph,mm).then(function(mm) {
@@ -36,10 +37,10 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			mm.set(tval, undefined, {silent:true});
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
-				mm.save();
-			} else { console.log(mm.id, ' no changed attributes '); }
+				mm.save().then(function() { d.resolve(); });
+			} else { console.log(mm.id, ' no changed attributes '); d.resolve(); }
 		});
-		return mm;
+		return d.promise();
 	};
 
 	var _transform = function(graph, obj) {
@@ -66,21 +67,21 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#feed'),
 			path:'/me/feed',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) { return do_obj(graph, item);	});
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
 			}			
 		},
 		inbox : {
 			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) { return do_obj(graph,item); });
+				return u.when(resp.data.map(function(item) { return do_obj(graph,item); }));
 			}
 		},		
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) { return do_obj(graph, item);	});
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
 			}
 		},
 		friends : {
@@ -88,30 +89,27 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			path:'/me/friends',
 			to_models:function(graph, resp) {
 				var _me = arguments.callee;
-				var result = resp.data.map(function(fid) {
+				var result = u.when(resp.data.map(function(fid) {
+					var d = deferred();
 					if (fid && fid.id) {
 						console.log('getting more info for -- ', fid.id, fid.name);
-						FB.api(fid.id, function(resp) {  do_obj(graph, resp);   });
-					}
-				});
+						FB.api(fid.id, function(resp) {  do_obj(graph, resp).then(d.resolve).fail(d.reject);   });
+					} else { d.reject(); }
+					return d.promise();
+				}));
 			}
 		},
 		statuses: {
 			button:$('#statuses'),
 			path:'/me/statuses',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) { return do_obj(graph, item);	});
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
 			}
 		},		
 		me : {
 			button:$('#me'),
 			path:'/me',
-			to_models:function(graph, resp) {
-				var me = do_obj(graph, resp);
-				window.me = me;
-				console.log(me);
-				return me;
-			}
+			to_models:function(graph, resp) {	return do_obj(graph, resp);	}
 		}		
 		
 	};
@@ -124,18 +122,32 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			v.button
 				.attr("disabled",false)
 				.on("click", function() {
-					console.log('trying ', mode, '- ', v.path);
+					var this_ = this;
+					$(this_).attr('disabled',true);
 					var check = function(path) {
-						var _me = arguments.callee; 
+						var _me = arguments.callee;
+						var d = u.deferred();
 						FB.api(path, function(resp) {
 							if (u.defined(resp)) {
-								console.log(" response >> ", resp);
-								v.to_models(graph, resp);
-								if (resp.paging && resp.paging.next) {	_me(resp.paging.next);	}
+								v.to_models(graph, resp).then(function() {
+									if (resp.paging && resp.paging.next) {
+										_me(resp.paging.next).then(d.resolve).fail(d.reject);
+									} else {
+										d.resolve();
+									}
+								}).fail(function(err) {
+									console.error('error coming back from to_models ', err );
+									d.reject(err);
+								});
 							}
 						});
+						return d.promise();
 					};
-					check(v.path);
+					check(v.path).then(function() {
+						$(this_).attr('disabled',false);
+					}).fail(function(err) {
+						console.error('FAIL with ', mode, err);
+					});
 				});
 		});
 	};
