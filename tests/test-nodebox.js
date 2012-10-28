@@ -13,7 +13,7 @@ define(['js/models','js/utils','js/sync-nodebox',],function(m,u,sync) {
 		});
 		sock.on('allo', function(data) {
 			console.log(' someones being friendly ', data);
-		})
+		});
 	};
 	tests = [
 		function() {

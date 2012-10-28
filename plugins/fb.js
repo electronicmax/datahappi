@@ -9,13 +9,6 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	};
 	window.get_fb = function(uri) { return get_model(models.get_graph('facebook'), uri); };
 	// debug only -----------------------------------------------------|
-	window.save = function() {
-		c.models.map(function(thing) {
-			console.log('saving this thing > ', thing);
-			thing.save();
-		});
-	};
-	// -------------------------------------------------------------
 
 	var fetch_model = function(graph,id) {
 		var m = get_model(graph,id);
@@ -80,7 +73,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) {	return do_obj(graph,item);	});
+				return resp.data.map(function(item) { return do_obj(graph,item); });
 			}
 		},		
 		friends : {
@@ -94,7 +87,13 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#friends'),
 			path:'/me/friends',
 			to_models:function(graph, resp) {
-				return resp.data.map(function(item) { return do_obj(graph, item);	});
+				var _me = arguments.callee;
+				var result = resp.data.map(function(fid) {
+					if (fid && fid.id) {
+						console.log('getting more info for -- ', fid.id, fid.name);
+						FB.api(fid.id, function(resp) {  do_obj(graph, resp);   });
+					}
+				});
 			}
 		},
 		statuses: {
@@ -125,12 +124,18 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			v.button
 				.attr("disabled",false)
 				.on("click", function() {
-					console.log('trying ', mode, '- ', v.path);					
-					FB.api(v.path, function(resp) {
-						console.log(" response >> ", resp);
-						v.to_models(graph, resp);
-						// console.log("RESULT > ", result);
-					});
+					console.log('trying ', mode, '- ', v.path);
+					var check = function(path) {
+						var _me = arguments.callee; 
+						FB.api(path, function(resp) {
+							if (u.defined(resp)) {
+								console.log(" response >> ", resp);
+								v.to_models(graph, resp);
+								if (resp.paging && resp.paging.next) {	_me(resp.paging.next);	}
+							}
+						});
+					};
+					check(v.path);
 				});
 		});
 	};
