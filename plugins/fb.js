@@ -7,6 +7,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		}
 		return c.get(id);
 	};
+	window.get_fb = function(uri) { return get_model(models.get_graph('facebook'), uri); };
 	// debug only -----------------------------------------------------|
 	window.save = function() {
 		c.models.map(function(thing) {
@@ -38,10 +39,12 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		var mm = get_model(graph, v.id || ('object-'+(new Date()).valueOf()));
 		delete v.id;
 		fetch_model(graph,mm).then(function(mm) {
-			console.log("fetch done >>>> ", mm.id);
-			mm.set(_transform(graph, v));
-			console.log('calling save >>> ', mm.id);
-			mm.save();
+			var tval = _transform(graph, v);
+			mm.set(tval, undefined, {silent:true});
+			if (mm.changedAttributes()) {
+				console.log('changed attributes -- calling save >>> ', mm.id);
+				mm.save();
+			} else { console.log(mm.id, ' no changed attributes '); }
 		});
 		return mm;
 	};

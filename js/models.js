@@ -50,9 +50,15 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			var this_ = this;
 			this.entailed = {};
 			this.sameas = [];
-			
-			this.graph = (options && options.graph) || DEFAULT_GRAPH;
-			this.version = 0;
+
+			if (options && options.graph) {
+				this.graph = options.graph;
+			} else {
+				this.graph = DEFAULT_GRAPH;
+			}
+			this.graph.add(this);
+			// this.graph = (options && options.graph) || DEFAULT_GRAPH;
+			// this.version = 0; // server provides us the version.
 			
 			if (!_(src_json).isUndefined()) {
 				this.original_json = _.clone(src_json);
@@ -152,12 +158,14 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return _(this.attributes).keys();
 		},		
 		set:function(k,v,options) {
+			// console.log("SET k:", k, " v:", v, " options", options);
 			// check if this was called with k,v format, not {k:v} format.
 			if (!_(v).isUndefined()) {
 				v = this._value_to_array(k,v);
 			} else {
 				k = this._all_values_to_arrays(k);
-			}				
+				v = options;
+			}
 			return Backbone.Model.prototype.set.apply(this,[k,v,options]);
 		},
 		_make_changelist : function(props) {

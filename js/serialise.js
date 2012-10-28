@@ -17,8 +17,7 @@ define(['js/models', 'js/utils'], function(models, u) {
 			throw new Error({ error: 'unpacking skeleton', details: 'model must have an _id attr' });
 		}
 		if (!u.defined(model)) {
-			model = new BasicModel({_id: skeleton._id}, { disable_chaining : true }); // graph.get_or_create <- we don't want to affect our global state
-			model.graph = graph;
+			model = new BasicModel({_id: skeleton._id}, { disable_chaining : true, graph:graph }); // graph.get_or_create <- we don't want to affect our global state
 		}
 		model.version = skeleton._version;
 		delete skeleton._id;
@@ -27,7 +26,7 @@ define(['js/models', 'js/utils'], function(models, u) {
 		var helper = function(v) {
 			var _me = arguments.callee;
 			if (_.isArray(v)) { return v.map(function(vv) { return _me(vv); }); }
-			if (typeof(v) == 'object' && v._id) { return _des(v); }
+			if (typeof(v) == 'object' && v._id) { return _des(v, graph); }
 			return v;
 		};
 		model.set(u.zip(_(skeleton).map(function(v,k) { return [k, helper(v)]; })));
@@ -44,6 +43,9 @@ define(['js/models', 'js/utils'], function(models, u) {
 			return _sm_literal(v);
 		};
 		return _(u.zip(model.keys().map(function(k) {
+			if (k == '_id') {
+				console.log('kill me ');
+			}
 			var varr = model.get(k);
 			return [k, varr.map(_sm_value)];
 		}))).extend(_sm_model(model)); // add the model attributes in // 
