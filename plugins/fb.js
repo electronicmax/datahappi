@@ -1,12 +1,43 @@
 define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) {
+
+	var DEBUG = true;
+
+	var debug_subset = function(l) {
+		if (DEBUG) { return l.slice(0,5); }
+		return l;
+	};
+	
 	var c = new Backbone.Collection();
+
+	// collects high level statistics about the saves to provide some visual candy	
+	var save_watcher =
+		new (Backbone.Model.extend({
+			initialize:function() {
+				this.counts = { all: 0 };
+			},
+			_update_counts: function(m) {
+				if (m.attributes.type) {
+					var stype = m.attributes.type.toString();
+					this.counts[stype] = this.counts[stype] ? this.counts[stype]+1 : 1;
+				}
+				this.counts.all = this.counts.all+1;
+				this.trigger('update', this.counts);
+			},
+			register: function(m) {
+				var this_ = this;
+				m.on('save', function() { this_._update_counts(m); });
+			}
+		}))();
+	       
 	var get_model = function(graph, id) {
 		if (!c.get(id)) {
 			var m = graph.create(id);
 			c.add(m);
+			save_watcher.register(m);
 		}
 		return c.get(id);
 	};
+	
 	window.get_fb = function(uri) { return get_model(models.get_graph('facebook'), uri); };
 	// debug only -----------------------------------------------------|
 
@@ -37,7 +68,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			mm.set(tval, undefined, {silent:true});
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
-				mm.save().then(function() { d.resolve(); });
+				mm.save().then(function() { mm.trigger('save'); d.resolve(); });
 			} else { console.log(mm.id, ' no changed attributes '); d.resolve(); }
 		});
 		return { model: mm, dfd: d.promise() };
@@ -62,30 +93,30 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		messages: {
 			button:$('#feed'),
 			path:'/me/feed',
-			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd; }));
+			to_models:function(graph, els) {
+				return u.when(els.map(function(item) { return do_obj(graph, item).dfd; }));
 			}			
 		},
 		inbox : {
 			button:$('#inbox'),
 			path:'/me/inbox',
-			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph,item).dfd; }));
+			to_models:function(graph, els) {
+				return u.when(els.map(function(item) { return do_obj(graph,item).dfd; }));
 			}
 		},		
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
-			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd;	}));
+			to_models:function(graph, els) {
+				return u.when(els.map(function(item) { return do_obj(graph, item).dfd;	}));
 			}
 		},
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
-			to_models:function(graph, resp) {
+			to_models:function(graph, els) {
 				var _me = arguments.callee;
-				var result = u.when(resp.data.map(function(fid) {
+				var result = u.when(els.map(function(fid) {
 					var d = u.deferred();
 					if (fid && fid.id) {
 						console.log('getting more info for -- ', fid.id, fid.name);
@@ -99,7 +130,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#statuses'),
 			path:'/me/statuses',
 			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd;	}));
+				return u.when(resp.map(function(item) { return do_obj(graph, item).dfd;	}));
 			}
 		},		
 		me : {
@@ -125,7 +156,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 						var d = u.deferred();
 						FB.api(path, function(resp) {
 							if (u.defined(resp)) {
-								v.to_models(graph, resp).then(function() {
+								v.to_models(graph, debug_subset(resp.data)).then(function() {
 									if (resp.paging && resp.paging.next) {
 										_me(resp.paging.next).then(d.resolve).fail(d.reject);
 									} else {
@@ -171,5 +202,8 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			console.log('not logged in ');
 		}
 	});	
-	return {};
+	return {
+		graph: models.get_graph('facebook'),
+		watcher: save_watcher
+	};
 });
