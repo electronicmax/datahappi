@@ -24,17 +24,19 @@
 	<script src="../lib/backbone.js" type="text/javascript"></script>
 	<script src="../lib/require.js"></script>
 	<script>
+	  var host = document.location.host;
+	  var channelURL = '//'+host+'/channel.html';
+	  console.log('checking for channel file at ', channelURL);
 	  // Additional JS functions here
 	  window.fbAsyncInit = function() {
          FB.init({
            appId      : '296646860441717', // App ID
-           channelUrl : '//webbox.hip.cat/channel.html', // Channel File
+           channelUrl : channelURL, // Channel File
            status     : true, // check login status
            cookie     : true, // enable cookies to allow the server to access the session
            xfbml      : true  // parse XFBML
          });
          // Additional init code here
-	   var host = document.location.host;
        var path = document.location.pathname;
        var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
        basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';

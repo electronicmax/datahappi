@@ -20,11 +20,14 @@
 	</div>
 	<div id="fb-root"></div>
 	<script>
+	  var host = document.location.host;
+	  var channelURL = '//'+host+'/channel.html';
+	  console.log('checking for channel file at ', channelURL);
 	  // Additional JS functions here
 	  window.fbAsyncInit = function() {
          FB.init({
            appId      : '296646860441717', // App ID
-           channelUrl : '//webbox.hip.cat/channel.html', // Channel File
+           channelUrl : channelURL, // Channel File
            status     : true, // check login status
            cookie     : true, // enable cookies to allow the server to access the session
            xfbml      : true  // parse XFBML
