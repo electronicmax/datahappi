@@ -79,7 +79,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return c;
 		},
 		set_up_inference:function(options) {
-			if (options && options.disable_chaining == true) { return; }
+			if (options && options.disable_chaining === true) { return; }
 			// if (!(options && options.enable_incremental_inference)) { return ; }
 			if (chainer === undefined) {chainer = new rh.RuleHelper({ruleset:options && options.inference_ruleset});	}
 			var this_ = this;			
