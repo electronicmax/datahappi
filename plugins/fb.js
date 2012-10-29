@@ -1,4 +1,4 @@
-define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) {
+define(['js/models', 'js/utils'], function(models, u, nsync) {
 
 	var DEBUG = false;
 
