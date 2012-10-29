@@ -22,6 +22,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 				}
 				this.counts.all = this.counts.all+1;
 				this.trigger('update', this.counts);
+				console.log('counts >> ', this.counts);
 			},
 			register: function(m) {
 				var this_ = this;
@@ -59,12 +60,13 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 		return d;
 	};
 
-	var do_obj = function(graph, v) {
+	var do_obj = function(graph, v, type) {
 		var d = u.deferred();
 		var mm = get_model(graph, v.id || ('object-'+(new Date()).valueOf()));
 		delete v.id;
 		fetch_model(graph,mm).then(function(mm) {
 			var tval = _transform(graph, v);
+			if (type && !tval.type) { tval.type = type; } 	// add type in there
 			mm.set(tval, undefined, {silent:true});
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
@@ -90,27 +92,20 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 	};
 	
 	var modes = {
-		messages: {
+		feed: {
 			button:$('#feed'),
 			path:'/me/feed',
 			to_models:function(graph, els) {
-				return u.when(els.map(function(item) { return do_obj(graph, item).dfd; }));
+				return u.when(els.map(function(item) { return do_obj(graph, item, 'feed').dfd; }));
 			}			
 		},
 		inbox : {
 			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, els) {
-				return u.when(els.map(function(item) { return do_obj(graph,item).dfd; }));
+				return u.when(els.map(function(item) { return do_obj(graph,item, 'message').dfd; }));
 			}
 		},		
-		friends : {
-			button:$('#friends'),
-			path:'/me/friends',
-			to_models:function(graph, els) {
-				return u.when(els.map(function(item) { return do_obj(graph, item).dfd;	}));
-			}
-		},
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
@@ -120,24 +115,27 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 					var d = u.deferred();
 					if (fid && fid.id) {
 						console.log('getting more info for -- ', fid.id, fid.name);
-						FB.api(fid.id, function(resp) {  do_obj(graph, resp).dfd.then(d.resolve).fail(d.reject);   });
+						FB.api(fid.id, function(resp) {  do_obj(graph, resp, 'person').dfd.then(d.resolve).fail(d.reject);   });
 					} else { d.reject(); }
 					return d.promise();
 				}));
+				return result;
 			}
 		},
 		statuses: {
 			button:$('#statuses'),
 			path:'/me/statuses',
 			to_models:function(graph, resp) {
-				return u.when(resp.map(function(item) { return do_obj(graph, item).dfd;	}));
+				return u.when(resp.map(function(item) { return do_obj(graph, item, 'status').dfd;	}));
 			}
 		},		
 		me : {
 			button:$('#me'),
 			path:'/me',
-			to_models:function(graph, resp) { return do_obj(graph, resp).dfd;	}
-		}		
+			to_models:function(graph, resp) {
+				return do_obj(graph, resp, 'person').dfd;
+			}
+		}		 
 		
 	};
 
@@ -156,7 +154,7 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 						var d = u.deferred();
 						FB.api(path, function(resp) {
 							if (u.defined(resp)) {
-								v.to_models(graph, debug_subset(resp.data)).then(function() {
+								v.to_models(graph, resp.data ? debug_subset(resp.data) : resp).then(function() {
 									if (resp.paging && resp.paging.next) {
 										_me(resp.paging.next).then(d.resolve).fail(d.reject);
 									} else {
