@@ -40,24 +40,20 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 				mm.save().then(function() { d.resolve(); });
 			} else { console.log(mm.id, ' no changed attributes '); d.resolve(); }
 		});
-		return d.promise();
+		return { model: mm, dfd: d.promise() };
 	};
 
 	var _transform = function(graph, obj) {
 		// console.log("_transform ", obj);
 		var do_prim = function(v, k) {
-			if (!_.isArray(v) && typeof(v) == 'object') {	return do_obj(graph, v); }
+			if (!_.isArray(v) && typeof(v) == 'object') { return do_obj(graph, v).model; }
 			if (k.indexOf('_time') >= 0) {  return new Date(v); }
 			return v;
 		};
 		return u.zip(_(obj).map(function(v,k) {
 			if (v === null) { return [k,  undefined]; }
-			if (_.isArray(v)) {
-				return [k, v.map(function(vx) { return do_prim(vx, k); })];
-			}
-			if (v.data) {
-				return [k, v.data.map(function(vx) { return do_prim(vx, k); })];
-			}			
+			if (_.isArray(v)) { return [k, v.map(function(vx) { return do_prim(vx, k); })]; 	}
+			if (v.data) {	return [k, v.data.map(function(vx) { return do_prim(vx, k); })];}			
 			return [k, do_prim(v,k)];
 		}));		
 	};
@@ -67,21 +63,21 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#feed'),
 			path:'/me/feed',
 			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd; }));
 			}			
 		},
 		inbox : {
 			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph,item); }));
+				return u.when(resp.data.map(function(item) { return do_obj(graph,item).dfd; }));
 			}
 		},		
 		friends : {
 			button:$('#friends'),
 			path:'/me/friends',
 			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd;	}));
 			}
 		},
 		friends : {
@@ -90,10 +86,10 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			to_models:function(graph, resp) {
 				var _me = arguments.callee;
 				var result = u.when(resp.data.map(function(fid) {
-					var d = deferred();
+					var d = u.deferred();
 					if (fid && fid.id) {
 						console.log('getting more info for -- ', fid.id, fid.name);
-						FB.api(fid.id, function(resp) {  do_obj(graph, resp).then(d.resolve).fail(d.reject);   });
+						FB.api(fid.id, function(resp) {  do_obj(graph, resp).dfd.then(d.resolve).fail(d.reject);   });
 					} else { d.reject(); }
 					return d.promise();
 				}));
@@ -103,13 +99,13 @@ define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) 
 			button:$('#statuses'),
 			path:'/me/statuses',
 			to_models:function(graph, resp) {
-				return u.when(resp.data.map(function(item) { return do_obj(graph, item);	}));
+				return u.when(resp.data.map(function(item) { return do_obj(graph, item).dfd;	}));
 			}
 		},		
 		me : {
 			button:$('#me'),
 			path:'/me',
-			to_models:function(graph, resp) {	return do_obj(graph, resp);	}
+			to_models:function(graph, resp) { return do_obj(graph, resp).dfd;	}
 		}		
 		
 	};
