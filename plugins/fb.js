@@ -1,6 +1,6 @@
 define(['js/models', 'js/utils', 'js/sync-nodebox'], function(models, u, nsync) {
 
-	var DEBUG = true;
+	var DEBUG = false;
 
 	var debug_subset = function(l) {
 		if (DEBUG) { return l.slice(0,5); }
