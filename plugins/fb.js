@@ -1,7 +1,6 @@
 define(['js/models', 'js/utils'], function(models, u, nsync) {
-
+	
 	var DEBUG = false;
-
 	var debug_subset = function(l) {
 		if (DEBUG) { return l.slice(0,5); }
 		return l;
@@ -177,6 +176,15 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 		});
 	};
 
+	return {
+		graph: models.get_graph('facebook'),
+		watcher: save_watcher,
+		initialize:initialize
+	};
+});
+
+
+/*
 	FB.getLoginStatus(function(response) {
 		if (response.status === 'connected') {
 			// connected
@@ -200,8 +208,4 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 			console.log('not logged in ');
 		}
 	});	
-	return {
-		graph: models.get_graph('facebook'),
-		watcher: save_watcher
-	};
-});
+*/

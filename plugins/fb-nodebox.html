@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link href="../css/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap.css" rel="stylesheet">  
   <head>
-	  <title>save face :: social network profile aggregator</title>
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> ------>
+    <link href="../css/bootstrap.css" rel="stylesheet">	
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/fb.css" rel="stylesheet">
+	<title>save face :: social network profile aggregator</title>
   </head>
   <body>
-	<div class="container-fluid">
-	  <div class="row">
-		<div class="span4"><h3>nodebox fb archiver</h3></div>
-		<div class="span8">
+	<div id="modes">
+	  <div class="box login" style="display:none">
+		<div class="span12 header">save<br>face</div>
+		<div id="login" class="btn">log in to facebook - <i class="icon-play"></i></div>
+	  </div>
+	  <div class="box controls" style="display:none">
+		<div id="buttons">
 		  <div id="me" class="btn" disabled='true'><i class="icon-user"></i> my profile </div>
 		  <div id="statuses" class="btn" disabled='true'><i class="icon-comment"></i> my statuses</div>
 		  <div id="inbox" class="btn" disabled='true'><i class="icon-pencil"></i> my messages</div>
-		  <div id="feed" class="btn" disabled='true'><i class="icon-listt"></i> news feed</div>		  
+		  <div id="feed" class="btn" disabled='true'><i class="icon-list"></i> news feed</div>		  
 		  <div id="friends" class="btn" disabled='true'><i class="icon-user"></i> friends</div>
+		  <div id="logoff" class="btn"><i class="icon-eject"></i> - log out of facebook</div>		  
 		</div>
+		<div id="stats"></div>
+	  </div>
+	  <div class="box denied" style="display:none">
+		Access denied. Did you give save face permission to access your fb?
 	  </div>
 	</div>
 	<div id="fb-root"></div>
@@ -25,28 +35,28 @@
 	  console.log('checking for channel file at ', channelURL);
 	  // Additional JS functions here
 	  window.fbAsyncInit = function() {
-         FB.init({
-           appId      : '296646860441717', // App ID
-           channelUrl : channelURL, // Channel File
-           status     : true, // check login status
-           cookie     : true, // enable cookies to allow the server to access the session
-           xfbml      : true  // parse XFBML
-         });
-         // Additional init code here
-       var path = document.location.pathname;
-       var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
-       basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
-       console.log('setting baseurl to ', document.location.pathname, '-', basepath);
-       require.config({ baseUrl:  basepath });	  
-       require(['js/sync-nodebox', 'plugins/fb', 'js/models'], function(nodebox, fb, models) { console.log('loaded fb'); window.models = models; });
+		 FB.init({
+			appId      : '296646860441717', // App ID
+			channelUrl : channelURL, // Channel File
+			status     : true, // check login status
+			cookie     : true, // enable cookies to allow the server to access the session
+			xfbml      : true  // parse XFBML
+		 });
+		 // Additional init code here
+		var path = document.location.pathname;
+		var basepath = path.slice(0,path.lastIndexOf('/')); // chop off 2 /'s
+		basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
+		console.log('setting baseurl to ', document.location.pathname, '-', basepath);
+		require.config({ baseUrl:  basepath });	  
+		require(['js/sync-nodebox','plugins/saveface', 'js/models'], function(nodebox, fb, models) { console.log('loaded fb'); window.models = models; });
 	  };
 	  // Load the SDK Asynchronously
 	  (function(d){
-      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement('script'); js.id = id; js.async = true;
-      js.src = "//connect.facebook.net/en_US/all.js";
-      ref.parentNode.insertBefore(js, ref);
+		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement('script'); js.id = id; js.async = true;
+		js.src = "//connect.facebook.net/en_US/all.js";
+		ref.parentNode.insertBefore(js, ref);
 	  }(document));
 	</script>	
   </body>
