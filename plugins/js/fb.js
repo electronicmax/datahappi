@@ -38,7 +38,8 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 		return c.get(id);
 	};
 	
-	window.get_fb = function(uri) { return get_model(models.get_graph('facebook'), uri); };
+	window.get_fb = function(uri) { return get_model(graph, uri);	};
+	
 	// debug only -----------------------------------------------------|
 
 	var fetch_model = function(graph,id) {
@@ -90,23 +91,20 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 		}));		
 	};
 	
-	var modes = {
+	var actions = {
 		feed: {
-			button:$('#feed'),
 			path:'/me/feed',
 			to_models:function(graph, els) {
 				return u.when(els.map(function(item) { return do_obj(graph, item, 'feed').dfd; }));
 			}			
 		},
 		inbox : {
-			button:$('#inbox'),
 			path:'/me/inbox',
 			to_models:function(graph, els) {
 				return u.when(els.map(function(item) { return do_obj(graph,item, 'message').dfd; }));
 			}
 		},		
 		friends : {
-			button:$('#friends'),
 			path:'/me/friends',
 			to_models:function(graph, els) {
 				var _me = arguments.callee;
@@ -122,14 +120,12 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 			}
 		},
 		statuses: {
-			button:$('#statuses'),
 			path:'/me/statuses',
 			to_models:function(graph, resp) {
 				return u.when(resp.map(function(item) { return do_obj(graph, item, 'status').dfd;	}));
 			}
 		},		
 		me : {
-			button:$('#me'),
 			path:'/me',
 			to_models:function(graph, resp) {
 				return do_obj(graph, resp, 'person').dfd;
@@ -138,74 +134,32 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 		
 	};
 
-	var initialize= function() {
-		var graph = models.get_graph('facebook');
-		console.log('initializing ');
-		_(modes).map(function(v, mode) {
-			console.log(v.button);
-			v.button
-				.attr("disabled",false)
-				.on("click", function() {
-					var this_ = this;
-					$(this_).attr('disabled',true);
-					var check = function(path) {
-						var _me = arguments.callee;
-						var d = u.deferred();
-						FB.api(path, function(resp) {
-							if (u.defined(resp)) {
-								v.to_models(graph, resp.data ? debug_subset(resp.data) : resp).then(function() {
-									if (resp.paging && resp.paging.next) {
-										_me(resp.paging.next).then(d.resolve).fail(d.reject);
-									} else {
-										d.resolve();
-									}
-								}).fail(function(err) {
-									console.error('error coming back from to_models ', err );
-									d.reject(err);
-								});
-							}
-						});
-						return d.promise();
-					};
-					check(v.path).then(function() {
-						$(this_).attr('disabled',false);
-					}).fail(function(err) {
-						console.error('FAIL with ', mode, err);
-					});
-				});
-		});
-	};
 
+	// actual action method -- that calls the above actions
+	var get = function(graph, action) {
+		var _me = arguments.callee;
+		var d = u.deferred();
+		FB.api(action.path, function(resp) {
+			if (u.defined(resp)) {
+				action.to_models(graph, resp.data ? debug_subset(resp.data) : resp)
+					.then(function() {
+						if (resp.paging && resp.paging.next) {
+							_me(resp.paging.next).then(d.resolve).fail(d.reject);
+						} else {
+							d.resolve();
+						}
+					}).fail(function(err) {
+						console.error('error coming back from to_models ', err );
+						d.reject(err);
+					});
+			}
+		});
+		return d.promise();
+	};
+	
 	return {
-		graph: models.get_graph('facebook'),
 		watcher: save_watcher,
-		initialize:initialize
+		actions:actions,
+		get:get
 	};
 });
-
-
-/*
-	FB.getLoginStatus(function(response) {
-		if (response.status === 'connected') {
-			// connected
-			console.log('connected ');
-			initialize();
-		} else if (response.status === 'not_authorized') {
-			// not_authorized
-			console.log('not auth ');
-			FB.login(function(resp) {
-				if (resp.authResponse) {
-					// response
-					console.log('response!');
-					initialize();
-				} else {
-					console.log('no response');
-					// no response
-				}
-			}, { perms:'read_stream,read_mailbox,offline_access'});
-		} else {
-			// not_logged_in
-			console.log('not logged in ');
-		}
-	});	
-*/

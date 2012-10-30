@@ -20,7 +20,7 @@ window.fbAsyncInit = function() {
 	basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 	console.log('setting baseurl to ', document.location.pathname, '-', basepath);
 	require.config({ baseUrl:  basepath });	  
-	require(['js/sync-nodebox','plugins/js/saveface', 'js/models'], function(nodebox, fb, models) {
+	require(['js/sync-nodebox','plugins/js/saveface','js/models'], function(sync, fb, models) {
 		console.log('loaded fb'); window.models = models;
 	});
 };
