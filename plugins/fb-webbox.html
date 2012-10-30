@@ -45,12 +45,19 @@
        require(['plugins/fb', 'js/models'], function(nodebox, fb, models) {
 	      $.getScript('http://'+host+':8211/js/objectstore.js', function() {
 	  	      var store = new ObjectStore.Store();
-              store.server_url = "http://"+host+":8215/";
+              store.server_url = "http://"+host+":8211/webbox/";
               var graph = store.get("http://example.com/graph");
-	          // var boo = new ObjectStore.Obj({"@id":123982389});
-	          // graph.get(objects).add(boo);
 	          graph.fetch().success(function() {
 	              console.log('ok to run fb code!');
+
+                  console.debug("graph", graph);
+
+                  var boo = graph.create({"@id": "123982388", "eats": "pizza"});
+//                  var boo = new ObjectStore.Obj({"@id":123982389});
+ //                 graph.get("objects").add(boo);
+                  boo.save();
+
+                  
 	          }).error(function(err)  {
 	              console.log('error in fetch ', err);
 	          });
