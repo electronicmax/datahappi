@@ -12,8 +12,9 @@ define(['plugins/js/fb','js/models','js/utils'],function(fb,models,u) {
 				.attr("disabled",false)
 				.on("click", function() {
 					var this_ = this;
+					console.log('click on ', mode);
 					$(this_).attr('disabled',true);
-					fb.get(graph,action).then(function() {
+					fb.exec_action(graph,action).then(function() {
 						console.log('done with action ', mode);
 						$(this_).attr('disabled',false);
 					}).fail(function(err) {

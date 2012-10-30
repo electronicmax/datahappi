@@ -1,4 +1,4 @@
-define(['js/models', 'js/utils'], function(models, u, nsync) {
+define(['js/models', 'js/utils', 'plugins/js/savewatcher'], function(models, u, savewatcher) {
 	
 	var DEBUG = false;
 	var debug_subset = function(l) {
@@ -7,28 +7,10 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 	};
 	
 	var c = new Backbone.Collection();
-
+	
 	// collects high level statistics about the saves to provide some visual candy	
-	var save_watcher =
-		new (Backbone.Model.extend({
-			initialize:function() {
-				this.counts = { all: 0 };
-			},
-			_update_counts: function(m) {
-				if (m.attributes.type) {
-					var stype = m.attributes.type.toString();
-					this.counts[stype] = this.counts[stype] ? this.counts[stype]+1 : 1;
-				}
-				this.counts.all = this.counts.all+1;
-				this.trigger('update', this.counts);
-				console.log('counts >> ', this.counts);
-			},
-			register: function(m) {
-				var this_ = this;
-				m.on('save', function() { this_._update_counts(m); });
-			}
-		}))();
-	       
+	var save_watcher = new savewatcher.SaveWatcher();
+	
 	var get_model = function(graph, id) {
 		if (!c.get(id)) {
 			var m = graph.create(id);
@@ -36,12 +18,8 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 			save_watcher.register(m);
 		}
 		return c.get(id);
-	};
-	
-	window.get_fb = function(uri) { return get_model(graph, uri);	};
-	
+	};	
 	// debug only -----------------------------------------------------|
-
 	var fetch_model = function(graph,id) {
 		var m = get_model(graph,id);
 		var d = u.deferred();
@@ -136,7 +114,8 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 
 
 	// actual action method -- that calls the above actions
-	var get = function(graph, action) {
+	var exec_action = function(graph, action) {
+		console.log('exec_action being called ', graph.id, action);
 		var _me = arguments.callee;
 		var d = u.deferred();
 		FB.api(action.path, function(resp) {
@@ -144,7 +123,8 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 				action.to_models(graph, resp.data ? debug_subset(resp.data) : resp)
 					.then(function() {
 						if (resp.paging && resp.paging.next) {
-							_me(resp.paging.next).then(d.resolve).fail(d.reject);
+							_me(graph, _(_(action).clone()).extend({ path: resp.paging.next }))
+								.then(d.resolve).fail(d.reject);
 						} else {
 							d.resolve();
 						}
@@ -160,6 +140,6 @@ define(['js/models', 'js/utils'], function(models, u, nsync) {
 	return {
 		watcher: save_watcher,
 		actions:actions,
-		get:get
+		exec_action:exec_action
 	};
 });
