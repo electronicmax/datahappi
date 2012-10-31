@@ -134,7 +134,7 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 				})),
 				l = _.union(entailed_values,sameas_entailed_vals, this.attributes[p] || []);
 			
-			if (l.length) { return l; }
+			return (l.length === 0 && this.attributes[p] === undefined) ? undefined : l; 
 		},
 		keys:function() {
 			return _.union(

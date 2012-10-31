@@ -40,7 +40,6 @@ define(['js/models', 'js/utils'], function(models, u) {
 			return _sm_literal(v);
 		};
 		return _(u.zip(model.keys().map(function(k) {
-			// if (k == '_id') {	console.log('kill me ');	}
 			var varr = model.get(k);
 			return [k, varr.map(_sm_value)];
 		}))).extend(_sm_model(model)); // add the model attributes in // 

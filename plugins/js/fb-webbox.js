@@ -24,6 +24,7 @@ window.fbAsyncInit = function() {
 			var graph = store.get("http://example.com/graph");
 			graph.fetch().success(function() {
 				console.log('ok to run fb code!');
+				
 				console.debug("graph", graph);
 				var boo = graph.create({"@id": "123982388", "eats": "pizza"});
 				//				  var boo = new ObjectStore.Obj({"@id":123982389});
@@ -32,6 +33,7 @@ window.fbAsyncInit = function() {
 			}).error(function(err)  {
 				console.log('error in fetch ', err);
 			});
+
 	 	});
 	});
 };
