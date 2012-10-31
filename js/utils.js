@@ -7,6 +7,7 @@ if (typeof define !== 'function') {
 
 define([],function() {
 	return {
+		isInteger:function(n) { return n % 1 === 0; },
 		deferred:function() { return new $.Deferred(); },
 		whend:function(deferred_array) { return $.when.apply($,deferred_array); },
 		t:function(template,v) { return _(template).template(v); },

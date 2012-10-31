@@ -23,6 +23,7 @@ window.fbAsyncInit = function() {
 	  		var store = new ObjectStore.Store();
 			store.server_url = "http://"+host+":8211/webbox/";
 			var graph = store.get("http://example.com/graph");
+			window.graph = graph;
 			graph.fetch().success(function() {
 				console.log('ok to run fb code!');
 				console.debug("created graph >> ", graph.id);

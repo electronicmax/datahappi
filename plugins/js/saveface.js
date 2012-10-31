@@ -70,8 +70,7 @@ define(['plugins/js/fb','js/models','js/utils'],function(fb,models,u) {
 			this.navigate(state, {trigger:true});
 		}
 	});
-
-
+	
 	var init = function(graph) {
 		var _router = (new Router(graph));		
 		$('#login').on('click', function() {

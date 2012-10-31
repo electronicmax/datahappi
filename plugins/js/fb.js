@@ -49,7 +49,9 @@ define(['js/models', 'js/utils', 'plugins/js/savewatcher'], function(models, u, 
 			mm.set(tval, {silent:true});
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
-				mm.save().then(function() { mm.trigger('save'); d.resolve(); });
+				// debug
+				// mm.save().then(function() { mm.trigger('save'); d.resolve(); });
+				d.resolve();
 			} else { console.log(mm.id, ' no changed attributes '); d.resolve(); }
 		});
 		return { model: mm, dfd: d.promise() };
