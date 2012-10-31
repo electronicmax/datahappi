@@ -26,8 +26,13 @@ define(['plugins/js/fb','js/models','js/utils'],function(fb,models,u) {
 						console.log('click on ', mode, ' using graph ', graph.id);
 						$(this_).attr('disabled',true);
 						fb.exec_action(graph,action).then(function() {
-							console.log('done with action ', mode);
-							$(this_).attr('disabled',false);
+							console.log('done with action > saving graph ', mode);
+							graph.save().then(function() {
+								console.log('graph save successful.');
+								$(this_).attr('disabled',false);
+							}).fail(function(err) {
+								console.error('graph save unsuccessful.', err);
+							});
 						}).fail(function(err) {
 							console.error('FAIL on action ', mode, err);
 						});

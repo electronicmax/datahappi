@@ -47,12 +47,16 @@ define(['js/models', 'js/utils', 'plugins/js/savewatcher'], function(models, u, 
 			if (type && !tval.type) { tval.type = type; } 	// add type in there
 			// mm.set(tval, undefined, {silent:true});
 			mm.set(tval, {silent:true});
+			d.resolve();
+			// used to save with every dude ----------------
+			/*
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
 				// debug
 				// mm.save().then(function() { mm.trigger('save'); d.resolve(); });
 				d.resolve();
 			} else { console.log(mm.id, ' no changed attributes '); d.resolve(); }
+			*/
 		});
 		return { model: mm, dfd: d.promise() };
 	};
