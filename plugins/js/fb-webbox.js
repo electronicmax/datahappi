@@ -1,4 +1,5 @@
 
+var host = document.location.host;
 var channelURL = '//'+host+'/channel.html';
 console.log('checking for channel file at ', channelURL);
 
@@ -17,23 +18,22 @@ window.fbAsyncInit = function() {
 	basepath = basepath.slice(0,Math.max(0,basepath.lastIndexOf('/'))) || '/';
 	console.log('setting baseurl to ', document.location.pathname, '-', basepath);
 	require.config({ baseUrl:  basepath });
-	require(['plugins/fb', 'js/models'], function(nodebox, fb, models) {
+	require(['plugins/js/saveface', 'js/models'], function(saveface, models) {
 		$.getScript('http://'+host+':8211/js/objectstore.js', function() {
 	  		var store = new ObjectStore.Store();
 			store.server_url = "http://"+host+":8211/webbox/";
 			var graph = store.get("http://example.com/graph");
 			graph.fetch().success(function() {
 				console.log('ok to run fb code!');
-				
-				console.debug("graph", graph);
-				var boo = graph.create({"@id": "123982388", "eats": "pizza"});
-				//				  var boo = new ObjectStore.Obj({"@id":123982389});
-				//				 graph.get("objects").add(boo);
-				boo.save();				
+				console.debug("created graph >> ", graph.id);
+				// var boo = graph.create({"@id": "123982388", "eats": "pizza"});
+				// var boo = new ObjectStore.Obj({"@id":123982389});
+				// graph.get("objects").add(boo);
+				// boo.save();
+				saveface.init({graph:graph});
 			}).error(function(err)  {
 				console.log('error in fetch ', err);
 			});
-
 	 	});
 	});
 };

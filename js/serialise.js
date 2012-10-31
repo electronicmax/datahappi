@@ -39,10 +39,11 @@ define(['js/models', 'js/utils'], function(models, u) {
 			if (v instanceof BasicModel) { return _sm_model(v); }
 			return _sm_literal(v);
 		};
-		return _(u.zip(model.keys().map(function(k) {
+		var lized =  _(u.zip(model.keys().map(function(k) {
 			var varr = model.get(k);
 			return [k, varr.map(_sm_value)];
-		}))).extend(_sm_model(model)); // add the model attributes in // 
+		}))).extend(_sm_model(model)); // add the model attributes in //
+		return lized;
 	};
 
 	return {

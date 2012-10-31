@@ -45,7 +45,8 @@ define(['js/models', 'js/utils', 'plugins/js/savewatcher'], function(models, u, 
 		fetch_model(graph,mm).then(function(mm) {
 			var tval = _transform(graph, v);
 			if (type && !tval.type) { tval.type = type; } 	// add type in there
-			mm.set(tval, undefined, {silent:true});
+			// mm.set(tval, undefined, {silent:true});
+			mm.set(tval, {silent:true});
 			if (mm.changedAttributes()) {
 				console.log('changed attributes -- calling save >>> ', mm.id);
 				mm.save().then(function() { mm.trigger('save'); d.resolve(); });

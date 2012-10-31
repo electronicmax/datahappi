@@ -137,13 +137,14 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 			return (l.length === 0 && this.attributes[p] === undefined) ? undefined : l; 
 		},
 		keys:function() {
-			return _.union(
-				_(this.attributes).keys(),
-				_(this.entailed).keys(),
-				flatten(this.sameas.map(function(x) {
-					return x.entailedKeys().concat(x.attrKeys());
-				}))
-			).filter(function(x) { return x !== '_id'; });
+			return _(this.attributes).keys(); // Backbone.Model.prototype.keys.apply(this);
+			// return _.union(
+			// 	_(this.attributes).keys(),
+			// 	_(this.entailed).keys(),
+			// 	flatten(this.sameas.map(function(x) {
+			// 		return x.entailedKeys().concat(x.attrKeys());
+			// 	}))
+			// ).filter(function(x) { return x !== '_id'; });
 		},
 		map:function(f) {
 			var this_ = this;
@@ -160,11 +161,10 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		set:function(k,v,options) {
 			// console.log("SET k:", k, " v:", v, " options", options);
 			// check if this was called with k,v format, not {k:v} format.
-			if (!_(v).isUndefined()) {
+			if (typeof(k) == 'string') {
 				v = this._value_to_array(k,v);
 			} else {
 				k = this._all_values_to_arrays(k);
-				v = options;
 			}
 			return Backbone.Model.prototype.set.apply(this,[k,v,options]);
 		},
