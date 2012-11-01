@@ -11,12 +11,15 @@ define(['js/models', 'js/utils'], function(models, u) {
 
 	// core serialisation / deserialisation
 	var deserialize = function(skeleton, graph, model) {
+		console.log('incoming model ', model);
 		var _des = arguments.callee;
 		if (!u.defined(skeleton._id)) {
 			throw new Error({ error: 'unpacking skeleton', details: 'model must have an _id attr' });
 		}
 		if (!u.defined(model)) {
-			model = new BasicModel({_id: skeleton._id}, {disable_chaining:true, graph:graph}); // graph.get_or_create <- we don't want to affect our global state
+			model = new BasicModel(
+				{_id: skeleton._id}, {disable_chaining:true,  graph:graph}
+			); // graph.get_or_create <- we don't want to affect our global state
 		}
 		model.version = skeleton._version;
 		delete skeleton._id;
@@ -28,7 +31,7 @@ define(['js/models', 'js/utils'], function(models, u) {
 			if (typeof(v) == 'object' && v._id) { return _des(v, graph); }
 			return v;
 		};
-		model.set(u.zip(_(skeleton).map(function(v,k) { return [k, helper(v)]; })));
+		model.set( u.zip( _(skeleton).map(function(v,k) { return [k, helper(v)]; })) );
 		return model;	
 	};
 

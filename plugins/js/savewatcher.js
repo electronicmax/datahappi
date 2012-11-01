@@ -13,9 +13,22 @@ define(['js/utils'], function(u) {
 				this.trigger('update', this.counts);
 				console.log('counts >> ', this.counts);
 			},
+			_update_display:function(m) {
+				if (this._to) {
+					clearTimeout(this._to);
+					delete this._to;
+					$('#last_modified').show();
+				}
+				var label = (m.get('type') ? "(" + m.get('type') + ") " : '') + (m.get('name') || m.get('message') || m.id);
+				$('#last_modified').html(label);
+				$('.mod_container').addClass('expanded');
+				this._to = setTimeout(function() { $('.mod_container').removeClass('expanded'); $('#last_modified').fadeOut('slow'); }, 2000);
+				$('#counter').html(this.counts.all);
+			},
 			register: function(m) {
 				var this_ = this;
 				m.on('save', function() { this_._update_counts(m); });
+				m.on('change', function() { this_._update_display(m); this_._update_counts(m); });				
 			}
 		})
 	};

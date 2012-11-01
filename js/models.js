@@ -41,6 +41,20 @@ define(['js/ops/incremental-forward','js/utils'],function(rh,util) {
 		get_or_create:function(uri, create_options){
 			var now = this.objects.get(uri) ;
 			return now ? now : this.create(uri, create_options);
+		},
+		save:function() {
+			var dfds = [];
+			this.objects.map(function(mm) {
+				if (mm.changedAttributes()) {
+					var d = util.deferred();
+					console.log('queuing up ', mm.id, ' to save');
+					dfds.push(d);
+					mm.save()
+						.then(function() { mm.trigger('save'); d.resolve(); })
+						.fail(function() { d.fail(); });
+				}
+			});
+			return util.when(dfds);
 		}
 	});
 	var DEFAULT_GRAPH = get_graph('');	
