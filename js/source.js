@@ -37,6 +37,7 @@ define(['js/basemodel', 'js/models', 'js/utils'], function(basemodel, maxel, uti
 	var get_from_source = function(src_url, modelclass, collectionclass, src_name) {
 		var suffix = src_url.slice(src_url.lastIndexOf('.'));
 		var source_d = utils.deferred();
+		console.log("GET FORM SOURCE ", src_url);
 				
 		if (source_modules[suffix] !== undefined) {
 			require([source_modules[suffix]],
