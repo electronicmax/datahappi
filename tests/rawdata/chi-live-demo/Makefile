@@ -20,19 +20,19 @@ gplus.rdf:
 	cwm --n3 gplus.n3 --rdf > gplus.rdf
 
 hygiene.tsv:
-	python ../rdf2tsv.py hygiene.n3 > hygiene.tsv
+	. env/bin/activate; python ../rdf2tsv.py hygiene.n3 > hygiene.tsv
 
 tripadvisor.tsv:
-	python ../rdf2tsv.py tripadvisor.n3 > tripadvisor.tsv
+	. env/bin/activate; python ../rdf2tsv.py tripadvisor.n3 > tripadvisor.tsv
 
 yelp.tsv:
-	python ../rdf2tsv.py yelp.n3 > yelp.tsv
+	. env/bin/activate; python ../rdf2tsv.py yelp.n3 > yelp.tsv
 
 facebook.tsv:
-	python ../rdf2tsv.py facebook.n3 > facebook.tsv
+	. env/bin/activate; python ../rdf2tsv.py facebook.n3 > facebook.tsv
 
 gplus.tsv:
-	python ../rdf2tsv.py gplus.n3 > gplus.tsv
+	. env/bin/activate; python ../rdf2tsv.py gplus.n3 > gplus.tsv
 
 
 
