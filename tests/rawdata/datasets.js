@@ -1,6 +1,13 @@
 define([],
 	   function() {
 			return {
+				'chi-live-demo': [
+					{path:['tests','rawdata','chi-live-demo','facebook.rdf'].join('/'),name:"Facebook"},
+					{path:['tests','rawdata','chi-live-demo','gplus.rdf'].join('/'), name:"Google+ Friends"},
+					{path:['tests','rawdata','chi-live-demo','tripadvisor.rdf'].join('/'), name:"Tripadvisor Restaurants"},
+					{path:['tests','rawdata','chi-live-demo','yelp.rdf'].join('/'), name:"Yelp Business Listing"},
+					{path:['tests','rawdata','chi-live-demo','hygiene.rdf'].join('/'), name:"Hygiene Ratings"}
+				],				
 				'cambridge': [
 					{path:['tests','rawdata','cambridge','facebook.rdf'].join('/'),name:"Facebook"},
 					{path:['tests','rawdata','cambridge','gplus.rdf'].join('/'), name:"Google+ Friends"},

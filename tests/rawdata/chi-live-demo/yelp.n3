@@ -1,0 +1,49 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-yelp-cambridge#> .
+
+:Restaurant rdfs:label "Restaurants from Yelp" .
+
+:r1 a :Restaurant ;
+    :address [ geo:lat "52.189483";  geo:long "0.135913"; rdfs:label "152-154 Hills Road  Cambridge CB2 8PB" ];
+    rdfs:label "Alimentum" ;
+    :score "4.5★" ;
+    :price_range "£££";
+    :ambience "Casual" .
+
+:r2 a :Restaurant ;
+    :address [ geo:lat "52.204556"; geo:long "0.117717"; rdfs:label "1 King's Parade  Cambridge, CB2 1SJ" ];
+    rdfs:label "The Cambridge Chop House" ;
+    :score "4.5★" ;
+    :price_range "£££";
+    :ambience "Casual" .
+
+:r3 a :Restaurant ;
+    :address [ geo:lat "52.200716";  geo:long "0.135806"; rdfs:label "62 Mill Road  Cambridge CB1 2AS" ];
+    rdfs:label "Al Casbah" ;
+    :score "3.5★" ;
+    :price_range "£££";
+    :ambience "Casual" .
+
+:r4 a :Restaurant ;
+    :address [ geo:lat "52.212498"; geo:long "0.128574"; rdfs:label "Midsummer Common, Cambridge CB4 1HA" ];
+    rdfs:label "Midsummer House" ;
+    :score "4.5★" ;
+    :price_range "££££";
+    :ambience "Dressy" .
+
+:r5 a :Restaurant ;
+    :address [ geo:lat "52.203635";  geo:long "0.122952"; rdfs:label "33-34 Saint Andrew's Street  Cambridge, CB2 3AR" ];
+    rdfs:label "Nandos Chickenland" ;
+    :score "4.5★" ;
+    :price_range "££";
+    :ambience "Casual" .
+
+:r6 a :Restaurant ;
+    :address [ geo:lat "52.206279";  geo:long "0.118693"; rdfs:label "2 Rose Crescent  City Centre, Cambridge CB2 3LL" ];
+    rdfs:label "Gardenia Take Away" ;
+    :score "4★" ;
+    :price_range "£";
+    :ambience "Casual" .
+
+

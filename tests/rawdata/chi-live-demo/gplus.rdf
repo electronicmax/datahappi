@@ -1,0 +1,75 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///home/electronic/github-vm/datahappi/tests/rawdata/cambridge/gplus.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#Person">
+        <rdfs:label>Contacts From Google+</rdfs:label>
+    </rdf:Description>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p1">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>Juan's Home Address</rdfs:label>
+            <geo:lat>52.244925</geo:lat>
+            <geo:long>0.283328</geo:long>
+        </home_address>
+        <likes_food>British</likes_food>
+        <rdfs:label>Juan Dunleavy</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p2">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>Daniel's Home Address</rdfs:label>
+            <geo:lat>52.06916</geo:lat>
+            <geo:long>0.170298</geo:long>
+        </home_address>
+        <likes_food>British</likes_food>
+        <rdfs:label>Daniel Gardner</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p3">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>Paul's Home</rdfs:label>
+            <geo:lat>52.215453</geo:lat>
+            <geo:long>0.112763</geo:long>
+        </home_address>
+        <likes_food>Portuguese</likes_food>
+        <rdfs:label>Paul Pine</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p4">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>Ralph's Home</rdfs:label>
+            <geo:lat>52.22849</geo:lat>
+            <geo:long>0.136796</geo:long>
+        </home_address>
+        <likes_food>British</likes_food>
+        <likes_food>Portguese</likes_food>
+        <rdfs:label>Ralph Vera</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p5">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>Donald's home</rdfs:label>
+            <geo:lat>52.211974</geo:lat>
+            <geo:long>0.171603</geo:long>
+        </home_address>
+        <likes_food>Greek</likes_food>
+        <rdfs:label>Donald Carlton</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p6">
+        <home_address rdf:parseType="Resource">
+            <rdfs:label>David's home</rdfs:label>
+            <geo:lat>52.088386</geo:lat>
+            <geo:long>0.41037</geo:long>
+        </home_address>
+        <likes_food>Greek</likes_food>
+        <rdfs:label>David Kellerman</rdfs:label>
+    </Person>
+</rdf:RDF>

@@ -1,0 +1,55 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix : <http://webbox.ecs.soton.ac.uk/ontology/chi2012-tripadvisor-cambridge#> .
+
+:Restaurant rdfs:label "Restaurants from TripAdvisor" .
+
+:r1 a :Restaurant ;
+    rdfs:label "Alimentum" ;
+    :address [ geo:lat "52.189483";  geo:long "0.135913"; rdfs:label "152-154 Hills Road  Cambridge CB2 8PB" ];
+    :telephone "(01223) 413000";
+    :cuisine "European" ;
+    :cuisine "British" ;
+    :score "4" ;
+    :ranking "14" .
+
+:r2 a :Restaurant ;
+    rdfs:label "The Cambridge Chop House" ;
+    :address [ geo:lat "52.204556"; geo:long "0.117717"; rdfs:label "1 King's Parade  Cambridge, CB2 1SJ" ];    
+    :telephone "01223 359506";
+    :cuisine "British" ;
+    :score "4" ;
+    :ranking "26" .
+
+:r3 a :Restaurant ;
+    rdfs:label "Al Casbah" ;
+    :address [ geo:lat "52.200716";  geo:long "0.135806"; rdfs:label "62 Mill Road  Cambridge CB1 2AS" ];
+    :telephone "01223 561666";
+    :score "3" ;
+    :ranking "244" .
+
+:r4 a :Restaurant ;
+    rdfs:label "Midsummer House" ;
+    :address [ geo:lat "52.212498"; geo:long "0.128574"; rdfs:label "Midsummer Common, Cambridge CB4 1HA" ];
+    :telephone "+44 (0)1223 369299";
+    :score "4" ;
+    :cuisine "British" ;
+    :ranking "8" .
+
+:r5 a :Restaurant ;
+    rdfs:label "Nandos" ;
+    :address [ geo:lat "52.203635";  geo:long "0.122952"; rdfs:label "33-34 Saint Andrew's Street  Cambridge, CB2 3AR" ];
+    :telephone "01223 313818";
+    :cuisine "Portuguese" ;
+    :score "3.5" ;
+    :ranking "121" .
+
+:r6 a :Restaurant ;
+    rdfs:label "The Gardenia" ;
+    :address [ geo:lat "52.206279";  geo:long "0.118693"; rdfs:label "2 Rose Crescent  City Centre, Cambridge CB2 3LL" ]; 
+    :telephone "01223-356 354";
+    :cuisine "Greek" ;
+    :cuisine "Vegetarian" ;
+    :score "3.5" ;
+    :ranking "183" .
+

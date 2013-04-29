@@ -1,0 +1,82 @@
+
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///home/electronic/github-vm/datahappi/tests/rawdata/cambridge/facebook.n3-->
+
+
+<rdf:RDF xmlns="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#Person">
+        <rdfs:label>Friends from facebook</rdfs:label>
+    </rdf:Description>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p1">
+        <home rdf:parseType="Resource">
+            <postcode>CB8 9JB</postcode>
+            <rdfs:label>Bradley Rd, Newmarket, Cambridgeshire CB8, UK</rdfs:label>
+            <geo:lat>52.170325</geo:lat>
+            <geo:long>0.478928</geo:long>
+        </home>
+        <likes>Greek</likes>
+        <rdfs:label>Howard Denison</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p2">
+        <home rdf:parseType="Resource">
+            <postcode>CB2 9LS</postcode>
+            <rdfs:label>54A High St, Trumpington, Cambridge, Cambridgeshire CB2 9LS, UK</rdfs:label>
+            <geo:lat>52.173901</geo:lat>
+            <geo:long>0.112256</geo:long>
+        </home>
+        <likes>British</likes>
+        <likes>Greek</likes>
+        <rdfs:label>Judith Krug</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p3">
+        <home rdf:parseType="Resource">
+            <postcode>CB7 9FN</postcode>
+            <rdfs:label>Nornea Ln, Ely, Cambridgeshire CB7, UK</rdfs:label>
+            <geo:lat>52.38221</geo:lat>
+            <geo:long>0.315642</geo:long>
+        </home>
+        <likes>British</likes>
+        <rdfs:label>Maggie Amato</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p4">
+        <home rdf:parseType="Resource">
+            <postcode>CB4 3RG</postcode>
+            <rdfs:label>3 Dowding Way, Cambridge, Cambridgeshire CB4 3RG, UK</rdfs:label>
+            <geo:lat>52.225211</geo:lat>
+            <geo:long>0.115656</geo:long>
+        </home>
+        <likes>British</likes>
+        <rdfs:label>Richard Goshorn</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p5">
+        <home rdf:parseType="Resource">
+            <postcode>CB2 1FR</postcode>
+            <rdfs:label>Blackmoor Head Yard, Cambridge CB2, UK</rdfs:label>
+            <geo:lat>52.209126</geo:lat>
+            <geo:long>0.118581</geo:long>
+        </home>
+        <likes>Portuguese</likes>
+        <rdfs:label>Tony Lombardi</rdfs:label>
+    </Person>
+
+    <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-facebook-cambridge#p6">
+        <home rdf:parseType="Resource">
+            <postcode>CB21 6AQ</postcode>
+            <rdfs:label>5 Pampisford Rd, Abington, Cambridge, Cambridgeshire CB21 6AQ, UK</rdfs:label>
+            <geo:lat>52.11055</geo:lat>
+            <geo:long>0.235269</geo:long>
+        </home>
+        <likes>British</likes>
+        <likes>Portuguese</likes>
+        <rdfs:label>Bruce Totten</rdfs:label>
+    </Person>
+</rdf:RDF>
