@@ -1,7 +1,7 @@
-rating	Name/Label	type
-5	Midsummer House Restaurant	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
-5	Nando's Restaurant	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
-4	Gardenia Restaurant	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
-4	Alimentum	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
-5	The Cambridge Chop House	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
-3	Al Casbah	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+Name/Label	rating	type
+Midsummer House Restaurant	5	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+Nando's Restaurant	5	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+Gardenia Restaurant	4	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+Alimentum	4	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+The Cambridge Chop House	5	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	
+Al Casbah	3	http://webbox.ecs.soton.ac.uk/ontology/chi2012-hygiene-cambridge#Restaurant	

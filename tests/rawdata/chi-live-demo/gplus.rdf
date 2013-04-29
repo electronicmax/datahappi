@@ -54,22 +54,22 @@
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p5">
-        <home_address rdf:parseType="Resource">
+        <likes_food>Greek</likes_food>
+        <work_address rdf:parseType="Resource">
             <rdfs:label>Donald's home</rdfs:label>
             <geo:lat>52.211974</geo:lat>
             <geo:long>0.171603</geo:long>
-        </home_address>
-        <likes_food>Greek</likes_food>
+        </work_address>
         <rdfs:label>Donald Carlton</rdfs:label>
     </Person>
 
     <Person rdf:about="http://webbox.ecs.soton.ac.uk/ontology/chi2012-gplus-cambridge#p6">
-        <home_address rdf:parseType="Resource">
+        <likes_food>Greek</likes_food>
+        <work_address rdf:parseType="Resource">
             <rdfs:label>David's home</rdfs:label>
             <geo:lat>52.088386</geo:lat>
             <geo:long>0.41037</geo:long>
-        </home_address>
-        <likes_food>Greek</likes_food>
+        </work_address>
         <rdfs:label>David Kellerman</rdfs:label>
     </Person>
 </rdf:RDF>

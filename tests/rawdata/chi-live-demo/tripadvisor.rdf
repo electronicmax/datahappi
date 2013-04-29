@@ -21,7 +21,7 @@
         <cuisine>British</cuisine>
         <cuisine>European</cuisine>
         <ranking>14</ranking>
-        <score>4</score>
+        <rating>4</rating>
         <telephone>(01223) 413000</telephone>
         <rdfs:label>Alimentum</rdfs:label>
     </Restaurant>
@@ -34,7 +34,7 @@
         </address>
         <cuisine>British</cuisine>
         <ranking>26</ranking>
-        <score>4</score>
+        <rating>4</rating>
         <telephone>01223 359506</telephone>
         <rdfs:label>The Cambridge Chop House</rdfs:label>
     </Restaurant>
@@ -46,7 +46,7 @@
             <geo:long>0.135806</geo:long>
         </address>
         <ranking>244</ranking>
-        <score>3</score>
+        <rating>3</rating>
         <telephone>01223 561666</telephone>
         <rdfs:label>Al Casbah</rdfs:label>
     </Restaurant>
@@ -58,9 +58,9 @@
             <geo:long>0.128574</geo:long>
         </address>
         <cuisine>British</cuisine>
+        <phone>+44 (0)1223 369299</phone>
         <ranking>8</ranking>
-        <score>4</score>
-        <telephone>+44 (0)1223 369299</telephone>
+        <rating>4</rating>
         <rdfs:label>Midsummer House</rdfs:label>
     </Restaurant>
 
@@ -71,9 +71,9 @@
             <geo:long>0.122952</geo:long>
         </address>
         <cuisine>Portuguese</cuisine>
+        <phone>01223 313818</phone>
         <ranking>121</ranking>
-        <score>3.5</score>
-        <telephone>01223 313818</telephone>
+        <rating>3.5</rating>
         <rdfs:label>Nandos</rdfs:label>
     </Restaurant>
 
@@ -86,7 +86,7 @@
         <cuisine>Greek</cuisine>
         <cuisine>Vegetarian</cuisine>
         <ranking>183</ranking>
-        <score>3.5</score>
+        <rating>3.5</rating>
         <telephone>01223-356 354</telephone>
         <rdfs:label>The Gardenia</rdfs:label>
     </Restaurant>

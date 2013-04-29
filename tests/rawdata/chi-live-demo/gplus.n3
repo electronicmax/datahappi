@@ -27,12 +27,12 @@
 
 :p5 a :Person ;
     rdfs:label "Donald Carlton" ;
-    :home_address [ geo:lat "52.211974"; geo:long "0.171603"; rdfs:label "Donald's home" ];
+    :work_address [ geo:lat "52.211974"; geo:long "0.171603"; rdfs:label "Donald's home" ];
     :likes_food "Greek".
 
 :p6 a :Person ;
     rdfs:label "David Kellerman" ;
-    :home_address [ geo:lat "52.088386"; geo:long "0.41037"; rdfs:label "David's home" ];
+    :work_address [ geo:lat "52.088386"; geo:long "0.41037"; rdfs:label "David's home" ];
     :likes_food "Greek".
 
 
